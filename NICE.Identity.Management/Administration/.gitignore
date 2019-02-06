@@ -19,3 +19,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# jetbrains IDE workspace settings
+/.idea
+
+# Generated vendor files
+/public/vendor/modernizr-custom.js
+
+# Generated css
+public/**/*.css
+public/**/*.css.map

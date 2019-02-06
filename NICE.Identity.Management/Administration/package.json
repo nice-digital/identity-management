@@ -1,5 +1,5 @@
 {
-  "name": "@nice-digital/role-management",
+  "name": "nice-role-management",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,5 +28,11 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "moment": "^2.24.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

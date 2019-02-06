@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NICE.Identity.Management.Configuration;
 using NICE.Identity.Management.Models;
-using NICE.Identity.Management.Services;
 
 namespace NICE.Identity.Management
 {
@@ -30,16 +29,10 @@ namespace NICE.Identity.Management
 		{
 			AppSettings.Configure(services, Configuration, Environment.IsDevelopment() ? @"c:\" : Environment.ContentRootPath);
 
-			var connectionString = Configuration.GetConnectionString("DefaultConnection");
-			if (!string.IsNullOrEmpty(connectionString) && !connectionString.StartsWith("NULL")
-			) //todo: improve this. connection string is in secrets.json, don't save it in the appsettings.json. but it's useful having something there so the code doesn't fall over looking for it, and so that people can learn where it should be set.
-			{
-				services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connectionString));
-			}
-
+			
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
-			services.TryAddTransient<IAuditService, AuditService>();
+			//services.TryAddTransient<IAuditService, AuditService>();
 
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
