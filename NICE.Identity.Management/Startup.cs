@@ -50,7 +50,7 @@ namespace NICE.Identity.Management
 				options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 				options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
+			})
 			.AddCookie()
 			.AddOpenIdConnect("Auth0", options => {
                 // Set the authority to your Auth0 domain
@@ -146,6 +146,8 @@ namespace NICE.Identity.Management
 			app.UseHttpsRedirection();
 			app.UseCookiePolicy();
 			app.UseAuthentication();
+			app.UseStaticFiles();
+			app.UseSpaStaticFiles();
 
 			app.MapWhen(x => x.User.Identity.IsAuthenticated, builder =>
 			{
