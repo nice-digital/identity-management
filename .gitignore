@@ -244,21 +244,12 @@ netcoreapp2.0/*
 
 
 
-# ClientApp
-ClientApp/public/*.css
-ClientApp/public/*.css.map
-/.idea/.idea.Consultations
+# Project specific
 .idea/
-/ConsultationsDatabase/ConsultationsDatabase.refactorlog
 *.jfm
 *.orig
 .DS_Store
-/Comments/Serilog-*.json
-/Comments/ClientApp/.idea.bak
-
-/Comments/published-app
-
 .vscode
-/Comments/ClientApp/.vscode
-/NICE.Identity/node_modules
-/NICE.Identity/Serilog-*.json
+/NICE.Identity.Management/Administration/node_modules
+/NICE.Identity.Management/Serilog-*.json
+

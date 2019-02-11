@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NICE.Identity.Management.Configuration;
-using NICE.Identity.Management.Models;
 
 namespace NICE.Identity.Management
 {
@@ -34,6 +38,82 @@ namespace NICE.Identity.Management
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
 			//services.TryAddTransient<IAuditService, AuditService>();
 
+			services.Configure<CookiePolicyOptions>(options =>
+			{
+				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
+				options.CheckConsentNeeded = context => true;
+				options.MinimumSameSitePolicy = SameSiteMode.None;
+			});
+
+			// Add authentication services
+			services.AddAuthentication(options => {
+				options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			})
+			.AddCookie()
+			.AddOpenIdConnect("Auth0", options => {
+                // Set the authority to your Auth0 domain
+                options.Authority = $"https://{Configuration["Auth0:Domain"]}";
+
+                // Configure the Auth0 Client ID and Client Secret
+                options.ClientId = Configuration["Auth0:ClientId"];
+                options.ClientSecret = Configuration["Auth0:ClientSecret"];
+
+                // Set response type to code
+                options.ResponseType = "code";
+
+                // Configure the scope
+                options.Scope.Clear();
+                options.Scope.Add("openid read:profile");
+
+                // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0 
+                // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard 
+                options.CallbackPath = new PathString("/signin-auth0");
+
+                // Configure the Claims Issuer to be Auth0
+                options.ClaimsIssuer = "Auth0";
+
+                // Saves tokens to the AuthenticationProperties
+                options.SaveTokens = true;
+
+                options.Events = new OpenIdConnectEvents
+                {
+                    OnRedirectToIdentityProvider = context =>
+                    {
+                        //context.ProtocolMessage.SetParameter("audience", "nice:profile");
+
+                        return Task.FromResult(0);
+                    },
+                    // handle the logout redirection 
+                    OnRedirectToIdentityProviderForSignOut = (context) =>
+                    {
+                        var logoutUri = $"https://{Configuration["Auth0:Domain"]}/v2/logout?client_id={Configuration["Auth0:ClientId"]}";
+
+                        var postLogoutUri = context.Properties.RedirectUri;
+                        if (!string.IsNullOrEmpty(postLogoutUri))
+                        {
+                            if (postLogoutUri.StartsWith("/"))
+                            {
+                                // transform to absolute
+                                var request = context.Request;
+                                postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
+                            }
+                            logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";
+                        }
+
+                        context.Response.Redirect(logoutUri);
+                        context.HandleResponse();
+
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine($"OnTokenValidated: {context.SecurityToken}");
+                        return Task.CompletedTask;
+                    }
+                };   
+            });
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -64,30 +144,42 @@ namespace NICE.Identity.Management
 			}
 
 			app.UseHttpsRedirection();
+			app.UseCookiePolicy();
+			app.UseAuthentication();
 			app.UseStaticFiles();
+			app.UseSpaStaticFiles();
 
-			app.UseMvc(routes =>
+			app.MapWhen(x => x.User.Identity.IsAuthenticated, builder =>
 			{
-				routes.MapRoute(
-					name: "adminRoute",
-					template: "{area:exists}/{controller=home}/{action=index}/{id?}"
-				);
+				builder.Use((context, next) =>
+				{
+					var httpRequestFeature = context.Features.Get<IHttpRequestFeature>();
 
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=home}/{action=index}/{id?}"
-				);
+					if (httpRequestFeature != null && string.IsNullOrEmpty(httpRequestFeature.RawTarget))
+						httpRequestFeature.RawTarget = httpRequestFeature.Path;
+					return next();
+				});
+				
+				builder.UseSpa(spa =>
+				{
+					spa.Options.SourcePath = "Administration";
+
+					if (env.IsDevelopment())
+					{
+						spa.UseReactDevelopmentServer(npmScript: "start");
+					}
+				});
 			});
 
-			app.UseSpa(spa =>
+			app.MapWhen(x => !x.User.Identity.IsAuthenticated, builder =>
 			{
-				spa.Options.SourcePath = "Administration";
-
-				if (env.IsDevelopment())
+				builder.Run(async context =>
 				{
-					spa.UseReactDevelopmentServer(npmScript: "start");
-				}
-			});			
+					var returnUrl = context.Request.Path;
+					await context.ChallengeAsync("Auth0", new AuthenticationProperties() { RedirectUri = returnUrl });
+				});
+			});
+			
 		}
 	}
 }
