@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="NICE.Identity.Authentication.Sdk" Version="1.0.163" />
     <PackageReference Include="NICE.Logging" Version="6.0.19" />
   </ItemGroup>
 

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NICE.Identity.Management.Configuration;
+using NICE.Identity.Authentication.Sdk;
+using NICE.Identity.Authentication.Sdk.Abstractions;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace NICE.Identity.Management
 {
@@ -36,7 +33,7 @@ namespace NICE.Identity.Management
 			
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
-			//services.TryAddTransient<IAuditService, AuditService>();
+			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{
@@ -44,78 +41,11 @@ namespace NICE.Identity.Management
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
+			
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 			// Add authentication services
-			services.AddAuthentication(options => {
-				options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-			})
-			.AddCookie()
-			.AddOpenIdConnect("Auth0", options => {
-                // Set the authority to your Auth0 domain
-                options.Authority = $"https://{Configuration["Auth0:Domain"]}";
-
-                // Configure the Auth0 Client ID and Client Secret
-                options.ClientId = Configuration["Auth0:ClientId"];
-                options.ClientSecret = Configuration["Auth0:ClientSecret"];
-
-                // Set response type to code
-                options.ResponseType = "code";
-
-                // Configure the scope
-                options.Scope.Clear();
-                options.Scope.Add("openid read:profile");
-
-                // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0 
-                // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard 
-                options.CallbackPath = new PathString("/signin-auth0");
-
-                // Configure the Claims Issuer to be Auth0
-                options.ClaimsIssuer = "Auth0";
-
-                // Saves tokens to the AuthenticationProperties
-                options.SaveTokens = true;
-
-                options.Events = new OpenIdConnectEvents
-                {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        //context.ProtocolMessage.SetParameter("audience", "nice:profile");
-
-                        return Task.FromResult(0);
-                    },
-                    // handle the logout redirection 
-                    OnRedirectToIdentityProviderForSignOut = (context) =>
-                    {
-                        var logoutUri = $"https://{Configuration["Auth0:Domain"]}/v2/logout?client_id={Configuration["Auth0:ClientId"]}";
-
-                        var postLogoutUri = context.Properties.RedirectUri;
-                        if (!string.IsNullOrEmpty(postLogoutUri))
-                        {
-                            if (postLogoutUri.StartsWith("/"))
-                            {
-                                // transform to absolute
-                                var request = context.Request;
-                                postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
-                            }
-                            logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";
-                        }
-
-                        context.Response.Redirect(logoutUri);
-                        context.HandleResponse();
-
-                        return Task.CompletedTask;
-                    },
-                    OnTokenValidated = context =>
-                    {
-                        Console.WriteLine($"OnTokenValidated: {context.SecurityToken}");
-                        return Task.CompletedTask;
-                    }
-                };   
-            });
-
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddAuthenticationSdk(Configuration);
 
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -125,7 +55,8 @@ namespace NICE.Identity.Management
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, IApplicationLifetime appLifetime)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
+			IApplicationLifetime appLifetime, INICEAuthenticationService niceAuthenticationService)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -175,8 +106,7 @@ namespace NICE.Identity.Management
 			{
 				builder.Run(async context =>
 				{
-					var returnUrl = context.Request.Path;
-					await context.ChallengeAsync("Auth0", new AuthenticationProperties() { RedirectUri = returnUrl });
+					await niceAuthenticationService.Login(context, context.Request.Path);
 				});
 			});
 			
