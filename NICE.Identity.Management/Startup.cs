@@ -82,7 +82,9 @@ namespace NICE.Identity.Management
 
 			app.Use((context, next) =>
 			{
-				if (context.Request.Headers["x-forwarded-proto"] == "https")
+				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
+				    context.Request.Headers["Front-End-Https"] == "on" ||
+					context.Request.Headers.ContainsKey("X-ARR-SSL"))
 				{
 					context.Request.Scheme = "https";
 				}
