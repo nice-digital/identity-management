@@ -12,4 +12,9 @@ Feature: Guidance list
 
   Scenario: Failed Login
     When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD"
-    Then I expect the error message is "YOUR ACCOUNT HAS BEEN BLOCKED AFTER MULTIPLE CONSECUTIVE LOGIN ATTEMPTS."
+    Then I expect the error message is "WRONG EMAIL OR PASSWORD."
+
+  Scenario: Successful Login
+    When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD_CORRECT"
+    And I wait on element "h1" to be visible
+    Then I expect that element "h1" matches the text "User Admin Portal"
