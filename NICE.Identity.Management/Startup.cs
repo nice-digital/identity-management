@@ -80,6 +80,17 @@ namespace NICE.Identity.Management
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles();
 
+			app.Use((context, next) =>
+			{
+				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
+				    context.Request.Headers["Front-End-Https"] == "on" ||
+					context.Request.Headers.ContainsKey("X-ARR-SSL"))
+				{
+					context.Request.Scheme = "https";
+				}
+				return next();
+			});
+
 			app.MapWhen(x => x.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Use((context, next) =>
