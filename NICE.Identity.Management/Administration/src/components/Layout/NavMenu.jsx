@@ -10,7 +10,7 @@ export class NavMenu extends React.Component {
     return (
       <LefthandMenuWrapper>
         <h1>User Admin Portal</h1>
-        <a href="https://alpha-identity.nice.org.uk/logout"> Logout </a>
+        <a href="https://alpha-nice-identity.eu.auth0.com/logout"> Logout </a>
         <LefthandMenuContainer>
           <StyledLink to="/">Users</StyledLink>
           <StyledLink to="/roles">Roles</StyledLink>
