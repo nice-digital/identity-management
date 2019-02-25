@@ -10,20 +10,21 @@ exports.config = {
         "./src/features/**/*.feature"
     ],
     exclude: [
-        // "./src/features/**/homepage.feature"
+        "./src/features/**/identityHomepage.feature"
     ],
 
     // Assume user has Chrome and Firefox installed.
     capabilities: [
         {
-            browserName: "chrome",
+            browserName: "firefox",
         }
     ],
 
     logLevel: "verbose",
     coloredLogs: true,
     screenshotPath: "./errorShots/",
-    baseUrl: "http://test-identity.nice.org.uk",
+    //baseUrl: "http://alpha-identity.nice.org.uk", - below url is a temporary measure for time being so that we can create some automation
+    baseUrl: "https://alpha-nice-identity.eu.auth0.com/",
     reporters: ["spec"],
 
     // Use BDD with Cucumber

@@ -13,3 +13,4 @@ Feature: Guidance list
   Scenario: Failed Login
     When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD"
     Then I expect the error message is "YOUR ACCOUNT HAS BEEN BLOCKED AFTER MULTIPLE CONSECUTIVE LOGIN ATTEMPTS."
+    When I click on the link ""
