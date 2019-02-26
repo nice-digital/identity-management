@@ -33,6 +33,7 @@ namespace NICE.Identity.Management
 			
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
+			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
 
 			services.Configure<CookiePolicyOptions>(options =>
@@ -111,6 +112,13 @@ namespace NICE.Identity.Management
 						spa.UseReactDevelopmentServer(npmScript: "start");
 					}
 				});
+
+				app.UseMvc(routes =>
+				{
+					routes.MapRoute(
+						name: "default",
+						template: "{controller}/{action=Index}/{id?}");
+				});
 			});
 
 			app.MapWhen(x => !x.User.Identity.IsAuthenticated, builder =>
@@ -120,7 +128,6 @@ namespace NICE.Identity.Management
 					await niceAuthenticationService.Login(context, context.Request.Path);
 				});
 			});
-			
 		}
 	}
 }
