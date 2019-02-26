@@ -2,7 +2,9 @@
 version: '2'
 services:
   firefox:
-    image: selenium/node-firefox:3.11.0-antimony
+    container_name: functional-tests_firefox_1
+    image: selenium/node-firefox:3.11.0-dysprosium
+    # See https://github.com/SeleniumHQ/docker-selenium#running-the-images
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -11,22 +13,84 @@ services:
       HUB_HOST: hub
 
   chrome:
-    image: selenium/node-chrome:3.11.0-antimony
+    container_name: functional-tests_chrome_1
+    image: selenium/node-chrome:3.11.0-dysprosium
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
       - hub
     environment:
       HUB_HOST: hub
+      #NODE_MAX_INSTANCES: 2
 
+  # Selenium Grid/Hub
   hub:
-    image: selenium/hub:3.11.0-antimony
-    ports:
-      - "4444:4444"
-    expose:
-      - "4444"
+    image: selenium/hub:3.11.0-dysprosium
+    container_name: selenium_hub
+    environment:
+      GRID_DEBUG: "true"
+      #GRID_MAX_SESSION: 2
+#    ports:
+#      - 4444:4444
 
+  # The tests themselves
   tests:
+    container_name: functional-tests_tests_1
     build: .
+    volumes:
+      - ./:/tests
+      - /tests/node_modules
     links:
       - hub
+      # - nginx
+      - idammanagement
+    environment:
+      - ACCOUNTS_EMAIL
+      - ACCOUNTS_EMAIL2
+      - ACCOUNTS_EMAIL3
+      - ACCOUNTS_EMAIL4
+      - ACCOUNTS_PASSWORD
+
+  # Comment Collection dotnet core web app
+  idammanagement:
+    container_name: functional-tests_idammanagement_1
+    build: ./../NICE.Identity.Management/
+    links:
+      - database
+    # Enable browsing from the host machine on http://localhost:8080/consultations
+    ports:
+        - 8080:8080
+    environment:
+      - AUTH0_DOMAIN
+      - AUTH0_CLIENTID
+      - AUTH0_CLIENTSECRECT
+      - AUTH0_REDIRECT_URI
+      - AUTH0_LOGOUT_REDIRECT_URI
+
+
+  # MS SQL Server database
+  database:
+    container_name: functional-tests_database_1
+    image: microsoft/mssql-server-linux:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - MSSQL_SA_PASSWORD
+      - COMPOSE_HTTP_TIMEOUT=200
+    ports:
+      - 1434:1433
+
+  # nginx:
+  #   container_name: functional-tests_nginx_1
+  #   image: nginx:latest
+  #   volumes:
+  #     - ./docker_ssl_proxy:/etc/nginx
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   links:
+  #     - comments
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - niceorg
