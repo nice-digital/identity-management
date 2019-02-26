@@ -16,7 +16,7 @@ export class NavMenu extends React.Component {
           <StyledLink to="/roles">Roles</StyledLink>
           <StyledLink to="/realms">Realms</StyledLink>
 
-          <a href="account/logout?returnUrl=/">Logout</a>
+          <a href="account/logout">Logout</a>
         </LefthandMenuContainer>
       </LefthandMenuWrapper>
     );

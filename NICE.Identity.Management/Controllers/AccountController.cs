@@ -18,15 +18,15 @@ namespace NICE.Identity.Management.Controllers
             _niceAuthenticationService = niceAuthenticationService;
         }
 
-        public async Task Login(string returnUrl = "/")
+        public Task Login(string returnUrl = "/")
         {
-            await _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, returnUrl);
+            return _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, returnUrl);
         }
 
         [Authorize]
-        public async Task Logout(string returnUrl = "/")
+        public Task Logout(string returnUrl = "/")
         {
-            await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, returnUrl);
+            return _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, returnUrl);
         }
     }
 }

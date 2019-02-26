@@ -92,6 +92,13 @@ namespace NICE.Identity.Management
 				return next();
 			});
 
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller}/{action=Index}/{id?}");
+			});
+
 			app.MapWhen(x => x.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Use((context, next) =>
@@ -111,13 +118,6 @@ namespace NICE.Identity.Management
 					{
 						spa.UseReactDevelopmentServer(npmScript: "start");
 					}
-				});
-
-				app.UseMvc(routes =>
-				{
-					routes.MapRoute(
-						name: "default",
-						template: "{controller}/{action=Index}/{id?}");
 				});
 			});
 
