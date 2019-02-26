@@ -1,3 +1,5 @@
+using System;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,15 +20,16 @@ namespace NICE.Identity.Management.Controllers
             _niceAuthenticationService = niceAuthenticationService;
         }
 
-        public Task Login(string returnUrl = "/")
+        public async Task Login(string returnUrl = "/")
         {
-            return _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, returnUrl);
+            await _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, returnUrl);
         }
 
         [Authorize]
-        public Task Logout(string returnUrl = "/")
+        public async Task Logout(string returnUrl = "/")
         {
-            return _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, returnUrl);
+            var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
+            await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, url);
         }
     }
 }
