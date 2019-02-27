@@ -10,21 +10,27 @@ exports.config = {
         "./src/features/**/*.feature"
     ],
     exclude: [
-        "./src/features/**/identityHomepage.feature"
+        "./src/features/**/identityHomepage.feature",
+        "./src/features/**/customRegistratonPage.feature",
+        "./src/features/**/customLoginPage.feature",
+        "./src/features/**/signUpConfirmEmailMismatch.feature",
+        "./src/features/**/signUpConfirmPasswordMismatch.feature",
+        "./src/features/**/unsuccessfulLogin.feature"
+        // "./src/features/**/successfulLogin",
     ],
 
     // Assume user has Chrome and Firefox installed.
     capabilities: [
         {
-            browserName: "firefox",
+            browserName: "chrome",
         }
     ],
 
     logLevel: "verbose",
     coloredLogs: true,
     screenshotPath: "./errorShots/",
-    //baseUrl: "http://alpha-identity.nice.org.uk", - below url is a temporary measure for time being so that we can create some automation
-    baseUrl: "https://alpha-nice-identity.eu.auth0.com/",
+    baseUrl: "https://alpha-identityadmin.nice.org.uk/", //- below url is a temporary measure for time being so that we can create some automation
+    //baseUrl: "https://alpha-nice-identity.eu.auth0.com/",
     reporters: ["spec"],
 
     // Use BDD with Cucumber
