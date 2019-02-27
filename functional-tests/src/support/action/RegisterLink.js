@@ -5,8 +5,11 @@ import isExisting from "@nice-digital/wdio-cucumber-steps/lib/support/check/isEx
 import clickElement from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
 import selectors from "../selectors";
 
-export const registerLink = (action) => {
-    clickElement(action, 'link', selectors.loginPage.registerLink);    
+
+
+export const registerLink = () => {
+    waitForVisible(selectors.loginPage.registerLink);
+    clickElement('click', 'element', selectors.loginPage.registerLink);
  };
  
 export default registerLink;

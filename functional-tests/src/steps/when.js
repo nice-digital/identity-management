@@ -8,7 +8,11 @@ When(
   Login
 );
 
-When(
-  /^I (click|double) on the Register link$/,
-  registerLink
+// When(
+//   /^I (click|double) on the Register link$/,
+//   registerLink
+// );
+
+When(/^I click on the Register link$/,
+ registerLink
 );
