@@ -7,6 +7,7 @@ import confirmEmailInput from "../support/check/confirmEmailInput";
 import confirmPasswordInput from "../support/check/confirmPasswordInput";
 import signUpUserNameInput from "../support/check/signUpUserNameInput";
 import signUpSurnameInput from "../support/check/signUpSurnameInput";
+import emailInput from "../support/check/emailInput";
 
 Then(
   /^I expect the error message is "([^"]*)"$/,
@@ -21,6 +22,11 @@ Then(
 Then(
   /^I expect that password input field does( not)* exist$/,
   passwordInput
+);
+
+Then(
+  /^I expect that email input field does( not)* exist$/,
+  emailInput
 );
 
 Then(

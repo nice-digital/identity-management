@@ -13,6 +13,6 @@ When(
 //   registerLink
 // );
 
-When(/^I click on the Register link$/,
+When(/^I click on the Sign up link$/,
  registerLink
 );

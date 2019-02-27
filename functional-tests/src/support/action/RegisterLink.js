@@ -7,7 +7,7 @@ import selectors from "../selectors";
 
 
 
-export const registerLink = () => {
+export const registerLink = () => {    
     waitForVisible(selectors.loginPage.registerLink);
     clickElement('click', 'element', selectors.loginPage.registerLink);
  };
