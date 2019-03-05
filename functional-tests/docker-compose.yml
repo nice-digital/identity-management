@@ -50,6 +50,7 @@ services:
       - ACCOUNTS_EMAIL3
       - ACCOUNTS_EMAIL4
       - ACCOUNTS_PASSWORD
+      - ACCOUNTS_PASSWORD2
 
   # Comment Collection dotnet core web app
   idammanagement:

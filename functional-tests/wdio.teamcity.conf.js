@@ -11,13 +11,13 @@ config.capabilities = [
         chromeOptions: {
             args: ["--headless", "--window-size=1366,768"]
         }
-    },
-    {
-        browserName: "firefox",
-        "moz:firefoxOptions": {
-            args: ["-headless"]
-        }
     }
+    // {
+    //     browserName: "firefox",
+    //     "moz:firefoxOptions": {
+    //         args: ["-headless"]
+    //     }
+    // }
 ];
 
 config.reporters = ["spec", "teamcity"];

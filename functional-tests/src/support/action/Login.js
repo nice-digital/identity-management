@@ -4,11 +4,11 @@ import selectors from "../selectors";
 import emailInput from "../check/emailInput";
 
 export const Login = (username, password) => {
-  browser.waitForVisible(selectors.loginPage.userNameInput, 10000);
-  browser.waitForVisible(selectors.loginPage.passwordInput, 10000);
-  browser.setValue(selectors.loginPage.userNameInput, process.env[username]);
-  browser.setValue(selectors.loginPage.passwordInput, process.env[password]);
-  browser.submitForm(selectors.loginPage.signInButton);
+  browser.waitForVisible(selectors.loginPage.usernameField, 10000);
+  browser.waitForVisible(selectors.loginPage.passwordField, 10000);
+  browser.setValue(selectors.loginPage.usernameField, process.env[username]);
+  browser.setValue(selectors.loginPage.passwordField, process.env[password]);
+  browser.click(selectors.loginPage.signInButton);
 }
 
 export default Login;

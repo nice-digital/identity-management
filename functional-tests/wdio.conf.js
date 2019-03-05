@@ -10,13 +10,12 @@ exports.config = {
         "./src/features/**/*.feature"
     ],
     exclude: [
-        "./src/features/**/identityHomepage.feature",
         "./src/features/**/customRegistratonPage.feature",
-        "./src/features/**/customLoginPage.feature",
         "./src/features/**/signUpConfirmEmailMismatch.feature",
         "./src/features/**/signUpConfirmPasswordMismatch.feature",
-        "./src/features/**/unsuccessfulLogin.feature"
-        // "./src/features/**/successfulLogin",
+        "./src/features/**/unsuccessfulLogin.feature",
+        "./src/features/**/successfulLogin.feature",
+        // "./src/features/**/identityHomepage.feature",
     ],
 
     // Assume user has Chrome and Firefox installed.
