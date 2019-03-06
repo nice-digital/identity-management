@@ -4,16 +4,10 @@ Feature: Guidance list
 
   Background:
     Given I open the url "/"
-
-  Scenario: Navigate to Identity homepage
-    Given I wait on element "h1" to be visible
-    And I wait on element "[data-qa-sel='login-email']" to be visible
     When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD2"
-    And I debug
-    Then I wait on element "h1" to be visible
-    Then I expect that element "h1" contains any text
-    And I expect that element "h1" contains the text "User Admin Portal"
-    Then I expect that element "body input[name='userName']" does exist
+
+  Scenario: Navigate to Identity Admin homepage
+    Then I expect I appear on the Identity Admin homepage
 
   # Scenario: Failed Login
   #   When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD"

@@ -19,5 +19,10 @@ export default {
     aiCheckBox: toDataQASelAttr("ai-checkbox-register"),
     tcCheckBox: toDataQASelAttr("tc-checkbox-register"),
     registerButton: toDataQASelAttr("Register-button"),
+  },
+  adminHomepage: {
+    usernameField: "body input[name='userName']",
+    roleField: "body input[name='role']",
+    pageTitle: "h1",
   }
 };

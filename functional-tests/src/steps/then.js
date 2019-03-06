@@ -8,6 +8,7 @@ import confirmPasswordInput from "../support/check/confirmPasswordInput";
 import signUpUserNameInput from "../support/check/signUpUserNameInput";
 import signUpSurnameInput from "../support/check/signUpSurnameInput";
 import emailInput from "../support/check/emailInput";
+import identityAdminHomepage from "../support/check/identityAdminHomepage";
 
 Then(
   /^I expect the error message is "([^"]*)"$/,
@@ -47,4 +48,9 @@ Then(
 Then(
   /^I expect that surname input field does( not)* exist$/,
   signUpSurnameInput
+);
+
+Then(
+  /^I expect I appear on the Identity Admin homepage$/,
+  identityAdminHomepage
 );
