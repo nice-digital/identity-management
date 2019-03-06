@@ -1,4 +1,4 @@
-Feature: Guidance list
+Feature: Successful Login
   As a user of NICE Identity 
   We can access the NICE identity page
 
