@@ -45,6 +45,7 @@ services:
       # - nginx
       - idammanagement
     environment:
+      - IDENTITY_NOUSER_EMAIL
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
