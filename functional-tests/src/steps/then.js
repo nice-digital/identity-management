@@ -9,6 +9,7 @@ import signUpUserNameInput from "../support/check/signUpUserNameInput";
 import signUpSurnameInput from "../support/check/signUpSurnameInput";
 import emailInput from "../support/check/emailInput";
 import identityAdminHomepage from "../support/check/identityAdminHomepage";
+import createaccount from "../support/action/createaccount";
 
 Then(
   /^I expect the error message is "([^"]*)"$/,
@@ -54,3 +55,8 @@ Then(
   /^I expect I appear on the Identity Admin homepage$/,
   identityAdminHomepage
 );
+
+Then(
+  /^I can successfuly register with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
+  createaccount
+)
