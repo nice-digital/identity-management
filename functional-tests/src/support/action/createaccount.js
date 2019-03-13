@@ -14,7 +14,7 @@ export const createaccount = (username, password) => {
   browser.setValue(selectors.registrationPage.confirmPasswordInput, process.env[password]);
   browser.setValue(selectors.registrationPage.firstNameInput, 'Martin');
   browser.setValue(selectors.registrationPage.surnameInput, 'Gallagher');
-  click('click', 'element', selectors.registrationPage.tcCheckBox);
+  click('doubleClick', 'element', selectors.registrationPage.tcCheckBox);
   click('click', 'element', selectors.registrationPage.registerButton);
   checkEqualsText('element', 'h3', 'should', 'Thank you!');
 }

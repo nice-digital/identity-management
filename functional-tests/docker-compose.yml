@@ -63,6 +63,7 @@ services:
     ports:
         - 8080:8080
     environment:
+      - DEFAULT_CONNECTION
       - AUTH0_DOMAIN
       - AUTH0_CLIENTID
       - AUTH0_CLIENTSECRECT
