@@ -9,7 +9,6 @@ class App extends Component {
       <BrowserRouter>
         <Fragment>
           <Route path="/" exact component={GridContainer} />
-          <Route path="/user:user" exact component={GridContainer} />
         </Fragment>
       </BrowserRouter>
     );

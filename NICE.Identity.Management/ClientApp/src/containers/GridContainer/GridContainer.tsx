@@ -1,5 +1,7 @@
 import React from "react";
+
 import { Wrapper, GridWrapper, SearchWrapper } from "./components";
+import { Grid } from "../../components/Grid";
 
 export interface GridContainerProps {}
 export interface GridContainerState {}
@@ -19,7 +21,7 @@ export class GridContainer extends React.Component<
           <input />
         </SearchWrapper>
         <GridWrapper id="grid-container">
-          <p>placeholderF</p>
+          <Grid>placeholderF</Grid>
         </GridWrapper>
       </Wrapper>
     );
