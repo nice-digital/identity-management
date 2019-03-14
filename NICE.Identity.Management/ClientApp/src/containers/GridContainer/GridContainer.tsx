@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import { Wrapper, GridWrapper, SearchWrapper } from "./components";
 import { Grid, ColumnDefinition } from "../../components/Grid";
-import { Store } from "../../store";
+import { Store } from "../../store/CommonStore";
 
 export interface GridContainerProps<T> {
   store: Store<any>;

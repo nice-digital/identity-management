@@ -9,6 +9,8 @@ export class UserProfileStore {
 
   @action
   async getUserProfile(){
-      this.userProfile = await axios.get(url.userProfile) as any
+      const item = await axios.get(url.userProfile) as any
+      console.log(item)
+      this.userProfile = item.data
   }
 }
