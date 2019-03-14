@@ -18,5 +18,5 @@ export const UsersPage = () => {
     }
   ];
   const userStore = new UserStore() 
-  return <GridContainer store={new UserStore()} columnDefs={columnDefs}/>;
+  return <GridContainer store={userStore} columnDefs={columnDefs}/>;
 };

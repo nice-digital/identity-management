@@ -1,12 +1,13 @@
 import React from "react";
-import {observer} from 'mobx-react'
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
 import { Wrapper, GridWrapper, SearchWrapper } from "./components";
 import { Grid, ColDef } from "../../components/Grid";
 import { Store } from "../../store";
 
 export interface GridContainerProps<T> {
-  store: Store<any>,
-  columnDefs: Array<ColDef>,
+  store: Store<any>;
+  columnDefs: Array<ColDef>;
 }
 export interface GridContainerState {}
 @observer
@@ -15,13 +16,13 @@ export class GridContainer<T> extends React.Component<
   GridContainerState
 > {
   constructor(props: GridContainerProps<T>) {
-    super(props)
-    props.store.getList('/users.json')
+    super(props);
+    props.store.getList("/users.json");
   }
 
   render() {
     const { columnDefs } = this.props;
-    const rowData = this.props.store.data
+    const rowData = toJS(this.props.store.data);
     return (
       <Wrapper>
         <SearchWrapper id="search-container">

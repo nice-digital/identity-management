@@ -1,4 +1,4 @@
-import { observable, computed, action } from "mobx"
+import { observable, action } from "mobx"
 import axios from 'axios'
 import { getAdministration } from "mobx/lib/internal";
 
@@ -15,8 +15,8 @@ export class Store<T>{
 
     @action
     async getList(url: string){
-        const data: Array<T> = await axios.get(url) as any
-        this.data = data
+        const data:any = await axios.get(url) as any
+        this.data = data.data
     }
 
     @action
