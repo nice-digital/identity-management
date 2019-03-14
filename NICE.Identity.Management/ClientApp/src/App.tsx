@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
 // import logo from './logo.svg';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { UsersPage } from "./containers/UsersPage";
-
+import { UsersPage } from "./containers/Users";
 
 class App extends Component {
-  
   constructor(props: any) {
     super(props);
   }

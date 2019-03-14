@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/icons": "^3.0.2",
     "ag-grid-community": "^20.1.0",
     "ag-grid-react": "^20.1.1",
     "axios": "^0.18.0",
@@ -10,6 +11,7 @@
     "mobx-react": "^5.4.3",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-loader": "^2.4.5",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
@@ -23,6 +25,7 @@
     "@types/node": "11.11.3",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.2",
+    "@types/react-loader": "^2.4.3",
     "@types/react-router": "^4.4.5",
     "@types/react-router-dom": "^4.3.1"
   },

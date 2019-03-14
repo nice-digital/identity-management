@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-balham.css";
+import "ag-grid-community/dist/styles/ag-theme-material.css";
 
-import { Wrapper } from "./components";
+import { Wrapper } from "./Components";
 import { ColDef } from "ag-grid-community";
 
 export interface columnType {
@@ -26,7 +26,7 @@ export class Grid<T> extends Component<GridProps<T>, GridState> {
   render() {
     const { columnDefs, rowData } = this.props;
     return (
-      <Wrapper className="ag-theme-balham">
+      <Wrapper className="ag-theme-material">
         <AgGridReact columnDefs={columnDefs} rowData={rowData} />
       </Wrapper>
     );

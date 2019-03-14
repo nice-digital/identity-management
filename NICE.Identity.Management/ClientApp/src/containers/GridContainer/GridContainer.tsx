@@ -1,13 +1,13 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
-import { Wrapper, GridWrapper, SearchWrapper } from "./components";
-import { Grid, ColumnDefinition } from "../../components/Grid";
-import { Store } from "../../store/CommonStore";
+import { Wrapper, GridWrapper, SearchWrapper } from "./Components";
+import { Search, Grid, ColumnDefinition } from "../../components";
+import { Store } from "../../stores/CommonStore";
 
 export interface GridContainerProps<T> {
-  store: Store<any>;
-  columnDefs: Array<ColumnDefinition>;
+  store: Store<any>
+  columnDefs: Array<ColumnDefinition>
 }
 export interface GridContainerState {}
 @observer
@@ -26,7 +26,7 @@ export class GridContainer<T> extends React.Component<
     return (
       <Wrapper>
         <SearchWrapper id="search-container">
-          <input />
+          <Search />
         </SearchWrapper>
         <GridWrapper id="grid-container">
           <Grid columnDefs={columnDefs} rowData={rowData} />
