@@ -5,6 +5,7 @@
   "dependencies": {
     "ag-grid-community": "^20.1.0",
     "ag-grid-react": "^20.1.1",
+    "axios": "^0.18.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "react": "^16.8.4",

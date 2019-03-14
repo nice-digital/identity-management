@@ -6,68 +6,28 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { Wrapper } from "./components";
 import { ColDef } from "ag-grid-community";
 
+export { ColDef };
 export interface columnType {
   headerName: string;
   field: string;
 }
 
-export interface rowType {
-  make: string;
-  model: string;
-  price: string;
+export interface GridProps<T> {
+  columnDefs: Array<ColDef>;
+  rowData: Array<T>;
 }
+export interface GridState {}
 
-export interface GridProps {}
-export interface GridState {
-  columnDefs: Array<columnType>;
-  rowData: Array<rowType>;
-}
-
-export class Grid extends Component<GridProps, GridState> {
-  constructor(props: GridProps) {
-    super(props)
-    this.state= {
-      columnDefs: [
-        {
-          headerName: "Make",
-          field: "make"
-        },
-        {
-          headerName: "Model",
-          field: "model"
-        },
-        {
-          headerName: "Price",
-          field: "price"
-        }
-      ],
-      rowData: [
-        {
-          make: "Toyota",
-          model: "Celica",
-          price: 35000
-        },
-        {
-          make: "Ford",
-          model: "Mondeo",
-          price: 32000
-        },
-        {
-          make: "Porsche",
-          model: "Boxter",
-          price: 72000
-        }
-      ]
-    };
+export class Grid<T> extends Component<GridProps<T>, GridState> {
+  constructor(props: GridProps<T>) {
+    super(props);
   }
 
-
   render() {
+    const { columnDefs, rowData } = this.props;
     return (
-      <Wrapper
-        className="ag-theme-balham"
-      >
-        <AgGridReact columnDefs={this.state.columnDefs} rowData={{}} />
+      <Wrapper className="ag-theme-balham">
+        <AgGridReact columnDefs={columnDefs} rowData={rowData} />
       </Wrapper>
     );
   }
