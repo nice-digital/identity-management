@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import { GridContainer } from "./GridContainer";
-import { UserStore } from "../store/User";
+import { UserStore, UserProfileStore } from "../store";
 
-export const UsersPage = () => {
-  const columnDefs = [
+
+export class UsersPage extends Component {
+  userProfileStore = new UserProfileStore();
+  userStore = new UserStore();
+  columnDefs = [
     {
       headerName: "First Name",
       field: "firstName"
@@ -17,6 +20,18 @@ export const UsersPage = () => {
       field: "email"
     }
   ];
-  const userStore = new UserStore() 
-  return <GridContainer store={userStore} columnDefs={columnDefs}/>;
-};
+
+  constructor(props: any) {
+    super(props);
+    this.userProfileStore.getUserProfile();
+  }
+  render() {
+    const loggedUser = this.userProfileStore.userProfile;
+    return loggedUser.roles &&
+      loggedUser.roles.find(item => item === "Administrator") ? (
+      <GridContainer store={this.userStore} columnDefs={this.columnDefs} />
+    ) : (
+      <div>no role</div>
+    );
+  }
+}

@@ -6,11 +6,11 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { Wrapper } from "./components";
 import { ColDef } from "ag-grid-community";
 
-export { ColDef };
 export interface columnType {
   headerName: string;
   field: string;
 }
+export interface ColumnDefinition extends ColDef{}
 
 export interface GridProps<T> {
   columnDefs: Array<ColDef>;

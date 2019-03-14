@@ -1,0 +1,10 @@
+{
+	"firstName": "Clark",
+	"lastName": "Kent",
+	"email": "superman@google.com",
+	"lastLoginDate": "2019-03-14T11:00:00.000",
+	"roles": [
+		"administrator",
+		"nicepeople"
+	]
+}

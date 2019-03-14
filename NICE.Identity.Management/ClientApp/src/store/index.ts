@@ -1,27 +1,30 @@
-import { observable, action } from "mobx"
-import axios from 'axios'
-import { getAdministration } from "mobx/lib/internal";
+import { observable, action } from "mobx";
+import axios from "axios";
+export * from "./User";
 
-export class Store<T>{
+export { observable, action };
+export class Store<T> {
+  constructor() {}
+  url?: string;
+  @observable
+  data: Array<T> = [];
 
-    @observable
-    data: Array<T> = []
+  @observable
+  detail?: T = undefined;
 
-    @observable
-    detail: Array<T> = []
+  @observable
+  count: number = 0;
 
-    @observable
-    count: number = 0
+  @action
+  async getList() {
+    if (!this.url) return;
+    const data: any = (await axios.get(this.url)) as any;
+    this.data = data.data;
+  }
 
-    @action
-    async getList(url: string){
-        const data:any = await axios.get(url) as any
-        this.data = data.data
-    }
-
-    @action
-    async getDetail(url: string){
-        const data: Array<T> = await axios.get(url) as any
-        this.detail = data
-    }
+  @action
+  async getDetail(item: string) {
+    const data = (await axios.get(`${this.url}/${item}`)) as any;
+    this.detail = data;
+  }
 }

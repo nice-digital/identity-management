@@ -3,7 +3,12 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { UsersPage } from "./containers/UsersPage";
 
+
 class App extends Component {
+  
+  constructor(props: any) {
+    super(props);
+  }
   render() {
     return (
       <BrowserRouter>

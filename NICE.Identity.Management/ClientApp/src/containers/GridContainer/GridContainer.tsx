@@ -2,12 +2,12 @@ import React from "react";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import { Wrapper, GridWrapper, SearchWrapper } from "./components";
-import { Grid, ColDef } from "../../components/Grid";
+import { Grid, ColumnDefinition } from "../../components/Grid";
 import { Store } from "../../store";
 
 export interface GridContainerProps<T> {
   store: Store<any>;
-  columnDefs: Array<ColDef>;
+  columnDefs: Array<ColumnDefinition>;
 }
 export interface GridContainerState {}
 @observer
@@ -17,7 +17,7 @@ export class GridContainer<T> extends React.Component<
 > {
   constructor(props: GridContainerProps<T>) {
     super(props);
-    props.store.getList("/users.json");
+    props.store.getList();
   }
 
   render() {
