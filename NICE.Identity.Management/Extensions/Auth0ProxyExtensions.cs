@@ -18,7 +18,6 @@ namespace NICE.Identity.Management.Extensions
             var _httpClient = clientFactory.CreateClient("Auth0ApiToken");
             var accessToken = GetAccessTokenFromAuth0(auth0Configuration, _httpClient).Result;
             forwardContext.UpstreamRequest.Headers.Add(authorisation, $"bearer {accessToken}");
-
             return forwardContext;
         }
 

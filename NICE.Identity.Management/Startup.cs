@@ -40,6 +40,7 @@ namespace NICE.Identity.Management
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
 			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
 			services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
+			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("CustomDB"));
 
             services.AddProxy();
             services.Configure<CookiePolicyOptions>(options =>
@@ -64,7 +65,7 @@ namespace NICE.Identity.Management
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
 			IApplicationLifetime appLifetime, INICEAuthenticationService niceAuthenticationService,
-			IOptions<Auth0Configuration> auth0Configuration, IHttpClientFactory httpClientFactory)
+			IOptions<Auth0Configuration> auth0Configuration,IOptions<CustomAPiConfiguration> customApi, IHttpClientFactory httpClientFactory)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -84,9 +85,8 @@ namespace NICE.Identity.Management
 
 			app.RunProxy(context =>
 			{
-				var forwardContext = context.ForwardTo("http://upstream-server:5001");
+				var forwardContext = context.ForwardTo(customApi.Value.ApiEndpoint);
 				forwardContext.AddAuth0AccessToken(auth0Configuration, httpClientFactory);
-
 				return forwardContext.Send();
 			});
 
