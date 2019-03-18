@@ -9,6 +9,10 @@
       "es2015",
       "es2017"
     ],
+    "types": [
+      "jest",
+      "node"
+    ],
     "allowJs": false,
     "declaration": false,
     "skipLibCheck": true,

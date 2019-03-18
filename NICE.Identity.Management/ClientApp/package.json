@@ -15,19 +15,24 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "react-test-renderer": "^16.8.4",
+    "tslint-config-airbnb": "^5.11.1",
     "typescript": "3.3.3333"
   },
   "devDependencies": {
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
     "@material-ui/core": "^3.9.2",
-    "@types/jest": "24.0.11",
+    "@types/enzyme": "^3.9.0",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.11",
     "@types/node": "11.11.3",
-    "@types/react": "16.8.8",
-    "@types/react-dom": "16.8.2",
     "@types/react-loader": "^2.4.3",
     "@types/react-router": "^4.4.5",
-    "@types/react-router-dom": "^4.3.1"
+    "@types/react-router-dom": "^4.3.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "jest": "23.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

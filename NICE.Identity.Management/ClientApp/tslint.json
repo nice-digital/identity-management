@@ -1,0 +1,33 @@
+{
+  "plugins": ["prettier"],
+  "extends": ["tslint:latest", "tslint-config-airbnb"],
+  "rules": {
+    "semi": false,
+    "jsx-alignment": true,
+    "jsx-boolean-value": true,
+    "jsx-curly-spacing": [true, "never"],
+    "jsx-equals-spacing": [true, "never"],
+    "jsx-key": true,
+    "jsx-no-bind": true,
+    "jsx-no-lambda": true,
+    "jsx-no-multiline-js": true,
+    "jsx-no-string-ref": true,
+    "jsx-self-close": true,
+    "jsx-wrap-multiline": true,
+    "import/no-extraneous-dependencies": 0,
+    "react/forbid-prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 1,
+    "linebreak-style": 0,
+    "react/sort-prop-types": [
+      1,
+      {
+        "callbacksLast": false,
+        "ignoreCase": true,
+        "requiredFirst": true,
+        "sortShapeProp": true
+      }
+    ],
+    "prettier/prettier": 1
+  }
+}

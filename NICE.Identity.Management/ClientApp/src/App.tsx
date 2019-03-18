@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from "react";
-// import logo from './logo.svg';
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import { UsersPage } from "./containers/Users";
+import React, { Component, Fragment } from "react"
+// import logo from './logo.svg'
+import { BrowserRouter, Route, Link } from "react-router-dom"
+import { UsersPage } from "./containers/Users"
 
 class App extends Component {
   constructor(props: any) {
-    super(props);
+    super(props)
   }
   render() {
     return (
@@ -14,8 +14,8 @@ class App extends Component {
           <Route path="/" exact component={UsersPage} />
         </Fragment>
       </BrowserRouter>
-    );
+    )
   }
 }
 
-export default App;
+export default App
