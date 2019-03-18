@@ -8,15 +8,15 @@ import selectors from "../selectors";
 export const createaccount = (username, password) => {
   waitForVisible(selectors.registrationPage.emailInput);
   waitForVisible(selectors.registrationPage.passwordInput);
+  waitFor(selectors.registrationPage.tcCheckBox, 10000);
+  click('click', 'element', selectors.registrationPage.tcCheckBox);
   browser.setValue(selectors.registrationPage.emailInput, process.env[username]);
   browser.setValue(selectors.registrationPage.confirmEmailInput, process.env[username]);
   browser.setValue(selectors.registrationPage.passwordInput, process.env[password]);
   browser.setValue(selectors.registrationPage.confirmPasswordInput, process.env[password]);
   browser.setValue(selectors.registrationPage.firstNameInput, 'Martin');
   browser.setValue(selectors.registrationPage.surnameInput, 'Gallagher');
-  click('doubleClick', 'element', selectors.registrationPage.tcCheckBox);
   click('click', 'element', selectors.registrationPage.registerButton);
-  checkEqualsText('element', 'h3', 'should', 'Thank you!');
 }
 
 export default createaccount;
