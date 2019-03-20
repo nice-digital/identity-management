@@ -1081,6 +1081,12 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
 
+"@types/react-dom@^16.8.2":
+  version "16.8.2"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.2.tgz#9bd7d33f908b243ff0692846ef36c81d4941ad12"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-loader@^2.4.3":
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/@types/react-loader/-/react-loader-2.4.3.tgz#1614b82d94b42a08e520750241c2f045492d69b5"

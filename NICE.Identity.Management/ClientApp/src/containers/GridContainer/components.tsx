@@ -10,7 +10,7 @@ export const SearchWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   & input{
-	  max-width: 100px;
+	  width: 100%;
   }
 `
 

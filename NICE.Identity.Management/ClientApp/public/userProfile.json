@@ -6,5 +6,6 @@
 	"roles": [
 		"administrator",
 		"nicepeople"
-	]
+	],
+	"email_verified": false
 }
