@@ -17,6 +17,7 @@ export const createaccount = (username, password) => {
   browser.setValue(selectors.registrationPage.firstNameInput, 'Martin');
   browser.setValue(selectors.registrationPage.surnameInput, 'Gallagher');
   click('click', 'element', selectors.registrationPage.registerButton);
+  browser.pause(10000);
 }
 
 export default createaccount;

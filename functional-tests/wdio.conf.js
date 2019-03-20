@@ -11,7 +11,7 @@ exports.config = {
     ],
     exclude: [
         // "./src/features/**/identityHomepage.feature",
-        // "./src/features/**/identityFailedLogin.feature",
+        // "./src/features/**/identityFailedLogin.feature"
     ],
 
     // Assume user has Chrome and Firefox installed.

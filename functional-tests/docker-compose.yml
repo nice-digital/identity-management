@@ -45,6 +45,8 @@ services:
       # - nginx
       - idammanagement
     environment:
+      - ALPHA_USER_API
+      - ALPHA_API_KEY
       - IDENTITY_NOUSER_EMAIL
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
