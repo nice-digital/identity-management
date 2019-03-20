@@ -253,3 +253,7 @@ netcoreapp2.0/*
 /NICE.Identity.Management/Administration/node_modules
 /NICE.Identity.Management/Serilog-*.json
 
+#testing project
+/NICE.Identity.Management/published-app
+/NICE.Identity.Management.Test/published-app
+
