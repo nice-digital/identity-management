@@ -1,24 +1,32 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using NICE.Identity.Management.Configuration;
 using NICE.Identity.Authentication.Sdk;
 using NICE.Identity.Authentication.Sdk.Abstractions;
-using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace NICE.Identity.Management
 {
 	public class Startup
 	{
+		private const string AuthorisationServiceConfigurationPath = "AuthorisationServiceConfiguration";
+
 		public Startup(IConfiguration configuration, IHostingEnvironment environment)
 		{
-			Configuration = configuration;
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(environment.ContentRootPath)
+				.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+				.AddUserSecrets(Assembly.GetAssembly(typeof(Startup)))
+				.AddEnvironmentVariables();
+			Configuration = builder.Build();
 			Environment = environment;
 		}
 
@@ -34,7 +42,6 @@ namespace NICE.Identity.Management
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
 			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
-			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{
@@ -46,7 +53,7 @@ namespace NICE.Identity.Management
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 			// Add authentication services
-			services.AddAuthenticationSdk(Configuration);
+			services.AddAuthenticationSdk(Configuration, AuthorisationServiceConfigurationPath);
 
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -57,7 +64,7 @@ namespace NICE.Identity.Management
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
-			IApplicationLifetime appLifetime, INICEAuthenticationService niceAuthenticationService)
+			IApplicationLifetime appLifetime, IAuthenticationService authenticationService)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -125,7 +132,7 @@ namespace NICE.Identity.Management
 			{
 				builder.Run(async context =>
 				{
-					await niceAuthenticationService.Login(context, context.Request.Path);
+					await authenticationService.Login(context, context.Request.Path);
 				});
 			});
 		}
