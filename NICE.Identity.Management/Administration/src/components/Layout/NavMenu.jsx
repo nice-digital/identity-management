@@ -1,18 +1,20 @@
-﻿import React from 'react';
+import React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group'
 import {LefthandMenuContainer, StyledLink, LefthandMenuWrapper} from "./component";
-
 
 export class NavMenu extends React.Component {
   render() {
     return (
       <LefthandMenuWrapper>
         <h1>User Admin Portal</h1>
+        
         <LefthandMenuContainer>
-            <StyledLink to="/">Users</StyledLink>
-            <StyledLink to="/roles">Roles</StyledLink>
-            <StyledLink to="/realms">Realms</StyledLink>
-        </LefthandMenuContainer> 
+          <StyledLink to="/">Users</StyledLink>
+          <StyledLink to="/roles">Roles</StyledLink>
+          <StyledLink to="/realms">Realms</StyledLink>
+
+          <a href="account/logout">Logout</a>
+        </LefthandMenuContainer>
       </LefthandMenuWrapper>
     );
   }
