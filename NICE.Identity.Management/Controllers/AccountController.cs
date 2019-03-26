@@ -20,6 +20,7 @@ namespace NICE.Identity.Management.Controllers
             _niceAuthenticationService = niceAuthenticationService;
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
         public async Task Login(string returnUrl = "/")
         {
             var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
