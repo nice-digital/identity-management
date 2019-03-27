@@ -8,8 +8,8 @@ using Polly;
 namespace NICE.Identity.Management.Configuration {
     public class Auth0Configuration : Authentication.Sdk.Configuration.IHttpConfiguration
     {
-        public string Token => null;
-        public string Domain { get; set; }
+		public string Token => null;
+		public string Domain { get; set; }
 		public string Host => $"https://{Domain}/";
 	    public string Password { get; set; }
 	    public string UserName { get; set; }
