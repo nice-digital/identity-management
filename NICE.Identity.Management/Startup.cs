@@ -38,6 +38,7 @@ namespace NICE.Identity.Management
 			
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
+			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
 			services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
 			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("CustomDB"));
@@ -107,6 +108,13 @@ namespace NICE.Identity.Management
 				return next();
 			});
 
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller}/{action=Index}/{id?}");
+			});
+
 			app.MapWhen(x => x.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Use((context, next) =>
@@ -136,7 +144,6 @@ namespace NICE.Identity.Management
 					await niceAuthenticationService.Login(context, context.Request.Path);
 				});
 			});
-			
 		}
 
 
