@@ -20,12 +20,15 @@ namespace NICE.Identity.Management.Controllers
             _niceAuthenticationService = niceAuthenticationService;
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
         public async Task Login(string returnUrl = "/")
         {
-            await _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, returnUrl);
+            var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
+            await _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, url);
         }
 
         [Authorize]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
         public async Task Logout(string returnUrl = "/")
         {
             var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
