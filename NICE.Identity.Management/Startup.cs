@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.Options;
 using NICE.Identity.Management.Configuration;
 using NICE.Identity.Authentication.Sdk;
@@ -19,6 +20,7 @@ using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Extensions;
 using ProxyKit;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
+using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 namespace NICE.Identity.Management
 {
@@ -102,7 +104,35 @@ namespace NICE.Identity.Management
 			app.UseCookiePolicy();
 			app.UseAuthentication();
 			app.UseStaticFiles();
-			app.UseSpaStaticFiles();
+			app.UseSpaStaticFiles( new StaticFileOptions()
+			{
+				OnPrepareResponse = context =>
+				{
+					if (context.Context.Request.Path.StartsWithSegments("/static"))
+					{
+						// cache static resources for one year (versioned filenames)
+						var headers = context.Context.Response.GetTypedHeaders();
+						headers.CacheControl = new CacheControlHeaderValue
+						{
+							Public = true,
+							MaxAge = TimeSpan.FromDays(365)
+						};
+					}
+					else
+					{
+						// do not cache other files. also see UseSpa
+						var headers = context.Context.Response.GetTypedHeaders();
+						headers.CacheControl = new CacheControlHeaderValue
+						{
+							Public = true,
+							NoCache = true, 
+							NoStore = true,
+							MustRevalidate = true,
+							MaxAge = TimeSpan.FromDays(0),
+						};
+					}
+				}
+			});
 
 			app.Use((context, next) =>
 			{
@@ -136,6 +166,21 @@ namespace NICE.Identity.Management
 				builder.UseSpa(spa =>
 				{
 					spa.Options.SourcePath = "Administration";
+					spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions()
+					{
+						OnPrepareResponse = ctx => {
+							// do not cache files. also see UseSpaStaticFiles
+							var headers = ctx.Context.Response.GetTypedHeaders();
+							headers.CacheControl = new CacheControlHeaderValue
+							{
+								Public = true,
+								NoCache = true, 
+								NoStore = true,
+								MustRevalidate = true,
+								MaxAge = TimeSpan.FromDays(0)
+							};
+						}
+					};
 
 					if (env.IsDevelopment())
 					{

@@ -10,7 +10,7 @@ namespace NICE.Identity.Management.Configuration {
     {
         public string Token => null;
         public string Domain { get; set; }
-        public string Host => $"https://{Domain}/";
+		public string Host => $"https://{Domain}/";
 	    public string Password { get; set; }
 	    public string UserName { get; set; }
 	    public int HandledEventsAllowedBeforeBreaking { get; set; }
