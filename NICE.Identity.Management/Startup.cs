@@ -40,7 +40,7 @@ namespace NICE.Identity.Management
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
 			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
 			services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
-			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("CustomDB"));
+			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("ProxyEndpoint"));
 
             services.AddProxy();
             services.Configure<CookiePolicyOptions>(options =>
@@ -83,12 +83,14 @@ namespace NICE.Identity.Management
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
-			app.RunProxy(context =>
+			app.RunProxy(async context =>
 			{
 				var forwardContext = context.ForwardTo(customApi.Value.ApiEndpoint);
 				forwardContext.AddAuth0AccessToken(auth0Configuration, httpClientFactory);
-				return forwardContext.Send();
-			});
+				var response = await forwardContext.Send();
+				response.Headers.Remove("Authorization");
+				return response;
+            });
 
             app.UseHttpsRedirection();
 			app.UseCookiePolicy();
