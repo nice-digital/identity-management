@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -84,14 +85,16 @@ namespace NICE.Identity.Management
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
-			app.RunProxy(async context =>
-			{
-				var forwardContext = context.ForwardTo(customApi.Value.ApiEndpoint);
-				forwardContext.AddAuth0AccessToken(auth0Configuration, httpClientFactory);
-				var response = await forwardContext.Send();
-				response.Headers.Remove("Authorization");
-				return response;
-            });
+
+			app.RunProxy("/api",
+				 async context =>
+				{
+					var forwardContext = context.ForwardTo(customApi.Value.ApiEndpoint);
+					forwardContext.AddAuth0AccessToken(auth0Configuration, httpClientFactory);
+					var response = await forwardContext.Send();
+					response.Headers.Remove("Authorization");
+					return response;
+				});
 
             app.UseHttpsRedirection();
 			app.UseCookiePolicy();

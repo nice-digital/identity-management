@@ -18,6 +18,11 @@ export const FindUserControls = ({ inputs }) => {
           <FormText>Filter your results by inserting a keyword.</FormText>
         </FormGroupStyled>
       ))}
+
+<form action="/api/users" method="GET">
+    <input type="submit" value="Submit" />
+  </form>
+
     </Container>
   );
 };
