@@ -6,12 +6,14 @@ using Newtonsoft.Json;
 using Polly;
 
 namespace NICE.Identity.Management.Configuration {
-    public class Auth0Configuration : IHttpConfiguration
+    public class Auth0Configuration : Authentication.Sdk.Configuration.IHttpConfiguration
     {
         public string Token => null;
         public string Domain { get; set; }
         public string Host => $"https://{Domain}/";
-        public int HandledEventsAllowedBeforeBreaking { get; set; }
+	    public string Password { get; set; }
+	    public string UserName { get; set; }
+	    public int HandledEventsAllowedBeforeBreaking { get; set; }
         public int DurationOfBreakInMinutes { get; set; }
 
         public Func<PolicyBuilder<HttpResponseMessage>, IAsyncPolicy<HttpResponseMessage>> CircuitBreaker => builder => builder.CircuitBreakerAsync(

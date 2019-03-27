@@ -14,6 +14,8 @@ using Microsoft.Extensions.Options;
 using NICE.Identity.Management.Configuration;
 using NICE.Identity.Authentication.Sdk;
 using NICE.Identity.Authentication.Sdk.Abstractions;
+using NICE.Identity.Authentication.Sdk.Authentication;
+using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Extensions;
 using ProxyKit;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -40,7 +42,7 @@ namespace NICE.Identity.Management
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
 			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
-			services.TryAddTransient<INICEAuthenticationService, NICEAuthenticationService>();
+			services.TryAddTransient<IAuthenticationService, Auth0Service>();
 			services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
 			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("ProxyEndpoint"));
 
@@ -55,7 +57,7 @@ namespace NICE.Identity.Management
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 			services.AddHttpClientWithHttpConfiguration<Auth0Configuration>("Auth0ApiToken");
 			// Add authentication services
-			services.AddAuthenticationSdk(Configuration);
+			services.AddAuthenticationSdk(Configuration, "Auth0");
 
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -66,7 +68,7 @@ namespace NICE.Identity.Management
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
-			IApplicationLifetime appLifetime, INICEAuthenticationService niceAuthenticationService,
+			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService,
 			IOptions<Auth0Configuration> auth0Configuration,IOptions<CustomAPiConfiguration> customApi, IHttpClientFactory httpClientFactory)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
