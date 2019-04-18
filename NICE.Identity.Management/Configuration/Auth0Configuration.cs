@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Polly;
 
 namespace NICE.Identity.Management.Configuration {
-    public class Auth0Configuration : Authentication.Sdk.Configuration.IHttpConfiguration
+    public class Auth0Configuration
     {
 		public string Token => null;
 		public string Domain { get; set; }

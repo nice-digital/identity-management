@@ -12,19 +12,19 @@ namespace NICE.Identity.Management.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IAuthenticationService _niceAuthenticationService;
+        private readonly IAuthenticationService _authenticationService;
 
-        public AccountController(IHttpContextAccessor httpContextAccessor, IAuthenticationService niceAuthenticationService)
+        public AccountController(IHttpContextAccessor httpContextAccessor, IAuthenticationService authenticationService)
         {
             _httpContextAccessor = httpContextAccessor;
-            _niceAuthenticationService = niceAuthenticationService;
+            _authenticationService = authenticationService;
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
         public async Task Login(string returnUrl = "/")
         {
             var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
-            await _niceAuthenticationService.Login(_httpContextAccessor.HttpContext, url);
+            await _authenticationService.Login(_httpContextAccessor.HttpContext, url);
         }
 
         [Authorize]
@@ -32,7 +32,7 @@ namespace NICE.Identity.Management.Controllers
         public async Task Logout(string returnUrl = "/")
         {
             var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
-            await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, url);
+            await _authenticationService.Logout(_httpContextAccessor.HttpContext, url);
         }
     }
 }
