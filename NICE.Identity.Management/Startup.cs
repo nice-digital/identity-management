@@ -16,6 +16,7 @@ using NICE.Identity.Management.Configuration;
 using NICE.Identity.Authentication.Sdk;
 using NICE.Identity.Authentication.Sdk.Abstractions;
 using NICE.Identity.Authentication.Sdk.Authentication;
+using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Extensions;
 using ProxyKit;
@@ -43,9 +44,12 @@ namespace NICE.Identity.Management
 			
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
+			var authConfiguration = new AuthConfiguration(Configuration, "AuthConfiguration");
+			services.TryAddSingleton<IAuthConfiguration>(authConfiguration);
+
 			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 			services.TryAddTransient<IAuthenticationService, Auth0Service>();
-			services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
+			//services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
 			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("ProxyEndpoint"));
 
             services.AddProxy();
@@ -57,9 +61,10 @@ namespace NICE.Identity.Management
 			});
 			
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-			services.AddHttpClientWithHttpConfiguration<Auth0Configuration>("Auth0ApiToken");
+			//services.AddHttpClientWithHttpConfiguration<Auth0Configuration>("Auth0ApiToken");
 			// Add authentication services
-			services.AddAuthenticationSdk(Configuration, "Auth0");
+			//services.AddAuthenticationSdk(Configuration, "Auth0");
+			services.AddAuthenticationSdk(authConfiguration);
 
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -71,7 +76,7 @@ namespace NICE.Identity.Management
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
 			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService,
-			IOptions<Auth0Configuration> auth0Configuration,IOptions<CustomAPiConfiguration> customApi, IHttpClientFactory httpClientFactory)
+			IAuthConfiguration authConfiguration,IOptions<CustomAPiConfiguration> customApi, IHttpClientFactory httpClientFactory)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -94,7 +99,7 @@ namespace NICE.Identity.Management
 				 async context =>
 				{
 					var forwardContext = context.ForwardTo(customApi.Value.ApiEndpoint);
-					forwardContext.AddAuth0AccessToken(auth0Configuration, httpClientFactory);
+					forwardContext.AddAuth0AccessToken(authConfiguration, httpClientFactory);
 					var response = await forwardContext.Send();
 					response.Headers.Remove("Authorization");
 					return response;
