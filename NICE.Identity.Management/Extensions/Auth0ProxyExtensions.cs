@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Management.Configuration;
 using NICE.Identity.Management.Models;
 using ProxyKit;
@@ -15,10 +16,10 @@ namespace NICE.Identity.Management.Extensions
     {
         public const string authorisation = "Authorization";
 
-        public static ForwardContext AddAuth0AccessToken(this ForwardContext forwardContext, IOptions<Auth0Configuration> auth0Configuration, IHttpClientFactory clientFactory)
+        public static ForwardContext AddAuth0AccessToken(this ForwardContext forwardContext, IAuthConfiguration authConfiguration, IHttpClientFactory clientFactory)
         {
             var _httpClient = clientFactory.CreateClient("Auth0ApiToken");
-            var accessToken = GetAccessTokenFromAuth0(auth0Configuration, _httpClient);
+            var accessToken = GetAccessTokenFromAuth0(authConfiguration, _httpClient);
 
             if (forwardContext.UpstreamRequest.Headers.Contains(authorisation))
             {
@@ -40,14 +41,14 @@ namespace NICE.Identity.Management.Extensions
             return forwardContext;
         }
 
-        private static Auth0TokenResponse GetAccessTokenFromAuth0(IOptions<Auth0Configuration> configuration, HttpClient client)
+        private static Auth0TokenResponse GetAccessTokenFromAuth0(IAuthConfiguration authConfiguration, HttpClient client)
         {
-            var httpResponseMessage = client.PostAsync("oauth/token", configuration.Value.GetTokenRequest).Result;
+            var httpResponseMessage = client.PostAsync("oauth/token", authConfiguration.GetTokenRequest).Result;
 
             if (!httpResponseMessage.IsSuccessStatusCode)
             {
                 var errorContent = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                throw new Exception($"Unable to get token for client with id {configuration.Value.ClientId}. Response status: {httpResponseMessage.StatusCode}. Response: {errorContent}.");
+                throw new Exception($"Unable to get token for client with id {authConfiguration.WebSettings.ClientId}. Response status: {httpResponseMessage.StatusCode}. Response: {errorContent}.");
             }
 
             var data = httpResponseMessage.Content.ReadAsStringAsync().Result;

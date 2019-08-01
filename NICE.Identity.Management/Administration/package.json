@@ -7,6 +7,7 @@
     "ag-grid-react": "^20.0.0",
     "axios": "^0.18.0",
     "bootstrap": "latest",
+    "jquery": "^1.9.1",
     "qs": "^6.6.0",
     "react": "^16.0.0",
     "react-bootstrap": "0.31.5",
