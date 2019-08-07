@@ -6,13 +6,16 @@ import { Tag } from "@nice-digital/nds-tag";
 const App: React.FC = () => {
 	return (
 		<div className={styles.App}>
-			<header className={styles.AppHeader}>
-				<img src={logo} className={styles.AppLogo} alt="logo" />
+			<header>
+				<img src={logo} alt="logo" />
 				<p>
 					This is a <Tag alpha>tag</Tag> right here.
 					<Tag outline flush>
 						Things!
 					</Tag>
+					<span>
+						<Tag flush>Hello</Tag>
+					</span>
 				</p>
 			</header>
 		</div>
