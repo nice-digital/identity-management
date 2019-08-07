@@ -16,6 +16,5 @@
 		"jsx": "preserve",
 		"preserveSymlinks": true
 	},
-	"include": ["src"],
-	"files": ["./types.d.ts"]
+	"include": ["src"]
 }
