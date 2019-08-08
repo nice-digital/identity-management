@@ -1,6 +1,10 @@
 module.exports = {
 	parser: "babel-eslint",
-	extends: ["@nice-digital/eslint-config/es6", "plugin:react/recommended"],
+	extends: [
+		"@nice-digital/eslint-config/es6",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+	],
 	settings: {
 		react: {
 			version: "detect",
