@@ -1,17 +1,18 @@
 import React from "react";
+import { RouteComponentProps, Link } from "react-router-dom";
 
-type PropsType = {
-	match: any;
+type TParams = { id: string };
+
+type UserProps = {} & RouteComponentProps<TParams>;
+
+export const User = (props: UserProps) => {
+	const { match } = props;
+	const { params } = match;
+
+	return (
+		<div>
+			<p>User: {params.id}</p>
+			<Link to={`/users/${params.id}/roles`}>Roles</Link>
+		</div>
+	);
 };
-
-class User extends React.Component<PropsType> {
-	render() {
-		return (
-			<div>
-				<p>User: {this.props.match.params.id}</p>
-			</div>
-		);
-	}
-}
-
-export default User;
