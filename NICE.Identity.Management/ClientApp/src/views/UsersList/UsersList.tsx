@@ -1,71 +1,42 @@
-import React, { Component } from "react";
+import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
+import { useFetch } from "../../hooks/hooks";
+import { Filter } from "../../components/Filter/Filter";
 
-type User = {
-	// TODO: Move model to shared model types file
-	id: string;
-	name: string;
-};
+export const UsersList: FunctionComponent = () => {
+	const [data, isLoading] = useFetch(
+		"http://www.json-generator.com/api/json/get/cfQXOXbwgO?indent=2",
+	);
 
-type UsersListProps = {};
-
-type UsersListState = {
-	isLoading: boolean;
-	users: User[];
-};
-
-export class UsersList extends Component<UsersListProps, UsersListState> {
-	constructor(props: UsersListProps) {
-		super(props);
-
-		this.state = {
-			isLoading: true,
-			users: [],
-		};
-	}
-
-	// Mimic async get request
-	fetchUsers() {
-		const users: User[] = [{ id: "1", name: "Ian" }, { id: "2", name: "John" }];
-
-		return Promise.resolve(users);
-	}
-
-	componentDidMount() {
-		this.fetchUsers().then(users => {
-			this.setState({
-				isLoading: false,
-				users: users,
-			});
-		});
-	}
-
-	render() {
-		return (
-			<>
-				{this.state.isLoading ? (
+	return (
+		<div className="grid">
+			<div data-g="3">
+				<Filter />
+			</div>
+			<div data-g="9">
+				{isLoading ? (
 					<p>Loading...</p>
 				) : (
 					<table>
 						<thead>
 							<tr>
 								<th>Name</th>
-								<th>Service</th>
+								<th>Email</th>
 							</tr>
 						</thead>
 						<tbody>
-							{this.state.users.map(user => (
-								<tr key={user.id}>
+							{data.map(({ _id, name, email }) => (
+								<tr key={_id}>
 									<td>
-										<Link to={`/users/${user.id}`}>{user.name}</Link>
+										<Link to={`/users/${_id}`}>{name}</Link>
 									</td>
-									<td>EPPI Reviewer</td>
+									<td>{email}</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
 				)}
-			</>
-		);
-	}
-}
+			</div>
+		</div>
+	);
+};

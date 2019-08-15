@@ -10,9 +10,11 @@ export const User = (props: UserProps) => {
 	const { params } = match;
 
 	return (
-		<div>
-			<p>User: {params.id}</p>
-			<Link to={`/users/${params.id}/roles`}>Roles</Link>
+		<div className="grid">
+			<div data-g="12">
+				<p>User: {params.id}</p>
+				<Link to={`/users/${params.id}/roles`}>Roles</Link>
+			</div>
 		</div>
 	);
 };

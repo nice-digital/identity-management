@@ -5,9 +5,16 @@ type TParams = { userId: string; roleId: string };
 
 type UserRolesProps = {} & RouteComponentProps<TParams>;
 
-export const UserRoles = (props: UserRolesProps) => (
-	<div>
-		<p>User: {props.match.params.userId}</p>
-		<p>Role: {props.match.params.roleId}</p>
-	</div>
-);
+export const UserRoles = (props: UserRolesProps) => {
+	const { match } = props;
+	const { params } = match;
+
+	return (
+		<div className="grid">
+			<div data-g="12">
+				<p>User: {params.userId}</p>
+				<p>Role: {params.roleId}</p>
+			</div>
+		</div>
+	);
+};
