@@ -170,7 +170,7 @@ namespace NICE.Identity.Management
 				
 				builder.UseSpa(spa =>
 				{
-					spa.Options.SourcePath = "Administration";
+					spa.Options.SourcePath = "ClientApp";
 					spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions()
 					{
 						OnPrepareResponse = ctx => {
