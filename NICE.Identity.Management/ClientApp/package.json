@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1"
+  },
+  "devDependencies": {
     "@nice-digital/browserslist-config": "^1.0.0",
     "@nice-digital/eslint-config": "^1.0.3",
     "@types/enzyme": "^3.10.3",
@@ -17,10 +23,6 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
     "node-sass": "^4.12.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
     "typescript": "3.5.3"
   },
   "scripts": {
