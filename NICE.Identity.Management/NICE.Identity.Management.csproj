@@ -44,8 +44,8 @@
   </ItemGroup>
 
   <Target Name="PublishSpa" AfterTargets="ComputeFilesToPublish">
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />  
+<!--    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />-->
+<!--    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />  -->
     <!-- Include the newly-built spa files in the publish output -->
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)build\**;$(SpaRoot)src\**;$(SpaRoot)*.*" />
