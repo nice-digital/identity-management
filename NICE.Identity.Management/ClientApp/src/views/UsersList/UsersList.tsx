@@ -14,10 +14,10 @@ export const UsersList: FunctionComponent = () => {
 
 	return (
 		<div className="grid">
-			<div data-g="3">
+			<div data-g="12 md:3">
 				<Filter />
 			</div>
-			<div data-g="9">
+			<div data-g="12 md:9">
 				{isLoading ? (
 					<p>Loading...</p>
 				) : (
