@@ -5,7 +5,7 @@ import { Filter } from "../../components/Filter/Filter";
 
 export const UsersList: FunctionComponent = () => {
 	const [data, isLoading] = useFetch(
-		"http://www.json-generator.com/api/json/get/cfQXOXbwgO?indent=2",
+		"https://www.json-generator.com/api/json/get/cfQXOXbwgO?indent=2",
 	);
 
 	return (
