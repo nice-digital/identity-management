@@ -3,11 +3,14 @@ import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
 import { UserRoles } from "./../../views/UserRoles/UserRoles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Header, Footer } from "@nice-digital/global-nav";
 
 class App extends React.Component {
 	render() {
 		return (
 			<Router>
+				<Header search={false} />
+
 				<nav>
 					<ul>
 						<li>
@@ -29,6 +32,8 @@ class App extends React.Component {
 						component={UserRoles}
 					/>
 				</div>
+
+				<Footer />
 			</Router>
 		);
 	}

@@ -2,6 +2,8 @@ import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../hooks/hooks";
 import { Filter } from "../../components/Filter/Filter";
+import { Card } from "@nice-digital/nds-card";
+import { Tag } from "@nice-digital/nds-tag";
 
 export const UsersList: FunctionComponent = () => {
 	const apiUrl = `${
@@ -19,24 +21,27 @@ export const UsersList: FunctionComponent = () => {
 				{isLoading ? (
 					<p>Loading...</p>
 				) : (
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Email</th>
-							</tr>
-						</thead>
-						<tbody>
-							{data.map(({ _id, name, email }) => (
-								<tr key={_id}>
-									<td>
-										<Link to={`/users/${_id}`}>{name}</Link>
-									</td>
-									<td>{email}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
+					<ul className="list--unstyled">
+						{data.map(({ email, user_id, given_name, family_name }) => {
+							const myHeading = {
+								headingText: `${given_name} ${family_name}`,
+								linkTag: Link,
+								destination: `/users/${user_id}`,
+							};
+							const myMetadata: Array<any> = [
+								{
+									value: <Tag alpha>Active</Tag>,
+								},
+								{
+									label: "Email address",
+									value: email,
+								},
+							];
+							return (
+								<Card heading={myHeading} metadata={myMetadata} key={user_id} />
+							);
+						})}
+					</ul>
 				)}
 			</div>
 		</div>
