@@ -10,4 +10,4 @@ docker-compose.*.yml
 */obj
 !obj/Docker/publish/*
 !obj/Docker/empty/
-Administration\node_modules\
+ClientApp\node_modules\
