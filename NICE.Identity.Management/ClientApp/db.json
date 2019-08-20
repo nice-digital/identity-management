@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "sofie.fatale@nice.org.uk",
+      "user_id": "usr_5457edea1b8f33391a000001",
+      "given_name": "Sofie",
+      "family_name": "Fatale"
+    },
+    {
+      "id": 2,
+      "email": "vernita.green@gmail.com",
+      "user_id": "usr_7437edea1b8f33391a000002",
+      "given_name": "Vernita",
+      "family_name": "Green"
+    }
+  ]
+}
