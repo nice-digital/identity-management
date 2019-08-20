@@ -4,9 +4,11 @@ import { useFetch } from "../../hooks/hooks";
 import { Filter } from "../../components/Filter/Filter";
 
 export const UsersList: FunctionComponent = () => {
-	const [data, isLoading] = useFetch(
-		"http://www.json-generator.com/api/json/get/cfQXOXbwgO?indent=2",
-	);
+	const apiUrl = `${
+		process.env.REACT_APP_API_BASE_URL
+	}/users?_sort=given_name&_order=asc`;
+
+	const [data, isLoading] = useFetch(apiUrl);
 
 	return (
 		<div className="grid">
