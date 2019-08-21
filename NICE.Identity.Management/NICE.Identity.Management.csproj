@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-	<SpaRoot>Administration\</SpaRoot>
+	<SpaRoot>ClientApp\</SpaRoot>
 	<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <UserSecretsId>d9b977c8-88af-4af8-89a3-295feb3e3f2e</UserSecretsId>
   </PropertyGroup>
@@ -44,8 +44,8 @@
   </ItemGroup>
 
   <Target Name="PublishSpa" AfterTargets="ComputeFilesToPublish">
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />  
+<!--    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />-->
+<!--    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />  -->
     <!-- Include the newly-built spa files in the publish output -->
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)build\**;$(SpaRoot)src\**;$(SpaRoot)*.*" />
