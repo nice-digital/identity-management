@@ -69,7 +69,7 @@ namespace NICE.Identity.Management
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
-				configuration.RootPath = "Administration/build";
+				configuration.RootPath = "ClientApp/build";
 			});
 		}
 
