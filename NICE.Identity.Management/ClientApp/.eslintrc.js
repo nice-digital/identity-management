@@ -5,6 +5,7 @@ module.exports = {
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
 	],
+	rules: { "@typescript-eslint/indent": ["error", "tab"] },
 	settings: {
 		react: {
 			version: "detect",
@@ -15,7 +16,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ["**.test.js", "**.test.ts", "**.test.tsx"],
+			files: ["setupTests.js", "**.test.js", "**.test.ts", "**.test.tsx"],
 			env: {
 				jest: true,
 				browser: true,
