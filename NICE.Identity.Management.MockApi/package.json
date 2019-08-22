@@ -1,0 +1,20 @@
+{
+  "name": "@nice-digital/identity-management-mockapi",
+  "version": "0.0.1",
+  "description": "NICE Identity Management Mock Api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Jose Hilario Almeida <JoseHilario.Almeida@nice.org.uk>",
+  "contributors": [
+    "NICE Digital Services (https://www.nice.org.uk/digital)",
+    "Jose Hilario Almeida (JoseHilario.Almeida@nice.org.uk)"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "json-server": "^0.15.0"
+  }
+}
