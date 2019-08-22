@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nice-digital/design-system": "^1.0.12-alpha.0",
     "@nice-digital/global-nav": "github:nhsevidence/global-nav#GN-30-Create-react-app-2",
     "concurrently": "^4.1.1",
-    "@nice-digital/design-system": "^1.0.11-alpha.0",
     "cross-env": "^5.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:mock-api": "concurrently \"npm run start\" \"json-server  db.json --routes routes.json --port 3001\"",
+    "start:mock-api": "cross-env REACT_APP_API_BASE_URL=http://localhost:3001 concurrently \"npm run start\" \"json-server  db.json --routes routes.json --port 3001\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
