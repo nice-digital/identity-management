@@ -14,10 +14,11 @@ if(fs.existsSync('localhost-cert.pem') && fs.existsSync('localhost-key.pem')) {
 }
 
 const server = jsonServer.create();
-const router = jsonServer.router('api/db.json');
 const middleware = jsonServer.defaults();
-server.use(router);
+const router = jsonServer.router('api/db.json');
+
 server.use(middleware);
+server.use(router);
 
 http.createServer(server).listen(http_port, () => {
   console.log(`Identity Management Mock API is running on http://localhost:${http_port}`);
