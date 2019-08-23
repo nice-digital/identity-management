@@ -34,9 +34,9 @@ export const UsersList: FunctionComponent = () => {
 						<p>Loading...</p>
 					) : (
 						<ul className="list--unstyled">
-							{data.map(({ email, user_id, given_name, family_name }) => {
+							{data.map(({ email_address, user_id, first_name, last_name }) => {
 								const myHeading = {
-									headingText: `${given_name} ${family_name}`,
+									headingText: `${first_name} ${last_name}`,
 									linkTag: Link,
 									destination: `/users/${user_id}`,
 								};
@@ -46,7 +46,7 @@ export const UsersList: FunctionComponent = () => {
 									},
 									{
 										label: "Email address",
-										value: email,
+										value: email_address,
 									},
 								];
 								return (

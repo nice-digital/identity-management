@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 type User = {
 	id: number;
-	email: string;
+	email_address: string;
 	user_id: string;
-	given_name: string;
-	family_name: string;
+	first_name: string;
+	last_name: string;
 };
 
 export function useFetch(url: string): [Array<User>, boolean] {

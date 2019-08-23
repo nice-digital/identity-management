@@ -7,6 +7,7 @@
     "@nice-digital/global-nav": "github:nhsevidence/global-nav#GN-30-Create-react-app-2",
     "concurrently": "^4.1.1",
     "cross-env": "^5.2.0",
+    "dotenv": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -32,7 +33,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:mock-api": "cross-env REACT_APP_API_BASE_URL=http://localhost:3001 concurrently \"npm run start\" \"json-server  db.json --routes routes.json --port 3001\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
