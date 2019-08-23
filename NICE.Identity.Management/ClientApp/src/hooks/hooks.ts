@@ -6,6 +6,8 @@ type User = {
 	user_id: string;
 	first_name: string;
 	last_name: string;
+	email_verified: boolean;
+	blocked: boolean;
 };
 
 export function useFetch(url: string): [Array<User>, boolean] {
