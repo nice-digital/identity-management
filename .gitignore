@@ -250,7 +250,7 @@ netcoreapp2.0/*
 *.orig
 .DS_Store
 .vscode
-/NICE.Identity.Management/Administration/node_modules
+/NICE.Identity.Management/ClientApp/node_modules
 /NICE.Identity.Management/Serilog-*.json
 
 #testing project
