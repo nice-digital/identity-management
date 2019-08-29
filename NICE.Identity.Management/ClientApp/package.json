@@ -6,7 +6,6 @@
     "@nice-digital/design-system": "^1.0.12-alpha.0",
     "@nice-digital/global-nav": "github:nhsevidence/global-nav#GN-30-Create-react-app-2",
     "concurrently": "^4.1.1",
-    "cross-env": "^5.2.0",
     "dotenv": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -24,6 +23,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
@@ -37,6 +37,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "cross-env CI=true react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": [
