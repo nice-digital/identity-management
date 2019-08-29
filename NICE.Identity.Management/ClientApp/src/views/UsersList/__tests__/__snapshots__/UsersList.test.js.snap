@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should match the snapshot when loading 1`] = `
+exports[`should match the snapshot after data has been loaded 1`] = `
 Array [
   Array [
     <nav
