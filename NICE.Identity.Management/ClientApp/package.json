@@ -6,7 +6,6 @@
     "@nice-digital/design-system": "^1.0.12-alpha.0",
     "@nice-digital/global-nav": "github:nhsevidence/global-nav#GN-30-Create-react-app-2",
     "concurrently": "^4.1.1",
-    "dotenv": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
