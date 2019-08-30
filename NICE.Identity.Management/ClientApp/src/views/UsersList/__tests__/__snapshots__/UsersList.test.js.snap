@@ -60,6 +60,7 @@ Array [
   ],
   <div
     className="page-header"
+    id="content-start"
   >
     <h1
       className="page-header__heading"
