@@ -6,17 +6,12 @@ import { Card } from "@nice-digital/nds-card";
 import { Tag } from "@nice-digital/nds-tag";
 
 import { Endpoints } from "../../data/endpoints";
-
+import { UserType } from "../../models/types";
 import { Filter } from "../../components/Filter/Filter";
 
-type User = {
-	id: number;
-	email_address: string;
-	user_id: string;
-	first_name: string;
-	last_name: string;
-	email_verified: boolean;
-	blocked: boolean;
+type CardMetaData = {
+	label?: string;
+	value: React.ReactNode;
 };
 
 interface StateType {
@@ -75,10 +70,9 @@ export class UsersList extends Component<PropsType, StateType> {
 											linkTag: Link,
 											destination: `/users/${user_id}`,
 										};
-										const myMetadata: Array<any> = [
-											{
-												value: <Tag alpha>Active</Tag>,
-											},
+
+										const usersListMetadata: Array<CardMetaData> = [
+											{ value: <Tag alpha>Active</Tag> },
 											{
 												label: "Email address",
 												value: email_address,
