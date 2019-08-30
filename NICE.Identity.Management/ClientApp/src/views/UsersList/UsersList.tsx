@@ -14,14 +14,16 @@ type CardMetaData = {
 	value: React.ReactNode;
 };
 
-interface StateType {
-	data: Array<User>;
-}
+type UsersListState = {
+	data: Array<UserType>;
+};
 
-interface PropsType {}
+type UsersListProps = {};
 
 export class UsersList extends Component<PropsType, StateType> {
 	constructor(props: PropsType) {
+export class UsersList extends Component<UsersListProps, UsersListState> {
+	constructor(props: UsersListProps) {
 		super(props);
 		this.state = {
 			data: [],
@@ -65,7 +67,7 @@ export class UsersList extends Component<PropsType, StateType> {
 							<ul className="list--unstyled">
 								{data.map(
 									({ email_address, user_id, first_name, last_name }) => {
-										const myHeading = {
+										const usersListHeading = {
 											headingText: `${first_name} ${last_name}`,
 											linkTag: Link,
 											destination: `/users/${user_id}`,
@@ -78,10 +80,11 @@ export class UsersList extends Component<PropsType, StateType> {
 												value: email_address,
 											},
 										];
+
 										return (
 											<Card
-												heading={myHeading}
-												metadata={myMetadata}
+												heading={usersListHeading}
+												metadata={usersListMetadata}
 												key={user_id}
 											/>
 										);
