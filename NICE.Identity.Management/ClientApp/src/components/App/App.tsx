@@ -23,7 +23,8 @@ export class App extends React.Component {
 								<Breadcrumbs>
 									<Breadcrumb>Home</Breadcrumb>
 								</Breadcrumbs>
-								<div className="page-header">
+
+								<div className="page-header" id="content-start">
 									<h1 className="page-header__heading">Identity admin</h1>
 									<p className="page-header__lead">
 										Admin site for managing users, services and roles for Auth0

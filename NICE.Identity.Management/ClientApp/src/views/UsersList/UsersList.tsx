@@ -50,7 +50,7 @@ export class UsersList extends Component<PropsType, StateType> {
 					<Breadcrumb>Users</Breadcrumb>
 				</Breadcrumbs>
 
-				<div className="page-header">
+				<div className="page-header" id="content-start">
 					<h1 className="page-header__heading">Users</h1>
 				</div>
 
