@@ -55,7 +55,7 @@ services:
       - ACCOUNTS_PASSWORD
       - ACCOUNTS_PASSWORD2
 
-  # Comment Collection dotnet core web app
+  # Identity management dotnet core web app
   idammanagement:
     container_name: functional-tests_idammanagement_1
     build: ./../NICE.Identity.Management/
