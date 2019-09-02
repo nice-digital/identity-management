@@ -16,24 +16,28 @@ type CardMetaData = {
 
 type UsersListState = {
 	data: Array<UserType>;
+	error: string;
 };
 
 type UsersListProps = {};
 
-export class UsersList extends Component<PropsType, StateType> {
-	constructor(props: PropsType) {
 export class UsersList extends Component<UsersListProps, UsersListState> {
 	constructor(props: UsersListProps) {
 		super(props);
 		this.state = {
 			data: [],
+			error: "",
 		};
 	}
 
 	fetchData = async (url: string) => {
-		const response = await fetch(url);
-		const data = await response.json();
-		this.setState({ data });
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
+			this.setState({ data });
+		} catch (error) {
+			this.setState({ error });
+		}
 	};
 
 	componentDidMount() {
@@ -56,44 +60,48 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 					<h1 className="page-header__heading">Users</h1>
 				</div>
 
-				<div className="grid">
-					<div data-g="12 md:3">
-						<Filter />
-					</div>
-					<div data-g="12 md:9" aria-busy={!data.length}>
-						{!data.length ? (
-							<p>Loading...</p>
-						) : (
-							<ul className="list--unstyled">
-								{data.map(
-									({ email_address, user_id, first_name, last_name }) => {
-										const usersListHeading = {
-											headingText: `${first_name} ${last_name}`,
-											linkTag: Link,
-											destination: `/users/${user_id}`,
-										};
+				{this.state.error ? (
+					<p>Whoops... There's a been an error.</p>
+				) : (
+					<div className="grid">
+						<div data-g="12 md:3">
+							<Filter />
+						</div>
+						<div data-g="12 md:9" aria-busy={!data.length}>
+							{!data.length ? (
+								<p>Loading...</p>
+							) : (
+								<ul className="list--unstyled">
+									{data.map(
+										({ email_address, user_id, first_name, last_name }) => {
+											const usersListHeading = {
+												headingText: `${first_name} ${last_name}`,
+												linkTag: Link,
+												destination: `/users/${user_id}`,
+											};
 
-										const usersListMetadata: Array<CardMetaData> = [
-											{ value: <Tag alpha>Active</Tag> },
-											{
-												label: "Email address",
-												value: email_address,
-											},
-										];
+											const usersListMetadata: Array<CardMetaData> = [
+												{ value: <Tag alpha>Active</Tag> },
+												{
+													label: "Email address",
+													value: email_address,
+												},
+											];
 
-										return (
-											<Card
-												heading={usersListHeading}
-												metadata={usersListMetadata}
-												key={user_id}
-											/>
-										);
-									},
-								)}
-							</ul>
-						)}
+											return (
+												<Card
+													heading={usersListHeading}
+													metadata={usersListMetadata}
+													key={user_id}
+												/>
+											);
+										},
+									)}
+								</ul>
+							)}
+						</div>
 					</div>
-				</div>
+				)}
 			</>
 		);
 	}
