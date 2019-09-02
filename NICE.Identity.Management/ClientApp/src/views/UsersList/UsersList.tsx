@@ -60,7 +60,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 					<div data-g="12 md:3">
 						<Filter />
 					</div>
-					<div data-g="12 md:9">
+					<div data-g="12 md:9" aria-busy={!data.length}>
 						{!data.length ? (
 							<p>Loading...</p>
 						) : (
