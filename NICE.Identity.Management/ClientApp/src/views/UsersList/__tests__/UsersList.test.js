@@ -26,3 +26,19 @@ it("should match the snapshot after data has been loaded", async () => {
 	wrapper.update();
 	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 });
+
+it("should show error message when fetch returns 401 error", async () => {
+	fetchMock.get("*", 401);
+	const wrapper = shallow(<UsersList />);
+	await nextTick();
+	wrapper.update();
+	expect(wrapper.find("#userslist-error").text()).toHaveLength;
+});
+
+it("should show error message when fetch returns 500 error", async () => {
+	fetchMock.get("*", 500);
+	const wrapper = shallow(<UsersList />);
+	await nextTick();
+	wrapper.update();
+	expect(wrapper.find("#userslist-error").text()).toHaveLength;
+});

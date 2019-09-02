@@ -45,7 +45,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	}
 
 	render() {
-		const { data } = this.state;
+		const { data, error } = this.state;
 
 		return (
 			<>
@@ -60,8 +60,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 					<h1 className="page-header__heading">Users</h1>
 				</div>
 
-				{this.state.error ? (
-					<p>Whoops... There's a been an error.</p>
+				{error ? (
+					<p id="userslist-error">Whoops... There's a been an error.</p>
 				) : (
 					<div className="grid">
 						<div data-g="12 md:3">
