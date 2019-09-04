@@ -6,6 +6,7 @@ import { UsersList } from "../UsersList";
 import users from "./users.json";
 import { MemoryRouter } from "react-router";
 import { nextTick } from "../../../utils/nextTick";
+import { User } from "../../User/User";
 
 afterEach(fetchMock.reset);
 
@@ -13,6 +14,15 @@ it("should show loading message before data has been loaded", () => {
 	fetchMock.get("*", {});
 	const wrapper = shallow(<UsersList />);
 	expect(wrapper.find("p").text()).toEqual("Loading...");
+});
+
+it("should call fetchData during componentDidMount", () => {
+	fetchMock.get("*", {});
+	const wrapper = shallow(<UsersList />);
+	const instance = wrapper.instance();
+	jest.spyOn(instance, "fetchData");
+	instance.componentDidMount();
+	expect(instance.fetchData).toHaveBeenCalledTimes(1);
 });
 
 it("should match the snapshot after data has been loaded", async () => {
