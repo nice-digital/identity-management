@@ -45,8 +45,6 @@ services:
       # - nginx
       - idammanagement
     environment:
-      - ALPHA_USER_API
-      - ALPHA_API_KEY
       - IDENTITY_NOUSER_EMAIL
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
@@ -65,12 +63,18 @@ services:
     ports:
         - 8080:8080
     environment:
+      - AUTHCONFIGURATION_AUTH_SERVICE_URI
+      - AUTHCONFIGURATION_API_IDENTIFIER
+      - ALPHA_AUTH_SERVICE_URI
+      - ALPHA_USER_API
+      - ALPHA_API_KEY
+      - REACT_APP_API_BASE_URL
       - DEFAULT_CONNECTION
-      - AUTH0_DOMAIN
-      - AUTH0_CLIENTID
-      - AUTH0_CLIENTSECRECT
-      - AUTH0_REDIRECT_URI
-      - AUTH0_LOGOUT_REDIRECT_URI
+      - AUTHCONFIGURATION_DOMAIN
+      - AUTHCONFIGURATION_CLIENTID
+      - AUTHCONFIGURATION_CLIENTSECRECT
+      - AUTHCONFIGURATION_REDIRECT_URI
+      - AUTHCONFIGURATION_LOGOUT_REDIRECT_URI
     networks:
       default:
         aliases:

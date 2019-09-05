@@ -7,7 +7,7 @@ exports.config = {
     seleniumLogs: "./logs",
 
     specs: [
-        "./src/features/**/*.feature"
+        "./src/features/**/identityFailedLogin.feature"
     ],
     exclude: [
         // "./src/features/**/identityHomepage.feature",

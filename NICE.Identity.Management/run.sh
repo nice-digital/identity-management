@@ -7,18 +7,22 @@ set -e
 
 jq \
     --arg defaultConnection "$DEFAULT_CONNECTION" \
-    --arg auth0domain "$AUTH0_DOMAIN" \
-    --arg auth0clientid "$AUTH0_CLIENTID" \
-    --arg auth0clientsecret "$AUTH0_CLIENTSECRECT" \
-    --arg auth0redirecturi "$AUTH0_REDIRECT_URI" \
-    --arg auth0logoutredirecturi "$AUTH0_LOGOUT_REDIRECT_URI" \
+    --arg auth0domain "$AUTHCONFIGURATION_DOMAIN" \
+    --arg auth0clientid "$AUTHCONFIGURATION_CLIENTID" \
+    --arg auth0clientsecret "$AUTHCONFIGURATION_CLIENTSECRECT" \
+    --arg auth0redirecturi "$AUTHCONFIGURATION_REDIRECT_URI" \
+    --arg auth0logoutredirecturi "$AUTHCONFIGURATION_LOGOUT_REDIRECT_URI" \
+    --arg auth0authserviceuri "$AUTHCONFIGURATION_AUTH_SERVICE_URI" \
+    --arg auth0apiidentifier "$AUTHCONFIGURATION_API_IDENTIFIER" \
     '
     .ConnectionStrings.DefaultConnection = $defaultConnection |
-    .Auth0.Domain = $auth0domain |
-    .Auth0.ClientId = $auth0clientid |
-    .Auth0.ClientSecret = $auth0clientsecret |
-    .Auth0.RedirectUri = $auth0redirecturi |
-    .Auth0.PostLogoutRedirectUri = $auth0logoutredirecturi
+    .AuthConfiguration.Domain = $auth0domain |
+    .AuthConfiguration.ClientId = $auth0clientid |
+    .AuthConfiguration.ClientSecret = $auth0clientsecret |
+    .AuthConfiguration.RedirectUri = $auth0redirecturi |
+    .AuthConfiguration.PostLogoutRedirectUri = $auth0logoutredirecturi |
+    .AuthConfiguration.AuthorisationServiceUri = $auth0authserviceuri |
+    .AuthConfiguration.ApiIdentifier = $auth0apiidentifier
     '\
     appsettings.json > _appsettings.json \
     && mv _appsettings.json appsettings.json
