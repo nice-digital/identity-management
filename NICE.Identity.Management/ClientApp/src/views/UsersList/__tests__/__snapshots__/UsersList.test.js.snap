@@ -1,0 +1,292 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot after data has been loaded 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/\\",
+        \\"name\\": \\"Home\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Users\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+    id="content-start"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="grid"
+  >
+    <div
+      data-g="12 md:3"
+    >
+      <div
+        className="panel"
+      >
+        <p>
+          Filter options
+        </p>
+        <div
+          className="input"
+        >
+          <label
+            className="input__label"
+            htmlFor="userSearch"
+          >
+            Search
+          </label>
+          <input
+            className="input__input"
+            id="userSearch"
+            name="user-search"
+            type="text"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      aria-busy={false}
+      data-g="12 md:9"
+    >
+      <ul
+        className="list--unstyled"
+      >
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
+          >
+            <p
+              className="card__heading"
+            >
+              <a
+                href="/users/usr_5457edea1b8f33391a000001"
+                onClick={[Function]}
+              >
+                Cliff Booth
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
+          >
+            <div
+              className="card__metadatum"
+            >
+              <dd>
+                <span
+                  className="tag tag--alpha"
+                >
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
+            >
+              <dt
+                className="visually-hidden"
+              >
+                Email address
+              </dt>
+              <dd>
+                cliff.booth@nice.org.uk
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
+          >
+            <p
+              className="card__heading"
+            >
+              <a
+                href="/users/usr_5457edea1b8f33391a000002"
+                onClick={[Function]}
+              >
+                Vernita Green
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
+          >
+            <div
+              className="card__metadatum"
+            >
+              <dd>
+                <span
+                  className="tag tag--alpha"
+                >
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
+            >
+              <dt
+                className="visually-hidden"
+              >
+                Email address
+              </dt>
+              <dd>
+                vernita.green@gmail.com
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
+          >
+            <p
+              className="card__heading"
+            >
+              <a
+                href="/users/usr_5457edea1b8f33391a000003"
+                onClick={[Function]}
+              >
+                Rick Dalton
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
+          >
+            <div
+              className="card__metadatum"
+            >
+              <dd>
+                <span
+                  className="tag tag--alpha"
+                >
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
+            >
+              <dt
+                className="visually-hidden"
+              >
+                Email address
+              </dt>
+              <dd>
+                rick.dalton@nice.org.uk
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
+          >
+            <p
+              className="card__heading"
+            >
+              <a
+                href="/users/usr_5457edea1b8f33391a000004"
+                onClick={[Function]}
+              >
+                Vincent Vega
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
+          >
+            <div
+              className="card__metadatum"
+            >
+              <dd>
+                <span
+                  className="tag tag--alpha"
+                >
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
+            >
+              <dt
+                className="visually-hidden"
+              >
+                Email address
+              </dt>
+              <dd>
+                vincent.vega@nice.org.uk
+              </dd>
+            </div>
+          </dl>
+        </article>
+      </ul>
+    </div>
+  </div>,
+]
+`;

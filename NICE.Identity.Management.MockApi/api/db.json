@@ -2,17 +2,39 @@
   "users": [
     {
       "id": 1,
-      "email": "sofie.fatale@nice.org.uk",
+      "email_address": "cliff.booth@nice.org.uk",
       "user_id": "usr_5457edea1b8f33391a000001",
-      "given_name": "Sofie",
-      "family_name": "Fatale"
+      "first_name": "Cliff",
+      "last_name": "Booth",
+      "email_verified": true,
+      "blocked": false
     },
     {
       "id": 2,
-      "email": "vernita.green@gmail.com",
-      "user_id": "usr_7437edea1b8f33391a000002",
-      "given_name": "Vernita",
-      "family_name": "Green"
+      "email_address": "vernita.green@gmail.com",
+      "user_id": "usr_5457edea1b8f33391a000002",
+      "first_name": "Vernita",
+      "last_name": "Green",
+      "email_verified": true,
+      "blocked": true
+    },
+    {
+      "email_address": "rick.dalton@nice.org.uk",
+      "user_id": "usr_5457edea1b8f33391a000003",
+      "first_name": "Rick",
+      "last_name": "Dalton",
+      "id": 3,
+      "email_verified": false,
+      "blocked": false
+    },
+    {
+      "email_address": "vincent.vega@nice.org.uk",
+      "user_id": "usr_5457edea1b8f33391a000004",
+      "first_name": "Vincent",
+      "last_name": "Vega",
+      "id": 4,
+      "email_verified": false,
+      "blocked": true
     }
   ],
   "services": [
