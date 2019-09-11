@@ -7,7 +7,7 @@ import { Tag } from "@nice-digital/nds-tag";
 
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
-import { Unlock } from "../../components/Unlock/Unlock";
+import { Unlock } from "../../components/UnlockUser/UnlockUser";
 
 type TParams = { id: string };
 
@@ -77,7 +77,7 @@ export class User extends Component<UserProps, UserState> {
 										User: {userDetails.first_name} {userDetails.last_name}
 									</p>
 
-									<Unlock
+									<UnlockUser
 										id={userDetails.id}
 										blocked={userDetails.blocked}
 										onToggleLock={this.updateData}

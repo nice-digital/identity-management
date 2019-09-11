@@ -7,7 +7,7 @@ export const Endpoints = {
 	user: (userId: string) => {
 		return `${API_BASE_URL}/users/?user_id=${userId}`;
 	},
-	unlock: (id: number) => {
+	unlockUser: (id: number) => {
 		return `${API_BASE_URL}/users/${id}`;
 	},
 };

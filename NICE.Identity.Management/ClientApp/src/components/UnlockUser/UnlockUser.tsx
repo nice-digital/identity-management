@@ -2,15 +2,15 @@ import React, { Component } from "react";
 
 import { Endpoints } from "../../data/endpoints";
 
-type UnlockProps = {
+type UnlockUserProps = {
 	id: number;
 	blocked: boolean;
 	onToggleLock: Function;
 };
 
-export class Unlock extends Component<UnlockProps> {
+export class UnlockUser extends Component<UnlockUserProps> {
 	fetchPatchData = async (url: string, isBlocked: boolean) => {
-		const response = await fetch(Endpoints.unlock(this.props.id), {
+		const response = await fetch(Endpoints.unlockUser(this.props.id), {
 			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -22,7 +22,7 @@ export class Unlock extends Component<UnlockProps> {
 	};
 
 	handleClick = () => {
-		const apiUrl = Endpoints.unlock(this.props.id);
+		const apiUrl = Endpoints.unlockUser(this.props.id);
 
 		this.fetchPatchData(apiUrl, this.props.blocked);
 	};
