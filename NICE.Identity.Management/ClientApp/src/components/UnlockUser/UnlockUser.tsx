@@ -22,7 +22,7 @@ export class UnlockUser extends Component<UnlockUserProps> {
 	};
 
 	handleClick = () => {
-		const apiUrl = Endpoints.unlockUser(this.props.id);
+		const apiUrl = Endpoints.editUser(this.props.id);
 
 		this.fetchPatchData(apiUrl, this.props.blocked);
 	};
