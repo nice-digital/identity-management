@@ -7,7 +7,7 @@ import { Tag } from "@nice-digital/nds-tag";
 
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
-import { Unlock } from "../../components/UnlockUser/UnlockUser";
+import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
 
 type TParams = { id: string };
 
