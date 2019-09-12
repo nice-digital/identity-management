@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot after data has been loaded 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/users"
+            onClick={[Function]}
+          >
+            Users
+          </a>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/\\",
+        \\"name\\": \\"Home\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"@id\\": \\"/users\\",
+        \\"name\\": \\"Users\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+    id="content-start"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      User details
+    </h1>
+  </div>,
+  <div
+    className="grid"
+  >
+    <div
+      aria-busy={false}
+      data-g="12 md:9"
+    >
+      <div
+        className="panel"
+      >
+        <span
+          className="tag"
+        >
+          Locked
+        </span>
+        <p>
+          User: 
+          Vernita
+           
+          Green
+        </p>
+        <button
+          className="btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Unlock user
+        </button>
+        <button
+          className="btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Delete user
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
