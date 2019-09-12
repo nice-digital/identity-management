@@ -64,11 +64,11 @@ Then(
 )
 
 Then(
-  /^An account exists in "([A-Z0-9_]+)" using "([A-Z0-9_]+)" with the username "([A-Z0-9_]+)"$/,
+  /^An account exists in "([A-Z0-9_]+)" with the username "([A-Z0-9_]+)"$/,
   finduser
 )
 
 Then(
-  /^I delete the user "([A-Z0-9_]+)" from "([A-Z0-9_]+)" using "([A-Z0-9_]+)"$/,
+  /^I delete the user "([A-Z0-9_]+)" from "([A-Z0-9_]+)"$/,
   deleteUser
 )

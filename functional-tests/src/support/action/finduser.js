@@ -1,10 +1,11 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-export const finduser = (userApi, apiKey, username) => {
+export const finduser = (userApi, username) => {
 
   const request = new XMLHttpRequest();
 
+  console.log('userApi', process.env[userApi]);
   request.open('GET', process.env[userApi], true);
-  request.setRequestHeader('x-api-key', process.env[apiKey]);
+  request.setRequestHeader('Authorization', 'Bearer ' + process.env.access_token);
   request.setRequestHeader('Content-Type', 'application/json');
   // request.responseType = 'json';
   request.onload = function(e) {

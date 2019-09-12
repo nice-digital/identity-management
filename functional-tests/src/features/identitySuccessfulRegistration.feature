@@ -8,5 +8,5 @@ Feature: Successful Registration
 
   Scenario: Register an account
     Then I can successfuly register with username "ACCOUNTS_EMAIL3" and password "ACCOUNTS_PASSWORD2"
-    And An account exists in "ALPHA_USER_API" using "ALPHA_API_KEY" with the username "ACCOUNTS_EMAIL3"
-    And I delete the user "ACCOUNTS_EMAIL3" from "ALPHA_USER_API" using "ALPHA_API_KEY"
+    And An account exists in "AUTHCONFIGURATION_API_AUDIENCE" with the username "ACCOUNTS_EMAIL3"
+    And I delete the user "ACCOUNTS_EMAIL3" from "AUTHCONFIGURATION_API_AUDIENCE"

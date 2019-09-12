@@ -41,10 +41,16 @@ services:
       - ./:/tests
       - /tests/node_modules
     links:
+      - api
       - hub
       # - nginx
       - idammanagement
     environment:
+      - AUTHCONFIGURATION_API_OAUTH_TOKEN_URL
+      - AUTHCONFIGURATION_API_CLIENTID
+      - AUTHCONFIGURATION_API_CLIENTSECRECT
+      - AUTHCONFIGURATION_API_GRANT_TYPE
+      - AUTHCONFIGURATION_API_AUDIENCE
       - IDENTITY_NOUSER_EMAIL
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
@@ -59,6 +65,7 @@ services:
     build: ./../NICE.Identity.Management/
     links:
       - database
+      - api
     # Enable browsing from the host machine on http://localhost:8080/consultations
     ports:
         - 8080:8080
@@ -92,6 +99,19 @@ services:
       - COMPOSE_HTTP_TIMEOUT=200
     ports:
       - 1434:1433
+
+  #JSON Server for Api
+  api:
+    container_name: functional-tests_api_1
+    build: ./../NICE.Identity.Management.MockApi/
+    links:
+      - idammanagement
+    port: 8081:80
+    networks:
+      default:
+        aliases:
+          - api
+
 
   # nginx:
   #   container_name: functional-tests_nginx_1

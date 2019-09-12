@@ -1,9 +1,9 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-module.exports = (username, userApi, apiKey) => {
+module.exports = (username, userApi) => {
   const request = new XMLHttpRequest();
   request.open('GET', process.env[userApi], false);
-  request.setRequestHeader('x-api-key', process.env[apiKey]);
+  request.setRequestHeader('Authorization', 'Bearer ' + process.env.access_token);
   request.setRequestHeader('Content-Type', 'application/json');
   // request.responseType = 'json';
   request.onload = function (e) {
@@ -12,7 +12,7 @@ module.exports = (username, userApi, apiKey) => {
       const users = JSON.parse(this.responseText);
       const myUser = users.find(user => user.email === process.env[username]);
       request.open('DELETE', process.env[userApi] + '?userId=' + myUser.userId, false);
-      request.setRequestHeader('x-api-key', process.env[apiKey]);
+      request.setRequestHeader('Authorization', 'Bearer ' + process.env.access_token);
       request.setRequestHeader('Content-Type', 'application/json');
       request.send();
     } else {
