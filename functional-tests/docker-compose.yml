@@ -104,9 +104,11 @@ services:
   api:
     container_name: functional-tests_api_1
     build: ./../NICE.Identity.Management.MockApi/
-    links:
-      - idammanagement
-    port: 8081:80
+    ports: 
+      - 8090:3000
+    volumes: 
+      - ./:/data/db.json
+    command: -H 0.0.0.0 -p 3000 -w db.json
     networks:
       default:
         aliases:
