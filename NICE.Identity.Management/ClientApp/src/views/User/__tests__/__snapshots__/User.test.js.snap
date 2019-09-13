@@ -100,13 +100,6 @@ Array [
         >
           Unlock user
         </button>
-        <button
-          className="btn"
-          onClick={[Function]}
-          type="button"
-        >
-          Delete user
-        </button>
       </div>
     </div>
   </div>,

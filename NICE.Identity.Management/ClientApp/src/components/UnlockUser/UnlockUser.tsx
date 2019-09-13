@@ -21,18 +21,14 @@ export class UnlockUser extends Component<UnlockUserProps> {
 		this.props.onToggleLock([data]);
 	};
 
-	handleClick = () => {
+	render() {
 		const apiUrl = Endpoints.editUser(this.props.id);
 
-		this.fetchPatchData(apiUrl, this.props.blocked);
-	};
-
-	render() {
 		return (
 			<>
 				<button
 					className="btn"
-					onClick={() => this.handleClick()}
+					onClick={() => this.fetchPatchData(apiUrl, this.props.blocked)}
 					type="button"
 				>
 					{this.props.blocked ? "Unlock user" : "Lock user"}
