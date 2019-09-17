@@ -47,5 +47,26 @@ exports.config = {
         global.expect = chai.expect;
         global.assert = chai.assert;
         global.should = chai.should();
-    },
+
+        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+        const request = new XMLHttpRequest();
+        var body = JSON.stringify({
+            "grant_type": process.env.AUTHCONFIGURATION_API_GRANT_TYPE,
+            "client_id": process.env.AUTHCONFIGURATION_API_CLIENTID,
+            "client_secret": process.env.AUTHCONFIGURATION_API_CLIENTSECRECT,
+            "audience": process.env.AUTHCONFIGURATION_API_AUDIENCE
+        });
+        request.open('POST', process.env.AUTHCONFIGURATION_API_OAUTH_TOKEN_URL, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.onload = function (e) {
+            console.log(this.status);
+            if (this.status == 200) {
+                const auth_token = JSON.parse(this.responseText);
+                process.env.access_token = auth_token.access_token
+            } else {
+                throw (new Error('Unable to obtain the access token. Returned a ' + this.status + ' response'));
+            }
+        };
+        request.send(body);
+    }
 }

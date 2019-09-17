@@ -107,7 +107,7 @@ services:
     ports: 
       - 8090:3000
     volumes: 
-      - ./:/data/db.json
+      -  ./../NICE.Identity.Management.MockApi/api:/data
     command: -H 0.0.0.0 -p 3000 -w db.json
     networks:
       default:
