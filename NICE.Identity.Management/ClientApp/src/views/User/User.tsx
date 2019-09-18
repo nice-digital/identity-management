@@ -14,8 +14,9 @@ type TParams = { id: string };
 type UserProps = {} & RouteComponentProps<TParams>;
 
 type UserState = {
-	data: Array<UserType>;
+	data: UserType;
 	error: string;
+	isLoading: boolean;
 };
 
 export class User extends Component<UserProps, UserState> {
@@ -23,12 +24,17 @@ export class User extends Component<UserProps, UserState> {
 		super(props);
 
 		this.state = {
-			data: [],
+			data: {} as UserType,
 			error: "",
+			isLoading: true,
 		};
 	}
 
-	updateData = (updatedData: Array<UserType>) => {
+	handleError = (error: Error) => {
+		this.setState({ error: error.message });
+	};
+
+	updateData = (updatedData: UserType) => {
 		this.setState({ data: updatedData });
 	};
 
@@ -36,7 +42,7 @@ export class User extends Component<UserProps, UserState> {
 		try {
 			const response = await fetch(url);
 			const data = await response.json();
-			this.setState({ data });
+			this.setState({ data, isLoading: false });
 		} catch (error) {
 			this.setState({ error });
 		}
@@ -47,8 +53,7 @@ export class User extends Component<UserProps, UserState> {
 	}
 
 	render() {
-		const { data, error } = this.state;
-		const userDetails = data[0];
+		const { data, error, isLoading } = this.state;
 
 		return (
 			<>
@@ -67,20 +72,21 @@ export class User extends Component<UserProps, UserState> {
 
 				{!error ? (
 					<div className="grid">
-						<div data-g="12 md:9" aria-busy={!data.length}>
-							{!data.length ? (
+						<div data-g="12 md:9" aria-busy={isLoading}>
+							{isLoading ? (
 								<p>Loading...</p>
 							) : (
 								<Panel>
-									<Tag>{!userDetails.blocked ? "Active" : "Locked"}</Tag>
+									<Tag>{!data.blocked ? "Active" : "Locked"}</Tag>
 									<p>
-										User: {userDetails.first_name} {userDetails.last_name}
+										User: {data.first_name} {data.last_name}
 									</p>
 
 									<UnlockUser
-										id={userDetails.id}
-										blocked={userDetails.blocked}
+										id={data.id}
+										isBlocked={data.blocked}
 										onToggleLock={this.updateData}
+										onError={this.handleError}
 									/>
 								</Panel>
 							)}

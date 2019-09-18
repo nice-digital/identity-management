@@ -85,20 +85,19 @@ Array [
         <span
           className="tag"
         >
-          Locked
+          Active
         </span>
         <p>
           User: 
-          Vernita
            
-          Green
         </p>
         <button
           className="btn"
+          disabled={false}
           onClick={[Function]}
           type="button"
         >
-          Unlock user
+          Lock user
         </button>
       </div>
     </div>

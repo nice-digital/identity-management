@@ -71,11 +71,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							) : (
 								<ul className="list--unstyled">
 									{data.map(
-										({ email_address, user_id, first_name, last_name }) => {
+										({ id, email_address, user_id, first_name, last_name }) => {
 											const usersListHeading = {
 												headingText: `${first_name} ${last_name}`,
 												linkTag: Link,
-												destination: `/users/${user_id}`,
+												destination: `/users/${id}`,
 											};
 
 											const usersListMetadata: Array<CardMetaData> = [
