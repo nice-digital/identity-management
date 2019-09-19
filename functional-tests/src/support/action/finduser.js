@@ -13,9 +13,7 @@ export const finduser = (userApi, username) => {
     if (this.status == 200) {
      const users = JSON.parse(this.responseText);
       const myUser = users.find(user => user.email === process.env[username]);
-      console.log(myUser.email);
-
-      // console.log(myUser.userId);
+      
       return myUser;
     }
   }; 
