@@ -59,7 +59,11 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 				type="button"
 				disabled={isButtonDisabled}
 			>
-				{this.props.isBlocked ? "Unlock user" : "Lock user"}
+				{isButtonDisabled
+					? "Loading..."
+					: this.props.isBlocked
+					? "Unlock user"
+					: "Lock user"}
 			</button>
 		);
 	}
