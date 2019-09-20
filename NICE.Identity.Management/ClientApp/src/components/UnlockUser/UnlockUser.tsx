@@ -10,8 +10,7 @@ type UnlockUserProps = {
 };
 
 type UnlockUserState = {
-	error: string;
-	buttonDisable: boolean;
+	isLoading: boolean;
 };
 
 export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
@@ -19,61 +18,46 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 		super(props);
 
 		this.state = {
-			error: "",
-			buttonDisable: false,
+			isLoading: false,
 		};
 	}
 
-	triggerError = (message: string) => {
-		this.props.onError(new Error(message));
-	};
+	fetchPatchData = async () => {
+		this.setState({ isLoading: true });
 
-	fetchPatchData = async (
-		url: string,
-		isBlocked: boolean,
-		callback: Function,
-	) => {
+		let response, data;
 		try {
-			const response = await fetch(url, {
+			response = await fetch(Endpoints.user(this.props.id), {
 				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					blocked: !isBlocked,
+					blocked: !this.props.isBlocked,
 				}),
 			});
-			const data = await response.json();
-
-			if (response.status !== 200) {
-				this.triggerError("Not Found");
-			}
-
-			this.props.onToggleLock(data);
-			callback();
+			data = await response.json();
 		} catch (error) {
-			this.triggerError(error.message);
+			this.props.onError(error);
+			return;
+		}
+
+		this.setState({ isLoading: false });
+
+		if (response.status === 200) {
+			this.props.onToggleLock(data);
+		} else {
+			this.props.onError(new Error(data.message));
 		}
 	};
 
-	handleClick = () => {
-		const apiUrl = Endpoints.user(`${this.props.id}`);
-		const toggleDisability = () => {
-			this.setState({ buttonDisable: !this.state.buttonDisable });
-		};
-
-		toggleDisability();
-
-		this.fetchPatchData(apiUrl, this.props.isBlocked, toggleDisability);
-	};
-
 	render() {
-		const { buttonDisable } = this.state;
+		const { isLoading: isButtonDisabled } = this.state;
 
 		return (
 			<button
 				className="btn"
-				onClick={this.handleClick}
+				onClick={this.fetchPatchData}
 				type="button"
-				disabled={buttonDisable}
+				disabled={isButtonDisabled}
 			>
 				{this.props.isBlocked ? "Unlock user" : "Lock user"}
 			</button>
