@@ -65,6 +65,11 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           onError={[Function]}
           onToggleLock={[Function]}
         />
+        <Link
+          to="/users/2/delete"
+        >
+          Delete user
+        </Link>
       </Panel>
     </GridItem>
   </Grid>

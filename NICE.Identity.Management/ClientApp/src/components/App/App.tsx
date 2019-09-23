@@ -8,6 +8,7 @@ import { PageHeader } from "@nice-digital/nds-page-header";
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
 import { UserRoles } from "./../../views/UserRoles/UserRoles";
+import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 
 export class App extends React.Component {
 	render() {
@@ -43,6 +44,7 @@ export class App extends React.Component {
 					/>
 					<Route path="/users" exact component={UsersList} />
 					<Route path="/users/:id" exact component={User} />
+					<Route path="/users/:id/delete" exact component={DeleteUser} />
 					<Route path="/users/:id/roles" exact component={User} />
 					<Route
 						path="/users/:userId/roles/:roleId"

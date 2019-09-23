@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { RouteComponentProps, Link } from "react-router-dom";
+import { RouteComponentProps, Link, Redirect } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Panel } from "@nice-digital/nds-panel";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
@@ -19,6 +19,7 @@ type UserProps = {} & RouteComponentProps<TParams>;
 type UserState = {
 	data: UserType;
 	error?: Error;
+	redirect: boolean;
 	isLoading: boolean;
 };
 
@@ -28,6 +29,7 @@ export class User extends Component<UserProps, UserState> {
 
 		this.state = {
 			data: {} as UserType,
+			redirect: false,
 			isLoading: true,
 		};
 	}
@@ -37,7 +39,12 @@ export class User extends Component<UserProps, UserState> {
 	};
 
 	updateData = (updatedData: UserType) => {
-		this.setState({ data: updatedData });
+		// if user has been deleted redirect, otherwise reload data
+		if (!Object.keys(updatedData).length) {
+			this.setState({ redirect: true });
+		} else {
+			this.setState({ data: updatedData });
+		}
 	};
 
 	fetchData = async (url: string) => {
@@ -68,7 +75,11 @@ export class User extends Component<UserProps, UserState> {
 	}
 
 	render() {
-		const { data, error, isLoading } = this.state;
+		const { data, error, redirect, isLoading } = this.state;
+
+		if (redirect) {
+			return <Redirect to="/users" />;
+		}
 
 		let lastBreadcrumb;
 
@@ -118,6 +129,8 @@ export class User extends Component<UserProps, UserState> {
 											onToggleLock={this.updateData}
 											onError={this.handleError}
 										/>
+
+										<Link to={`/users/${data.id}/delete`}>Delete user</Link>
 									</Panel>
 								)}
 							</GridItem>
