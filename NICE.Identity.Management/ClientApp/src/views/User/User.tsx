@@ -8,7 +8,6 @@ import { Tag } from "@nice-digital/nds-tag";
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
-import { DeleteUser } from "../../components/DeleteUser/DeleteUser";
 
 type TParams = { id: string };
 
