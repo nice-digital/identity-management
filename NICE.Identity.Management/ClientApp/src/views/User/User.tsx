@@ -101,7 +101,13 @@ export class User extends Component<UserProps, UserState> {
 										onError={this.handleError}
 									/>
 
-									<DeleteUser id={data.id} onDeleteUser={this.updateData} />
+									{/* <DeleteUser
+										id={data.id}
+										onDeleteUser={this.updateData}
+										onError={this.handleError}
+									/> */}
+
+									<Link to={`/users/${data.id}/delete`}>Delete user</Link>
 								</Panel>
 							)}
 						</div>

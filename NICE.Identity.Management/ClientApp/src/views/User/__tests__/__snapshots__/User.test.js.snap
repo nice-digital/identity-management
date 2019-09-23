@@ -99,6 +99,12 @@ Array [
         >
           Lock user
         </button>
+        <a
+          href="/users/undefined/delete"
+          onClick={[Function]}
+        >
+          Delete user
+        </a>
       </div>
     </div>
   </div>,
