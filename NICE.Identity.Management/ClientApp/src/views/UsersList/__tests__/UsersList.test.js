@@ -42,7 +42,8 @@ it("should show error message when fetch returns 401 error", async () => {
 	const wrapper = shallow(<UsersList />);
 	await nextTick();
 	wrapper.update();
-	expect(wrapper.find("#userslist-error")).toHaveLength(1);
+	//expect(wrapper.find("#userslist-error")).toHaveLength(1);
+	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 });
 
 it("should show error message when fetch returns 500 error", async () => {
@@ -50,5 +51,6 @@ it("should show error message when fetch returns 500 error", async () => {
 	const wrapper = shallow(<UsersList />);
 	await nextTick();
 	wrapper.update();
-	expect(wrapper.find("#userslist-error")).toHaveLength(1);
+	//expect(wrapper.find("#userslist-error")).toHaveLength(1);
+	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 });

@@ -60,7 +60,6 @@ Array [
   ],
   <div
     className="page-header"
-    id="content-start"
   >
     <h1
       className="page-header__heading"
@@ -130,7 +129,7 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--alpha"
+                  className="tag tag--live"
                 >
                   Active
                 </span>
@@ -177,7 +176,7 @@ Array [
                 <span
                   className="tag tag--alpha"
                 >
-                  Active
+                  Locked
                 </span>
               </dd>
             </div>
@@ -220,7 +219,7 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--alpha"
+                  className="tag tag--live"
                 >
                   Active
                 </span>
@@ -267,7 +266,7 @@ Array [
                 <span
                   className="tag tag--alpha"
                 >
-                  Active
+                  Locked
                 </span>
               </dd>
             </div>
@@ -289,4 +288,52 @@ Array [
     </div>
   </div>,
 ]
+`;
+
+exports[`should show error message when fetch returns 401 error 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/"
+    >
+      Home
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Users
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Users"
+  />
+  <ErrorMessage
+    error={[FetchError: invalid json response body at http://localhost:3001/users reason: Unexpected end of JSON input]}
+  />
+</Fragment>
+`;
+
+exports[`should show error message when fetch returns 500 error 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/"
+    >
+      Home
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Users
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Users"
+  />
+  <ErrorMessage
+    error={[FetchError: invalid json response body at http://localhost:3001/users reason: Unexpected end of JSON input]}
+  />
+</Fragment>
 `;

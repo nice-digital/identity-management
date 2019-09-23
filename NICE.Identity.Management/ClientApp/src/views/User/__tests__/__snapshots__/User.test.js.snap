@@ -1,106 +1,132 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should match the snapshot after data has been loaded 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/"
     >
-      <ol
-        className="breadcrumbs"
-      >
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            Home
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <a
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
-    {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Home\\"
-      }
-    },
-    {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
-      }
-    }
-  ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
-  <div
-    className="page-header"
-    id="content-start"
-  >
-    <h1
-      className="page-header__heading"
+      Home
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
     >
-      User details
-    </h1>
-  </div>,
-  <div
-    className="grid"
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Vernita Green
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Vernita Green"
+  />
+  <Grid
+    elementType="div"
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
   >
-    <div
+    <GridItem
       aria-busy={false}
-      data-g="12 md:9"
+      cols={12}
+      elementType="div"
+      md={9}
     >
-      <div
-        className="panel"
+      <Panel
+        variant="supporting"
       >
-        <span
-          className="tag"
-        >
-          Active
-        </span>
+        <UserStatus
+          user={
+            Object {
+              "blocked": true,
+              "email_address": "vernita.green@gmail.com",
+              "email_verified": true,
+              "first_name": "Vernita",
+              "id": 2,
+              "last_name": "Green",
+              "user_id": "usr_5457edea1b8f33391a000002",
+            }
+          }
+        />
         <p>
           User: 
+          Vernita
            
+          Green
         </p>
-        <button
-          className="btn"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Lock user
-        </button>
-      </div>
-    </div>
-  </div>,
-]
+        <UnlockUser
+          id={2}
+          isLocked={true}
+          onError={[Function]}
+          onToggleLock={[Function]}
+        />
+      </Panel>
+    </GridItem>
+  </Grid>
+</Fragment>
+`;
+
+exports[`should show error message when fetch returns 401 error 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/"
+    >
+      Home
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Error
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Error"
+  />
+  <ErrorMessage
+    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
+  />
+</Fragment>
+`;
+
+exports[`should show error message when fetch returns 500 error 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/"
+    >
+      Home
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Error
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Error"
+  />
+  <ErrorMessage
+    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
+  />
+</Fragment>
 `;
