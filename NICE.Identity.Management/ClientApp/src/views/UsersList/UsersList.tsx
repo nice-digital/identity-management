@@ -9,6 +9,8 @@ import { PageHeader } from "@nice-digital/nds-page-header";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
 import { Filter } from "../../components/Filter/Filter";
+import { UserStatus } from "../../components/UserStatus/UserStatus";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 type CardMetaData = {
 	label?: string;
@@ -19,7 +21,7 @@ type UsersListProps = {};
 
 type UsersListState = {
 	data: Array<UserType>;
-	error: string;
+	error?: Error;
 };
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
@@ -31,12 +33,21 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	}
 
 	fetchData = async (url: string) => {
+		let response, data;
 		try {
-			const response = await fetch(url);
-			const data = await response.json();
-			this.setState({ data });
-		} catch (error) {
+			response = await fetch(url);
+			data = await response.json();
+		} catch (err) {
+			let error: Error = err;
+
 			this.setState({ error });
+			return;
+		}
+
+		if (response.status === 200) {
+			this.setState({ data });
+		} else {
+			this.setState({ error: new Error(data.message) });
 		}
 	};
 
@@ -107,7 +118,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 						</GridItem>
 					</Grid>
 				) : (
-					<p id="userslist-error">Whoops... There's a been an error.</p>
+					<ErrorMessage error={error}></ErrorMessage>
 				)}
 			</>
 		);
