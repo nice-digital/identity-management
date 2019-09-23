@@ -58,10 +58,10 @@ export class User extends Component<UserProps, UserState> {
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/" tag={Link}>
+					<Breadcrumb to="/" elementType={Link}>
 						Home
 					</Breadcrumb>
-					<Breadcrumb to="/users" tag={Link}>
+					<Breadcrumb to="/users" elementType={Link}>
 						Users
 					</Breadcrumb>
 				</Breadcrumbs>
