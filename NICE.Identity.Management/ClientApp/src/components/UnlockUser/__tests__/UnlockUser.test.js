@@ -3,9 +3,7 @@ import { mount, shallow } from "enzyme";
 import fetchMock from "fetch-mock";
 
 import { UnlockUser } from "../UnlockUser";
-import { Endpoints } from "../../../data/endpoints";
 import { nextTick } from "../../../utils/nextTick";
-//import singleUser from "./singleUser.json";
 
 describe("UnlockUser", () => {
 	let userProps;
@@ -21,7 +19,6 @@ describe("UnlockUser", () => {
 
 	afterEach(fetchMock.reset);
 
-	// show unlock/lock text
 	it("should show unlock text when locked", () => {
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		expect(wrapper.find("button").text()).toEqual("Unlock user");
