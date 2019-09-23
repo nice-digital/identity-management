@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "@nice-digital/design-system/scss/nice-design-system.scss";
+import "@nice-digital/design-system/scss/base.scss";
 
 import { App } from "./components/App/App";
 
