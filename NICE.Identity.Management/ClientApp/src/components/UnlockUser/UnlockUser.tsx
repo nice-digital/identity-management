@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "@nice-digital/nds-button";
 
 import { Endpoints } from "../../data/endpoints";
 
@@ -50,21 +51,17 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 	};
 
 	render() {
+		const { isLocked } = this.props;
 		const { isLoading: isButtonDisabled } = this.state;
 
 		return (
-			<button
-				className="btn"
-				onClick={this.fetchPatchData}
-				type="button"
-				disabled={isButtonDisabled}
-			>
+			<Button onClick={this.fetchPatchData} disabled={isButtonDisabled}>
 				{isButtonDisabled
 					? "Loading..."
-					: this.props.isBlocked
+					: isLocked
 					? "Unlock user"
 					: "Lock user"}
-			</button>
+			</Button>
 		);
 	}
 }

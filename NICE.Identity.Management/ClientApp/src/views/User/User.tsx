@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Panel } from "@nice-digital/nds-panel";
-import { Tag } from "@nice-digital/nds-tag";
+import { Grid, GridItem } from "@nice-digital/nds-grid";
+import { PageHeader } from "@nice-digital/nds-page-header";
 
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
@@ -66,32 +67,37 @@ export class User extends Component<UserProps, UserState> {
 					</Breadcrumb>
 				</Breadcrumbs>
 
-				<div className="page-header" id="content-start">
-					<h1 className="page-header__heading">User details</h1>
-				</div>
-
 				{!error ? (
-					<div className="grid">
-						<div data-g="12 md:9" aria-busy={isLoading}>
-							{isLoading ? (
-								<p>Loading...</p>
-							) : (
-								<Panel>
-									<Tag>{!data.blocked ? "Active" : "Locked"}</Tag>
-									<p>
-										User: {data.first_name} {data.last_name}
-									</p>
+					<>
+						<PageHeader
+							heading={
+								isLoading
+									? "User details"
+									: `${data.first_name} ${data.last_name}`
+							}
+						/>
+						<Grid>
+							<GridItem cols={12} md={9} aria-busy={isLoading}>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : (
+									<Panel>
+										<UserStatus user={data} />
+										<p>
+											User: {data.first_name} {data.last_name}
+										</p>
 
-									<UnlockUser
-										id={data.id}
-										isBlocked={data.blocked}
-										onToggleLock={this.updateData}
-										onError={this.handleError}
-									/>
-								</Panel>
-							)}
-						</div>
-					</div>
+										<UnlockUser
+											id={data.id}
+											isLocked={data.blocked}
+											onToggleLock={this.updateData}
+											onError={this.handleError}
+										/>
+									</Panel>
+								)}
+							</GridItem>
+						</Grid>
+					</>
 				) : (
 					<p id="user-error">Whoops... There's a been an error.</p>
 				)}

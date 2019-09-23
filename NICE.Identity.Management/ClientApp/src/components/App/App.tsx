@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Header, Footer } from "@nice-digital/global-nav";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
+import { PageHeader } from "@nice-digital/nds-page-header";
 
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
@@ -24,13 +25,11 @@ export class App extends React.Component {
 									<Breadcrumb>Home</Breadcrumb>
 								</Breadcrumbs>
 
-								<div className="page-header" id="content-start">
-									<h1 className="page-header__heading">Identity admin</h1>
-									<p className="page-header__lead">
-										Admin site for managing users, services and roles for Auth0
-										identity
-									</p>
-								</div>
+								<PageHeader
+									heading="Identity admin"
+									lead="Admin site for managing users, services and roles for Auth0
+										identity"
+								/>
 
 								<nav>
 									<ul className="list list--piped">
