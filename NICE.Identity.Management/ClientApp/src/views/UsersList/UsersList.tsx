@@ -14,12 +14,12 @@ type CardMetaData = {
 	value: React.ReactNode;
 };
 
+type UsersListProps = {};
+
 type UsersListState = {
 	data: Array<UserType>;
 	error: string;
 };
-
-type UsersListProps = {};
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
 	constructor(props: UsersListProps) {
@@ -60,9 +60,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 					<h1 className="page-header__heading">Users</h1>
 				</div>
 
-				{error ? (
-					<p id="userslist-error">Whoops... There's a been an error.</p>
-				) : (
+				{!error ? (
 					<div className="grid">
 						<div data-g="12 md:3">
 							<Filter />
@@ -73,11 +71,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							) : (
 								<ul className="list--unstyled">
 									{data.map(
-										({ email_address, user_id, first_name, last_name }) => {
+										({ id, email_address, user_id, first_name, last_name }) => {
 											const usersListHeading = {
 												headingText: `${first_name} ${last_name}`,
 												linkTag: Link,
-												destination: `/users/${user_id}`,
+												destination: `/users/${id}`,
 											};
 
 											const usersListMetadata: Array<CardMetaData> = [
@@ -101,6 +99,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							)}
 						</div>
 					</div>
+				) : (
+					<p id="userslist-error">Whoops... There's a been an error.</p>
 				)}
 			</>
 		);
