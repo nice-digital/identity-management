@@ -24,5 +24,10 @@ export default {
     usernameField: "body input[name='userName']",
     roleField: "body input[name='role']",
     pageTitle: "h1",
+  },
+  forgotPassword: {
+    forgotPasswordEmail: toDataQASelAttr("forgotPassword-email"),
+    forgotPasswordButton: toDataQASelAttr("forgotPassword-button"),
+    forgotReturnToSignIn: toDataQASelAttr("forgotPassword-link-to-login"),
   }
 };
