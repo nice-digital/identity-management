@@ -12,7 +12,6 @@ module.exports = (username, userApi) => {
       const deleteUserRequest = new XMLHttpRequest();
       const users = JSON.parse(this.responseText);
       const myUser = users.find(user => user.email === process.env[username]);
-      console.log('myUser ', myUser.email);
       deleteUserRequest.open('DELETE', process.env[userApi] + '/users' + '?userId=' + myUser.userId, false);
       deleteUserRequest.setRequestHeader('Authorization', 'Bearer ' + process.env.access_token);
       deleteUserRequest.setRequestHeader('Content-Type', 'application/json');
