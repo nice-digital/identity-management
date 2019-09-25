@@ -115,7 +115,7 @@ Array [
               className="card__heading"
             >
               <a
-                href="/users/usr_5457edea1b8f33391a000001"
+                href="/users/1"
                 onClick={[Function]}
               >
                 Cliff Booth
@@ -160,7 +160,7 @@ Array [
               className="card__heading"
             >
               <a
-                href="/users/usr_5457edea1b8f33391a000002"
+                href="/users/2"
                 onClick={[Function]}
               >
                 Vernita Green
@@ -205,7 +205,7 @@ Array [
               className="card__heading"
             >
               <a
-                href="/users/usr_5457edea1b8f33391a000003"
+                href="/users/3"
                 onClick={[Function]}
               >
                 Rick Dalton
@@ -250,7 +250,7 @@ Array [
               className="card__heading"
             >
               <a
-                href="/users/usr_5457edea1b8f33391a000004"
+                href="/users/4"
                 onClick={[Function]}
               >
                 Vincent Vega
