@@ -13,16 +13,6 @@ Array [
         <li
           className="breadcrumbs__crumb"
         >
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            Home
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
           <span>
             Users
           </span>
@@ -35,23 +25,13 @@ Array [
           "__html": "{
   \\"@context\\": \\"http://schema.org\\",
   \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
-    {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Home\\"
-      }
-    },
-    {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
-      }
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
     }
-  ]
+  }
 }",
         }
       }
@@ -294,12 +274,6 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
-      elementType={[Function]}
-      to="/"
-    >
-      Home
-    </Breadcrumb>
-    <Breadcrumb
       elementType="a"
     >
       Users
@@ -309,7 +283,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
     heading="Users"
   />
   <ErrorMessage
-    error={[FetchError: invalid json response body at / reason: Unexpected end of JSON input]}
+    error={[FetchError: invalid json response body at http://localhost:3001/users reason: Unexpected end of JSON input]}
   />
 </Fragment>
 `;
@@ -318,12 +292,6 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
-      elementType={[Function]}
-      to="/"
-    >
-      Home
-    </Breadcrumb>
-    <Breadcrumb
       elementType="a"
     >
       Users
@@ -333,7 +301,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
     heading="Users"
   />
   <ErrorMessage
-    error={[FetchError: invalid json response body at / reason: Unexpected end of JSON input]}
+    error={[FetchError: invalid json response body at http://localhost:3001/users reason: Unexpected end of JSON input]}
   />
 </Fragment>
 `;

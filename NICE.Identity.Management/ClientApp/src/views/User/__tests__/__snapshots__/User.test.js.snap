@@ -5,12 +5,6 @@ exports[`should match the snapshot after data has been loaded 1`] = `
   <Breadcrumbs>
     <Breadcrumb
       elementType={[Function]}
-      to="/"
-    >
-      Home
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={[Function]}
       to="/users"
     >
       Users
@@ -23,6 +17,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
   </Breadcrumbs>
   <PageHeader
     heading="Vernita Green"
+    preheading="User profile for"
   />
   <Grid
     elementType="div"
@@ -37,40 +32,91 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       elementType="div"
       md={9}
     >
-      <Panel
-        variant="supporting"
+      <Grid
+        elementType="div"
+        gutter="standard"
+        horizontalAlignment="left"
+        reverse={false}
+        verticalAlignment="top"
       >
-        <UserStatus
-          user={
-            Object {
-              "blocked": true,
-              "email_address": "vernita.green@gmail.com",
-              "email_verified": true,
-              "first_name": "Vernita",
-              "id": 2,
-              "last_name": "Green",
-              "user_id": "usr_5457edea1b8f33391a000002",
-            }
-          }
-        />
-        <p>
-          User: 
-          Vernita
-           
-          Green
-        </p>
-        <UnlockUser
-          id={2}
-          isLocked={true}
-          onError={[Function]}
-          onToggleLock={[Function]}
-        />
-        <Link
-          to="/users/2/delete"
+        <GridItem
+          cols={3}
+          elementType="div"
         >
-          Delete user
-        </Link>
-      </Panel>
+          <span
+            className="detailsLabel"
+          >
+            Account information
+          </span>
+        </GridItem>
+        <GridItem
+          cols={9}
+          elementType="div"
+        >
+          <UserStatus
+            user={
+              Object {
+                "blocked": true,
+                "email_address": "vernita.green@gmail.com",
+                "email_verified": true,
+                "first_name": "Vernita",
+                "id": 2,
+                "last_name": "Green",
+                "user_id": "usr_5457edea1b8f33391a000002",
+              }
+            }
+          />
+          <div
+            className="right"
+          >
+            <UnlockUser
+              id={2}
+              isLocked={true}
+              onError={[Function]}
+              onToggleLock={[Function]}
+            />
+          </div>
+        </GridItem>
+        <GridItem
+          cols={3}
+          elementType="div"
+        >
+          <span
+            className="detailsLabel"
+          >
+            Email address
+          </span>
+        </GridItem>
+        <GridItem
+          cols={9}
+          elementType="div"
+        >
+          <span>
+            vernita.green@gmail.com
+          </span>
+        </GridItem>
+      </Grid>
+      <h2
+        className="h3"
+      >
+        Permanently delete this account
+      </h2>
+      <p>
+        The account will no longer be available, and all data in the account will be permanently deleted.
+      </p>
+      <Link
+        to={
+          Object {
+            "pathname": "/users/2/delete",
+            "state": Object {
+              "email_address": "vernita.green@gmail.com",
+              "full_name": "Vernita Green",
+            },
+          }
+        }
+      >
+        Delete user
+      </Link>
     </GridItem>
   </Grid>
 </Fragment>
@@ -81,12 +127,6 @@ exports[`should show error message when fetch returns 401 error 1`] = `
   <Breadcrumbs>
     <Breadcrumb
       elementType={[Function]}
-      to="/"
-    >
-      Home
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={[Function]}
       to="/users"
     >
       Users
@@ -101,7 +141,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
     heading="Error"
   />
   <ErrorMessage
-    error={[FetchError: invalid json response body at / reason: Unexpected end of JSON input]}
+    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
   />
 </Fragment>
 `;
@@ -111,12 +151,6 @@ exports[`should show error message when fetch returns 500 error 1`] = `
   <Breadcrumbs>
     <Breadcrumb
       elementType={[Function]}
-      to="/"
-    >
-      Home
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={[Function]}
       to="/users"
     >
       Users
@@ -131,7 +165,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
     heading="Error"
   />
   <ErrorMessage
-    error={[FetchError: invalid json response body at / reason: Unexpected end of JSON input]}
+    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
   />
 </Fragment>
 `;
