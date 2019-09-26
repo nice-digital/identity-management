@@ -61,9 +61,6 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/" elementType={Link}>
-						Home
-					</Breadcrumb>
 					<Breadcrumb>Users</Breadcrumb>
 				</Breadcrumbs>
 

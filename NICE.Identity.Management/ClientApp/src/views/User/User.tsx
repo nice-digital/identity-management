@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
-import { Panel } from "@nice-digital/nds-panel";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
 
@@ -11,6 +10,8 @@ import { Endpoints } from "../../data/endpoints";
 import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+
+import styles from "./User.module.scss";
 
 type TParams = { id: string };
 
@@ -66,7 +67,9 @@ export class User extends Component<UserProps, UserState> {
 		if (response.status === 200) {
 			this.setState({ data });
 		} else {
-			this.setState({ error: new Error(data.message) });
+			this.setState({
+				error: new Error(data.message),
+			});
 		}
 	};
 
@@ -81,22 +84,18 @@ export class User extends Component<UserProps, UserState> {
 			return <Redirect to="/users" />;
 		}
 
-		let lastBreadcrumb;
+		let lastBreadcrumb = `${data.first_name} ${data.last_name}`;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading user details";
-		} else if (error) {
+		}
+		if (error) {
 			lastBreadcrumb = "Error";
-		} else {
-			lastBreadcrumb = `${data.first_name} ${data.last_name}`;
 		}
 
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/" elementType={Link}>
-						Home
-					</Breadcrumb>
 					<Breadcrumb to="/users" elementType={Link}>
 						Users
 					</Breadcrumb>
@@ -106,6 +105,7 @@ export class User extends Component<UserProps, UserState> {
 				{!error ? (
 					<>
 						<PageHeader
+							preheading="User profile for"
 							heading={
 								isLoading
 									? "User details"
@@ -117,21 +117,51 @@ export class User extends Component<UserProps, UserState> {
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-									<Panel>
-										<UserStatus user={data} />
+									<>
+										<Grid>
+											<GridItem cols={3}>
+												<span className={styles.detailsLabel}>
+													Account information
+												</span>
+											</GridItem>
+											<GridItem cols={9}>
+												<UserStatus user={data} />
+												<div className="right">
+													<UnlockUser
+														id={data.id}
+														isLocked={data.blocked}
+														onToggleLock={this.updateData}
+														onError={this.handleError}
+													/>
+												</div>
+											</GridItem>
+											<GridItem cols={3}>
+												<span className={styles.detailsLabel}>
+													Email address
+												</span>
+											</GridItem>
+											<GridItem cols={9}>
+												<span>{data.email_address}</span>
+											</GridItem>
+										</Grid>
+
+										<h2 className="h3">Permanently delete this account</h2>
 										<p>
-											User: {data.first_name} {data.last_name}
+											The account will no longer be available, and all data in
+											the account will be permanently deleted.
 										</p>
-
-										<UnlockUser
-											id={data.id}
-											isLocked={data.blocked}
-											onToggleLock={this.updateData}
-											onError={this.handleError}
-										/>
-
-										<Link to={`/users/${data.id}/delete`}>Delete user</Link>
-									</Panel>
+										<Link
+											to={{
+												pathname: `/users/${data.id}/delete`,
+												state: {
+													full_name: `${data.first_name} ${data.last_name}`,
+													email_address: data.email_address,
+												},
+											}}
+										>
+											Delete user
+										</Link>
+									</>
 								)}
 							</GridItem>
 						</Grid>

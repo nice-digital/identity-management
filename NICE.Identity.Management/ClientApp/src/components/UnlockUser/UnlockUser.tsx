@@ -59,7 +59,11 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 		const { isLoading: isButtonDisabled } = this.state;
 
 		return (
-			<Button onClick={this.fetchPatchData} disabled={isButtonDisabled}>
+			<Button
+				variant="secondary"
+				onClick={this.fetchPatchData}
+				disabled={isButtonDisabled}
+			>
 				{isButtonDisabled
 					? "Loading..."
 					: isLocked
