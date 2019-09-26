@@ -141,7 +141,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
     heading="Error"
   />
   <ErrorMessage
-    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
+    error={[FetchError: invalid json response body at / reason: Unexpected end of JSON input]}
   />
 </Fragment>
 `;
@@ -165,7 +165,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
     heading="Error"
   />
   <ErrorMessage
-    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
+    error={[FetchError: invalid json response body at / reason: Unexpected end of JSON input]}
   />
 </Fragment>
 `;
