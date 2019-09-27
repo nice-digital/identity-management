@@ -21,7 +21,7 @@ export const DeleteUserConfirmation = (props: DeleteUserConfirmationProps) => {
 				<Breadcrumb>{full_name}</Breadcrumb>
 			</Breadcrumbs>
 
-			<PageHeader heading="Confirmation message" />
+			<PageHeader heading="User deleted" />
 
 			<Alert type="success">
 				<p>The user {full_name} was successfully deleted.</p>

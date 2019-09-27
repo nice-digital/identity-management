@@ -4,7 +4,6 @@ import toJson from "enzyme-to-json";
 import { App } from "../App";
 
 it("should mount without crashing", () => {
-	const wrapper = mount(<App />);
+	const wrapper = shallow(<App />);
 	expect(wrapper).toHaveLength(1);
-	wrapper.unmount();
 });

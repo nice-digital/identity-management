@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1"
+    >
+      Vernita Green
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Delete user
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Vernita Green"
+    preheading="Are you sure you want to delete user?"
+  />
+  <Grid
+    className="pv--d"
+    elementType="div"
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      cols={3}
+      elementType="div"
+    >
+      <span
+        className="detailsLabel"
+      >
+        Email address
+      </span>
+    </GridItem>
+    <GridItem
+      cols={9}
+      elementType="div"
+    >
+      <span>
+        vernita.green@gmail.com
+      </span>
+    </GridItem>
+  </Grid>
+  <Button
+    disabled={false}
+    onClick={[Function]}
+    variant="primary"
+  >
+    Confirm
+  </Button>
+  <Button
+    disabled={false}
+    elementType={[Function]}
+    to="/users/1"
+    variant="secondary"
+  >
+    Cancel
+  </Button>
+</Fragment>
+`;
+
+exports[`DeleteUser should show error message when fetchData function returns 401 error 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Error
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Delete user
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Error"
+  />
+  <ErrorMessage
+    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
+  />
+</Fragment>
+`;
+
+exports[`DeleteUser should show error message when fetchData function returns 500 error 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Error
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Delete user
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Error"
+  />
+  <ErrorMessage
+    error={[FetchError: invalid json response body at http://localhost:3001/users/1 reason: Unexpected end of JSON input]}
+  />
+</Fragment>
+`;

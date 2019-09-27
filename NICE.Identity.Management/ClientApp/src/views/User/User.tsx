@@ -150,17 +150,7 @@ export class User extends Component<UserProps, UserState> {
 											The account will no longer be available, and all data in
 											the account will be permanently deleted.
 										</p>
-										<Link
-											to={{
-												pathname: `/users/${data.id}/delete`,
-												state: {
-													full_name: `${data.first_name} ${data.last_name}`,
-													email_address: data.email_address,
-												},
-											}}
-										>
-											Delete user
-										</Link>
+										<Link to={`/users/${data.id}/delete`}>Delete user</Link>
 									</>
 								)}
 							</GridItem>

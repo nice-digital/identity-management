@@ -79,6 +79,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 			let error: Error = err;
 
 			this.handleError(error);
+			this.setState({ isDeleteButtonLoading: false });
 			return;
 		}
 
@@ -87,7 +88,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		if (response.status === 200) {
 			this.setState({ hasBeenDeleted: true });
 		} else {
-			this.setState({ error: new Error(data.message) });
+			this.handleError(new Error(data.message));
 		}
 	};
 
