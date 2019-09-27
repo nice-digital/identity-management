@@ -15,6 +15,8 @@ export const finduser = (userApi, username) => {
       const myUser = users.find(user => user.email === process.env[username]);
       
       return myUser;
+    } else {
+      throw(new Error('Status ' + this.status + ' Request returned as ' + this.response));
     }
   }; 
 request.send();
