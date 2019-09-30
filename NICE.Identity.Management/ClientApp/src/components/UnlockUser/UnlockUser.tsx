@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import { Button } from "@nice-digital/nds-button";
 
 import { Endpoints } from "../../data/endpoints";
+import { UserType } from "../../models/types";
 
 type UnlockUserProps = {
 	id: number;
-	isBlocked: boolean;
-	onToggleLock: Function;
-	onError: Function;
+	isLocked: boolean;
+	onToggleLock: (user: UserType) => void;
+	onError: (error: Error) => void;
 };
 
 type UnlockUserState = {
@@ -31,12 +33,15 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					blocked: !this.props.isBlocked,
+					blocked: !this.props.isLocked,
 				}),
 			});
 			data = await response.json();
-		} catch (error) {
+		} catch (err) {
+			let error: Error = err;
+
 			this.props.onError(error);
+			this.setState({ isLoading: false });
 			return;
 		}
 
@@ -50,21 +55,21 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 	};
 
 	render() {
+		const { isLocked } = this.props;
 		const { isLoading: isButtonDisabled } = this.state;
 
 		return (
-			<button
-				className="btn"
+			<Button
+				variant="secondary"
 				onClick={this.fetchPatchData}
-				type="button"
 				disabled={isButtonDisabled}
 			>
 				{isButtonDisabled
 					? "Loading..."
-					: this.props.isBlocked
+					: isLocked
 					? "Unlock user"
 					: "Lock user"}
-			</button>
+			</Button>
 		);
 	}
 }

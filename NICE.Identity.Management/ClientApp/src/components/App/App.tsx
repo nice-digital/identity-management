@@ -1,8 +1,7 @@
 import React from "react";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Header, Footer } from "@nice-digital/global-nav";
-import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
@@ -16,33 +15,7 @@ export class App extends React.Component {
 				<Header search={false} />
 
 				<div className="container">
-					<Route
-						path="/"
-						exact
-						render={() => (
-							<>
-								<Breadcrumbs>
-									<Breadcrumb>Home</Breadcrumb>
-								</Breadcrumbs>
-
-								<div className="page-header" id="content-start">
-									<h1 className="page-header__heading">Identity admin</h1>
-									<p className="page-header__lead">
-										Admin site for managing users, services and roles for Auth0
-										identity
-									</p>
-								</div>
-
-								<nav>
-									<ul className="list list--piped">
-										<li>
-											<Link to="/users">Users</Link>
-										</li>
-									</ul>
-								</nav>
-							</>
-						)}
-					/>
+					<Route path="/" exact render={() => <Redirect to="/users" />} />
 					<Route path="/users" exact component={UsersList} />
 					<Route path="/users/:id" exact component={User} />
 					<Route path="/users/:id/delete" exact component={DeleteUser} />

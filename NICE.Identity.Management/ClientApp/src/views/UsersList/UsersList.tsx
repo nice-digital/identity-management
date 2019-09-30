@@ -3,11 +3,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Card } from "@nice-digital/nds-card";
-import { Tag } from "@nice-digital/nds-tag";
+import { Grid, GridItem } from "@nice-digital/nds-grid";
+import { PageHeader } from "@nice-digital/nds-page-header";
 
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
 import { Filter } from "../../components/Filter/Filter";
+import { UserStatus } from "../../components/UserStatus/UserStatus";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 type CardMetaData = {
 	label?: string;
@@ -18,7 +21,7 @@ type UsersListProps = {};
 
 type UsersListState = {
 	data: Array<UserType>;
-	error: string;
+	error?: Error;
 };
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
@@ -26,17 +29,25 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		super(props);
 		this.state = {
 			data: [],
-			error: "",
 		};
 	}
 
 	fetchData = async (url: string) => {
+		let response, data;
 		try {
-			const response = await fetch(url);
-			const data = await response.json();
-			this.setState({ data });
-		} catch (error) {
+			response = await fetch(url);
+			data = await response.json();
+		} catch (err) {
+			let error: Error = err;
+
 			this.setState({ error });
+			return;
+		}
+
+		if (response.status === 200) {
+			this.setState({ data });
+		} else {
+			this.setState({ error: new Error(data.message) });
 		}
 	};
 
@@ -50,57 +61,61 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/" tag={Link}>
-						Home
-					</Breadcrumb>
 					<Breadcrumb>Users</Breadcrumb>
 				</Breadcrumbs>
 
-				<div className="page-header" id="content-start">
-					<h1 className="page-header__heading">Users</h1>
-				</div>
+				<PageHeader heading="Users" />
 
 				{!error ? (
-					<div className="grid">
-						<div data-g="12 md:3">
+					<Grid>
+						<GridItem cols={12} md={3}>
 							<Filter />
-						</div>
-						<div data-g="12 md:9" aria-busy={!data.length}>
+						</GridItem>
+						<GridItem cols={12} md={9} aria-busy={!data.length}>
 							{!data.length ? (
 								<p>Loading...</p>
 							) : (
 								<ul className="list--unstyled">
-									{data.map(
-										({ id, email_address, user_id, first_name, last_name }) => {
-											const usersListHeading = {
-												headingText: `${first_name} ${last_name}`,
-												linkTag: Link,
+									{data.map(user => {
+										const {
+											id,
+											email_address,
+											user_id,
+											first_name,
+											last_name,
+										} = user;
+										const usersListHeading = {
+											headingText: `${first_name} ${last_name}`,
+											link: {
+												elementType: Link,
 												destination: `/users/${id}`,
-											};
+											},
+										};
 
-											const usersListMetadata: Array<CardMetaData> = [
-												{ value: <Tag alpha>Active</Tag> },
-												{
-													label: "Email address",
-													value: email_address,
-												},
-											];
+										const usersListMetadata: Array<CardMetaData> = [
+											{
+												value: <UserStatus user={user} />,
+											},
+											{
+												label: "Email address",
+												value: email_address,
+											},
+										];
 
-											return (
-												<Card
-													heading={usersListHeading}
-													metadata={usersListMetadata}
-													key={user_id}
-												/>
-											);
-										},
-									)}
+										return (
+											<Card
+												{...usersListHeading}
+												metadata={usersListMetadata}
+												key={user_id}
+											/>
+										);
+									})}
 								</ul>
 							)}
-						</div>
-					</div>
+						</GridItem>
+					</Grid>
 				) : (
-					<p id="userslist-error">Whoops... There's a been an error.</p>
+					<ErrorMessage error={error}></ErrorMessage>
 				)}
 			</>
 		);

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should match the snapshot after data has been loaded 1`] = `
+exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
@@ -10,16 +10,23 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       Users
     </Breadcrumb>
     <Breadcrumb
-      elementType="a"
+      elementType={[Function]}
+      to="/users/1"
     >
       Vernita Green
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Delete user
     </Breadcrumb>
   </Breadcrumbs>
   <PageHeader
     heading="Vernita Green"
-    preheading="User profile for"
+    preheading="Are you sure you want to delete user?"
   />
   <Grid
+    className="pv--d"
     elementType="div"
     gutter="standard"
     horizontalAlignment="left"
@@ -27,94 +34,43 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     verticalAlignment="top"
   >
     <GridItem
-      aria-busy={false}
-      cols={12}
+      cols={3}
       elementType="div"
-      md={9}
     >
-      <Grid
-        elementType="div"
-        gutter="standard"
-        horizontalAlignment="left"
-        reverse={false}
-        verticalAlignment="top"
+      <span
+        className="detailsLabel"
       >
-        <GridItem
-          cols={3}
-          elementType="div"
-        >
-          <span
-            className="detailsLabel"
-          >
-            Account information
-          </span>
-        </GridItem>
-        <GridItem
-          cols={9}
-          elementType="div"
-        >
-          <UserStatus
-            user={
-              Object {
-                "blocked": true,
-                "email_address": "vernita.green@gmail.com",
-                "email_verified": true,
-                "first_name": "Vernita",
-                "id": 2,
-                "last_name": "Green",
-                "user_id": "usr_5457edea1b8f33391a000002",
-              }
-            }
-          />
-          <div
-            className="right"
-          >
-            <UnlockUser
-              id={2}
-              isLocked={true}
-              onError={[Function]}
-              onToggleLock={[Function]}
-            />
-          </div>
-        </GridItem>
-        <GridItem
-          cols={3}
-          elementType="div"
-        >
-          <span
-            className="detailsLabel"
-          >
-            Email address
-          </span>
-        </GridItem>
-        <GridItem
-          cols={9}
-          elementType="div"
-        >
-          <span>
-            vernita.green@gmail.com
-          </span>
-        </GridItem>
-      </Grid>
-      <h2
-        className="h3"
-      >
-        Permanently delete this account
-      </h2>
-      <p>
-        The account will no longer be available, and all data in the account will be permanently deleted.
-      </p>
-      <Link
-        to="/users/2/delete"
-      >
-        Delete user
-      </Link>
+        Email address
+      </span>
+    </GridItem>
+    <GridItem
+      cols={9}
+      elementType="div"
+    >
+      <span>
+        vernita.green@gmail.com
+      </span>
     </GridItem>
   </Grid>
+  <Button
+    disabled={false}
+    onClick={[Function]}
+    variant="primary"
+  >
+    Confirm
+  </Button>
+  <Button
+    disabled={false}
+    elementType={[Function]}
+    to="/users/1"
+    variant="secondary"
+  >
+    Cancel
+  </Button>
 </Fragment>
 `;
 
-exports[`should show error message when fetch returns 401 error 1`] = `
+exports[`DeleteUser should show error message when fetchData function returns 401 error 1`] = `
 Array [
   Array [
     <nav
@@ -141,6 +97,13 @@ Array [
             Error
           </span>
         </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Delete user
+          </span>
+        </li>
       </ol>
     </nav>,
     <script
@@ -163,6 +126,13 @@ Array [
       \\"position\\": 2,
       \\"item\\": {
         \\"name\\": \\"Error\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"name\\": \\"Delete user\\"
       }
     }
   ]
@@ -194,7 +164,7 @@ Array [
 ]
 `;
 
-exports[`should show error message when fetch returns 500 error 1`] = `
+exports[`DeleteUser should show error message when fetchData function returns 500 error 1`] = `
 Array [
   Array [
     <nav
@@ -221,6 +191,13 @@ Array [
             Error
           </span>
         </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Delete user
+          </span>
+        </li>
       </ol>
     </nav>,
     <script
@@ -243,6 +220,13 @@ Array [
       \\"position\\": 2,
       \\"item\\": {
         \\"name\\": \\"Error\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"name\\": \\"Delete user\\"
       }
     }
   ]

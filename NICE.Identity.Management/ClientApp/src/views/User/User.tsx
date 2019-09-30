@@ -2,12 +2,16 @@ import React, { Component } from "react";
 
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
-import { Panel } from "@nice-digital/nds-panel";
-import { Tag } from "@nice-digital/nds-tag";
+import { Grid, GridItem } from "@nice-digital/nds-grid";
+import { PageHeader } from "@nice-digital/nds-page-header";
 
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
+import { UserStatus } from "../../components/UserStatus/UserStatus";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+
+import styles from "./User.module.scss";
 
 type TParams = { id: string };
 
@@ -15,7 +19,7 @@ type UserProps = {} & RouteComponentProps<TParams>;
 
 type UserState = {
 	data: UserType;
-	error: string;
+	error?: Error;
 	redirect: boolean;
 	isLoading: boolean;
 };
@@ -26,18 +30,16 @@ export class User extends Component<UserProps, UserState> {
 
 		this.state = {
 			data: {} as UserType,
-			error: "",
 			redirect: false,
 			isLoading: true,
 		};
 	}
 
 	handleError = (error: Error) => {
-		this.setState({ error: error.message });
+		this.setState({ error });
 	};
 
 	updateData = (updatedData: UserType) => {
-		// if user has been deleted redirect, otherwise reload data
 		if (!Object.keys(updatedData).length) {
 			this.setState({ redirect: true });
 		} else {
@@ -46,12 +48,27 @@ export class User extends Component<UserProps, UserState> {
 	};
 
 	fetchData = async (url: string) => {
+		this.setState({ isLoading: true });
+
+		let response, data;
 		try {
-			const response = await fetch(url);
-			const data = await response.json();
-			this.setState({ data, isLoading: false });
-		} catch (error) {
-			this.setState({ error });
+			response = await fetch(url);
+			data = await response.json();
+		} catch (err) {
+			let error: Error = err;
+
+			this.setState({ error, isLoading: false });
+			return;
+		}
+
+		this.setState({ isLoading: false });
+
+		if (response.status === 200) {
+			this.setState({ data });
+		} else {
+			this.setState({
+				error: new Error(data.message),
+			});
 		}
 	};
 
@@ -66,53 +83,83 @@ export class User extends Component<UserProps, UserState> {
 			return <Redirect to="/users" />;
 		}
 
+		let lastBreadcrumb = `${data.first_name} ${data.last_name}`;
+
+		if (isLoading) {
+			lastBreadcrumb = "Loading user details";
+		}
+		if (error) {
+			lastBreadcrumb = "Error";
+		}
+
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/" tag={Link}>
-						Home
-					</Breadcrumb>
-					<Breadcrumb to="/users" tag={Link}>
+					<Breadcrumb to="/users" elementType={Link}>
 						Users
 					</Breadcrumb>
+					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
 
-				<div className="page-header" id="content-start">
-					<h1 className="page-header__heading">User details</h1>
-				</div>
-
 				{!error ? (
-					<div className="grid">
-						<div data-g="12 md:9" aria-busy={isLoading}>
-							{isLoading ? (
-								<p>Loading...</p>
-							) : (
-								<Panel>
-									<Tag>{!data.blocked ? "Active" : "Locked"}</Tag>
-									<p>
-										User: {data.first_name} {data.last_name}
-									</p>
+					<>
+						<PageHeader
+							preheading="User profile for"
+							heading={
+								isLoading
+									? "User details"
+									: `${data.first_name} ${data.last_name}`
+							}
+						/>
+						<Grid>
+							<GridItem cols={12} md={9} aria-busy={isLoading}>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : (
+									<>
+										<Grid>
+											<GridItem cols={3}>
+												<span className={styles.detailsLabel}>
+													Account information
+												</span>
+											</GridItem>
+											<GridItem cols={9}>
+												<UserStatus user={data} />
+												<div className="right">
+													<UnlockUser
+														id={data.id}
+														isLocked={data.blocked}
+														onToggleLock={this.updateData}
+														onError={this.handleError}
+													/>
+												</div>
+											</GridItem>
+											<GridItem cols={3}>
+												<span className={styles.detailsLabel}>
+													Email address
+												</span>
+											</GridItem>
+											<GridItem cols={9}>
+												<span>{data.email_address}</span>
+											</GridItem>
+										</Grid>
 
-									<UnlockUser
-										id={data.id}
-										isBlocked={data.blocked}
-										onToggleLock={this.updateData}
-										onError={this.handleError}
-									/>
-
-									{/* <DeleteUser
-										id={data.id}
-										onDeleteUser={this.updateData}
-										onError={this.handleError}
-									/> */}
-
-									<Link to={`/users/${data.id}/delete`}>Delete user</Link>
-								</Panel>
-							)}
-						</div>
-					</div>
+										<h2 className="h3">Permanently delete this account</h2>
+										<p>
+											The account will no longer be available, and all data in
+											the account will be permanently deleted.
+										</p>
+										<Link to={`/users/${data.id}/delete`}>Delete user</Link>
+									</>
+								)}
+							</GridItem>
+						</Grid>
+					</>
 				) : (
-					<p id="user-error">Whoops... There's a been an error.</p>
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				)}
 			</>
 		);

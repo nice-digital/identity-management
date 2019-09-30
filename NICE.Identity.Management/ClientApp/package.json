@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@nice-digital/design-system": "^1.0.12-alpha.0",
-    "@nice-digital/global-nav": "github:nhsevidence/global-nav#GN-30-Create-react-app-2",
+    "@nice-digital/design-system": "^1.0.15-alpha.0",
+    "@nice-digital/global-nav": "github:nhsevidence/global-nav",
     "concurrently": "^4.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
