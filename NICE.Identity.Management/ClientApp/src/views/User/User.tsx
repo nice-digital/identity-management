@@ -40,7 +40,6 @@ export class User extends Component<UserProps, UserState> {
 	};
 
 	updateData = (updatedData: UserType) => {
-		// if user has been deleted redirect, otherwise reload data
 		if (!Object.keys(updatedData).length) {
 			this.setState({ redirect: true });
 		} else {

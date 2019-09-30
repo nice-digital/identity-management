@@ -271,37 +271,121 @@ Array [
 `;
 
 exports[`should show error message when fetch returns 401 error 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      elementType="a"
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
     >
       Users
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    heading="Users"
-  />
-  <ErrorMessage
-    error={[FetchError: invalid json response body at http://localhost:3001/users reason: Unexpected end of JSON input]}
-  />
-</Fragment>
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
 `;
 
 exports[`should show error message when fetch returns 500 error 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      elementType="a"
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
     >
       Users
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    heading="Users"
-  />
-  <ErrorMessage
-    error={[FetchError: invalid json response body at http://localhost:3001/users reason: Unexpected end of JSON input]}
-  />
-</Fragment>
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
 `;

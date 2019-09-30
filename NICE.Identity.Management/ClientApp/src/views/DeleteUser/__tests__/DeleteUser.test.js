@@ -43,7 +43,11 @@ describe("DeleteUser", () => {
 
 	it("should show error message when fetchData function returns 401 error", async () => {
 		fetchMock.get("*", 401);
-		const wrapper = shallow(<DeleteUser match={match} />);
+		const wrapper = mount(
+			<MemoryRouter>
+				<DeleteUser match={match} />
+			</MemoryRouter>,
+		);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
@@ -51,7 +55,11 @@ describe("DeleteUser", () => {
 
 	it("should show error message when fetchData function returns 500 error", async () => {
 		fetchMock.get("*", 500);
-		const wrapper = shallow(<DeleteUser match={match} />);
+		const wrapper = mount(
+			<MemoryRouter>
+				<DeleteUser match={match} />
+			</MemoryRouter>,
+		);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
