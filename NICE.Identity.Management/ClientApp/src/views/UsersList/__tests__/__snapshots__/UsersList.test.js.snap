@@ -13,16 +13,6 @@ Array [
         <li
           className="breadcrumbs__crumb"
         >
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            Home
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
           <span>
             Users
           </span>
@@ -35,23 +25,13 @@ Array [
           "__html": "{
   \\"@context\\": \\"http://schema.org\\",
   \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
-    {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Home\\"
-      }
-    },
-    {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
-      }
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
     }
-  ]
+  }
 }",
         }
       }
@@ -60,7 +40,6 @@ Array [
   ],
   <div
     className="page-header"
-    id="content-start"
   >
     <h1
       className="page-header__heading"
@@ -130,7 +109,7 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--alpha"
+                  className="tag tag--live"
                 >
                   Active
                 </span>
@@ -177,7 +156,7 @@ Array [
                 <span
                   className="tag tag--alpha"
                 >
-                  Active
+                  Locked
                 </span>
               </dd>
             </div>
@@ -220,7 +199,7 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--alpha"
+                  className="tag tag--live"
                 >
                   Active
                 </span>
@@ -267,7 +246,7 @@ Array [
                 <span
                   className="tag tag--alpha"
                 >
-                  Active
+                  Locked
                 </span>
               </dd>
             </div>
@@ -287,6 +266,126 @@ Array [
         </article>
       </ul>
     </div>
+  </div>,
+]
+`;
+
+exports[`should show error message when fetch returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`should show error message when fetch returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
   </div>,
 ]
 `;

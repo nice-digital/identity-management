@@ -3,9 +3,7 @@ import { mount, shallow } from "enzyme";
 import fetchMock from "fetch-mock";
 
 import { UnlockUser } from "../UnlockUser";
-import { Endpoints } from "../../../data/endpoints";
 import { nextTick } from "../../../utils/nextTick";
-//import singleUser from "./singleUser.json";
 
 describe("UnlockUser", () => {
 	let userProps;
@@ -13,7 +11,7 @@ describe("UnlockUser", () => {
 	beforeEach(() => {
 		userProps = {
 			id: 1,
-			isBlocked: true,
+			isLocked: true,
 			onToggleLock: jest.fn(),
 			onError: jest.fn(),
 		};
@@ -21,9 +19,20 @@ describe("UnlockUser", () => {
 
 	afterEach(fetchMock.reset);
 
+	it("should show unlock text when locked", () => {
+		const wrapper = mount(<UnlockUser {...userProps} />);
+		expect(wrapper.find("button").text()).toEqual("Unlock user");
+	});
+
+	it("should show lock text when unlocked", () => {
+		userProps.isLocked = false;
+		const wrapper = mount(<UnlockUser {...userProps} />);
+		expect(wrapper.find("button").text()).toEqual("Lock user");
+	});
+
 	it("should disable button when clicked", async () => {
 		fetchMock.patch("*", {});
-		const wrapper = shallow(<UnlockUser {...userProps} />);
+		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		wrapper.update();
 		expect(wrapper.find("button").props().disabled).toEqual(true);
@@ -33,7 +42,7 @@ describe("UnlockUser", () => {
 	it("should trigger onToggleLock prop function with server data once fetch is successfully complete", async () => {
 		const responseData = { a: 1 };
 		fetchMock.patch("*", responseData);
-		const wrapper = shallow(<UnlockUser {...userProps} />);
+		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onToggleLock).toHaveBeenCalledTimes(1);
@@ -43,7 +52,7 @@ describe("UnlockUser", () => {
 	it("should show error message when fetch fails", async () => {
 		const error = new Error("Not allowed");
 		fetchMock.patch("*", { throws: error });
-		const wrapper = shallow(<UnlockUser {...userProps} />);
+		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
@@ -56,7 +65,7 @@ describe("UnlockUser", () => {
 			body: { message: serverErrorMessage },
 			status: 401,
 		});
-		const wrapper = shallow(<UnlockUser {...userProps} />);
+		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);

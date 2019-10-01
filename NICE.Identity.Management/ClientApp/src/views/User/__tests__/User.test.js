@@ -1,10 +1,11 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
+import { MemoryRouter } from "react-router";
 import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
+
 import { User } from "../User";
 import singleUser from "./singleUser.json";
-import { MemoryRouter } from "react-router";
 import { nextTick } from "../../../utils/nextTick";
 
 const match = {
@@ -33,6 +34,14 @@ it("should call fetchData during componentDidMount", () => {
 
 it("should match the snapshot after data has been loaded", async () => {
 	fetchMock.get("*", singleUser);
+	const wrapper = shallow(<User match={match} />);
+	await nextTick();
+	wrapper.update();
+	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+});
+
+it("should show error message when fetch returns 401 error", async () => {
+	fetchMock.get("*", 401);
 	const wrapper = mount(
 		<MemoryRouter>
 			<User match={match} />
@@ -43,18 +52,14 @@ it("should match the snapshot after data has been loaded", async () => {
 	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 });
 
-it("should show error message when fetch returns 401 error", async () => {
-	fetchMock.get("*", 401);
-	const wrapper = shallow(<User match={match} />);
-	await nextTick();
-	wrapper.update();
-	expect(wrapper.find("#user-error")).toHaveLength(1);
-});
-
 it("should show error message when fetch returns 500 error", async () => {
 	fetchMock.get("*", 500);
-	const wrapper = shallow(<User match={match} />);
+	const wrapper = mount(
+		<MemoryRouter>
+			<User match={match} />
+		</MemoryRouter>,
+	);
 	await nextTick();
 	wrapper.update();
-	expect(wrapper.find("#user-error")).toHaveLength(1);
+	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 });
