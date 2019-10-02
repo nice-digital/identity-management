@@ -5,16 +5,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
-using Microsoft.Extensions.Options;
 using NICE.Identity.Management.Configuration;
-using NICE.Identity.Authentication.Sdk;
-using NICE.Identity.Authentication.Sdk.Abstractions;
 using NICE.Identity.Authentication.Sdk.Authentication;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
@@ -44,13 +40,7 @@ namespace NICE.Identity.Management
 			
 			//dependency injection goes here.
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
-			var authConfiguration = new AuthConfiguration(Configuration, "AuthConfiguration");
-			services.TryAddSingleton<IAuthConfiguration>(authConfiguration);
-
-			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
-			services.TryAddTransient<IAuthenticationService, Auth0Service>();
-			//services.Configure<Auth0Configuration>(Configuration.GetSection("Auth0"));
-			services.Configure<CustomAPiConfiguration>(Configuration.GetSection("ProxyEndpoint"));
+            services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddProxy();
             services.Configure<CookiePolicyOptions>(options =>
@@ -61,12 +51,14 @@ namespace NICE.Identity.Management
 			});
 			
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-			//services.AddHttpClientWithHttpConfiguration<Auth0Configuration>("Auth0ApiToken");
-			// Add authentication services
-			//services.AddAuthenticationSdk(Configuration, "Auth0");
-			services.AddAuthenticationSdk(authConfiguration);
 
-			// In production, the React files will be served from this directory
+            // Add authentication services
+            var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
+            var apiConfiguration = new AuthConfiguration(Configuration, "IdentityApiConfiguration");
+            services.AddAuthentication(authConfiguration);
+            services.TryAddSingleton<IAuthConfiguration>(apiConfiguration);
+
+            // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
 				configuration.RootPath = "ClientApp/build";
@@ -76,7 +68,7 @@ namespace NICE.Identity.Management
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
 			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService,
-			IAuthConfiguration authConfiguration,IOptions<CustomAPiConfiguration> customApi, IHttpClientFactory httpClientFactory)
+			IAuthConfiguration apiConfiguration, IHttpClientFactory httpClientFactory)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -98,8 +90,8 @@ namespace NICE.Identity.Management
 			app.RunProxy("/api",
 				 async context =>
 				{
-					var forwardContext = context.ForwardTo(customApi.Value.ApiEndpoint);
-					forwardContext.AddAuth0AccessToken(authConfiguration, httpClientFactory);
+					var forwardContext = context.ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier);
+					forwardContext.AddAuth0AccessToken(apiConfiguration, httpClientFactory);
 					var response = await forwardContext.Send();
 					response.Headers.Remove("Authorization");
 					return response;
