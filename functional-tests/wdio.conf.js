@@ -24,7 +24,7 @@ exports.config = {
     logLevel: "verbose",
     coloredLogs: true,
     screenshotPath: "./errorShots/",
-    baseUrl: "https://alpha-identityadmin.nice.org.uk/", //- below url is a temporary measure for time being so that we can create some automation
+    baseUrl: "https://test-identityadmin.nice.org.uk/", //- below url is a temporary measure for time being so that we can create some automation
     //baseUrl: "https://alpha-nice-identity.eu.auth0.com/",
     reporters: ["spec"],
 
