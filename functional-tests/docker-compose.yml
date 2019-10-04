@@ -41,31 +41,53 @@ services:
       - ./:/tests
       - /tests/node_modules
     links:
+      - api
       - hub
       # - nginx
       - idammanagement
     environment:
+      - IDENTITYAPI_AUTH_SERVICE_URI
+      - IDENTITYAPI_IDENTIFIER
+      - IDENTITYAPI_API_OAUTH_TOKEN_URL
+      - IDENTITYAPI_API_CLIENTID
+      - IDENTITYAPI_API_CLIENTSECRECT
+      - IDENTITYAPI_API_GRANT_TYPE
+      - IDENTITYAPI_API_AUDIENCE
+      - IDENTITY_NOUSER_EMAIL
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
       - ACCOUNTS_EMAIL4
       - ACCOUNTS_PASSWORD
+      - ACCOUNTS_PASSWORD2
 
-  # Comment Collection dotnet core web app
+  # Identity management dotnet core web app
   idammanagement:
     container_name: functional-tests_idammanagement_1
     build: ./../NICE.Identity.Management/
     links:
       - database
+      - api
     # Enable browsing from the host machine on http://localhost:8080/consultations
     ports:
         - 8080:8080
     environment:
-      - AUTH0_DOMAIN
-      - AUTH0_CLIENTID
-      - AUTH0_CLIENTSECRECT
-      - AUTH0_REDIRECT_URI
-      - AUTH0_LOGOUT_REDIRECT_URI
+      - AUTHCONFIGURATION_AUTH_SERVICE_URI
+      - AUTHCONFIGURATION_API_IDENTIFIER
+      - ALPHA_AUTH_SERVICE_URI
+      - ALPHA_USER_API
+      - ALPHA_API_KEY
+      - REACT_APP_API_BASE_URL
+      - DEFAULT_CONNECTION
+      - WEBAPP_DOMAIN
+      - WEBAPP_CLIENTID
+      - WEBAPP_CLIENTSECRECT
+      - WEBAPP_REDIRECT_URI
+      - WEBAPP_LOGOUT_REDIRECT_URI
+      - IDENTITYAPI_AUTH_SERVICE_URI
+      - IDENTITYAPI_IDENTIFIER
+      - IDENTITYAPI_API_CLIENTID
+      - IDENTITYAPI_API_CLIENTSECRECT
     networks:
       default:
         aliases:
@@ -83,6 +105,21 @@ services:
       - COMPOSE_HTTP_TIMEOUT=200
     ports:
       - 1434:1433
+
+  #JSON Server for Api
+  api:
+    container_name: functional-tests_api_1
+    build: ./../NICE.Identity.Management.MockApi/
+    ports: 
+      - 8090:3000
+    volumes: 
+      -  ./../NICE.Identity.Management.MockApi/api:/data
+    command: -H 0.0.0.0 -p 3000 -w db.json
+    networks:
+      default:
+        aliases:
+          - api
+
 
   # nginx:
   #   container_name: functional-tests_nginx_1

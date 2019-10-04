@@ -10,13 +10,8 @@ exports.config = {
         "./src/features/**/*.feature"
     ],
     exclude: [
-        "./src/features/**/identityHomepage.feature",
-        "./src/features/**/customRegistratonPage.feature",
-        "./src/features/**/customLoginPage.feature",
-        "./src/features/**/signUpConfirmEmailMismatch.feature",
-        "./src/features/**/signUpConfirmPasswordMismatch.feature",
-        "./src/features/**/unsuccessfulLogin.feature"
-        // "./src/features/**/successfulLogin",
+        // "./src/features/**/identityHomepage.feature",
+        // "./src/features/**/identityFailedLogin.feature"
     ],
 
     // Assume user has Chrome and Firefox installed.
@@ -29,7 +24,7 @@ exports.config = {
     logLevel: "verbose",
     coloredLogs: true,
     screenshotPath: "./errorShots/",
-    baseUrl: "https://alpha-identityadmin.nice.org.uk/", //- below url is a temporary measure for time being so that we can create some automation
+    baseUrl: "https://test-identityadmin.nice.org.uk/", //- below url is a temporary measure for time being so that we can create some automation
     //baseUrl: "https://alpha-nice-identity.eu.auth0.com/",
     reporters: ["spec"],
 
@@ -52,5 +47,26 @@ exports.config = {
         global.expect = chai.expect;
         global.assert = chai.assert;
         global.should = chai.should();
-    },
+
+        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+        const request = new XMLHttpRequest();
+        var body = JSON.stringify({
+            "grant_type": process.env.IDENTITYAPI_API_GRANT_TYPE,
+            "client_id": process.env.IDENTITYAPI_API_CLIENTID,
+            "client_secret": process.env.IDENTITYAPI_API_CLIENTSECRECT,
+            "audience": process.env.IDENTITYAPI_API_AUDIENCE
+        });
+        request.open('POST', process.env.IDENTITYAPI_API_OAUTH_TOKEN_URL, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.onload = function (e) {
+            console.log(this.status);
+            if (this.status == 200) {
+                const auth_token = JSON.parse(this.responseText);
+                process.env.access_token = auth_token.access_token
+            } else {
+                throw (new Error('Unable to obtain the access token. Returned a ' + this.status + ' response'));
+            }
+        };
+        request.send(body);
+    }
 }

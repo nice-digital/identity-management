@@ -7,18 +7,26 @@ set -e
 
 jq \
     --arg defaultConnection "$DEFAULT_CONNECTION" \
-    --arg auth0domain "$AUTH0_DOMAIN" \
-    --arg auth0clientid "$AUTH0_CLIENTID" \
-    --arg auth0clientsecret "$AUTH0_CLIENTSECRECT" \
-    --arg auth0redirecturi "$AUTH0_REDIRECT_URI" \
-    --arg auth0logoutredirecturi "$AUTH0_LOGOUT_REDIRECT_URI" \
+    --arg webappdomain "$WEBAPP_DOMAIN" \
+    --arg webappclientid "$WEBAPP_CLIENTID" \
+    --arg webappclientsecret "$WEBAPP_CLIENTSECRECT" \
+    --arg webappredirecturi "$WEBAPP_REDIRECT_URI" \
+    --arg webapplogoutredirecturi "$WEBAPP_LOGOUT_REDIRECT_URI" \
+    --arg identityapiauthorisationserviceuri "$IDENTITYAPI_AUTH_SERVICE_URI" \
+    --arg identityapiidentifier "$IDENTITYAPI_IDENTIFIER" \
+    --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
+    --arg identityapiclientsecret "$IDENTITYAPI_API_CLIENTSECRECT" \
     '
     .ConnectionStrings.DefaultConnection = $defaultConnection |
-    .Auth0.Domain = $auth0domain |
-    .Auth0.ClientId = $auth0clientid |
-    .Auth0.ClientSecret = $auth0clientsecret |
-    .Auth0.RedirectUri = $auth0redirecturi |
-    .Auth0.PostLogoutRedirectUri = $auth0logoutredirecturi
+    .WebAppConfiguration.Domain = $webappdomain |
+    .WebAppConfiguration.ClientId = $webappclientid |
+    .WebAppConfiguration.ClientSecret = $webappclientsecret |
+    .WebAppConfiguration.RedirectUri = $webappredirecturi |
+    .WebAppConfiguration.PostLogoutRedirectUri = $webapplogoutredirecturi |
+    .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
+    .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
+    .IdentityApiConfiguration.ClientId = $identityapiclientid |
+    .IdentityApiConfiguration.ClientSecret = $identityapiclientsecret
     '\
     appsettings.json > _appsettings.json \
     && mv _appsettings.json appsettings.json
