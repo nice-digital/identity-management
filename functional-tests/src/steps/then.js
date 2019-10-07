@@ -8,6 +8,10 @@ import confirmPasswordInput from "../support/check/confirmPasswordInput";
 import signUpUserNameInput from "../support/check/signUpUserNameInput";
 import signUpSurnameInput from "../support/check/signUpSurnameInput";
 import emailInput from "../support/check/emailInput";
+import identityAdminHomepage from "../support/check/identityAdminHomepage";
+import createaccount from "../support/action/createaccount";
+import finduser from "../support/action/finduser";
+import deleteUser from "../support/action/deleteUser";
 
 Then(
   /^I expect the error message is "([^"]*)"$/,
@@ -48,3 +52,23 @@ Then(
   /^I expect that surname input field does( not)* exist$/,
   signUpSurnameInput
 );
+
+Then(
+  /^I expect I appear on the Identity Admin homepage$/,
+  identityAdminHomepage
+);
+
+Then(
+  /^I can successfuly register with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
+  createaccount
+)
+
+Then(
+  /^An account exists in "([A-Z0-9_]+)" with the username "([A-Z0-9_]+)"$/,
+  finduser
+)
+
+Then(
+  /^I delete the user "([A-Z0-9_]+)" from "([A-Z0-9_]+)"$/,
+  deleteUser
+)
