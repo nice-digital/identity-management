@@ -23,6 +23,9 @@ RUN curl -SL "$NODE_DOWNLOAD_URL" --output nodejs.tar.gz \
 RUN node -v
 RUN npm -v
 
+# Install replace globally for endpoints.ts replacement
+RUN npm i -g replace
+
 # Install jq for JSON file replacement and nc for checking sql port is available
 RUN apt-get update && apt-get install jq -y \
   && rm -rf /var/lib/apt/lists/*

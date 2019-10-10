@@ -1,59 +1,49 @@
 {
   "users": [
     {
-      "userId": 6,
-      "auth0UserId": "some-user-id",
-      "firstName": "Nigel",
-      "lastName": "Boring",
-      "email": "nige@google.com",
-      "allowContactMe": false,
-      "hasVerifiedEmailAddress": false,
-      "isLockedOut": false,
-      "initialRegistrationDate": "2019-03-04T11:50:32.5779242"
+      "id": 1,
+      "email_address": "cliff.booth@nice.org.uk",
+      "user_id": "usr_5457edea1b8f33391a000001",
+      "first_name": "Cliff",
+      "last_name": "Booth",
+      "email_verified": true,
+      "blocked": false
     },
     {
-      "userId": 11,
-      "auth0UserId": "google-oauth2|116299827169729090940",
-      "firstName": "lynda",
-      "lastName": "tester03",
-      "email": "lynda.tester03@gmail.com",
-      "allowContactMe": false,
-      "hasVerifiedEmailAddress": false,
-      "isLockedOut": false,
-      "initialRegistrationDate": "2019-04-05T15:10:07.2417249"
+      "id": 2,
+      "email_address": "vernita.green@gmail.com",
+      "user_id": "usr_5457edea1b8f33391a000002",
+      "first_name": "Vernita",
+      "last_name": "Green",
+      "email_verified": true,
+      "blocked": true
     },
     {
-      "userId": 12,
-      "auth0UserId": "auth0|5ca772a155eaa70eaa39e671",
-      "firstName": "testFORM LYNDA",
-      "lastName": "lynda",
-      "email": "lynda.tester01@gmail.com",
-      "allowContactMe": false,
-      "hasVerifiedEmailAddress": false,
-      "isLockedOut": false,
-      "initialRegistrationDate": "2019-04-05T15:22:10.0134656"
+      "email_address": "rick.dalton@nice.org.uk",
+      "user_id": "usr_5457edea1b8f33391a000003",
+      "first_name": "Rick",
+      "last_name": "Dalton",
+      "id": 3,
+      "email_verified": false,
+      "blocked": false
     },
     {
-      "userId": 13,
-      "auth0UserId": "string",
-      "firstName": "string",
-      "lastName": "string",
-      "email": "string",
-      "allowContactMe": false,
-      "hasVerifiedEmailAddress": false,
-      "isLockedOut": false,
-      "initialRegistrationDate": "2019-04-05T15:22:20.6953204"
+      "email_address": "vincent.vega@nice.org.uk",
+      "user_id": "usr_5457edea1b8f33391a000004",
+      "first_name": "Vincent",
+      "last_name": "Vega",
+      "id": 4,
+      "email_verified": false,
+      "blocked": true
     },
     {
-      "userId": 14,
-      "auth0UserId": "auth0|test-user",
-      "firstName": "Joe",
-      "lastName": "Bloggs",
-      "email": "joe.bloggs@nice.org.uk",
-      "allowContactMe": false,
-      "hasVerifiedEmailAddress": false,
-      "isLockedOut": false,
-      "initialRegistrationDate": "2019-09-06T10:35:56.3629261"
+      "email_address": "martingmeta67@gmail.com",
+      "user_id": "usr_5457edea1b8f33391a000004",
+      "first_name": "Kate",
+      "last_name": "Tempest",
+      "id": 5,
+      "email_verified": true,
+      "blocked": false
     }
   ],
   "services": [

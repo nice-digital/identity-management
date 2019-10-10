@@ -31,6 +31,8 @@ jq \
     appsettings.json > _appsettings.json \
     && mv _appsettings.json appsettings.json
 
+replace "#{REACT_APP_API_BASE_URL}" "$REACT_APP_API_BASE_URL" ClientApp/build/static/js/ -r --include="*.js"
+
 dotnet NICE.Identity.Management.dll
 
 # See https://stackoverflow.com/questions/39082768/what-does-set-e-and-exec-do-for-docker-entrypoint-scripts
