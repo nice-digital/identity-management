@@ -72,6 +72,18 @@ export class User extends Component<UserProps, UserState> {
 		}
 	};
 
+	statusClick= async () =>{
+		console.log('about to fetch status');
+
+		let response, data;
+		
+		response = await fetch('https://test-identityapi.nice.org.uk/api/status');
+		data = await response.json();
+		
+		console.log(data);
+
+	}
+
 	componentDidMount() {
 		this.fetchData(Endpoints.user(this.props.match.params.id));
 	}
@@ -149,6 +161,7 @@ export class User extends Component<UserProps, UserState> {
 											The account will no longer be available, and all data in
 											the account will be permanently deleted.
 										</p>
+										<button onClick={this.statusClick}>Status click</button><br/>
 										<Link to={`/users/${data.id}/delete`}>Delete user</Link>
 									</>
 								)}
