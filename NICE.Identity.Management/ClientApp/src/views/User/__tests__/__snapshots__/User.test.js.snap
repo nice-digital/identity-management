@@ -108,6 +108,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       <p>
         The account will no longer be available, and all data in the account will be permanently deleted.
       </p>
+      <button
+        onClick={[Function]}
+      >
+        Status click
+      </button>
+      <br />
       <Link
         to="/users/2/delete"
       >
