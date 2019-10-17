@@ -186,13 +186,13 @@ namespace NICE.Identity.Management
 				});
 			});
 
-			//app.MapWhen(x => !x.User.Identity.IsAuthenticated, builder =>
-			//{
-			//	builder.Run(async context =>
-			//	{
-			//		await niceAuthenticationService.Login(context, context.Request.Path);
-			//	});
-			//});
+			app.MapWhen(x => !x.User.Identity.IsAuthenticated, builder =>
+			{
+				builder.Run(async context =>
+				{
+					await niceAuthenticationService.Login(context, context.Request.Path);
+				});
+			});
 		}
 
 
