@@ -14,7 +14,7 @@ import finduser from "../support/action/finduser";
 import deleteUser from "../support/action/deleteUser";
 
 Then(
-  /^I expect the error message is "([^"]*)"$/,
+  /^I expect the error message is displayed$/,
   loginErrorMessage
 );
 

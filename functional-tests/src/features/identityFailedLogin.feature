@@ -7,4 +7,4 @@ Feature: Failed Login
     When I log into accounts with username "IDENTITY_NOUSER_EMAIL" and password "ACCOUNTS_PASSWORD2"
 
   Scenario: Navigate to Identity Admin homepage
-    Then I expect the error message is "Wrong email or password."
+    Then I expect the error message is displayed
