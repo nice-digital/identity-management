@@ -77,7 +77,7 @@ export class User extends Component<UserProps, UserState> {
 
 		let response, data;
 		
-		response = await fetch('https://test-identityapi.nice.org.uk/api/status', { credentials: 'include' });
+		response = await fetch('/account/status', { credentials: 'include' });
 		data = await response.json();
 		
 		console.log(data);
