@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
     <Compile Remove="wwwroot\images\**" />
+    <Content Remove="Services\**" />
     <Content Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="Services\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
+    <None Remove="Services\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
@@ -31,10 +35,6 @@
     <PackageReference Include="Polly" Version="7.1.0" />
     <PackageReference Include="ProxyKit" Version="2.0.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

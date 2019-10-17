@@ -64,8 +64,8 @@ namespace NICE.Identity.Management.Controllers
 				//todo: get the other links.
 
 				_logger.LogWarning("claims:");
-				var serialisedClaims = JsonConvert.SerializeObject(this.User.Claims);
-				_logger.LogWarning(serialisedClaims);
+				//var serialisedClaims = JsonConvert.SerializeObject(this.User.Claims);
+				//_logger.LogWarning(serialisedClaims);
 
 				return new ActionResult<Status>(new Status(isAuthenticated: true, displayName: this.User.Identity.Name,
 			        links: new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("Sign out", _linkGenerator.GetPathByAction(HttpContext, nameof(Logout))) }));
