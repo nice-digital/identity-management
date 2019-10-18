@@ -117,32 +117,30 @@ export class User extends Component<UserProps, UserState> {
 									<p>Loading...</p>
 								) : (
 									<>
-										<Grid className="pb--d">
-											<GridItem cols={3}>
-												<span className={styles.detailsLabel}>
-													Account information
-												</span>
-											</GridItem>
-											<GridItem cols={9}>
+										<div className={`${styles.summaryList} pv--c`}>
+											<span className={styles.summaryListLabel}>
+												Account information
+											</span>
+											<div className={styles.summaryListDetail}>
 												<UserStatus user={data} />
-												<div className="right">
-													<UnlockUser
-														id={data.id}
-														isLocked={data.blocked}
-														onToggleLock={this.updateData}
-														onError={this.handleError}
-													/>
-												</div>
-											</GridItem>
-											<GridItem cols={3}>
-												<span className={styles.detailsLabel}>
-													Email address
-												</span>
-											</GridItem>
-											<GridItem cols={9}>
-												<span>{data.email_address}</span>
-											</GridItem>
-										</Grid>
+
+												<UnlockUser
+													id={data.id}
+													isLocked={data.blocked}
+													onToggleLock={this.updateData}
+													onError={this.handleError}
+												/>
+											</div>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Email address
+											</span>
+											<span className={styles.summaryListDetail}>
+												{data.email_address}
+											</span>
+										</div>
 
 										<hr className="mv--b" />
 
