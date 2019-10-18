@@ -33,6 +33,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       md={9}
     >
       <Grid
+        className="pb--d"
         elementType="div"
         gutter="standard"
         horizontalAlignment="left"
@@ -96,6 +97,9 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           </span>
         </GridItem>
       </Grid>
+      <hr
+        className="mv--b"
+      />
       <h2
         className="h3"
       >

@@ -4,7 +4,7 @@ const fs = require('fs');
 const http = require('http');
 const https = require('https');
 
-const http_port = process.env.HTTP_PORT || 3000;
+const http_port = process.env.HTTP_PORT || 3001;
 const https_port = process.env.HTTPS_PORT || 3443;
 const options = { cert: null, key: null };
 
