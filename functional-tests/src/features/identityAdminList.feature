@@ -7,5 +7,6 @@ Feature: Admin Page Dispalys Users
     When I log into accounts with username "ACCOUNTS_EMAIL5" and password "ACCOUNTS_PASSWORD2"
 
   Scenario: Navigate to Identity Admin homepage
-    Then I expect that the url is "http://idam:8080/users"
-    Then I expect that element "([^"]*)?"( not)* contains the text "([^"]*)?"
+    Then I expect user "Vernita Green" to exist in the list
+    When I click on the first user in the list
+    And I click on the delete user link

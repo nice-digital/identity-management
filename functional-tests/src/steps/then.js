@@ -12,6 +12,7 @@ import identityAdminHomepage from "../support/check/identityAdminHomepage";
 import createaccount from "../support/action/createaccount";
 import finduser from "../support/action/finduser";
 import deleteUser from "../support/action/deleteUser";
+import findUserList from "../support/check/findUserInList"
 
 Then(
   /^I expect the error message is "([^"]*)"$/,
@@ -71,4 +72,9 @@ Then(
 Then(
   /^I delete the user "([A-Z0-9_]+)" from "([A-Z0-9_]+)"$/,
   deleteUser
+)
+
+Then(
+  /^I expect user "([^"]*)" to exist in the list$/,
+  findUserList
 )

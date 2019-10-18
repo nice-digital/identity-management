@@ -1,5 +1,5 @@
 const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
-const toNthChildAttr = (attrValue) => `.CommentBox:nth-child(${attrValue})`;
+const toNthChildAttr = (attrValue) => `.card:nth-child(${attrValue})`;
 const toChildAndQASel = (childIndex, attrValue) => toNthChildAttr(childIndex) + ' ' + toDataQASelAttr(attrValue);
 
 export default {
@@ -24,9 +24,12 @@ export default {
   },
   adminHomepage: {
     userlist: toDataQASelAttr("list-of-users"),
-    userCard: toDataQASelAttr("user-in-list"),
+    userCard: toNthChildAttr(1),
     roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
+  },
+  adminUserPage: {
+    deleteUserLink: toDataQASelAttr("delete-user-link"),
   },
   forgotPassword: {
     forgotPasswordEmail: toDataQASelAttr("forgotPassword-email"),
