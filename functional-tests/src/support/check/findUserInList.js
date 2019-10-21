@@ -7,6 +7,7 @@ import pause from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
 import selectors from "../selectors";
 
 export const findUserList = (userName) => {
+  browser.refresh();
   waitForVisible(selectors.adminHomepage.userlist);
   checkURL("http://idam:8080/users");
   checkContainsText("element", selectors.adminHomepage.userlist, userName);
