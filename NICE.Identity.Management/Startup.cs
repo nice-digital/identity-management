@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,13 +12,12 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using Microsoft.Net.Http.Headers;
 using NICE.Identity.Management.Configuration;
-using NICE.Identity.Authentication.Sdk.Authentication;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
-using NICE.Identity.Management.Extensions;
 using ProxyKit;
+using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
+using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
@@ -42,7 +44,14 @@ namespace NICE.Identity.Management
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddProxy();
+            // TODO: remove httpClientBuilder
+            // This bypasses any certificate validation on proxy requests
+            // Only done due to local APIs not having certificates configured 
+            services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+            }));
             services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -68,7 +77,7 @@ namespace NICE.Identity.Management
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
 			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService,
-			IAuthConfiguration apiConfiguration, IHttpClientFactory httpClientFactory)
+			IAuthConfiguration apiConfiguration, IHttpContextAccessor httpContextAccessor)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -86,16 +95,32 @@ namespace NICE.Identity.Management
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
+            app.RunProxy("/api",async context =>
+            {
+                var forwardContext = context.ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier);
+                // TODO: Add token expiration handling
+                if (!forwardContext.UpstreamRequest.Headers.Contains("Authorization"))
+                {
+                    var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+                    forwardContext.UpstreamRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                }
 
-			app.RunProxy("/api",
-				 async context =>
-				{
-					var forwardContext = context.ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier);
-					forwardContext.AddAuth0AccessToken(apiConfiguration, httpClientFactory);
-					var response = await forwardContext.Send();
-					response.Headers.Remove("Authorization");
-					return response;
-				});
+                try
+                {
+                    var response = await forwardContext.Send();
+                    response.Headers.Remove("Authorization");
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    startupLogger.Log(LogLevel.Error, e.Message);
+                    return new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.InternalServerError,
+                        ReasonPhrase = e.Message
+                    };
+                }
+            });
 
             app.UseHttpsRedirection();
 			app.UseCookiePolicy();
