@@ -106,7 +106,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		} = this.state;
 		const { id } = this.props.match.params;
 
-		let lastBreadcrumb = `${data.first_name} ${data.last_name}`;
+		let lastBreadcrumb = `${data.firstName} ${data.lastName}`;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading user details";
@@ -120,7 +120,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 			<>
 				{hasBeenDeleted ? (
 					<DeleteUserConfirmation
-						full_name={`${data.first_name} ${data.last_name}`}
+						full_name={`${data.firstName} ${data.lastName}`}
 					/>
 				) : (
 					<>
@@ -149,7 +149,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 									<>
 										<PageHeader
 											preheading="Are you sure you want to delete user?"
-											heading={`${data.first_name} ${data.last_name}`}
+											heading={`${data.firstName} ${data.lastName}`}
 											cta={
 												<>
 													<Button
@@ -178,7 +178,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 												</span>
 											</GridItem>
 											<GridItem cols={9}>
-												<span>{data.email_address}</span>
+												<span>{data.emailAddress}</span>
 											</GridItem>
 										</Grid>
 									</>

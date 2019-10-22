@@ -78,17 +78,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								<ul className="list--unstyled">
 									{data.map(user => {
 										const {
-											id,
-											email_address,
-											user_id,
-											first_name,
-											last_name,
+											userId,
+											emailAddress,
+											auth0UserId,
+											firstName,
+											lastName,
 										} = user;
 										const usersListHeading = {
-											headingText: `${first_name} ${last_name}`,
+											headingText: `${firstName} ${firstName}`,
 											link: {
 												elementType: Link,
-												destination: `/users/${id}`,
+												destination: `/users/${userId}`,
 											},
 										};
 
@@ -98,7 +98,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											},
 											{
 												label: "Email address",
-												value: email_address,
+												value: emailAddress,
 											},
 										];
 
@@ -106,7 +106,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											<Card
 												{...usersListHeading}
 												metadata={usersListMetadata}
-												key={user_id}
+												key={userId}
 											/>
 										);
 									})}
