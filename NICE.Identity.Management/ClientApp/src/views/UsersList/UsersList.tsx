@@ -85,7 +85,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											lastName,
 										} = user;
 										const usersListHeading = {
-											headingText: `${firstName} ${firstName}`,
+											headingText: `${firstName} ${lastName}`,
 											link: {
 												elementType: Link,
 												destination: `/users/${userId}`,
