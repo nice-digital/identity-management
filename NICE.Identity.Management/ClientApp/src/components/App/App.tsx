@@ -8,11 +8,28 @@ import { User } from "./../../views/User/User";
 import { UserRoles } from "./../../views/UserRoles/UserRoles";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 
+type LinksType = {
+	key: string;
+	value: string;
+};
+
+type AuthType = {
+	links: Array<LinksType>;
+	displayName: string;
+	provider: string;
+};
+
 export class App extends React.Component {
 	render() {
+		const auth: AuthType = {
+			links: [{ key: "Sign out", value: "/Account/Logout" }],
+			displayName: "Alice",
+			provider: "idam",
+		};
+
 		return (
 			<Router>
-				<Header search={false} />
+				<Header search={false} auth={auth} />
 
 				<div className="container">
 					<Route path="/" exact render={() => <Redirect to="/users" />} />
