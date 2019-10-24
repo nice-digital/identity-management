@@ -8,24 +8,20 @@ import { User } from "./../../views/User/User";
 import { UserRoles } from "./../../views/UserRoles/UserRoles";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 
-type LinkType = {
-	key: String;
-	value: String;
+type LinksType = {
+	key: string;
+	value: string;
 };
 
 type AuthType = {
-	links: Array<LinkType>;
-	displayName: String;
-	provider?: String;
+	links: Array<LinksType>;
+	displayName: string;
+	provider: string;
 };
 
 export class App extends React.Component {
 	render() {
-		const links: Array<LinkType> = [
-			{ key: "Sign out", value: "/Account/Logout" },
-		];
-
-		const auth: any = {
+		const auth: AuthType = {
 			links: [{ key: "Sign out", value: "/Account/Logout" }],
 			displayName: "Alice",
 			provider: "idam",
