@@ -23,7 +23,7 @@ export const DeleteUserConfirmation = (props: DeleteUserConfirmationProps) => {
 
 			<PageHeader heading="User deleted" />
 
-			<Alert type="success">
+			<Alert type="success" data-qa-sel="deletion-success">
 				<p>The user {full_name} was successfully deleted.</p>
 				<Link to="/users">Back to users</Link>
 			</Alert>
