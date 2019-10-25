@@ -3,7 +3,7 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 
-ENV ASPNETCORE_URLS http://+:8081
+ENV ASPNETCORE_URLS http://+:8080
 
 # Install Git
 RUN apt-get update && apt-get install git -y
@@ -59,7 +59,7 @@ RUN chmod +x ./run.sh
 # Assume dotner core app's already been published...
 COPY ./published-app ./
 
-EXPOSE 8081
+EXPOSE 8080
 
 # Wait for SQL Server to be available before running the dotnet app
 ENTRYPOINT ["waitforit", "-t", "60", "--strict", "database:1433", "--", "./run.sh"]
