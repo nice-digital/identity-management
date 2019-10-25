@@ -42,7 +42,7 @@ namespace NICE.Identity.Management.Controllers
             await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, url);
         }
 
-        [Route("/signin-auth0")]
+        [Route("/callback")]
 		public ActionResult CallBack(string returnUrl = "/")
         {
 	        return Redirect(returnUrl);
