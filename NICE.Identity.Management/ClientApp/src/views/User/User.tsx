@@ -117,7 +117,7 @@ export class User extends Component<UserProps, UserState> {
 									<p>Loading...</p>
 								) : (
 									<>
-										<Grid>
+										<Grid className="pb--d">
 											<GridItem cols={3}>
 												<span className={styles.detailsLabel}>
 													Account information
@@ -143,6 +143,8 @@ export class User extends Component<UserProps, UserState> {
 												<span>{data.email_address}</span>
 											</GridItem>
 										</Grid>
+
+										<hr className="mv--b" />
 
 										<h2 className="h3">Permanently delete this account</h2>
 										<p>

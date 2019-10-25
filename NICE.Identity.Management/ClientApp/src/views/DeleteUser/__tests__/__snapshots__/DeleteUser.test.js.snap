@@ -22,8 +22,30 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
     </Breadcrumb>
   </Breadcrumbs>
   <PageHeader
+    cta={
+      <React.Fragment>
+        <Button
+          disabled={false}
+          onClick={[Function]}
+          variant="cta"
+        >
+          Confirm
+        </Button>
+        <Button
+          disabled={false}
+          elementType={[Function]}
+          to="/users/1"
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </React.Fragment>
+    }
     heading="Vernita Green"
     preheading="Are you sure you want to delete user?"
+  />
+  <hr
+    className="mv--b"
   />
   <Grid
     className="pv--d"
@@ -52,21 +74,6 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
       </span>
     </GridItem>
   </Grid>
-  <Button
-    disabled={false}
-    onClick={[Function]}
-    variant="primary"
-  >
-    Confirm
-  </Button>
-  <Button
-    disabled={false}
-    elementType={[Function]}
-    to="/users/1"
-    variant="secondary"
-  >
-    Cancel
-  </Button>
 </Fragment>
 `;
 

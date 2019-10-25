@@ -150,8 +150,27 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 										<PageHeader
 											preheading="Are you sure you want to delete user?"
 											heading={`${data.first_name} ${data.last_name}`}
+											cta={
+												<>
+													<Button
+														variant="cta"
+														onClick={this.fetchDeleteData}
+														disabled={isDeleteButtonLoading}
+													>
+														{isDeleteButtonLoading ? "Loading..." : "Confirm"}
+													</Button>
+													<Button
+														to={`/users/${id}`}
+														variant="secondary"
+														elementType={Link}
+														disabled={isDeleteButtonLoading}
+													>
+														Cancel
+													</Button>
+												</>
+											}
 										/>
-
+										<hr className="mv--b" />
 										<Grid className="pv--d">
 											<GridItem cols={3}>
 												<span className={styles.detailsLabel}>
@@ -162,21 +181,6 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 												<span>{data.email_address}</span>
 											</GridItem>
 										</Grid>
-
-										<Button
-											onClick={this.fetchDeleteData}
-											disabled={isDeleteButtonLoading}
-										>
-											{isDeleteButtonLoading ? "Loading..." : "Confirm"}
-										</Button>
-										<Button
-											to={`/users/${id}`}
-											variant="secondary"
-											elementType={Link}
-											disabled={isDeleteButtonLoading}
-										>
-											Cancel
-										</Button>
 									</>
 								)}
 							</>
