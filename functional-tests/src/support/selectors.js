@@ -31,6 +31,9 @@ export default {
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),
   },
+  confirmUserDeletionPage: {
+    confirmDeleteUser: toDataQASelAttr("confirm-delete-user"),
+  },
   forgotPassword: {
     forgotPasswordEmail: toDataQASelAttr("forgotPassword-email"),
     forgotPasswordButton: toDataQASelAttr("forgotPassword-button"),

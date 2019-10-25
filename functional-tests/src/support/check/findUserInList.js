@@ -9,8 +9,15 @@ import selectors from "../selectors";
 export const findUserList = (userName) => {
   browser.refresh();
   waitForVisible(selectors.adminHomepage.userlist);
-  checkURL("http://idam:8081/users");
+  checkURL("http://idam:8080/users");
   checkContainsText("element", selectors.adminHomepage.userlist, userName);
+  pause(1000);
+};
+
+export const userNotInList = (userName) => {
+  waitForVisible(selectors.adminHomepage.userlist);
+  checkURL("http://idam:8080/users");
+  checkContainsText("element", selectors.adminHomepage.userlist, 0, userName);
   pause(1000);
 };
 

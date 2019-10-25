@@ -153,6 +153,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 											cta={
 												<>
 													<Button
+														data-qa-sel="confirm-delete-user"
 														variant="cta"
 														onClick={this.fetchDeleteData}
 														disabled={isDeleteButtonLoading}

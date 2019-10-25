@@ -11,4 +11,9 @@ export const clickDeleteUserLink = () => {
   clickElement("click", "selector", selectors.adminUserPage.deleteUserLink);
 };
 
+export const clickConfirmDelete = () => {
+  waitForVisible(selectors.confirmUserDeletionPage.confirmDeleteUser);
+  clickElement("click", "selector", selectors.confirmUserDeletionPage.confirmDeleteUser);
+};
+
 export default clickDeleteUserLink;
