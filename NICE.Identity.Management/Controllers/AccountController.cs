@@ -41,8 +41,9 @@ namespace NICE.Identity.Management.Controllers
             var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
             await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, url);
         }
-	
-		public ActionResult ReturnTo(string returnUrl = "/")
+
+        [Route("/signin-auth0")]
+		public ActionResult CallBack(string returnUrl = "/")
         {
 	        return Redirect(returnUrl);
         }
