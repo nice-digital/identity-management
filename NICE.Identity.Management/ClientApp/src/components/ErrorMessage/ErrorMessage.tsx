@@ -17,11 +17,14 @@ export const ErrorMessage = (props: ErrorMessageProps) => (
 				<p>Sorry, there's been an error!</p>
 			</>
 		)}
-        <dl style={{visibility:"hidden"}}>
-            <dt>Message:</dt>
-            <dd>{props.error.message}</dd>
-            <dt>Stack:</dt>
-            <dd>{props.error.stack}</dd>
-        </dl>
+
+		{process.env.NODE_ENV === "development" && (
+			<dl style={{visibility:"hidden"}}>
+				<dt>Message:</dt>
+				<dd>{props.error.message}</dd>
+				<dt>Stack:</dt>
+				<dd>{props.error.stack}</dd>
+			</dl>
+		)}
 	</Alert>
 );
