@@ -39,7 +39,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			data = await response.json();
 		} catch (err) {
 			let error: Error = err;
-
+            console.error(err);
 			this.setState({ error });
 			return;
 		}
