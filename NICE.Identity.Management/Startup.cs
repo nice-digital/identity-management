@@ -97,7 +97,10 @@ namespace NICE.Identity.Management
 
             app.RunProxy("/api",async context =>
             {
-                var forwardContext = context.ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier);
+                var forwardContext = context
+                    .ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier)
+                    .CopyXForwardedHeaders()
+                    .AddXForwardedHeaders();
                 // TODO: Add token expiration handling
                 if (!forwardContext.UpstreamRequest.Headers.Contains("Authorization"))
                 {
