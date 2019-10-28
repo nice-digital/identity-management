@@ -28,9 +28,7 @@ namespace NICE.Identity.Management
             string logFilePath = logCfg["LogFilePath"]; ;
 
             var formatter = new NiceSerilogFormatter(AppSettings.Environment.Name, "IdAM");
-            var logConfig = new LoggerConfiguration()
-                .MinimumLevel
-                .Warning();
+            var logConfig = new LoggerConfiguration().MinimumLevel.Debug();
 
             if (rabbitSettingsFound && useRabbit)
             {

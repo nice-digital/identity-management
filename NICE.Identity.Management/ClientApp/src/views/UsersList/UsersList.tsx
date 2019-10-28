@@ -47,6 +47,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		if (response.status === 200) {
 			this.setState({ data });
 		} else {
+            console.error(data.message);
 			this.setState({ error: new Error(data.message) });
 		}
 	};

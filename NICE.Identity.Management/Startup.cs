@@ -109,6 +109,7 @@ namespace NICE.Identity.Management
                 {
                     var response = await forwardContext.Send();
                     response.Headers.Remove("Authorization");
+                    startupLogger.Log(LogLevel.Debug, await response.Content.ReadAsStringAsync());
                     return response;
                 }
                 catch (Exception e)
