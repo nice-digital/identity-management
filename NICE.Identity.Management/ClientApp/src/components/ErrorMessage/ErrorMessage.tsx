@@ -19,7 +19,7 @@ export const ErrorMessage = (props: ErrorMessageProps) => (
 		)}
 
 		{process.env.NODE_ENV === "development" && (
-			<dl style={{visibility:"hidden"}}>
+			<dl>
 				<dt>Message:</dt>
 				<dd>{props.error.message}</dd>
 				<dt>Stack:</dt>
