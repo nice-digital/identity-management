@@ -81,6 +81,8 @@ namespace NICE.Identity.Management
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
+            
+            startupLogger.LogInformation("Logger is setup");
 
 			if (env.IsDevelopment())
 			{
@@ -102,22 +104,33 @@ namespace NICE.Identity.Management
                     .CopyXForwardedHeaders()
                     .AddXForwardedHeaders();
                 // TODO: Add token expiration handling
+                startupLogger.LogDebug("Proxy call started");
                 if (!forwardContext.UpstreamRequest.Headers.Contains("Authorization"))
                 {
+                    startupLogger.LogDebug("Proxy Add Authorization");
                     var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-                    forwardContext.UpstreamRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    forwardContext.UpstreamRequest.Headers.Authorization = 
+                        new AuthenticationHeaderValue("Bearer", accessToken);
+                    startupLogger.LogDebug($"Proxy Authorization: {forwardContext.UpstreamRequest.Headers.Authorization}");
                 }
 
                 try
                 {
+                    startupLogger.LogDebug("Proxy send started");
                     var response = await forwardContext.Send();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        var errorMessage = $"Proxy error: {response.StatusCode.ToString()}:{response.ReasonPhrase} - " +
+                                           $"{await response.Content.ReadAsStringAsync()}"; 
+                        startupLogger.LogError(errorMessage);
+                    }
                     response.Headers.Remove("Authorization");
-                    startupLogger.Log(LogLevel.Debug, await response.Content.ReadAsStringAsync());
+                    startupLogger.LogDebug($"Proxy response: {await response.Content.ReadAsStringAsync()}");
                     return response;
                 }
                 catch (Exception e)
                 {
-                    startupLogger.Log(LogLevel.Error, e.Message);
+                    startupLogger.LogError(e.Message);
                     return new HttpResponseMessage()
                     {
                         StatusCode = HttpStatusCode.InternalServerError,
