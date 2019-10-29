@@ -34,6 +34,10 @@ export default {
   confirmUserDeletionPage: {
     confirmDeleteUser: toDataQASelAttr("confirm-delete-user"),
   },
+  deletionAlertPage: {
+    deletionSuccessMessage: toDataQASelAttr("deletion-success"),
+    backToUsersLink: toDataQASelAttr("back-to-users"),
+  },
   forgotPassword: {
     forgotPasswordEmail: toDataQASelAttr("forgotPassword-email"),
     forgotPasswordButton: toDataQASelAttr("forgotPassword-button"),

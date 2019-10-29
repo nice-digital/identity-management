@@ -16,4 +16,11 @@ export const clickConfirmDelete = () => {
   clickElement("click", "selector", selectors.confirmUserDeletionPage.confirmDeleteUser);
 };
 
+export const clickBackToUsersLink = () => {
+  pause(1000);
+  waitForVisible(selectors.deletionAlertPage.backToUsersLink);
+  clickElement("click", "element", selectors.deletionAlertPage.backToUsersLink);
+  pause(1000);
+};
+
 export default clickDeleteUserLink;

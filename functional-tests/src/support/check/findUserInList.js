@@ -17,7 +17,7 @@ export const findUserList = (userName) => {
 export const userNotInList = (userName) => {
   waitForVisible(selectors.adminHomepage.userlist);
   checkURL("http://idam:8080/users");
-  checkContainsText("element", selectors.adminHomepage.userlist, 0, userName);
+  checkContainsText("element", selectors.adminHomepage.userlist, " not", userName);
   pause(1000);
 };
 
