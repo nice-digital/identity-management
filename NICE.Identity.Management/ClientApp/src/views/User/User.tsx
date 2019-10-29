@@ -151,7 +151,7 @@ export class User extends Component<UserProps, UserState> {
 											The account will no longer be available, and all data in
 											the account will be permanently deleted.
 										</p>
-										<Link to={`/users/${data.userId}/delete`}>Delete user</Link>
+										<Link data-qa-sel="delete-user-link" to={`/users/${data.userId}/delete`}>Delete user</Link>
 									</>
 								)}
 							</GridItem>

@@ -25,6 +25,7 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
     cta={
       <React.Fragment>
         <Button
+          data-qa-sel="confirm-delete-user"
           disabled={false}
           onClick={[Function]}
           variant="cta"
