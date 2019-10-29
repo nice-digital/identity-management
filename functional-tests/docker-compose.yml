@@ -58,6 +58,7 @@ services:
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
       - ACCOUNTS_EMAIL4
+      - ACCOUNTS_EMAIL5
       - ACCOUNTS_PASSWORD
       - ACCOUNTS_PASSWORD2
 
@@ -111,10 +112,10 @@ services:
     container_name: functional-tests_api_1
     build: ./../NICE.Identity.Management.MockApi/
     ports: 
-      - 8090:3000
+      - 8090:8090
     volumes: 
       -  ./../NICE.Identity.Management.MockApi/api:/data
-    command: -H 0.0.0.0 -p 3000 -w db.json
+    command: -H 0.0.0.0 -p 8090 -w db.json
     networks:
       default:
         aliases:

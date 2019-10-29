@@ -75,7 +75,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							{!data.length ? (
 								<p>Loading...</p>
 							) : (
-								<ul className="list--unstyled">
+								<ul className="list--unstyled" data-qa-sel="list-of-users">
 									{data.map(user => {
 										const {
 											id,
@@ -86,6 +86,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										} = user;
 										const usersListHeading = {
 											headingText: `${first_name} ${last_name}`,
+											// elementType: "li",
 											link: {
 												elementType: Link,
 												destination: `/users/${id}`,
@@ -103,11 +104,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										];
 
 										return (
-											<Card
-												{...usersListHeading}
-												metadata={usersListMetadata}
-												key={user_id}
-											/>
+											<li key={user_id}>
+												<Card
+													{...usersListHeading}
+													metadata={usersListMetadata}
+												/>
+											</li>
 										);
 									})}
 								</ul>
