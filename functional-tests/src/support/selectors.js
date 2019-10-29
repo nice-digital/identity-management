@@ -1,4 +1,6 @@
 const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
+const toNthChildAttr = (attrValue) => `.card:nth-child(${attrValue})`;
+const toChildAndQASel = (childIndex, attrValue) => toNthChildAttr(childIndex) + ' ' + toDataQASelAttr(attrValue);
 
 export default {
   loginPage: {
@@ -21,9 +23,20 @@ export default {
     registerButton: toDataQASelAttr("Register-button"),
   },
   adminHomepage: {
-    usernameField: "body input[name='userName']",
-    roleField: "body input[name='role']",
+    userlist: toDataQASelAttr("list-of-users"),
+    userCard: toNthChildAttr(1),
+    roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
+  },
+  adminUserPage: {
+    deleteUserLink: toDataQASelAttr("delete-user-link"),
+  },
+  confirmUserDeletionPage: {
+    confirmDeleteUser: toDataQASelAttr("confirm-delete-user"),
+  },
+  deletionAlertPage: {
+    deletionSuccessMessage: toDataQASelAttr("deletion-success"),
+    backToUsersLink: toDataQASelAttr("back-to-users"),
   },
   forgotPassword: {
     forgotPasswordEmail: toDataQASelAttr("forgotPassword-email"),

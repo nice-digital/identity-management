@@ -109,6 +109,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         The account will no longer be available, and all data in the account will be permanently deleted.
       </p>
       <Link
+        data-qa-sel="delete-user-link"
         to="/users/2/delete"
       >
         Delete user
