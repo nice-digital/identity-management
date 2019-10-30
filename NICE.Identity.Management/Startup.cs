@@ -63,9 +63,7 @@ namespace NICE.Identity.Management
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
-            var apiConfiguration = new AuthConfiguration(Configuration, "IdentityApiConfiguration");
             services.AddAuthentication(authConfiguration);
-            services.TryAddSingleton<IAuthConfiguration>(apiConfiguration);
 
             // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -76,8 +74,7 @@ namespace NICE.Identity.Management
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
-			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService,
-			IAuthConfiguration apiConfiguration, IHttpContextAccessor httpContextAccessor)
+			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
@@ -99,8 +96,10 @@ namespace NICE.Identity.Management
 
             app.RunProxy("/api",async context =>
             {
+                var apiEndpoint = Configuration.GetSection("WebAppConfiguration")["ApiIdentifier"];
+                startupLogger.LogDebug($"Proxy to endpoint {apiEndpoint}");
                 var forwardContext = context
-                    .ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier)
+                    .ForwardTo(apiEndpoint)
                     .CopyXForwardedHeaders()
                     .AddXForwardedHeaders();
                 // TODO: Add token expiration handling
