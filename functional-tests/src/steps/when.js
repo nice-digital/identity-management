@@ -4,7 +4,6 @@ import { When } from "cucumber";
 import registerLink from "../support/action/RegisterLink";
 import findUserList, { clickUserInList } from "../support/check/findUserInList";
 import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink } from "../support/action/clickDeleteUserLink";
-import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted";
 
 When(
   /^I log into accounts with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
@@ -37,8 +36,4 @@ When(
 
 When(/^I click on the back to users link$/,
   clickBackToUsersLink
-);
-
-When(/^I click the register button without completing any details$/,
-  clickRegisterUncompleted
 );
