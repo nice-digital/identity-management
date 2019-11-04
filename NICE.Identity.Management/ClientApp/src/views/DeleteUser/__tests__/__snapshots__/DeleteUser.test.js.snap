@@ -13,7 +13,7 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
       elementType={[Function]}
       to="/users/1"
     >
-      Vernita Green
+      Kristin Patrick
     </Breadcrumb>
     <Breadcrumb
       elementType="a"
@@ -42,7 +42,7 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
         </Button>
       </React.Fragment>
     }
-    heading="Vernita Green"
+    heading="Kristin Patrick"
     preheading="Are you sure you want to delete user?"
   />
   <hr
@@ -71,7 +71,7 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
       elementType="div"
     >
       <span>
-        vernita.green@gmail.com
+        kristin.patrick@example.com
       </span>
     </GridItem>
   </Grid>

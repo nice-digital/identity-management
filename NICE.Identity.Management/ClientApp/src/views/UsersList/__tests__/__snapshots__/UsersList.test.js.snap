@@ -99,7 +99,7 @@ Array [
                   href="/users/1"
                   onClick={[Function]}
                 >
-                  Cliff Booth
+                  Kristin Patrick
                 </a>
               </p>
             </header>
@@ -126,7 +126,7 @@ Array [
                   Email address
                 </dt>
                 <dd>
-                  cliff.booth@nice.org.uk
+                  kristin.patrick@example.com
                 </dd>
               </div>
             </dl>
@@ -146,54 +146,7 @@ Array [
                   href="/users/2"
                   onClick={[Function]}
                 >
-                  Vernita Green
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--alpha"
-                  >
-                    Locked
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
-              >
-                <dt
-                  className="visually-hidden"
-                >
-                  Email address
-                </dt>
-                <dd>
-                  vernita.green@gmail.com
-                </dd>
-              </div>
-            </dl>
-          </article>
-        </li>
-        <li>
-          <article
-            className="card"
-          >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
-              >
-                <a
-                  href="/users/3"
-                  onClick={[Function]}
-                >
-                  Rick Dalton
+                  Thomas Holding
                 </a>
               </p>
             </header>
@@ -220,7 +173,54 @@ Array [
                   Email address
                 </dt>
                 <dd>
-                  rick.dalton@nice.org.uk
+                  thomas.holding@example.com
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            <header
+              className="card__header"
+            >
+              <p
+                className="card__heading"
+              >
+                <a
+                  href="/users/3"
+                  onClick={[Function]}
+                >
+                  Aisha Bartlett
+                </a>
+              </p>
+            </header>
+            <dl
+              className="card__metadata"
+            >
+              <div
+                className="card__metadatum"
+              >
+                <dd>
+                  <span
+                    className="tag tag--live"
+                  >
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                className="card__metadatum"
+              >
+                <dt
+                  className="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  aisha.bartlett@example.com
                 </dd>
               </div>
             </dl>
@@ -240,7 +240,7 @@ Array [
                   href="/users/4"
                   onClick={[Function]}
                 >
-                  Vincent Vega
+                  Theo Bradford
                 </a>
               </p>
             </header>
@@ -252,9 +252,9 @@ Array [
               >
                 <dd>
                   <span
-                    className="tag tag--alpha"
+                    className="tag tag--live"
                   >
-                    Locked
+                    Active
                   </span>
                 </dd>
               </div>
@@ -267,7 +267,7 @@ Array [
                   Email address
                 </dt>
                 <dd>
-                  vincent.vega@nice.org.uk
+                  theo.bradford@example.com
                 </dd>
               </div>
             </dl>

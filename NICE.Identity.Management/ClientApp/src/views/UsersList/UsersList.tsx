@@ -39,7 +39,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			data = await response.json();
 		} catch (err) {
 			let error: Error = err;
-
+            console.error(err);
 			this.setState({ error });
 			return;
 		}
@@ -47,6 +47,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		if (response.status === 200) {
 			this.setState({ data });
 		} else {
+            console.error(data.message);
 			this.setState({ error: new Error(data.message) });
 		}
 	};
@@ -78,18 +79,18 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								<ul className="list--unstyled" data-qa-sel="list-of-users">
 									{data.map(user => {
 										const {
-											id,
-											email_address,
-											user_id,
-											first_name,
-											last_name,
+											userId,
+											emailAddress,
+											auth0UserId,
+											firstName,
+											lastName,
 										} = user;
 										const usersListHeading = {
-											headingText: `${first_name} ${last_name}`,
+											headingText: `${firstName} ${lastName}`,
 											// elementType: "li",
 											link: {
 												elementType: Link,
-												destination: `/users/${id}`,
+												destination: `/users/${userId}`,
 											},
 										};
 
@@ -99,12 +100,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											},
 											{
 												label: "Email address",
-												value: email_address,
+												value: emailAddress,
 											},
 										];
 
 										return (
-											<li key={user_id}>
+											<li key={userId}>
 												<Card
 													{...usersListHeading}
 													metadata={usersListMetadata}
