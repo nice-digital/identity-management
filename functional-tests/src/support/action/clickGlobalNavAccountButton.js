@@ -5,9 +5,10 @@ import waitFor from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitFo
 import checkEqualsText from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkEqualsText";
 import selectors from "../selectors";
 
-export const clickRegisterUncompleted = () => {
-  click('click', 'element', selectors.registrationPage.registerButton);
-  browser.pause(3000);
+export const clickGlobalNavAccountButton = () => {
+  click('click', 'element', selectors.adminHomepage.globalNavMyAccount);
+  browser.pause(1000);
+  click('click', 'element', selectors.adminHomepage.globalNavSignOut);
 }
 
-export default clickRegisterUncompleted; 
+export default clickGlobalNavAccountButton; 
