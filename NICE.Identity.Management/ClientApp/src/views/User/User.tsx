@@ -83,7 +83,7 @@ export class User extends Component<UserProps, UserState> {
 			return <Redirect to="/users" />;
 		}
 
-		let lastBreadcrumb = `${data.first_name} ${data.last_name}`;
+		let lastBreadcrumb = `${data.firstName} ${data.lastName}`;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading user details";
@@ -108,7 +108,7 @@ export class User extends Component<UserProps, UserState> {
 							heading={
 								isLoading
 									? "User details"
-									: `${data.first_name} ${data.last_name}`
+									: `${data.firstName} ${data.lastName}`
 							}
 						/>
 						<Grid>
@@ -127,8 +127,8 @@ export class User extends Component<UserProps, UserState> {
 												<UserStatus user={data} />
 												<div className="right">
 													<UnlockUser
-														id={data.id}
-														isLocked={data.blocked}
+														id={data.userId}
+														isLocked={data.isLockedOut}
 														onToggleLock={this.updateData}
 														onError={this.handleError}
 													/>
@@ -140,7 +140,7 @@ export class User extends Component<UserProps, UserState> {
 												</span>
 											</GridItem>
 											<GridItem cols={9}>
-												<span>{data.email_address}</span>
+												<span>{data.emailAddress}</span>
 											</GridItem>
 										</Grid>
 
@@ -151,7 +151,7 @@ export class User extends Component<UserProps, UserState> {
 											The account will no longer be available, and all data in
 											the account will be permanently deleted.
 										</p>
-										<Link data-qa-sel="delete-user-link" to={`/users/${data.id}/delete`}>Delete user</Link>
+										<Link data-qa-sel="delete-user-link" to={`/users/${data.userId}/delete`}>Delete user</Link>
 									</>
 								)}
 							</GridItem>
