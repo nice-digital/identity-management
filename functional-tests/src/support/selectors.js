@@ -21,6 +21,12 @@ export default {
     aiCheckBox: toDataQASelAttr("ai-checkbox-register"),
     tcCheckBox: toDataQASelAttr("tc-checkbox-register"),
     registerButton: toDataQASelAttr("Register-button"),
+    emailValidationMessage: ".input.input--error:nth-child(3)",
+    confirmEmailValidationMessage: ".input.input--error:nth-child(4)",
+    passwordValidationMessage: ".input.input--error:nth-child(5)",
+    confirmPasswordValidationMessage: ".input.input--error:nth-child(6)",
+    firstNameValidationMessage: ".input.input--error:nth-child(7)",
+    lastNameValidationMessage: ".input.input--error:nth-child(8)"
   },
   adminHomepage: {
     userlist: toDataQASelAttr("list-of-users"),
