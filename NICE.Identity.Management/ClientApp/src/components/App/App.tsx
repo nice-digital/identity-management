@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Header, Footer } from "@nice-digital/global-nav";
+import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
 
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
@@ -10,9 +10,15 @@ import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 
 export class App extends React.Component {
 	render() {
+		const auth: IdamProviderProps = {
+			links: [{ text: "Sign out", url: "/Account/Logout" }],
+			displayName: "John",
+			provider: "idam",
+		};
+
 		return (
 			<Router>
-				<Header search={false} />
+				<Header search={false} auth={auth} />
 
 				<div className="container">
 					<Route path="/" exact render={() => <Redirect to="/users" />} />

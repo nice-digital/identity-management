@@ -1,9 +1,9 @@
 export type UserType = {
-	id: number;
-	email_address: string;
-	user_id: string;
-	first_name: string;
-	last_name: string;
-	email_verified: boolean;
-	blocked: boolean;
+    userId: number;
+    emailAddress: string;
+    auth0UserId: string;
+    firstName: string;
+    lastName: string;
+    hasVerifiedEmailAddress: boolean;
+    isLockedOut: boolean;
 };

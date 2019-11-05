@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,13 +12,12 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using Microsoft.Net.Http.Headers;
 using NICE.Identity.Management.Configuration;
-using NICE.Identity.Authentication.Sdk.Authentication;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
-using NICE.Identity.Management.Extensions;
 using ProxyKit;
+using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
+using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
@@ -42,7 +44,14 @@ namespace NICE.Identity.Management
 			services.TryAddSingleton<ISeriLogger, SeriLogger>();
             services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddProxy();
+            // TODO: remove httpClientBuilder
+            // This bypasses any certificate validation on proxy requests
+            // Only done due to local APIs not having certificates configured 
+            services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+            }));
             services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -54,9 +63,7 @@ namespace NICE.Identity.Management
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
-            var apiConfiguration = new AuthConfiguration(Configuration, "IdentityApiConfiguration");
             services.AddAuthentication(authConfiguration);
-            services.TryAddSingleton<IAuthConfiguration>(apiConfiguration);
 
             // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -67,11 +74,12 @@ namespace NICE.Identity.Management
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
-			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService,
-			IAuthConfiguration apiConfiguration, IHttpClientFactory httpClientFactory)
+			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
 			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
 			var startupLogger = loggerFactory.CreateLogger<Startup>();
+            
+            startupLogger.LogInformation("Logger is setup");
 
 			if (env.IsDevelopment())
 			{
@@ -86,16 +94,49 @@ namespace NICE.Identity.Management
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
+            app.RunProxy("/api",async context =>
+            {
+                var apiEndpoint = Configuration.GetSection("WebAppConfiguration")["ApiIdentifier"];
+                startupLogger.LogDebug($"Proxy to endpoint {apiEndpoint}");
+                var forwardContext = context
+                    .ForwardTo(apiEndpoint)
+                    .CopyXForwardedHeaders()
+                    .AddXForwardedHeaders();
+                // TODO: Add token expiration handling
+                startupLogger.LogDebug("Proxy call started");
+                if (!forwardContext.UpstreamRequest.Headers.Contains("Authorization"))
+                {
+                    startupLogger.LogDebug("Proxy Add Authorization");
+                    var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+                    forwardContext.UpstreamRequest.Headers.Authorization = 
+                        new AuthenticationHeaderValue("Bearer", accessToken);
+                    startupLogger.LogDebug($"Proxy Authorization: {forwardContext.UpstreamRequest.Headers.Authorization}");
+                }
 
-			app.RunProxy("/api",
-				 async context =>
-				{
-					var forwardContext = context.ForwardTo(apiConfiguration.MachineToMachineSettings.ApiIdentifier);
-					forwardContext.AddAuth0AccessToken(apiConfiguration, httpClientFactory);
-					var response = await forwardContext.Send();
-					response.Headers.Remove("Authorization");
-					return response;
-				});
+                try
+                {
+                    startupLogger.LogDebug("Proxy send started");
+                    var response = await forwardContext.Send();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        var errorMessage = $"Proxy error: {response.StatusCode.ToString()}:{response.ReasonPhrase} - " +
+                                           $"{await response.Content.ReadAsStringAsync()}"; 
+                        startupLogger.LogError(errorMessage);
+                    }
+                    response.Headers.Remove("Authorization");
+                    startupLogger.LogDebug($"Proxy response: {await response.Content.ReadAsStringAsync()}");
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    startupLogger.LogError(e.Message);
+                    return new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.InternalServerError,
+                        ReasonPhrase = e.Message
+                    };
+                }
+            });
 
             app.UseHttpsRedirection();
 			app.UseCookiePolicy();
