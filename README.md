@@ -1,4 +1,4 @@
-# Identity Managment
+# Identity Management
   
  > This repo contains the application role management interface to be used primarily by App Support, to manage user's role permissions. 
  > It's a replacement for the functionality that was built into NICE Accounts.
@@ -18,7 +18,7 @@
 Overview
 - This application provides App Support with the ability to assign users with roles for websites.
 - The visual studio project in the repo is "NICE.Identity.Management". The UI is a react app, hosted in a child folder "ClientApp"
-The NICE.Identity.Management project is responsible for proxying the requests of the UI to the API, adding authentication on the way. Also it provides endpoints for Login and Logout.
+The NICE.Identity.Management project is responsible for proxying the requests of the UI to the API, adding authentication on the way. Also, it provides endpoints for Login and Logout.
   
 ## Stack
 - [.NET Core 2.2](https://github.com/dotnet/core) parent application
