@@ -12,6 +12,8 @@
 ## What is it?
 Overview
 - This application provides App Support with the ability to assign users with roles for websites.
+- The visual studio project in the repo is "NICE.Identity.Management". The UI is a react app, hosted in a child folder "ClientApp"
+The NICE.Identity.Management project is responsible for proxying the requests of the UI to the API, adding authentication on the way. Also it provides endpoints for Login and Logout.
   
 ## Stack
 - [.NET Core 2.2](https://github.com/dotnet/core) parent application
@@ -28,27 +30,11 @@ change directory to the client app:
 cd NICE.Identity.Management/ClientApp
 
 npm install
+npm start
 
-### Gotchas
-    - List and provide solutions to possible difficulties/issues someone may encounter while setting up the development environment.
+
+#### Secrets.json
+
+The application's uses appsettings.json to store configuration. However, since this is a public repository, confidential configuration information is stored in secrets.json
+In order to run the application correctly (with it having access to a database), you'll need to acquire (from another dev) or create a secrets.json file with the correct configuration information in. For more  information see: [https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio)
   
-## How to use
-> How might different users use the service
- 
-### What are the main user journeys?
-- A journey example
-- Another jorney example
-- Yet another journey example
- 
-  
-## Good to know
-  
-- List Hidden features eg admin specific tools
-  
-| Environment |  URL  |
-| ----------- | :---: |
-| Dev         | Link  |
-| Test        | Link  |
- 
-# Top 5 common issues affecting users
-> An explanation of the top 5 common issues (if applicable) that we as a development team might encounter with this project
