@@ -5,8 +5,13 @@
  
 <details>
 <summary><strong>Table of contents</strong></summary>
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+</details>
+
+- [Secrets.json](#secretsjson)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
   
 ## What is it?
