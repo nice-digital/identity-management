@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@nice-digital/design-system": "^1.0.15-alpha.0",
-    "@nice-digital/global-nav": "github:nhsevidence/global-nav#IDAM-248-Identity-management-update",
+    "@nice-digital/global-nav": "github:nice-digital/global-nav#IDAM-248-Identity-management-update",
     "concurrently": "^4.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
