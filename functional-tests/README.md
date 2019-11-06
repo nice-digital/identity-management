@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Front end testing base](#front-end-testing-base)
+  - [What is it?](#what-is-it)
+    - [Features](#features)
+  - [Required software](#required-software)
+  - [Getting started](#getting-started)
+    - [Excluding tests](#excluding-tests)
+    - [Running single features](#running-single-features)
+  - [Docker](#docker)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Front end testing base
 
 > Start point for browser based testing
