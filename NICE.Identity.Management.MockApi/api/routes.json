@@ -1,4 +1,5 @@
 {
   "/users\\?sort=:field\\:1": "/users?_sort=:field&_order=asc",
-  "/users\\?sort=:field\\:-1": "/users?_sort=:field&_order=desc"
+  "/users\\?sort=:field\\:-1": "/users?_sort=:field&_order=desc",
+  "/users/:id": "/users?userId=:id"
 }

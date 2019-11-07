@@ -54,6 +54,7 @@ services:
       - IDENTITYAPI_API_GRANT_TYPE
       - IDENTITYAPI_API_AUDIENCE
       - IDENTITY_NOUSER_EMAIL
+      - WEBAPP_API_IDENTIFIER
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
@@ -85,6 +86,8 @@ services:
       - WEBAPP_CLIENTSECRECT
       - WEBAPP_REDIRECT_URI
       - WEBAPP_LOGOUT_REDIRECT_URI
+      - WEBAPP_AUTH_SERVICE_URI
+      - WEBAPP_API_IDENTIFIER
       - IDENTITYAPI_AUTH_SERVICE_URI
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_CLIENTID
@@ -115,7 +118,7 @@ services:
       - 8090:8090
     volumes: 
       -  ./../NICE.Identity.Management.MockApi/api:/data
-    command: -H 0.0.0.0 -p 8090 -w db.json
+    command: -H 0.0.0.0 -p 8090 -w db.json --routes routes.json
     networks:
       default:
         aliases:
