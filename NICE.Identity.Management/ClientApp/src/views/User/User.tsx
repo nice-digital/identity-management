@@ -14,6 +14,7 @@ import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 import styles from "./User.module.scss";
+import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string };
 
@@ -94,6 +95,16 @@ export class User extends Component<UserProps, UserState> {
 								isLoading
 									? "User details"
 									: `${user.firstName} ${user.lastName}`
+							}
+							cta={
+								<Button
+									variant="cta"
+									to={`/users/${this.props.match.params.id}/services`}
+									elementType={Link}
+									disabled={isLoading}
+								>
+									{isLoading ? "Loading..." : "Add role"}
+								</Button>
 							}
 						/>
 						<Grid>

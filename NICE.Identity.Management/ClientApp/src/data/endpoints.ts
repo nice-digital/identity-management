@@ -7,4 +7,8 @@ export const Endpoints = {
 	user: (id: string | number) => {
 		return `${API_BASE_URL}/users/${id}`;
 	},
+	servicesList: `${API_BASE_URL}/services`,
+	service: (serviceId: string | number) => {
+		return `${API_BASE_URL}/services/${serviceId}`;
+	},
 };
