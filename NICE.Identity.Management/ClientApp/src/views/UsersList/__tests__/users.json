@@ -1,38 +1,38 @@
 [
 	{
 		"userId": 1,
-		"emailAddress": "cliff.booth@nice.org.uk",
-		"auth0UserId": "usr_5457edea1b8f33391a000001",
-		"firstName": "Cliff",
-		"lastName": "Booth",
+		"auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+		"firstName": "Kristin",
+		"lastName": "Patrick",
+		"emailAddress": "kristin.patrick@example.com",
 		"hasVerifiedEmailAddress": true,
 		"isLockedOut": false
 	},
 	{
 		"userId": 2,
-		"emailAddress": "vernita.green@gmail.com",
-		"auth0UserId": "usr_5457edea1b8f33391a000002",
-		"firstName": "Vernita",
-		"lastName": "Green",
+		"auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+		"firstName": "Thomas",
+		"lastName": "Holding",
+		"emailAddress": "thomas.holding@example.com",
 		"hasVerifiedEmailAddress": true,
-		"isLockedOut": true
+		"isLockedOut": false
 	},
 	{
 		"userId": 3,
-		"emailAddress": "rick.dalton@nice.org.uk",
-		"auth0UserId": "usr_5457edea1b8f33391a000003",
-		"firstName": "Rick",
-		"lastName": "Dalton",
-		"hasVerifiedEmailAddress": false,
+		"auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+		"firstName": "Aisha",
+		"lastName": "Bartlett",
+		"emailAddress": "aisha.bartlett@example.com",
+		"hasVerifiedEmailAddress": true,
 		"isLockedOut": false
 	},
 	{
 		"userId": 4,
-		"emailAddress": "vincent.vega@nice.org.uk",
-		"auth0UserId": "usr_5457edea1b8f33391a000004",
-		"firstName": "Vincent",
-		"lastName": "Vega",
-		"hasVerifiedEmailAddress": false,
-		"isLockedOut": true
+		"auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+		"firstName": "Theo",
+		"lastName": "Bradford",
+		"emailAddress": "theo.bradford@example.com",
+		"hasVerifiedEmailAddress": true,
+		"isLockedOut": false
 	}
 ]

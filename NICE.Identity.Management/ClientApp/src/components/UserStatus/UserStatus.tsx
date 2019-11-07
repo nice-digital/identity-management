@@ -7,7 +7,7 @@ type UserStatusProps = {
 };
 
 export const UserStatus = (props: UserStatusProps) => (
-	<Tag live={!props.user.blocked} alpha={props.user.blocked}>
-		{!props.user.blocked ? "Active" : "Locked"}
+	<Tag live={!props.user.isLockedOut} alpha={props.user.isLockedOut}>
+		{!props.user.isLockedOut ? "Active" : "Locked"}
 	</Tag>
 );

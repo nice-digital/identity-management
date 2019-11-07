@@ -12,6 +12,9 @@ import identityAdminHomepage from "../support/check/identityAdminHomepage";
 import createaccount from "../support/action/createaccount";
 import finduser from "../support/action/finduser";
 import deleteUser from "../support/action/deleteUser";
+import findUserList, { userNotInList } from "../support/check/findUserInList";
+import validateDeletionSuccessMessage, { validateRegistrationValidationMessages } from "../support/check/validateMessages";
+import identityLogInPage from "../support/check/identityLogInPage";
 
 Then(
   /^I expect the error message is displayed$/,
@@ -61,14 +64,39 @@ Then(
 Then(
   /^I can successfuly register with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
   createaccount
-)
+);
 
 Then(
   /^An account exists in "([A-Z0-9_]+)" with the username "([A-Z0-9_]+)"$/,
   finduser
-)
+);
 
 Then(
   /^I delete the user "([A-Z0-9_]+)" from "([A-Z0-9_]+)"$/,
   deleteUser
-)
+);
+
+Then(
+  /^I expect user "([^"]*)" to exist in the list$/,
+  findUserList
+);
+
+Then(
+  /^I expect user "([^"]*)" does not exist in the list$/,
+  userNotInList
+);
+
+Then(
+  /^I expect the deletion successful message "([^"]*)" to be displayed$/,
+  validateDeletionSuccessMessage
+);
+
+Then(
+  /^I expect the registration page validation messages are displayed$/,
+  validateRegistrationValidationMessages
+);
+
+Then(
+  /^I expect I appear on the login page$/,
+  identityLogInPage
+);
