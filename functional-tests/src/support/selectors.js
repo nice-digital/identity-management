@@ -33,6 +33,8 @@ export default {
     userCard: toNthChildAttr(1),
     roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
+    globalNavMyAccount: "#my-account-button",
+    globalNavSignOut: "#my-account",
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),

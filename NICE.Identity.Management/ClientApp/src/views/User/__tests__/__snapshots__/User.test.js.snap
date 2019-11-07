@@ -32,27 +32,16 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       elementType="div"
       md={9}
     >
-      <Grid
-        className="pb--d"
-        elementType="div"
-        gutter="standard"
-        horizontalAlignment="left"
-        reverse={false}
-        verticalAlignment="top"
+      <div
+        className="summaryList pv--c"
       >
-        <GridItem
-          cols={3}
-          elementType="div"
+        <span
+          className="summaryListLabel"
         >
-          <span
-            className="detailsLabel"
-          >
-            Account information
-          </span>
-        </GridItem>
-        <GridItem
-          cols={9}
-          elementType="div"
+          Account information
+        </span>
+        <div
+          className="summaryListDetail"
         >
           <UserStatus
             user={
@@ -73,36 +62,28 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               }
             }
           />
-          <div
-            className="right"
-          >
-            <UnlockUser
-              id={1}
-              isLocked={false}
-              onError={[Function]}
-              onToggleLock={[Function]}
-            />
-          </div>
-        </GridItem>
-        <GridItem
-          cols={3}
-          elementType="div"
+          <UnlockUser
+            id={1}
+            isLocked={false}
+            onError={[Function]}
+            onToggleLock={[Function]}
+          />
+        </div>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
         >
-          <span
-            className="detailsLabel"
-          >
-            Email address
-          </span>
-        </GridItem>
-        <GridItem
-          cols={9}
-          elementType="div"
+          Email address
+        </span>
+        <span
+          className="summaryListDetail"
         >
-          <span>
-            kristin.patrick@example.com
-          </span>
-        </GridItem>
-      </Grid>
+          kristin.patrick@example.com
+        </span>
+      </div>
       <hr
         className="mv--b"
       />
