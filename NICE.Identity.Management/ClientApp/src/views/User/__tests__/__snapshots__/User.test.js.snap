@@ -12,11 +12,11 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     <Breadcrumb
       elementType="a"
     >
-      Vernita Green
+      Kristin Patrick
     </Breadcrumb>
   </Breadcrumbs>
   <PageHeader
-    heading="Vernita Green"
+    heading="Kristin Patrick"
     preheading="User profile for"
   />
   <Grid
@@ -32,71 +32,58 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       elementType="div"
       md={9}
     >
-      <Grid
-        className="pb--d"
-        elementType="div"
-        gutter="standard"
-        horizontalAlignment="left"
-        reverse={false}
-        verticalAlignment="top"
+      <div
+        className="summaryList pv--c"
       >
-        <GridItem
-          cols={3}
-          elementType="div"
+        <span
+          className="summaryListLabel"
         >
-          <span
-            className="detailsLabel"
-          >
-            Account information
-          </span>
-        </GridItem>
-        <GridItem
-          cols={9}
-          elementType="div"
+          Account information
+        </span>
+        <div
+          className="summaryListDetail"
         >
           <UserStatus
             user={
               Object {
-                "blocked": true,
-                "email_address": "vernita.green@gmail.com",
-                "email_verified": true,
-                "first_name": "Vernita",
-                "id": 2,
-                "last_name": "Green",
-                "user_id": "usr_5457edea1b8f33391a000002",
+                "acceptedTerms": true,
+                "allowContactMe": true,
+                "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+                "emailAddress": "kristin.patrick@example.com",
+                "firstName": "Kristin",
+                "hasVerifiedEmailAddress": true,
+                "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+                "isLockedOut": false,
+                "isMigrated": false,
+                "isStaffMember": false,
+                "lastLoggedInDate": "2019-10-23T12:29:54.911Z",
+                "lastName": "Patrick",
+                "userId": 1,
               }
             }
           />
-          <div
-            className="right"
-          >
-            <UnlockUser
-              id={2}
-              isLocked={true}
-              onError={[Function]}
-              onToggleLock={[Function]}
-            />
-          </div>
-        </GridItem>
-        <GridItem
-          cols={3}
-          elementType="div"
+          <UnlockUser
+            id={1}
+            isLocked={false}
+            onError={[Function]}
+            onToggleLock={[Function]}
+          />
+        </div>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
         >
-          <span
-            className="detailsLabel"
-          >
-            Email address
-          </span>
-        </GridItem>
-        <GridItem
-          cols={9}
-          elementType="div"
+          Email address
+        </span>
+        <span
+          className="summaryListDetail"
         >
-          <span>
-            vernita.green@gmail.com
-          </span>
-        </GridItem>
-      </Grid>
+          kristin.patrick@example.com
+        </span>
+      </div>
       <hr
         className="mv--b"
       />
@@ -110,7 +97,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       </p>
       <Link
         data-qa-sel="delete-user-link"
-        to="/users/2/delete"
+        to="/users/1/delete"
       >
         Delete user
       </Link>

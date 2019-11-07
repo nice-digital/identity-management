@@ -83,7 +83,7 @@ export class User extends Component<UserProps, UserState> {
 			return <Redirect to="/users" />;
 		}
 
-		let lastBreadcrumb = `${data.first_name} ${data.last_name}`;
+		let lastBreadcrumb = `${data.firstName} ${data.lastName}`;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading user details";
@@ -108,7 +108,7 @@ export class User extends Component<UserProps, UserState> {
 							heading={
 								isLoading
 									? "User details"
-									: `${data.first_name} ${data.last_name}`
+									: `${data.firstName} ${data.lastName}`
 							}
 						/>
 						<Grid>
@@ -117,32 +117,30 @@ export class User extends Component<UserProps, UserState> {
 									<p>Loading...</p>
 								) : (
 									<>
-										<Grid className="pb--d">
-											<GridItem cols={3}>
-												<span className={styles.detailsLabel}>
-													Account information
-												</span>
-											</GridItem>
-											<GridItem cols={9}>
+										<div className={`${styles.summaryList} pv--c`}>
+											<span className={styles.summaryListLabel}>
+												Account information
+											</span>
+											<div className={styles.summaryListDetail}>
 												<UserStatus user={data} />
-												<div className="right">
-													<UnlockUser
-														id={data.id}
-														isLocked={data.blocked}
-														onToggleLock={this.updateData}
-														onError={this.handleError}
-													/>
-												</div>
-											</GridItem>
-											<GridItem cols={3}>
-												<span className={styles.detailsLabel}>
-													Email address
-												</span>
-											</GridItem>
-											<GridItem cols={9}>
-												<span>{data.email_address}</span>
-											</GridItem>
-										</Grid>
+
+												<UnlockUser
+													id={data.userId}
+													isLocked={data.isLockedOut}
+													onToggleLock={this.updateData}
+													onError={this.handleError}
+												/>
+											</div>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Email address
+											</span>
+											<span className={styles.summaryListDetail}>
+												{data.emailAddress}
+											</span>
+										</div>
 
 										<hr className="mv--b" />
 
@@ -151,7 +149,12 @@ export class User extends Component<UserProps, UserState> {
 											The account will no longer be available, and all data in
 											the account will be permanently deleted.
 										</p>
-										<Link data-qa-sel="delete-user-link" to={`/users/${data.id}/delete`}>Delete user</Link>
+										<Link
+											data-qa-sel="delete-user-link"
+											to={`/users/${data.userId}/delete`}
+										>
+											Delete user
+										</Link>
 									</>
 								)}
 							</GridItem>

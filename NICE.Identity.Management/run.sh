@@ -12,6 +12,8 @@ jq \
     --arg webappclientsecret "$WEBAPP_CLIENTSECRECT" \
     --arg webappredirecturi "$WEBAPP_REDIRECT_URI" \
     --arg webapplogoutredirecturi "$WEBAPP_LOGOUT_REDIRECT_URI" \
+    --arg webappapiidentifier "$WEBAPP_API_IDENTIFIER" \
+    --arg webappauthorisationserviceuri "$WEBAPP_AUTH_SERVICE_URI" \
     --arg identityapiauthorisationserviceuri "$IDENTITYAPI_AUTH_SERVICE_URI" \
     --arg identityapiidentifier "$IDENTITYAPI_IDENTIFIER" \
     --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
@@ -23,6 +25,8 @@ jq \
     .WebAppConfiguration.ClientSecret = $webappclientsecret |
     .WebAppConfiguration.RedirectUri = $webappredirecturi |
     .WebAppConfiguration.PostLogoutRedirectUri = $webapplogoutredirecturi |
+    .WebAppConfiguration.ApiIdentifier = $webappapiidentifier |
+    .WebAppConfiguration.AuthorisationServiceUri = $webappauthorisationserviceuri |
     .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
     .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
     .IdentityApiConfiguration.ClientId = $identityapiclientid |
