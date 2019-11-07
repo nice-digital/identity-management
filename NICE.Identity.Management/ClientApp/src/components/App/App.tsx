@@ -5,7 +5,6 @@ import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
 
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
-import { AddUserRole } from "../../views/AddUserRole/AddUserRole";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
