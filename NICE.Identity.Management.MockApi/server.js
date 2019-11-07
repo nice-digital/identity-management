@@ -27,14 +27,13 @@ const router = jsonServer.router('api/db.json');
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   let requestUrl = url.parse(req.url);
-  if (requestUrl.path.includes('/users')) {
+  if (requestUrl.path.includes('/users')){
     router.db._.id = "userId";
-  } else {
+  }else{
     router.db._.id = "id";
   }
   next()
 });
-
 server.use(middleware);
 server.use(rewriter);
 server.use(router);
