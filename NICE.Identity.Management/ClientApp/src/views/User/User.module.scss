@@ -1,3 +1,19 @@
-.detailsLabel {
-  font-weight: bold;
+.summaryList {
+  display: flex;
+  align-items: center;
+
+  &Label {
+    font-weight: bold;
+    flex: 1;
+  }
+  &Detail {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > * {
+      margin: 0;
+    }
+  }
 }
