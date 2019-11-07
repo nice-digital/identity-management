@@ -6,6 +6,8 @@ import { Card } from "@nice-digital/nds-card";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
 
+import { fetchData } from "../../helpers/fetchData";
+import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
 import { Filter } from "../../components/Filter/Filter";
@@ -20,44 +22,34 @@ type CardMetaData = {
 type UsersListProps = {};
 
 type UsersListState = {
-	data: Array<UserType>;
+	users: Array<UserType>;
 	error?: Error;
+	isLoading: boolean;
 };
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
 	constructor(props: UsersListProps) {
 		super(props);
 		this.state = {
-			data: [],
+			users: [],
+			isLoading: true,
 		};
 	}
 
-	fetchData = async (url: string) => {
-		let response, data;
-		try {
-			response = await fetch(url);
-			data = await response.json();
-		} catch (err) {
-			let error: Error = err;
-            console.error(err);
-			this.setState({ error });
-			return;
+	async componentDidMount() {
+		this.setState({ isLoading: true });
+
+		let users = await fetchData(Endpoints.usersList);
+
+		if (isDataError(users)) {
+			this.setState({ error: users });
 		}
 
-		if (response.status === 200) {
-			this.setState({ data });
-		} else {
-            console.error(data.message);
-			this.setState({ error: new Error(data.message) });
-		}
-	};
-
-	componentDidMount() {
-		this.fetchData(Endpoints.usersList);
+		this.setState({ users, isLoading: false });
 	}
 
 	render() {
-		const { data, error } = this.state;
+		const { users, error, isLoading } = this.state;
 
 		return (
 			<>
@@ -72,12 +64,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 						<GridItem cols={12} md={3}>
 							<Filter />
 						</GridItem>
-						<GridItem cols={12} md={9} aria-busy={!data.length}>
-							{!data.length ? (
+						<GridItem cols={12} md={9} aria-busy={!users.length}>
+							{!users.length ? (
 								<p>Loading...</p>
 							) : (
-								<ul className="list--unstyled" data-qa-sel="list-of-users">
-									{data.map(user => {
+								<ul className="list--unstyled">
+									{users.map(user => {
 										const {
 											userId,
 											emailAddress,
@@ -87,7 +79,6 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										} = user;
 										const usersListHeading = {
 											headingText: `${firstName} ${lastName}`,
-											// elementType: "li",
 											link: {
 												elementType: Link,
 												destination: `/users/${userId}`,
@@ -105,12 +96,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										];
 
 										return (
-											<li key={userId}>
-												<Card
-													{...usersListHeading}
-													metadata={usersListMetadata}
-												/>
-											</li>
+											<Card
+												{...usersListHeading}
+												metadata={usersListMetadata}
+												key={auth0UserId}
+											/>
 										);
 									})}
 								</ul>

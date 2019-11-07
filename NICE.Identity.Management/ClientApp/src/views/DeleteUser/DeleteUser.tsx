@@ -12,17 +12,19 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 import styles from "./DeleteUser.module.scss";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
+import { fetchData } from "../../helpers/fetchData";
+import { isDataError } from "../../helpers/isDataError";
 
 type TParams = { id: string };
 
 type DeleteUserProps = {} & RouteComponentProps<TParams>;
 
 type DeleteUserState = {
+	user: UserType;
+	hasBeenDeleted: boolean;
+	error?: Error;
 	isLoading: boolean;
 	isDeleteButtonLoading: boolean;
-	error?: Error;
-	hasBeenDeleted: boolean;
-	data: UserType;
 };
 
 export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
@@ -30,70 +32,46 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		super(props);
 
 		this.state = {
+			user: {} as UserType,
+			hasBeenDeleted: false,
 			isLoading: true,
 			isDeleteButtonLoading: false,
-			hasBeenDeleted: false,
-			data: {} as UserType,
 		};
 	}
 
-	handleError = (error: Error) => {
-		this.setState({ error });
-	};
-
-	fetchData = async (url: string) => {
-		this.setState({ isLoading: true });
-
-		let response, data;
-		try {
-			response = await fetch(url);
-			data = await response.json();
-		} catch (err) {
-			let error: Error = err;
-
-			this.setState({ error });
-			return;
-		}
-
-		this.setState({ isLoading: false });
-
-		if (response.status === 200) {
-			this.setState({ data });
-		} else {
-			this.setState({ error: new Error(data.message) });
-		}
-	};
-
-	fetchDeleteData = async () => {
+	handleDeleteClick = async () => {
 		this.setState({ isDeleteButtonLoading: true });
 
-		let response, data;
-		try {
-			response = await fetch(Endpoints.user(this.props.match.params.id), {
-				method: "DELETE",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ id: this.props.match.params.id }),
-			});
-			data = await response.json();
-		} catch (err) {
-			let error: Error = err;
+		let fetchOptions = {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ id: this.props.match.params.id }),
+		};
 
-			this.handleError(error);
-			this.setState({ isDeleteButtonLoading: false });
-			return;
+		let deletedUser = await fetchData(
+			Endpoints.user(this.props.match.params.id),
+			fetchOptions,
+		);
+
+		if (isDataError(deletedUser)) {
+			this.setState({ error: deletedUser });
+		} else {
+			this.setState({ hasBeenDeleted: true });
 		}
 
 		this.setState({ isDeleteButtonLoading: false });
-
-		if (response.status === 200) {
-			this.setState({ hasBeenDeleted: true });
-		} else {
-			this.handleError(new Error(data.message));
-		}
 	};
 
-	componentDidMount() {
-		this.fetchData(Endpoints.user(this.props.match.params.id));
+	async componentDidMount() {
+		this.setState({ isLoading: true });
+
+		let user = await fetchData(Endpoints.user(this.props.match.params.id));
+
+		if (isDataError(user)) {
+			this.setState({ error: user });
+		}
+
+		this.setState({ user, isLoading: false });
 	}
 
 	render() {
@@ -102,11 +80,11 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 			isDeleteButtonLoading,
 			error,
 			hasBeenDeleted,
-			data,
+			user,
 		} = this.state;
 		const { id } = this.props.match.params;
 
-		let lastBreadcrumb = `${data.firstName} ${data.lastName}`;
+		let lastBreadcrumb = `${user.firstName} ${user.lastName}`;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading user details";
@@ -120,7 +98,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 			<>
 				{hasBeenDeleted ? (
 					<DeleteUserConfirmation
-						full_name={`${data.firstName} ${data.lastName}`}
+						fullName={`${user.firstName} ${user.lastName}`}
 					/>
 				) : (
 					<>
@@ -149,13 +127,13 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 									<>
 										<PageHeader
 											preheading="Are you sure you want to delete user?"
-											heading={`${data.firstName} ${data.lastName}`}
+											heading={`${user.firstName} ${user.lastName}`}
 											cta={
 												<>
 													<Button
 														data-qa-sel="confirm-delete-user"
 														variant="cta"
-														onClick={this.fetchDeleteData}
+														onClick={this.handleDeleteClick}
 														disabled={isDeleteButtonLoading}
 													>
 														{isDeleteButtonLoading ? "Loading..." : "Confirm"}
@@ -179,7 +157,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 												</span>
 											</GridItem>
 											<GridItem cols={9}>
-												<span>{data.emailAddress}</span>
+												<span>{user.emailAddress}</span>
 											</GridItem>
 										</Grid>
 									</>

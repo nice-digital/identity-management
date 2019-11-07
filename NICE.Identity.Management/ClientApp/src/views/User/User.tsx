@@ -5,6 +5,8 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
 
+import { fetchData } from "../../helpers/fetchData";
+import { isDataError } from "../../helpers/isDataError";
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
@@ -18,7 +20,7 @@ type TParams = { id: string };
 type UserProps = {} & RouteComponentProps<TParams>;
 
 type UserState = {
-	data: UserType;
+	user: UserType;
 	error?: Error;
 	redirect: boolean;
 	isLoading: boolean;
@@ -29,7 +31,7 @@ export class User extends Component<UserProps, UserState> {
 		super(props);
 
 		this.state = {
-			data: {} as UserType,
+			user: {} as UserType,
 			redirect: false,
 			isLoading: true,
 		};
@@ -43,47 +45,30 @@ export class User extends Component<UserProps, UserState> {
 		if (!Object.keys(updatedData).length) {
 			this.setState({ redirect: true });
 		} else {
-			this.setState({ data: updatedData });
+			this.setState({ user: updatedData });
 		}
 	};
 
-	fetchData = async (url: string) => {
+	async componentDidMount() {
 		this.setState({ isLoading: true });
 
-		let response, data;
-		try {
-			response = await fetch(url);
-			data = await response.json();
-		} catch (err) {
-			let error: Error = err;
+		let user = await fetchData(Endpoints.user(this.props.match.params.id));
 
-			this.setState({ error, isLoading: false });
-			return;
+		if (isDataError(user)) {
+			this.setState({ error: user });
 		}
 
-		this.setState({ isLoading: false });
-
-		if (response.status === 200) {
-			this.setState({ data });
-		} else {
-			this.setState({
-				error: new Error(data.message),
-			});
-		}
-	};
-
-	componentDidMount() {
-		this.fetchData(Endpoints.user(this.props.match.params.id));
+		this.setState({ user, isLoading: false });
 	}
 
 	render() {
-		const { data, error, redirect, isLoading } = this.state;
+		const { user, error, redirect, isLoading } = this.state;
 
 		if (redirect) {
 			return <Redirect to="/users" />;
 		}
 
-		let lastBreadcrumb = `${data.firstName} ${data.lastName}`;
+		let lastBreadcrumb = `${user.firstName} ${user.lastName}`;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading user details";
@@ -108,7 +93,7 @@ export class User extends Component<UserProps, UserState> {
 							heading={
 								isLoading
 									? "User details"
-									: `${data.firstName} ${data.lastName}`
+									: `${user.firstName} ${user.lastName}`
 							}
 						/>
 						<Grid>
@@ -124,11 +109,11 @@ export class User extends Component<UserProps, UserState> {
 												</span>
 											</GridItem>
 											<GridItem cols={9}>
-												<UserStatus user={data} />
+												<UserStatus user={user} />
 												<div className="right">
 													<UnlockUser
-														id={data.userId}
-														isLocked={data.isLockedOut}
+														id={user.userId}
+														isLocked={user.isLockedOut}
 														onToggleLock={this.updateData}
 														onError={this.handleError}
 													/>
@@ -140,7 +125,7 @@ export class User extends Component<UserProps, UserState> {
 												</span>
 											</GridItem>
 											<GridItem cols={9}>
-												<span>{data.emailAddress}</span>
+												<span>{user.emailAddress}</span>
 											</GridItem>
 										</Grid>
 
@@ -151,7 +136,12 @@ export class User extends Component<UserProps, UserState> {
 											The account will no longer be available, and all data in
 											the account will be permanently deleted.
 										</p>
-										<Link data-qa-sel="delete-user-link" to={`/users/${data.userId}/delete`}>Delete user</Link>
+										<Link
+											data-qa-sel="delete-user-link"
+											to={`/users/${user.userId}/delete`}
+										>
+											Delete user
+										</Link>
 									</>
 								)}
 							</GridItem>
