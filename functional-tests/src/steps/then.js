@@ -14,6 +14,7 @@ import finduser from "../support/action/finduser";
 import deleteUser from "../support/action/deleteUser";
 import findUserList, { userNotInList } from "../support/check/findUserInList";
 import validateDeletionSuccessMessage, { validateRegistrationValidationMessages } from "../support/check/validateMessages";
+import identityLogInPage from "../support/check/identityLogInPage";
 
 Then(
   /^I expect the error message is displayed$/,
@@ -93,4 +94,9 @@ Then(
 Then(
   /^I expect the registration page validation messages are displayed$/,
   validateRegistrationValidationMessages
+);
+
+Then(
+  /^I expect I appear on the login page$/,
+  identityLogInPage
 );
