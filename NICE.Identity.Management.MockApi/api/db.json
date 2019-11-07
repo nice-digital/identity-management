@@ -13,7 +13,19 @@
       "lastLoggedInDate": "2019-10-23T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false
+      "isMigrated": false,
+      "roles": [
+        {
+          "id": 13,
+          "name": "EppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     },
     {
       "userId": 2,
@@ -28,7 +40,19 @@
       "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false
+      "isMigrated": false,
+      "roles": [
+        {
+          "id": 13,
+          "name": "EppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     },
     {
       "userId": 3,
@@ -43,7 +67,19 @@
       "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false
+      "isMigrated": false,
+      "roles": [
+        {
+          "id": 13,
+          "name": "EppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     },
     {
       "userId": 4,
@@ -58,7 +94,19 @@
       "lastLoggedInDate": "2019-10-26T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false
+      "isMigrated": false,
+      "roles": [
+        {
+          "id": 13,
+          "name": "EppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     },
     {
       "userId": 5,
@@ -73,7 +121,19 @@
       "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false
+      "isMigrated": false,
+      "roles": [
+        {
+          "id": 13,
+          "name": "EppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     },
     {
       "userId": 6,
@@ -88,21 +148,97 @@
       "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false
+      "isMigrated": false,
+      "roles": [
+        {
+          "id": 13,
+          "name": "EppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     }
   ],
   "services": [
     {
-      "id": 1,
-      "name": "Publications"
+      "id": 11,
+      "name": "EPPI Reviewer V5",
+      "websites": [
+        {
+          "id": 111,
+          "environmentName": "DEV",
+          "host": "dev-eppi.nice.org.uk"
+        },
+        {
+          "id": 112,
+          "environmentName": "TEST",
+          "host": "test-eppi.nice.org.uk"
+        }
+      ],
+      "roles": [
+        {
+          "id": 13,
+          "name": "DevEppiAdmin",
+          "websiteId": 111
+        },
+        {
+          "id": 14,
+          "name": "DevConsultationsReviewer",
+          "websiteId": 111
+        },
+        {
+          "id": 15,
+          "name": "TesteppiAdmin",
+          "websiteId": 112
+        },
+        {
+          "id": 16,
+          "name": "TestConsultationsReviewer",
+          "websiteId": 112
+        }
+      ]
     },
     {
-      "id": 2,
-      "name": "InDev"
-    },
-    {
-      "id": 3,
-      "name": "EPPI"
+      "id": 21,
+      "name": "Consultations",
+      "websites": [
+        {
+          "id": 221,
+          "environmentName": "DEV",
+          "host": "dev-consultations.nice.org.uk"
+        },
+        {
+          "id": 222,
+          "environmentName": "TEST",
+          "host": "test-consultations.nice.org.uk"
+        }
+      ],
+      "roles": [
+        {
+          "id": 23,
+          "name": "ConsultationsAdmin",
+          "websiteId": 221
+        },
+        {
+          "id": 24,
+          "name": "ConsultationsReviewer",
+          "websiteId": 221
+        },
+        {
+          "id": 25,
+          "name": "ConsultationsAdmin",
+          "websiteId": 222
+        },
+        {
+          "id": 26,
+          "name": "ConsultationsReviewer",
+          "websiteId": 222
+        }
+      ]
     }
   ]
 }
