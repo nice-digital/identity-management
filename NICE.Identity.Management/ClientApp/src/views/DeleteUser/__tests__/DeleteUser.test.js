@@ -8,6 +8,9 @@ import { nextTick } from "../../../utils/nextTick";
 import singleUser from "./singleUser.json";
 import { DeleteUser } from "../DeleteUser";
 
+import * as fetchData from "../../../helpers/fetchData";
+import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
+
 describe("DeleteUser", () => {
 	const match = {
 		params: { id: 1 },
@@ -28,9 +31,9 @@ describe("DeleteUser", () => {
 		fetchMock.get("*", {});
 		const wrapper = shallow(<DeleteUser match={match} />);
 		const instance = wrapper.instance();
-		jest.spyOn(instance, "fetchData");
+		jest.spyOn(fetchData, "fetchData");
 		instance.componentDidMount();
-		expect(instance.fetchData).toHaveBeenCalledTimes(1);
+		expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
@@ -65,11 +68,10 @@ describe("DeleteUser", () => {
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 	});
 
-	it("should show error message when fetchDeleteData fails", async () => {
+	it("should show error message when fetchData delete fails", async () => {
 		const error = new Error("Not allowed");
 		fetchMock.get("*", {});
 		fetchMock.delete("*", { throws: error });
-
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />
@@ -77,15 +79,13 @@ describe("DeleteUser", () => {
 		);
 		await nextTick();
 		wrapper.update();
-		const instance = wrapper.find(DeleteUser).instance();
-		jest.spyOn(instance, "handleError");
 		wrapper.find("button").simulate("click");
 		await nextTick();
-		expect(instance.handleError).toHaveBeenCalledTimes(1);
-		expect(instance.handleError).toHaveBeenCalledWith(error);
+		wrapper.update();
+		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
 	});
 
-	it("should show error message when fetchDeleteData returns non-200 error", async () => {
+	it("should show error message when fetchData delete returns non-200 error", async () => {
 		const serverErrorMessage = "Not authorized";
 		fetchMock.get("*", {});
 		fetchMock.delete("*", {
@@ -99,14 +99,10 @@ describe("DeleteUser", () => {
 		);
 		await nextTick();
 		wrapper.update();
-		const instance = wrapper.find(DeleteUser).instance();
-		jest.spyOn(instance, "handleError");
 		wrapper.find("button").simulate("click");
 		await nextTick();
-		expect(instance.handleError).toHaveBeenCalledTimes(1);
-		expect(instance.handleError).toHaveBeenCalledWith(
-			new Error(serverErrorMessage),
-		);
+		wrapper.update();
+		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
 	});
 
 	it("should disable delete button when clicked", async () => {

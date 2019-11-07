@@ -8,6 +8,8 @@ import { User } from "../User";
 import singleUser from "./singleUser.json";
 import { nextTick } from "../../../utils/nextTick";
 
+import * as fetchData from "../../../helpers/fetchData";
+
 const match = {
 	params: { id: 1 },
 	isExact: true,
@@ -27,9 +29,9 @@ it("should call fetchData during componentDidMount", () => {
 	fetchMock.get("*", {});
 	const wrapper = shallow(<User match={match} />);
 	const instance = wrapper.instance();
-	jest.spyOn(instance, "fetchData");
+	jest.spyOn(fetchData, "fetchData");
 	instance.componentDidMount();
-	expect(instance.fetchData).toHaveBeenCalledTimes(1);
+	expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
 });
 
 it("should match the snapshot after data has been loaded", async () => {

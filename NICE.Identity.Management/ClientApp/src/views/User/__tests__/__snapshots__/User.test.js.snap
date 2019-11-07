@@ -16,6 +16,16 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     </Breadcrumb>
   </Breadcrumbs>
   <PageHeader
+    cta={
+      <Button
+        disabled={false}
+        elementType={[Function]}
+        to="/users/1/services"
+        variant="cta"
+      >
+        Add role
+      </Button>
+    }
     heading="Kristin Patrick"
     preheading="User profile for"
   />
@@ -57,17 +67,11 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           <UserStatus
             user={
               Object {
-                "acceptedTerms": true,
-                "allowContactMe": true,
                 "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
                 "emailAddress": "kristin.patrick@example.com",
                 "firstName": "Kristin",
                 "hasVerifiedEmailAddress": true,
-                "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
                 "isLockedOut": false,
-                "isMigrated": false,
-                "isStaffMember": false,
-                "lastLoggedInDate": "2019-10-23T12:29:54.911Z",
                 "lastName": "Patrick",
                 "userId": 1,
               }

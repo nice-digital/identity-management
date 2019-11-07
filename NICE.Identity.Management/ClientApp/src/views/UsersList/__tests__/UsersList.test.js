@@ -9,6 +9,8 @@ import users from "./users.json";
 
 import { nextTick } from "../../../utils/nextTick";
 
+import * as fetchData from "../../../helpers/fetchData";
+
 afterEach(fetchMock.reset);
 
 it("should show loading message before data has been loaded", () => {
@@ -21,9 +23,9 @@ it("should call fetchData during componentDidMount", () => {
 	fetchMock.get("*", {});
 	const wrapper = shallow(<UsersList />);
 	const instance = wrapper.instance();
-	jest.spyOn(instance, "fetchData");
+	jest.spyOn(fetchData, "fetchData");
 	instance.componentDidMount();
-	expect(instance.fetchData).toHaveBeenCalledTimes(1);
+	expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
 });
 
 it("should match the snapshot after data has been loaded", async () => {
