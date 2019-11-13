@@ -13,19 +13,7 @@
       "lastLoggedInDate": "2019-10-23T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false,
-      "roles": [
-        {
-          "id": 13,
-          "name": "EppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
-        }
-      ]
+      "isMigrated": false
     },
     {
       "userId": 2,
@@ -40,19 +28,7 @@
       "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false,
-      "roles": [
-        {
-          "id": 13,
-          "name": "EppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
-        }
-      ]
+      "isMigrated": false
     },
     {
       "userId": 3,
@@ -67,19 +43,7 @@
       "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false,
-      "roles": [
-        {
-          "id": 13,
-          "name": "EppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
-        }
-      ]
+      "isMigrated": false
     },
     {
       "userId": 4,
@@ -94,19 +58,7 @@
       "lastLoggedInDate": "2019-10-26T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false,
-      "roles": [
-        {
-          "id": 13,
-          "name": "EppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
-        }
-      ]
+      "isMigrated": false
     },
     {
       "userId": 5,
@@ -121,19 +73,7 @@
       "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false,
-      "roles": [
-        {
-          "id": 13,
-          "name": "EppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
-        }
-      ]
+      "isMigrated": false
     },
     {
       "userId": 6,
@@ -148,97 +88,136 @@
       "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
-      "isMigrated": false,
-      "roles": [
-        {
-          "id": 13,
-          "name": "EppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
-        }
-      ]
+      "isMigrated": false
     }
   ],
   "services": [
     {
-      "id": 11,
-      "name": "EPPI Reviewer V5",
+      "serviceId": 1,
+      "name": "EPPI Reviewer",
       "websites": [
         {
-          "id": 111,
-          "environmentName": "DEV",
-          "host": "dev-eppi.nice.org.uk"
+          "websiteId": 11,
+          "host": "dev-eppi.nice.org.uk",
+          "environment":{
+            "environmentId": 71,
+            "name": "dev"
+          }
         },
         {
-          "id": 112,
-          "environmentName": "TEST",
-          "host": "test-eppi.nice.org.uk"
-        }
-      ],
-      "roles": [
-        {
-          "id": 13,
-          "name": "DevEppiAdmin",
-          "websiteId": 111
-        },
-        {
-          "id": 14,
-          "name": "DevConsultationsReviewer",
-          "websiteId": 111
-        },
-        {
-          "id": 15,
-          "name": "TesteppiAdmin",
-          "websiteId": 112
-        },
-        {
-          "id": 16,
-          "name": "TestConsultationsReviewer",
-          "websiteId": 112
+          "websiteId": 12,
+          "host": "test-eppi.nice.org.uk",
+          "environment":{
+            "environmentId": 72,
+            "name": "test"
+          }
         }
       ]
     },
     {
-      "id": 21,
-      "name": "Consultations",
+      "serviceId": 2,
+      "name": "Comment Collection",
       "websites": [
         {
-          "id": 221,
-          "environmentName": "DEV",
-          "host": "dev-consultations.nice.org.uk"
+          "websiteId": 21,
+          "host": "dev-comments.nice.org.uk",
+          "environment":{
+            "environmentId": 71,
+            "name": "dev"
+          }
         },
         {
-          "id": 222,
-          "environmentName": "TEST",
-          "host": "test-consultations.nice.org.uk"
-        }
-      ],
-      "roles": [
-        {
-          "id": 23,
-          "name": "ConsultationsAdmin",
-          "websiteId": 221
-        },
-        {
-          "id": 24,
-          "name": "ConsultationsReviewer",
-          "websiteId": 221
-        },
-        {
-          "id": 25,
-          "name": "ConsultationsAdmin",
-          "websiteId": 222
-        },
-        {
-          "id": 26,
-          "name": "ConsultationsReviewer",
-          "websiteId": 222
+          "websiteId": 22,
+          "host": "alpha-comments.nice.org.uk",
+          "environment":{
+            "environmentId": 73,
+            "name": "alpha"
+          }
         }
       ]
+    }
+  ],
+  "userRolesByWebsite":[
+    {
+      "websiteId": 11,
+      "host": "dev-eppi.nice.org.uk",
+      "environment":{
+        "environmentId": 71,
+        "name": "dev"
+      },
+      "service":{
+        "serviceId": 1,
+        "name": "EPPI Reviewer"
+      },
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": true
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "websiteId": 12,
+      "host": "test-eppi.nice.org.uk",
+      "environment":{
+        "environmentId": 72,
+        "name": "dev"
+      },
+      "service":{
+        "serviceId": 11,
+        "name": "EPPI Reviewer"
+      },
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor"
+        },
+        {
+          "id": 992,
+          "name": "Product manager"
+        },
+        {
+          "id": 993,
+          "name": "Product administrator"
+        },
+        {
+          "id": 994,
+          "name": "Product editor"
+        }
+      ]
+    }
+  ],
+  "userRoles": [
+    {
+      "userRoleId": 1991,
+      "roleId": 991,
+      "userId": 1
+    },
+    {
+      "userRoleId": 1992,
+      "roleId": 992,
+      "userId": 1
+    },
+    {
+      "userRoleId": 1993,
+      "roleId": 993,
+      "userId": 1
     }
   ]
 }

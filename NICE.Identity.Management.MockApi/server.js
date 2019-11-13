@@ -27,8 +27,14 @@ const router = jsonServer.router('api/db.json');
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   let requestUrl = url.parse(req.url);
-  if (requestUrl.path.includes('/users')){
+  if (requestUrl.path.includes('users')){
     router.db._.id = "userId";
+  }else if (requestUrl.path.includes('services')){
+    router.db._.id = "serviceId";
+  }else if (requestUrl.path.includes('userRolesByWebsite')){
+    router.db._.id = "websiteId";
+  }else if (requestUrl.path.includes('userRoles')){
+    router.db._.id = "userRoleId";
   }else{
     router.db._.id = "id";
   }
