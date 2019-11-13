@@ -158,7 +158,7 @@
         {
           "id": 992,
           "name": "Product manager",
-          "hasRole": false
+          "hasRole": true
         },
         {
           "id": 993,
@@ -185,20 +185,24 @@
       },
       "roles": [
         {
-          "id": 991,
-          "name": "Product contributor"
+          "id": 995,
+          "name": "Product contributor",
+          "hasRole": false
         },
         {
-          "id": 992,
-          "name": "Product manager"
+          "id": 996,
+          "name": "Product manager",
+          "hasRole": false
         },
         {
-          "id": 993,
-          "name": "Product administrator"
+          "id": 997,
+          "name": "Product administrator",
+          "hasRole": false
         },
         {
-          "id": 994,
-          "name": "Product editor"
+          "id": 998,
+          "name": "Product editor",
+          "hasRole": true
         }
       ]
     }
@@ -217,6 +221,11 @@
     {
       "userRoleId": 1993,
       "roleId": 993,
+      "userId": 1
+    },
+    {
+      "userRoleId": 1998,
+      "roleId": 998,
       "userId": 1
     }
   ]
