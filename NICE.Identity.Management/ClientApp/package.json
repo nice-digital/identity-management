@@ -5,6 +5,7 @@
   "dependencies": {
     "@nice-digital/design-system": "^1.0.15-alpha.0",
     "@nice-digital/global-nav": "github:nice-digital/global-nav",
+    "@nice-digital/nds-checkbox": "^1.0.13-alpha.0",
     "concurrently": "^4.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
