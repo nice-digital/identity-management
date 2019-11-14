@@ -4,7 +4,12 @@ import { RouteComponentProps, Link, Switch, Route } from "react-router-dom";
 import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
-import { UserType, ServiceType, EnvironmentType } from "../../models/types";
+import {
+	UserType,
+	ServiceType,
+	EnvironmentType,
+	WebsiteType,
+} from "../../models/types";
 import { User } from "../User/User";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
@@ -19,7 +24,7 @@ type SelectEnvironmentProps = {} & RouteComponentProps<TParams>;
 type SelectEnvironmentState = {
 	user: UserType;
 	service: ServiceType;
-	environments: Array<EnvironmentType>;
+	websites: Array<WebsiteType>;
 	error?: Error;
 	isLoading: boolean;
 };
@@ -33,7 +38,7 @@ export class SelectEnvironment extends Component<
 		this.state = {
 			user: {} as UserType,
 			service: {} as ServiceType,
-			environments: [],
+			websites: [],
 			isLoading: true,
 		};
 	}
@@ -51,13 +56,13 @@ export class SelectEnvironment extends Component<
 			this.setState({ error: service });
 		}
 
-		let environments = service.websites;
+		let websites = service.websites;
 
-		this.setState({ user, service, environments, isLoading: false });
+		this.setState({ user, service, websites, isLoading: false });
 	}
 
 	render() {
-		const { user, service, environments, error, isLoading } = this.state;
+		const { user, service, websites, error, isLoading } = this.state;
 		const { params, url } = this.props.match;
 		const { id } = params;
 
@@ -95,13 +100,13 @@ export class SelectEnvironment extends Component<
 						<Grid>
 							<GridItem cols={8}>
 								<StackedNav>
-									{environments.map(environment => {
+									{websites.map(website => {
 										return (
 											<StackedNavLink
-												destination={`${url}/${environment.id}/roles`}
+												destination={`${url}/${website.websiteId}/roles`}
 												elementType={Link}
 											>
-												{environment.environmentName}
+												{website.environment.name}
 											</StackedNavLink>
 										);
 									})}
