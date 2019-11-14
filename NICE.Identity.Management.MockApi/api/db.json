@@ -99,7 +99,7 @@
         {
           "websiteId": 11,
           "host": "dev-eppi.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 71,
             "name": "dev"
           }
@@ -107,7 +107,7 @@
         {
           "websiteId": 12,
           "host": "test-eppi.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 72,
             "name": "test"
           }
@@ -121,7 +121,7 @@
         {
           "websiteId": 21,
           "host": "dev-comments.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 71,
             "name": "dev"
           }
@@ -129,7 +129,7 @@
         {
           "websiteId": 22,
           "host": "alpha-comments.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 73,
             "name": "alpha"
           }
@@ -137,15 +137,15 @@
       ]
     }
   ],
-  "userRolesByWebsite":[
+  "userRolesByWebsite": [
     {
       "websiteId": 11,
       "host": "dev-eppi.nice.org.uk",
-      "environment":{
+      "environment": {
         "environmentId": 71,
         "name": "dev"
       },
-      "service":{
+      "service": {
         "serviceId": 1,
         "name": "EPPI Reviewer"
       },
@@ -175,11 +175,11 @@
     {
       "websiteId": 12,
       "host": "test-eppi.nice.org.uk",
-      "environment":{
+      "environment": {
         "environmentId": 72,
         "name": "dev"
       },
-      "service":{
+      "service": {
         "serviceId": 11,
         "name": "EPPI Reviewer"
       },
