@@ -45,7 +45,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		let fetchOptions = {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ id: this.props.match.params.id }),
+			body: JSON.stringify({ userId: this.props.match.params.id }),
 		};
 
 		let deletedUser = await fetchData(
