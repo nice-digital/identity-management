@@ -33,7 +33,7 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					blocked: !this.props.isLocked,
+                    isLockedOut: !this.props.isLocked,
 				}),
 			});
 			data = await response.json();
