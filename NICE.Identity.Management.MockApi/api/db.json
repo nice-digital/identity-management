@@ -99,7 +99,7 @@
         {
           "websiteId": 11,
           "host": "dev-eppi.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 71,
             "name": "dev"
           }
@@ -107,7 +107,7 @@
         {
           "websiteId": 12,
           "host": "test-eppi.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 72,
             "name": "test"
           }
@@ -121,7 +121,7 @@
         {
           "websiteId": 21,
           "host": "dev-comments.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 71,
             "name": "dev"
           }
@@ -129,7 +129,7 @@
         {
           "websiteId": 22,
           "host": "alpha-comments.nice.org.uk",
-          "environment":{
+          "environment": {
             "environmentId": 73,
             "name": "alpha"
           }
@@ -137,96 +137,152 @@
       ]
     }
   ],
-  "userRolesByWebsite":[
+  "userRolesByWebsite": [
     {
-      "websiteId": 11,
-      "host": "dev-eppi.nice.org.uk",
-      "environment":{
-        "environmentId": 71,
-        "name": "dev"
-      },
-      "service":{
-        "serviceId": 1,
-        "name": "EPPI Reviewer"
-      },
-      "roles": [
+      "userId": 1,
+      "websites": [
         {
-          "id": 991,
-          "name": "Product contributor",
-          "hasRole": true
+          "websiteId": 11,
+          "host": "dev-eppi.nice.org.uk",
+          "environment": {
+            "environmentId": 71,
+            "name": "dev"
+          },
+          "service": {
+            "serviceId": 1,
+            "name": "EPPI Reviewer"
+          },
+          "roles": [
+            {
+              "id": 991,
+              "name": "Product contributor",
+              "hasRole": true
+            },
+            {
+              "id": 992,
+              "name": "Product manager",
+              "hasRole": true
+            },
+            {
+              "id": 993,
+              "name": "Product administrator",
+              "hasRole": true
+            },
+            {
+              "id": 994,
+              "name": "Product editor",
+              "hasRole": false
+            }
+          ]
         },
         {
-          "id": 992,
-          "name": "Product manager",
-          "hasRole": true
-        },
-        {
-          "id": 993,
-          "name": "Product administrator",
-          "hasRole": true
-        },
-        {
-          "id": 994,
-          "name": "Product editor",
-          "hasRole": false
+          "websiteId": 12,
+          "host": "test-eppi.nice.org.uk",
+          "environment": {
+            "environmentId": 72,
+            "name": "dev"
+          },
+          "service": {
+            "serviceId": 11,
+            "name": "EPPI Reviewer"
+          },
+          "roles": [
+            {
+              "id": 995,
+              "name": "Product contributor",
+              "hasRole": false
+            },
+            {
+              "id": 996,
+              "name": "Product manager",
+              "hasRole": false
+            },
+            {
+              "id": 997,
+              "name": "Product administrator",
+              "hasRole": false
+            },
+            {
+              "id": 998,
+              "name": "Product editor",
+              "hasRole": true
+            }
+          ]
         }
       ]
     },
     {
-      "websiteId": 12,
-      "host": "test-eppi.nice.org.uk",
-      "environment":{
-        "environmentId": 72,
-        "name": "dev"
-      },
-      "service":{
-        "serviceId": 11,
-        "name": "EPPI Reviewer"
-      },
-      "roles": [
+      "userId": 2,
+      "websites": [
         {
-          "id": 995,
-          "name": "Product contributor",
-          "hasRole": false
+          "websiteId": 11,
+          "host": "dev-eppi.nice.org.uk",
+          "environment": {
+            "environmentId": 71,
+            "name": "dev"
+          },
+          "service": {
+            "serviceId": 1,
+            "name": "EPPI Reviewer"
+          },
+          "roles": [
+            {
+              "id": 991,
+              "name": "Product contributor",
+              "hasRole": true
+            },
+            {
+              "id": 992,
+              "name": "Product manager",
+              "hasRole": true
+            },
+            {
+              "id": 993,
+              "name": "Product administrator",
+              "hasRole": true
+            },
+            {
+              "id": 994,
+              "name": "Product editor",
+              "hasRole": false
+            }
+          ]
         },
         {
-          "id": 996,
-          "name": "Product manager",
-          "hasRole": false
-        },
-        {
-          "id": 997,
-          "name": "Product administrator",
-          "hasRole": false
-        },
-        {
-          "id": 998,
-          "name": "Product editor",
-          "hasRole": true
+          "websiteId": 12,
+          "host": "test-eppi.nice.org.uk",
+          "environment": {
+            "environmentId": 72,
+            "name": "dev"
+          },
+          "service": {
+            "serviceId": 11,
+            "name": "EPPI Reviewer"
+          },
+          "roles": [
+            {
+              "id": 995,
+              "name": "Product contributor",
+              "hasRole": false
+            },
+            {
+              "id": 996,
+              "name": "Product manager",
+              "hasRole": false
+            },
+            {
+              "id": 997,
+              "name": "Product administrator",
+              "hasRole": false
+            },
+            {
+              "id": 998,
+              "name": "Product editor",
+              "hasRole": true
+            }
+          ]
         }
       ]
-    }
-  ],
-  "userRoles": [
-    {
-      "userRoleId": 1991,
-      "roleId": 991,
-      "userId": 1
-    },
-    {
-      "userRoleId": 1992,
-      "roleId": 992,
-      "userId": 1
-    },
-    {
-      "userRoleId": 1993,
-      "roleId": 993,
-      "userId": 1
-    },
-    {
-      "userRoleId": 1998,
-      "roleId": 998,
-      "userId": 1
     }
   ]
 }

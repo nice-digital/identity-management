@@ -32,11 +32,7 @@ server.use((req, res, next) => {
   }else if (requestUrl.path.includes('services')){
     router.db._.id = "serviceId";
   }else if (requestUrl.path.includes('userRolesByWebsite')){
-    router.db._.id = "websiteId";
-  }else if (requestUrl.path.includes('userRoles')){
-    router.db._.id = "userRoleId";
-  }else{
-    router.db._.id = "id";
+    router.db._.id = "userId";
   }
   next()
 });
