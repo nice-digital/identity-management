@@ -68,7 +68,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							{!users.length ? (
 								<p>Loading...</p>
 							) : (
-								<ul className="list--unstyled">
+								<ul className="list--unstyled" data-qa-sel="list-of-users">
 									{users.map(user => {
 										const {
 											userId,
