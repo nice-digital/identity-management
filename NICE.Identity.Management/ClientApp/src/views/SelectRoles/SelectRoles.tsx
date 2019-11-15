@@ -6,24 +6,27 @@ import {
 	ServiceType,
 	UserType,
 	RoleType,
+	WebsiteType,
 } from "../../models/types";
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
-import { StackedNav, StackedNavLink } from "@nice-digital/nds-stacked-nav";
+//import { Checkbox } from "@nice-digital/nds-checkbox";
+import "@nice-digital/nds-checkbox/scss/checkbox.scss";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
-type TParams = { id: string; serviceId: string; environmentId: string };
+type TParams = { id: string; serviceId: string; websiteId: string };
 
 type SelectRolesProps = {} & RouteComponentProps<TParams>;
 
 type SelectRolesState = {
 	user: UserType;
-	service: ServiceType;
-	environment: EnvironmentType;
+	environment: WebsiteType;
 	roles: Array<RoleType>;
+	//environment: EnvironmentType;
+	editUser: UserType;
 	error?: Error;
 	isLoading: boolean;
 };
@@ -33,40 +36,70 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 		super(props);
 		this.state = {
 			user: {} as UserType,
-			service: {} as ServiceType,
-			environment: {} as EnvironmentType,
+			environment: {} as WebsiteType,
 			roles: [],
+			//environment: {} as EnvironmentType,
+			editUser: {} as UserType,
 			isLoading: true,
 		};
 	}
+
+	handleClick = async (e: any) => {
+		let roleId = e.target.value;
+		//console.log(e.target.value);
+		//this.setState({ isLoading: true });
+
+		// let roles = this.state.user.roles;
+
+		// roles.push({
+		// 	id: 14,
+		// 	name: "TESTSTSTSTSTSTS",
+		// 	websiteId: 116,
+		// });
+
+		let fetchOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				roleId: roleId,
+				userId: this.props.match.params.id,
+			}),
+		};
+
+		let editUser = await fetchData(Endpoints.userRolesList, fetchOptions);
+
+		console.log(editUser);
+
+		// if (isDataError(editUser)) {
+		// 	this.setState({ error: editUser });
+		// }
+
+		// this.setState({ editUser, isLoading: false });
+	};
 
 	async componentDidMount() {
 		this.setState({ isLoading: true });
 
 		let user = await fetchData(Endpoints.user(this.props.match.params.id));
-		let service = await fetchData(
-			Endpoints.service(this.props.match.params.serviceId),
+		let environment = await fetchData(
+			Endpoints.userRolesByWebsite(this.props.match.params.websiteId),
 		);
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
 		}
-		if (isDataError(service)) {
-			this.setState({ error: service });
+		if (isDataError(environment)) {
+			this.setState({ error: environment });
 		}
 
-		let environment = service.websites;
-		let roles = service.roles.filter(
-			(role: RoleType) =>
-				role.websiteId.toString() === this.props.match.params.environmentId,
-		);
+		let roles = environment.roles;
 
-		this.setState({ user, service, environment, roles, isLoading: false });
+		this.setState({ user, environment, roles, isLoading: false });
 	}
 
 	render() {
-		const { user, service, environment, roles, error, isLoading } = this.state;
-		const { id, serviceId } = this.props.match.params;
+		const { user, environment, roles, error, isLoading, editUser } = this.state;
+		const { id, serviceId, websiteId } = this.props.match.params;
 
 		let nameBreadcrumb = `${user.firstName} ${user.lastName}`;
 
@@ -102,20 +135,34 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 					<>
 						<PageHeader
 							preheading="Select environment for"
-							heading={service.name}
+							heading="Some text"
 						/>
 
 						<Grid>
 							<GridItem cols={8}>
-								<StackedNav>
+								<>
 									{roles.map(role => {
 										return (
-											<StackedNavLink destination="/" elementType={Link}>
-												{role.name}
-											</StackedNavLink>
+											<div className="checkbox">
+												<input
+													type="checkbox"
+													className="checkbox__input"
+													id="service-role"
+													name="service-role"
+													value={role.id}
+													checked={role.hasRole}
+													onClick={this.handleClick}
+												/>
+												<label
+													className="checkbox__label"
+													htmlFor="service-role"
+												>
+													{role.name}
+												</label>
+											</div>
 										);
 									})}
-								</StackedNav>
+								</>
 							</GridItem>
 						</Grid>
 					</>

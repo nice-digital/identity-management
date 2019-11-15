@@ -10,21 +10,25 @@ export type UserType = {
 	roles: Array<RoleType>;
 };
 
-export type EnvironmentType = {
-	id: number;
-	environmentName: string;
+export type WebsiteType = {
+	websiteId: number;
 	host: string;
+	environment: EnvironmentType;
+};
+
+export type EnvironmentType = {
+	EnvironmentId: number;
+	name: string;
 };
 
 export type RoleType = {
 	id: number;
 	name: string;
-	websiteId: number;
+	hasRole: boolean;
 };
 
 export type ServiceType = {
-	id: number;
+	serviceId: number;
 	name: string;
 	websites: Array<EnvironmentType>;
-	roles: Array<RoleType>;
 };

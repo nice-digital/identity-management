@@ -85,7 +85,7 @@ export class SelectService extends Component<
 									{services.map(service => {
 										return (
 											<StackedNavLink
-												destination={`${this.props.match.url}/${service.id}/environments`}
+												destination={`${this.props.match.url}/${service.serviceId}/environments`}
 												elementType={Link}
 											>
 												{service.name}

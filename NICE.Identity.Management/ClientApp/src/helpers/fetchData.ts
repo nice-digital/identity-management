@@ -8,7 +8,7 @@ export const fetchData = async (url: string, options?: {}) => {
 		return error;
 	}
 
-	if (response.status === 200) {
+	if (response.status === 200 || response.status === 201) {
 		return data;
 	} else {
 		let error = new Error(data.message);

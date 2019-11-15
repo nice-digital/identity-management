@@ -34,7 +34,7 @@ export class App extends React.Component {
 						component={SelectEnvironment}
 					/>
 					<Route
-						path="/users/:id/services/:serviceId/environments/:environmentId/roles"
+						path="/users/:id/services/:serviceId/environments/:websiteId/roles"
 						exact
 						component={SelectRoles}
 					/>
