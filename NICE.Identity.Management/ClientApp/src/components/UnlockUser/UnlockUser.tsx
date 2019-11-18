@@ -60,6 +60,7 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 
 		return (
 			<Button
+				data-qa-sel="lock-user-button"
 				variant="secondary"
 				onClick={this.fetchPatchData}
 				disabled={isButtonDisabled}
