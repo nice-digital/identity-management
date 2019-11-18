@@ -7,17 +7,18 @@ export type UserType = {
 	hasVerifiedEmailAddress: boolean;
 	isLockedOut: boolean;
 	acceptedTerms: boolean;
-	roles: Array<RoleType>;
 };
 
 export type WebsiteType = {
 	websiteId: number;
 	host: string;
 	environment: EnvironmentType;
+	service: ServiceType;
+	roles: Array<RoleType>;
 };
 
 export type EnvironmentType = {
-	EnvironmentId: number;
+	environmentId: number;
 	name: string;
 };
 
@@ -25,6 +26,12 @@ export type RoleType = {
 	id: number;
 	name: string;
 	hasRole: boolean;
+};
+
+export type UserRoleType = {
+	userRoleId: number;
+	roleId: number;
+	userId: number;
 };
 
 export type ServiceType = {

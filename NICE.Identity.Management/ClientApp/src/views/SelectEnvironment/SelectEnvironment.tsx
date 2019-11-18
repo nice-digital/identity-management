@@ -44,6 +44,8 @@ export class SelectEnvironment extends Component<
 	}
 
 	async componentDidMount() {
+		this.setState({ isLoading: true });
+
 		let user = await fetchData(Endpoints.user(this.props.match.params.id)),
 			service = await fetchData(
 				Endpoints.service(this.props.match.params.serviceId),

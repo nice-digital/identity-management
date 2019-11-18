@@ -37,8 +37,10 @@ export class SelectService extends Component<
 	}
 
 	async componentDidMount() {
-		let user = await fetchData(Endpoints.user(this.props.match.params.id));
-		let services = await fetchData(Endpoints.servicesList);
+		this.setState({ isLoading: true });
+
+		let user = await fetchData(Endpoints.user(this.props.match.params.id)),
+			services = await fetchData(Endpoints.servicesList);
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
