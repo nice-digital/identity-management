@@ -93,194 +93,162 @@
   ],
   "services": [
     {
-      "serviceId": 1,
-      "name": "EPPI Reviewer",
-      "websites": [
-        {
-          "websiteId": 11,
-          "host": "dev-eppi.nice.org.uk",
-          "environment": {
-            "environmentId": 71,
-            "name": "dev"
-          }
-        },
-        {
-          "websiteId": 12,
-          "host": "test-eppi.nice.org.uk",
-          "environment": {
-            "environmentId": 72,
-            "name": "test"
-          }
-        }
-      ]
+      "id": 1,
+      "name": "EPPI Reviewer"
     },
     {
-      "serviceId": 2,
-      "name": "Comment Collection",
-      "websites": [
-        {
-          "websiteId": 21,
-          "host": "dev-comments.nice.org.uk",
-          "environment": {
-            "environmentId": 71,
-            "name": "dev"
-          }
-        },
-        {
-          "websiteId": 22,
-          "host": "alpha-comments.nice.org.uk",
-          "environment": {
-            "environmentId": 73,
-            "name": "alpha"
-          }
-        }
-      ]
+      "id": 2,
+      "name": "Comment Collection"
     }
   ],
-  "userRolesByWebsite": [
+  "websites": [
     {
+      "id": 1,
+      "serviceId": 1,
+      "host": "dev-eppi.nice.org.uk",
+      "environment": {
+        "environmentId": 71,
+        "name": "dev"
+      }
+    },
+    {
+      "id": 2,
+      "serviceId": 1,
+      "host": "test-eppi.nice.org.uk",
+      "environment": {
+        "environmentId": 72,
+        "name": "test"
+      }
+    },
+    {
+      "id": 3,
+      "serviceId": 2,
+      "host": "dev-comments.nice.org.uk",
+      "environment": {
+        "environmentId": 71,
+        "name": "dev"
+      }
+    },
+    {
+      "id": 4,
+      "serviceId": 2,
+      "host": "alpha-comments.nice.org.uk",
+      "environment": {
+        "environmentId": 73,
+        "name": "alpha"
+      }
+    }
+  ],
+  "userroles": [
+    {
+      "id": 1,
       "userId": 1,
-      "websites": [
+      "serviceId": 1,
+      "websiteId": 1,
+      "roles": [
         {
-          "websiteId": 11,
-          "host": "dev-eppi.nice.org.uk",
-          "environment": {
-            "environmentId": 71,
-            "name": "dev"
-          },
-          "service": {
-            "serviceId": 1,
-            "name": "EPPI Reviewer"
-          },
-          "roles": [
-            {
-              "id": 991,
-              "name": "Product contributor",
-              "hasRole": true
-            },
-            {
-              "id": 992,
-              "name": "Product manager",
-              "hasRole": true
-            },
-            {
-              "id": 993,
-              "name": "Product administrator",
-              "hasRole": true
-            },
-            {
-              "id": 994,
-              "name": "Product editor",
-              "hasRole": false
-            }
-          ]
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
         },
         {
-          "websiteId": 12,
-          "host": "test-eppi.nice.org.uk",
-          "environment": {
-            "environmentId": 72,
-            "name": "dev"
-          },
-          "service": {
-            "serviceId": 11,
-            "name": "EPPI Reviewer"
-          },
-          "roles": [
-            {
-              "id": 995,
-              "name": "Product contributor",
-              "hasRole": false
-            },
-            {
-              "id": 996,
-              "name": "Product manager",
-              "hasRole": false
-            },
-            {
-              "id": 997,
-              "name": "Product administrator",
-              "hasRole": false
-            },
-            {
-              "id": 998,
-              "name": "Product editor",
-              "hasRole": true
-            }
-          ]
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": true
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": true
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
         }
       ]
     },
     {
-      "userId": 2,
-      "websites": [
+      "id": 2,
+      "userId": 1,
+      "serviceId": 1,
+      "websiteId": 2,
+      "roles": [
         {
-          "websiteId": 11,
-          "host": "dev-eppi.nice.org.uk",
-          "environment": {
-            "environmentId": 71,
-            "name": "dev"
-          },
-          "service": {
-            "serviceId": 1,
-            "name": "EPPI Reviewer"
-          },
-          "roles": [
-            {
-              "id": 991,
-              "name": "Product contributor",
-              "hasRole": true
-            },
-            {
-              "id": 992,
-              "name": "Product manager",
-              "hasRole": true
-            },
-            {
-              "id": 993,
-              "name": "Product administrator",
-              "hasRole": true
-            },
-            {
-              "id": 994,
-              "name": "Product editor",
-              "hasRole": false
-            }
-          ]
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
         },
         {
-          "websiteId": 12,
-          "host": "test-eppi.nice.org.uk",
-          "environment": {
-            "environmentId": 72,
-            "name": "dev"
-          },
-          "service": {
-            "serviceId": 11,
-            "name": "EPPI Reviewer"
-          },
-          "roles": [
-            {
-              "id": 995,
-              "name": "Product contributor",
-              "hasRole": false
-            },
-            {
-              "id": 996,
-              "name": "Product manager",
-              "hasRole": false
-            },
-            {
-              "id": 997,
-              "name": "Product administrator",
-              "hasRole": false
-            },
-            {
-              "id": 998,
-              "name": "Product editor",
-              "hasRole": true
-            }
-          ]
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "serviceId": 2,
+      "websiteId": 1,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": true
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "serviceId": 2,
+      "websiteId": 4,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": false
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
         }
       ]
     }
