@@ -5,7 +5,7 @@ const http = require('http');
 const https = require('https');
 const url = require('url');
 
-const http_port = process.env.HTTP_PORT || 3001;
+const http_port = process.env.HTTP_PORT || 8090;
 const https_port = process.env.HTTPS_PORT || 3443;
 const options = { cert: null, key: null };
 
