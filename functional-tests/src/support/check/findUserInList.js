@@ -21,9 +21,14 @@ export const userNotInList = (userName) => {
   pause(1000);
 };
 
-export const clickUserInList = () => {
+export const clickFirstUserInList = () => {
   waitForVisible(selectors.adminHomepage.userlist);
-  clickElement("click", "selector", selectors.adminHomepage.userCard);
+  clickElement("click", "selector", selectors.adminHomepage.firstUserCard);
+};
+
+export const clickSecondUserInList = () => {
+  waitForVisible(selectors.adminHomepage.userlist);
+  clickElement("click", "selector", selectors.adminHomepage.secondUserCard);
 };
 
 export default findUserList;

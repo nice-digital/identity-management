@@ -116,9 +116,13 @@ services:
     build: ./../NICE.Identity.Management.MockApi/
     ports: 
       - 8090:8090
+    environment:
+      - HTTP_PORT
+      - HTTPS_PORT
     volumes: 
-      -  ./../NICE.Identity.Management.MockApi/api:/data
-    command: -H 0.0.0.0 -p 8090 -w db.json --routes routes.json
+      -  ./../NICE.Identity.Management.MockApi:/data
+      - /data/node_modules
+    command: npm start
     networks:
       default:
         aliases:

@@ -1,6 +1,6 @@
 const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
-const toNthChildAttr = (attrValue) => `.card:nth-child(${attrValue})`;
-const toChildAndQASel = (childIndex, attrValue) => toNthChildAttr(childIndex) + ' ' + toDataQASelAttr(attrValue);
+const toNthChildAttr = (attrValue) => `li:nth-child(${attrValue})`;
+const toChildAndQASel = (childIndex, attrValue) => toDataQASelAttr(attrValue) + ' ' + toNthChildAttr(childIndex);
 
 export default {
   loginPage: {
@@ -30,14 +30,22 @@ export default {
   },
   adminHomepage: {
     userlist: toDataQASelAttr("list-of-users"),
-    userCard: toNthChildAttr(1),
+    firstUserCard: toChildAndQASel(1, "list-of-users"),
+    secondUserCard: toChildAndQASel(2, "list-of-users"),
+    thirdUserCard: toChildAndQASel(3, "list-of-users"),
+    fourthUserCard: toChildAndQASel(4, "list-of-users"),
     roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
     globalNavMyAccount: "#my-account-button",
     globalNavSignOut: "#my-account",
+    userStatusListPage: "[data-qa-sel='list-of-users'] li:nth-child(2) .tag--alpha",
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),
+    lockUserButton: toDataQASelAttr("lock-user-button"),
+    usersBreadcrumb: toDataQASelAttr("breadcrumb-user-link"),
+    userStatusActive: ".tag--live",
+    userStatusLocked: ".tag--alpha",
   },
   confirmUserDeletionPage: {
     confirmDeleteUser: toDataQASelAttr("confirm-delete-user"),

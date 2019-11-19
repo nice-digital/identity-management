@@ -95,7 +95,7 @@ export class User extends Component<UserProps, UserState> {
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/users" elementType={Link}>
+					<Breadcrumb data-qa-sel="breadcrumb-user-link" to="/users" elementType={Link}>
 						Users
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>

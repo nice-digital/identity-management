@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
+      data-qa-sel="breadcrumb-user-link"
       elementType={[Function]}
       to="/users"
     >
@@ -120,6 +121,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <a
+            data-qa-sel="breadcrumb-user-link"
             href="/users"
             onClick={[Function]}
           >
@@ -200,6 +202,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <a
+            data-qa-sel="breadcrumb-user-link"
             href="/users"
             onClick={[Function]}
           >
