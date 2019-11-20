@@ -9,12 +9,28 @@ export type UserType = {
 	acceptedTerms: boolean;
 };
 
-export type WebsiteType = {
+export type ServiceType = {
+	id: number;
+	name: string;
+	websites: Array<ServiceWebsiteType>;
+};
+
+export type ServiceWebsiteType = {
 	websiteId: number;
 	host: string;
 	environment: EnvironmentType;
-	service: ServiceType;
-	roles: Array<RoleType>;
+};
+
+export type UserRoleType = {
+	userId: number;
+	websites: Array<WebsiteType>;
+};
+
+export type WebsiteType = {
+	id: number;
+	serviceId: number;
+	host: string;
+	environment: EnvironmentType;
 };
 
 export type EnvironmentType = {
@@ -26,16 +42,4 @@ export type RoleType = {
 	id: number;
 	name: string;
 	hasRole: boolean;
-};
-
-export type UserRoleType = {
-	userRoleId: number;
-	roleId: number;
-	userId: number;
-};
-
-export type ServiceType = {
-	serviceId: number;
-	name: string;
-	websites: Array<EnvironmentType>;
 };

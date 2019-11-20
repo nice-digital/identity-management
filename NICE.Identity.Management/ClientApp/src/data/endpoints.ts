@@ -10,11 +10,6 @@ export const Endpoints = {
 	service: (serviceId: string | number) =>
 		`${API_BASE_URL}/services/${serviceId}`,
 
-	userRolesList: `${API_BASE_URL}/userRoles/`,
-	userRole: (userRoleId: string | number) =>
-		`${API_BASE_URL}/userRoles/${userRoleId}`,
-
-	userRolesByWebsiteList: `${API_BASE_URL}/userRolesByWebsite/`,
-	userRolesByWebsite: (websiteId: string | number) =>
-		`${API_BASE_URL}/userRolesByWebsite/${websiteId}`,
+	userRolesByWebsite: (userId: string | number, websiteId: string | number) =>
+		`${API_BASE_URL}/users/${userId}/rolesbywebsite/${websiteId}`,
 };
