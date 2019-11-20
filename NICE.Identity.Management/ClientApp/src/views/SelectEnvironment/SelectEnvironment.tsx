@@ -105,7 +105,7 @@ export class SelectEnvironment extends Component<
 									{websites.map(website => {
 										return (
 											<StackedNavLink
-												destination={`${url}/${website.websiteId}/roles`}
+												destination={`${url}/${website.id}/roles`}
 												elementType={Link}
 											>
 												{website.environment.name}
