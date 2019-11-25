@@ -83,6 +83,7 @@ Array [
     >
       <ul
         className="list--unstyled"
+        data-qa-sel="list-of-users"
       >
         <article
           className="card"

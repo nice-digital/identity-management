@@ -119,7 +119,7 @@ describe("DeleteUser", () => {
 		expect(wrapper.find("button").text()).toEqual("Loading...");
 	});
 
-	it("should display confirmation message once fetchDeleteData is successfully complete", async () => {
+	it("should display confirmation message once fetchData delete is successfully complete", async () => {
 		fetchMock.mock("*", {});
 		const wrapper = mount(
 			<MemoryRouter>
