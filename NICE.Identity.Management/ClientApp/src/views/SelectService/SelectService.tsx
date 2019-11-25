@@ -83,18 +83,23 @@ export class SelectService extends Component<
 
 						<Grid>
 							<GridItem cols={12}>
-								<StackedNav>
-									{services.map(service => {
-										return (
-											<StackedNavLink
-												destination={`${this.props.match.url}/${service.id}/environments`}
-												elementType={Link}
-											>
-												{service.name}
-											</StackedNavLink>
-										);
-									})}
-								</StackedNav>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : (
+									<StackedNav>
+										{services.map(service => {
+											return (
+												<StackedNavLink
+													destination={`${this.props.match.url}/${service.id}/environments`}
+													elementType={Link}
+													key={service.id}
+												>
+													{service.name}
+												</StackedNavLink>
+											);
+										})}
+									</StackedNav>
+								)}
 							</GridItem>
 						</Grid>
 					</>

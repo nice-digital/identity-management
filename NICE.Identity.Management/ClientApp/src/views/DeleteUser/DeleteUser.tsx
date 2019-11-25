@@ -90,10 +90,6 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 			lastBreadcrumb = "Loading user details";
 		}
 
-		if (error) {
-			lastBreadcrumb = "";
-		}
-
 		return (
 			<>
 				{hasBeenDeleted ? (

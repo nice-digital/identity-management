@@ -96,23 +96,28 @@ export class SelectEnvironment extends Component<
 					<>
 						<PageHeader
 							preheading="Select environment for"
-							heading={service.name}
+							heading={isLoading ? "Service name" : service.name}
 						/>
 
 						<Grid>
 							<GridItem cols={8}>
-								<StackedNav>
-									{websites.map(website => {
-										return (
-											<StackedNavLink
-												destination={`${url}/${website.id}/roles`}
-												elementType={Link}
-											>
-												{website.environment.name}
-											</StackedNavLink>
-										);
-									})}
-								</StackedNav>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : (
+									<StackedNav>
+										{websites.map(website => {
+											return (
+												<StackedNavLink
+													destination={`${url}/${website.id}/roles`}
+													elementType={Link}
+													key={website.id}
+												>
+													{website.environment.name}
+												</StackedNavLink>
+											);
+										})}
+									</StackedNav>
+								)}
 							</GridItem>
 						</Grid>
 					</>

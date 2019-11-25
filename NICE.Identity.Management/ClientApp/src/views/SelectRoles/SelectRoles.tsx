@@ -16,6 +16,9 @@ import { Grid, GridItem } from "@nice-digital/nds-grid";
 //import { Checkbox } from "@nice-digital/nds-checkbox";
 import "@nice-digital/nds-checkbox/scss/checkbox.scss";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { AddRoleConfirmation } from "../../components/AddRoleConfirmation/AddRoleConfirmation";
+import { ToggleCheckbox } from "../../components/ToggleCheckbox/ToggleCheckbox";
+import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string; serviceId: string; websiteId: string };
 
@@ -23,12 +26,14 @@ type SelectRolesProps = {} & RouteComponentProps<TParams>;
 
 type SelectRolesState = {
 	user: UserType;
-	environment: WebsiteType;
 	roles: Array<RoleType>;
-	//environment: EnvironmentType;
-	editUser: UserType;
+	service: ServiceType;
+	website: WebsiteType;
+	environment: EnvironmentType;
+	hasBeenUpdated: boolean;
 	error?: Error;
 	isLoading: boolean;
+	isButtonDisabled: boolean;
 };
 
 export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
@@ -36,78 +41,107 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 		super(props);
 		this.state = {
 			user: {} as UserType,
-			environment: {} as WebsiteType,
 			roles: [],
-			//environment: {} as EnvironmentType,
-			editUser: {} as UserType,
+			service: {} as ServiceType,
+			website: {} as WebsiteType,
+			environment: {} as EnvironmentType,
+			hasBeenUpdated: false,
 			isLoading: true,
+			isButtonDisabled: false,
 		};
 	}
 
-	handleClick = async (e: any) => {
-		let roleId = e.target.value;
-		//console.log(e.target.value);
-		//this.setState({ isLoading: true });
+	handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		let checkbox = e.target;
+		let roles = this.state.roles;
 
-		// let roles = this.state.user.roles;
+		roles.map(role => {
+			if (role.id.toString() === checkbox.value) {
+				role.hasRole = !role.hasRole;
+			}
+		});
 
-		// roles.push({
-		// 	id: 14,
-		// 	name: "TESTSTSTSTSTSTS",
-		// 	websiteId: 116,
-		// });
+		this.setState({ roles });
+	};
+
+	handleFormSubmission = async (e: any) => {
+		e.preventDefault();
+
+		this.setState({ isButtonDisabled: true });
 
 		let fetchOptions = {
-			method: "POST",
+			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				roleId: roleId,
-				userId: this.props.match.params.id,
-			}),
+			body: JSON.stringify({ roles: this.state.roles }),
 		};
 
-		let editUser = await fetchData(Endpoints.userRolesList, fetchOptions);
+		let roles = await fetchData(
+			Endpoints.userRolesByWebsite(
+				this.props.match.params.id,
+				this.props.match.params.websiteId,
+			),
+			fetchOptions,
+		);
 
-		console.log(editUser);
+		if (isDataError(roles)) {
+			this.setState({ error: roles });
+		} else {
+			this.setState({ hasBeenUpdated: true });
+		}
 
-		// if (isDataError(editUser)) {
-		// 	this.setState({ error: editUser });
-		// }
-
-		// this.setState({ editUser, isLoading: false });
+		this.setState({ isButtonDisabled: false });
 	};
 
 	async componentDidMount() {
 		this.setState({ isLoading: true });
 
 		let user = await fetchData(Endpoints.user(this.props.match.params.id));
-		let environment = await fetchData(
-			Endpoints.userRolesByWebsite(this.props.match.params.websiteId),
+		let userRolesByWebsite = await fetchData(
+			Endpoints.userRolesByWebsite(
+				this.props.match.params.id,
+				this.props.match.params.websiteId,
+			),
 		);
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
 		}
-		if (isDataError(environment)) {
-			this.setState({ error: environment });
+
+		if (isDataError(userRolesByWebsite)) {
+			this.setState({ error: userRolesByWebsite });
 		}
 
-		let roles = environment.roles;
+		const { roles, service, website } = userRolesByWebsite;
 
-		this.setState({ user, environment, roles, isLoading: false });
+		let environment = website ? website.environment : {};
+
+		this.setState({
+			user,
+			roles,
+			service,
+			website,
+			environment,
+			isLoading: false,
+		});
 	}
 
 	render() {
-		const { user, environment, roles, error, isLoading, editUser } = this.state;
+		const {
+			user,
+			roles,
+			service,
+			environment,
+			hasBeenUpdated,
+			error,
+			isLoading,
+			isButtonDisabled,
+		} = this.state;
 		const { id, serviceId, websiteId } = this.props.match.params;
 
 		let nameBreadcrumb = `${user.firstName} ${user.lastName}`;
 
 		if (isLoading) {
 			nameBreadcrumb = "Loading user details";
-		}
-		if (error) {
-			nameBreadcrumb = "Error";
 		}
 
 		return (
@@ -116,9 +150,13 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 					<Breadcrumb to="/users" elementType={Link}>
 						Users
 					</Breadcrumb>
-					<Breadcrumb to={`/users/${id}`} elementType={Link}>
-						{nameBreadcrumb}
-					</Breadcrumb>
+					{error ? (
+						<Breadcrumb>Error</Breadcrumb>
+					) : (
+						<Breadcrumb to={`/users/${id}`} elementType={Link}>
+							{nameBreadcrumb}
+						</Breadcrumb>
+					)}
 					<Breadcrumb to={`/users/${id}/services`} elementType={Link}>
 						Select service
 					</Breadcrumb>
@@ -135,34 +173,42 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 					<>
 						<PageHeader
 							preheading="Select environment for"
-							heading="Some text"
+							heading={
+								isLoading
+									? "User details"
+									: `${service.name} (${environment.name})`
+							}
 						/>
+
+						{hasBeenUpdated && (
+							<AddRoleConfirmation
+								id={user.userId}
+								fullName={`${user.firstName} ${user.lastName}`}
+							/>
+						)}
 
 						<Grid>
 							<GridItem cols={8}>
-								<>
-									{roles.map(role => {
-										return (
-											<div className="checkbox">
-												<input
-													type="checkbox"
-													className="checkbox__input"
-													id="service-role"
-													name="service-role"
-													value={role.id}
-													checked={role.hasRole}
-													onClick={this.handleClick}
-												/>
-												<label
-													className="checkbox__label"
-													htmlFor="service-role"
-												>
-													{role.name}
-												</label>
-											</div>
-										);
-									})}
-								</>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : (
+									<form onSubmit={this.handleFormSubmission}>
+										{roles.map(role => {
+											let props = {
+												id: role.id,
+												name: role.name,
+												isSelected: role.hasRole,
+												isDisabled: isButtonDisabled,
+												onCheckboxChange: this.handleCheckboxChange,
+											};
+
+											return <ToggleCheckbox {...props} key={role.id} />;
+										})}
+										<Button buttonType="submit" disabled={isButtonDisabled}>
+											{isButtonDisabled ? "Loading..." : "Save"}
+										</Button>
+									</form>
+								)}
 							</GridItem>
 						</Grid>
 					</>
