@@ -1,11 +1,10 @@
 FROM node:latest
 
-RUN npm install -g json-server
-
 WORKDIR /data
 
-EXPOSE 8090
+COPY package.json /data
+COPY package-lock.json /data
 
-ENTRYPOINT ["json-server"]
+RUN npm install
 
-CMD []
+COPY . .

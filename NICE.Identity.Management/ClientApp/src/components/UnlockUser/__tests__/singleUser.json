@@ -1,11 +1,15 @@
-[
-	{
-		"userId": 2,
-		"emailAddress": "vernita.green@gmail.com",
-		"auth0UserId": "usr_5457edea1b8f33391a000002",
-		"firstName": "Vernita",
-		"lastName": "Green",
-		"hasVerifiedEmailAddress": true,
-		"isLockedOut": true
-	}
-]
+{
+	"userId": 1,
+	"auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+	"firstName": "Kristin",
+	"lastName": "Patrick",
+	"emailAddress": "kristin.patrick@example.com",
+	"allowContactMe": true,
+	"hasVerifiedEmailAddress": true,
+	"isLockedOut": false,
+	"initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+	"lastLoggedInDate": "2019-10-23T12:29:54.911Z",
+	"isStaffMember": false,
+	"acceptedTerms": true,
+	"isMigrated": false
+}

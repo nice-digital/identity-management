@@ -14,6 +14,7 @@ import finduser from "../support/action/finduser";
 import deleteUser from "../support/action/deleteUser";
 import findUserList, { userNotInList } from "../support/check/findUserInList";
 import validateDeletionSuccessMessage, { validateRegistrationValidationMessages } from "../support/check/validateMessages";
+import validateUserStatusActive, { validateUserStatusLocked, validateUserStatusListPageLocked } from "../support/check/validateUserStatus";
 import identityLogInPage from "../support/check/identityLogInPage";
 
 Then(
@@ -99,4 +100,19 @@ Then(
 Then(
   /^I expect I appear on the login page$/,
   identityLogInPage
+);
+
+Then(
+  /^I expect that the status of the user appears as Active$/,
+  validateUserStatusActive
+);
+
+Then(
+  /^I expect that the status of the user appears as Locked$/,
+  validateUserStatusLocked
+);
+
+Then(
+  /^I expect that the status of the user on the user list page is also Locked$/,
+  validateUserStatusListPageLocked
 );
