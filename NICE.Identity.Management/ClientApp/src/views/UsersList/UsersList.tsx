@@ -99,7 +99,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											<Card
 												{...usersListHeading}
 												metadata={usersListMetadata}
-												key={auth0UserId}
+												key={nameIdentifier}
 											/>
 										);
 									})}
