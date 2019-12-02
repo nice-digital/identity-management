@@ -40,12 +40,11 @@ describe("SelectRoles", () => {
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
-		fetchMock
-			.getOnce(Endpoints.user(match.params.id), singleUser)
-			.getOnce(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				singleUserRoles,
-			);
+		fetchMock.getOnce(Endpoints.user(match.params.id), singleUser);
+		fetchMock.getOnce(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			singleUserRoles,
+		);
 		const wrapper = shallow(<SelectRoles match={match} />);
 		await nextTick();
 		wrapper.update();
