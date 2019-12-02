@@ -40,7 +40,7 @@ describe("SelectService", () => {
 
 	it("should match the snapshot after data has been loaded", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(Endpoints.servicesList, services);
+		fetchMock.get(Endpoints.servicesList, services, { overwriteRoutes: false });
 		const wrapper = shallow(<SelectService match={match} />);
 		await nextTick();
 		wrapper.update();
@@ -49,7 +49,7 @@ describe("SelectService", () => {
 
 	it("should show error message when user fetchData function returns 500 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), 500);
-		fetchMock.get(Endpoints.servicesList, services);
+		fetchMock.get(Endpoints.servicesList, services, { overwriteRoutes: false });
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectService match={match} />
@@ -62,7 +62,7 @@ describe("SelectService", () => {
 
 	it("should show error message when user fetchData function returns 401 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), 401);
-		fetchMock.get(Endpoints.servicesList, services);
+		fetchMock.get(Endpoints.servicesList, services, { overwriteRoutes: false });
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectService match={match} />
@@ -75,7 +75,7 @@ describe("SelectService", () => {
 
 	it("should show error message when services fetchData function returns 500 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(Endpoints.servicesList, 500);
+		fetchMock.get(Endpoints.servicesList, 500, { overwriteRoutes: false });
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectService match={match} />
@@ -88,7 +88,7 @@ describe("SelectService", () => {
 
 	it("should show error message when services fetchData function returns 401 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(Endpoints.servicesList, 401);
+		fetchMock.get(Endpoints.servicesList, 401, { overwriteRoutes: false });
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectService match={match} />

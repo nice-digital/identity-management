@@ -53,12 +53,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when user fetchData function returns 500 error", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), 500)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				singleUserRoles,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), 500);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			singleUserRoles,
+			{ overwriteRoutes: false },
+		);
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -70,12 +70,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when user fetchData function returns 401 error", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), 401)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				singleUserRoles,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), 401);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			singleUserRoles,
+			{ overwriteRoutes: false },
+		);
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -87,12 +87,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when services fetchData function returns 500 error", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), singleUser)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				500,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), singleUser);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			500,
+			{ overwriteRoutes: false },
+		);
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -104,12 +104,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when services fetchData function returns 401 error", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), singleUser)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				401,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), singleUser);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			401,
+			{ overwriteRoutes: false },
+		);
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -121,12 +121,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should display confirmation message once fetchData patch is successfully complete", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), singleUser)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				singleUserRoles,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), singleUser);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			singleUserRoles,
+			{ overwriteRoutes: false },
+		);
 		fetchMock.patch("*", singleUserRoles);
 		const wrapper = mount(
 			<MemoryRouter>
@@ -142,12 +142,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should disable button when form submitted", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), singleUser)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				singleUserRoles,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), singleUser);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			singleUserRoles,
+			{ overwriteRoutes: false },
+		);
 		fetchMock.patch("*", {});
 		const wrapper = mount(
 			<MemoryRouter>
@@ -163,12 +163,12 @@ describe("SelectRoles", () => {
 	});
 
 	it("should disable all checkboxes when form submitted", async () => {
-		fetchMock
-			.get(Endpoints.user(match.params.id), singleUser)
-			.get(
-				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-				singleUserRoles,
-			);
+		fetchMock.get(Endpoints.user(match.params.id), singleUser);
+		fetchMock.get(
+			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
+			singleUserRoles,
+			{ overwriteRoutes: false },
+		);
 		fetchMock.patch("*", {});
 		const wrapper = mount(
 			<MemoryRouter>

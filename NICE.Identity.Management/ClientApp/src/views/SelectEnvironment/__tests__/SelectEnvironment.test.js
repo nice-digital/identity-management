@@ -40,7 +40,9 @@ describe("SelectEnvironment", () => {
 
 	it("should match the snapshot after data has been loaded", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(Endpoints.service(match.params.serviceId), singleService);
+		fetchMock.get(Endpoints.service(match.params.serviceId), singleService, {
+			overwriteRoutes: false,
+		});
 		const wrapper = shallow(<SelectEnvironment match={match} />);
 		await nextTick();
 		wrapper.update();
@@ -49,7 +51,9 @@ describe("SelectEnvironment", () => {
 
 	it("should show error message when user fetchData function returns 500 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), 500);
-		fetchMock.get(Endpoints.service(match.params.serviceId), singleService);
+		fetchMock.get(Endpoints.service(match.params.serviceId), singleService, {
+			overwriteRoutes: false,
+		});
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectEnvironment match={match} />
@@ -62,7 +66,9 @@ describe("SelectEnvironment", () => {
 
 	it("should show error message when user fetchData function returns 401 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), 401);
-		fetchMock.get(Endpoints.service(match.params.serviceId), singleService);
+		fetchMock.get(Endpoints.service(match.params.serviceId), singleService, {
+			overwriteRoutes: false,
+		});
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectEnvironment match={match} />
@@ -75,7 +81,9 @@ describe("SelectEnvironment", () => {
 
 	it("should show error message when services fetchData function returns 500 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(Endpoints.service(match.params.serviceId), 500);
+		fetchMock.get(Endpoints.service(match.params.serviceId), 500, {
+			overwriteRoutes: false,
+		});
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectEnvironment match={match} />
@@ -88,7 +96,9 @@ describe("SelectEnvironment", () => {
 
 	it("should show error message when services fetchData function returns 401 error", async () => {
 		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(Endpoints.service(match.params.serviceId), 401);
+		fetchMock.get(Endpoints.service(match.params.serviceId), 401, {
+			overwriteRoutes: false,
+		});
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectEnvironment match={match} />
