@@ -41,8 +41,8 @@ describe("SelectRoles", () => {
 
 	it("should match the snapshot after data has been loaded", async () => {
 		fetchMock
-			.mock(Endpoints.user(match.params.id), singleUser)
-			.mock(
+			.getOnce(Endpoints.user(match.params.id), singleUser)
+			.getOnce(
 				Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 				singleUserRoles,
 			);
