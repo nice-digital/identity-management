@@ -1,7 +1,7 @@
 [
   {
     "userId": 1,
-    "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+    "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
     "firstName": "Kristin",
     "lastName": "Patrick",
     "emailAddress": "kristin.patrick@example.com",
@@ -16,7 +16,7 @@
   },
   {
     "userId": 2,
-    "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+    "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
     "firstName": "Thomas",
     "lastName": "Holding",
     "emailAddress": "thomas.holding@example.com",
@@ -31,7 +31,7 @@
   },
   {
     "userId": 3,
-    "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+    "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
     "firstName": "Aisha",
     "lastName": "Bartlett",
     "emailAddress": "aisha.bartlett@example.com",
@@ -46,7 +46,7 @@
   },
   {
     "userId": 4,
-    "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+    "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
     "firstName": "Theo",
     "lastName": "Bradford",
     "emailAddress": "theo.bradford@example.com",
