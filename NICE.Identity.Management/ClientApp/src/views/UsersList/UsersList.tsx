@@ -73,7 +73,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										const {
 											userId,
 											emailAddress,
-											auth0UserId,
+											nameIdentifier,
 											firstName,
 											lastName,
 										} = user;
