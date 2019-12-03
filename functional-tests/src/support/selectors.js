@@ -36,8 +36,8 @@ export default {
     fourthUserCard: toChildAndQASel(4, "list-of-users"),
     roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
-    globalNavMyAccount: "#my-account-button",
-    globalNavSignOut: "#my-account",
+    globalNavMyAccount: "[id$='my-account-button']",
+    globalNavSignOut: "[id$='my-account']",
     userStatusListPage: "[data-qa-sel='list-of-users'] li:nth-child(2) .tag--alpha",
   },
   adminUserPage: {
