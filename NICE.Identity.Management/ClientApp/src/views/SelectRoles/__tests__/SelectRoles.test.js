@@ -22,13 +22,6 @@ describe("SelectRoles", () => {
 		url: "",
 	};
 
-	const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
-		? process.env.REACT_APP_API_BASE_URL
-		: "#{REACT_APP_API_BASE_URL}";
-
-	let userEndpoint = `${API_BASE_URL}/users/${match.params.id}`;
-	let userRolesByWebsiteEndpoint = `${API_BASE_URL}/users/${match.params.id}/rolesbywebsite/${match.params.websiteId}`;
-
 	afterEach(fetchMock.reset);
 
 	it("should show loading message before data has been loaded", () => {
@@ -47,8 +40,8 @@ describe("SelectRoles", () => {
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
-		fetchMock.mock(userEndpoint, singleUser);
-		fetchMock.get(userRolesByWebsiteEndpoint, singleUserRoles, {
+		fetchMock.mock(Endpoints.user(match.params.id), singleUser);
+		fetchMock.get(Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId), singleUserRoles, {
 			overwriteRoutes: false,
 		});
 		const wrapper = shallow(<SelectRoles match={match} />);
