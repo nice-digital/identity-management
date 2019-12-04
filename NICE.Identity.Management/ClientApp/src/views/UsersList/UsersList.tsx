@@ -48,6 +48,19 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ users, isLoading: false });
 	}
 
+	filterUsers = async (query: any) => {
+		this.setState({ isLoading: true });
+
+		let url = `${Endpoints.usersList}?q=${query}`;
+		let users = await fetchData(url);
+
+		if (isDataError(users)) {
+			this.setState({ error: users });
+		}
+
+		this.setState({ users, isLoading: false });
+	};
+
 	render() {
 		const { users, error, isLoading } = this.state;
 
@@ -62,7 +75,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<Filter />
+							<Filter onInputChange={this.filterUsers} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
 							{!users.length ? (
