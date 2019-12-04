@@ -23,6 +23,7 @@ type UsersListProps = {};
 
 type UsersListState = {
 	users: Array<UserType>;
+	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
 };
@@ -48,21 +49,20 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ users, isLoading: false });
 	}
 
-	filterUsers = async (query: any) => {
+	filterUsers = async (searchQuery: string) => {
 		this.setState({ isLoading: true });
 
-		let url = `${Endpoints.usersList}?q=${query}`;
-		let users = await fetchData(url);
+		let users = await fetchData(`${Endpoints.usersList}?q=${searchQuery}`);
 
 		if (isDataError(users)) {
 			this.setState({ error: users });
 		}
 
-		this.setState({ users, isLoading: false });
+		this.setState({ users, searchQuery, isLoading: false });
 	};
 
 	render() {
-		const { users, error, isLoading } = this.state;
+		const { users, searchQuery, error, isLoading } = this.state;
 
 		return (
 			<>
@@ -78,9 +78,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							<Filter onInputChange={this.filterUsers} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
-							{!users.length ? (
+							{isLoading ? (
 								<p>Loading...</p>
-							) : (
+							) : users.length ? (
 								<ul className="list--unstyled" data-qa-sel="list-of-users">
 									{users.map(user => {
 										const {
@@ -117,6 +117,15 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										);
 									})}
 								</ul>
+							) : (
+								<p>
+									No results found
+									{searchQuery && (
+										<>
+											&nbsp;for <strong>{searchQuery}</strong>
+										</>
+									)}
+								</p>
 							)}
 						</GridItem>
 					</Grid>

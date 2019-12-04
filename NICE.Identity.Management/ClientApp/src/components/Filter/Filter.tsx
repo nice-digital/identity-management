@@ -3,13 +3,13 @@ import { Panel } from "@nice-digital/nds-panel";
 import { Input } from "@nice-digital/nds-forms";
 
 type FilterProps = {
-	onInputChange: (query: string) => void;
+	onInputChange: (searchQuery: string) => void;
 };
 
 export const Filter = (props: FilterProps) => {
 	let typingTimer: number = 0;
 
-	const handleInputChange = (e: any) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const val = e.target.value.trim();
 
 		clearTimeout(typingTimer);
@@ -23,11 +23,12 @@ export const Filter = (props: FilterProps) => {
 		<Panel>
 			<p>Filter options</p>
 			<Input
-				type="text"
+				type="search"
 				label="Search"
 				unique="userSearch"
 				name="user-search"
 				onChange={handleInputChange}
+				autoComplete="off"
 			/>
 		</Panel>
 	);
