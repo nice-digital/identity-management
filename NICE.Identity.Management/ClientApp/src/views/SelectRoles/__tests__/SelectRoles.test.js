@@ -56,7 +56,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			singleUserRoles,
-			{ overwriteRoutes: false },
 		);
 		const wrapper = mount(
 			<MemoryRouter>
@@ -73,7 +72,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			singleUserRoles,
-			{ overwriteRoutes: false },
 		);
 		const wrapper = mount(
 			<MemoryRouter>
@@ -90,7 +88,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			500,
-			{ overwriteRoutes: false },
 		);
 		const wrapper = mount(
 			<MemoryRouter>
@@ -107,7 +104,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			401,
-			{ overwriteRoutes: false },
 		);
 		const wrapper = mount(
 			<MemoryRouter>
@@ -124,7 +120,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			singleUserRoles,
-			{ overwriteRoutes: false },
 		);
 		fetchMock.patch("*", singleUserRoles);
 		const wrapper = mount(
@@ -145,7 +140,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			singleUserRoles,
-			{ overwriteRoutes: false },
 		);
 		fetchMock.patch("*", {});
 		const wrapper = mount(
@@ -166,7 +160,6 @@ describe("SelectRoles", () => {
 		fetchMock.get(
 			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
 			singleUserRoles,
-			{ overwriteRoutes: false },
 		);
 		fetchMock.patch("*", {});
 		const wrapper = mount(
