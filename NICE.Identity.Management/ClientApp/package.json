@@ -37,8 +37,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:ci": "cross-env CI=true react-scripts test",
+    "test": "cross-env REACT_APP_API_BASE_URL=test-api react-scripts test",
+    "test:ci": "cross-env CI=true REACT_APP_API_BASE_URL=test-api react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": [

@@ -1,9 +1,9 @@
 export type UserType = {
 	userId: number;
-	auth0UserId: string;
+	emailAddress: string;
+	nameIdentifier: string;
 	firstName: string;
 	lastName: string;
-	emailAddress: string;
 	hasVerifiedEmailAddress: boolean;
 	isLockedOut: boolean;
 	acceptedTerms: boolean;

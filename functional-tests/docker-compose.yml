@@ -3,7 +3,7 @@ version: '2'
 services:
   firefox:
     container_name: functional-tests_firefox_1
-    image: selenium/node-firefox:3.11.0-dysprosium
+    image: selenium/node-firefox:3.141
     # See https://github.com/SeleniumHQ/docker-selenium#running-the-images
     volumes:
       - /dev/shm:/dev/shm
@@ -14,7 +14,7 @@ services:
 
   chrome:
     container_name: functional-tests_chrome_1
-    image: selenium/node-chrome:3.11.0-dysprosium
+    image: selenium/node-chrome:3.141
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -25,7 +25,7 @@ services:
 
   # Selenium Grid/Hub
   hub:
-    image: selenium/hub:3.11.0-dysprosium
+    image: selenium/hub:3.141
     container_name: selenium_hub
     environment:
       GRID_DEBUG: "true"

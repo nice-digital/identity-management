@@ -11,7 +11,7 @@ export const Login = (username, password) => {
   browser.setValue(selectors.loginPage.usernameField, process.env[username]);
   browser.setValue(selectors.loginPage.passwordField, process.env[password]);
   // waitFor(selectors.loginPage.signInButton, 'enabled')
-  click('doubleclick', 'element', selectors.loginPage.signInButton);
+  click('click', 'element', selectors.loginPage.signInButton);
   browser.pause(1000);
 }
 

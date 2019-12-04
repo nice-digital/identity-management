@@ -86,7 +86,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										const {
 											userId,
 											emailAddress,
-											auth0UserId,
+											nameIdentifier,
 											firstName,
 											lastName,
 										} = user;
@@ -112,7 +112,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											<Card
 												{...usersListHeading}
 												metadata={usersListMetadata}
-												key={auth0UserId}
+												key={nameIdentifier}
 											/>
 										);
 									})}
