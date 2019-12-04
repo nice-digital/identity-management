@@ -9,7 +9,7 @@ type FilterProps = {
 export const Filter = (props: FilterProps) => {
 	let typingTimer: number = 0;
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value.trim();
 
 		clearTimeout(typingTimer);
