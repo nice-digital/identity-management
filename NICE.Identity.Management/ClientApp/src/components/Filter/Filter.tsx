@@ -21,10 +21,9 @@ export const Filter = (props: FilterProps) => {
 
 	return (
 		<Panel>
-			<p>Filter options</p>
 			<Input
 				type="search"
-				label="Search"
+				label="Filter by name or email address"
 				unique="userSearch"
 				name="user-search"
 				onChange={handleInputChange}
