@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should match the snapshot after data has been loaded 1`] = `
+exports[`UsersList should match the snapshot after data has been loaded 1`] = `
 Array [
   Array [
     <nav
@@ -69,10 +69,12 @@ Array [
             Search
           </label>
           <input
+            autoComplete="off"
             className="input__input"
             id="userSearch"
             name="user-search"
-            type="text"
+            onChange={[Function]}
+            type="search"
           />
         </div>
       </div>
@@ -271,7 +273,7 @@ Array [
 ]
 `;
 
-exports[`should show error message when fetch returns 401 error 1`] = `
+exports[`UsersList should show error message when fetch returns 401 error 1`] = `
 Array [
   Array [
     <nav
@@ -331,7 +333,7 @@ Array [
 ]
 `;
 
-exports[`should show error message when fetch returns 500 error 1`] = `
+exports[`UsersList should show error message when fetch returns 500 error 1`] = `
 Array [
   Array [
     <nav

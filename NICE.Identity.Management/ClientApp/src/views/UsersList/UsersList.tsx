@@ -117,15 +117,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										);
 									})}
 								</ul>
+							) : searchQuery ? (
+								<p>No results found for {searchQuery}</p>
 							) : (
-								<p>
-									No results found
-									{searchQuery && (
-										<>
-											&nbsp;for <strong>{searchQuery}</strong>
-										</>
-									)}
-								</p>
+								<p>No results found</p>
 							)}
 						</GridItem>
 					</Grid>

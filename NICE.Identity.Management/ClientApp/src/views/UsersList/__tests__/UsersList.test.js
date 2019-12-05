@@ -5,53 +5,102 @@ import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
 
 import { UsersList } from "../UsersList";
+import { Filter } from "../../../components/Filter/Filter";
 import users from "./users.json";
 
 import { nextTick } from "../../../utils/nextTick";
 
 import * as fetchData from "../../../helpers/fetchData";
+import { Endpoints } from "../../../data/endpoints";
 
-afterEach(fetchMock.reset);
+describe("UsersList", () => {
+	afterEach(fetchMock.reset);
 
-it("should show loading message before data has been loaded", () => {
-	fetchMock.get("*", {});
-	const wrapper = shallow(<UsersList />);
-	expect(wrapper.find("p").text()).toEqual("Loading...");
-});
+	const filterProps = {
+		onInputChange: jest.fn(),
+	};
 
-it("should call fetchData during componentDidMount", () => {
-	fetchMock.get("*", {});
-	const wrapper = shallow(<UsersList />);
-	const instance = wrapper.instance();
-	jest.spyOn(fetchData, "fetchData");
-	instance.componentDidMount();
-	expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
-});
+	const dummyText = "SomeText";
 
-it("should match the snapshot after data has been loaded", async () => {
-	fetchMock.get("*", users);
-	const wrapper = mount(
-		<MemoryRouter>
-			<UsersList />
-		</MemoryRouter>,
-	);
-	await nextTick();
-	wrapper.update();
-	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-});
+	it("should show loading message before data has been loaded", () => {
+		fetchMock.get("*", {});
+		const wrapper = shallow(<UsersList />);
+		expect(wrapper.find("p").text()).toEqual("Loading...");
+	});
 
-it("should show error message when fetch returns 401 error", async () => {
-	fetchMock.get("*", 401);
-	const wrapper = mount(<UsersList />);
-	await nextTick();
-	wrapper.update();
-	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-});
+	it("should call fetchData during componentDidMount", () => {
+		fetchMock.get("*", {});
+		const wrapper = shallow(<UsersList />);
+		const instance = wrapper.instance();
+		jest.spyOn(fetchData, "fetchData");
+		instance.componentDidMount();
+		expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
+	});
 
-it("should show error message when fetch returns 500 error", async () => {
-	fetchMock.get("*", 500);
-	const wrapper = mount(<UsersList />);
-	await nextTick();
-	wrapper.update();
-	expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+	it("should match the snapshot after data has been loaded", async () => {
+		fetchMock.get("*", users);
+		const wrapper = mount(
+			<MemoryRouter>
+				<UsersList />
+			</MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+	});
+
+	it("should show error message when fetch returns 401 error", async () => {
+		fetchMock.get("*", 401);
+		const wrapper = mount(<UsersList />);
+		await nextTick();
+		wrapper.update();
+		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+	});
+
+	it("should show error message when fetch returns 500 error", async () => {
+		fetchMock.get("*", 500);
+		const wrapper = mount(<UsersList />);
+		await nextTick();
+		wrapper.update();
+		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+	});
+
+	it("should show no results message when fetch returns an empty array", async () => {
+		fetchMock.get("*", []);
+		const wrapper = shallow(<UsersList />);
+		await nextTick();
+		wrapper.update();
+		expect(wrapper.find("p").text()).toEqual("No results found");
+	});
+
+	it("should show no results found message after search returns empty array", async () => {
+		fetchMock.get(Endpoints.usersList, users);
+		fetchMock.get(`${Endpoints.usersList}?q=${dummyText}`, []);
+		const wrapper = shallow(<UsersList />);
+		const instance = wrapper.instance();
+		await nextTick();
+		wrapper.update();
+		instance.filterUsers(dummyText);
+		await nextTick();
+		wrapper.update();
+		expect(wrapper.find("p").text()).toEqual(
+			`No results found for ${dummyText}`,
+		);
+	});
+
+	it("should trigger onInputChange prop function after input has been changed", () => {
+		jest.useFakeTimers();
+		const wrapper = mount(<Filter {...filterProps} />);
+		const searchBox = wrapper.find("input");
+
+		searchBox.simulate("change", {
+			target: {
+				value: dummyText,
+			},
+		});
+		expect(filterProps.onInputChange).not.toHaveBeenCalled();
+		jest.runAllTimers();
+		expect(filterProps.onInputChange).toHaveBeenCalledTimes(1);
+		expect(filterProps.onInputChange).toHaveBeenCalledWith(dummyText);
+	});
 });
