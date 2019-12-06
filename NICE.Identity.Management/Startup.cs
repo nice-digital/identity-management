@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,10 +8,14 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using NICE.Identity.Management.Configuration;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
+using NICE.Identity.Management.Configuration;
 using ProxyKit;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -33,6 +33,7 @@ namespace NICE.Identity.Management
 
 		public IConfiguration Configuration { get; }
 		public IHostingEnvironment Environment { get; }
+		private const string AdministratorRole = "Administrator";
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -190,7 +191,26 @@ namespace NICE.Identity.Management
 					template: "{controller}/{action=Index}/{id?}");
 			});
 
-			app.MapWhen(x => x.User.Identity.IsAuthenticated, builder =>
+
+			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
+			{
+				builder.Run(async context =>
+				{
+					await niceAuthenticationService.Login(context, context.Request.Path);
+				});
+			});
+
+			
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.IsInRole(AdministratorRole), builder =>
+			{
+				builder.Run(async context =>
+				{
+					context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+					await context.Response.WriteAsync("You do not have access to this website. Please contact support if you think this is incorrect.");
+				});
+			});
+
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.IsInRole(AdministratorRole), builder =>
 			{
 				builder.Use((context, next) =>
 				{
@@ -226,16 +246,7 @@ namespace NICE.Identity.Management
 					}
 				});
 			});
-
-			app.MapWhen(x => !x.User.Identity.IsAuthenticated, builder =>
-			{
-				builder.Run(async context =>
-				{
-					await niceAuthenticationService.Login(context, context.Request.Path);
-				});
-			});
 		}
-
 
     }
 }
