@@ -16,6 +16,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using NICE.Identity.Authentication.Sdk.Authorisation;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -33,7 +34,6 @@ namespace NICE.Identity.Management
 
 		public IConfiguration Configuration { get; }
 		public IHostingEnvironment Environment { get; }
-		private const string AdministratorRole = "Administrator";
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -201,7 +201,7 @@ namespace NICE.Identity.Management
 			});
 
 			
-			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.IsInRole(AdministratorRole), builder =>
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.IsInRole(Policies.Web.Administrator), builder =>
 			{
 				builder.Run(async context =>
 				{
@@ -210,7 +210,7 @@ namespace NICE.Identity.Management
 				});
 			});
 
-			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.IsInRole(AdministratorRole), builder =>
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.IsInRole(Policies.Web.Administrator), builder =>
 			{
 				builder.Use((context, next) =>
 				{
