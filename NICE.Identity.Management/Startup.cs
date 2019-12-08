@@ -16,6 +16,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Routing;
 using NICE.Identity.Authentication.Sdk.Authorisation;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
@@ -191,7 +192,6 @@ namespace NICE.Identity.Management
 					template: "{controller}/{action=Index}/{id?}");
 			});
 
-
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Run(async context =>
@@ -200,8 +200,7 @@ namespace NICE.Identity.Management
 				});
 			});
 
-			
-			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.IsInRole(Policies.Web.Administrator), builder =>
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(Policies.Web.Administrator), builder =>
 			{
 				builder.Run(async context =>
 				{
@@ -210,7 +209,7 @@ namespace NICE.Identity.Management
 				});
 			});
 
-			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.IsInRole(Policies.Web.Administrator), builder =>
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(Policies.Web.Administrator), builder =>
 			{
 				builder.Use((context, next) =>
 				{
