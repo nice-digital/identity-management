@@ -35,7 +35,7 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
   </Breadcrumbs>
   <PageHeader
     heading="EPPI Reviewer (dev)"
-    preheading="Select environment for"
+    preheading="Select roles for"
   />
   <Grid
     elementType="div"
