@@ -40,15 +40,16 @@ server.use((req, res, next) => {
   }else{
     router.db._.id = "id";
   }
-
   next()
 });
 
 router.render = (req, res) => {
   let requestUrl = url.parse(req.url);
   if (requestUrl.path.includes('userroles')){
-    if (res.locals.data[0]){
+    if (req.method === "GET" && res.locals.data[0]){
       res.jsonp(res.locals.data[0]);
+    }else if(req.method === "PATCH") {
+      res.status(200).jsonp(req.body);
     }else{
       res.status(404).jsonp({});
     }
