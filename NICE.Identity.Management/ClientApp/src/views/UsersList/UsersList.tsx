@@ -10,7 +10,8 @@ import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
-import { Filter } from "../../components/Filter/Filter";
+import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
+import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
@@ -22,6 +23,7 @@ type CardMetaData = {
 type UsersListProps = {};
 
 type UsersListState = {
+	originalUsers: Array<UserType>;
 	users: Array<UserType>;
 	searchQuery?: string;
 	error?: Error;
@@ -32,6 +34,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	constructor(props: UsersListProps) {
 		super(props);
 		this.state = {
+			originalUsers: [],
 			users: [],
 			isLoading: true,
 		};
@@ -46,10 +49,29 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.setState({ error: users });
 		}
 
-		this.setState({ users, isLoading: false });
+		this.setState({ originalUsers: users, users, isLoading: false });
 	}
 
-	filterUsers = async (searchQuery: string) => {
+	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+		this.setState({ isLoading: true });
+
+		let checkbox = e.target;
+		let users = this.state.originalUsers;
+
+		if (checkbox.value) {
+			users = users.filter(user => {
+				let activeCheckbox = !user.isLockedOut ? "active" : "locked";
+
+				if (activeCheckbox === checkbox.value) {
+					return user;
+				}
+			});
+		}
+
+		this.setState({ users, isLoading: false });
+	};
+
+	filterUsersBySearch = async (searchQuery: string) => {
 		this.setState({ isLoading: true });
 
 		let users = await fetchData(`${Endpoints.usersList}?q=${searchQuery}`);
@@ -75,7 +97,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<Filter onInputChange={this.filterUsers} />
+							<FilterSearch onInputChange={this.filterUsersBySearch} />
+							<FilterStatus onCheckboxChange={this.filterUsersByStatus} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
 							{isLoading ? (

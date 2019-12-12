@@ -2,11 +2,11 @@ import React from "react";
 import { Panel } from "@nice-digital/nds-panel";
 import { Input } from "@nice-digital/nds-forms";
 
-type FilterProps = {
+type FilterSearchProps = {
 	onInputChange: (searchQuery: string) => void;
 };
 
-export const Filter = (props: FilterProps) => {
+export const FilterSearch = (props: FilterSearchProps) => {
 	let typingTimer: number = 0;
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
