@@ -16,7 +16,7 @@ export type ServiceType = {
 };
 
 export type ServiceWebsiteType = {
-	websiteId: number;
+    id: number;
 	host: string;
 	environment: EnvironmentType;
 };
@@ -34,7 +34,7 @@ export type WebsiteType = {
 };
 
 export type EnvironmentType = {
-	environmentId: number;
+	id: number;
 	name: string;
 };
 

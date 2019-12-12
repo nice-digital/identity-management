@@ -172,7 +172,7 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 				{!error ? (
 					<>
 						<PageHeader
-							preheading="Select environment for"
+							preheading="Select roles for"
 							heading={
 								isLoading
 									? "User details"
