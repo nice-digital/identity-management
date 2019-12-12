@@ -56,9 +56,6 @@ Array [
       <div
         className="panel"
       >
-        <p>
-          Filter options
-        </p>
         <div
           className="input"
         >
@@ -66,7 +63,7 @@ Array [
             className="input__label"
             htmlFor="userSearch"
           >
-            Search
+            Filter by name or email address
           </label>
           <input
             autoComplete="off"
@@ -77,6 +74,70 @@ Array [
             type="search"
           />
         </div>
+      </div>
+      <div
+        className="panel"
+      >
+        <h4>
+          Show:
+        </h4>
+        <form>
+          <div
+            className="radio"
+          >
+            <input
+              className="radio__input"
+              defaultChecked={true}
+              id="filter-status-all"
+              name="filter-status"
+              onChange={[Function]}
+              type="radio"
+              value=""
+            />
+            <label
+              className="radio__label"
+              htmlFor="filter-status-all"
+            >
+              All
+            </label>
+          </div>
+          <div
+            className="radio"
+          >
+            <input
+              className="radio__input"
+              id="filter-status-active"
+              name="filter-status"
+              onChange={[Function]}
+              type="radio"
+              value="active"
+            />
+            <label
+              className="radio__label"
+              htmlFor="filter-status-active"
+            >
+              Active
+            </label>
+          </div>
+          <div
+            className="radio"
+          >
+            <input
+              className="radio__input"
+              id="filter-status-locked"
+              name="filter-status"
+              onChange={[Function]}
+              type="radio"
+              value="locked"
+            />
+            <label
+              className="radio__label"
+              htmlFor="filter-status-locked"
+            >
+              Locked
+            </label>
+          </div>
+        </form>
       </div>
     </div>
     <div
@@ -247,9 +308,9 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--live"
+                  className="tag tag--alpha"
                 >
-                  Active
+                  Locked
                 </span>
               </dd>
             </div>

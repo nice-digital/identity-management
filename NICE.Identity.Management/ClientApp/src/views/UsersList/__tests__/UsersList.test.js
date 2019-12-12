@@ -5,7 +5,7 @@ import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
 
 import { UsersList } from "../UsersList";
-import { Filter } from "../../../components/Filter/Filter";
+import { FilterSearch } from "../../../components/FilterSearch/FilterSearch";
 import users from "./users.json";
 
 import { nextTick } from "../../../utils/nextTick";
@@ -16,7 +16,7 @@ import { Endpoints } from "../../../data/endpoints";
 describe("UsersList", () => {
 	afterEach(fetchMock.reset);
 
-	const filterProps = {
+	const filterSearchProps = {
 		onInputChange: jest.fn(),
 	};
 
@@ -80,7 +80,7 @@ describe("UsersList", () => {
 		const instance = wrapper.instance();
 		await nextTick();
 		wrapper.update();
-		instance.filterUsers(dummyText);
+		instance.filterUsersBySearch(dummyText);
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find("p").text()).toEqual(
@@ -88,19 +88,30 @@ describe("UsersList", () => {
 		);
 	});
 
-	it("should trigger onInputChange prop function after input has been changed", () => {
-		jest.useFakeTimers();
-		const wrapper = mount(<Filter {...filterProps} />);
-		const searchBox = wrapper.find("input");
+	it("should show all filter by default", () => {
+		fetchMock.get("*", {});
+		const wrapper = mount(<UsersList />);
+		expect(wrapper.find("#filter-status-all").props().defaultChecked).toEqual(
+			true,
+		);
+	});
 
-		searchBox.simulate("change", {
-			target: {
-				value: dummyText,
-			},
+	it("should filter users to all active when radio button is clicked", async () => {
+		fetchMock.get("*", users);
+		const wrapper = mount(
+			<MemoryRouter>
+				<UsersList />
+			</MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		wrapper.find("#filter-status-active").simulate("change", {
+			target: { value: "active" },
 		});
-		expect(filterProps.onInputChange).not.toHaveBeenCalled();
-		jest.runAllTimers();
-		expect(filterProps.onInputChange).toHaveBeenCalledTimes(1);
-		expect(filterProps.onInputChange).toHaveBeenCalledWith(dummyText);
+		await nextTick();
+		wrapper.update();
+		wrapper.find(".tag").forEach(tag => {
+			expect(tag.text()).toEqual("Active");
+		});
 	});
 });
