@@ -149,22 +149,26 @@
         {
           "id": 991,
           "name": "Product contributor",
-          "hasRole": true
+          "hasRole": true,
+          "description": "Some text here"
         },
         {
           "id": 992,
           "name": "Product manager",
-          "hasRole": true
+          "hasRole": true,
+          "description": "Some text here"
         },
         {
           "id": 993,
           "name": "Product administrator",
-          "hasRole": true
+          "hasRole": true,
+          "description": "Some text here"
         },
         {
           "id": 994,
           "name": "Product editor",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         }
       ]
     },
@@ -177,22 +181,26 @@
         {
           "id": 991,
           "name": "Product contributor",
-          "hasRole": true
+          "hasRole": true,
+          "description": "Some text here"
         },
         {
           "id": 992,
           "name": "Product manager",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         },
         {
           "id": 993,
           "name": "Product administrator",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         },
         {
           "id": 994,
           "name": "Product editor",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         }
       ]
     },
@@ -205,22 +213,26 @@
         {
           "id": 991,
           "name": "Product contributor",
-          "hasRole": true
+          "hasRole": true,
+          "description": "Some text here"
         },
         {
           "id": 992,
           "name": "Product manager",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         },
         {
           "id": 993,
           "name": "Product administrator",
-          "hasRole": true
+          "hasRole": true,
+          "description": "Some text here"
         },
         {
           "id": 994,
           "name": "Product editor",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         }
       ]
     },
@@ -233,22 +245,26 @@
         {
           "id": 991,
           "name": "Product contributor",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         },
         {
           "id": 992,
           "name": "Product manager",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         },
         {
           "id": 993,
           "name": "Product administrator",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         },
         {
           "id": 994,
           "name": "Product editor",
-          "hasRole": false
+          "hasRole": false,
+          "description": "Some text here"
         }
       ]
     }

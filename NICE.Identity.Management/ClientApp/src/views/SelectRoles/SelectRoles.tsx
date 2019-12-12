@@ -197,6 +197,7 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 											let props = {
 												id: role.id,
 												name: role.name,
+												description: role.description,
 												isSelected: role.hasRole,
 												isDisabled: isButtonDisabled,
 												onCheckboxChange: this.handleCheckboxChange,
