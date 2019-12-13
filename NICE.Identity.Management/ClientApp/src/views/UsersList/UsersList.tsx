@@ -28,6 +28,7 @@ type UsersListState = {
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
+    statusFilter?: string;
 };
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
@@ -55,33 +56,40 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ isLoading: true });
 
-		let checkbox = e.target;
+		let statusFilter = e.target.value;
 		let users = this.state.originalUsers;
 
-		if (checkbox.value) {
-			users = users.filter(user => {
-				let activeCheckbox = !user.isLockedOut ? "active" : "locked";
-
-				if (activeCheckbox === checkbox.value) {
-					return user;
-				}
-			});
+		if (statusFilter) {
+			users = this.usersByStatus(statusFilter, users);
 		}
 
-		this.setState({ users, isLoading: false });
+		this.setState({ users, statusFilter, isLoading: false });
 	};
 
 	filterUsersBySearch = async (searchQuery: string) => {
 		this.setState({ isLoading: true });
 
-		let users = await fetchData(`${Endpoints.usersList}?q=${searchQuery}`);
-
-		if (isDataError(users)) {
-			this.setState({ error: users });
+		let originalUsers = await fetchData(`${Endpoints.usersList}?q=${searchQuery}`);
+        let users = originalUsers;
+        if (isDataError(originalUsers)) {
+			this.setState({ error: originalUsers });
 		}
 
-		this.setState({ users, searchQuery, isLoading: false });
+        if (this.state.statusFilter) {
+            users = this.usersByStatus(this.state.statusFilter, users);
+        }
+
+		this.setState({ originalUsers, users, searchQuery, isLoading: false });
 	};
+
+    usersByStatus = (statusFilter: string, users: Array<UserType>) : Array<UserType> => {
+        return users = users.filter(user => {
+            let userStatus = !user.isLockedOut ? "active" : "locked";
+            if (userStatus === statusFilter) {
+                return user;
+            }
+        });
+    };
 
 	render() {
 		const { users, searchQuery, error, isLoading } = this.state;
