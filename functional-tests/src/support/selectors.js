@@ -1,5 +1,5 @@
 const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
-const toNthChildAttr = (attrValue) => `li:nth-child(${attrValue})`;
+const toNthChildAttr = (attrValue) => `article:nth-child(${attrValue}) a`;
 const toChildAndQASel = (childIndex, attrValue) => toDataQASelAttr(attrValue) + ' ' + toNthChildAttr(childIndex);
 
 export default {
@@ -38,7 +38,7 @@ export default {
     pageTitle: "h1",
     globalNavMyAccount: "[id$='my-account-button']",
     globalNavSignOut: "[id$='my-account']",
-    userStatusListPage: "[data-qa-sel='list-of-users'] li:nth-child(2) .tag--alpha",
+    userStatusListPage: "[data-qa-sel='list-of-users'] article:nth-child(2) .tag--alpha"
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),

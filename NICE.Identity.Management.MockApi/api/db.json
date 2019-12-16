@@ -252,5 +252,12 @@
         }
       ]
     }
+  ],
+  "claims":[
+    {
+      "type": "http://identity.nice.org.uk/claims/role",
+      "value": "Administrator",
+      "issuer": "idam"
+    }
   ]
 }
