@@ -98,6 +98,7 @@ export class User extends Component<UserProps, UserState> {
 							}
 							cta={
 								<Button
+									data-qa-sel="add-user-role-button"
 									variant="cta"
 									to={`/users/${this.props.match.params.id}/services`}
 									elementType={Link}
