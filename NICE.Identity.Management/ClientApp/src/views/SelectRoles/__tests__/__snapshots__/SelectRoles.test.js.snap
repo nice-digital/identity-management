@@ -81,6 +81,7 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
         />
         <Button
           buttonType="submit"
+          className="mt--d"
           disabled={false}
           variant="primary"
         >

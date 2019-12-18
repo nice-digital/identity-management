@@ -204,7 +204,11 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 
 											return <ToggleCheckbox {...props} key={role.id} />;
 										})}
-										<Button buttonType="submit" disabled={isButtonDisabled}>
+										<Button
+											buttonType="submit"
+											disabled={isButtonDisabled}
+											className="mt--d"
+										>
 											{isButtonDisabled ? "Loading..." : "Save"}
 										</Button>
 									</form>
