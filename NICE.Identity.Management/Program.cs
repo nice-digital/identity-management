@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using System;
 
 namespace NICE.Identity.Management
 {
@@ -7,11 +9,27 @@ namespace NICE.Identity.Management
 	{
 		public static void Main(string[] args)
 		{
-			CreateWebHostBuilder(args).Build().Run();
+			Log.Logger = SeriLogger.GetLoggerConfiguration().CreateLogger();
+			try
+			{
+				CreateHostBuilder(args).Build().Run();
+			}
+			catch (Exception ex)
+			{
+				Log.Fatal(ex, "Application start-up failed");
+			}
+			finally
+			{
+				Log.CloseAndFlush();
+			}
 		}
 
-		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.UseStartup<Startup>();
+		public static IHostBuilder CreateHostBuilder(string[] args) =>
+			Host.CreateDefaultBuilder(args)
+				.UseSerilog()
+				.ConfigureWebHostDefaults(webBuilder =>
+				{
+					webBuilder.UseStartup<Startup>();
+				});
 	}
 }
