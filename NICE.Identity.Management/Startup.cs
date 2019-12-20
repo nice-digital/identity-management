@@ -200,10 +200,11 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
-				builder.Run(async context =>
+				builder.Run(async httpContext =>
 				{
-					context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-					await context.Response.WriteAsync("You do not have access to this website. Please contact support if you think this is incorrect.");
+					startupLogger.LogWarning($"User: {httpContext.User.DisplayName()} with id: {httpContext.User.NameIdentifier()} has tried accessing {httpContext.Request.Host.Value}{httpContext.Request.Path} but does not have access");
+					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+					await httpContext.Response.WriteAsync("You do not have access to this website. Please contact support if you think this is incorrect.");
 				});
 			});
 
