@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NICE.Identity.Authentication.Sdk.Authorisation;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Configuration;
@@ -16,8 +18,6 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Routing;
-using NICE.Identity.Authentication.Sdk.Authorisation;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -27,14 +27,15 @@ namespace NICE.Identity.Management
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration, IHostingEnvironment environment)
+		public Startup(IConfiguration configuration, IWebHostEnvironment environment)
 		{
 			Configuration = configuration;
 			Environment = environment;
 		}
 
 		public IConfiguration Configuration { get; }
-		public IHostingEnvironment Environment { get; }
+		public IWebHostEnvironment Environment { get; }
+		private const string AdministratorRole = "Administrator";
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -43,8 +44,7 @@ namespace NICE.Identity.Management
 
 			
 			//dependency injection goes here.
-			services.TryAddSingleton<ISeriLogger, SeriLogger>();
-            services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             // TODO: remove httpClientBuilder
             // This bypasses any certificate validation on proxy requests
@@ -60,8 +60,8 @@ namespace NICE.Identity.Management
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
-			
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddControllers();
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
@@ -75,19 +75,14 @@ namespace NICE.Identity.Management
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ISeriLogger seriLogger, 
-			IApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, ILogger<Startup> startupLogger,
+			IHostApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
-			seriLogger.Configure(loggerFactory, Configuration, appLifetime, env);
-			var startupLogger = loggerFactory.CreateLogger<Startup>();
-            
-            startupLogger.LogInformation("Logger is setup");
+			startupLogger.LogInformation("Identity management is starting up");
 
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-				loggerFactory.AddDebug();
 			}
 			else
 			{
@@ -141,8 +136,13 @@ namespace NICE.Identity.Management
             });
 
             app.UseHttpsRedirection();
-			app.UseCookiePolicy();
+			//app.UseCookiePolicy();
+
+			app.UseRouting();
+
 			app.UseAuthentication();
+			app.UseAuthorization(); //TODO: this is new
+
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles( new StaticFileOptions()
 			{
@@ -174,6 +174,11 @@ namespace NICE.Identity.Management
 				}
 			});
 
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute("default", pattern: "{controller}/{action=Index}/{id?}");
+			});
+
 			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
@@ -185,13 +190,6 @@ namespace NICE.Identity.Management
 				return next();
 			});
 
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller}/{action=Index}/{id?}");
-			});
-
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Run(async context =>
@@ -200,20 +198,21 @@ namespace NICE.Identity.Management
 				});
 			});
 
-			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(Policies.Web.Administrator), builder =>
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
-				builder.Run(async context =>
+				builder.Run(async httpContext =>
 				{
-					context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-					await context.Response.WriteAsync("You do not have access to this website. Please contact support if you think this is incorrect.");
+					startupLogger.LogWarning($"User: {httpContext.User.DisplayName()} with id: {httpContext.User.NameIdentifier()} has tried accessing {httpContext.Request.Host.Value}{httpContext.Request.Path} but does not have access");
+					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+					await httpContext.Response.WriteAsync("You do not have access to this website. Please contact support if you think this is incorrect.");
 				});
 			});
 
-			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(Policies.Web.Administrator), builder =>
+			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
-				builder.Use((context, next) =>
+				builder.Use((httpContext, next) =>
 				{
-					var httpRequestFeature = context.Features.Get<IHttpRequestFeature>();
+					var httpRequestFeature = httpContext.Features.Get<IHttpRequestFeature>();
 
 					if (httpRequestFeature != null && string.IsNullOrEmpty(httpRequestFeature.RawTarget))
 						httpRequestFeature.RawTarget = httpRequestFeature.Path;
