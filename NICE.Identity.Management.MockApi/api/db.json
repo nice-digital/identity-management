@@ -99,6 +99,10 @@
     {
       "id": 2,
       "name": "Comment Collection"
+    },
+    {
+      "id": 3,
+      "name": "Idam Docker"
     }
   ],
   "websites": [
@@ -136,6 +140,15 @@
       "environment": {
         "environmentId": 73,
         "name": "alpha"
+      }
+    },
+    {
+      "id": 5,
+      "serviceId": 3,
+      "host": "idam",
+      "environment": {
+        "environmentId": 72,
+        "name":"test"
       }
     }
   ],
@@ -229,6 +242,34 @@
       "userId": 2,
       "serviceId": 2,
       "websiteId": 4,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": false
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "userId": 6,
+      "serviceId": 3,
+      "websiteId": 5,
       "roles": [
         {
           "id": 991,
