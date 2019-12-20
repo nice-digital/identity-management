@@ -7,4 +7,9 @@ export const clickDeleteUserLink = () => {
   clickElement("click", "selector", selectors.adminUserPage.lockUserButton);
 };
 
+export const clickAddRoleButton = () => {
+  waitForVisible(selectors.adminUserPage.AddRoleButton);
+  clickElement("click", "selector", selectors.adminUserPage.AddRoleButton);
+};
+
 export default clickDeleteUserLink;

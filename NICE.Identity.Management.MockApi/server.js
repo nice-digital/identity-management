@@ -17,7 +17,11 @@ if(fs.existsSync('localhost-cert.pem') && fs.existsSync('localhost-key.pem')) {
 const rewriter = jsonServer.rewriter({
   '/api/*': '/$1',
   '/users\\?sort=:field\\:1': '/users?_sort=:field&_order=asc',
-  '/users\\?sort=:field\\:-1': '/users?_sort=:field&_order=desc'
+  '/users\\?sort=:field\\:-1': '/users?_sort=:field&_order=desc',
+  '/services': '/services?_embed=websites',
+  '/services/:id': '/services/:id?_embed=websites',
+  '/users/:userId/rolesbywebsite/:websiteId': '/userroles?userId=:userId&websiteId=:websiteId&_expand=service&_expand=website',
+  '/claims/:authenticationProviderUserId': '/claims'
 });
 
 const server = jsonServer.create();
@@ -27,13 +31,34 @@ const router = jsonServer.router('api/db.json');
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   let requestUrl = url.parse(req.url);
-  if (requestUrl.path.includes('/users')){
+  // We match on rolesbywebsite first because the user roles map to
+  // /users/:userId/rolesbywebsite . That will trigger the change of
+  // id to userId which we don't want for this specific route.
+  if (requestUrl.path.includes('rolesbywebsite')){
+    router.db._.id = "id";
+  }else if (requestUrl.path.includes('users')){
     router.db._.id = "userId";
   }else{
     router.db._.id = "id";
   }
   next()
 });
+
+router.render = (req, res) => {
+  let requestUrl = url.parse(req.url);
+  if (requestUrl.path.includes('userroles')){
+    if (req.method === "GET" && res.locals.data[0]){
+      res.jsonp(res.locals.data[0]);
+    }else if(req.method === "PATCH") {
+      res.status(200).jsonp(req.body);
+    }else{
+      res.status(404).jsonp({});
+    }
+  }else{
+    res.jsonp(res.locals.data);
+  }
+};
+
 server.use(middleware);
 server.use(rewriter);
 server.use(router);

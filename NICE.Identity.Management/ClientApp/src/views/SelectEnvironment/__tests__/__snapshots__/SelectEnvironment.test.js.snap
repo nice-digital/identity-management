@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectEnvironment should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1"
+    >
+      Kristin Patrick
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1/services"
+    >
+      Select service
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Select environment
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="EPPI Reviewer"
+    preheading="Select environment for"
+  />
+  <Grid
+    elementType="div"
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      cols={8}
+      elementType="div"
+    >
+      <StackedNav>
+        <StackedNavLink
+          destination="/1/roles"
+          elementType={[Function]}
+        >
+          dev
+        </StackedNavLink>
+        <StackedNavLink
+          destination="/2/roles"
+          elementType={[Function]}
+        >
+          test
+        </StackedNavLink>
+      </StackedNav>
+    </GridItem>
+  </Grid>
+</Fragment>
+`;

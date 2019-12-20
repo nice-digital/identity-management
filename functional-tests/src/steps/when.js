@@ -2,11 +2,12 @@ import "@nice-digital/wdio-cucumber-steps/lib/when";
 import { Login } from "../support/action/Login";
 import { When } from "cucumber";
 import registerLink from "../support/action/RegisterLink";
-import findUserList, { clickFirstUserInList, clickSecondUserInList } from "../support/check/findUserInList";
+import findUserList, { clickFirstUserInList, clickSecondUserInList, clickLastUserInList } from "../support/check/findUserInList";
 import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink } from "../support/action/clickDeleteUserLink";
 import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted";
 import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton";
-import clickLockUserButton from "../support/action/clickLockUserButton";
+import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
+import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave } from "../support/action/selectService";
 
 When(
   /^I log into accounts with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
@@ -30,6 +31,11 @@ When(
 When(
   /^I click on the second user in the list$/,
   clickSecondUserInList
+);
+
+When(
+  /^I click on the last user in the list$/,
+  clickLastUserInList
 );
 
 When(
@@ -57,4 +63,44 @@ When(/^I click on the GlobalNav accounts button$/,
 When(
   /^I click on the Lock user button$/,
   clickLockUserButton
+);
+
+When(
+  /^I click on the Add role button$/,
+  clickAddRoleButton
+);
+
+When(
+  /^I click on the Idam Docker Service$/,
+  clickIdamDockerService
+);
+
+When(
+  /^I click on the test environment$/,
+  clickTestEnvironment
+);
+
+When(
+  /^I click on the First Role$/,
+  clickFirstRole
+);
+
+When(
+  /^I click on the Second Role$/,
+  clickSecondRole
+);
+
+When(
+  /^I click on the Third Role$/,
+  clickThirdRole
+);
+
+When(
+  /^I click on the Fourth Role$/,
+  clickFourthRole
+);
+
+When(
+  /^I click Save$/,
+  clickSave
 );

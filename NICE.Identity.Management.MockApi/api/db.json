@@ -2,7 +2,7 @@
   "users": [
     {
       "userId": 1,
-      "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
       "firstName": "Kristin",
       "lastName": "Patrick",
       "emailAddress": "kristin.patrick@example.com",
@@ -17,7 +17,7 @@
     },
     {
       "userId": 2,
-      "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
       "firstName": "Thomas",
       "lastName": "Holding",
       "emailAddress": "thomas.holding@example.com",
@@ -32,7 +32,7 @@
     },
     {
       "userId": 3,
-      "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
       "firstName": "Aisha",
       "lastName": "Bartlett",
       "emailAddress": "aisha.bartlett@example.com",
@@ -47,7 +47,7 @@
     },
     {
       "userId": 4,
-      "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
       "firstName": "Theo",
       "lastName": "Bradford",
       "emailAddress": "theo.bradford@example.com",
@@ -62,7 +62,7 @@
     },
     {
       "userId": 5,
-      "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
       "firstName": "Polly",
       "lastName": "Greaves",
       "emailAddress": "polly.greaves@example.com",
@@ -77,10 +77,10 @@
     },
     {
       "userId": 6,
-      "auth0UserId": "auth0|abc12345-2f95-43e7-b419-18f2784f6666",
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f6666",
       "firstName": "Martin",
       "lastName": "Sweeney",
-      "emailAddress": "martingmeta67@gmail.com",
+      "emailAddress": "martingmeta1967@gmail.com",
       "allowContactMe": true,
       "hasVerifiedEmailAddress": true,
       "isLockedOut": false,
@@ -94,15 +94,211 @@
   "services": [
     {
       "id": 1,
-      "name": "Publications"
+      "name": "EPPI Reviewer"
     },
     {
       "id": 2,
-      "name": "InDev"
+      "name": "Comment Collection"
     },
     {
       "id": 3,
-      "name": "EPPI"
+      "name": "Idam Docker"
+    }
+  ],
+  "websites": [
+    {
+      "id": 1,
+      "serviceId": 1,
+      "host": "dev-eppi.nice.org.uk",
+      "environment": {
+        "environmentId": 71,
+        "name": "dev"
+      }
+    },
+    {
+      "id": 2,
+      "serviceId": 1,
+      "host": "test-eppi.nice.org.uk",
+      "environment": {
+        "environmentId": 72,
+        "name": "test"
+      }
+    },
+    {
+      "id": 3,
+      "serviceId": 2,
+      "host": "dev-comments.nice.org.uk",
+      "environment": {
+        "environmentId": 71,
+        "name": "dev"
+      }
+    },
+    {
+      "id": 4,
+      "serviceId": 2,
+      "host": "alpha-comments.nice.org.uk",
+      "environment": {
+        "environmentId": 73,
+        "name": "alpha"
+      }
+    },
+    {
+      "id": 5,
+      "serviceId": 3,
+      "host": "idam",
+      "environment": {
+        "environmentId": 72,
+        "name":"test"
+      }
+    }
+  ],
+  "userroles": [
+    {
+      "id": 1,
+      "userId": 1,
+      "serviceId": 1,
+      "websiteId": 1,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": true
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": true
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "serviceId": 1,
+      "websiteId": 2,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "serviceId": 2,
+      "websiteId": 1,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": true
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": true
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "serviceId": 2,
+      "websiteId": 4,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": false
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "userId": 6,
+      "serviceId": 3,
+      "websiteId": 5,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": false
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    }
+  ],
+  "claims":[
+    {
+      "type": "http://identity.nice.org.uk/claims/role",
+      "value": "Administrator",
+      "issuer": "idam"
     }
   ]
 }
