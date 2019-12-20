@@ -86,10 +86,11 @@ export class SelectService extends Component<
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-									<StackedNav>
+										<StackedNav data-qa-sel="service-stacked-nav">
 										{services.map(service => {
 											return (
 												<StackedNavLink
+													data-qa-sel="service-stacked-nav-link"
 													destination={`${this.props.match.url}/${service.id}/environments`}
 													elementType={Link}
 													key={service.id}

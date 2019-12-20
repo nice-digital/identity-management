@@ -36,14 +36,18 @@ exports[`SelectService should match the snapshot after data has been loaded 1`] 
       cols={12}
       elementType="div"
     >
-      <StackedNav>
+      <StackedNav
+        data-qa-sel="service-stacked-nav"
+      >
         <StackedNavLink
+          data-qa-sel="service-stacked-nav-link"
           destination="/1/environments"
           elementType={[Function]}
         >
           EPPI Reviewer
         </StackedNavLink>
         <StackedNavLink
+          data-qa-sel="service-stacked-nav-link"
           destination="/2/environments"
           elementType={[Function]}
         >

@@ -19,6 +19,7 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
   <PageHeader
     cta={
       <Button
+        data-qa-sel="add-user-role-button"
         disabled={false}
         elementType={[Function]}
         to="/users/1/services"

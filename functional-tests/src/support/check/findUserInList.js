@@ -31,4 +31,9 @@ export const clickSecondUserInList = () => {
   clickElement("click", "selector", selectors.adminHomepage.secondUserCard);
 };
 
+export const clickLastUserInList = () => {
+  waitForVisible(selectors.adminHomepage.userlist);
+  clickElement("click", "selector", selectors.adminHomepage.lastUserCard);
+};
+
 export default findUserList;
