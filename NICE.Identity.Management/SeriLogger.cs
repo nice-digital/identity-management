@@ -14,15 +14,15 @@ namespace NICE.Identity.Management
     /// </summary>
     public static class SeriLogger
 	{
-		public static LoggerConfiguration GetLoggerConfiguration()
-		{
+        public static LoggerConfiguration GetLoggerConfiguration()
+        {
             // Read Logging configuration
             var configuration = new ConfigurationBuilder()
-	            .AddJsonFile("appsettings.json", optional: false)
-	            .AddUserSecrets<Startup>()
-	            .Build();
+                .AddJsonFile("appsettings.json", optional: false)
+                .AddUserSecrets<Startup>()
+                .Build();
             var logCfg = configuration.GetSection("Logging");
-            
+
             var application = logCfg["Application"];
             var environment = logCfg["Environment"];
             var rabbitMQHost = logCfg["RabbitMQHost"];
@@ -32,25 +32,26 @@ namespace NICE.Identity.Management
             var rabbitMQPassword = logCfg["RabbitMQPassword"];
             var rabbitMQExchangeName = logCfg["RabbitMQExchangeName"];
             var rabbitMQExchangeType = logCfg["RabbitMQExchangeType"];
-            var serilogFilePath = logCfg["SerilogFilePath"];
+            var serilogFilePath = logCfg["SerilogFilePath"] ?? logCfg["LogFilePath"];
             Enum.TryParse(logCfg["SerilogMinLevel"], out LogEventLevel serilogMinLevel);
             bool.TryParse(logCfg["UseRabbit"], out var useRabbit);
             bool.TryParse(logCfg["UseFile"], out var useFile);
 
             var serilogFormatter = new NiceSerilogFormatter(environment, application);
             var serilogConfiguration = new LoggerConfiguration()
-	            .Enrich.FromLogContext()
-	            .WriteTo.Console()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
                 .MinimumLevel.Is(serilogMinLevel);
 
             if (useRabbit && !string.IsNullOrEmpty(rabbitMQHost) && rabbitPortIsSet)
             {
-                var rabbitCfg = new RabbitMQConfiguration {
+                var rabbitCfg = new RabbitMQConfiguration
+                {
                     Hostname = rabbitMQHost,
                     VHost = rabbitMQVHost,
                     Port = rabbitMQPort,
-                    Username = rabbitMQUsername,
-                    Password = rabbitMQPassword,
+                    Username = rabbitMQUsername ?? "",
+                    Password = rabbitMQPassword ?? "",
                     Protocol = RabbitMQ.Client.Protocols.AMQP_0_9_1,
                     Exchange = rabbitMQExchangeName,
                     ExchangeType = rabbitMQExchangeType
@@ -63,14 +64,14 @@ namespace NICE.Identity.Management
             // Write logs to file
             if (useFile)
             {
-                serilogConfiguration.WriteTo.RollingFile(serilogFormatter, 
-                    serilogFilePath, 
-                    fileSizeLimitBytes: 5000000, 
-                    retainedFileCountLimit: 5, 
+                serilogConfiguration.WriteTo.RollingFile(serilogFormatter,
+                    serilogFilePath,
+                    fileSizeLimitBytes: 5000000,
+                    retainedFileCountLimit: 5,
                     flushToDiskInterval: TimeSpan.FromSeconds(20));
             }
 
             return serilogConfiguration;
-		}
+        }
     }
 }

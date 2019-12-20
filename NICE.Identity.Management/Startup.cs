@@ -78,7 +78,7 @@ namespace NICE.Identity.Management
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, ILogger<Startup> startupLogger,
 			IHostApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
-			startupLogger.LogInformation("Logger is setup");
+			startupLogger.LogInformation("Identity management is starting up");
 
 			if (env.IsDevelopment())
 			{
@@ -210,9 +210,9 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
-				builder.Use((context, next) =>
+				builder.Use((httpContext, next) =>
 				{
-					var httpRequestFeature = context.Features.Get<IHttpRequestFeature>();
+					var httpRequestFeature = httpContext.Features.Get<IHttpRequestFeature>();
 
 					if (httpRequestFeature != null && string.IsNullOrEmpty(httpRequestFeature.RawTarget))
 						httpRequestFeature.RawTarget = httpRequestFeature.Path;
