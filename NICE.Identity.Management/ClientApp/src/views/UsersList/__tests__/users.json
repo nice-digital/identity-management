@@ -52,7 +52,7 @@
 		"emailAddress": "theo.bradford@example.com",
 		"allowContactMe": true,
 		"hasVerifiedEmailAddress": true,
-		"isLockedOut": false,
+		"isLockedOut": true,
 		"initialRegistrationDate": "2019-10-26T12:29:54.911Z",
 		"lastLoggedInDate": "2019-10-26T12:29:54.911Z",
 		"isStaffMember": false,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should match the snapshot after data has been loaded 1`] = `
+exports[`User should match the snapshot after data has been loaded 1`] = `
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
@@ -118,7 +118,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 </Fragment>
 `;
 
-exports[`should show error message when fetch returns 401 error 1`] = `
+exports[`User should show error message when fetch returns 401 error 1`] = `
 Array [
   Array [
     <nav
@@ -199,7 +199,7 @@ Array [
 ]
 `;
 
-exports[`should show error message when fetch returns 500 error 1`] = `
+exports[`User should show error message when fetch returns 500 error 1`] = `
 Array [
   Array [
     <nav

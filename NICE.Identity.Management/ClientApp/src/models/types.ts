@@ -16,7 +16,7 @@ export type ServiceType = {
 };
 
 export type ServiceWebsiteType = {
-    id: number;
+	id: number;
 	host: string;
 	environment: EnvironmentType;
 };
@@ -41,5 +41,6 @@ export type EnvironmentType = {
 export type RoleType = {
 	id: number;
 	name: string;
+	description: string;
 	hasRole: boolean;
 };

@@ -10,7 +10,8 @@ import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
-import { Filter } from "../../components/Filter/Filter";
+import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
+import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
@@ -22,15 +23,19 @@ type CardMetaData = {
 type UsersListProps = {};
 
 type UsersListState = {
+	originalUsers: Array<UserType>;
 	users: Array<UserType>;
+	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
+    statusFilter?: string;
 };
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
 	constructor(props: UsersListProps) {
 		super(props);
 		this.state = {
+			originalUsers: [],
 			users: [],
 			isLoading: true,
 		};
@@ -45,11 +50,49 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.setState({ error: users });
 		}
 
-		this.setState({ users, isLoading: false });
+		this.setState({ originalUsers: users, users, isLoading: false });
 	}
 
+	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+		this.setState({ isLoading: true });
+
+		let statusFilter = e.target.value;
+		let users = this.state.originalUsers;
+
+		if (statusFilter) {
+			users = this.usersByStatus(statusFilter, users);
+		}
+
+		this.setState({ users, statusFilter, isLoading: false });
+	};
+
+	filterUsersBySearch = async (searchQuery: string) => {
+		this.setState({ isLoading: true });
+
+		let originalUsers = await fetchData(`${Endpoints.usersList}?q=${searchQuery}`);
+        let users = originalUsers;
+        if (isDataError(originalUsers)) {
+			this.setState({ error: originalUsers });
+		}
+
+        if (this.state.statusFilter) {
+            users = this.usersByStatus(this.state.statusFilter, users);
+        }
+
+		this.setState({ originalUsers, users, searchQuery, isLoading: false });
+	};
+
+    usersByStatus = (statusFilter: string, users: Array<UserType>) : Array<UserType> => {
+        return users = users.filter(user => {
+            let userStatus = !user.isLockedOut ? "active" : "locked";
+            if (userStatus === statusFilter) {
+                return user;
+            }
+        });
+    };
+
 	render() {
-		const { users, error, isLoading } = this.state;
+		const { users, searchQuery, error, isLoading } = this.state;
 
 		return (
 			<>
@@ -62,12 +105,13 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<Filter />
+							<FilterSearch onInputChange={this.filterUsersBySearch} />
+							<FilterStatus onCheckboxChange={this.filterUsersByStatus} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
-							{!users.length ? (
+							{isLoading ? (
 								<p>Loading...</p>
-							) : (
+							) : users.length ? (
 								<ul className="list--unstyled" data-qa-sel="list-of-users">
 									{users.map(user => {
 										const {
@@ -104,6 +148,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										);
 									})}
 								</ul>
+							) : searchQuery ? (
+								<p>No results found for {searchQuery}</p>
+							) : (
+								<p>No results found</p>
 							)}
 						</GridItem>
 					</Grid>

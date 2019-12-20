@@ -6,6 +6,7 @@
     "@nice-digital/design-system": "^1.0.15-alpha.0",
     "@nice-digital/global-nav": "github:nice-digital/global-nav#9afad701666ebc8c4ca85c5de47505c5bf468848",
     "@nice-digital/nds-checkbox": "^1.0.13-alpha.0",
+    "@nice-digital/nds-radio": "^1.0.17-alpha.0",
     "concurrently": "^4.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
