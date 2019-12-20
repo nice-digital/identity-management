@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectService should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1"
+    >
+      Kristin Patrick
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Select service
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Service list"
+    preheading="Select service"
+  />
+  <Grid
+    elementType="div"
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      cols={12}
+      elementType="div"
+    >
+      <StackedNav
+        data-qa-sel="service-stacked-nav"
+      >
+        <StackedNavLink
+          data-qa-sel="service-stacked-nav-link"
+          destination="/1/environments"
+          elementType={[Function]}
+        >
+          EPPI Reviewer
+        </StackedNavLink>
+        <StackedNavLink
+          data-qa-sel="service-stacked-nav-link"
+          destination="/2/environments"
+          elementType={[Function]}
+        >
+          Comment Collection
+        </StackedNavLink>
+      </StackedNav>
+    </GridItem>
+  </Grid>
+</Fragment>
+`;

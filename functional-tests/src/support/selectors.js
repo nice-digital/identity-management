@@ -1,5 +1,5 @@
 const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
-const toNthChildAttr = (attrValue) => `li:nth-child(${attrValue})`;
+const toNthChildAttr = (attrValue) => `article:nth-child(${attrValue}) a`;
 const toChildAndQASel = (childIndex, attrValue) => toDataQASelAttr(attrValue) + ' ' + toNthChildAttr(childIndex);
 
 export default {
@@ -34,15 +34,17 @@ export default {
     secondUserCard: toChildAndQASel(2, "list-of-users"),
     thirdUserCard: toChildAndQASel(3, "list-of-users"),
     fourthUserCard: toChildAndQASel(4, "list-of-users"),
+    lastUserCard: "article:last-of-type a",
     roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
     globalNavMyAccount: "[id$='my-account-button']",
     globalNavSignOut: "[id$='my-account']",
-    userStatusListPage: "[data-qa-sel='list-of-users'] li:nth-child(2) .tag--alpha",
+    userStatusListPage: "[data-qa-sel='list-of-users'] article:nth-child(2) .tag--alpha"
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),
     lockUserButton: toDataQASelAttr("lock-user-button"),
+    AddRoleButton: toDataQASelAttr("add-user-role-button"),
     usersBreadcrumb: toDataQASelAttr("breadcrumb-user-link"),
     userStatusActive: ".tag--live",
     userStatusLocked: ".tag--alpha",
@@ -58,5 +60,25 @@ export default {
     forgotPasswordEmail: toDataQASelAttr("forgotPassword-email"),
     forgotPasswordButton: toDataQASelAttr("forgotPassword-button"),
     forgotReturnToSignIn: toDataQASelAttr("forgotPassword-link-to-login"),
+  },
+  serviceListPage: {
+    firstService: ".stacked-nav__list-item:nth-of-type(1)",
+    secondService: ".stacked-nav__list-item:nth-of-type(2)",
+    thirdService: ".stacked-nav__list-item:nth-of-type(3)",
+    fourthService: ".stacked-nav__list-item:nth-of-type(4)"
+  },
+  environmentListPage: {
+    firstEnvironment: ".stacked-nav__list-item:nth-of-type(1)",
+    secondEnvironment: ".stacked-nav__list-item:nth-of-type(2)",
+    thirdEnvironment: ".stacked-nav__list-item:nth-of-type(3)",
+    fourthEnvironment: ".stacked-nav__list-item:nth-of-type(4)"
+  },
+  rolesListPage: {
+    firstRole: ".checkbox:nth-of-type(1)",
+    secondRole: ".checkbox:nth-of-type(2)",
+    thirdRole: ".checkbox:nth-of-type(3)",
+    fourthRole: ".checkbox:nth-of-type(4)",
+    saveButton: ".btn",
+    roleChangeSuccess: ".alert--success"
   }
 };

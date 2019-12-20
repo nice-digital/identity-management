@@ -1,0 +1,24 @@
+{
+	"id": 1,
+	"name": "EPPI Reviewer",
+	"websites": [
+		{
+			"id": 1,
+			"serviceId": 1,
+			"host": "dev-eppi.nice.org.uk",
+			"environment": {
+				"environmentId": 71,
+				"name": "dev"
+			}
+		},
+		{
+			"id": 2,
+			"serviceId": 1,
+			"host": "test-eppi.nice.org.uk",
+			"environment": {
+				"environmentId": 72,
+				"name": "test"
+			}
+		}
+	]
+}

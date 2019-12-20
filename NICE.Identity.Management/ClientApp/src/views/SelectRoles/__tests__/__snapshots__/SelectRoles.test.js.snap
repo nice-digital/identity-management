@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectRoles should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1"
+    >
+      Kristin Patrick
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1/services"
+    >
+      Select service
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={[Function]}
+      to="/users/1/services/1/environments"
+    >
+      Select environment
+    </Breadcrumb>
+    <Breadcrumb
+      elementType="a"
+    >
+      Select role
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="EPPI Reviewer (dev)"
+    preheading="Select roles for"
+  />
+  <Grid
+    elementType="div"
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      cols={8}
+      elementType="div"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <ToggleCheckbox
+          id={991}
+          isDisabled={false}
+          isSelected={true}
+          name="Product contributor"
+          onCheckboxChange={[Function]}
+        />
+        <ToggleCheckbox
+          id={992}
+          isDisabled={false}
+          isSelected={true}
+          name="Product manager"
+          onCheckboxChange={[Function]}
+        />
+        <ToggleCheckbox
+          id={993}
+          isDisabled={false}
+          isSelected={true}
+          name="Product administrator"
+          onCheckboxChange={[Function]}
+        />
+        <ToggleCheckbox
+          id={994}
+          isDisabled={false}
+          isSelected={false}
+          name="Product editor"
+          onCheckboxChange={[Function]}
+        />
+        <Button
+          buttonType="submit"
+          className="mt--d"
+          disabled={false}
+          variant="primary"
+        >
+          Save
+        </Button>
+      </form>
+    </GridItem>
+  </Grid>
+</Fragment>
+`;

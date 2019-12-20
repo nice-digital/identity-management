@@ -1,0 +1,9 @@
+{
+	"userId": 1,
+	"nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+	"firstName": "Kristin",
+	"lastName": "Patrick",
+	"emailAddress": "kristin.patrick@example.com",
+	"hasVerifiedEmailAddress": true,
+	"isLockedOut": false
+}

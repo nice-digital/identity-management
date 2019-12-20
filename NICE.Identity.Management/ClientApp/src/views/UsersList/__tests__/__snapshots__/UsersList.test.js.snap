@@ -85,194 +85,186 @@ Array [
         className="list--unstyled"
         data-qa-sel="list-of-users"
       >
-        <li>
-          <article
-            className="card"
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
           >
-            <header
-              className="card__header"
+            <p
+              className="card__heading"
             >
-              <p
-                className="card__heading"
+              <a
+                href="/users/1"
+                onClick={[Function]}
               >
-                <a
-                  href="/users/1"
-                  onClick={[Function]}
-                >
-                  Kristin Patrick
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--live"
-                  >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
-              >
-                <dt
-                  className="visually-hidden"
-                >
-                  Email address
-                </dt>
-                <dd>
-                  kristin.patrick@example.com
-                </dd>
-              </div>
-            </dl>
-          </article>
-        </li>
-        <li>
-          <article
-            className="card"
+                Kristin Patrick
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
           >
-            <header
-              className="card__header"
+            <div
+              className="card__metadatum"
             >
-              <p
-                className="card__heading"
-              >
-                <a
-                  href="/users/2"
-                  onClick={[Function]}
+              <dd>
+                <span
+                  className="tag tag--live"
                 >
-                  Thomas Holding
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
             >
-              <div
-                className="card__metadatum"
+              <dt
+                className="visually-hidden"
               >
-                <dd>
-                  <span
-                    className="tag tag--live"
-                  >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
-              >
-                <dt
-                  className="visually-hidden"
-                >
-                  Email address
-                </dt>
-                <dd>
-                  thomas.holding@example.com
-                </dd>
-              </div>
-            </dl>
-          </article>
-        </li>
-        <li>
-          <article
-            className="card"
+                Email address
+              </dt>
+              <dd>
+                kristin.patrick@example.com
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
           >
-            <header
-              className="card__header"
+            <p
+              className="card__heading"
             >
-              <p
-                className="card__heading"
+              <a
+                href="/users/2"
+                onClick={[Function]}
               >
-                <a
-                  href="/users/3"
-                  onClick={[Function]}
-                >
-                  Aisha Bartlett
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--live"
-                  >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
-              >
-                <dt
-                  className="visually-hidden"
-                >
-                  Email address
-                </dt>
-                <dd>
-                  aisha.bartlett@example.com
-                </dd>
-              </div>
-            </dl>
-          </article>
-        </li>
-        <li>
-          <article
-            className="card"
+                Thomas Holding
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
           >
-            <header
-              className="card__header"
+            <div
+              className="card__metadatum"
             >
-              <p
-                className="card__heading"
-              >
-                <a
-                  href="/users/4"
-                  onClick={[Function]}
+              <dd>
+                <span
+                  className="tag tag--live"
                 >
-                  Theo Bradford
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
             >
-              <div
-                className="card__metadatum"
+              <dt
+                className="visually-hidden"
               >
-                <dd>
-                  <span
-                    className="tag tag--live"
-                  >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                Email address
+              </dt>
+              <dd>
+                thomas.holding@example.com
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
+          >
+            <p
+              className="card__heading"
+            >
+              <a
+                href="/users/3"
+                onClick={[Function]}
               >
-                <dt
-                  className="visually-hidden"
+                Aisha Bartlett
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
+          >
+            <div
+              className="card__metadatum"
+            >
+              <dd>
+                <span
+                  className="tag tag--live"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  theo.bradford@example.com
-                </dd>
-              </div>
-            </dl>
-          </article>
-        </li>
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
+            >
+              <dt
+                className="visually-hidden"
+              >
+                Email address
+              </dt>
+              <dd>
+                aisha.bartlett@example.com
+              </dd>
+            </div>
+          </dl>
+        </article>
+        <article
+          className="card"
+        >
+          <header
+            className="card__header"
+          >
+            <p
+              className="card__heading"
+            >
+              <a
+                href="/users/4"
+                onClick={[Function]}
+              >
+                Theo Bradford
+              </a>
+            </p>
+          </header>
+          <dl
+            className="card__metadata"
+          >
+            <div
+              className="card__metadatum"
+            >
+              <dd>
+                <span
+                  className="tag tag--live"
+                >
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              className="card__metadatum"
+            >
+              <dt
+                className="visually-hidden"
+              >
+                Email address
+              </dt>
+              <dd>
+                theo.bradford@example.com
+              </dd>
+            </div>
+          </dl>
+        </article>
       </ul>
     </div>
   </div>,

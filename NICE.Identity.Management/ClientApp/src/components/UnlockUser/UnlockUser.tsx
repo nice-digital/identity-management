@@ -3,6 +3,8 @@ import { Button } from "@nice-digital/nds-button";
 
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
+import { fetchData } from "../../helpers/fetchData";
+import { isDataError } from "../../helpers/isDataError";
 
 type UnlockUserProps = {
 	id: number;
@@ -24,34 +26,29 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 		};
 	}
 
-	fetchPatchData = async () => {
+	handleClick = async () => {
 		this.setState({ isLoading: true });
 
-		let response, data;
-		try {
-			response = await fetch(Endpoints.user(this.props.id), {
-				method: "PATCH",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-                    isLockedOut: !this.props.isLocked,
-				}),
-			});
-			data = await response.json();
-		} catch (err) {
-			let error: Error = err;
+		let fetchOptions = {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				isLockedOut: !this.props.isLocked,
+			}),
+		};
 
-			this.props.onError(error);
-			this.setState({ isLoading: false });
-			return;
+		let updatedUser = await fetchData(
+			Endpoints.user(this.props.id),
+			fetchOptions,
+		);
+
+		if (isDataError(updatedUser)) {
+			this.props.onError(new Error(updatedUser.message));
 		}
+
+		this.props.onToggleLock(updatedUser);
 
 		this.setState({ isLoading: false });
-
-		if (response.status === 200) {
-			this.props.onToggleLock(data);
-		} else {
-			this.props.onError(new Error(data.message));
-		}
 	};
 
 	render() {
@@ -62,7 +59,7 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 			<Button
 				data-qa-sel="lock-user-button"
 				variant="secondary"
-				onClick={this.fetchPatchData}
+				onClick={this.handleClick}
 				disabled={isButtonDisabled}
 			>
 				{isButtonDisabled

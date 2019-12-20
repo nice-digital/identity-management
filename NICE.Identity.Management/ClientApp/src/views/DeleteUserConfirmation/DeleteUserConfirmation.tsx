@@ -6,11 +6,11 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 
 type DeleteUserConfirmationProps = {
-	full_name: string;
+	fullName: string;
 };
 
 export const DeleteUserConfirmation = (props: DeleteUserConfirmationProps) => {
-	const { full_name } = props;
+	const { fullName } = props;
 
 	return (
 		<>
@@ -18,14 +18,16 @@ export const DeleteUserConfirmation = (props: DeleteUserConfirmationProps) => {
 				<Breadcrumb to="/users" elementType={Link}>
 					Users
 				</Breadcrumb>
-				<Breadcrumb>{full_name}</Breadcrumb>
+				<Breadcrumb>{fullName}</Breadcrumb>
 			</Breadcrumbs>
 
 			<PageHeader heading="User deleted" />
 
 			<Alert type="success" data-qa-sel="deletion-success">
-				<p>The user {full_name} was successfully deleted.</p>
-				<Link data-qa-sel="back-to-users" to="/users">Back to users</Link>
+				<p>The user {fullName} was successfully deleted.</p>
+				<Link data-qa-sel="back-to-users" to="/users">
+					Back to users
+				</Link>
 			</Alert>
 		</>
 	);
