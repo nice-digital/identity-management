@@ -38,7 +38,10 @@ namespace NICE.Identity.Management
             bool.TryParse(logCfg["UseFile"], out var useFile);
 
             var serilogFormatter = new NiceSerilogFormatter(environment, application);
-            var serilogConfiguration = new LoggerConfiguration().MinimumLevel.Is(serilogMinLevel);
+            var serilogConfiguration = new LoggerConfiguration()
+	            .Enrich.FromLogContext()
+	            .WriteTo.Console()
+                .MinimumLevel.Is(serilogMinLevel);
 
             if (useRabbit && !string.IsNullOrEmpty(rabbitMQHost) && rabbitPortIsSet)
             {
