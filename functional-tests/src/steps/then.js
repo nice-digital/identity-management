@@ -16,6 +16,7 @@ import findUserList, { userNotInList } from "../support/check/findUserInList";
 import validateDeletionSuccessMessage, { validateRegistrationValidationMessages } from "../support/check/validateMessages";
 import validateUserStatusActive, { validateUserStatusLocked, validateUserStatusListPageLocked } from "../support/check/validateUserStatus";
 import identityLogInPage from "../support/check/identityLogInPage";
+import validateRoleChange from "../support/check/validateRoleChange";
 
 Then(
   /^I expect the error message is displayed$/,
@@ -115,4 +116,9 @@ Then(
 Then(
   /^I expect that the status of the user on the user list page is also Locked$/,
   validateUserStatusListPageLocked
+);
+
+Then(
+  /^I expect the user roles to be successfully changed$/,
+  validateRoleChange
 );

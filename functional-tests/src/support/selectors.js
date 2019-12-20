@@ -34,6 +34,7 @@ export default {
     secondUserCard: toChildAndQASel(2, "list-of-users"),
     thirdUserCard: toChildAndQASel(3, "list-of-users"),
     fourthUserCard: toChildAndQASel(4, "list-of-users"),
+    lastUserCard: "article:last-of-type a",
     roleField: toChildAndQASel(1, "list-of-users"),
     pageTitle: "h1",
     globalNavMyAccount: "[id$='my-account-button']",
@@ -43,6 +44,7 @@ export default {
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),
     lockUserButton: toDataQASelAttr("lock-user-button"),
+    AddRoleButton: toDataQASelAttr("add-user-role-button"),
     usersBreadcrumb: toDataQASelAttr("breadcrumb-user-link"),
     userStatusActive: ".tag--live",
     userStatusLocked: ".tag--alpha",
@@ -70,5 +72,13 @@ export default {
     secondEnvironment: ".stacked-nav__list-item:nth-of-type(2)",
     thirdEnvironment: ".stacked-nav__list-item:nth-of-type(3)",
     fourthEnvironment: ".stacked-nav__list-item:nth-of-type(4)"
+  },
+  rolesListPage: {
+    firstRole: ".checkbox:nth-of-type(1)",
+    secondRole: ".checkbox:nth-of-type(2)",
+    thirdRole: ".checkbox:nth-of-type(3)",
+    fourthRole: ".checkbox:nth-of-type(4)",
+    saveButton: ".btn",
+    roleChangeSuccess: ".alert--success"
   }
 };
