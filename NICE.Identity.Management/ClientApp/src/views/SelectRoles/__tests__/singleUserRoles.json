@@ -7,22 +7,26 @@
 		{
 			"id": 991,
 			"name": "Product contributor",
-			"hasRole": true
+			"hasRole": true,
+			"description": "Description for Product contributor"
 		},
 		{
 			"id": 992,
 			"name": "Product manager",
-			"hasRole": true
+			"hasRole": true,
+			"description": "Description for Product manager"
 		},
 		{
 			"id": 993,
 			"name": "Product administrator",
-			"hasRole": true
+			"hasRole": true,
+			"description": "Description for Product administrator"
 		},
 		{
 			"id": 994,
 			"name": "Product editor",
-			"hasRole": false
+			"hasRole": false,
+			"description": "Description for Product editor"
 		}
 	],
 	"service": {
