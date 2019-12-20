@@ -1,7 +1,7 @@
 # Runs the Identity management webapp.
 # Assumes you've published the app to ./published-app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 
 ENV ASPNETCORE_URLS http://+:8080
 
