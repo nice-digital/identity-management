@@ -16,10 +16,9 @@ export const UserStatus = (props: UserStatusProps) => (
 
 		{!props.user.hasVerifiedEmailAddress && (
 			<>
-				<Tag data-qa-sel="user-status" beta>
+				<Tag data-qa-sel="user-pending" beta>
 					Pending
 				</Tag>
-				&nbsp;
 			</>
 		)}
 
