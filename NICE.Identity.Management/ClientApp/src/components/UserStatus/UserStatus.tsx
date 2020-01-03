@@ -7,7 +7,22 @@ type UserStatusProps = {
 };
 
 export const UserStatus = (props: UserStatusProps) => (
-	<Tag data-qa-sel="user-status" live={!props.user.isLockedOut} alpha={props.user.isLockedOut}>
-		{!props.user.isLockedOut ? "Active" : "Locked"}
-	</Tag>
+	<>
+		{!props.user.isLockedOut && props.user.hasVerifiedEmailAddress && (
+			<Tag data-qa-sel="user-status" consultation>
+				Active
+			</Tag>
+		)}
+
+		{!props.user.hasVerifiedEmailAddress && (
+			<>
+				<Tag data-qa-sel="user-status" beta>
+					Pending
+				</Tag>
+				&nbsp;
+			</>
+		)}
+
+		{props.user.isLockedOut && <Tag data-qa-sel="user-status">Locked</Tag>}
+	</>
 );
