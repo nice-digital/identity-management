@@ -19,6 +19,7 @@ export const UserStatus = (props: UserStatusProps) => (
 				<Tag data-qa-sel="user-pending" beta>
 					Pending
 				</Tag>
+				&nbsp;
 			</>
 		)}
 
