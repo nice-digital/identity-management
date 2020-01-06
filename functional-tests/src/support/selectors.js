@@ -39,7 +39,7 @@ export default {
     pageTitle: "h1",
     globalNavMyAccount: "[id$='my-account-button']",
     globalNavSignOut: "[id$='my-account']",
-    userStatusListPage: "[data-qa-sel='list-of-users'] article:nth-child(2) .tag--alpha"
+    userStatusListPage: "[data-qa-sel='list-of-users'] article:nth-child(2) [data-qa-sel='user-status']"
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr("delete-user-link"),
@@ -48,6 +48,7 @@ export default {
     usersBreadcrumb: toDataQASelAttr("breadcrumb-user-link"),
     userStatusActive: ".tag--live",
     userStatusLocked: ".tag--alpha",
+    userStatus: toDataQASelAttr("user-status"),
   },
   confirmUserDeletionPage: {
     confirmDeleteUser: toDataQASelAttr("confirm-delete-user"),
