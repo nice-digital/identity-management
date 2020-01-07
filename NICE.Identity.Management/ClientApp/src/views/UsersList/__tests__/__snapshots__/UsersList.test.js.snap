@@ -124,6 +124,24 @@ Array [
           >
             <input
               className="radio__input"
+              id="filter-status-pending"
+              name="filter-status"
+              onChange={[Function]}
+              type="radio"
+              value="pending"
+            />
+            <label
+              className="radio__label"
+              htmlFor="filter-status-pending"
+            >
+              Pending
+            </label>
+          </div>
+          <div
+            className="radio"
+          >
+            <input
+              className="radio__input"
               id="filter-status-locked"
               name="filter-status"
               onChange={[Function]}
@@ -173,7 +191,8 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--live"
+                  className="tag tag--consultation"
+                  data-qa-sel="user-status"
                 >
                   Active
                 </span>
@@ -218,7 +237,8 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--live"
+                  className="tag tag--consultation"
+                  data-qa-sel="user-status"
                 >
                   Active
                 </span>
@@ -263,7 +283,8 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--live"
+                  className="tag tag--consultation"
+                  data-qa-sel="user-status"
                 >
                   Active
                 </span>
@@ -308,7 +329,8 @@ Array [
             >
               <dd>
                 <span
-                  className="tag tag--alpha"
+                  className="tag"
+                  data-qa-sel="user-status"
                 >
                   Locked
                 </span>

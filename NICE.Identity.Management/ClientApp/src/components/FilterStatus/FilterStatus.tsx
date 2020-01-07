@@ -46,6 +46,20 @@ export const FilterStatus = (props: FilterStatusProps) => {
 						className="radio__input"
 						name="filter-status"
 						type="radio"
+						id="filter-status-pending"
+						value="pending"
+						onChange={props.onCheckboxChange}
+					/>
+					<label className="radio__label" htmlFor="filter-status-pending">
+						Pending
+					</label>
+				</div>
+
+				<div className="radio">
+					<input
+						className="radio__input"
+						name="filter-status"
+						type="radio"
 						id="filter-status-locked"
 						value="locked"
 						onChange={props.onCheckboxChange}

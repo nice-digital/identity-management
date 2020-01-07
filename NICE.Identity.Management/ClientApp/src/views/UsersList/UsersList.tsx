@@ -28,7 +28,7 @@ type UsersListState = {
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
-    statusFilter?: string;
+	statusFilter?: string;
 };
 
 export class UsersList extends Component<UsersListProps, UsersListState> {
@@ -69,27 +69,42 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	filterUsersBySearch = async (searchQuery: string) => {
 		this.setState({ isLoading: true });
 
-		let originalUsers = await fetchData(`${Endpoints.usersList}?q=${searchQuery}`);
-        let users = originalUsers;
-        if (isDataError(originalUsers)) {
+		let originalUsers = await fetchData(
+			`${Endpoints.usersList}?q=${searchQuery}`,
+		);
+		let users = originalUsers;
+		if (isDataError(originalUsers)) {
 			this.setState({ error: originalUsers });
 		}
 
-        if (this.state.statusFilter) {
-            users = this.usersByStatus(this.state.statusFilter, users);
-        }
+		if (this.state.statusFilter) {
+			users = this.usersByStatus(this.state.statusFilter, users);
+		}
 
 		this.setState({ originalUsers, users, searchQuery, isLoading: false });
 	};
 
-    usersByStatus = (statusFilter: string, users: Array<UserType>) : Array<UserType> => {
-        return users = users.filter(user => {
-            let userStatus = !user.isLockedOut ? "active" : "locked";
-            if (userStatus === statusFilter) {
-                return user;
-            }
-        });
-    };
+	usersByStatus = (
+		statusFilter: string,
+		users: Array<UserType>,
+	): Array<UserType> => {
+		return (users = users.filter(user => {
+			let userActive = !user.isLockedOut,
+				userPending = !user.hasVerifiedEmailAddress;
+
+			if (statusFilter === "active" && userActive && !userPending) {
+				return user;
+			}
+
+			if (statusFilter === "pending" && userPending) {
+				return user;
+			}
+
+			if (statusFilter === "locked" && !userActive) {
+				return user;
+			}
+		}));
+	};
 
 	render() {
 		const { users, searchQuery, error, isLoading } = this.state;
