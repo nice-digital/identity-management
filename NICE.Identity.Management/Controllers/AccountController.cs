@@ -38,8 +38,8 @@ namespace NICE.Identity.Management.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
         public async Task Logout(string returnUrl = "/")
         {
-            var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
-            await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, url);
+            //var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble(); //removing cache buster for logout as auth0 doesn't support dynamic logout urls.
+            await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, returnUrl);
         }
 
         [AllowAnonymous]
