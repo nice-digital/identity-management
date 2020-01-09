@@ -81,7 +81,11 @@ export class User extends Component<UserProps, UserState> {
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb data-qa-sel="breadcrumb-user-link" to="/users" elementType={Link}>
+					<Breadcrumb
+						data-qa-sel="breadcrumb-user-link"
+						to="/users"
+						elementType={Link}
+					>
 						Users
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
@@ -119,7 +123,9 @@ export class User extends Component<UserProps, UserState> {
 												Account information
 											</span>
 											<div className={styles.summaryListDetail}>
-												<UserStatus user={user} />
+												<div>
+													<UserStatus user={user} />
+												</div>
 
 												<UnlockUser
 													id={user.userId}

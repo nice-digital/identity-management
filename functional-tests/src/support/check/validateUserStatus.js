@@ -5,21 +5,21 @@ import selectors from "../selectors";
 
 export const validateUserStatusActive = () => {
   pause(1000);
-  waitForVisible(selectors.adminUserPage.userStatusActive);
-  checkContainsText("element", selectors.adminUserPage.userStatusActive, "Active");
+  waitForVisible(selectors.adminUserPage.userStatus);
+  checkContainsText("element", selectors.adminUserPage.userStatus, "Active");
   pause(1000);
 };
 
 export const validateUserStatusLocked = () => {
   pause(1000);
-  waitForVisible(selectors.adminUserPage.userStatusLocked);
-  checkContainsText("element", selectors.adminUserPage.userStatusLocked, "Locked");
+  waitForVisible(selectors.adminUserPage.userStatus);
+  checkContainsText("element", selectors.adminUserPage.userStatus, "Locked");
   pause(1000);
 };
 
 export const validateUserStatusListPageLocked = () => {
   pause(1000);
-  waitForVisible(selectors.adminUserPage.userStatusLocked);
+  waitForVisible(selectors.adminUserPage.userStatus);
   checkContainsText("element", selectors.adminHomepage.userStatusListPage, "Locked");
   pause(1000);
 };
