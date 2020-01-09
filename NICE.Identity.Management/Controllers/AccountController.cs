@@ -38,7 +38,7 @@ namespace NICE.Identity.Management.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = 0)]
         public async Task Logout(string returnUrl = "/")
         {
-            var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble();
+            var url = returnUrl + (returnUrl.Contains('?') ? '&' : '?') + new Random().NextDouble(); 
             await _niceAuthenticationService.Logout(_httpContextAccessor.HttpContext, url);
         }
 
