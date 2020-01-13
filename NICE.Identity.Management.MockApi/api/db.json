@@ -148,14 +148,14 @@
       "host": "idam",
       "environment": {
         "environmentId": 72,
-        "name":"test"
+        "name": "test"
       }
     }
   ],
   "userroles": [
     {
       "id": 1,
-      "userId": 1,
+      "user": 1,
       "serviceId": 1,
       "websiteId": 1,
       "roles": [
@@ -187,7 +187,7 @@
     },
     {
       "id": 2,
-      "userId": 1,
+      "user": 1,
       "serviceId": 1,
       "websiteId": 2,
       "roles": [
@@ -219,7 +219,7 @@
     },
     {
       "id": 3,
-      "userId": 2,
+      "user": 2,
       "serviceId": 2,
       "websiteId": 1,
       "roles": [
@@ -251,7 +251,7 @@
     },
     {
       "id": 4,
-      "userId": 2,
+      "user": 2,
       "serviceId": 2,
       "websiteId": 4,
       "roles": [
@@ -283,7 +283,7 @@
     },
     {
       "id": 5,
-      "userId": 6,
+      "user": 6,
       "serviceId": 3,
       "websiteId": 5,
       "roles": [
@@ -310,7 +310,7 @@
       ]
     }
   ],
-  "claims":[
+  "claims": [
     {
       "type": "http://identity.nice.org.uk/claims/role",
       "value": "Administrator",
