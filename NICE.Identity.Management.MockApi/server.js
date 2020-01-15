@@ -20,7 +20,7 @@ const rewriter = jsonServer.rewriter({
   '/users\\?sort=:field\\:-1': '/users?_sort=:field&_order=desc',
   '/services': '/services?_embed=websites',
   '/services/:id': '/services/:id?_embed=websites',
-  '/users/:userId/rolesbywebsite/:websiteId': '/userroles?userId=:userId&websiteId=:websiteId&_expand=service&_expand=website',
+  '/users/:userId/rolesbywebsite/:websiteId': '/userroles?user=:userId&websiteId=:websiteId&_expand=service&_expand=website',
   '/claims/:authenticationProviderUserId': '/claims'
 });
 
