@@ -54,6 +54,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		);
 
 		if (isDataError(deletedUser)) {
+            console.error(deletedUser);
 			this.setState({ error: deletedUser });
 		} else {
 			this.setState({ hasBeenDeleted: true });
@@ -68,6 +69,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		let user = await fetchData(Endpoints.user(this.props.match.params.id));
 
 		if (isDataError(user)) {
+		    console.error(user);
 			this.setState({ error: user });
 		}
 
