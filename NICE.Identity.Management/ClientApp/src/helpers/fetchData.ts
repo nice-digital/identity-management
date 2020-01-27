@@ -2,7 +2,9 @@ export const fetchData = async (url: string, options?: {}) => {
 	let response, data;
 	try {
 		response = await fetch(url, options);
-		data = await response.json();
+		if (response.body){
+            data = await response.json();
+        }
 	} catch (err) {
 		let error: Error = err;
 		return error;
