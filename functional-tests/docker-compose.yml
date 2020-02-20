@@ -92,10 +92,6 @@ services:
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_CLIENTID
       - IDENTITYAPI_API_CLIENTSECRECT
-    networks:
-      default:
-        aliases:
-          - idam
 
 
   # MS SQL Server database
@@ -129,17 +125,17 @@ services:
           - api
 
 
-  # nginx:
-  #   container_name: functional-tests_nginx_1
-  #   image: nginx:latest
-  #   volumes:
-  #     - ./docker_ssl_proxy:/etc/nginx
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   links:
-  #     - comments
-  #   networks:
-  #     default:
-  #       aliases:
-  #         - niceorg
+  nginx:
+    container_name: functional-tests_nginx_1
+    image: nginx:latest
+    volumes:
+      - ./docker_ssl_proxy:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - idammanagement
+    networks:
+      default:
+        aliases:
+          - idam
