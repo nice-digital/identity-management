@@ -14,6 +14,13 @@ import * as fetchData from "../../../helpers/fetchData";
 import { Endpoints } from "../../../data/endpoints";
 
 describe("UsersList", () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "?amount=all&page=1",
+		},
+	};
+
 	afterEach(fetchMock.reset);
 
 	const filterSearchProps = {
@@ -24,13 +31,13 @@ describe("UsersList", () => {
 
 	it("should show loading message before data has been loaded", () => {
 		fetchMock.get("*", {});
-		const wrapper = shallow(<UsersList />);
+		const wrapper = shallow(<UsersList {...usersListProps} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
 	it("should call fetchData during componentDidMount", () => {
 		fetchMock.get("*", {});
-		const wrapper = shallow(<UsersList />);
+		const wrapper = shallow(<UsersList {...usersListProps} />);
 		const instance = wrapper.instance();
 		jest.spyOn(fetchData, "fetchData");
 		instance.componentDidMount();
@@ -41,7 +48,7 @@ describe("UsersList", () => {
 		fetchMock.get("*", users);
 		const wrapper = mount(
 			<MemoryRouter>
-				<UsersList />
+				<UsersList {...usersListProps} />
 			</MemoryRouter>,
 		);
 		await nextTick();
@@ -51,7 +58,7 @@ describe("UsersList", () => {
 
 	it("should show error message when fetch returns 401 error", async () => {
 		fetchMock.get("*", 401);
-		const wrapper = mount(<UsersList />);
+		const wrapper = mount(<UsersList {...usersListProps} />);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
@@ -59,7 +66,7 @@ describe("UsersList", () => {
 
 	it("should show error message when fetch returns 500 error", async () => {
 		fetchMock.get("*", 500);
-		const wrapper = mount(<UsersList />);
+		const wrapper = mount(<UsersList {...usersListProps} />);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
@@ -67,7 +74,7 @@ describe("UsersList", () => {
 
 	it("should show no results message when fetch returns an empty array", async () => {
 		fetchMock.get("*", []);
-		const wrapper = shallow(<UsersList />);
+		const wrapper = shallow(<UsersList {...usersListProps} />);
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find("p").text()).toEqual("No results found");
@@ -76,7 +83,7 @@ describe("UsersList", () => {
 	it("should show no results found message after search returns empty array", async () => {
 		fetchMock.get(Endpoints.usersList, users);
 		fetchMock.get(`${Endpoints.usersList}?q=${dummyText}`, []);
-		const wrapper = shallow(<UsersList />);
+		const wrapper = shallow(<UsersList {...usersListProps} />);
 		const instance = wrapper.instance();
 		await nextTick();
 		wrapper.update();
@@ -90,7 +97,7 @@ describe("UsersList", () => {
 
 	it("should show all filter by default", () => {
 		fetchMock.get("*", {});
-		const wrapper = mount(<UsersList />);
+		const wrapper = mount(<UsersList {...usersListProps} />);
 		expect(wrapper.find("#filter-status-all").props().defaultChecked).toEqual(
 			true,
 		);
@@ -100,7 +107,7 @@ describe("UsersList", () => {
 		fetchMock.get("*", users);
 		const wrapper = mount(
 			<MemoryRouter>
-				<UsersList />
+				<UsersList {...usersListProps} />
 			</MemoryRouter>,
 		);
 		await nextTick();
@@ -110,7 +117,7 @@ describe("UsersList", () => {
 		});
 		await nextTick();
 		wrapper.update();
-		wrapper.find(".tag").forEach(tag => {
+		wrapper.find(".tag").forEach((tag) => {
 			expect(tag.text()).toEqual("Active");
 		});
 	});
