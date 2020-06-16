@@ -44,16 +44,16 @@ export const validateRegistrationValidationMessages = () => {
     'This field is required'
   );
   setInputField('set', '123abc', selectors.registrationPage.emailInput);
-  checkContainsText(
-    'element',
-    selectors.registrationPage.emailValidationMessage,
-    'Email address is in an invalid format'
-  );
   setInputField('set', '123abc', selectors.registrationPage.passwordInput);
   setInputField(
     'set',
     '123abc',
     selectors.registrationPage.confirmPasswordInput
+  );
+  checkContainsText(
+    'element',
+    selectors.registrationPage.emailValidationMessage,
+    'Email address is in an invalid format'
   );
   checkContainsText(
     'element',
