@@ -23,7 +23,6 @@ export const validateRegistrationValidationMessages = () => {
     selectors.registrationPage.emailValidationMessage,
     'This field is required'
   );
-  // checkContainsText("element", selectors.registrationPage.confirmEmailValidationMessage, "This field is required");
   checkContainsText(
     'element',
     selectors.registrationPage.passwordValidationMessage,
@@ -45,7 +44,6 @@ export const validateRegistrationValidationMessages = () => {
     'This field is required'
   );
   setInputField('set', '123abc', selectors.registrationPage.emailInput);
-  // setInputField("set", "123abc", selectors.registrationPage.confirmEmailInput);
   checkContainsText(
     'element',
     selectors.registrationPage.emailValidationMessage,

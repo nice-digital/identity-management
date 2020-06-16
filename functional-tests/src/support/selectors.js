@@ -23,7 +23,6 @@ export default {
     tcCheckBox: toDataQASelAttr('tc-checkbox-register'),
     registerButton: toDataQASelAttr('Register-button'),
     emailValidationMessage: '.input.input--error:nth-child(3)',
-    confirmEmailValidationMessage: '.input.input--error:nth-child(3)',
     passwordValidationMessage: '.input.input--error:nth-child(4)',
     confirmPasswordValidationMessage: '.input.input--error:nth-child(5)',
     firstNameValidationMessage: '.input.input--error:nth-child(6)',
