@@ -5,7 +5,6 @@ import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
 
 import { UsersList } from "../UsersList";
-import { FilterSearch } from "../../../components/FilterSearch/FilterSearch";
 import users from "./users.json";
 
 import { nextTick } from "../../../utils/nextTick";
@@ -19,13 +18,22 @@ describe("UsersList", () => {
 			pathname: "/user",
 			search: "?amount=all&page=1",
 		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+
+	const usersListPropsOnePerPage = {
+		...usersListProps,
+		location: { search: "?amount=1&page=4" },
+	};
+
+	const usersListPropsThreePerPage = {
+		...usersListProps,
+		location: { search: "?amount=3&page=1" },
 	};
 
 	afterEach(fetchMock.reset);
-
-	const filterSearchProps = {
-		onInputChange: jest.fn(),
-	};
 
 	const dummyText = "SomeText";
 
@@ -120,5 +128,56 @@ describe("UsersList", () => {
 		wrapper.find(".tag").forEach((tag) => {
 			expect(tag.text()).toEqual("Active");
 		});
+	});
+
+	it("should show 25 (default page amount) or less results by default when paginated", async () => {
+		fetchMock.get("*", users);
+		const wrapper = mount(
+			<MemoryRouter>
+				<UsersList {...usersListProps} />
+			</MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		const listContainer = wrapper.find("[data-qa-sel='list-of-users']");
+		expect(listContainer.find(".card").length).toBeLessThanOrEqual(25);
+	});
+
+	it("should go to page 2 when next button is clicked", async () => {
+		fetchMock.get("*", users);
+		const wrapper = mount(
+			<MemoryRouter>
+				<UsersList {...usersListPropsThreePerPage} />
+			</MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		wrapper.find("[data-pager='next']").simulate("click");
+		await nextTick();
+		wrapper.update();
+		const listContainer = wrapper.find("[data-qa-sel='list-of-users']");
+		const usersListSummary = wrapper.find(".usersListSummary");
+		expect(usersListSummary.text()).toEqual("Showing 4 to 4 of 4 users");
+		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 2 of 2");
+		expect(listContainer.find(".card").length).toEqual(1);
+	});
+
+	it("should go to first page when page 1 button is clicked", async () => {
+		fetchMock.get("*", users);
+		const wrapper = mount(
+			<MemoryRouter>
+				<UsersList {...usersListPropsOnePerPage} />
+			</MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		wrapper.find("[data-pager='1']").simulate("click");
+		await nextTick();
+		wrapper.update();
+		const listContainer = wrapper.find("[data-qa-sel='list-of-users']");
+		const usersListSummary = wrapper.find(".usersListSummary");
+		expect(usersListSummary.text()).toEqual("Showing 1 to 1 of 4 users");
+		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 1 of 4");
+		expect(listContainer.find(".card").length).toEqual(1);
 	});
 });

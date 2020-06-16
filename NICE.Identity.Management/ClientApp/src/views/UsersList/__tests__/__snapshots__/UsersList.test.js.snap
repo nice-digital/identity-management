@@ -163,7 +163,7 @@ Array [
       data-g="12 md:9"
     >
       <h2
-        className="UsersListSummary"
+        className="usersListSummary"
       >
         Showing 4 users
       </h2>
