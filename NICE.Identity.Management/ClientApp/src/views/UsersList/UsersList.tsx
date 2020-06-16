@@ -291,7 +291,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								<p>Loading...</p>
 							) : users.length ? (
 								<>
-									<h2 className={styles.UsersListSummary}>{paginationText}</h2>
+									<h2 className={styles.usersListSummary}>{paginationText}</h2>
 									<ul className="list--unstyled" data-qa-sel="list-of-users">
 										{usersPaginated.map((user) => {
 											const {
