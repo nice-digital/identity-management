@@ -162,6 +162,11 @@ Array [
       aria-busy={false}
       data-g="12 md:9"
     >
+      <h2
+        className="usersListSummary"
+      >
+        Showing 4 users
+      </h2>
       <ul
         className="list--unstyled"
         data-qa-sel="list-of-users"
@@ -351,6 +356,44 @@ Array [
           </dl>
         </article>
       </ul>
+      <div
+        className="flex flexAlignCenter"
+      >
+        <div
+          className="mr--e"
+          data-qa-sel="number-of-results-on-page"
+        >
+          <label
+            className="bold mr--c"
+            htmlFor="itemsPerPage"
+          >
+            Items per page
+          </label>
+          <select
+            data-qa-sel="result-on-the-page-index"
+            id="itemsPerPage"
+            name="itemsPerPage"
+            onChange={[Function]}
+            value="all"
+          >
+            <option
+              value="25"
+            >
+              25
+            </option>
+            <option
+              value="50"
+            >
+              50
+            </option>
+            <option
+              value="all"
+            >
+              All
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>,
 ]

@@ -8,6 +8,7 @@
     "@nice-digital/nds-checkbox": "^1.0.13-alpha.0",
     "@nice-digital/nds-radio": "^1.0.17-alpha.0",
     "concurrently": "^4.1.1",
+    "query-string": "^6.12.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",

@@ -44,3 +44,20 @@ export type RoleType = {
 	description: string;
 	hasRole: boolean;
 };
+
+export type HistoryLocationType = {
+	pathname: string;
+	search: string;
+	hash: string;
+	state?: any;
+	key?: string;
+};
+
+export type HistoryType = {
+	push: (url: string) => void;
+	listen: (
+		location: HistoryLocationType,
+		action: "PUSH" | "REPLACE" | "POP" | null,
+	) => void;
+	location: HistoryLocationType;
+};
