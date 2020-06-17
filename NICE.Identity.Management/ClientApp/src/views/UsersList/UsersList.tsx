@@ -96,21 +96,44 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ originalUsers: users, users, isLoading: false });
 	}
 
+	pastPageRange = (
+		itemsPerPage: string | number,
+		pageNumber: number,
+		dataCount: number,
+	) => {
+		let pastPageRange = false;
+
+		if (Number(itemsPerPage)) {
+			itemsPerPage = Number(itemsPerPage);
+			pastPageRange = pageNumber * itemsPerPage >= dataCount;
+		}
+
+		if (pastPageRange || itemsPerPage === "all") {
+			pageNumber = 1;
+		}
+
+		return pageNumber;
+	};
+
 	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ isLoading: true });
 
 		let statusFilter = e.target.value,
 			users = this.state.originalUsers,
 			pageNumber = this.state.pageNumber,
-			itemsPerPage = this.state.itemsPerPage;
+			itemsPerPage = Number(this.state.itemsPerPage)
+				? Number(this.state.itemsPerPage)
+				: this.state.itemsPerPage;
 
 		if (statusFilter) {
 			users = this.usersByStatus(statusFilter, users);
 		}
 
-		if (users.length <= itemsPerPage) {
-			pageNumber = 1;
-		}
+		pageNumber = this.pastPageRange(
+			itemsPerPage,
+			pageNumber,
+			this.state.users.length,
+		);
 
 		this.setState({ users, statusFilter, pageNumber, isLoading: false });
 	};
@@ -123,7 +146,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			),
 			users = originalUsers,
 			pageNumber = this.state.pageNumber,
-			itemsPerPage = this.state.itemsPerPage;
+			itemsPerPage = Number(this.state.itemsPerPage)
+				? Number(this.state.itemsPerPage)
+				: this.state.itemsPerPage;
 
 		if (isDataError(originalUsers)) {
 			this.setState({ error: originalUsers });
@@ -133,9 +158,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			users = this.usersByStatus(this.state.statusFilter, users);
 		}
 
-		if (users.length <= itemsPerPage) {
-			pageNumber = 1;
-		}
+		pageNumber = this.pastPageRange(
+			itemsPerPage,
+			pageNumber,
+			this.state.users.length,
+		);
 
 		this.setState({
 			originalUsers,
@@ -203,18 +230,16 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 
 	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		let itemsPerPage = (e.target as HTMLSelectElement).value || 25,
-			pastPageRange = false,
 			pageNumber = this.state.pageNumber,
 			path = stripMultipleQueries(this.state.path, ["amount", "page"]);
 
-		if (Number(itemsPerPage)) {
-			itemsPerPage = Number(itemsPerPage);
-			pastPageRange = itemsPerPage >= this.state.users.length;
-		}
+		itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
 
-		if (pastPageRange || itemsPerPage === "all") {
-			pageNumber = 1;
-		}
+		pageNumber = this.pastPageRange(
+			itemsPerPage,
+			pageNumber,
+			this.state.users.length,
+		);
 
 		path = appendQueryParameter(path, "amount", itemsPerPage.toString());
 		path = appendQueryParameter(path, "page", pageNumber);
