@@ -2,7 +2,7 @@ import setInputField from '@nice-digital/wdio-cucumber-steps/lib/support/action/
 import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
 import click from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
 import waitFor from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitFor';
-import scroll from '@nice-digital/wdio-cucumber-steps/lib/support/action/scroll';
+// import scroll from '@nice-digital/wdio-cucumber-steps/lib/support/action/scroll';
 import selectors from '../selectors';
 import emailInput from '../check/emailInput';
 
@@ -12,7 +12,7 @@ export const Login = (username, password) => {
   browser.setValue(selectors.loginPage.usernameField, process.env[username]);
   browser.setValue(selectors.loginPage.passwordField, process.env[password]);
   // waitFor(selectors.loginPage.signInButton, 'enabled')
-  scroll(selectors.loginPage.signInButton);
+  // scroll(selectors.loginPage.signInButton);
   click('click', 'element', selectors.loginPage.signInButton);
   browser.pause(1000);
 };
