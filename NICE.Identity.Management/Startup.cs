@@ -135,8 +135,8 @@ namespace NICE.Identity.Management
                 }
             });
 
-            app.UseHttpsRedirection();
-			//app.UseCookiePolicy();
+            app.UseCookiePolicy();
+			app.UseHttpsRedirection();
 
 			app.UseRouting();
 
