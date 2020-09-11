@@ -22,7 +22,7 @@ export class App extends React.Component {
 			<Router>
 				<Header search={false} auth={auth} />
 
-				<div className="container">
+				<main className="container" role="contentinfo">
 					<Route path="/" exact render={() => <Redirect to="/users" />} />
 					<Route path="/users" exact component={UsersList} />
 					<Route path="/users/:id" exact component={User} />
@@ -38,7 +38,7 @@ export class App extends React.Component {
 						exact
 						component={SelectRoles}
 					/>
-				</div>
+				</main>
 
 				<Footer />
 			</Router>
