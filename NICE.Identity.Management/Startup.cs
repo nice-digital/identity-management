@@ -65,7 +65,7 @@ namespace NICE.Identity.Management
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
-            services.AddAuthentication(authConfiguration);
+            services.AddAuthentication(authConfiguration, allowNonSecureCookie: Environment.IsDevelopment());
 
             // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
