@@ -14,6 +14,15 @@ config.capabilities = [
     chromeOptions: {
       args: ['--headless', '--window-size=1366,1000'],
     },
+    'goog:chromeOptions': {
+      args: [],
+      localState: {
+        'browser.enabled_labs_experiments': [
+          'same-site-by-default-cookies@2',
+          'cookies-without-same-site-must-be-secure@2',
+        ],
+      },
+    },
   }, //,
   // {
   // 	acceptInsecureCerts: true, // Because of self-signed cert inside Docker
