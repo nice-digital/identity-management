@@ -37,6 +37,7 @@ exports[`SelectService should match the snapshot after data has been loaded 1`] 
       elementType="div"
     >
       <StackedNav
+        aria-label="Services"
         data-qa-sel="service-stacked-nav"
       >
         <StackedNavLink

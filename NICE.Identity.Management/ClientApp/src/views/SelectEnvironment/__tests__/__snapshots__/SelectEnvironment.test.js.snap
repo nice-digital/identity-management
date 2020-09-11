@@ -42,7 +42,9 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
       cols={8}
       elementType="div"
     >
-      <StackedNav>
+      <StackedNav
+        aria-label="Environments"
+      >
         <StackedNavLink
           destination="/1/roles"
           elementType={[Function]}
