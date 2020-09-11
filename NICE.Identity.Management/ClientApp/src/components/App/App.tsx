@@ -22,7 +22,7 @@ export class App extends React.Component {
 			<Router>
 				<Header search={false} auth={auth} />
 
-				<main className="container" role="main">
+				<main className="container" role="main"  id="content-start" aria-label="Start of content">
 					<Route path="/" exact render={() => <Redirect to="/users" />} />
 					<Route path="/users" exact component={UsersList} />
 					<Route path="/users/:id" exact component={User} />
