@@ -5,7 +5,20 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
   <Breadcrumbs>
     <Breadcrumb
       data-qa-sel="breadcrumb-user-link"
-      elementType={[Function]}
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "displayName": "Link",
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
       to="/users"
     >
       Users
@@ -21,7 +34,20 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
       <Button
         data-qa-sel="add-user-role-button"
         disabled={false}
-        elementType={[Function]}
+        elementType={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "Link",
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
         to="/users/1/services"
         variant="cta"
       >
