@@ -41,6 +41,7 @@ export class SelectEnvironment extends Component<
 			websites: [],
 			isLoading: true,
 		};
+		document.title = "NICE Accounts - Select environment"
 	}
 
 	async componentDidMount() {

@@ -49,6 +49,8 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 			isLoading: true,
 			isButtonDisabled: false,
 		};
+
+		document.title = "NICE Accounts - Select role"
 	}
 
 	handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {

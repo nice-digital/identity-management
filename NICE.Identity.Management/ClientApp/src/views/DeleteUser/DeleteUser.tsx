@@ -72,6 +72,7 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		}
 
 		this.setState({ user, isLoading: false });
+		document.title = `NICE Accounts - Delete ${user.firstName} ${user.lastName}`
 	}
 
 	render() {
