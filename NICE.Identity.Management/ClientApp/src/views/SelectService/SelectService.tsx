@@ -86,7 +86,7 @@ export class SelectService extends Component<
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-										<StackedNav data-qa-sel="service-stacked-nav">
+										<StackedNav data-qa-sel="service-stacked-nav" aria-label="Services">
 										{services.map(service => {
 											return (
 												<StackedNavLink
