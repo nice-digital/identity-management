@@ -11,8 +11,8 @@ RUN git --version
 
 # Install node and npm
 # Latest Nodejs LTS as of 03/05/2018
-ENV NODE_VERSION 8.11.1
-ENV NODE_DOWNLOAD_SHA 0e20787e2eda4cc31336d8327556ebc7417e8ee0a6ba0de96a09b0ec2b841f60
+ENV NODE_VERSION 10.16.3
+ENV NODE_DOWNLOAD_SHA 2f0397bb81c1d0c9901b9aff82a933257bf60f3992227b86107111a75b9030d9
 ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz
 
 RUN curl -SL "$NODE_DOWNLOAD_URL" --output nodejs.tar.gz \
