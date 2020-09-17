@@ -65,7 +65,7 @@ namespace NICE.Identity.Management
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
-            services.AddAuthentication(authConfiguration);
+            services.AddAuthentication(authConfiguration, allowNonSecureCookie: Environment.IsDevelopment());
 
             // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
@@ -135,13 +135,13 @@ namespace NICE.Identity.Management
                 }
             });
 
-            app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
 
 			app.UseRouting();
 
 			app.UseAuthentication();
-			app.UseAuthorization(); //TODO: this is new
+			app.UseAuthorization(); 
 
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles( new StaticFileOptions()
@@ -238,10 +238,10 @@ namespace NICE.Identity.Management
 						}
 					};
 
-					if (env.IsDevelopment())
-					{
-						spa.UseReactDevelopmentServer(npmScript: "start");
-					}
+					//if (env.IsDevelopment())
+					//{
+					//	spa.UseReactDevelopmentServer(npmScript: "start");
+					//}
 				});
 			});
 		}
