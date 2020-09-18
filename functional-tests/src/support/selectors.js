@@ -34,6 +34,7 @@ export default {
     secondUserCard: toChildAndQASel(2, 'list-of-users'),
     thirdUserCard: toChildAndQASel(3, 'list-of-users'),
     fourthUserCard: toChildAndQASel(4, 'list-of-users'),
+    secondUserStatus: "body [data-qa-sel='list-of-users'] > :nth-child(2) span",
     lastUserCard:
       'body [data-qa-sel="list-of-users"] > li:last-of-type > .card:last-of-type a',
     roleField: toChildAndQASel(1, 'list-of-users'),

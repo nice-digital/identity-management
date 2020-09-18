@@ -22,7 +22,7 @@ export const validateUserStatusListPageLocked = () => {
   waitForVisible(selectors.adminUserPage.userStatus);
   checkContainsText(
     'element',
-    '#root > div.container > div.grid > div:nth-child(2) > ul > li:nth-child(2) > article > dl > div:nth-child(1) > dd > span',
+    selectors.adminHomepage.secondUserStatus,
     'Locked'
   );
   pause(1000);
