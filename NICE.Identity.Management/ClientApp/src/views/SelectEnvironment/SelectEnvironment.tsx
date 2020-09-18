@@ -105,7 +105,7 @@ export class SelectEnvironment extends Component<
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-									<StackedNav>
+									<StackedNav aria-label="Environments">
 										{websites.map(website => {
 											return (
 												<StackedNavLink

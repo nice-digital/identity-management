@@ -10,63 +10,66 @@ type FilterStatusProps = {
 export const FilterStatus = (props: FilterStatusProps) => {
 	return (
 		<Panel>
-			<h4>Show:</h4>
 			<form>
-				<div className="radio">
-					<input
-						className="radio__input"
-						name="filter-status"
-						type="radio"
-						id="filter-status-all"
-						value=""
-						defaultChecked
-						onChange={props.onCheckboxChange}
-					/>
-					<label className="radio__label" htmlFor="filter-status-all">
-						All
-					</label>
-				</div>
+				<div role="group" aria-labelledby="filter-header">
+					<div id="filter-header"><strong>Show:</strong></div>
+					<div className="radio">
+						<input
+							className="radio__input"
+							name="filter-status"
+							type="radio"
+							id="filter-status-all"
+							value=""
+							defaultChecked
+							onChange={props.onCheckboxChange}
+						/>
+						<label className="radio__label" htmlFor="filter-status-all">
+							<span className="visually-hidden">Show: </span>
+							All
+						</label>
+					</div>
 
-				<div className="radio">
-					<input
-						className="radio__input"
-						name="filter-status"
-						type="radio"
-						id="filter-status-active"
-						value="active"
-						onChange={props.onCheckboxChange}
-					/>
-					<label className="radio__label" htmlFor="filter-status-active">
-						Active
-					</label>
-				</div>
+					<div className="radio">
+						<input
+							className="radio__input"
+							name="filter-status"
+							type="radio"
+							id="filter-status-active"
+							value="active"
+							onChange={props.onCheckboxChange}
+						/>
+						<label className="radio__label" htmlFor="filter-status-active">
+							Active
+						</label>
+					</div>
 
-				<div className="radio">
-					<input
-						className="radio__input"
-						name="filter-status"
-						type="radio"
-						id="filter-status-pending"
-						value="pending"
-						onChange={props.onCheckboxChange}
-					/>
-					<label className="radio__label" htmlFor="filter-status-pending">
-						Pending
-					</label>
-				</div>
+					<div className="radio">
+						<input
+							className="radio__input"
+							name="filter-status"
+							type="radio"
+							id="filter-status-pending"
+							value="pending"
+							onChange={props.onCheckboxChange}
+						/>
+						<label className="radio__label" htmlFor="filter-status-pending">
+							Pending
+						</label>
+					</div>
 
-				<div className="radio">
-					<input
-						className="radio__input"
-						name="filter-status"
-						type="radio"
-						id="filter-status-locked"
-						value="locked"
-						onChange={props.onCheckboxChange}
-					/>
-					<label className="radio__label" htmlFor="filter-status-locked">
-						Locked
-					</label>
+					<div className="radio">
+						<input
+							className="radio__input"
+							name="filter-status"
+							type="radio"
+							id="filter-status-locked"
+							value="locked"
+							onChange={props.onCheckboxChange}
+						/>
+						<label className="radio__label" htmlFor="filter-status-locked">
+							Locked
+						</label>
+					</div>
 				</div>
 			</form>
 		</Panel>

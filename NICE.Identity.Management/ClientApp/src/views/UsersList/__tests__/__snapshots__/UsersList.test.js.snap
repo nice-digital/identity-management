@@ -78,82 +78,96 @@ Array [
       <div
         className="panel"
       >
-        <h4>
-          Show:
-        </h4>
         <form>
           <div
-            className="radio"
+            aria-labelledby="filter-header"
+            role="group"
           >
-            <input
-              className="radio__input"
-              defaultChecked={true}
-              id="filter-status-all"
-              name="filter-status"
-              onChange={[Function]}
-              type="radio"
-              value=""
-            />
-            <label
-              className="radio__label"
-              htmlFor="filter-status-all"
+            <div
+              id="filter-header"
             >
-              All
-            </label>
-          </div>
-          <div
-            className="radio"
-          >
-            <input
-              className="radio__input"
-              id="filter-status-active"
-              name="filter-status"
-              onChange={[Function]}
-              type="radio"
-              value="active"
-            />
-            <label
-              className="radio__label"
-              htmlFor="filter-status-active"
+              <strong>
+                Show:
+              </strong>
+            </div>
+            <div
+              className="radio"
             >
-              Active
-            </label>
-          </div>
-          <div
-            className="radio"
-          >
-            <input
-              className="radio__input"
-              id="filter-status-pending"
-              name="filter-status"
-              onChange={[Function]}
-              type="radio"
-              value="pending"
-            />
-            <label
-              className="radio__label"
-              htmlFor="filter-status-pending"
+              <input
+                className="radio__input"
+                defaultChecked={true}
+                id="filter-status-all"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value=""
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-all"
+              >
+                <span
+                  className="visually-hidden"
+                >
+                  Show: 
+                </span>
+                All
+              </label>
+            </div>
+            <div
+              className="radio"
             >
-              Pending
-            </label>
-          </div>
-          <div
-            className="radio"
-          >
-            <input
-              className="radio__input"
-              id="filter-status-locked"
-              name="filter-status"
-              onChange={[Function]}
-              type="radio"
-              value="locked"
-            />
-            <label
-              className="radio__label"
-              htmlFor="filter-status-locked"
+              <input
+                className="radio__input"
+                id="filter-status-active"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value="active"
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-active"
+              >
+                Active
+              </label>
+            </div>
+            <div
+              className="radio"
             >
-              Locked
-            </label>
+              <input
+                className="radio__input"
+                id="filter-status-pending"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value="pending"
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-pending"
+              >
+                Pending
+              </label>
+            </div>
+            <div
+              className="radio"
+            >
+              <input
+                className="radio__input"
+                id="filter-status-locked"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value="locked"
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-locked"
+              >
+                Locked
+              </label>
+            </div>
           </div>
         </form>
       </div>
@@ -171,190 +185,198 @@ Array [
         className="list--unstyled"
         data-qa-sel="list-of-users"
       >
-        <article
-          className="card"
-        >
-          <header
-            className="card__header"
+        <li>
+          <article
+            className="card"
           >
-            <p
-              className="card__heading"
+            <header
+              className="card__header"
             >
-              <a
-                href="/users/1"
-                onClick={[Function]}
+              <p
+                className="card__heading"
               >
-                Kristin Patrick
-              </a>
-            </p>
-          </header>
-          <dl
-            className="card__metadata"
-          >
-            <div
-              className="card__metadatum"
-            >
-              <dd>
-                <span
-                  className="tag tag--consultation"
-                  data-qa-sel="user-status"
+                <a
+                  href="/users/1"
+                  onClick={[Function]}
                 >
-                  Active
-                </span>
-              </dd>
-            </div>
-            <div
-              className="card__metadatum"
+                  Kristin Patrick
+                </a>
+              </p>
+            </header>
+            <dl
+              className="card__metadata"
             >
-              <dt
-                className="visually-hidden"
+              <div
+                className="card__metadatum"
               >
-                Email address
-              </dt>
-              <dd>
-                kristin.patrick@example.com
-              </dd>
-            </div>
-          </dl>
-        </article>
-        <article
-          className="card"
-        >
-          <header
-            className="card__header"
-          >
-            <p
-              className="card__heading"
-            >
-              <a
-                href="/users/2"
-                onClick={[Function]}
+                <dd>
+                  <span
+                    className="tag tag--consultation"
+                    data-qa-sel="user-status"
+                  >
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                className="card__metadatum"
               >
-                Thomas Holding
-              </a>
-            </p>
-          </header>
-          <dl
-            className="card__metadata"
-          >
-            <div
-              className="card__metadatum"
-            >
-              <dd>
-                <span
-                  className="tag tag--consultation"
-                  data-qa-sel="user-status"
+                <dt
+                  className="visually-hidden"
                 >
-                  Active
-                </span>
-              </dd>
-            </div>
-            <div
-              className="card__metadatum"
-            >
-              <dt
-                className="visually-hidden"
-              >
-                Email address
-              </dt>
-              <dd>
-                thomas.holding@example.com
-              </dd>
-            </div>
-          </dl>
-        </article>
-        <article
-          className="card"
-        >
-          <header
-            className="card__header"
+                  Email address
+                </dt>
+                <dd>
+                  kristin.patrick@example.com
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
           >
-            <p
-              className="card__heading"
+            <header
+              className="card__header"
             >
-              <a
-                href="/users/3"
-                onClick={[Function]}
+              <p
+                className="card__heading"
               >
-                Aisha Bartlett
-              </a>
-            </p>
-          </header>
-          <dl
-            className="card__metadata"
-          >
-            <div
-              className="card__metadatum"
-            >
-              <dd>
-                <span
-                  className="tag tag--consultation"
-                  data-qa-sel="user-status"
+                <a
+                  href="/users/2"
+                  onClick={[Function]}
                 >
-                  Active
-                </span>
-              </dd>
-            </div>
-            <div
-              className="card__metadatum"
+                  Thomas Holding
+                </a>
+              </p>
+            </header>
+            <dl
+              className="card__metadata"
             >
-              <dt
-                className="visually-hidden"
+              <div
+                className="card__metadatum"
               >
-                Email address
-              </dt>
-              <dd>
-                aisha.bartlett@example.com
-              </dd>
-            </div>
-          </dl>
-        </article>
-        <article
-          className="card"
-        >
-          <header
-            className="card__header"
-          >
-            <p
-              className="card__heading"
-            >
-              <a
-                href="/users/4"
-                onClick={[Function]}
+                <dd>
+                  <span
+                    className="tag tag--consultation"
+                    data-qa-sel="user-status"
+                  >
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                className="card__metadatum"
               >
-                Theo Bradford
-              </a>
-            </p>
-          </header>
-          <dl
-            className="card__metadata"
-          >
-            <div
-              className="card__metadatum"
-            >
-              <dd>
-                <span
-                  className="tag"
-                  data-qa-sel="user-status"
+                <dt
+                  className="visually-hidden"
                 >
-                  Locked
-                </span>
-              </dd>
-            </div>
-            <div
-              className="card__metadatum"
+                  Email address
+                </dt>
+                <dd>
+                  thomas.holding@example.com
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            <header
+              className="card__header"
             >
-              <dt
-                className="visually-hidden"
+              <p
+                className="card__heading"
               >
-                Email address
-              </dt>
-              <dd>
-                theo.bradford@example.com
-              </dd>
-            </div>
-          </dl>
-        </article>
+                <a
+                  href="/users/3"
+                  onClick={[Function]}
+                >
+                  Aisha Bartlett
+                </a>
+              </p>
+            </header>
+            <dl
+              className="card__metadata"
+            >
+              <div
+                className="card__metadatum"
+              >
+                <dd>
+                  <span
+                    className="tag tag--consultation"
+                    data-qa-sel="user-status"
+                  >
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                className="card__metadatum"
+              >
+                <dt
+                  className="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  aisha.bartlett@example.com
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            <header
+              className="card__header"
+            >
+              <p
+                className="card__heading"
+              >
+                <a
+                  href="/users/4"
+                  onClick={[Function]}
+                >
+                  Theo Bradford
+                </a>
+              </p>
+            </header>
+            <dl
+              className="card__metadata"
+            >
+              <div
+                className="card__metadatum"
+              >
+                <dd>
+                  <span
+                    className="tag"
+                    data-qa-sel="user-status"
+                  >
+                    Locked
+                  </span>
+                </dd>
+              </div>
+              <div
+                className="card__metadatum"
+              >
+                <dt
+                  className="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  theo.bradford@example.com
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </li>
       </ul>
       <div
         className="flex flexAlignCenter"

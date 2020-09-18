@@ -347,11 +347,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											];
 
 											return (
-												<Card
+												<li><Card
 													{...usersListHeading}
 													metadata={usersListMetadata}
 													key={nameIdentifier}
-												/>
+												/></li>
 											);
 										})}
 									</ul>

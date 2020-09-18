@@ -28,10 +28,10 @@ services:
     image: selenium/hub:3.141
     container_name: selenium_hub
     environment:
-      GRID_DEBUG: "true"
+      GRID_DEBUG: 'true'
       #GRID_MAX_SESSION: 2
-#    ports:
-#      - 4444:4444
+  #    ports:
+  #      - 4444:4444
 
   # The tests themselves
   tests:
@@ -72,7 +72,7 @@ services:
       - api
     # Enable browsing from the host machine on http://localhost:8080/consultations
     ports:
-        - 8080:8080
+      - 8080:8080
     environment:
       - AUTHCONFIGURATION_AUTH_SERVICE_URI
       - AUTHCONFIGURATION_API_IDENTIFIER
@@ -92,11 +92,11 @@ services:
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_CLIENTID
       - IDENTITYAPI_API_CLIENTSECRECT
+      - ASPNETCORE_ENVIRONMENT
     networks:
       default:
         aliases:
           - idam
-
 
   # MS SQL Server database
   database:
@@ -114,20 +114,19 @@ services:
   api:
     container_name: functional-tests_api_1
     build: ./../NICE.Identity.Management.MockApi/
-    ports: 
+    ports:
       - 8090:8090
     environment:
       - HTTP_PORT
       - HTTPS_PORT
-    volumes: 
-      -  ./../NICE.Identity.Management.MockApi:/data
+    volumes:
+      - ./../NICE.Identity.Management.MockApi:/data
       - /data/node_modules
     command: npm start
     networks:
       default:
         aliases:
           - api
-
 
   # nginx:
   #   container_name: functional-tests_nginx_1
