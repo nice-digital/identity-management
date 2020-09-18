@@ -1,5 +1,5 @@
 const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
-const toNthChildAttr = (attrValue) => `article:nth-child(${attrValue}) a`;
+const toNthChildAttr = (attrValue) => `> :nth-child(${attrValue}) a`;
 const toChildAndQASel = (childIndex, attrValue) =>
   toDataQASelAttr(attrValue) + ' ' + toNthChildAttr(childIndex);
 
@@ -34,13 +34,15 @@ export default {
     secondUserCard: toChildAndQASel(2, 'list-of-users'),
     thirdUserCard: toChildAndQASel(3, 'list-of-users'),
     fourthUserCard: toChildAndQASel(4, 'list-of-users'),
-    lastUserCard: 'article:last-of-type a',
+    secondUserStatus: "body [data-qa-sel='list-of-users'] > :nth-child(2) span",
+    lastUserCard:
+      'body [data-qa-sel="list-of-users"] > li:last-of-type > .card:last-of-type a',
     roleField: toChildAndQASel(1, 'list-of-users'),
     pageTitle: 'h1',
     globalNavMyAccount: "[id$='my-account-button']",
     globalNavSignOut: "[id$='my-account']",
     userStatusListPage:
-      "[data-qa-sel='list-of-users'] article:nth-child(2) [data-qa-sel='user-status']",
+      "[data-qa-sel='list-of-users'] [data-qa-sel='user-status']",
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr('delete-user-link'),
