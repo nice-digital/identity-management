@@ -60,6 +60,7 @@ export class User extends Component<UserProps, UserState> {
 		}
 
 		this.setState({ user, isLoading: false });
+		document.title = `NICE Accounts - ${user.firstName} ${user.lastName}`
 	}
 
 	render() {

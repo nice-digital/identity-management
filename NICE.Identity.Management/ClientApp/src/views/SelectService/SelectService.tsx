@@ -34,6 +34,7 @@ export class SelectService extends Component<
 			services: [],
 			isLoading: true,
 		};
+		document.title = "NICE Accounts - Select service"
 	}
 
 	async componentDidMount() {

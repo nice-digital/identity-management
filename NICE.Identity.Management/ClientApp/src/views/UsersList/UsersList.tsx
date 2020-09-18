@@ -82,6 +82,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
 		};
+
+		document.title = "NICE Accounts - Users list"
 	}
 
 	async componentDidMount() {
