@@ -316,5 +316,8 @@
       "value": "Administrator",
       "issuer": "idam"
     }
+  ],
+  "verificationemail": [
+    { "verificationemail": 1 }
   ]
 }

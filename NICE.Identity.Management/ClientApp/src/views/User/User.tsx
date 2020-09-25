@@ -10,6 +10,7 @@ import { isDataError } from "../../helpers/isDataError";
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
+import { ResendVerification } from "../../components/ResendVerification/ResendVerification";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
@@ -65,6 +66,7 @@ export class User extends Component<UserProps, UserState> {
 
 	render() {
 		const { user, error, redirect, isLoading } = this.state;
+		const showResendVerificationButton = !user.hasVerifiedEmailAddress;
 
 		if (redirect) {
 			return <Redirect to="/users" />;
@@ -127,6 +129,12 @@ export class User extends Component<UserProps, UserState> {
 												<div>
 													<UserStatus user={user} />
 												</div>
+												{ showResendVerificationButton &&
+													<ResendVerification
+														id={user.userId}
+														onError={this.handleError}
+													/>
+												}
 
 												<UnlockUser
 													id={user.userId}
