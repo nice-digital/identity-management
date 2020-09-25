@@ -131,7 +131,7 @@ export class User extends Component<UserProps, UserState> {
 												</div>
 												{ showResendVerificationButton &&
 													<ResendVerification
-														id={user.userId}
+														nameIdentifier={user.nameIdentifier}
 														onError={this.handleError}
 													/>
 												}

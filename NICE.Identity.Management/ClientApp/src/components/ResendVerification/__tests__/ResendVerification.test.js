@@ -10,7 +10,7 @@ describe("ResendVerification", () => {
 
 	beforeEach(() => {
 		userProps = {
-			id: 1,
+			nameIdentifier: "some_id",
 			onClick: jest.fn(),
 			onError: jest.fn(),
 		};
