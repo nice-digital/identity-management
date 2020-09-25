@@ -6,7 +6,7 @@ import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 
 type ResendVerificationProps = {
-	id: number;
+	nameIdentifier: string;
 	onError: (error: Error) => void;
 };
 
@@ -32,7 +32,7 @@ export class ResendVerification extends Component<ResendVerificationProps, Resen
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				user_id: this.props.id,
+				user_id: this.props.nameIdentifier,
 			}),
 		};
 
