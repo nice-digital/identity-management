@@ -36,14 +36,10 @@ export class ResendVerification extends Component<ResendVerificationProps, Resen
 			}),
 		};
 
-		console.log(`fetchOptions: ${JSON.stringify(fetchOptions)}`);
-		console.log(`Endpoints.verificationEmail: ${Endpoints.verificationEmail}`);
-
 		let jobStatus = await fetchData(
 			Endpoints.verificationEmail,
 			fetchOptions,
 		);
-		console.log(`jobstatus: ${JSON.stringify(jobStatus)}`);
 
 		if (isDataError(jobStatus)) {
 			this.props.onError(new Error(jobStatus.message));
