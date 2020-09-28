@@ -124,6 +124,34 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
           kristin.patrick@example.com
         </span>
       </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Initial registration date
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          23 October 2019 13:29
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Last logged in date
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          23 October 2019 13:29
+        </span>
+      </div>
       <hr
         className="mv--b"
       />

@@ -7,6 +7,8 @@ export type UserType = {
 	hasVerifiedEmailAddress: boolean;
 	isLockedOut: boolean;
 	acceptedTerms: boolean;
+	initialRegistrationDate: Date;
+	lastLoggedInDate: Date;
 };
 
 export type ServiceType = {

@@ -13,6 +13,7 @@ import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
 import { ResendVerification } from "../../components/ResendVerification/ResendVerification";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { ToFormattedDateString } from "../../helpers/dateHelpers";
 
 import styles from "./User.module.scss";
 import { Button } from "@nice-digital/nds-button";
@@ -67,6 +68,7 @@ export class User extends Component<UserProps, UserState> {
 	render() {
 		const { user, error, redirect, isLoading } = this.state;
 		const showResendVerificationButton = !user.hasVerifiedEmailAddress;
+
 
 		if (redirect) {
 			return <Redirect to="/users" />;
@@ -151,6 +153,24 @@ export class User extends Component<UserProps, UserState> {
 											</span>
 											<span className={styles.summaryListDetail}>
 												{user.emailAddress}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Initial registration date
+											</span>
+											<span className={styles.summaryListDetail}>
+												{ToFormattedDateString(user.initialRegistrationDate)}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Last logged in date
+											</span>
+											<span className={styles.summaryListDetail}>
+												{ToFormattedDateString(user.lastLoggedInDate)}
 											</span>
 										</div>
 
