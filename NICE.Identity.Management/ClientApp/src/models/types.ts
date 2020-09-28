@@ -9,6 +9,10 @@ export type UserType = {
 	acceptedTerms: boolean;
 	initialRegistrationDate: Date;
 	lastLoggedInDate: Date;
+	isMigrated: boolean;
+	isInAuthenticationProvider: boolean;
+	allowContactMe: boolean;
+	isStaffMember: boolean;
 };
 
 export type ServiceType = {

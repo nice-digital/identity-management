@@ -174,6 +174,33 @@ export class User extends Component<UserProps, UserState> {
 											</span>
 										</div>
 
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Name identifier (internal id)
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.nameIdentifier}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Is migrated from NICE Accounts
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.isMigrated ? "Yes" : "No"}
+											</span>
+										</div>
+										
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Is in Authentication Provider (Auth0)
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.isInAuthenticationProvider ? "Yes" : "No"}
+											</span>
+										</div>
+
 										<hr className="mv--b" />
 
 										<h2 className="h3">Permanently delete this account</h2>

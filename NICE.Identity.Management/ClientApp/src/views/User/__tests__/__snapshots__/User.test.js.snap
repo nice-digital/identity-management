@@ -152,6 +152,48 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
           23 October 2019 13:29
         </span>
       </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Name identifier (internal id)
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          auth0|abc12345-2f95-43e7-b419-18f2784f1111
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Is migrated from NICE Accounts
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          No
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Is in Authentication Provider (Auth0)
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          No
+        </span>
+      </div>
       <hr
         className="mv--b"
       />
