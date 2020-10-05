@@ -21,7 +21,8 @@ const rewriter = jsonServer.rewriter({
   '/services': '/services?_embed=websites',
   '/services/:id': '/services/:id?_embed=websites',
   '/users/:userId/rolesbywebsite/:websiteId': '/userroles?user=:userId&websiteId=:websiteId&_expand=service&_expand=website',
-  '/claims/:authenticationProviderUserId': '/claims'
+  '/claims/:authenticationProviderUserId': '/claims',
+  "/admin/getmanagementapitoken": "/getmanagementapitoken"
 });
 
 const server = jsonServer.create();
@@ -54,6 +55,12 @@ router.render = (req, res) => {
     }else{
       res.status(404).jsonp({});
     }
+  }else if (requestUrl.path.includes('getmanagementapitoken')){
+    res.status(200).jsonp( {
+      "access_token":process.env.MANAGEMENTAPITOKEN || "",
+      "token_type":"Bearer",
+      "expires_in":86400
+    });
   }else{
     res.jsonp(res.locals.data);
   }

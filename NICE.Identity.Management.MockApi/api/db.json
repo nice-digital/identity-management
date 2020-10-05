@@ -316,5 +316,10 @@
       "value": "Administrator",
       "issuer": "idam"
     }
-  ]
+  ],
+  "getmanagementapitoken": {
+    "access_token":"",
+    "token_type":"Bearer",
+    "expires_in":86400
+  }
 }
