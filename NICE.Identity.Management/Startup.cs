@@ -18,6 +18,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -66,12 +67,17 @@ namespace NICE.Identity.Management
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
             services.AddAuthentication(authConfiguration, allowNonSecureCookie: Environment.IsDevelopment());
+            services.AddAuthorisation(authConfiguration);
 
             // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
 				configuration.RootPath = "ClientApp/build";
 			});
+
+			services
+				.AddHealthChecksUI()
+				.AddInMemoryStorage();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -174,11 +180,6 @@ namespace NICE.Identity.Management
 				}
 			});
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllerRoute("default", pattern: "{controller}/{action=Index}/{id?}");
-			});
-
 			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
@@ -192,6 +193,11 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
 			{
+				app.UseEndpoints(endpoints =>
+				{
+					endpoints.MapDefaultControllerRoute();
+				});
+
 				builder.Run(async context =>
 				{
 					await niceAuthenticationService.Login(context, context.Request.Path);
@@ -200,6 +206,11 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
+				app.UseEndpoints(endpoints =>
+				{
+					endpoints.MapDefaultControllerRoute();
+				});
+
 				builder.Run(async httpContext =>
 				{
 					startupLogger.LogWarning($"User: {httpContext.User.DisplayName()} with id: {httpContext.User.NameIdentifier()} has tried accessing {httpContext.Request.Host.Value}{httpContext.Request.Path} but does not have access");
@@ -210,6 +221,12 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
+				app.UseEndpoints(endpoints =>
+				{
+					endpoints.MapDefaultControllerRoute();
+					endpoints.MapHealthChecksUI().RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
+				});
+
 				builder.Use((httpContext, next) =>
 				{
 					var httpRequestFeature = httpContext.Features.Get<IHttpRequestFeature>();
