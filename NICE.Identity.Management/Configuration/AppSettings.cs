@@ -9,14 +9,14 @@ namespace NICE.Identity.Management.Configuration
         // this is a static class for storing appsettings so we don't have to use DI for passing configuration stuff
         // (i.e. to stop us having to pass IOptions<SomeConfig> through the stack)
 
-        public static EnvironmentConfig Environment { get; private set; }
+        public static EnvironmentConfig EnvironmentConfig { get; private set; }
        
 		public static void Configure(IServiceCollection services, IConfiguration configuration, string contentRootPath)
         {
-            services.Configure<EnvironmentConfig>(configuration.GetSection("AppSettings:Environment"));
+            services.Configure<EnvironmentConfig>(configuration.GetSection("Environment"));
             
 			var sp = services.BuildServiceProvider();
-            Environment = sp.GetService<IOptions<EnvironmentConfig>>().Value;
+			EnvironmentConfig = sp.GetService<IOptions<EnvironmentConfig>>().Value;
 		}
     }
 }

@@ -18,7 +18,10 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -74,6 +77,16 @@ namespace NICE.Identity.Management
 			{
 				configuration.RootPath = "ClientApp/build";
 			});
+
+
+			var healthChecksBuilder = services.AddHealthChecks();
+			if (authConfiguration.RedisConfiguration.Enabled)
+			{
+				healthChecksBuilder.AddRedis(
+					redisConnectionString: authConfiguration.RedisConfiguration.ConnectionString,
+					name: "Redis",
+					failureStatus: HealthStatus.Degraded);
+			}
 
 			services
 				.AddHealthChecksUI()
@@ -191,13 +204,19 @@ namespace NICE.Identity.Management
 				return next();
 			});
 
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapDefaultControllerRoute();
+				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthChecksAPIEndpoint, new HealthCheckOptions()
+				{
+					Predicate = _ => true,
+					ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+				});
+				endpoints.MapHealthChecksUI().RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
+			});
+
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
 			{
-				app.UseEndpoints(endpoints =>
-				{
-					endpoints.MapDefaultControllerRoute();
-				});
-
 				builder.Run(async context =>
 				{
 					await niceAuthenticationService.Login(context, context.Request.Path);
@@ -206,11 +225,6 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
-				app.UseEndpoints(endpoints =>
-				{
-					endpoints.MapDefaultControllerRoute();
-				});
-
 				builder.Run(async httpContext =>
 				{
 					startupLogger.LogWarning($"User: {httpContext.User.DisplayName()} with id: {httpContext.User.NameIdentifier()} has tried accessing {httpContext.Request.Host.Value}{httpContext.Request.Path} but does not have access");
@@ -221,12 +235,6 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
-				app.UseEndpoints(endpoints =>
-				{
-					endpoints.MapDefaultControllerRoute();
-					endpoints.MapHealthChecksUI().RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
-				});
-
 				builder.Use((httpContext, next) =>
 				{
 					var httpRequestFeature = httpContext.Features.Get<IHttpRequestFeature>();
