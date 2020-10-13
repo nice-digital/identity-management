@@ -9,6 +9,8 @@ import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
+import { Dashboard } from "../../views/Dashboard/Dashboard";
+import { DashboardHistorical } from "../../views/DashboardHistorical/DashboardHistorical";
 
 export class App extends React.Component {
 	render() {
@@ -43,6 +45,12 @@ export class App extends React.Component {
 						path="/users/:id/services/:serviceId/environments/:websiteId/roles"
 						exact
 						component={SelectRoles}
+					/>
+					<Route path="/dashboard" exact component={Dashboard} />
+					<Route
+						path="/dashboard/historical"
+						exact
+						component={DashboardHistorical}
 					/>
 				</main>
 

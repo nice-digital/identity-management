@@ -1,0 +1,13 @@
+.responsiveTable {
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+.fixedTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tableCells {
+  padding: 10px 0px;
+}

@@ -61,3 +61,12 @@ export type HistoryType = {
 	) => void;
 	location: HistoryLocationType;
 };
+
+export type StatisticsType = {
+	date: Date;
+	logins: number;
+	signups: number;
+	leaked_passwords: number;
+	updated_at: Date;
+	created_at: Date;
+};
