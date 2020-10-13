@@ -21,7 +21,8 @@ const rewriter = jsonServer.rewriter({
   '/services': '/services?_embed=websites',
   '/services/:id': '/services/:id?_embed=websites',
   '/users/:userId/rolesbywebsite/:websiteId': '/userroles?user=:userId&websiteId=:websiteId&_expand=service&_expand=website',
-  '/claims/:authenticationProviderUserId': '/claims'
+  '/claims/:authenticationProviderUserId': '/claims',
+  '/verificationemail/verificationemail': '/verificationemail'
 });
 
 const server = jsonServer.create();
