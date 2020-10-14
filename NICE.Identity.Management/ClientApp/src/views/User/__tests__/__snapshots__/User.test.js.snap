@@ -90,11 +90,11 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
                   "emailAddress": "kristin.patrick@example.com",
                   "firstName": "Kristin",
                   "hasVerifiedEmailAddress": true,
-                  "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+                  "initialRegistrationDate": "2019-01-23T12:29:54.911Z",
                   "isLockedOut": false,
                   "isMigrated": false,
                   "isStaffMember": false,
-                  "lastLoggedInDate": "2019-10-23T12:29:54.911Z",
+                  "lastLoggedInDate": "2019-01-23T12:29:54.911Z",
                   "lastName": "Patrick",
                   "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
                   "userId": 1,
@@ -122,6 +122,76 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
           className="summaryListDetail"
         >
           kristin.patrick@example.com
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Initial registration date
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          23 January 2019 12:29
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Last logged in date
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          23 January 2019 12:29
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Name identifier (internal id)
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          auth0|abc12345-2f95-43e7-b419-18f2784f1111
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Is migrated from NICE Accounts
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          No
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Is in Authentication Provider (Auth0)
+        </span>
+        <span
+          className="summaryListDetail"
+        >
+          No
         </span>
       </div>
       <hr

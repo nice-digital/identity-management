@@ -10,8 +10,10 @@ import { isDataError } from "../../helpers/isDataError";
 import { UserType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
+import { ResendVerification } from "../../components/ResendVerification/ResendVerification";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { ToFormattedDateString } from "../../helpers/dateHelpers";
 
 import styles from "./User.module.scss";
 import { Button } from "@nice-digital/nds-button";
@@ -65,6 +67,8 @@ export class User extends Component<UserProps, UserState> {
 
 	render() {
 		const { user, error, redirect, isLoading } = this.state;
+		const showResendVerificationButton = !user.hasVerifiedEmailAddress;
+
 
 		if (redirect) {
 			return <Redirect to="/users" />;
@@ -127,6 +131,12 @@ export class User extends Component<UserProps, UserState> {
 												<div>
 													<UserStatus user={user} />
 												</div>
+												{ showResendVerificationButton &&
+													<ResendVerification
+														nameIdentifier={user.nameIdentifier}
+														onError={this.handleError}
+													/>
+												}
 
 												<UnlockUser
 													id={user.userId}
@@ -143,6 +153,51 @@ export class User extends Component<UserProps, UserState> {
 											</span>
 											<span className={styles.summaryListDetail}>
 												{user.emailAddress}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Initial registration date
+											</span>
+											<span className={styles.summaryListDetail}>
+												{ToFormattedDateString(user.initialRegistrationDate)}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Last logged in date
+											</span>
+											<span className={styles.summaryListDetail}>
+												{ToFormattedDateString(user.lastLoggedInDate)}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Name identifier (internal id)
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.nameIdentifier}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Is migrated from NICE Accounts
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.isMigrated ? "Yes" : "No"}
+											</span>
+										</div>
+										
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
+												Is in Authentication Provider (Auth0)
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.isInAuthenticationProvider ? "Yes" : "No"}
 											</span>
 										</div>
 
