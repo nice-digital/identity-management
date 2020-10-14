@@ -44,6 +44,7 @@ namespace NICE.Identity.Management
 
 			//dependency injection goes here.
 			services.AddHttpContextAccessor();
+			services.AddTransient<HealthCheckDelegatingHandler>();
 
 			// TODO: remove httpClientBuilder
 			// This bypasses any certificate validation on proxy requests
@@ -85,10 +86,7 @@ namespace NICE.Identity.Management
 			services
 				.AddHealthChecksUI(setupSettings: setup =>
 				{
-					setup.ConfigureApiEndpointHttpclient((serviceProvider, httpClient) =>
-					{
-						httpClient.DefaultRequestHeaders.Add("X-Api-Key", AppSettings.EnvironmentConfig.AuthenticatedHealthCheckAPIKey);
-					});
+					setup.UseApiEndpointDelegatingHandler<HealthCheckDelegatingHandler>();
 				})
 				.AddInMemoryStorage();
 		}

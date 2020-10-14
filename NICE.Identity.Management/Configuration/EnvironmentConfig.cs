@@ -10,6 +10,7 @@ namespace NICE.Identity.Management.Configuration
         public string HealthChecksAPIEndpoint { get; set; }
 
         public string[] AuthenticatedEndpoints { get; set; }
+
         public string AuthenticatedHealthCheckAPIKey { get; set; }
     }
 }
