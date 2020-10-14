@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NICE.Identity.Authentication.Sdk.Authorisation;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Configuration;
@@ -18,10 +18,6 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -46,14 +42,13 @@ namespace NICE.Identity.Management
 		{
 			AppSettings.Configure(services, Configuration, Environment.IsDevelopment() ? @"c:\" : Environment.ContentRootPath);
 
-			
 			//dependency injection goes here.
-			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddHttpContextAccessor();
 
-            // TODO: remove httpClientBuilder
-            // This bypasses any certificate validation on proxy requests
-            // Only done due to local APIs not having certificates configured 
-            services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+			// TODO: remove httpClientBuilder
+			// This bypasses any certificate validation on proxy requests
+			// Only done due to local APIs not having certificates configured 
+			services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
                     ClientCertificateOptions = ClientCertificateOption.Manual,
                     ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
@@ -78,7 +73,6 @@ namespace NICE.Identity.Management
 				configuration.RootPath = "ClientApp/build";
 			});
 
-
 			var healthChecksBuilder = services.AddHealthChecks();
 			if (authConfiguration.RedisConfiguration.Enabled)
 			{
@@ -89,7 +83,13 @@ namespace NICE.Identity.Management
 			}
 
 			services
-				.AddHealthChecksUI()
+				.AddHealthChecksUI(setupSettings: setup =>
+				{
+					setup.ConfigureApiEndpointHttpclient((serviceProvider, httpClient) =>
+					{
+						httpClient.DefaultRequestHeaders.Add("X-Api-Key", AppSettings.EnvironmentConfig.AuthenticatedHealthCheckAPIKey);
+					});
+				})
 				.AddInMemoryStorage();
 		}
 
