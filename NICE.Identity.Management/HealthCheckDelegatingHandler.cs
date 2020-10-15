@@ -17,9 +17,9 @@ namespace NICE.Identity.Management
 	{
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			if (AppSettings.EnvironmentConfig.AuthenticatedEndpoints.Contains(request.RequestUri.AbsoluteUri, StringComparer.OrdinalIgnoreCase))
+			if (AppSettings.EnvironmentConfig.HealthCheckAuthenticatedEndpoints.Contains(request.RequestUri.AbsoluteUri, StringComparer.OrdinalIgnoreCase))
 			{
-				request.Headers.Add("X-Api-Key", AppSettings.EnvironmentConfig.AuthenticatedHealthCheckAPIKey);
+				request.Headers.Add("X-Api-Key", AppSettings.EnvironmentConfig.HealthCheckAuthenticatedAPIKey);
 			}
 			return base.SendAsync(request, cancellationToken);
 		}

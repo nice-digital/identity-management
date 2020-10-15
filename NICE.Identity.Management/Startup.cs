@@ -74,14 +74,15 @@ namespace NICE.Identity.Management
 				configuration.RootPath = "ClientApp/build";
 			});
 
-			var healthChecksBuilder = services.AddHealthChecks();
-			if (authConfiguration.RedisConfiguration.Enabled)
-			{
-				healthChecksBuilder.AddRedis(
-					redisConnectionString: authConfiguration.RedisConfiguration.ConnectionString,
-					name: "Redis",
-					failureStatus: HealthStatus.Degraded);
-			}
+			//var healthChecksBuilder = 
+				services.AddHealthChecks();
+			//if (authConfiguration.RedisConfiguration.Enabled)
+			//{
+			//	healthChecksBuilder.AddRedis(
+			//		redisConnectionString: authConfiguration.RedisConfiguration.ConnectionString,
+			//		name: "Redis",
+			//		failureStatus: HealthStatus.Degraded);
+			//}
 
 			services
 				.AddHealthChecksUI(setupSettings: setup =>
@@ -205,7 +206,7 @@ namespace NICE.Identity.Management
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
-				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthChecksAPIEndpoint, new HealthCheckOptions()
+				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint, new HealthCheckOptions()
 				{
 					Predicate = _ => true,
 					ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
