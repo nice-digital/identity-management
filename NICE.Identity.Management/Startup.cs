@@ -74,18 +74,8 @@ namespace NICE.Identity.Management
 				configuration.RootPath = "ClientApp/build";
 			});
 
-			//var healthChecksBuilder = 
-				services.AddHealthChecks();
-			//if (authConfiguration.RedisConfiguration.Enabled)
-			//{
-			//	healthChecksBuilder.AddRedis(
-			//		redisConnectionString: authConfiguration.RedisConfiguration.ConnectionString,
-			//		name: "Redis",
-			//		failureStatus: HealthStatus.Degraded);
-			//}
-
-			services
-				.AddHealthChecksUI(setupSettings: setup =>
+			services.AddHealthChecks();
+			services.AddHealthChecksUI(setupSettings: setup =>
 				{
 					setup.UseApiEndpointDelegatingHandler<HealthCheckDelegatingHandler>();
 				})
