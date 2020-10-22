@@ -13,7 +13,7 @@ import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 export class App extends React.Component {
 	render() {
 		const auth: IdamProviderProps = {
-			links: [{ text: "Sign out", url: "/Account/Logout" }],
+			links: [{ text: "Health checks", url: "/healthchecks-ui" }, { text: "Sign out", url: "/Account/Logout" }],
 			displayName: "John",
 			provider: "idam",
 		};
