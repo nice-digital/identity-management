@@ -34,6 +34,6 @@ config.capabilities = [
   // }
 ];
 
-config.reporters = ['spec', 'teamcity'];
+config.reporters = ['spec', 'teamcity', 'allure'];
 
 exports.config = config;
