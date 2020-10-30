@@ -28,6 +28,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "node": "^8.11.1",
+    "wdio-allure-reporter": "^0.8.3",
     "wdio-chromedriver-service": "^0.1.5",
     "wdio-webdriver-service": "^0.1.6",
     "geckodriver": "^1.14.1",
