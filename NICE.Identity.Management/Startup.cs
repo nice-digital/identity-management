@@ -201,7 +201,10 @@ namespace NICE.Identity.Management
 					Predicate = _ => true,
 					ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 				});
-				endpoints.MapHealthChecksUI().RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
+				endpoints.MapHealthChecksUI(setup =>
+				{
+					setup.AddCustomStylesheet("wwwroot/NICE.Style.css");
+				}).RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
 			});
 
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
