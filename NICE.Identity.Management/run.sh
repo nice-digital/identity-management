@@ -14,6 +14,7 @@ jq \
     --arg webapplogoutredirecturi "$WEBAPP_LOGOUT_REDIRECT_URI" \
     --arg webappapiidentifier "$WEBAPP_API_IDENTIFIER" \
     --arg webappauthorisationserviceuri "$WEBAPP_AUTH_SERVICE_URI" \
+    --arg webappgoogletrackingid "$WEBAPP_GOOGLE_TRACK_ID" \
     --arg identityapiauthorisationserviceuri "$IDENTITYAPI_AUTH_SERVICE_URI" \
     --arg identityapiidentifier "$IDENTITYAPI_IDENTIFIER" \
     --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
@@ -27,6 +28,7 @@ jq \
     .WebAppConfiguration.PostLogoutRedirectUri = $webapplogoutredirecturi |
     .WebAppConfiguration.ApiIdentifier = $webappapiidentifier |
     .WebAppConfiguration.AuthorisationServiceUri = $webappauthorisationserviceuri |
+    .WebAppConfiguration.GoogleTrackingId = $webappgoogletrackingid |
     .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
     .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
     .IdentityApiConfiguration.ClientId = $identityapiclientid |
