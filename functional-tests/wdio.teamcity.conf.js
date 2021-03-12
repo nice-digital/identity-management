@@ -15,6 +15,7 @@ config.capabilities = [
       args: ['--headless', '--window-size=1366,1000'],
     },
     'goog:chromeOptions': {
+      w3c: false,
       args: [],
       localState: {
         'browser.enabled_labs_experiments': [
