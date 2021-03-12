@@ -15,12 +15,12 @@ config.capabilities = [
       args: ['--headless', '--window-size=1366,1000'],
     },
     'goog:chromeOptions': {
-      w3c: false,
       args: [],
       localState: {
         'browser.enabled_labs_experiments': [
           'same-site-by-default-cookies@2',
           'cookies-without-same-site-must-be-secure@2',
+          'mixed-forms-interstitial@2',
         ],
       },
     },
