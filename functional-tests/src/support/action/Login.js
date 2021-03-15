@@ -10,7 +10,7 @@ export const Login = (username, password) => {
   waitForVisible(selectors.loginPage.usernameField);
   waitForVisible(selectors.loginPage.passwordField);
   click('click', 'element', 'body #ccc-recommended-settings');
-  click('click', 'element', '.CoronaMessage_button__2a9qf');
+  // click('click', 'element', '.CoronaMessage_button__2a9qf');
   browser.setValue(selectors.loginPage.usernameField, process.env[username]);
   browser.setValue(selectors.loginPage.passwordField, process.env[password]);
   // waitFor(selectors.loginPage.signInButton, 'enabled')

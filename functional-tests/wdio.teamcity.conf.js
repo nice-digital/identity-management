@@ -20,6 +20,7 @@ config.capabilities = [
         'browser.enabled_labs_experiments': [
           'same-site-by-default-cookies@2',
           'cookies-without-same-site-must-be-secure@2',
+          'mixed-forms-interstitial@2',
         ],
       },
     },
