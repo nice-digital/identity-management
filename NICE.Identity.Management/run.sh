@@ -19,6 +19,7 @@ jq \
     --arg identityapiidentifier "$IDENTITYAPI_IDENTIFIER" \
     --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
     --arg identityapiclientsecret "$IDENTITYAPI_API_CLIENTSECRECT" \
+    --arg RedisConnectionString "$REDIS_CONNECTION_STRING" \
     '
     .ConnectionStrings.DefaultConnection = $defaultConnection |
     .WebAppConfiguration.Domain = $webappdomain |
@@ -29,6 +30,8 @@ jq \
     .WebAppConfiguration.ApiIdentifier = $webappapiidentifier |
     .WebAppConfiguration.AuthorisationServiceUri = $webappauthorisationserviceuri |
     .WebAppConfiguration.GoogleTrackingId = $webappgoogletrackingid |
+    .WebAppConfiguration.RedisServiceConfiguration.ConnectionString = $RedisConnectionString |
+    .WebAppConfiguration.RedisServiceConfiguration.Enabled = true |
     .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
     .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
     .IdentityApiConfiguration.ClientId = $identityapiclientid |
