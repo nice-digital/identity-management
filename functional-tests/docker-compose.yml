@@ -95,6 +95,7 @@ services:
       - IDENTITYAPI_API_CLIENTID
       - IDENTITYAPI_API_CLIENTSECRECT
       - ASPNETCORE_ENVIRONMENT
+      - REDIS_CONNECTION_STRING
     networks:
       default:
         aliases:
@@ -129,6 +130,15 @@ services:
       default:
         aliases:
           - api
+
+  redis:
+    container_name: functional-tests_redis_1
+    image: 'redis:alpine'
+    #command: redis-server --requirepass sOmE_sEcUrE_pAsS
+    ports:
+      - '6379:6379'
+    command: ['redis-server', '--appendonly', 'yes']
+    #command: ["redis-server", "--bind", "redis", "--port", "6379"]
 
   # nginx:
   #   container_name: functional-tests_nginx_1
