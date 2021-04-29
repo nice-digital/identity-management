@@ -29,6 +29,10 @@ type CardMetaData = {
 	value: React.ReactNode;
 };
 
+type statusFilterOptions = {
+	[key: string]: (user: UserType) => boolean,
+}
+
 type UsersListProps = {
 	basename: string;
 	location: {
@@ -179,22 +183,15 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		statusFilter: string,
 		users: Array<UserType>,
 	): Array<UserType> => {
-		return (users = users.filter((user) => {
-			let userActive = !user.isLockedOut,
-				userPending = !user.hasVerifiedEmailAddress;
+		const statusFilterOptions: statusFilterOptions = {
+			active: user => !user.isLockedOut && user.hasVerifiedEmailAddress,
+			pending: user => !user.hasVerifiedEmailAddress,
+			locked: user => user.isLockedOut,
+		};
 
-			if (statusFilter === "active" && userActive && !userPending) {
-				return user;
-			}
+		const filteredUsers = users.filter(statusFilterOptions[statusFilter]);
 
-			if (statusFilter === "pending" && userPending) {
-				return user;
-			}
-
-			if (statusFilter === "locked" && !userActive) {
-				return user;
-			}
-		}));
+		return filteredUsers;
 	};
 
 	getPaginateStartAndFinishPosition = (

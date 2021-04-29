@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { RouteComponentProps, Link, Switch, Route } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 
 import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
@@ -7,10 +7,8 @@ import { isDataError } from "../../helpers/isDataError";
 import {
 	UserType,
 	ServiceType,
-	EnvironmentType,
 	WebsiteType,
 } from "../../models/types";
-import { User } from "../User/User";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { StackedNav, StackedNavLink } from "@nice-digital/nds-stacked-nav";

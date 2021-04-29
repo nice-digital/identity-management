@@ -1,5 +1,4 @@
 import React from "react";
-import { Checkbox } from "@nice-digital/nds-checkbox";
 
 type ToggleCheckboxProps = {
 	id: number;
@@ -10,7 +9,7 @@ type ToggleCheckboxProps = {
 	onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const ToggleCheckbox = (props: ToggleCheckboxProps) => (
+export const ToggleCheckbox = (props: ToggleCheckboxProps): React.ReactElement => (
 	<>
 		<div className="checkbox">
 			<input

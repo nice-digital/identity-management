@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { RouteComponentProps, Link, Switch, Route } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import {
 	EnvironmentType,
@@ -57,7 +57,7 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 		let checkbox = e.target;
 		let roles = this.state.roles;
 
-		roles.map(role => {
+		roles.forEach(role => {
 			if (role.id.toString() === checkbox.value) {
 				role.hasRole = !role.hasRole;
 			}
@@ -138,7 +138,7 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 			isLoading,
 			isButtonDisabled,
 		} = this.state;
-		const { id, serviceId, websiteId } = this.props.match.params;
+		const { id, serviceId } = this.props.match.params;
 
 		let nameBreadcrumb = `${user.firstName} ${user.lastName}`;
 
