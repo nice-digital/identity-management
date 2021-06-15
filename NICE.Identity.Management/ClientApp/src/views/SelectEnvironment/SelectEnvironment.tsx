@@ -41,6 +41,7 @@ export class SelectEnvironment extends Component<
 			websites: [],
 			isLoading: true,
 		};
+		document.title = "NICE Accounts - Select environment"
 	}
 
 	async componentDidMount() {
@@ -104,7 +105,7 @@ export class SelectEnvironment extends Component<
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-									<StackedNav>
+									<StackedNav aria-label="Environments">
 										{websites.map(website => {
 											return (
 												<StackedNavLink

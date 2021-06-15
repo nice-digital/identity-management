@@ -1,4 +1,15 @@
-FROM node:8.11.1
+FROM node:10
+
+# Install Java (for Allure) see https://stackoverflow.com/a/44154721/486434
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive \
+  #apt-get install -y software-properties-common && \
+  apt-get install -y default-jre-headless
+
+# Install Allure for generating a report
+RUN curl -o allure-2.13.2.tgz -Ls https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.13.2/allure-commandline-2.13.2.tgz \
+  && tar -zxf allure-2.13.2.tgz -C /usr/local --strip-components=1 \
+  && rm allure-2.13.2.tgz
 
 RUN mkdir -p /tests
 

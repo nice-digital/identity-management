@@ -4,6 +4,7 @@ export const fetchData = async (url: string, options?: {}) => {
 		response = await fetch(url, options);
 		data = await response.json();
 	} catch (err) {
+		console.error(err);
 		let error: Error = err;
 		return error;
 	}
@@ -12,6 +13,7 @@ export const fetchData = async (url: string, options?: {}) => {
 		return data;
 	} else {
 		let error = new Error(data.message);
+		console.error(error);
 		return error;
 	}
 };

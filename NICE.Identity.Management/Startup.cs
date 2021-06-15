@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NICE.Identity.Authentication.Sdk.Authorisation;
 using NICE.Identity.Authentication.Sdk.Configuration;
 using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Configuration;
@@ -42,14 +42,14 @@ namespace NICE.Identity.Management
 		{
 			AppSettings.Configure(services, Configuration, Environment.IsDevelopment() ? @"c:\" : Environment.ContentRootPath);
 
-			
 			//dependency injection goes here.
-			services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddHttpContextAccessor();
+			services.AddTransient<HealthCheckDelegatingHandler>();
 
-            // TODO: remove httpClientBuilder
-            // This bypasses any certificate validation on proxy requests
-            // Only done due to local APIs not having certificates configured 
-            services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+			// TODO: remove httpClientBuilder
+			// This bypasses any certificate validation on proxy requests
+			// Only done due to local APIs not having certificates configured 
+			services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
                     ClientCertificateOptions = ClientCertificateOption.Manual,
                     ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
@@ -65,13 +65,21 @@ namespace NICE.Identity.Management
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
-            services.AddAuthentication(authConfiguration);
+            services.AddAuthentication(authConfiguration, allowNonSecureCookie: Environment.IsDevelopment());
+            services.AddAuthorisation(authConfiguration);
 
             // In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
 				configuration.RootPath = "ClientApp/build";
 			});
+
+			services.AddHealthChecks();
+			services.AddHealthChecksUI(setupSettings: setup =>
+				{
+					setup.UseApiEndpointDelegatingHandler<HealthCheckDelegatingHandler>();
+				})
+				.AddInMemoryStorage();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,13 +143,13 @@ namespace NICE.Identity.Management
                 }
             });
 
-            app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
 
 			app.UseRouting();
 
 			app.UseAuthentication();
-			app.UseAuthorization(); //TODO: this is new
+			app.UseAuthorization(); 
 
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles( new StaticFileOptions()
@@ -174,11 +182,6 @@ namespace NICE.Identity.Management
 				}
 			});
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllerRoute("default", pattern: "{controller}/{action=Index}/{id?}");
-			});
-
 			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
@@ -188,6 +191,20 @@ namespace NICE.Identity.Management
 					context.Request.Scheme = "https";
 				}
 				return next();
+			});
+
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapDefaultControllerRoute();
+				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint, new HealthCheckOptions()
+				{
+					Predicate = _ => true,
+					ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+				});
+				endpoints.MapHealthChecksUI(setup =>
+				{
+					setup.AddCustomStylesheet("wwwroot/NICE.Style.css");
+				}).RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
 			});
 
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
@@ -238,10 +255,10 @@ namespace NICE.Identity.Management
 						}
 					};
 
-					if (env.IsDevelopment())
-					{
-						spa.UseReactDevelopmentServer(npmScript: "start");
-					}
+					//if (env.IsDevelopment())
+					//{
+					//	spa.UseReactDevelopmentServer(npmScript: "start");
+					//}
 				});
 			});
 		}

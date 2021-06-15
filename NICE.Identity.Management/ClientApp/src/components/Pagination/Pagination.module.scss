@@ -1,0 +1,97 @@
+@import '@nice-digital/nds-core/scss/core.scss';
+@import '@nice-digital/nds-button/scss/button.scss';
+
+.flex {
+  display: flex;
+
+  &AlignCenter {
+    align-items: center;
+  }
+}
+
+.pagination {
+  margin: 0;
+
+  &Pager,
+  &Truncate {
+    list-style: none;
+    display: none;
+  }
+
+  &Pager {
+    &.next,
+    &.previous {
+      display: inline-block;
+    }
+
+    a {
+      @extend .btn;
+
+      background: none;
+      border: 1px solid transparent;
+      background: none;
+      color: $nds-colour-link;
+      margin: 0;
+      text-transform: capitalize;
+
+      &[data-pager='previous']:before {
+        content: '< ';
+      }
+
+      &[data-pager='next']:after {
+        content: ' >';
+      }
+
+      &:hover {
+        border: 1px solid #eee;
+        background: none;
+        color: $nds-colour-link;
+      }
+      &:focus {
+        background: none;
+        color: $nds-colour-link;
+        z-index: 3000;
+        top: 0;
+      }
+    }
+
+    &.active {
+      a {
+        background: #eee;
+        color: #000;
+      }
+    }
+  }
+
+  &Truncate {
+    span {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0.5em 0.25em;
+      vertical-align: top;
+      display: inline-block;
+    }
+  }
+
+  &Counter {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    padding: 0.5em 1em;
+    vertical-align: top;
+    display: inline-block;
+  }
+}
+
+@media (min-width: 56.25em) {
+  .pagination {
+    &Pager,
+    &Truncate {
+      display: inline-block;
+    }
+
+    &Counter {
+      display: none;
+    }
+  }
+}

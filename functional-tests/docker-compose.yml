@@ -28,10 +28,10 @@ services:
     image: selenium/hub:3.141
     container_name: selenium_hub
     environment:
-      GRID_DEBUG: "true"
+      GRID_DEBUG: 'true'
       #GRID_MAX_SESSION: 2
-#    ports:
-#      - 4444:4444
+  #    ports:
+  #      - 4444:4444
 
   # The tests themselves
   tests:
@@ -55,6 +55,7 @@ services:
       - IDENTITYAPI_API_AUDIENCE
       - IDENTITY_NOUSER_EMAIL
       - WEBAPP_API_IDENTIFIER
+      - WEBAPP_GOOGLE_TRACK_ID
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
@@ -72,7 +73,7 @@ services:
       - api
     # Enable browsing from the host machine on http://localhost:8080/consultations
     ports:
-        - 8080:8080
+      - 8080:8080
     environment:
       - AUTHCONFIGURATION_AUTH_SERVICE_URI
       - AUTHCONFIGURATION_API_IDENTIFIER
@@ -88,15 +89,17 @@ services:
       - WEBAPP_LOGOUT_REDIRECT_URI
       - WEBAPP_AUTH_SERVICE_URI
       - WEBAPP_API_IDENTIFIER
+      - WEBAPP_GOOGLE_TRACK_ID
       - IDENTITYAPI_AUTH_SERVICE_URI
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_CLIENTID
       - IDENTITYAPI_API_CLIENTSECRECT
+      - ASPNETCORE_ENVIRONMENT
+      - REDIS_CONNECTION_STRING
     networks:
       default:
         aliases:
           - idam
-
 
   # MS SQL Server database
   database:
@@ -114,13 +117,13 @@ services:
   api:
     container_name: functional-tests_api_1
     build: ./../NICE.Identity.Management.MockApi/
-    ports: 
+    ports:
       - 8090:8090
     environment:
       - HTTP_PORT
       - HTTPS_PORT
-    volumes: 
-      -  ./../NICE.Identity.Management.MockApi:/data
+    volumes:
+      - ./../NICE.Identity.Management.MockApi:/data
       - /data/node_modules
     command: npm start
     networks:
@@ -128,6 +131,14 @@ services:
         aliases:
           - api
 
+  redis:
+    container_name: functional-tests_redis_1
+    image: 'redis:alpine'
+    #command: redis-server --requirepass sOmE_sEcUrE_pAsS
+    ports:
+      - '6379:6379'
+    command: ['redis-server', '--appendonly', 'yes']
+    #command: ["redis-server", "--bind", "redis", "--port", "6379"]
 
   # nginx:
   #   container_name: functional-tests_nginx_1

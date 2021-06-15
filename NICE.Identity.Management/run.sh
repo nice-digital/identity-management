@@ -14,10 +14,12 @@ jq \
     --arg webapplogoutredirecturi "$WEBAPP_LOGOUT_REDIRECT_URI" \
     --arg webappapiidentifier "$WEBAPP_API_IDENTIFIER" \
     --arg webappauthorisationserviceuri "$WEBAPP_AUTH_SERVICE_URI" \
+    --arg webappgoogletrackingid "$WEBAPP_GOOGLE_TRACK_ID" \
     --arg identityapiauthorisationserviceuri "$IDENTITYAPI_AUTH_SERVICE_URI" \
     --arg identityapiidentifier "$IDENTITYAPI_IDENTIFIER" \
     --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
     --arg identityapiclientsecret "$IDENTITYAPI_API_CLIENTSECRECT" \
+    --arg RedisConnectionString "$REDIS_CONNECTION_STRING" \
     '
     .ConnectionStrings.DefaultConnection = $defaultConnection |
     .WebAppConfiguration.Domain = $webappdomain |
@@ -27,6 +29,9 @@ jq \
     .WebAppConfiguration.PostLogoutRedirectUri = $webapplogoutredirecturi |
     .WebAppConfiguration.ApiIdentifier = $webappapiidentifier |
     .WebAppConfiguration.AuthorisationServiceUri = $webappauthorisationserviceuri |
+    .WebAppConfiguration.GoogleTrackingId = $webappgoogletrackingid |
+    .WebAppConfiguration.RedisServiceConfiguration.ConnectionString = $RedisConnectionString |
+    .WebAppConfiguration.RedisServiceConfiguration.Enabled = true |
     .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
     .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
     .IdentityApiConfiguration.ClientId = $identityapiclientid |

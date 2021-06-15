@@ -34,6 +34,7 @@ export class SelectService extends Component<
 			services: [],
 			isLoading: true,
 		};
+		document.title = "NICE Accounts - Select service"
 	}
 
 	async componentDidMount() {
@@ -86,7 +87,7 @@ export class SelectService extends Component<
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-										<StackedNav data-qa-sel="service-stacked-nav">
+										<StackedNav data-qa-sel="service-stacked-nav" aria-label="Services">
 										{services.map(service => {
 											return (
 												<StackedNavLink

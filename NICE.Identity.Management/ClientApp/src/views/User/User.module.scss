@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    align-self: flex-start;
 
     > * {
       margin: 0;

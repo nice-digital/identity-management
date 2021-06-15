@@ -1,11 +1,16 @@
+using System.Collections.Generic;
+
 namespace NICE.Identity.Management.Configuration
 {
     public class EnvironmentConfig
     {
-        private const string LocalEnvironmentName = "local";
+	    
+	    public string Name { get; set; }
 
-        public string Name { get; set; }
+        public string HealthCheckPublicAPIEndpoint { get; set; }
 
-        //public bool IsLocal => string.Equals(Name, LocalEnvironmentName, StringComparison.OrdinalIgnoreCase);
+        public string[] HealthCheckAuthenticatedEndpoints { get; set; }
+
+        public string HealthCheckAuthenticatedAPIKey { get; set; }
     }
 }

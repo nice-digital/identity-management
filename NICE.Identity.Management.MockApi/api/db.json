@@ -10,7 +10,7 @@
       "hasVerifiedEmailAddress": true,
       "isLockedOut": false,
       "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
-      "lastLoggedInDate": "2019-10-23T12:29:54.911Z",
+      "lastLoggedInDate": "2019-02-25T01:29:54.911Z",
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
@@ -58,7 +58,7 @@
       "hasVerifiedEmailAddress": false,
       "isLockedOut": false,
       "initialRegistrationDate": "2019-10-26T12:29:54.911Z",
-      "lastLoggedInDate": "2019-10-26T12:29:54.911Z",
+      "lastLoggedInDate": null,
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
@@ -663,5 +663,8 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true
     }
+  ],
+  "verificationemail": [
+    { "verificationemail": 1 }
   ]
 }

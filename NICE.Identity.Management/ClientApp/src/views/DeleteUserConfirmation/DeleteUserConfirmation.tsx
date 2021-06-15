@@ -12,6 +12,8 @@ type DeleteUserConfirmationProps = {
 export const DeleteUserConfirmation = (props: DeleteUserConfirmationProps) => {
 	const { fullName } = props;
 
+	document.title = `NICE Accounts - ${fullName} deleted`
+
 	return (
 		<>
 			<Breadcrumbs>
