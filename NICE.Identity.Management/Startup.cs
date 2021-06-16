@@ -18,6 +18,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -87,6 +88,17 @@ namespace NICE.Identity.Management
 			IHostApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
 			startupLogger.LogInformation("Identity management is starting up");
+
+            app.Use(async (context, next) =>
+                {
+                    context.Response.OnStarting(() =>
+                    {
+                        context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
+                        return Task.FromResult(0);
+                    });
+                    await next();
+                }
+            );
 
 			if (env.IsDevelopment())
 			{
