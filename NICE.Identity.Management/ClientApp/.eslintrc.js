@@ -5,7 +5,10 @@ module.exports = {
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
 	],
-	rules: { "@typescript-eslint/indent": ["error", "tab"] },
+	rules: { 
+		"@typescript-eslint/indent": ["error", "tab"],
+		"@typescript-eslint/explicit-member-accessibility": "off"
+	},
 	settings: {
 		react: {
 			version: "detect",
