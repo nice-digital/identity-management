@@ -3,27 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@nice-digital/design-system": "^1.0.18-alpha.0",
+    "@nice-digital/design-system": "^1.2.13",
     "@nice-digital/global-nav": "github:nice-digital/global-nav",
     "@nice-digital/nds-checkbox": "^1.0.13-alpha.0",
     "@nice-digital/nds-radio": "^1.0.17-alpha.0",
     "@nice-digital/nds-stacked-nav": "^1.0.27-alpha.0",
-    "concurrently": "^4.1.1",
+    "concurrently": "^6.2.0",
     "query-string": "^6.12.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "^4.0.3"
   },
   "devDependencies": {
     "@nice-digital/browserslist-config": "^1.0.0",
     "@nice-digital/eslint-config": "^1.0.3",
     "@types/enzyme": "^3.10.3",
     "@types/fetch-mock": "^7.3.1",
-    "@types/jest": "24.0.16",
-    "@types/node": "12.6.8",
-    "@types/react": "16.8.24",
-    "@types/react-dom": "16.8.5",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^4.3.4",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
@@ -35,7 +35,7 @@
     "json-server": "^0.15.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.12.0",
-    "typescript": "3.5.3"
+    "typescript": "^4.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +46,11 @@
   },
   "browserslist": [
     "extends @nice-digital/browserslist-config"
-  ]
+  ],
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  }
 }
