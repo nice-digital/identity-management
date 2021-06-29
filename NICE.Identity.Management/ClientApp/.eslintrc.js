@@ -1,21 +1,34 @@
 module.exports = {
-	parser: "babel-eslint",
-	extends: [
-		"@nice-digital/eslint-config/es6",
-		"plugin:react/recommended",
-		"plugin:@typescript-eslint/recommended",
-	],
-	rules: { 
-		"@typescript-eslint/indent": ["error", "tab"],
-		"@typescript-eslint/explicit-member-accessibility": "off"
+	root: true,
+	parser: "@typescript-eslint/parser",
+	parserOptions: {
+		ecmaVersion: 2018,
+		sourceType: "module",
+		project: "./tsconfig.json",
 	},
+	extends: [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		//"plugin:prettier/recommended",
+		
+	],
+	plugins: [
+		"react",
+		"react-hooks",
+		"@typescript-eslint",
+		//"prettier",
+	],
 	settings: {
 		react: {
+			pragma: "React",
 			version: "detect",
 		},
 	},
-	env: {
-		es6: true,
+	rules: { 
+		"@typescript-eslint/no-explicit-any": "off",
 	},
 	overrides: [
 		{
@@ -25,5 +38,11 @@ module.exports = {
 				browser: true,
 			},
 		},
-	],
+		{
+			files: ["*.js"],
+			rules: {
+				"@typescript-eslint/explicit-module-boundary-types": "off",
+			},
+		},
+	],	
 };
