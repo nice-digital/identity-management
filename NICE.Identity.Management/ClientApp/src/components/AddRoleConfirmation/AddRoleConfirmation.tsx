@@ -8,7 +8,9 @@ type AddRoleConfirmationProps = {
 	fullName: string;
 };
 
-export const AddRoleConfirmation = (props: AddRoleConfirmationProps) => {
+export const AddRoleConfirmation = (
+	props: AddRoleConfirmationProps,
+): React.ReactElement => {
 	const { id, fullName } = props;
 
 	return (

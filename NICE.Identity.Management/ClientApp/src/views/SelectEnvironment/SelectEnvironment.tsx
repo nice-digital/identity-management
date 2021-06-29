@@ -4,11 +4,7 @@ import { RouteComponentProps, Link } from "react-router-dom";
 import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
-import {
-	UserType,
-	ServiceType,
-	WebsiteType,
-} from "../../models/types";
+import { UserType, ServiceType, WebsiteType } from "../../models/types";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { StackedNav, StackedNavLink } from "@nice-digital/nds-stacked-nav";
@@ -17,7 +13,8 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 
 type TParams = { id: string; serviceId: string };
 
-type SelectEnvironmentProps = {} & RouteComponentProps<TParams>;
+type SelectEnvironmentProps = Record<string, unknown> &
+	RouteComponentProps<TParams>;
 
 type SelectEnvironmentState = {
 	user: UserType;
@@ -39,16 +36,16 @@ export class SelectEnvironment extends Component<
 			websites: [],
 			isLoading: true,
 		};
-		document.title = "NICE Accounts - Select environment"
+		document.title = "NICE Accounts - Select environment";
 	}
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let user = await fetchData(Endpoints.user(this.props.match.params.id)),
-			service = await fetchData(
-				Endpoints.service(this.props.match.params.serviceId),
-			);
+		const user = await fetchData(Endpoints.user(this.props.match.params.id));
+		const service = await fetchData(
+			Endpoints.service(this.props.match.params.serviceId),
+		);
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
@@ -57,12 +54,12 @@ export class SelectEnvironment extends Component<
 			this.setState({ error: service });
 		}
 
-		let websites = service.websites;
+		const websites = service.websites;
 
 		this.setState({ user, service, websites, isLoading: false });
 	}
 
-	render() {
+	render(): JSX.Element {
 		const { user, service, websites, error, isLoading } = this.state;
 		const { params, url } = this.props.match;
 		const { id } = params;
@@ -104,7 +101,7 @@ export class SelectEnvironment extends Component<
 									<p>Loading...</p>
 								) : (
 									<StackedNav aria-label="Environments">
-										{websites.map(website => {
+										{websites.map((website) => {
 											return (
 												<StackedNavLink
 													destination={`${url}/${website.id}/roles`}

@@ -1,4 +1,4 @@
-export const ToFormattedDateString = (date: Date) => {
+export const ToFormattedDateString = (date: Date): string => {
     if (!date) return "";
     const dateToFormat = new Date(date);
     const day = dateToFormat.getDate();

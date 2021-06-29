@@ -14,7 +14,8 @@ import { ServiceType, UserType } from "../../models/types";
 
 type TParams = { id: string };
 
-type SelectServiceProps = {} & RouteComponentProps<TParams>;
+type SelectServiceProps = Record<string, unknown> &
+	RouteComponentProps<TParams>;
 
 type SelectServiceState = {
 	user: UserType;
@@ -34,14 +35,14 @@ export class SelectService extends Component<
 			services: [],
 			isLoading: true,
 		};
-		document.title = "NICE Accounts - Select service"
+		document.title = "NICE Accounts - Select service";
 	}
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let user = await fetchData(Endpoints.user(this.props.match.params.id)),
-			services = await fetchData(Endpoints.servicesList);
+		const user = await fetchData(Endpoints.user(this.props.match.params.id));
+		const services = await fetchData(Endpoints.servicesList);
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
@@ -53,7 +54,7 @@ export class SelectService extends Component<
 		this.setState({ user, services, isLoading: false });
 	}
 
-	render() {
+	render(): JSX.Element {
 		const { user, services, error, isLoading } = this.state;
 		const { id } = this.props.match.params;
 
@@ -87,8 +88,11 @@ export class SelectService extends Component<
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (
-										<StackedNav data-qa-sel="service-stacked-nav" aria-label="Services">
-										{services.map(service => {
+									<StackedNav
+										data-qa-sel="service-stacked-nav"
+										aria-label="Services"
+									>
+										{services.map((service) => {
 											return (
 												<StackedNavLink
 													data-qa-sel="service-stacked-nav-link"

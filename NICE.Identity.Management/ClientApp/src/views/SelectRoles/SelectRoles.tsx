@@ -22,7 +22,7 @@ import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string; serviceId: string; websiteId: string };
 
-type SelectRolesProps = {} & RouteComponentProps<TParams>;
+type SelectRolesProps = Record<string, unknown> & RouteComponentProps<TParams>;
 
 type SelectRolesState = {
 	user: UserType;
@@ -50,14 +50,14 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 			isButtonDisabled: false,
 		};
 
-		document.title = "NICE Accounts - Select role"
+		document.title = "NICE Accounts - Select role";
 	}
 
-	handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		let checkbox = e.target;
-		let roles = this.state.roles;
+	handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+		const checkbox = e.target;
+		const roles = this.state.roles;
 
-		roles.forEach(role => {
+		roles.forEach((role) => {
 			if (role.id.toString() === checkbox.value) {
 				role.hasRole = !role.hasRole;
 			}
@@ -66,18 +66,18 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 		this.setState({ roles });
 	};
 
-	handleFormSubmission = async (e: any) => {
+	handleFormSubmission = async (e: React.FormEvent): Promise<void> => {
 		e.preventDefault();
 
 		this.setState({ isButtonDisabled: true });
 
-		let fetchOptions = {
+		const fetchOptions = {
 			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ roles: this.state.roles }),
 		};
 
-		let roles = await fetchData(
+		const roles = await fetchData(
 			Endpoints.userRolesByWebsite(
 				this.props.match.params.id,
 				this.props.match.params.websiteId,
@@ -94,11 +94,11 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 		this.setState({ isButtonDisabled: false });
 	};
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let user = await fetchData(Endpoints.user(this.props.match.params.id));
-		let userRolesByWebsite = await fetchData(
+		const user = await fetchData(Endpoints.user(this.props.match.params.id));
+		const userRolesByWebsite = await fetchData(
 			Endpoints.userRolesByWebsite(
 				this.props.match.params.id,
 				this.props.match.params.websiteId,
@@ -115,7 +115,7 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 
 		const { roles, service, website } = userRolesByWebsite;
 
-		let environment = website ? website.environment : {};
+		const environment = website ? website.environment : {};
 
 		this.setState({
 			user,
@@ -127,7 +127,7 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 		});
 	}
 
-	render() {
+	render(): JSX.Element {
 		const {
 			user,
 			roles,
@@ -195,8 +195,8 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 									<p>Loading...</p>
 								) : (
 									<form onSubmit={this.handleFormSubmission}>
-										{roles.map(role => {
-											let props = {
+										{roles.map((role) => {
+											const props = {
 												id: role.id,
 												name: role.name,
 												description: role.description,

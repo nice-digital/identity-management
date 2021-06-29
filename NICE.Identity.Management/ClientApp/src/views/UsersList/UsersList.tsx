@@ -30,8 +30,8 @@ type CardMetaData = {
 };
 
 type statusFilterOptions = {
-	[key: string]: (user: UserType) => boolean,
-}
+	[key: string]: (user: UserType) => boolean;
+};
 
 type UsersListProps = {
 	basename: string;
@@ -60,7 +60,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 
 		const querystring = this.props.location.search;
 
-		let querystringObject = queryStringToObject(querystring);
+		const querystringObject = queryStringToObject(querystring);
 
 		const pageNumber = Number(
 			querystringObject.page
@@ -87,13 +87,13 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			itemsPerPage: itemsPerPage,
 		};
 
-		document.title = "NICE Accounts - Users list"
+		document.title = "NICE Accounts - Users list";
 	}
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let users = await fetchData(Endpoints.usersList);
+		const users = await fetchData(Endpoints.usersList);
 
 		if (isDataError(users)) {
 			this.setState({ error: users });
@@ -106,7 +106,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		itemsPerPage: string | number,
 		pageNumber: number,
 		dataCount: number,
-	) => {
+	): number => {
 		let pastPageRange = false;
 
 		if (Number(itemsPerPage)) {
@@ -121,15 +121,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return pageNumber;
 	};
 
-	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		this.setState({ isLoading: true });
 
-		let statusFilter = e.target.value,
-			users = this.state.originalUsers,
-			pageNumber = this.state.pageNumber,
-			itemsPerPage = Number(this.state.itemsPerPage)
-				? Number(this.state.itemsPerPage)
-				: this.state.itemsPerPage;
+		const statusFilter = e.target.value;
+
+		let users = this.state.originalUsers,
+			pageNumber = this.state.pageNumber;
+
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
 
 		if (statusFilter) {
 			users = this.usersByStatus(statusFilter, users);
@@ -144,17 +146,19 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ users, statusFilter, pageNumber, isLoading: false });
 	};
 
-	filterUsersBySearch = async (searchQuery: string) => {
+	filterUsersBySearch = async (searchQuery: string): Promise<void> => {
 		this.setState({ isLoading: true });
 
-		let originalUsers = await fetchData(
-				`${Endpoints.usersList}?q=${searchQuery}`,
-			),
-			users = originalUsers,
-			pageNumber = this.state.pageNumber,
-			itemsPerPage = Number(this.state.itemsPerPage)
-				? Number(this.state.itemsPerPage)
-				: this.state.itemsPerPage;
+		const originalUsers = await fetchData(
+			`${Endpoints.usersList}?q=${searchQuery}`,
+		);
+
+		let users = originalUsers,
+			pageNumber = this.state.pageNumber;
+
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
 
 		if (isDataError(originalUsers)) {
 			this.setState({ error: originalUsers });
@@ -184,9 +188,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		users: Array<UserType>,
 	): Array<UserType> => {
 		const statusFilterOptions: statusFilterOptions = {
-			active: user => !user.isLockedOut && user.hasVerifiedEmailAddress,
-			pending: user => !user.hasVerifiedEmailAddress,
-			locked: user => user.isLockedOut,
+			active: (user) => !user.isLockedOut && user.hasVerifiedEmailAddress,
+			pending: (user) => !user.hasVerifiedEmailAddress,
+			locked: (user) => user.isLockedOut,
 		};
 
 		const filteredUsers = users.filter(statusFilterOptions[statusFilter]);
@@ -198,8 +202,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		consultationsCount: number,
 		pageNumber: number,
 		itemsPerPage: number | string,
-	) => {
-		let paginationPositions = {
+	): { start: number; finish: number } => {
+		const paginationPositions = {
 			start: 0,
 			finish: consultationsCount,
 		};
@@ -217,7 +221,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return paginationPositions;
 	};
 
-	getPaginationText = (usersCount: number, start: number, finish: number) => {
+	getPaginationText = (
+		usersCount: number,
+		start: number,
+		finish: number,
+	): string => {
 		const amountPerPage = finish - start;
 		const paginationExtract =
 			usersCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
@@ -227,7 +235,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		}`;
 	};
 
-	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>): void => {
 		let itemsPerPage = (e.target as HTMLSelectElement).value || 25,
 			pageNumber = this.state.pageNumber,
 			path = stripMultipleQueries(this.state.path, ["amount", "page"]);
@@ -248,7 +256,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		});
 	};
 
-	changePage = (e: React.MouseEvent<HTMLAnchorElement>) => {
+	changePage = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		e.preventDefault();
 
 		let pageNumber =
@@ -270,15 +278,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		});
 	};
 
-	render() {
-		const {
-			users,
-			searchQuery,
-			error,
-			isLoading,
-			pageNumber,
-			itemsPerPage,
-		} = this.state;
+	render(): JSX.Element {
+		const { users, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
+			this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
 			users.length,
@@ -344,11 +346,13 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											];
 
 											return (
-												<li><Card
-													{...usersListHeading}
-													metadata={usersListMetadata}
-													key={nameIdentifier}
-												/></li>
+												<li key={nameIdentifier}>
+													<Card
+														{...usersListHeading}
+														metadata={usersListMetadata}
+														key={nameIdentifier}
+													/>
+												</li>
 											);
 										})}
 									</ul>
