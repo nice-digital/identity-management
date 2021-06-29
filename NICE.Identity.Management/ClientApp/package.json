@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@nice-digital/design-system": "^1.2.13",
+    "@nice-digital/design-system": "^1.2.14-alpha.0",
     "@nice-digital/global-nav": "github:nice-digital/global-nav",
     "@nice-digital/nds-checkbox": "^1.0.13-alpha.0",
     "@nice-digital/nds-radio": "^1.0.17-alpha.0",
@@ -25,13 +25,15 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^4.3.4",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "cross-env": "^5.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
-    "fetch-mock": "^7.3.9",
+    "fetch-mock": "^9.11.0",
+    "fetch-mock-jest": "^1.5.1",
     "json-server": "^0.15.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.12.0",
@@ -46,11 +48,5 @@
   },
   "browserslist": [
     "extends @nice-digital/browserslist-config"
-  ],
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  }
+  ]
 }
