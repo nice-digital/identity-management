@@ -14,7 +14,7 @@ services:
 
   chrome:
     container_name: functional-tests_chrome_1
-    image: selenium/node-chrome:3.141
+    image: selenium/node-chrome:3.141.59-20200826
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -25,7 +25,7 @@ services:
 
   # Selenium Grid/Hub
   hub:
-    image: selenium/hub:3.141
+    image: selenium/hub:3.141.59
     container_name: selenium_hub
     environment:
       GRID_DEBUG: 'true'

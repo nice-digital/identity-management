@@ -33,7 +33,7 @@
     "wdio-webdriver-service": "^0.1.6",
     "geckodriver": "^1.14.1",
     "wdio-cucumber-framework": "^1.1.1",
-    "wdio-selenium-standalone-service": "0.0.10",
+    "wdio-selenium-standalone-service": "0.0.12",
     "wdio-spec-reporter": "^0.1.4",
     "wdio-teamcity-reporter": "^1.1.1",
     "webdriverio": "^4.12.0"
