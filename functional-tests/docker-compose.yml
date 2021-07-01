@@ -104,7 +104,7 @@ services:
   # MS SQL Server database
   database:
     container_name: functional-tests_database_1
-    image: microsoft/mssql-server-linux:2017-latest
+    image: mcr.microsoft.com/mssql/server:2017-latest
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Express
