@@ -14,7 +14,7 @@ services:
 
   chrome:
     container_name: functional-tests_chrome_1
-    image: selenium/node-chrome:3.141
+    image: selenium/node-chrome:3.141.59-20200826
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -25,7 +25,7 @@ services:
 
   # Selenium Grid/Hub
   hub:
-    image: selenium/hub:3.141
+    image: selenium/hub:3.141.59
     container_name: selenium_hub
     environment:
       GRID_DEBUG: 'true'
@@ -104,7 +104,7 @@ services:
   # MS SQL Server database
   database:
     container_name: functional-tests_database_1
-    image: microsoft/mssql-server-linux:2017-latest
+    image: mcr.microsoft.com/mssql/server:2017-latest
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Express

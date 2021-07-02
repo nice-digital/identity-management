@@ -12,6 +12,7 @@ config.capabilities = [
     maxInstances: 2,
     browserName: 'chrome',
     chromeOptions: {
+      w3c: false,
       args: ['--headless', '--window-size=1366,1000'],
     },
     'goog:chromeOptions': {
