@@ -16,7 +16,7 @@
     "react-scripts": "^4.0.3"
   },
   "devDependencies": {
-    "@nice-digital/browserslist-config": "^1.0.0",
+    "@nice-digital/browserslist-config": "^2.0.1",
     "@nice-digital/eslint-config": "^1.0.3",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^26.0.15",
