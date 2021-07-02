@@ -22,15 +22,15 @@ describe("User", () => {
 		fetch.resetMocks();
 	});
 
-	it("should show loading message before data has been loaded", async () => {
+	it("should show loading message before data has been loaded", () => {
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = await shallow(<User match={match} />);
+		const wrapper = shallow(<User match={match} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
-	it("should call fetch during componentDidMount", async () => {
+	it("should call fetch during componentDidMount", () => {
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = await mount(<MemoryRouter><User match={match} /></MemoryRouter>);
+		const wrapper = mount(<MemoryRouter><User match={match} /></MemoryRouter>);
 		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
 		wrapper.instance().componentDidMount();
 		wrapper.update();
@@ -64,7 +64,6 @@ describe("User", () => {
 
 	it("should show error message when fetch returns 500 error", async () => {
 		console.error = jest.fn(); // hide console error from fetchData
-		fetch.mockResponseOnce(JSON.stringify(singleUser), { status: 401 });
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
 			<MemoryRouter>

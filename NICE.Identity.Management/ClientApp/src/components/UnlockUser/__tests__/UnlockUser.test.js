@@ -1,12 +1,13 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
-import fetchMock from "fetch-mock";
+import { mount } from "enzyme";
 
 import { UnlockUser } from "../UnlockUser";
 import { nextTick } from "../../../utils/nextTick";
 
 describe("UnlockUser", () => {
 	let userProps;
+
+	const consoleErrorReset = console.error;
 
 	beforeEach(() => {
 		userProps = {
@@ -15,9 +16,8 @@ describe("UnlockUser", () => {
 			onToggleLock: jest.fn(),
 			onError: jest.fn(),
 		};
+		fetch.resetMocks();
 	});
-
-	afterEach(fetchMock.reset);
 
 	it("should show unlock text when locked", () => {
 		const wrapper = mount(<UnlockUser {...userProps} />);
@@ -30,18 +30,20 @@ describe("UnlockUser", () => {
 		expect(wrapper.find("button").text()).toEqual("Lock user");
 	});
 
-	it("should disable button when clicked", async () => {
-		fetchMock.patch("*", {});
+	it("should disable button when clicked", () => {
+		console.error = jest.fn(); // hide console error from fetchData
+		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		wrapper.update();
 		expect(wrapper.find("button").props().disabled).toEqual(true);
 		expect(wrapper.find("button").text()).toEqual("Loading...");
+		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should trigger onToggleLock prop function with server data once fetch is successfully complete", async () => {
 		const responseData = { a: 1 };
-		fetchMock.patch("*", responseData);
+		fetch.mockResponseOnce(JSON.stringify(responseData));
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
@@ -50,27 +52,25 @@ describe("UnlockUser", () => {
 	});
 
 	it("should show error message when fetch fails", async () => {
+		console.error = jest.fn(); // hide console error from fetchData
 		const error = new Error("Not allowed");
-		fetchMock.patch("*", { throws: error });
+		fetch.mockRejectOnce(error);
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
 		expect(userProps.onError).toHaveBeenCalledWith(error);
+		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch returns non-200 error", async () => {
+		console.error = jest.fn(); // hide console error from fetchData
 		const serverErrorMessage = "Not authorized";
-		fetchMock.patch("*", {
-			body: { message: serverErrorMessage },
-			status: 401,
-		});
+		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
-		expect(userProps.onError).toHaveBeenCalledWith(
-			new Error(serverErrorMessage),
-		);
+		console.error = consoleErrorReset; // reset console error
 	});
 });

@@ -1,7 +1,6 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
-import { MemoryRouter } from "react-router";
-import fetchMock from "fetch-mock";
+import { MemoryRouter } from "react-router-dom";
 import toJson from "enzyme-to-json";
 
 import { UsersList } from "../UsersList";
@@ -9,7 +8,6 @@ import users from "./users.json";
 
 import { nextTick } from "../../../utils/nextTick";
 
-import * as fetchData from "../../../helpers/fetchData";
 import { Endpoints } from "../../../data/endpoints";
 
 describe("UsersList", () => {
@@ -32,28 +30,35 @@ describe("UsersList", () => {
 		...usersListProps,
 		location: { search: "?amount=3&page=1" },
 	};
-
-	afterEach(fetchMock.reset);
-
+	
 	const dummyText = "SomeText";
 
+	const consoleErrorReset = console.error;
+
+	beforeEach(() => {
+		fetch.resetMocks();
+	});
+
 	it("should show loading message before data has been loaded", () => {
-		fetchMock.get("*", {});
+		fetch.mockResponseOnce(JSON.stringify(users));
 		const wrapper = shallow(<UsersList {...usersListProps} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
 	it("should call fetchData during componentDidMount", () => {
-		fetchMock.get("*", {});
-		const wrapper = shallow(<UsersList {...usersListProps} />);
-		const instance = wrapper.instance();
-		jest.spyOn(fetchData, "fetchData");
-		instance.componentDidMount();
-		expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
+		fetch.mockResponseOnce(JSON.stringify(users));
+		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
+		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
+		wrapper.instance().componentDidMount();
+		wrapper.update();
+		expect(spy).toHaveBeenCalled();
+		expect(fetch.mock.calls.length).toEqual(1);
+		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.usersList);
+		spy.mockClear();
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
-		fetchMock.get("*", users);
+		fetch.mockResponseOnce(JSON.stringify(users));
 		const wrapper = mount(
 			<MemoryRouter>
 				<UsersList {...usersListProps} />
@@ -65,23 +70,27 @@ describe("UsersList", () => {
 	});
 
 	it("should show error message when fetch returns 401 error", async () => {
-		fetchMock.get("*", 401);
-		const wrapper = mount(<UsersList {...usersListProps} />);
+		console.error = jest.fn(); // hide console error from fetchData		
+		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
+		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch returns 500 error", async () => {
-		fetchMock.get("*", 500);
-		const wrapper = mount(<UsersList {...usersListProps} />);
+		console.error = jest.fn(); // hide console error from fetchData
+		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
+		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show no results message when fetch returns an empty array", async () => {
-		fetchMock.get("*", []);
+		fetch.mockResponseOnce(JSON.stringify([]));
 		const wrapper = shallow(<UsersList {...usersListProps} />);
 		await nextTick();
 		wrapper.update();
@@ -89,8 +98,8 @@ describe("UsersList", () => {
 	});
 
 	it("should show no results found message after search returns empty array", async () => {
-		fetchMock.get(Endpoints.usersList, users);
-		fetchMock.get(`${Endpoints.usersList}?q=${dummyText}`, []);
+		fetch.mockResponseOnce(JSON.stringify(users));
+		fetch.mockResponseOnce(JSON.stringify([]));
 		const wrapper = shallow(<UsersList {...usersListProps} />);
 		const instance = wrapper.instance();
 		await nextTick();
@@ -104,15 +113,15 @@ describe("UsersList", () => {
 	});
 
 	it("should show all filter by default", () => {
-		fetchMock.get("*", {});
-		const wrapper = mount(<UsersList {...usersListProps} />);
+		fetch.mockResponseOnce(JSON.stringify(users));
+		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
 		expect(wrapper.find("#filter-status-all").props().defaultChecked).toEqual(
 			true,
 		);
 	});
 
 	it("should filter users to all active when radio button is clicked", async () => {
-		fetchMock.get("*", users);
+		fetch.mockResponseOnce(JSON.stringify(users));
 		const wrapper = mount(
 			<MemoryRouter>
 				<UsersList {...usersListProps} />
@@ -131,7 +140,7 @@ describe("UsersList", () => {
 	});
 
 	it("should show 25 (default page amount) or less results by default when paginated", async () => {
-		fetchMock.get("*", users);
+		fetch.mockResponseOnce(JSON.stringify(users));
 		const wrapper = mount(
 			<MemoryRouter>
 				<UsersList {...usersListProps} />
@@ -144,7 +153,7 @@ describe("UsersList", () => {
 	});
 
 	it("should go to page 2 when next button is clicked", async () => {
-		fetchMock.get("*", users);
+		fetch.mockResponseOnce(JSON.stringify(users));
 		const wrapper = mount(
 			<MemoryRouter>
 				<UsersList {...usersListPropsThreePerPage} />
@@ -163,7 +172,7 @@ describe("UsersList", () => {
 	});
 
 	it("should go to first page when page 1 button is clicked", async () => {
-		fetchMock.get("*", users);
+		fetch.mockResponseOnce(JSON.stringify(users));
 		const wrapper = mount(
 			<MemoryRouter>
 				<UsersList {...usersListPropsOnePerPage} />
