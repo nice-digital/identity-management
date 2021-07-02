@@ -1,7 +1,10 @@
 import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { enableFetchMocks } from "jest-fetch-mock";
 
 configure({ adapter: new Adapter() });
+
+enableFetchMocks();
 
 // https://twitter.com/kentcdodds/status/1163644392789250048?s=19
 beforeEach(() => {
@@ -10,6 +13,7 @@ beforeEach(() => {
 		throw new Error("This must be mocked!");
 	});
 });
+
 afterEach(() => {
 	window.fetch.mockRestore();
 });
