@@ -17,6 +17,7 @@ describe("UnlockUser", () => {
 			onError: jest.fn(),
 		};
 		fetch.resetMocks();
+		console.error = consoleErrorReset;
 	});
 
 	it("should show unlock text when locked", () => {
@@ -31,14 +32,13 @@ describe("UnlockUser", () => {
 	});
 
 	it("should disable button when clicked", () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		wrapper.update();
 		expect(wrapper.find("button").props().disabled).toEqual(true);
 		expect(wrapper.find("button").text()).toEqual("Loading...");
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should trigger onToggleLock prop function with server data once fetch is successfully complete", async () => {
@@ -52,7 +52,7 @@ describe("UnlockUser", () => {
 	});
 
 	it("should show error message when fetch fails", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		const error = new Error("Not allowed");
 		fetch.mockRejectOnce(error);
 		const wrapper = mount(<UnlockUser {...userProps} />);
@@ -60,17 +60,15 @@ describe("UnlockUser", () => {
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
 		expect(userProps.onError).toHaveBeenCalledWith(error);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch returns non-200 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		const serverErrorMessage = "Not authorized";
 		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
 		const wrapper = mount(<UnlockUser {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
-		console.error = consoleErrorReset; // reset console error
 	});
 });

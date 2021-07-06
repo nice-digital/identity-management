@@ -37,6 +37,7 @@ describe("UsersList", () => {
 
 	beforeEach(() => {
 		fetch.resetMocks();
+		console.error = consoleErrorReset;
 	});
 
 	it("should show loading message before data has been loaded", () => {
@@ -70,23 +71,21 @@ describe("UsersList", () => {
 	});
 
 	it("should show error message when fetch returns 401 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData		
+		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch returns 500 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show no results message when fetch returns an empty array", async () => {

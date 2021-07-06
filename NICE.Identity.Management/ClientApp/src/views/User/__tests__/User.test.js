@@ -20,6 +20,7 @@ describe("User", () => {
 
 	beforeEach(() => {
 		fetch.resetMocks();
+		console.error = consoleErrorReset;
 	});
 
 	it("should show loading message before data has been loaded", () => {
@@ -49,7 +50,7 @@ describe("User", () => {
 	});
 
 	it("should show error message when fetch returns 401 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData		
+		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
 			<MemoryRouter>
@@ -59,11 +60,10 @@ describe("User", () => {
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();		
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch returns 500 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
 			<MemoryRouter>
@@ -73,6 +73,5 @@ describe("User", () => {
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-		console.error = consoleErrorReset; // reset console error
 	});
 });

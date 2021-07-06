@@ -16,6 +16,7 @@ describe("ResendVerification", () => {
 			onError: jest.fn(),
 		};
 		fetch.resetMocks();
+		console.error = consoleErrorReset;
 	});
 
 	it("should show correct text on load", () => {
@@ -23,36 +24,32 @@ describe("ResendVerification", () => {
 		expect(wrapper.find("button").text()).toEqual("Resend verification email");
 	});
 
-
 	it("should disable button when clicked", () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(<ResendVerification {...userProps} />);
 		wrapper.find("button").simulate("click");
 		wrapper.update();
 		expect(wrapper.find("button").props().disabled).toEqual(true);
 		expect(wrapper.find("button").text()).toEqual("Loading...");
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch fails", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(<ResendVerification {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when fetch returns non-200 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		const serverErrorMessage = "Not authorized";
 		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
 		const wrapper = mount(<ResendVerification {...userProps} />);
 		wrapper.find("button").simulate("click");
 		await nextTick();
 		expect(userProps.onError).toHaveBeenCalledTimes(1);
-		console.error = consoleErrorReset; // reset console error
 	});
 });

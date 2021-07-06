@@ -23,6 +23,7 @@ describe("SelectEnvironment", () => {
 
 	beforeEach(() => {
 		fetch.resetMocks();
+		console.error = consoleErrorReset;
 	});	
 
 	it("should show loading message before data has been loaded", () => {
@@ -57,7 +58,7 @@ describe("SelectEnvironment", () => {
 	});
 
 	it("should show error message when user fetchData function returns 500 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData		
+		console.error = jest.fn();		
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		fetch.mockResponseOnce(JSON.stringify(singleService));
 		const wrapper = mount(
@@ -68,11 +69,10 @@ describe("SelectEnvironment", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when user fetchData function returns 401 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData		
+		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		fetch.mockResponseOnce(JSON.stringify(singleService));
 		const wrapper = mount(
@@ -83,11 +83,10 @@ describe("SelectEnvironment", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when services fetchData function returns 500 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData		
+		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
@@ -98,11 +97,10 @@ describe("SelectEnvironment", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when services fetchData function returns 401 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData		
+		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
@@ -113,6 +111,5 @@ describe("SelectEnvironment", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 });

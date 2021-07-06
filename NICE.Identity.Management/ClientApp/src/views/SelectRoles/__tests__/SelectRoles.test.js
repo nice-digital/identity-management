@@ -24,6 +24,7 @@ describe("SelectRoles", () => {
 
 	beforeEach(() => {
 		fetch.resetMocks();
+		console.error = consoleErrorReset;
 	});
 
 	it("should show loading message before data has been loaded", () => {
@@ -58,7 +59,7 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when user fetchData function returns 500 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = mount(
@@ -69,11 +70,10 @@ describe("SelectRoles", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when user fetchData function returns 401 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = mount(
@@ -84,11 +84,10 @@ describe("SelectRoles", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when services fetchData function returns 500 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
@@ -99,11 +98,10 @@ describe("SelectRoles", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should show error message when services fetchData function returns 401 error", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
@@ -114,7 +112,6 @@ describe("SelectRoles", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should display confirmation message once fetchData patch is successfully complete", async () => {
@@ -135,7 +132,7 @@ describe("SelectRoles", () => {
 	});
 
 	it("should disable button when form submitted", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		fetch.mockResponseOnce(JSON.stringify({}));
@@ -150,11 +147,10 @@ describe("SelectRoles", () => {
 		wrapper.update();
 		expect(wrapper.find("button").props().disabled).toEqual(true);
 		expect(wrapper.find("button").text()).toEqual("Loading...");
-		console.error = consoleErrorReset; // reset console error
 	});
 
 	it("should disable all checkboxes when form submitted", async () => {
-		console.error = jest.fn(); // hide console error from fetchData
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		fetch.mockResponseOnce(JSON.stringify({}));
@@ -170,6 +166,5 @@ describe("SelectRoles", () => {
 		wrapper.find({ type: "checkbox" }).forEach(checkbox => {
 			expect(checkbox.props().disabled).toEqual(true);
 		});
-		console.error = consoleErrorReset; // reset console error
 	});
 });
