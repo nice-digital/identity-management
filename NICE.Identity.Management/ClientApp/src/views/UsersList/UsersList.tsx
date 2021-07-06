@@ -18,6 +18,7 @@ import { Endpoints } from "../../data/endpoints";
 import { UserType, HistoryType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
 import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
+import { FilterService } from "../../components/FilterService/FilterService";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
@@ -46,6 +47,7 @@ type UsersListState = {
 	error?: Error;
 	isLoading: boolean;
 	statusFilter?: string;
+	serviceFilter?: number;
 	pageNumber: number;
 	itemsPerPage: number | string;
 };
@@ -83,7 +85,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			itemsPerPage: itemsPerPage,
 		};
 
-		document.title = "NICE Accounts - Users list"
+		document.title = "NICE Accounts - Users list";
 	}
 
 	async componentDidMount() {
@@ -140,6 +142,30 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ users, statusFilter, pageNumber, isLoading: false });
 	};
 
+	filterUsersByService = (e: React.ChangeEvent<HTMLInputElement>) => {
+		this.setState({ isLoading: true });
+
+		const serviceFilter = parseInt(e.target.value);
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
+
+		let users = this.state.originalUsers;
+		let pageNumber = this.state.pageNumber;
+
+		if (serviceFilter) {
+			users = this.usersByService(serviceFilter, users);
+		}
+
+		pageNumber = this.pastPageRange(
+			itemsPerPage,
+			pageNumber,
+			this.state.users.length,
+		);
+
+		this.setState({ users, serviceFilter, pageNumber, isLoading: false });
+	};
+
 	filterUsersBySearch = async (searchQuery: string) => {
 		this.setState({ isLoading: true });
 
@@ -160,6 +186,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			users = this.usersByStatus(this.state.statusFilter, users);
 		}
 
+		if (this.state.serviceFilter) {
+			users = this.usersByService(this.state.serviceFilter, users);
+		}
+
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
 			pageNumber,
@@ -173,6 +203,19 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			pageNumber,
 			isLoading: false,
 		});
+	};
+
+	usersByService = (
+		serviceFilter: number,
+		users: Array<UserType>,
+	): Array<UserType> => {
+		return (users = users.filter((user) => {
+			let userServices = user.services;
+
+			if (userServices.includes(serviceFilter)) {
+				return user;
+			}
+		}));
 	};
 
 	usersByStatus = (
@@ -274,14 +317,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	};
 
 	render() {
-		const {
-			users,
-			searchQuery,
-			error,
-			isLoading,
-			pageNumber,
-			itemsPerPage,
-		} = this.state;
+		const { users, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
+			this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
 			users.length,
@@ -299,6 +336,29 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			? users.slice(paginationPositions.start, paginationPositions.finish)
 			: users;
 
+		const dummyServices = [
+			{
+				name: "dev-eppi.nice.org.uk",
+				id: 1,
+			},
+			{
+				name: "test-eppi.nice.org.uk",
+				id: 2,
+			},
+			{
+				name: "dev-comments.nice.org.uk",
+				id: 3,
+			},
+			{
+				name: "alpha-comments.nice.org.uk",
+				id: 4,
+			},
+			{
+				name: "idam",
+				id: 5,
+			},
+		];
+
 		return (
 			<>
 				<Breadcrumbs>
@@ -312,6 +372,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 						<GridItem cols={12} md={3}>
 							<FilterSearch onInputChange={this.filterUsersBySearch} />
 							<FilterStatus onCheckboxChange={this.filterUsersByStatus} />
+							<FilterService
+								onCheckboxChange={this.filterUsersByService}
+								services={dummyServices}
+							/>
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
 							{isLoading ? (
@@ -347,11 +411,13 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											];
 
 											return (
-												<li><Card
-													{...usersListHeading}
-													metadata={usersListMetadata}
-													key={nameIdentifier}
-												/></li>
+												<li>
+													<Card
+														{...usersListHeading}
+														metadata={usersListMetadata}
+														key={nameIdentifier}
+													/>
+												</li>
 											);
 										})}
 									</ul>

@@ -14,7 +14,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "services": [1, 2, 3]
     },
     {
       "userId": 2,
@@ -30,7 +31,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "services": [3]
     },
     {
       "userId": 3,
@@ -46,7 +48,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "services": [3, 4]
     },
     {
       "userId": 4,
@@ -62,7 +65,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "services": [1, 4, 5]
     },
     {
       "userId": 5,
@@ -78,7 +82,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "services": [2, 4]
     },
     {
       "userId": 6,
@@ -94,7 +99,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "services": [5]
     }
   ],
   "services": [
