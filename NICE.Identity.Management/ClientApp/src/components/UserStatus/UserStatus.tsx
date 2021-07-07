@@ -6,7 +6,7 @@ type UserStatusProps = {
 	user: UserType;
 };
 
-export const UserStatus = (props: UserStatusProps) => (
+export const UserStatus = (props: UserStatusProps): React.ReactElement => (
 	<>
 		{!props.user.isLockedOut && props.user.hasVerifiedEmailAddress && (
 			<Tag data-qa-sel="user-status" consultation>

@@ -17,7 +17,7 @@ import { isDataError } from "../../helpers/isDataError";
 
 type TParams = { id: string };
 
-type DeleteUserProps = {} & RouteComponentProps<TParams>;
+type DeleteUserProps = Record<string, unknown> & RouteComponentProps<TParams>;
 
 type DeleteUserState = {
 	user: UserType;
@@ -39,16 +39,16 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		};
 	}
 
-	handleDeleteClick = async () => {
+	handleDeleteClick = async (): Promise<void> => {
 		this.setState({ isDeleteButtonLoading: true });
 
-		let fetchOptions = {
+		const fetchOptions = {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ userId: this.props.match.params.id }),
 		};
 
-		let deletedUser = await fetchData(
+		const deletedUser = await fetchData(
 			Endpoints.user(this.props.match.params.id),
 			fetchOptions,
 		);
@@ -62,27 +62,22 @@ export class DeleteUser extends Component<DeleteUserProps, DeleteUserState> {
 		this.setState({ isDeleteButtonLoading: false });
 	};
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let user = await fetchData(Endpoints.user(this.props.match.params.id));
+		const user = await fetchData(Endpoints.user(this.props.match.params.id));
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
 		}
 
 		this.setState({ user, isLoading: false });
-		document.title = `NICE Accounts - Delete ${user.firstName} ${user.lastName}`
+		document.title = `NICE Accounts - Delete ${user.firstName} ${user.lastName}`;
 	}
 
-	render() {
-		const {
-			isLoading,
-			isDeleteButtonLoading,
-			error,
-			hasBeenDeleted,
-			user,
-		} = this.state;
+	render(): JSX.Element {
+		const { isLoading, isDeleteButtonLoading, error, hasBeenDeleted, user } =
+			this.state;
 		const { id } = this.props.match.params;
 
 		let lastBreadcrumb = `${user.firstName} ${user.lastName}`;

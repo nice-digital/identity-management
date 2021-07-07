@@ -7,7 +7,6 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -26,7 +25,6 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -63,7 +61,6 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
           elementType={
             Object {
               "$$typeof": Symbol(react.forward_ref),
-              "displayName": "Link",
               "propTypes": Object {
                 "innerRef": [Function],
                 "onClick": [Function],
@@ -90,6 +87,7 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
   <Grid
     className="pv--d"
     elementType="div"
+    equalHeight={false}
     gutter="standard"
     horizontalAlignment="left"
     reverse={false}
@@ -97,7 +95,6 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
   >
     <GridItem
       cols={3}
-      elementType="div"
     >
       <span
         className="detailsLabel"
@@ -107,7 +104,6 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
     </GridItem>
     <GridItem
       cols={9}
-      elementType="div"
     >
       <span>
         kristin.patrick@example.com

@@ -26,10 +26,10 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 		};
 	}
 
-	handleClick = async () => {
+	handleClick = async (): Promise<void> => {
 		this.setState({ isLoading: true });
 
-		let fetchOptions = {
+		const fetchOptions = {
 			method: "PATCH",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -37,7 +37,7 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 			}),
 		};
 
-		let updatedUser = await fetchData(
+		const updatedUser = await fetchData(
 			Endpoints.user(this.props.id),
 			fetchOptions,
 		);
@@ -51,7 +51,7 @@ export class UnlockUser extends Component<UnlockUserProps, UnlockUserState> {
 		this.setState({ isLoading: false });
 	};
 
-	render() {
+	render(): JSX.Element {
 		const { isLocked } = this.props;
 		const { isLoading: isButtonDisabled } = this.state;
 

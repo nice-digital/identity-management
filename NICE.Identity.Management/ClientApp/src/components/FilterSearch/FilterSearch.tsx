@@ -6,8 +6,8 @@ type FilterSearchProps = {
 	onInputChange: (searchQuery: string) => void;
 };
 
-export const FilterSearch = (props: FilterSearchProps) => {
-	let typingTimer: number = 0;
+export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
+	let typingTimer = 0;
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value.trim();

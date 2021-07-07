@@ -1,14 +1,12 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router";
-import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
 
 import { User } from "../User";
+import { Endpoints } from "../../../data/endpoints";
 import singleUser from "./singleUser.json";
 import { nextTick } from "../../../utils/nextTick";
-
-import * as fetchData from "../../../helpers/fetchData";
 
 describe("User", () => {
 	const match = {
@@ -18,25 +16,33 @@ describe("User", () => {
 		url: "",
 	};
 
-	afterEach(fetchMock.reset);
+	const consoleErrorReset = console.error;
+
+	beforeEach(() => {
+		fetch.resetMocks();
+		console.error = consoleErrorReset;
+	});
 
 	it("should show loading message before data has been loaded", () => {
-		fetchMock.get("*", {});
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		const wrapper = shallow(<User match={match} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
-	it("should call fetchData during componentDidMount", () => {
-		fetchMock.get("*", {});
-		const wrapper = shallow(<User match={match} />);
-		const instance = wrapper.instance();
-		jest.spyOn(fetchData, "fetchData");
-		instance.componentDidMount();
-		expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
+	it("should call fetch during componentDidMount", () => {
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		const wrapper = mount(<MemoryRouter><User match={match} /></MemoryRouter>);
+		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
+		wrapper.instance().componentDidMount();
+		wrapper.update();
+		expect(spy).toHaveBeenCalled();
+		expect(fetch.mock.calls.length).toEqual(1);
+		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.user(match.params.id));
+		spy.mockClear();
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
-		fetchMock.get("*", singleUser);
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		const wrapper = shallow(<User match={match} />);
 		await nextTick();
 		wrapper.update();
@@ -44,7 +50,8 @@ describe("User", () => {
 	});
 
 	it("should show error message when fetch returns 401 error", async () => {
-		fetchMock.get("*", 401);
+		console.error = jest.fn();		
+		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
 			<MemoryRouter>
 				<User match={match} />
@@ -52,11 +59,12 @@ describe("User", () => {
 		);
 		await nextTick();
 		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();		
 	});
 
 	it("should show error message when fetch returns 500 error", async () => {
-		fetchMock.get("*", 500);
+		console.error = jest.fn();
+		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
 			<MemoryRouter>
 				<User match={match} />

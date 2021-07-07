@@ -7,12 +7,14 @@ type FilterStatusProps = {
 	onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const FilterStatus = (props: FilterStatusProps) => {
+export const FilterStatus = (props: FilterStatusProps): React.ReactElement => {
 	return (
 		<Panel>
 			<form>
 				<div role="group" aria-labelledby="filter-header">
-					<div id="filter-header"><strong>Show:</strong></div>
+					<div id="filter-header">
+						<strong>Show:</strong>
+					</div>
 					<div className="radio">
 						<input
 							className="radio__input"

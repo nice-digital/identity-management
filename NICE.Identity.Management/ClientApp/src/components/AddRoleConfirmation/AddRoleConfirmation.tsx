@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Alert } from "@nice-digital/nds-alert";
 
@@ -8,7 +8,9 @@ type AddRoleConfirmationProps = {
 	fullName: string;
 };
 
-export const AddRoleConfirmation = (props: AddRoleConfirmationProps) => {
+export const AddRoleConfirmation = (
+	props: AddRoleConfirmationProps,
+): React.ReactElement => {
 	const { id, fullName } = props;
 
 	return (
