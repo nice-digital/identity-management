@@ -27,7 +27,7 @@ const rewriter = jsonServer.rewriter({
 
 const server = jsonServer.create();
 const middleware = jsonServer.defaults();
-const router = jsonServer.router('api/db.json');
+const router = jsonServer.router('db.json');
 
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
