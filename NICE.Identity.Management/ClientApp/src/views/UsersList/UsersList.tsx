@@ -51,7 +51,7 @@ type UsersListState = {
 	error?: Error;
 	isLoading: boolean;
 	statusFilter?: string;
-	serviceFilter?: number;
+	serviceFilter: Array<number>;
 	pageNumber: number;
 	itemsPerPage: number | string;
 };
@@ -85,6 +85,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			originalUsers: [],
 			users: [],
 			isLoading: true,
+			serviceFilter: [],
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
 		};
@@ -151,7 +152,14 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	filterUsersByService = (e: React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ isLoading: true });
 
-		const serviceFilter = parseInt(e.target.value);
+		const serviceId = parseInt(e.target.value);
+
+		let serviceFilter = this.state.serviceFilter;
+
+		serviceFilter = serviceFilter.includes(serviceId)
+			? serviceFilter.filter((value) => value !== serviceId)
+			: serviceFilter.concat(serviceId);
+
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
@@ -159,7 +167,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		let users = this.state.originalUsers;
 		let pageNumber = this.state.pageNumber;
 
-		if (serviceFilter) {
+		if (serviceFilter.length) {
 			users = this.usersByService(serviceFilter, users);
 		}
 
@@ -214,13 +222,13 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	};
 
 	usersByService = (
-		serviceFilter: number,
+		serviceFilter: Array<number>,
 		users: Array<UserType>,
 	): Array<UserType> => {
 		return (users = users.filter((user) => {
-			let userServices = user.services;
+			let userServices = user.hasAccessToServiceIds;
 
-			if (userServices.includes(serviceFilter)) {
+			if (userServices.some((r) => serviceFilter.indexOf(r) >= 0)) {
 				return user;
 			}
 		}));

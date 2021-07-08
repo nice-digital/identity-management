@@ -1,6 +1,7 @@
 import React from "react";
 import { Panel } from "@nice-digital/nds-panel";
 //import { Radio } from "@nice-digital/nds-radio";
+import { Checkbox } from "@nice-digital/nds-checkbox";
 import "@nice-digital/nds-radio/scss/radio.scss";
 
 type Services = {
@@ -28,22 +29,29 @@ export const FilterService = (
 						// eslint-disable-next-line
 						props.services.map((service): JSX.Element => {
 							return (
-								<div className="radio" key={service.id}>
-									<input
-										className="radio__input"
-										name="filter-status"
-										type="radio"
-										id={`filter-status-${service.name}`}
-										value={service.id}
-										onChange={props.onCheckboxChange}
-									/>
-									<label
-										className="radio__label"
-										htmlFor={`filter-status-${service.name}`}
-									>
-										{service.name}
-									</label>
-								</div>
+								<Checkbox
+									key={service.id}
+									value={`${service.id}`}
+									name="filter-service"
+									label={service.name}
+									onChange={props.onCheckboxChange}
+								/>
+								// <div className="radio" key={service.id}>
+								// 	<input
+								// 		className="radio__input"
+								// 		name="filter-status"
+								// 		type="radio"
+								// 		id={`filter-status-${service.name}`}
+								// 		value={service.id}
+								// 		onChange={props.onCheckboxChange}
+								// 	/>
+								// 	<label
+								// 		className="radio__label"
+								// 		htmlFor={`filter-status-${service.name}`}
+								// 	>
+								// 		{service.name}
+								// 	</label>
+								// </div>
 							);
 						})
 					}
