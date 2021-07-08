@@ -2,7 +2,9 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
+import { Container } from "@nice-digital/nds-container";
 
+import { Overview } from "../../views/Overview/Overview";
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
@@ -13,7 +15,10 @@ import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 export class App extends React.Component {
 	render() {
 		const auth: IdamProviderProps = {
-			links: [{ text: "Health checks", url: "/healthchecks-ui" }, { text: "Sign out", url: "/Account/Logout" }],
+			links: [
+				{ text: "Health checks", url: "/healthchecks-ui" },
+				{ text: "Sign out", url: "/Account/Logout" },
+			],
 			displayName: "John",
 			provider: "idam",
 		};
@@ -23,27 +28,29 @@ export class App extends React.Component {
 				<Header search={false} auth={auth} />
 
 				<main
-					className="container"
 					role="main"
 					id="content-start"
 					aria-label="Start of content"
 					aria-live="polite"
 				>
-					<Route path="/" exact render={() => <Redirect to="/users" />} />
-					<Route path="/users" exact component={UsersList} />
-					<Route path="/users/:id" exact component={User} />
-					<Route path="/users/:id/delete" exact component={DeleteUser} />
-					<Route path="/users/:id/services" exact component={SelectService} />
-					<Route
-						path="/users/:id/services/:serviceId/environments"
-						exact
-						component={SelectEnvironment}
-					/>
-					<Route
-						path="/users/:id/services/:serviceId/environments/:websiteId/roles"
-						exact
-						component={SelectRoles}
-					/>
+					<Container>
+						<Route path="/" exact render={() => <Redirect to="/overview" />} />
+						<Route path="/overview" exact component={Overview} />
+						<Route path="/users" exact component={UsersList} />
+						<Route path="/users/:id" exact component={User} />
+						<Route path="/users/:id/delete" exact component={DeleteUser} />
+						<Route path="/users/:id/services" exact component={SelectService} />
+						<Route
+							path="/users/:id/services/:serviceId/environments"
+							exact
+							component={SelectEnvironment}
+						/>
+						<Route
+							path="/users/:id/services/:serviceId/environments/:websiteId/roles"
+							exact
+							component={SelectRoles}
+						/>
+					</Container>
 				</main>
 
 				<Footer />
