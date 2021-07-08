@@ -61,17 +61,18 @@ Array [
         >
           <label
             className="input__label"
-            htmlFor="userSearch"
+            htmlFor="user-search"
           >
             Filter by name or email address
           </label>
           <input
             autoComplete="off"
             className="input__input"
-            id="userSearch"
+            id="user-search"
             name="user-search"
             onChange={[Function]}
             type="search"
+            unique="userSearch"
           />
         </div>
       </div>
@@ -189,192 +190,200 @@ Array [
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/1"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Kristin Patrick
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--consultation"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/1"
+                    onClick={[Function]}
                   >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Kristin Patrick
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  kristin.patrick@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    kristin.patrick@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
         <li>
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/2"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Thomas Holding
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--consultation"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/2"
+                    onClick={[Function]}
                   >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Thomas Holding
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  thomas.holding@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    thomas.holding@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
         <li>
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/3"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Aisha Bartlett
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--consultation"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/3"
+                    onClick={[Function]}
                   >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Aisha Bartlett
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  aisha.bartlett@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    aisha.bartlett@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
         <li>
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/4"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Theo Bradford
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/4"
+                    onClick={[Function]}
                   >
-                    Locked
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Theo Bradford
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  theo.bradford@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag"
+                      data-qa-sel="user-status"
+                    >
+                      Locked
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    theo.bradford@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
       </ul>

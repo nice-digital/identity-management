@@ -2,6 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
+import { Container } from "@nice-digital/nds-container";
 
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
@@ -11,9 +12,12 @@ import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnviron
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 
 export class App extends React.Component {
-	render() {
+	render(): JSX.Element {
 		const auth: IdamProviderProps = {
-			links: [{ text: "Health checks", url: "/healthchecks-ui" }, { text: "Sign out", url: "/Account/Logout" }],
+			links: [
+				{ text: "Health checks", url: "/healthchecks-ui" },
+				{ text: "Sign out", url: "/Account/Logout" },
+			],
 			displayName: "John",
 			provider: "idam",
 		};
@@ -22,8 +26,7 @@ export class App extends React.Component {
 			<Router>
 				<Header search={false} auth={auth} />
 
-				<main
-					className="container"
+				<Container
 					role="main"
 					id="content-start"
 					aria-label="Start of content"
@@ -44,7 +47,7 @@ export class App extends React.Component {
 						exact
 						component={SelectRoles}
 					/>
-				</main>
+				</Container>
 
 				<Footer />
 			</Router>

@@ -1,14 +1,14 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router";
-import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
 
 import { nextTick } from "../../../utils/nextTick";
 import singleUser from "./singleUser.json";
 import { DeleteUser } from "../DeleteUser";
 
-import * as fetchData from "../../../helpers/fetchData";
+import { Endpoints } from "../../../data/endpoints";
+
 import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 
 describe("DeleteUser", () => {
@@ -19,25 +19,34 @@ describe("DeleteUser", () => {
 		url: "",
 	};
 
-	afterEach(fetchMock.reset);
+	const consoleErrorReset = console.error;
+
+	beforeEach(() => {
+		fetch.resetMocks();
+		console.error = consoleErrorReset;
+	});
+
 
 	it("should show loading message before data has been loaded", () => {
-		fetchMock.get("*", {});
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		const wrapper = shallow(<DeleteUser match={match} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
 	it("should call fetchData during componentDidMount", () => {
-		fetchMock.get("*", {});
-		const wrapper = shallow(<DeleteUser match={match} />);
-		const instance = wrapper.instance();
-		jest.spyOn(fetchData, "fetchData");
-		instance.componentDidMount();
-		expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		const wrapper = mount(<MemoryRouter><DeleteUser match={match} /></MemoryRouter>);
+		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
+		wrapper.instance().componentDidMount();
+		wrapper.update();
+		expect(spy).toHaveBeenCalled();
+		expect(fetch.mock.calls.length).toEqual(1);
+		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.user(match.params.id));
+		spy.mockClear();
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
-		fetchMock.get("*", singleUser);
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
 		const wrapper = shallow(<DeleteUser match={match} />);
 		await nextTick();
 		wrapper.update();
@@ -45,7 +54,8 @@ describe("DeleteUser", () => {
 	});
 
 	it("should show error message when fetchData function returns 401 error", async () => {
-		fetchMock.get("*", 401);
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />
@@ -57,7 +67,8 @@ describe("DeleteUser", () => {
 	});
 
 	it("should show error message when fetchData function returns 500 error", async () => {
-		fetchMock.get("*", 500);
+		console.error = jest.fn();
+		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />
@@ -69,9 +80,10 @@ describe("DeleteUser", () => {
 	});
 
 	it("should show error message when fetchData delete fails", async () => {
+		console.error = jest.fn();
 		const error = new Error("Not allowed");
-		fetchMock.get("*", {});
-		fetchMock.delete("*", { throws: error });
+		fetch.mockResponseOnce(JSON.stringify({}));
+		fetch.mockRejectOnce(error);
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />
@@ -86,12 +98,10 @@ describe("DeleteUser", () => {
 	});
 
 	it("should show error message when fetchData delete returns non-200 error", async () => {
+		console.error = jest.fn();
 		const serverErrorMessage = "Not authorized";
-		fetchMock.get("*", {});
-		fetchMock.delete("*", {
-			body: { message: serverErrorMessage },
-			status: 401,
-		});
+		fetch.mockResponseOnce(JSON.stringify({}));
+		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />
@@ -106,7 +116,9 @@ describe("DeleteUser", () => {
 	});
 
 	it("should disable delete button when clicked", async () => {
-		fetchMock.mock("*", singleUser);
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />
@@ -120,7 +132,9 @@ describe("DeleteUser", () => {
 	});
 
 	it("should display confirmation message once fetchData delete is successfully complete", async () => {
-		fetchMock.mock("*", {});
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(
 			<MemoryRouter>
 				<DeleteUser match={match} />

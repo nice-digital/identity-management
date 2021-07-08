@@ -30,6 +30,10 @@ type CardMetaData = {
 	value: React.ReactNode;
 };
 
+type statusFilterOptions = {
+	[key: string]: (user: UserType) => boolean;
+};
+
 type UsersListProps = {
 	basename: string;
 	location: {
@@ -58,7 +62,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 
 		const querystring = this.props.location.search;
 
-		let querystringObject = queryStringToObject(querystring);
+		const querystringObject = queryStringToObject(querystring);
 
 		const pageNumber = Number(
 			querystringObject.page
@@ -88,10 +92,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		document.title = "NICE Accounts - Users list";
 	}
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let users = await fetchData(Endpoints.usersList);
+		const users = await fetchData(Endpoints.usersList);
 
 		if (isDataError(users)) {
 			this.setState({ error: users });
@@ -104,7 +108,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		itemsPerPage: string | number,
 		pageNumber: number,
 		dataCount: number,
-	) => {
+	): number => {
 		let pastPageRange = false;
 
 		if (Number(itemsPerPage)) {
@@ -119,15 +123,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return pageNumber;
 	};
 
-	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		this.setState({ isLoading: true });
 
-		let statusFilter = e.target.value,
-			users = this.state.originalUsers,
-			pageNumber = this.state.pageNumber,
-			itemsPerPage = Number(this.state.itemsPerPage)
-				? Number(this.state.itemsPerPage)
-				: this.state.itemsPerPage;
+		const statusFilter = e.target.value;
+
+		let users = this.state.originalUsers,
+			pageNumber = this.state.pageNumber;
+
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
 
 		if (statusFilter) {
 			users = this.usersByStatus(statusFilter, users);
@@ -166,17 +172,19 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ users, serviceFilter, pageNumber, isLoading: false });
 	};
 
-	filterUsersBySearch = async (searchQuery: string) => {
+	filterUsersBySearch = async (searchQuery: string): Promise<void> => {
 		this.setState({ isLoading: true });
 
-		let originalUsers = await fetchData(
-				`${Endpoints.usersList}?q=${searchQuery}`,
-			),
-			users = originalUsers,
-			pageNumber = this.state.pageNumber,
-			itemsPerPage = Number(this.state.itemsPerPage)
-				? Number(this.state.itemsPerPage)
-				: this.state.itemsPerPage;
+		const originalUsers = await fetchData(
+			`${Endpoints.usersList}?q=${searchQuery}`,
+		);
+
+		let users = originalUsers,
+			pageNumber = this.state.pageNumber;
+
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
 
 		if (isDataError(originalUsers)) {
 			this.setState({ error: originalUsers });
@@ -222,30 +230,23 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		statusFilter: string,
 		users: Array<UserType>,
 	): Array<UserType> => {
-		return (users = users.filter((user) => {
-			let userActive = !user.isLockedOut,
-				userPending = !user.hasVerifiedEmailAddress;
+		const statusFilterOptions: statusFilterOptions = {
+			active: (user) => !user.isLockedOut && user.hasVerifiedEmailAddress,
+			pending: (user) => !user.hasVerifiedEmailAddress,
+			locked: (user) => user.isLockedOut,
+		};
 
-			if (statusFilter === "active" && userActive && !userPending) {
-				return user;
-			}
+		const filteredUsers = users.filter(statusFilterOptions[statusFilter]);
 
-			if (statusFilter === "pending" && userPending) {
-				return user;
-			}
-
-			if (statusFilter === "locked" && !userActive) {
-				return user;
-			}
-		}));
+		return filteredUsers;
 	};
 
 	getPaginateStartAndFinishPosition = (
 		consultationsCount: number,
 		pageNumber: number,
 		itemsPerPage: number | string,
-	) => {
-		let paginationPositions = {
+	): { start: number; finish: number } => {
+		const paginationPositions = {
 			start: 0,
 			finish: consultationsCount,
 		};
@@ -263,7 +264,11 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return paginationPositions;
 	};
 
-	getPaginationText = (usersCount: number, start: number, finish: number) => {
+	getPaginationText = (
+		usersCount: number,
+		start: number,
+		finish: number,
+	): string => {
 		const amountPerPage = finish - start;
 		const paginationExtract =
 			usersCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
@@ -273,7 +278,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		}`;
 	};
 
-	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>): void => {
 		let itemsPerPage = (e.target as HTMLSelectElement).value || 25,
 			pageNumber = this.state.pageNumber,
 			path = stripMultipleQueries(this.state.path, ["amount", "page"]);
@@ -294,7 +299,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		});
 	};
 
-	changePage = (e: React.MouseEvent<HTMLAnchorElement>) => {
+	changePage = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		e.preventDefault();
 
 		let pageNumber =
@@ -316,7 +321,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		});
 	};
 
-	render() {
+	render(): JSX.Element {
 		const { users, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
 			this.state;
 
@@ -411,7 +416,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 											];
 
 											return (
-												<li>
+												<li key={nameIdentifier}>
 													<Card
 														{...usersListHeading}
 														metadata={usersListMetadata}

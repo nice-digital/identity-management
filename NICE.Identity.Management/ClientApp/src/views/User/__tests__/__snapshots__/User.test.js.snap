@@ -8,7 +8,6 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -37,7 +36,6 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
         elementType={
           Object {
             "$$typeof": Symbol(react.forward_ref),
-            "displayName": "Link",
             "propTypes": Object {
               "innerRef": [Function],
               "onClick": [Function],
@@ -59,6 +57,7 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
   />
   <Grid
     elementType="div"
+    equalHeight={false}
     gutter="standard"
     horizontalAlignment="left"
     reverse={false}
@@ -67,7 +66,6 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
     <GridItem
       aria-busy={false}
       cols={12}
-      elementType="div"
       md={9}
     >
       <div
