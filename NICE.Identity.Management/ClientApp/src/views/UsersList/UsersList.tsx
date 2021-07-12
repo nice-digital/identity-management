@@ -302,6 +302,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return (
 			<>
 				<Breadcrumbs>
+					<Breadcrumb to="/overview" elementType={Link}>
+						Administration
+					</Breadcrumb>
 					<Breadcrumb>Users</Breadcrumb>
 				</Breadcrumbs>
 
