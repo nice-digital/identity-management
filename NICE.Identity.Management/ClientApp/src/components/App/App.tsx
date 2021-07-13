@@ -27,13 +27,13 @@ export class App extends React.Component {
 			<Router>
 				<Header search={false} auth={auth} />
 
-				<main
+				<Container
+					elementType="main"
 					role="main"
 					id="content-start"
 					aria-label="Start of content"
 					aria-live="polite"
 				>
-					<Container>
 						<Route path="/" exact render={() => <Redirect to="/overview" />} />
 						<Route path="/overview" exact component={Overview} />
 						<Route path="/users" exact component={UsersList} />
@@ -50,8 +50,7 @@ export class App extends React.Component {
 							exact
 							component={SelectRoles}
 						/>
-					</Container>
-				</main>
+				</Container>
 
 				<Footer />
 			</Router>
