@@ -81,17 +81,18 @@ Array [
         >
           <label
             className="input__label"
-            htmlFor="userSearch"
+            htmlFor="user-search"
           >
             Filter by name or email address
           </label>
           <input
             autoComplete="off"
             className="input__input"
-            id="userSearch"
+            id="user-search"
             name="user-search"
             onChange={[Function]}
             type="search"
+            unique="userSearch"
           />
         </div>
       </div>
