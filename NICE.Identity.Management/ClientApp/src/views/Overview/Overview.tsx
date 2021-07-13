@@ -18,7 +18,7 @@ export const Overview = (): React.ReactElement => {
 
 			{!error ? (
 				<Grid equalHeight>
-					<GridItem cols={12} md={4}>
+					<GridItem cols={12} md={4} className="mb--d">
 						<Panel>
 							<h2>User admin</h2>
 							<p>Find and manage user accounts; includes editing permissions and updating user profiles.</p>
@@ -29,7 +29,7 @@ export const Overview = (): React.ReactElement => {
 					</GridItem>
 
 					{/* To be added once the services page is added in IDAM-141 */}
-					{/* <GridItem cols={12} md={4}>
+					{/* <GridItem cols={12} md={4} className="mb--d">
 						<Panel>
 							<h2>Services admin</h2>
 							<p>Find and manage services and their roles; includes searches for users assigned to roles.</p>
@@ -40,7 +40,7 @@ export const Overview = (): React.ReactElement => {
 					</GridItem> */}
 
 					{/* To be added once the organisation page is added in IDAM-433 */}
-					{/* <GridItem cols={12} md={4}>
+					{/* <GridItem cols={12} md={4} className="mb--d">
 						<Panel>
 							<h2>Organisation admin</h2>
 							<p>Find and manage organisations; includes viewing and managing user accounts associated to an organisation.</p>
@@ -50,16 +50,6 @@ export const Overview = (): React.ReactElement => {
 						</Panel>
 					</GridItem> */}
 
-					{/* To be added once the services page is added in ??? */}
-					{/* <GridItem cols={12} md={8}>
-						<Panel>
-							<h2>Services analytics</h2>
-							<p>View data about the Identity and Access Management service usage; a dashboard about user accounts by status and activity.</p>
-							<Button variant="inverse" to="/">
-								Manage service analytics
-							</Button>
-						</Panel>
-					</GridItem> */}
 				</Grid>
 			) : (
 				<p>Error</p>
