@@ -13,7 +13,7 @@ import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnviron
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 
 export class App extends React.Component {
-	render() {
+	render(): JSX.Element {
 		const auth: IdamProviderProps = {
 			links: [
 				{ text: "Health checks", url: "/healthchecks-ui" },

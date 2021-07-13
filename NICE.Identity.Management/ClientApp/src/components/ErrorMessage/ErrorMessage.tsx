@@ -7,14 +7,14 @@ type ErrorMessageProps = {
 	children?: React.ReactNode;
 };
 
-export const ErrorMessage = (props: ErrorMessageProps) => (
+export const ErrorMessage = (props: ErrorMessageProps): React.ReactElement => (
 	<Alert type="error">
 		{props.children ? (
 			props.children
 		) : (
 			<>
 				<h2>Whoops</h2>
-				<p>Sorry, there's been an error!</p>
+				<p>Sorry, there&apos;s been an error!</p>
 			</>
 		)}
 

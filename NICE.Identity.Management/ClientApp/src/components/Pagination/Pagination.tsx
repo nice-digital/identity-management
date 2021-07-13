@@ -11,8 +11,8 @@ type PaginationProps = {
 	currentPage: number;
 };
 
-export const Pagination = (props: PaginationProps) => {
-	let generatePageList = (pageCount: number, currentPage: number) => {
+export const Pagination = (props: PaginationProps): React.ReactElement => {
+	const generatePageList = (pageCount: number, currentPage: number) => {
 		let pageListArray = [currentPage - 1, currentPage, currentPage + 1];
 
 		if (currentPage <= 3) {
@@ -41,7 +41,7 @@ export const Pagination = (props: PaginationProps) => {
 	const paginationNeeded =
 		typeof itemsPerPage === "string" ? false : consultationCount > itemsPerPage;
 	const pageCount = Math.ceil(
-		consultationCount / parseInt(itemsPerPage!.toString(), 10),
+		consultationCount / parseInt(itemsPerPage?.toString(), 10),
 	);
 
 	const pageListArray = generatePageList(pageCount, currentPage);
@@ -79,8 +79,8 @@ export const Pagination = (props: PaginationProps) => {
 						)}
 
 						{pageListArray.map((page, index) => {
-							let showFirstLink = index === 0 && page > 1 && pageCount > 5;
-							let showLastLink =
+							const showFirstLink = index === 0 && page > 1 && pageCount > 5;
+							const showLastLink =
 								index === pageListArray.length - 1 &&
 								page < pageCount &&
 								pageCount > 5;
