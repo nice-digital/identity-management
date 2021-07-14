@@ -28,7 +28,10 @@ export default {
     firstNameValidationMessage: '.input.input--error:nth-child(6)',
     lastNameValidationMessage: '.input.input--error:nth-child(7)',
   },
-  adminHomepage: {
+  adminHomePage:{
+    manageUsersButton: toDataQASelAttr('manage-users'),
+  },
+  userListPage: {
     userlist: toDataQASelAttr('list-of-users'),
     firstUserCard: toChildAndQASel(1, 'list-of-users'),
     secondUserCard: toChildAndQASel(2, 'list-of-users'),

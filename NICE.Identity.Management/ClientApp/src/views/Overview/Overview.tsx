@@ -22,7 +22,7 @@ export const Overview = (): React.ReactElement => {
 						<Panel>
 							<h2>User admin</h2>
 							<p>Find and manage user accounts; includes editing permissions and updating user profiles.</p>
-							<Button variant="inverse" to="/users" elementType={Link}>
+							<Button variant="inverse" to="/users" elementType={Link} data-qa-sel="manage-users">
 								Manage users
 							</Button>
 						</Panel>

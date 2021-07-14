@@ -1,7 +1,7 @@
 import "@nice-digital/wdio-cucumber-steps/lib/given";
 import { Given } from "cucumber";
 import navigateToRegPage from "../support/action/navigateToRegPage";
-import navigateToUserListPage from "../support/action/navigateToUserListPage";
+import {navigateToUserListPageUsingBreadscrumb, navigateToUserListPageFromAdminPage} from "../support/action/navigateToUserListPage";
 
 Given(
     /^I navigate to the registration page$/,
@@ -10,5 +10,10 @@ Given(
 
 Given(
     /^I navigate to the user list page$/,
-    navigateToUserListPage
+    navigateToUserListPageUsingBreadscrumb
+);
+
+Given(
+    /^I click on the manage user button$/,
+    navigateToUserListPageFromAdminPage
 );
