@@ -8,32 +8,32 @@ import selectors from "../selectors";
 
 export const findUserList = (userName) => {
   browser.refresh();
-  waitForVisible(selectors.adminHomepage.userlist);
+  waitForVisible(selectors.userListPage.userlist);
   checkURL("http://idam:8080/users");
-  checkContainsText("element", selectors.adminHomepage.userlist, userName);
+  checkContainsText("element", selectors.userListPage.userlist, userName);
   pause(1000);
 };
 
 export const userNotInList = (userName) => {
-  waitForVisible(selectors.adminHomepage.userlist);
+  waitForVisible(selectors.userListPage.userlist);
   checkURL("http://idam:8080/users");
-  checkContainsText("element", selectors.adminHomepage.userlist, " not", userName);
+  checkContainsText("element", selectors.userListPage.userlist, " not", userName);
   pause(1000);
 };
 
 export const clickFirstUserInList = () => {
-  waitForVisible(selectors.adminHomepage.userlist);
-  clickElement("click", "selector", selectors.adminHomepage.firstUserCard);
+  waitForVisible(selectors.userListPage.userlist);
+  clickElement("click", "selector", selectors.userListPage.firstUserCard);
 };
 
 export const clickSecondUserInList = () => {
-  waitForVisible(selectors.adminHomepage.userlist);
-  clickElement("click", "selector", selectors.adminHomepage.secondUserCard);
+  waitForVisible(selectors.userListPage.userlist);
+  clickElement("click", "selector", selectors.userListPage.secondUserCard);
 };
 
 export const clickLastUserInList = () => {
-  waitForVisible(selectors.adminHomepage.userlist);
-  clickElement("click", "selector", selectors.adminHomepage.lastUserCard);
+  waitForVisible(selectors.userListPage.userlist);
+  clickElement("click", "selector", selectors.userListPage.lastUserCard);
 };
 
 export default findUserList;
