@@ -1,0 +1,551 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersList should match the snapshot after data has been loaded 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="grid"
+  >
+    <div
+      data-g="12 md:3"
+    >
+      <div
+        className="panel"
+      >
+        <div
+          className="input"
+        >
+          <label
+            className="input__label"
+            htmlFor="user-search"
+          >
+            Filter by name or email address
+          </label>
+          <input
+            autoComplete="off"
+            className="input__input"
+            id="user-search"
+            name="user-search"
+            onChange={[Function]}
+            type="search"
+            unique="userSearch"
+          />
+        </div>
+      </div>
+      <div
+        className="panel"
+      >
+        <form>
+          <div
+            aria-labelledby="filter-header"
+            role="group"
+          >
+            <div
+              id="filter-header"
+            >
+              <strong>
+                Show:
+              </strong>
+            </div>
+            <div
+              className="radio"
+            >
+              <input
+                className="radio__input"
+                defaultChecked={true}
+                id="filter-status-all"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value=""
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-all"
+              >
+                <span
+                  className="visually-hidden"
+                >
+                  Show: 
+                </span>
+                All
+              </label>
+            </div>
+            <div
+              className="radio"
+            >
+              <input
+                className="radio__input"
+                id="filter-status-active"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value="active"
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-active"
+              >
+                Active
+              </label>
+            </div>
+            <div
+              className="radio"
+            >
+              <input
+                className="radio__input"
+                id="filter-status-pending"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value="pending"
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-pending"
+              >
+                Pending
+              </label>
+            </div>
+            <div
+              className="radio"
+            >
+              <input
+                className="radio__input"
+                id="filter-status-locked"
+                name="filter-status"
+                onChange={[Function]}
+                type="radio"
+                value="locked"
+              />
+              <label
+                className="radio__label"
+                htmlFor="filter-status-locked"
+              >
+                Locked
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      aria-busy={false}
+      data-g="12 md:9"
+    >
+      <h2
+        className="usersListSummary"
+      >
+        Showing 4 users
+      </h2>
+      <ul
+        className="list--unstyled"
+        data-qa-sel="list-of-users"
+      >
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  <a
+                    href="/users/1"
+                    onClick={[Function]}
+                  >
+                    Kristin Patrick
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    kristin.patrick@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  <a
+                    href="/users/2"
+                    onClick={[Function]}
+                  >
+                    Thomas Holding
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    thomas.holding@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  <a
+                    href="/users/3"
+                    onClick={[Function]}
+                  >
+                    Aisha Bartlett
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    aisha.bartlett@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  <a
+                    href="/users/4"
+                    onClick={[Function]}
+                  >
+                    Theo Bradford
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag"
+                      data-qa-sel="user-status"
+                    >
+                      Locked
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    theo.bradford@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+      </ul>
+      <div
+        className="flex flexAlignCenter"
+      >
+        <div
+          className="mr--e"
+          data-qa-sel="number-of-results-on-page"
+        >
+          <label
+            className="bold mr--c"
+            htmlFor="itemsPerPage"
+          >
+            Items per page
+          </label>
+          <select
+            data-qa-sel="result-on-the-page-index"
+            id="itemsPerPage"
+            name="itemsPerPage"
+            onChange={[Function]}
+            value="all"
+          >
+            <option
+              value="25"
+            >
+              25
+            </option>
+            <option
+              value="50"
+            >
+              50
+            </option>
+            <option
+              value="all"
+            >
+              All
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`UsersList should show error message when fetch returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`UsersList should show error message when fetch returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": {
+    \\"@type\\": \\"ListItem\\",
+    \\"position\\": 1,
+    \\"item\\": {
+      \\"name\\": \\"Users\\"
+    }
+  }
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;

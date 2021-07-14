@@ -6,6 +6,7 @@ import { Container } from "@nice-digital/nds-container";
 
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
+import { ServicesList } from "../../views/ServicesList/ServicesList";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
@@ -47,6 +48,7 @@ export class App extends React.Component {
 						exact
 						component={SelectRoles}
 					/>
+					<Route path="/services" exact component={ServicesList} />
 				</Container>
 
 				<Footer />
