@@ -4,6 +4,7 @@ import { Input } from "@nice-digital/nds-forms";
 
 type FilterSearchProps = {
 	onInputChange: (searchQuery: string) => void;
+	label: string;
 };
 
 export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
@@ -23,7 +24,7 @@ export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
 		<Panel>
 			<Input
 				type="search"
-				label="Filter by name or email address"
+				label={props.label}
 				unique="userSearch"
 				name="user-search"
 				onChange={handleInputChange}

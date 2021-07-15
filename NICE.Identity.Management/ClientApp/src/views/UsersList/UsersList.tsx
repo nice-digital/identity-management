@@ -309,7 +309,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterUsersBySearch} />
+							<FilterSearch onInputChange={this.filterUsersBySearch} label={"Filter by name or email address"}/>
 							<FilterStatus onCheckboxChange={this.filterUsersByStatus} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
