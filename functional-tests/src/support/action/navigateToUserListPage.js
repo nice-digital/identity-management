@@ -2,9 +2,14 @@ import waitForVisible from "@nice-digital/wdio-cucumber-steps/lib/support/action
 import click from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
 import selectors from "../selectors";
 
-export const navigateToUserListPage = () => {
+export const navigateToUserListPageUsingBreadscrumb = () => {
   click('click', 'element', selectors.adminUserPage.usersBreadcrumb);
-  waitForVisible(selectors.adminHomepage.userlist);
+  waitForVisible(selectors.userListPage.userlist);
 }
 
-export default navigateToUserListPage;
+export const navigateToUserListPageFromAdminPage = () => {
+  click('click', 'element', selectors.adminHomePage.manageUsersButton);
+  waitForVisible(selectors.userListPage.userlist);
+}
+
+export default navigateToUserListPageUsingBreadscrumb;
