@@ -15,14 +15,14 @@ import {
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
-import { ServiceType, HistoryType, ServiceWebsiteType } from "../../models/types";
+import { HistoryType, WebsiteType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
-import { ServiceEnvironment } from "../../components/ServiceEnvironment/ServiceEnvironment";
+import { FilterEnvironment } from "../../components/FilterEnvironment/FilterEnvironment";
+import { WebsiteEnvironment } from "../../components/WebsiteEnvironment/WebsiteEnvironment";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
 
-import styles from "./SitesList.module.scss";
+import styles from "./ServicesList.module.scss";
 
 type CardMetaData = {
 	label?: string;
@@ -30,7 +30,7 @@ type CardMetaData = {
 };
 
 type environmentFilterOptions = {
-	[key: string]: (service: ServiceType) => boolean;
+	[key: string]: (website: WebsiteType) => boolean;
 };
 
 type ServicesListProps = {
@@ -44,8 +44,8 @@ type ServicesListProps = {
 
 type ServicesListState = {
 	path: string;
-	originalServices: Array<ServiceType>;
-	services: Array<ServiceType>;
+	originalWebsites: Array<WebsiteType>;
+	websites: Array<WebsiteType>;
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
@@ -80,8 +80,8 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 
 		this.state = {
 			path: "",
-			originalServices: [],
-			services: [],
+			originalWebsites: [],
+			websites: [],
 			isLoading: true,
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
@@ -93,26 +93,13 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const services = await fetchData(Endpoints.servicesList);
+		const websites = await fetchData(Endpoints.websitesList);
 
-		let splitServices: Array<ServiceType>;
-		services.forEach((service: ServiceType) => {
-			const id = service.id;
-			const name = service.name;
-			const websites: Array<ServiceWebsiteType> = [];
-
-			service.websites.forEach((website: ServiceWebsiteType) => {
-				websites.push(website);
-				const splitService = {id, name, websites}; 
-				splitServices.push(splitService)
-			});
-		});
-
-		if (isDataError(services)) {
-			this.setState({ error: services });
+		if (isDataError(websites)) {
+			this.setState({ error: websites });
 		}
 
-		this.setState({ originalServices: services, services: splitServices, isLoading: false });
+		this.setState({ originalWebsites: websites, websites: websites, isLoading: false });
 	}
 
 	pastPageRange = (
@@ -134,12 +121,12 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		return pageNumber;
 	};
 
-	filterServicesByEnvironment = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	filterWebsitesByEnvironment = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		this.setState({ isLoading: true });
 
 		const environmentFilter = e.target.value;
 
-		let services = this.state.originalServices,
+		let websites = this.state.originalWebsites,
 			pageNumber = this.state.pageNumber;
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
@@ -147,83 +134,71 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			: this.state.itemsPerPage;
 
 		if (environmentFilter) {
-			services = this.servicesByEnvironment(environmentFilter, services);
+			websites = this.websitesByEnvironment(environmentFilter, websites);
 		}
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
 			pageNumber,
-			this.state.services.length,
+			this.state.websites.length,
 		);
 
-		this.setState({ services: services, environmentFilter: environmentFilter, pageNumber, isLoading: false });
+		this.setState({ websites: websites, environmentFilter: environmentFilter, pageNumber, isLoading: false });
 	};
 
-	filterServicesBySearch = async (searchQuery: string): Promise<void> => {
+	filterWebsitesBySearch = async (searchQuery: string): Promise<void> => {
 		this.setState({ isLoading: true });
 
-		const originalServices = await fetchData(
-			`${Endpoints.servicesList}?q=${searchQuery}`,
+		const originalWebsites = await fetchData(
+			`${Endpoints.websitesList}?q=${searchQuery}`,
 		);
 
-		let services: Array<ServiceType>;
-		originalServices.forEach((service: ServiceType) => {
-			const id = service.id;
-			const name = service.name;
-			const websites: Array<ServiceWebsiteType> = [];
-
-			service.websites.forEach((website: ServiceWebsiteType) => {
-				websites.push(website);
-				const splitService = {id, name, websites}; 
-				services.push(splitService)
-			});
-		});
-
-		let	pageNumber = this.state.pageNumber;
+		let websites = originalWebsites,
+		pageNumber = this.state.pageNumber;
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
 
-		if (isDataError(originalServices)) {
-			this.setState({ error: originalServices });
+		if (isDataError(originalWebsites)) {
+			this.setState({ error: originalWebsites });
 		}
 
 		if (this.state.environmentFilter) {
-			services = this.servicesByEnvironment(this.state.environmentFilter, services);
+			websites = this.websitesByEnvironment(this.state.environmentFilter, websites);
 		}
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
 			pageNumber,
-			this.state.services.length,
+			this.state.websites.length,
 		);
 
 		this.setState({
-			originalServices: originalServices,
-			services: services,
+			originalWebsites: originalWebsites,
+			websites: websites,
 			searchQuery,
 			pageNumber,
 			isLoading: false,
 		});
 	};
 
-	servicesByEnvironment = (
+	websitesByEnvironment = (
 		environmentFilter: string,
-		services: Array<ServiceType>,
-	): Array<ServiceType> => {
+		websites: Array<WebsiteType>,
+	): Array<WebsiteType> => {
 		const environmentFilterOptions: environmentFilterOptions = {
-			live: (service) => service.websites[0].environment.id == 6,
-			beta: (service) => service.websites[0].environment.id == 5,
-			alpha: (service) => service.websites[0].environment.id == 4,
-			test: (service) => service.websites[0].environment.id == 3,
-			dev: (service) => service.websites[0].environment.id == 2,
-			local: (service) => service.websites[0].environment.id == 1,
+			live: (website) => website.environment.name == "live",
+			beta: (website) => website.environment.name == "beta",
+			alpha: (website) => website.environment.name == "alpha",
+			test: (website) => website.environment.name == "test",
+			dev: (website) => website.environment.name == "dev",
+			local: (website) => website.environment.name == "local",
 		};
 
-		const filteredServices = services.filter(environmentFilterOptions[environmentFilter]);
+		const filteredWebsites = websites.filter(environmentFilterOptions[environmentFilter]);
 
-		return filteredServices;
+		return filteredWebsites;
 	};
 
 	getPaginateStartAndFinishPosition = (
@@ -258,7 +233,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		const paginationExtract =
 			servicesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
 
-		return `Showing ${paginationExtract}${servicesCount} user${
+		return `Showing ${paginationExtract}${servicesCount} services${
 			servicesCount === 1 ? "" : "s"
 		}`;
 	};
@@ -273,7 +248,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
 			pageNumber,
-			this.state.services.length,
+			this.state.websites.length,
 		);
 
 		path = appendQueryParameter(path, "amount", itemsPerPage.toString());
@@ -307,7 +282,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 	};
 
 	render(): JSX.Element {
-		const { services: services, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
+		const { websites: services, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
 			this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
@@ -337,8 +312,8 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterServicesBySearch} />
-							<FilterStatus onCheckboxChange={this.filterServicesByEnvironment} />
+							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"}/>
+							<FilterEnvironment onCheckboxChange={this.filterWebsitesByEnvironment} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!services.length}>
 							{isLoading ? (
@@ -346,28 +321,30 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 							) : services.length ? (
 								<>
 									<h2 className={styles.servicesListSummary}>{paginationText}</h2>
-									<ul className="list--unstyled" data-qa-sel="list-of-services">
-										{servicesPaginated.map((service) => {
+									<ul className="list--unstyled" data-qa-sel="list-of-websites">
+										{servicesPaginated.map((website) => {
 											const {
 												id,
-												name,
-												websites
-											} = service;
+												serviceId,
+												host,
+												environment,
+												service
+											} = website;
 											const servicesListHeading = {
-												headingText: `${name}`,
+												headingText: `${service.name}`,
 												link: {
 													elementType: Link,
-													destination: `/services/${id}`,
+													destination: `/websites/${id}`,
 												},
 											};
 
 											const servicesListMetadata: Array<CardMetaData> = [
 												{
-													value: <ServiceEnvironment service={service} />,
+													value: <WebsiteEnvironment website={website} />,
 												},
 												{
 													label: "Website",
-													value: websites,
+													value: host,
 												},
 											];
 
