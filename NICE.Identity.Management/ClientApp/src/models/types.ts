@@ -37,6 +37,7 @@ export type WebsiteType = {
 	serviceId: number;
 	host: string;
 	environment: EnvironmentType;
+	service: ServiceType;
 };
 
 export type EnvironmentType = {
