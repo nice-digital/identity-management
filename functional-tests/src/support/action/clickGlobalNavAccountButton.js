@@ -6,9 +6,9 @@ import checkEqualsText from "@nice-digital/wdio-cucumber-steps/lib/support/check
 import selectors from "../selectors";
 
 export const clickGlobalNavAccountButton = () => {
-  click('click', 'element', selectors.adminHomepage.globalNavMyAccount);
+  click('click', 'element', selectors.userListPage.globalNavMyAccount);
   browser.pause(1000);
-  click('click', 'element', selectors.adminHomepage.globalNavSignOut);
+  click('click', 'element', selectors.userListPage.globalNavSignOut);
 }
 
 export default clickGlobalNavAccountButton; 
