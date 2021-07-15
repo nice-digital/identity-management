@@ -17,7 +17,7 @@ import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { HistoryType, WebsiteType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterEnvironment } from "../../components/FilterEnvironment/FilterEnvironment";
+import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
 import { WebsiteEnvironment } from "../../components/WebsiteEnvironment/WebsiteEnvironment";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
@@ -313,7 +313,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 					<Grid>
 						<GridItem cols={12} md={3}>
 							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"}/>
-							<FilterEnvironment onCheckboxChange={this.filterWebsitesByEnvironment} />
+							<FilterStatus onCheckboxChange={this.filterWebsitesByEnvironment} />
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!services.length}>
 							{isLoading ? (

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsersList should match the snapshot after data has been loaded 1`] = `
+exports[`ServicesList should match the snapshot after data has been loaded 1`] = `
 Array [
   Array [
     <nav
@@ -14,7 +14,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <span>
-            Users
+            Services
           </span>
         </li>
       </ol>
@@ -29,7 +29,7 @@ Array [
     \\"@type\\": \\"ListItem\\",
     \\"position\\": 1,
     \\"item\\": {
-      \\"name\\": \\"Users\\"
+      \\"name\\": \\"Services\\"
     }
   }
 }",
@@ -44,7 +44,7 @@ Array [
     <h1
       className="page-header__heading"
     >
-      Users
+      Services
     </h1>
   </div>,
   <div
@@ -63,7 +63,7 @@ Array [
             className="input__label"
             htmlFor="user-search"
           >
-            Filter by name or email address
+            Filter by service name or URL
           </label>
           <input
             autoComplete="off"
@@ -178,13 +178,13 @@ Array [
       data-g="12 md:9"
     >
       <h2
-        className="usersListSummary"
+        className="servicesListSummary"
       >
-        Showing 4 users
+        Showing 5 servicess
       </h2>
       <ul
         className="list--unstyled"
-        data-qa-sel="list-of-users"
+        data-qa-sel="list-of-websites"
       >
         <li>
           <article
@@ -198,10 +198,10 @@ Array [
                   className="card__heading"
                 >
                   <a
-                    href="/users/1"
+                    href="/websites/1"
                     onClick={[Function]}
                   >
-                    Kristin Patrick
+                    EPPI Reviewer
                   </a>
                 </p>
               </header>,
@@ -213,10 +213,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
+                      className="tag tag--updated"
+                      data-qa-sel="environment-dev"
                     >
-                      Active
+                      Dev
                     </span>
                   </dd>
                 </div>
@@ -226,10 +226,10 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    kristin.patrick@example.com
+                    dev-eppi.nice.org.uk
                   </dd>
                 </div>
               </dl>,
@@ -248,10 +248,10 @@ Array [
                   className="card__heading"
                 >
                   <a
-                    href="/users/2"
+                    href="/websites/2"
                     onClick={[Function]}
                   >
-                    Thomas Holding
+                    EPPI Reviewer
                   </a>
                 </p>
               </header>,
@@ -263,10 +263,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
+                      className="tag tag--new"
+                      data-qa-sel="environment-test"
                     >
-                      Active
+                      Test
                     </span>
                   </dd>
                 </div>
@@ -276,10 +276,10 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    thomas.holding@example.com
+                    test-eppi.nice.org.uk
                   </dd>
                 </div>
               </dl>,
@@ -298,10 +298,10 @@ Array [
                   className="card__heading"
                 >
                   <a
-                    href="/users/3"
+                    href="/websites/3"
                     onClick={[Function]}
                   >
-                    Aisha Bartlett
+                    Comment Collection
                   </a>
                 </p>
               </header>,
@@ -313,10 +313,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
+                      className="tag tag--updated"
+                      data-qa-sel="environment-dev"
                     >
-                      Active
+                      Dev
                     </span>
                   </dd>
                 </div>
@@ -326,10 +326,10 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    aisha.bartlett@example.com
+                    dev-comments.nice.org.uk
                   </dd>
                 </div>
               </dl>,
@@ -348,10 +348,10 @@ Array [
                   className="card__heading"
                 >
                   <a
-                    href="/users/4"
+                    href="/websites/4"
                     onClick={[Function]}
                   >
-                    Theo Bradford
+                    Comment Collection
                   </a>
                 </p>
               </header>,
@@ -363,10 +363,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag"
-                      data-qa-sel="user-status"
+                      className="tag tag--alpha"
+                      data-qa-sel="environment-alpha"
                     >
-                      Locked
+                      Alpha
                     </span>
                   </dd>
                 </div>
@@ -376,10 +376,60 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    theo.bradford@example.com
+                    alpha-comments.nice.org.uk
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  <a
+                    href="/websites/5"
+                    onClick={[Function]}
+                  >
+                    Idam Docker
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--new"
+                      data-qa-sel="environment-test"
+                    >
+                      Test
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    idam
                   </dd>
                 </div>
               </dl>,
@@ -430,7 +480,7 @@ Array [
 ]
 `;
 
-exports[`UsersList should show error message when fetch returns 401 error 1`] = `
+exports[`ServicesList should show error message when fetch returns 401 error 1`] = `
 Array [
   Array [
     <nav
@@ -444,7 +494,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <span>
-            Users
+            Services
           </span>
         </li>
       </ol>
@@ -459,7 +509,7 @@ Array [
     \\"@type\\": \\"ListItem\\",
     \\"position\\": 1,
     \\"item\\": {
-      \\"name\\": \\"Users\\"
+      \\"name\\": \\"Services\\"
     }
   }
 }",
@@ -474,7 +524,7 @@ Array [
     <h1
       className="page-header__heading"
     >
-      Users
+      Services
     </h1>
   </div>,
   <div
@@ -490,7 +540,7 @@ Array [
 ]
 `;
 
-exports[`UsersList should show error message when fetch returns 500 error 1`] = `
+exports[`ServicesList should show error message when fetch returns 500 error 1`] = `
 Array [
   Array [
     <nav
@@ -504,7 +554,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <span>
-            Users
+            Services
           </span>
         </li>
       </ol>
@@ -519,7 +569,7 @@ Array [
     \\"@type\\": \\"ListItem\\",
     \\"position\\": 1,
     \\"item\\": {
-      \\"name\\": \\"Users\\"
+      \\"name\\": \\"Services\\"
     }
   }
 }",
@@ -534,7 +584,7 @@ Array [
     <h1
       className="page-header__heading"
     >
-      Users
+      Services
     </h1>
   </div>,
   <div
