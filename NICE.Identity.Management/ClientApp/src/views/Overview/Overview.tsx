@@ -28,16 +28,15 @@ export const Overview = (): React.ReactElement => {
 						</Panel>
 					</GridItem>
 
-					{/* To be added once the services page is added in IDAM-141 */}
-					{/* <GridItem cols={12} md={4} className="mb--d">
+					<GridItem cols={12} md={4} className="mb--d">
 						<Panel>
 							<h2>Services admin</h2>
 							<p>Find and manage services and their roles; includes searches for users assigned to roles.</p>
-							<Button variant="inverse" to="/">
+							<Button variant="inverse" to="/services">
 								Manage services
 							</Button>
 						</Panel>
-					</GridItem> */}
+					</GridItem>
 
 					{/* To be added once the organisation page is added in IDAM-433 */}
 					{/* <GridItem cols={12} md={4} className="mb--d">

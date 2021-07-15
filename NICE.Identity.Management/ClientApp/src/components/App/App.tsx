@@ -35,7 +35,7 @@ export class App extends React.Component {
 					aria-label="Start of content"
 					aria-live="polite"
 				>
-					<Route path="/" exact render={() => <Redirect to="/users" />} />
+					<Route path="/" exact render={() => <Redirect to="/overview" />} />
 					<Route path="/overview" exact component={Overview} />
 					<Route path="/users" exact component={UsersList} />
 					<Route path="/users/:id" exact component={User} />

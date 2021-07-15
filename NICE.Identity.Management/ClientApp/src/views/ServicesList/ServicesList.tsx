@@ -304,6 +304,9 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		return (
 			<>
 				<Breadcrumbs>
+					<Breadcrumb to="/overview" elementType={Link}>
+						Administration
+					</Breadcrumb>
 					<Breadcrumb>Services</Breadcrumb>
 				</Breadcrumbs>
 
