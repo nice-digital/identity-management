@@ -233,7 +233,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		const paginationExtract =
 			servicesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
 
-		return `Showing ${paginationExtract}${servicesCount} services${
+		return `Showing ${paginationExtract}${servicesCount} service${
 			servicesCount === 1 ? "" : "s"
 		}`;
 	};
