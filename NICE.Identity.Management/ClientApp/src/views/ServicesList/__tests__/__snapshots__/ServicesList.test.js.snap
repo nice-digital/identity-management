@@ -217,12 +217,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/websites/4"
-                    onClick={[Function]}
-                  >
-                    Comment Collection
-                  </a>
+                  Comment Collection
                 </p>
               </header>,
               <dl
@@ -267,12 +262,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/websites/2"
-                    onClick={[Function]}
-                  >
-                    EPPI Reviewer
-                  </a>
+                  EPPI Reviewer
                 </p>
               </header>,
               <dl
@@ -317,12 +307,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/websites/5"
-                    onClick={[Function]}
-                  >
-                    Idam Docker
-                  </a>
+                  Idam Docker
                 </p>
               </header>,
               <dl
@@ -367,12 +352,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/websites/3"
-                    onClick={[Function]}
-                  >
-                    Comment Collection
-                  </a>
+                  Comment Collection
                 </p>
               </header>,
               <dl
@@ -417,12 +397,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/websites/1"
-                    onClick={[Function]}
-                  >
-                    EPPI Reviewer
-                  </a>
+                  EPPI Reviewer
                 </p>
               </header>,
               <dl
