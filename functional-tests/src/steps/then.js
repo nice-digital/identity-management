@@ -8,7 +8,8 @@ import confirmPasswordInput from "../support/check/confirmPasswordInput";
 import signUpUserNameInput from "../support/check/signUpUserNameInput";
 import signUpSurnameInput from "../support/check/signUpSurnameInput";
 import emailInput from "../support/check/emailInput";
-import identityAdminHomepage from "../support/check/identityAdminHomepage";
+import manageUsersPage from "../support/check/manageUsersPage";
+import adminHomepage from "../support/check/adminHomepage";
 import createaccount from "../support/action/createaccount";
 import finduser from "../support/action/finduser";
 import deleteUser from "../support/action/deleteUser";
@@ -59,8 +60,13 @@ Then(
 );
 
 Then(
-  /^I expect I appear on the Identity Admin homepage$/,
-  identityAdminHomepage
+  /^I expect I appear on the Manage Users page$/,
+  manageUsersPage
+);
+
+Then(
+  /^Then I expect I appear on the Identity Admin homepage$/,
+  adminHomepage
 );
 
 Then(
