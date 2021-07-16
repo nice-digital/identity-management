@@ -32,7 +32,7 @@ export const Overview = (): React.ReactElement => {
 						<Panel>
 							<h2>Services admin</h2>
 							<p>Find and manage services and their roles; includes searches for users assigned to roles.</p>
-							<Button variant="inverse" to="/services">
+							<Button variant="inverse" to="/services" elementType={Link} data-qa-sel="manage-services">
 								Manage services
 							</Button>
 						</Panel>

@@ -17,3 +17,8 @@ Given(
     /^I click on the manage user button$/,
     navigateToUserListPageFromAdminPage
 );
+
+Given(
+    /^I click on the manage services button$/,
+    navigateToServiceListPageFromAdminPage
+);

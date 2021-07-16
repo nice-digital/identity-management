@@ -122,3 +122,8 @@ Then(
   /^I expect the user roles to be successfully changed$/,
   validateRoleChange
 );
+
+Then(
+  /^I expect website "([^"]*)" to exist in the list$/,
+  findWebsiteList
+);

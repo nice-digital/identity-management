@@ -30,6 +30,7 @@ export default {
   },
   adminHomePage:{
     manageUsersButton: toDataQASelAttr('manage-users'),
+    manageServicesButton: toDataQASelAttr('manage-services'),
   },
   userListPage: {
     userlist: toDataQASelAttr('list-of-users'),
@@ -46,6 +47,10 @@ export default {
     globalNavSignOut: "[id$='my-account']",
     userStatusListPage:
       "[data-qa-sel='list-of-users'] [data-qa-sel='user-status']",
+  },
+  serviceListPage: {
+    servicelist: toDataQASelAttr('list-of-websites'),
+    firstWebsiteCard: toChildAndQASel(1, 'list-of-websites'),
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr('delete-user-link'),
