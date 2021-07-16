@@ -36,4 +36,4 @@ export const findWebsiteList = (website) => {
 //   clickElement("click", "selector", selectors.userListPage.lastUserCard);
 // };
 
-export default findUserList;
+export default findWebsiteList;
