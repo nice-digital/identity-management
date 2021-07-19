@@ -10,18 +10,19 @@ import "@nice-digital/nds-filters/scss/filters.scss";
 
 type FiltersType = {
 	name: string;
-	id?: number;
-	value?: string;
+	value: string;
 };
 
 type FilterBoxProps = {
-	onCheckboxChange: (e: string) => void;
-	filters: Array<FiltersType> | Array<string>;
 	name: string;
+	filters: Array<FiltersType> | Array<string>;
+	selected: Array<string>;
+	onCheckboxChange: (e: string) => void;
 };
 
 export const FilterBox = (props: FilterBoxProps): React.ReactElement => {
 	let filters: any = [];
+	let selectedCount = 0;
 
 	if (typeof props.filters[0] === "string") {
 		props.filters.map((filter) => {
@@ -31,62 +32,32 @@ export const FilterBox = (props: FilterBoxProps): React.ReactElement => {
 		filters = [...props.filters];
 	}
 
-	const someFunction = () => {
-		console.log("fired");
-		//props.onCheckboxChange(this.value);
-	};
+	const FilterOptions = filters.map((filter: FiltersType, index: number) => {
+		const checkboxValue = `${filter.value}`;
+		const checkboxName = filter.name;
+		const isSelected = props.selected.includes(checkboxValue) ? true : false;
+
+		if (isSelected) selectedCount += 1;
+
+		return (
+			<FilterOption
+				isSelected={isSelected}
+				onChanged={() => {
+					props.onCheckboxChange(checkboxValue);
+				}}
+				value={checkboxValue}
+				key={index}
+			>
+				{checkboxName}
+			</FilterOption>
+		);
+	});
 
 	return (
-		<>
-			{/* <div className="filter-panel">
-				<div className="filter-panel__body">
-					<div className="filter-group">
-						<button type="button" className="filter-group__heading">
-							<div>
-								<span className="visually-hidden">Filter by </span>
-								{props.name}
-							</div>
-						</button>
-						<div className="filter-group__options" role="group">
-							{filters.map((filter: FiltersType, index: number) => {
-								return (
-									<label
-										className="filter-group__option break-word"
-										key={index}
-									>
-										<input
-											type="checkbox"
-											value={`${filter.id || filter.value}`}
-											name={`filter-${props.name}`}
-											title="Something"
-											onChange={props.onCheckboxChange}
-										/>
-										{filter.name}
-									</label>
-								);
-							})}
-						</div>
-					</div>
-				</div>
-			</div> */}
-			<FilterPanel heading="">
-				<FilterGroup heading={props.name} selectedCount={2}>
-					{filters.map((filter: FiltersType, index: number) => {
-						const value = `${filters.id | filters.value}`;
-
-						return (
-							<FilterOption
-								isSelected={false}
-								onChanged={someFunction}
-								value={value}
-								key={index}
-							>
-								{filter.name}
-							</FilterOption>
-						);
-					})}
-				</FilterGroup>
-			</FilterPanel>
-		</>
+		<FilterPanel heading="">
+			<FilterGroup heading={props.name} selectedCount={selectedCount}>
+				{FilterOptions}
+			</FilterGroup>
+		</FilterPanel>
 	);
 };
