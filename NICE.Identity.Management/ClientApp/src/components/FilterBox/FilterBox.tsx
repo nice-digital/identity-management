@@ -7,6 +7,7 @@ import {
 } from "@nice-digital/nds-filters";
 
 import "@nice-digital/nds-filters/scss/filters.scss";
+import { capitaliseWord } from "../../helpers/capitaliseWord";
 
 type FiltersType = {
 	name: string;
@@ -26,7 +27,10 @@ export const FilterBox = (props: FilterBoxProps): React.ReactElement => {
 
 	if (typeof props.filters[0] === "string") {
 		props.filters.map((filter) => {
-			filters.push({ value: filter, name: filter });
+			filters.push({
+				value: filter,
+				name: capitaliseWord(filter as string),
+			});
 		});
 	} else {
 		filters = [...props.filters];

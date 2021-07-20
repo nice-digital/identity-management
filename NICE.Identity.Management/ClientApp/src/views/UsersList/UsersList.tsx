@@ -15,22 +15,22 @@ import {
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
-import { UserType, HistoryType } from "../../models/types";
+import { UserType, HistoryType, ServiceType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
-import { FilterService } from "../../components/FilterService/FilterService";
+import { FilterBox } from "../../components/FilterBox/FilterBox";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
 
 import styles from "./UsersList.module.scss";
+import { capitaliseWord } from "../../helpers/capitaliseWord";
 
 type CardMetaData = {
 	label?: string;
 	value: React.ReactNode;
 };
 
-type statusFilterOptions = {
+type statusFilters = {
 	[key: string]: (user: UserType) => boolean;
 };
 
@@ -47,11 +47,12 @@ type UsersListState = {
 	path: string;
 	originalUsers: Array<UserType>;
 	users: Array<UserType>;
+	services: Array<ServiceType>;
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
-	statusFilter?: string;
-	serviceFilter: Array<number>;
+	statusFiltersChecked: Array<string>;
+	serviceFiltersChecked: Array<string>;
 	pageNumber: number;
 	itemsPerPage: number | string;
 };
@@ -84,8 +85,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			path: "",
 			originalUsers: [],
 			users: [],
+			services: [],
 			isLoading: true,
-			serviceFilter: [],
+			statusFiltersChecked: [],
+			serviceFiltersChecked: [],
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
 		};
@@ -97,12 +100,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ isLoading: true });
 
 		const users = await fetchData(Endpoints.usersList);
+		const services = await fetchData(Endpoints.servicesList);
 
 		if (isDataError(users)) {
 			this.setState({ error: users });
 		}
 
-		this.setState({ originalUsers: users, users, isLoading: false });
+		if (isDataError(services)) {
+			this.setState({ error: services });
+		}
+
+		this.setState({ originalUsers: users, users, services, isLoading: false });
 	}
 
 	pastPageRange = (
@@ -124,21 +132,29 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return pageNumber;
 	};
 
-	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	filterUsersByStatus = (status: string): void => {
 		this.setState({ isLoading: true });
 
-		const statusFilter = e.target.value;
+		let statusFiltersChecked = this.state.statusFiltersChecked;
 
-		let users = this.state.originalUsers,
+		statusFiltersChecked = statusFiltersChecked.includes(status)
+			? statusFiltersChecked.filter((statusFilter) => statusFilter !== status)
+			: statusFiltersChecked.concat(status);
+
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
+
+		let users = this.state.searchQuery
+				? this.state.users
+				: this.state.originalUsers,
 			pageNumber = this.state.pageNumber;
 
-		const itemsPerPage = Number(this.state.itemsPerPage)
-			? Number(this.state.itemsPerPage)
-			: this.state.itemsPerPage;
+		if (statusFiltersChecked.length)
+			users = this.usersByStatus(statusFiltersChecked, users);
 
-		if (statusFilter) {
-			users = this.usersByStatus(statusFilter, users);
-		}
+		if (this.state.serviceFiltersChecked.length)
+			users = this.usersByService(this.state.serviceFiltersChecked, users);
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
@@ -146,30 +162,37 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.state.users.length,
 		);
 
-		this.setState({ users, statusFilter, pageNumber, isLoading: false });
+		this.setState({
+			users,
+			statusFiltersChecked,
+			pageNumber,
+			isLoading: false,
+		});
 	};
 
-	filterUsersByService = (e: React.ChangeEvent<HTMLInputElement>) => {
+	filterUsersByService = (serviceId: string): void => {
 		this.setState({ isLoading: true });
 
-		const serviceId = parseInt(e.target.value);
+		let serviceFiltersChecked = this.state.serviceFiltersChecked;
 
-		let serviceFilter = this.state.serviceFilter;
-
-		serviceFilter = serviceFilter.includes(serviceId)
-			? serviceFilter.filter((value) => value !== serviceId)
-			: serviceFilter.concat(serviceId);
+		serviceFiltersChecked = serviceFiltersChecked.includes(serviceId)
+			? serviceFiltersChecked.filter((filter) => filter !== serviceId)
+			: serviceFiltersChecked.concat(serviceId);
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
 
-		let users = this.state.originalUsers;
-		let pageNumber = this.state.pageNumber;
+		let users = this.state.searchQuery
+				? this.state.users
+				: this.state.originalUsers,
+			pageNumber = this.state.pageNumber;
 
-		if (serviceFilter.length) {
-			users = this.usersByService(serviceFilter, users);
-		}
+		if (serviceFiltersChecked.length)
+			users = this.usersByService(serviceFiltersChecked, users);
+
+		if (this.state.statusFiltersChecked.length)
+			users = this.usersByStatus(this.state.statusFiltersChecked, users);
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
@@ -177,7 +200,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.state.users.length,
 		);
 
-		this.setState({ users, serviceFilter, pageNumber, isLoading: false });
+		this.setState({
+			users,
+			serviceFiltersChecked,
+			pageNumber,
+			isLoading: false,
+		});
 	};
 
 	filterUsersBySearch = async (searchQuery: string): Promise<void> => {
@@ -198,12 +226,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.setState({ error: originalUsers });
 		}
 
-		if (this.state.statusFilter) {
-			users = this.usersByStatus(this.state.statusFilter, users);
+		if (this.state.statusFiltersChecked.length) {
+			users = this.usersByStatus(this.state.statusFiltersChecked, users);
 		}
 
-		if (this.state.serviceFilter) {
-			users = this.usersByService(this.state.serviceFilter, users);
+		if (this.state.serviceFiltersChecked.length) {
+			users = this.usersByService(this.state.serviceFiltersChecked, users);
 		}
 
 		pageNumber = this.pastPageRange(
@@ -222,29 +250,42 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	};
 
 	usersByService = (
-		serviceFilter: Array<number>,
+		serviceFiltersChecked: Array<string>,
 		users: Array<UserType>,
 	): Array<UserType> => {
 		return (users = users.filter((user) => {
-			let userServices = user.hasAccessToServiceIds;
+			const userServices = user.hasAccessToServiceIds;
 
-			if (userServices.some((r) => serviceFilter.indexOf(r) >= 0)) {
+			if (
+				userServices.some((id) => serviceFiltersChecked.indexOf(`${id}`) >= 0)
+			) {
 				return user;
 			}
 		}));
 	};
 
 	usersByStatus = (
-		statusFilter: string,
+		statusFiltersChecked: Array<string>,
 		users: Array<UserType>,
 	): Array<UserType> => {
-		const statusFilterOptions: statusFilterOptions = {
+		const statusFilters: statusFilters = {
 			active: (user) => !user.isLockedOut && user.hasVerifiedEmailAddress,
 			pending: (user) => !user.hasVerifiedEmailAddress,
 			locked: (user) => user.isLockedOut,
 		};
 
-		const filteredUsers = users.filter(statusFilterOptions[statusFilter]);
+		let filteredUsers: Array<UserType> = [];
+
+		statusFiltersChecked.map((statusFilter) => {
+			const filteredUsersIds = filteredUsers.map((user) => user.userId);
+			let filteredByStatus = users.filter(statusFilters[statusFilter]);
+
+			filteredByStatus = filteredByStatus.filter(
+				(user) => filteredUsersIds.indexOf(user.userId) < 0,
+			);
+
+			filteredUsers = filteredUsers.concat(filteredByStatus);
+		});
 
 		return filteredUsers;
 	};
@@ -330,8 +371,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	};
 
 	render(): JSX.Element {
-		const { users, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
-			this.state;
+		const {
+			users,
+			services,
+			searchQuery,
+			error,
+			isLoading,
+			pageNumber,
+			itemsPerPage,
+			serviceFiltersChecked,
+			statusFiltersChecked,
+		} = this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
 			users.length,
@@ -349,28 +399,16 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			? users.slice(paginationPositions.start, paginationPositions.finish)
 			: users;
 
-		const dummyServices = [
-			{
-				name: "dev-eppi.nice.org.uk",
-				id: 1,
-			},
-			{
-				name: "test-eppi.nice.org.uk",
-				id: 2,
-			},
-			{
-				name: "dev-comments.nice.org.uk",
-				id: 3,
-			},
-			{
-				name: "alpha-comments.nice.org.uk",
-				id: 4,
-			},
-			{
-				name: "idam",
-				id: 5,
-			},
-		];
+		const servicesByEnvironment = services.reduce((result, service) => {
+			service.websites.map((website) => {
+				const environmentName = capitaliseWord(website.environment.name);
+				const updatedService = { ...service, value: website.id };
+				updatedService.websites = [{ ...website }];
+				result[environmentName] = result[environmentName] || [];
+				result[environmentName].push(updatedService);
+			});
+			return result;
+		}, Object.create(null));
 
 		return (
 			<>
@@ -383,12 +421,28 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterUsersBySearch} />
-							<FilterStatus onCheckboxChange={this.filterUsersByStatus} />
-							<FilterService
-								onCheckboxChange={this.filterUsersByService}
-								services={dummyServices}
-							/>
+							{isLoading ? (
+								<p>Loading...</p>
+							) : (
+								<>
+									<FilterSearch onInputChange={this.filterUsersBySearch} />
+									<FilterBox
+										name="Status"
+										filters={["active", "pending", "locked"]}
+										selected={statusFiltersChecked}
+										onCheckboxChange={this.filterUsersByStatus}
+									/>
+									{Object.keys(servicesByEnvironment).map((key, index) => (
+										<FilterBox
+											name={key}
+											filters={servicesByEnvironment[key]}
+											selected={serviceFiltersChecked}
+											onCheckboxChange={this.filterUsersByService}
+											key={index}
+										/>
+									))}
+								</>
+							)}
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
 							{isLoading ? (
