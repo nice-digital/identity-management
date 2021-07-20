@@ -148,6 +148,25 @@ describe("UsersList", () => {
 		});
 	});
 
+	it("should filter users to those who have access to a specific service when radio button is clicked", async () => {
+		fetch.mockResponseOnce(JSON.stringify(users));
+		fetch.mockResponseOnce(JSON.stringify(services));
+		const wrapper = mount(
+			<MemoryRouter>
+				<UsersList {...usersListProps} />
+			</MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		wrapper.find("#filter_dev_3").simulate("change", {
+			target: { value: "3" },
+		});
+		await nextTick();
+		wrapper.update();
+		const usersListSummary = wrapper.find(".usersListSummary");
+		expect(usersListSummary.text()).toEqual("Showing 2 users");
+	});
+
 	it("should show 25 (default page amount) or less results by default when paginated", async () => {
 		fetch.mockResponseOnce(JSON.stringify(users));
 		fetch.mockResponseOnce(JSON.stringify(services));

@@ -12,7 +12,8 @@
 		"lastLoggedInDate": "2019-10-23T12:29:54.911Z",
 		"isStaffMember": false,
 		"acceptedTerms": true,
-		"isMigrated": false
+		"isMigrated": false,
+		"hasAccessToServiceIds": [1]
 	},
 	{
 		"userId": 2,
@@ -27,7 +28,8 @@
 		"lastLoggedInDate": "2019-10-24T12:29:54.911Z",
 		"isStaffMember": false,
 		"acceptedTerms": true,
-		"isMigrated": false
+		"isMigrated": false,
+		"hasAccessToServiceIds": [2, 3]
 	},
 	{
 		"userId": 3,
@@ -42,7 +44,8 @@
 		"lastLoggedInDate": "2019-10-25T12:29:54.911Z",
 		"isStaffMember": false,
 		"acceptedTerms": true,
-		"isMigrated": false
+		"isMigrated": false,
+		"hasAccessToServiceIds": [3]
 	},
 	{
 		"userId": 4,
@@ -57,6 +60,7 @@
 		"lastLoggedInDate": "2019-10-26T12:29:54.911Z",
 		"isStaffMember": false,
 		"acceptedTerms": true,
-		"isMigrated": false
+		"isMigrated": false,
+		"hasAccessToServiceIds": [1, 4]
 	}
 ]
