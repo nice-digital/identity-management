@@ -30,6 +30,15 @@ type CardMetaData = {
 	value: React.ReactNode;
 };
 
+type FiltersType = {
+	name: string;
+	value: string;
+};
+
+type ServicesByEnvironmentType = {
+	[key: string]: Array<FiltersType>;
+};
+
 type statusFilters = {
 	[key: string]: (user: UserType) => boolean;
 };
@@ -47,7 +56,7 @@ type UsersListState = {
 	path: string;
 	originalUsers: Array<UserType>;
 	users: Array<UserType>;
-	services: Array<ServiceType>;
+	services: ServicesByEnvironmentType;
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
@@ -85,7 +94,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			path: "",
 			originalUsers: [],
 			users: [],
-			services: [],
+			services: {} as ServicesByEnvironmentType,
 			isLoading: true,
 			statusFiltersChecked: [],
 			serviceFiltersChecked: [],
@@ -110,7 +119,26 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.setState({ error: services });
 		}
 
-		this.setState({ originalUsers: users, users, services, isLoading: false });
+		const servicesByEnvironment = services.reduce(
+			(result: ServicesByEnvironmentType, service: ServiceType) => {
+				service.websites.map((website) => {
+					const environmentName = capitaliseWord(website.environment.name);
+					const updatedService = { ...service, value: `${website.id}` };
+					updatedService.websites = [{ ...website }];
+					result[environmentName] = result[environmentName] || [];
+					result[environmentName].push(updatedService);
+				});
+				return result;
+			},
+			Object.create(null),
+		);
+
+		this.setState({
+			originalUsers: users,
+			users,
+			services: servicesByEnvironment,
+			isLoading: false,
+		});
 	}
 
 	pastPageRange = (
@@ -186,13 +214,22 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		let users = this.state.searchQuery
 				? this.state.users
 				: this.state.originalUsers,
-			pageNumber = this.state.pageNumber;
+			pageNumber = this.state.pageNumber,
+			filtersActive = false;
 
-		if (serviceFiltersChecked.length)
+		if (serviceFiltersChecked.length) {
 			users = this.usersByService(serviceFiltersChecked, users);
+			filtersActive = true;
+		}
 
-		if (this.state.statusFiltersChecked.length)
+		if (this.state.statusFiltersChecked.length) {
 			users = this.usersByStatus(this.state.statusFiltersChecked, users);
+			filtersActive = true;
+		}
+
+		if (!filtersActive) {
+			users = this.state.originalUsers;
+		}
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
@@ -399,17 +436,6 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			? users.slice(paginationPositions.start, paginationPositions.finish)
 			: users;
 
-		const servicesByEnvironment = services.reduce((result, service) => {
-			service.websites.map((website) => {
-				const environmentName = capitaliseWord(website.environment.name);
-				const updatedService = { ...service, value: website.id };
-				updatedService.websites = [{ ...website }];
-				result[environmentName] = result[environmentName] || [];
-				result[environmentName].push(updatedService);
-			});
-			return result;
-		}, Object.create(null));
-
 		return (
 			<>
 				<Breadcrumbs>
@@ -421,28 +447,22 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							{isLoading ? (
-								<p>Loading...</p>
-							) : (
-								<>
-									<FilterSearch onInputChange={this.filterUsersBySearch} />
-									<FilterBox
-										name="Status"
-										filters={["active", "pending", "locked"]}
-										selected={statusFiltersChecked}
-										onCheckboxChange={this.filterUsersByStatus}
-									/>
-									{Object.keys(servicesByEnvironment).map((key, index) => (
-										<FilterBox
-											name={key}
-											filters={servicesByEnvironment[key]}
-											selected={serviceFiltersChecked}
-											onCheckboxChange={this.filterUsersByService}
-											key={index}
-										/>
-									))}
-								</>
-							)}
+							<FilterSearch onInputChange={this.filterUsersBySearch} />
+							<FilterBox
+								name="Status"
+								filters={["active", "pending", "locked"]}
+								selected={statusFiltersChecked}
+								onCheckboxChange={this.filterUsersByStatus}
+							/>
+							{Object.keys(services).map((key, index) => (
+								<FilterBox
+									name={key}
+									filters={services[key]}
+									selected={serviceFiltersChecked}
+									onCheckboxChange={this.filterUsersByService}
+									key={index}
+								/>
+							))}
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
 							{isLoading ? (
