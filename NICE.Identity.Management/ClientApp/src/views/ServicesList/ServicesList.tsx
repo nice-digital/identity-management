@@ -48,6 +48,7 @@ type ServicesListState = {
 	environmentFiltersChecked: Array<string>;
 	pageNumber: number;
 	itemsPerPage: number | string;
+	environmentsForFilter: Array<string>;
 };
 
 export class ServicesList extends Component<ServicesListProps, ServicesListState> {
@@ -82,6 +83,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
 			environmentFiltersChecked: [],
+			environmentsForFilter: [],
 		};
 
 		document.title = "NICE Accounts - Services list";
@@ -94,6 +96,17 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 
 		if (isDataError(websites)) {
 			this.setState({ error: websites });
+		}else{
+		const allEnvironments = websites.map((website: { environment: { name: string; }; }) => website.environment.name);
+
+		const environmentsForFilter = allEnvironments.reduce(function (accumulatedEnvironments: string[], currentEnvironment: string) {
+			if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
+				accumulatedEnvironments.push(currentEnvironment)
+			}
+			return accumulatedEnvironments
+		}, []);
+
+		this.setState({environmentsForFilter})
 		}
 
 		this.setState({ originalWebsites: websites, websites: websites, isLoading: false });
@@ -305,16 +318,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			? websites.slice(paginationPositions.start, paginationPositions.finish)
 			: websites;
 
-		// const environmentsForFilter = Array.from(new Set(websites.map(website => website.environment.name)));
 
-		const allEnvironments = websites.map(website => website.environment.name);
-
-		const environmentsForFilter = allEnvironments.reduce<string[]>(function (accumulatedEnvironments, currentEnvironment) {
-			if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
-				accumulatedEnvironments.push(currentEnvironment)
-			}
-			return accumulatedEnvironments
-		}, [])
 
 		return (
 			<>
@@ -334,7 +338,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 
 							<FilterBox
 								name="Environment"
-								filters={environmentsForFilter}
+								filters={this.state.environmentsForFilter}
 								selected={environmentFiltersChecked}
 								onCheckboxChange={this.filterWebsitesByEnvironment}
 							/>

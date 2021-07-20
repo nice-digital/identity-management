@@ -97,100 +97,109 @@ Array [
         </div>
       </div>
       <div
-        className="panel"
+        className="filter-panel undefined"
       >
-        <form>
+        <h2
+          className="filter-panel__heading"
+        >
+          <a
+            aria-controls="filter-panel-body"
+            aria-expanded="true"
+            href="#filter-panel-body"
+          />
+        </h2>
+        <div
+          aria-hidden={false}
+          className="filter-panel__body"
+          id="filter-panel-body"
+        >
           <div
-            aria-labelledby="filter-header"
-            role="group"
+            className="filter-group"
           >
-            <div
-              id="filter-header"
+            <h3
+              className="filter-group__heading"
             >
-              <strong>
-                Show:
-              </strong>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                defaultChecked={true}
-                id="filter-status-all"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value=""
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-all"
+              <button
+                aria-controls="group-environment"
+                aria-expanded={true}
+                onClick={[Function]}
+                type="button"
               >
                 <span
-                  className="visually-hidden"
+                  id="group-heading-environment"
                 >
-                  Show: 
+                  Environment
                 </span>
-                All
-              </label>
-            </div>
-            <div
-              className="radio"
+              </button>
+            </h3>
+            <fieldset
+              aria-hidden={false}
+              className="filter-group__options"
+              id="group-environment"
             >
-              <input
-                className="radio__input"
-                id="filter-status-active"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="active"
-              />
+              <legend>
+                Environment
+              </legend>
               <label
-                className="radio__label"
-                htmlFor="filter-status-active"
+                className="filter-option"
+                htmlFor="filter_environment_alpha"
               >
-                Active
+                <input
+                  checked={false}
+                  id="filter_environment_alpha"
+                  name="environment"
+                  onChange={[Function]}
+                  title="Environment - Alpha"
+                  type="checkbox"
+                  value="alpha"
+                />
+                <span
+                  className="filter-option__text"
+                >
+                  Alpha
+                </span>
               </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-pending"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="pending"
-              />
               <label
-                className="radio__label"
-                htmlFor="filter-status-pending"
+                className="filter-option"
+                htmlFor="filter_environment_test"
               >
-                Pending
+                <input
+                  checked={false}
+                  id="filter_environment_test"
+                  name="environment"
+                  onChange={[Function]}
+                  title="Environment - Test"
+                  type="checkbox"
+                  value="test"
+                />
+                <span
+                  className="filter-option__text"
+                >
+                  Test
+                </span>
               </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-locked"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="locked"
-              />
               <label
-                className="radio__label"
-                htmlFor="filter-status-locked"
+                className="filter-option"
+                htmlFor="filter_environment_dev"
               >
-                Locked
+                <input
+                  checked={false}
+                  id="filter_environment_dev"
+                  name="environment"
+                  onChange={[Function]}
+                  title="Environment - Dev"
+                  type="checkbox"
+                  value="dev"
+                />
+                <span
+                  className="filter-option__text"
+                >
+                  Dev
+                </span>
               </label>
-            </div>
+            </fieldset>
           </div>
-        </form>
+        </div>
       </div>
     </div>
     <div

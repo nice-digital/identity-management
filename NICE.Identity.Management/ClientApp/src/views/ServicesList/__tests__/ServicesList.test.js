@@ -111,32 +111,24 @@ describe("ServicesList", () => {
 		);
 	});
 
-	it("should show all filter by default", () => {
+	it("should filter websites to all in dev environment when checkbox is clicked", async () => {
 		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(<MemoryRouter><ServicesList {...servicesListProps} /></MemoryRouter>);
-		expect(wrapper.find("#filter-status-all").props().defaultChecked).toEqual(
-			true,
+		const wrapper = mount(
+			<MemoryRouter>
+				<ServicesList {...servicesListProps} />
+			</MemoryRouter>,
 		);
+		await nextTick();
+		wrapper.update();
+		wrapper.find("#filter_environment_dev").simulate("change", {
+			target: { value: "dev" },
+		});
+		await nextTick();
+		wrapper.update();
+		wrapper.find(".tag").forEach((tag) => {
+			expect(tag.text()).toEqual("Dev");
+		});
 	});
-
-	// it("should filter websites to all test when radio button is clicked", async () => {
-	// 	fetch.mockResponseOnce(JSON.stringify(websites));
-	// 	const wrapper = mount(
-	// 		<MemoryRouter>
-	// 			<ServicesList {...servicesListProps} />
-	// 		</MemoryRouter>,
-	// 	);
-	// 	await nextTick();
-	// 	wrapper.update();
-	// 	wrapper.find("#filter-status-dev").simulate("change", {
-	// 		target: { value: "dev" },
-	// 	});
-	// 	await nextTick();
-	// 	wrapper.update();
-	// 	wrapper.find(".tag").forEach((tag) => {
-	// 		expect(tag.text()).toEqual("dev");
-	// 	});
-	// });
 
 	it("should show 25 (default page amount) or less results by default when paginated", async () => {
 		fetch.mockResponseOnce(JSON.stringify(websites));
