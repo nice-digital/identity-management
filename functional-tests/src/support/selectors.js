@@ -48,13 +48,9 @@ export default {
     userStatusListPage:
       "[data-qa-sel='list-of-users'] [data-qa-sel='user-status']",
   },
-  serviceListPage: {
-    servicelist: toDataQASelAttr('list-of-websites'),
+  websiteListPage: {
+    websitelist: toDataQASelAttr('list-of-websites'),
     firstWebsiteCard: toChildAndQASel(1, 'list-of-websites'),
-    firstService: '.stacked-nav__list-item:nth-of-type(1)',
-    secondService: '.stacked-nav__list-item:nth-of-type(2)',
-    thirdService: '.stacked-nav__list-item:nth-of-type(3)',
-    fourthService: '.stacked-nav__list-item:nth-of-type(4)',
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr('delete-user-link'),
@@ -76,6 +72,12 @@ export default {
     forgotPasswordEmail: toDataQASelAttr('forgotPassword-email'),
     forgotPasswordButton: toDataQASelAttr('forgotPassword-button'),
     forgotReturnToSignIn: toDataQASelAttr('forgotPassword-link-to-login'),
+  },
+  serviceListPage: {
+    firstService: '.stacked-nav__list-item:nth-of-type(1)',
+    secondService: '.stacked-nav__list-item:nth-of-type(2)',
+    thirdService: '.stacked-nav__list-item:nth-of-type(3)',
+    fourthService: '.stacked-nav__list-item:nth-of-type(4)',
   },
   environmentListPage: {
     firstEnvironment: '.stacked-nav__list-item:nth-of-type(1)',

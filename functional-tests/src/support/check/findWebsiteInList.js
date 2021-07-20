@@ -8,9 +8,9 @@ import selectors from "../selectors";
 
 export const findWebsiteList = (website) => {
   browser.refresh();
-  waitForVisible(selectors.serviceListPage.servicelist);
+  waitForVisible(selectors.websiteListPage.websitelist);
   checkURL("http://idam:8080/services");
-  checkContainsText("element", selectors.serviceListPage.servicelist, website);
+  checkContainsText("element", selectors.websiteListPage.websitelist, website);
   pause(1000);
 };
 

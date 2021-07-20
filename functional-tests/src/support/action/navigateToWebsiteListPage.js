@@ -2,9 +2,9 @@ import waitForVisible from "@nice-digital/wdio-cucumber-steps/lib/support/action
 import click from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
 import selectors from "../selectors";
 
-export const navigateToServiceListPageFromAdminPage = () => {
+export const navigateToWebsiteListPageFromAdminPage = () => {
   click('click', 'element', selectors.adminHomePage.manageServicesButton);
-  waitForVisible(selectors.serviceListPage.servicelist);
+  waitForVisible(selectors.websiteListPage.websitelist);
 }
 
-export default navigateToServiceListPageFromAdminPage;
+export default navigateToWebsiteListPageFromAdminPage;

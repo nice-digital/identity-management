@@ -12,9 +12,4 @@ export const navigateToUserListPageFromAdminPage = () => {
   waitForVisible(selectors.userListPage.userlist);
 };
 
-export const navigateToServiceListPageFromAdminPage = () => {
-  click('click', 'element', selectors.adminHomePage.manageServicesButton);
-  waitForVisible(selectors.serviceListPage.servicelist);
-};
-
 export default navigateToUserListPageUsingBreadscrumb;

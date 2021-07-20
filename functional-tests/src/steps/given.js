@@ -4,8 +4,8 @@ import navigateToRegPage from '../support/action/navigateToRegPage';
 import {
   navigateToUserListPageUsingBreadscrumb,
   navigateToUserListPageFromAdminPage,
-  navigateToServiceListPageFromAdminPage,
 } from '../support/action/navigateToUserListPage';
+import {  navigateToWebsiteListPageFromAdminPage } from '../support/action/navigateToWebsiteListPage';
 
 Given(/^I navigate to the registration page$/, navigateToRegPage);
 
@@ -21,5 +21,5 @@ Given(
 
 Given(
   /^I click on the manage services button$/,
-  navigateToServiceListPageFromAdminPage
+  navigateToWebsiteListPageFromAdminPage
 );
