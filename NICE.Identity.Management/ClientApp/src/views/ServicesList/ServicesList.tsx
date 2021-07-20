@@ -17,7 +17,7 @@ import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { HistoryType, WebsiteType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
+import { FilterBox } from "../../components/FilterBox/FilterBox";
 import { WebsiteEnvironment } from "../../components/WebsiteEnvironment/WebsiteEnvironment";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
@@ -27,10 +27,6 @@ import styles from "./ServicesList.module.scss";
 type CardMetaData = {
 	label?: string;
 	value: React.ReactNode;
-};
-
-type environmentFilterOptions = {
-	[key: string]: (website: WebsiteType) => boolean;
 };
 
 type ServicesListProps = {
@@ -49,7 +45,7 @@ type ServicesListState = {
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
-	environmentFilter?: string;
+	environmentFiltersChecked: Array<string>;
 	pageNumber: number;
 	itemsPerPage: number | string;
 };
@@ -85,6 +81,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			isLoading: true,
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
+			environmentFiltersChecked: [],
 		};
 
 		document.title = "NICE Accounts - Services list";
@@ -121,21 +118,24 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		return pageNumber;
 	};
 
-	filterWebsitesByEnvironment = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	filterWebsitesByEnvironment = (environment: string): void => {
 		this.setState({ isLoading: true });
 
-		const environmentFilter = e.target.value;
+		let environmentFiltersChecked = this.state.environmentFiltersChecked;
 
-		let websites = this.state.originalWebsites,
-			pageNumber = this.state.pageNumber;
+		environmentFiltersChecked = environmentFiltersChecked.includes(environment)
+			? environmentFiltersChecked.filter((environmentFilter) => environmentFilter !== environment)
+			: environmentFiltersChecked.concat(environment);
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
 
-		if (environmentFilter) {
-			websites = this.websitesByEnvironment(environmentFilter, websites);
-		}
+		let websites = this.state.originalWebsites,
+			pageNumber = this.state.pageNumber;
+
+		if (environmentFiltersChecked.length)
+			websites = this.websitesByEnvironment(environmentFiltersChecked, websites);
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
@@ -143,7 +143,12 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			this.state.websites.length,
 		);
 
-		this.setState({ websites: websites, environmentFilter: environmentFilter, pageNumber, isLoading: false });
+		this.setState({
+			websites: websites,
+			environmentFiltersChecked: environmentFiltersChecked,
+			pageNumber,
+			isLoading: false,
+		});
 	};
 
 	filterWebsitesBySearch = async (searchQuery: string): Promise<void> => {
@@ -153,7 +158,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			`${Endpoints.websitesList}?q=${searchQuery}`,
 		);
 
-		let websites = originalWebsites,
+		let websites = originalWebsites, 
 		pageNumber = this.state.pageNumber;
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
@@ -164,8 +169,8 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			this.setState({ error: originalWebsites });
 		}
 
-		if (this.state.environmentFilter) {
-			websites = this.websitesByEnvironment(this.state.environmentFilter, websites);
+		if (this.state.environmentFiltersChecked.length) {
+			websites = this.websitesByEnvironment(this.state.environmentFiltersChecked, websites);
 		}
 
 		pageNumber = this.pastPageRange(
@@ -184,31 +189,30 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 	};
 
 	websitesByEnvironment = (
-		environmentFilter: string,
+		environmentFiltersChecked: Array<string>,
 		websites: Array<WebsiteType>,
 	): Array<WebsiteType> => {
-		const environmentFilterOptions: environmentFilterOptions = {
-			live: (website) => website.environment.name == "live",
-			beta: (website) => website.environment.name == "beta",
-			alpha: (website) => website.environment.name == "alpha",
-			test: (website) => website.environment.name == "test",
-			dev: (website) => website.environment.name == "dev",
-			local: (website) => website.environment.name == "local",
-		};
 
-		const filteredWebsites = websites.filter(environmentFilterOptions[environmentFilter]);
+		return (websites = websites.filter((website) => {
+			const websiteEnvironment = website.environment.name;
 
-		return filteredWebsites;
+			if (
+				environmentFiltersChecked.includes(websiteEnvironment) 
+			) {
+				return website;
+			}
+		}));
+
 	};
 
 	getPaginateStartAndFinishPosition = (
-		servicesCount: number,
+		websitesCount: number,
 		pageNumber: number,
 		itemsPerPage: number | string,
 	): { start: number; finish: number } => {
 		const paginationPositions = {
 			start: 0,
-			finish: servicesCount,
+			finish: websitesCount,
 		};
 
 		const itemAmountIsNumber = Number(itemsPerPage);
@@ -216,25 +220,25 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		if (itemAmountIsNumber) {
 			paginationPositions.start = (pageNumber - 1) * itemAmountIsNumber;
 			paginationPositions.finish =
-				paginationPositions.start + itemAmountIsNumber <= servicesCount
+				paginationPositions.start + itemAmountIsNumber <= websitesCount
 					? paginationPositions.start + itemAmountIsNumber
-					: servicesCount;
+					: websitesCount;
 		}
 
 		return paginationPositions;
 	};
 
 	getPaginationText = (
-		servicesCount: number,
+		websitesCount: number,
 		start: number,
 		finish: number,
 	): string => {
 		const amountPerPage = finish - start;
 		const paginationExtract =
-			servicesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
+			websitesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
 
-		return `Showing ${paginationExtract}${servicesCount} service${
-			servicesCount === 1 ? "" : "s"
+		return `Showing ${paginationExtract}${websitesCount} service${
+			websitesCount === 1 ? "" : "s"
 		}`;
 	};
 
@@ -282,24 +286,35 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 	};
 
 	render(): JSX.Element {
-		const { websites: services, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
+		const { websites, searchQuery, error, isLoading, pageNumber, itemsPerPage, environmentFiltersChecked } =
 			this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
-			services.length,
+			websites.length,
 			pageNumber,
 			itemsPerPage,
 		);
 
 		const paginationText = this.getPaginationText(
-			services.length,
+			websites.length,
 			paginationPositions.start,
 			paginationPositions.finish,
 		);
 
-		const servicesPaginated = services.length
-			? services.slice(paginationPositions.start, paginationPositions.finish)
-			: services;
+		const websitesPaginated = websites.length
+			? websites.slice(paginationPositions.start, paginationPositions.finish)
+			: websites;
+
+		// const environmentsForFilter = Array.from(new Set(websites.map(website => website.environment.name)));
+
+		const allEnvironments = websites.map(website => website.environment.name);
+
+		const environmentsForFilter = allEnvironments.reduce<string[]>(function (accumulatedEnvironments, currentEnvironment) {
+			if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
+				accumulatedEnvironments.push(currentEnvironment)
+			}
+			return accumulatedEnvironments
+		}, [])
 
 		return (
 			<>
@@ -316,21 +331,26 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 					<Grid>
 						<GridItem cols={12} md={3}>
 							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"}/>
-							<FilterStatus onCheckboxChange={this.filterWebsitesByEnvironment} />
+
+							<FilterBox
+								name="Environment"
+								filters={environmentsForFilter}
+								selected={environmentFiltersChecked}
+								onCheckboxChange={this.filterWebsitesByEnvironment}
+							/>
+
 						</GridItem>
-						<GridItem cols={12} md={9} aria-busy={!services.length}>
+						<GridItem cols={12} md={9} aria-busy={!websites.length}>
 							{isLoading ? (
 								<p>Loading...</p>
-							) : services.length ? (
+							) : websites.length ? (
 								<>
 									<h2 className={styles.servicesListSummary}>{paginationText}</h2>
 									<ul className="list--unstyled" data-qa-sel="list-of-websites">
-										{servicesPaginated.map((website) => {
+										{websitesPaginated.map((website) => {
 											const {
 												id,
-												serviceId,
 												host,
-												environment,
 												service
 											} = website;
 											const servicesListHeading = {
@@ -367,7 +387,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 										onChangePage={this.changePage}
 										onChangeAmount={this.changeAmount}
 										itemsPerPage={itemsPerPage}
-										consultationCount={services.length}
+										consultationCount={websites.length}
 										currentPage={pageNumber}
 									/>
 								</>
