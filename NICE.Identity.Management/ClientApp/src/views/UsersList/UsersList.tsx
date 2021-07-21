@@ -119,19 +119,21 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.setState({ error: services });
 		}
 
-		const servicesByEnvironment = services.reduce(
-			(result: ServicesByEnvironmentType, service: ServiceType) => {
-				service.websites.map((website) => {
-					const environmentName = capitaliseWord(website.environment.name);
-					const updatedService = { ...service, value: `${website.id}` };
-					updatedService.websites = [{ ...website }];
-					result[environmentName] = result[environmentName] || [];
-					result[environmentName].push(updatedService);
-				});
-				return result;
-			},
-			Object.create(null),
-		);
+		const servicesByEnvironment = Array.isArray(services)
+			? services.reduce(
+					(result: ServicesByEnvironmentType, service: ServiceType) => {
+						service.websites.map((website) => {
+							const environmentName = capitaliseWord(website.environment.name);
+							const updatedService = { ...service, value: `${website.id}` };
+							updatedService.websites = [{ ...website }];
+							result[environmentName] = result[environmentName] || [];
+							result[environmentName].push(updatedService);
+						});
+						return result;
+					},
+					Object.create(null),
+			  ) // eslint-disable-line
+			: {};
 
 		this.setState({
 			originalUsers: users,

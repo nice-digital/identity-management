@@ -74,7 +74,7 @@ describe("UsersList", () => {
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 	});
 
-	it("should show error message when fetch returns 401 error", async () => {
+	it("should show error message when fetch users returns 401 error", async () => {
 		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		fetch.mockResponseOnce(JSON.stringify(services));
@@ -84,10 +84,30 @@ describe("UsersList", () => {
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 	});
 
-	it("should show error message when fetch returns 500 error", async () => {
+	it("should show error message when fetch users returns 500 error", async () => {
 		console.error = jest.fn();
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		fetch.mockResponseOnce(JSON.stringify(services));
+		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
+		await nextTick();
+		wrapper.update();
+		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+	});
+
+	it("should show error message when fetch services returns 401 error", async () => {
+		console.error = jest.fn();		
+		fetch.mockResponseOnce(JSON.stringify(users));
+		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
+		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
+		await nextTick();
+		wrapper.update();
+		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+	});
+
+	it("should show error message when fetch services returns 500 error", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(users));
+		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
