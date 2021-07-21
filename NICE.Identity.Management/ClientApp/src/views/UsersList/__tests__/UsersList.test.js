@@ -119,15 +119,6 @@ describe("UsersList", () => {
 		);
 	});
 
-	// it("should show all filter by default", () => {
-	// 	fetch.mockResponseOnce(JSON.stringify(users));
-	// 	fetch.mockResponseOnce(JSON.stringify(services));
-	// 	const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
-	// 	expect(wrapper.find("#filter-status-all").props().defaultChecked).toEqual(
-	// 		true,
-	// 	);
-	// });
-
 	it("should filter users to all active when radio button is clicked", async () => {
 		fetch.mockResponseOnce(JSON.stringify(users));
 		fetch.mockResponseOnce(JSON.stringify(services));
