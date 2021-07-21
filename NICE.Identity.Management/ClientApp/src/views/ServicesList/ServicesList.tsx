@@ -97,19 +97,19 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		if (isDataError(websites)) {
 			this.setState({ error: websites });
 		}else{
-		const allEnvironments = websites.map((website: { environment: { name: string; }; }) => website.environment.name);
+			const allEnvironments = websites.map((website: { environment: { name: string; }; }) => website.environment.name);
 
-		const environmentsForFilter = allEnvironments.reduce(function (accumulatedEnvironments: string[], currentEnvironment: string) {
-			if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
-				accumulatedEnvironments.push(currentEnvironment)
-			}
-			return accumulatedEnvironments
-		}, []);
+			const environmentsForFilter = allEnvironments.reduce(function (accumulatedEnvironments: string[], currentEnvironment: string) {
+				if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
+					accumulatedEnvironments.push(currentEnvironment);
+				}
+				return accumulatedEnvironments;
+			}, []);
 
-		this.setState({environmentsForFilter})
+			this.setState({environmentsForFilter});
 		}
 
-		this.setState({ originalWebsites: websites, websites: websites, isLoading: false });
+		this.setState({ originalWebsites: websites, websites, isLoading: false });
 	}
 
 	pastPageRange = (
@@ -157,8 +157,8 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		);
 
 		this.setState({
-			websites: websites,
-			environmentFiltersChecked: environmentFiltersChecked,
+			websites,
+			environmentFiltersChecked,
 			pageNumber,
 			isLoading: false,
 		});
@@ -193,8 +193,8 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		);
 
 		this.setState({
-			originalWebsites: originalWebsites,
-			websites: websites,
+			originalWebsites,
+			websites,
 			searchQuery,
 			pageNumber,
 			isLoading: false,
