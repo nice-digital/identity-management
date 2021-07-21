@@ -5,6 +5,7 @@ Feature: Admin Page Dispalys Users
   Background:
     Given I open the url "/"
     When I log into accounts with username "ACCOUNTS_EMAIL5" and password "ACCOUNTS_PASSWORD2"
+    Given I click on the manage user button
 
   Scenario: Navigate to Identity Admin homepage
     Given I expect user "Kristin Patrick" to exist in the list

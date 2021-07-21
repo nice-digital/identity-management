@@ -10,6 +10,7 @@ Feature: Manage User Roles
   Background:
     Given I open the url "/"
     When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD2"
+    Given I click on the manage user button
 
   Scenario: Manage User Roles
     Given I expect I appear on the Identity Admin homepage
