@@ -20,6 +20,8 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { AddRoleConfirmation } from "../../components/AddRoleConfirmation/AddRoleConfirmation";
 import { ToggleCheckbox } from "../../components/ToggleCheckbox/ToggleCheckbox";
 
+import "@nice-digital/nds-checkbox/scss/checkbox.scss";
+
 type TParams = { id: string; serviceId: string; websiteId: string };
 
 type SelectRolesProps = Record<string, unknown> & RouteComponentProps<TParams>;
