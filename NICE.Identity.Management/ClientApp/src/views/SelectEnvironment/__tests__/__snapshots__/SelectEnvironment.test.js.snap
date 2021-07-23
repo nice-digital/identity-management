@@ -57,9 +57,7 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
     >
       Select service
     </Breadcrumb>
-    <Breadcrumb
-      elementType="a"
-    >
+    <Breadcrumb>
       Select environment
     </Breadcrumb>
   </Breadcrumbs>

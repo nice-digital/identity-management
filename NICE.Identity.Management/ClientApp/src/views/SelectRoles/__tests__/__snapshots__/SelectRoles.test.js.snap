@@ -75,9 +75,7 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
     >
       Select environment
     </Breadcrumb>
-    <Breadcrumb
-      elementType="a"
-    >
+    <Breadcrumb>
       Select role
     </Breadcrumb>
   </Breadcrumbs>
@@ -135,7 +133,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
           buttonType="submit"
           className="mt--d"
           disabled={false}
-          variant="primary"
         >
           Save
         </Button>
