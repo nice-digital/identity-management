@@ -13,7 +13,7 @@
 		"isStaffMember": false,
 		"acceptedTerms": true,
 		"isMigrated": false,
-		"hasAccessToServiceIds": [1]
+		"hasAccessToWebsiteIds": [1]
 	},
 	{
 		"userId": 2,
@@ -29,7 +29,7 @@
 		"isStaffMember": false,
 		"acceptedTerms": true,
 		"isMigrated": false,
-		"hasAccessToServiceIds": [2, 3]
+		"hasAccessToWebsiteIds": [2, 3]
 	},
 	{
 		"userId": 3,
@@ -45,7 +45,7 @@
 		"isStaffMember": false,
 		"acceptedTerms": true,
 		"isMigrated": false,
-		"hasAccessToServiceIds": [3]
+		"hasAccessToWebsiteIds": [3]
 	},
 	{
 		"userId": 4,
@@ -61,6 +61,6 @@
 		"isStaffMember": false,
 		"acceptedTerms": true,
 		"isMigrated": false,
-		"hasAccessToServiceIds": [1, 4]
+		"hasAccessToWebsiteIds": [1, 4]
 	}
 ]

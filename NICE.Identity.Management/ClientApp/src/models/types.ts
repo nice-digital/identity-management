@@ -13,7 +13,7 @@ export type UserType = {
 	isInAuthenticationProvider: boolean;
 	allowContactMe: boolean;
 	isStaffMember: boolean;
-	hasAccessToServiceIds: Array<number>;
+	hasAccessToWebsiteIds: Array<number>;
 };
 
 export type ServiceType = {

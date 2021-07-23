@@ -293,7 +293,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		users: Array<UserType>,
 	): Array<UserType> => {
 		return (users = users.filter((user) => {
-			const userServices = user.hasAccessToServiceIds;
+			const userServices = user.hasAccessToWebsiteIds;
 
 			if (
 				userServices.some((id) => serviceFiltersChecked.indexOf(`${id}`) >= 0)
