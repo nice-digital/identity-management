@@ -23,7 +23,6 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
 
 import styles from "./UsersList.module.scss";
-import { capitaliseWord } from "../../helpers/capitaliseWord";
 
 type CardMetaData = {
 	label?: string;
@@ -123,7 +122,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			? services.reduce(
 					(result: ServicesByEnvironmentType, service: ServiceType) => {
 						service.websites.map((website) => {
-							const environmentName = capitaliseWord(website.environment.name);
+							const environmentName = website.environment.name;
 							const updatedService = { ...service, value: `${website.id}` };
 							updatedService.websites = [{ ...website }];
 							result[environmentName] = result[environmentName] || [];
@@ -308,9 +307,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		users: Array<UserType>,
 	): Array<UserType> => {
 		const statusFilters: statusFilters = {
-			active: (user) => !user.isLockedOut && user.hasVerifiedEmailAddress,
-			pending: (user) => !user.hasVerifiedEmailAddress,
-			locked: (user) => user.isLockedOut,
+			Active: (user) => !user.isLockedOut && user.hasVerifiedEmailAddress,
+			Pending: (user) => !user.hasVerifiedEmailAddress,
+			Locked: (user) => user.isLockedOut,
 		};
 
 		let filteredUsers: Array<UserType> = [];
@@ -455,7 +454,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 							<FilterSearch onInputChange={this.filterUsersBySearch} />
 							<FilterBox
 								name="Status"
-								filters={["active", "pending", "locked"]}
+								filters={["Active", "Pending", "Locked"]}
 								selected={statusFiltersChecked}
 								onCheckboxChange={this.filterUsersByStatus}
 							/>

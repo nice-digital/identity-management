@@ -151,7 +151,7 @@ Array [
                   onChange={[Function]}
                   title="Status - Active"
                   type="checkbox"
-                  value="active"
+                  value="Active"
                 />
                 <span
                   className="filter-option__text"
@@ -170,7 +170,7 @@ Array [
                   onChange={[Function]}
                   title="Status - Pending"
                   type="checkbox"
-                  value="pending"
+                  value="Pending"
                 />
                 <span
                   className="filter-option__text"
@@ -189,7 +189,7 @@ Array [
                   onChange={[Function]}
                   title="Status - Locked"
                   type="checkbox"
-                  value="locked"
+                  value="Locked"
                 />
                 <span
                   className="filter-option__text"
@@ -233,7 +233,7 @@ Array [
                 <span
                   id="group-heading-dev"
                 >
-                  Dev
+                  dev
                 </span>
               </button>
             </h3>
@@ -243,7 +243,7 @@ Array [
               id="group-dev"
             >
               <legend>
-                Dev
+                dev
               </legend>
               <label
                 className="filter-option"
@@ -254,7 +254,7 @@ Array [
                   id="filter_dev_1"
                   name="dev"
                   onChange={[Function]}
-                  title="Dev - EPPI Reviewer"
+                  title="dev - EPPI Reviewer"
                   type="checkbox"
                   value="1"
                 />
@@ -273,7 +273,7 @@ Array [
                   id="filter_dev_3"
                   name="dev"
                   onChange={[Function]}
-                  title="Dev - Comment Collection"
+                  title="dev - Comment Collection"
                   type="checkbox"
                   value="3"
                 />
@@ -319,7 +319,7 @@ Array [
                 <span
                   id="group-heading-test"
                 >
-                  Test
+                  test
                 </span>
               </button>
             </h3>
@@ -329,7 +329,7 @@ Array [
               id="group-test"
             >
               <legend>
-                Test
+                test
               </legend>
               <label
                 className="filter-option"
@@ -340,7 +340,7 @@ Array [
                   id="filter_test_2"
                   name="test"
                   onChange={[Function]}
-                  title="Test - EPPI Reviewer"
+                  title="test - EPPI Reviewer"
                   type="checkbox"
                   value="2"
                 />
@@ -359,7 +359,7 @@ Array [
                   id="filter_test_5"
                   name="test"
                   onChange={[Function]}
-                  title="Test - Idam Docker"
+                  title="test - Idam Docker"
                   type="checkbox"
                   value="5"
                 />
@@ -405,7 +405,7 @@ Array [
                 <span
                   id="group-heading-alpha"
                 >
-                  Alpha
+                  alpha
                 </span>
               </button>
             </h3>
@@ -415,7 +415,7 @@ Array [
               id="group-alpha"
             >
               <legend>
-                Alpha
+                alpha
               </legend>
               <label
                 className="filter-option"
@@ -426,7 +426,7 @@ Array [
                   id="filter_alpha_4"
                   name="alpha"
                   onChange={[Function]}
-                  title="Alpha - Comment Collection"
+                  title="alpha - Comment Collection"
                   type="checkbox"
                   value="4"
                 />

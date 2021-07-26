@@ -169,9 +169,7 @@ describe("UsersList", () => {
 		);
 		await nextTick();
 		wrapper.update();
-		wrapper.find("#filter_dev_3").simulate("change", {
-			target: { value: "3" },
-		});
+		wrapper.find("#filter_dev_3").simulate("change");
 		await nextTick();
 		wrapper.update();
 		const usersListSummary = wrapper.find(".usersListSummary");

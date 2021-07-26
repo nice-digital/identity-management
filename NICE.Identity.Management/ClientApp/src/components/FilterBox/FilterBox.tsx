@@ -7,7 +7,6 @@ import {
 } from "@nice-digital/nds-filters";
 
 import "@nice-digital/nds-filters/scss/filters.scss";
-import { capitaliseWord } from "../../helpers/capitaliseWord";
 
 type FiltersType = {
 	name: string;
@@ -16,24 +15,24 @@ type FiltersType = {
 
 type FilterBoxProps = {
 	name: string;
-	filters: Array<FiltersType> | Array<string>;
+	filters: (FiltersType | string)[];
 	selected: Array<string>;
 	onCheckboxChange: (e: string) => void;
 };
 
 export const FilterBox = (props: FilterBoxProps): React.ReactElement => {
-	let filters: any = [];
+	let filters = [] as Array<FiltersType>;
 	let selectedCount = 0;
 
 	if (typeof props.filters[0] === "string") {
 		props.filters.map((filter) => {
 			filters.push({
-				value: filter,
-				name: capitaliseWord(filter as string),
+				value: filter as string,
+				name: filter as string,
 			});
 		});
 	} else {
-		filters = [...props.filters];
+		filters = [...props.filters] as Array<FiltersType>;
 	}
 
 	const FilterOptions = filters.map((filter: FiltersType, index: number) => {
