@@ -16,7 +16,7 @@ config.capabilities = [
       args: ['--headless', '--window-size=1366,1000'],
     },
     'goog:chromeOptions': {
-      args: [],
+      args: ["--disable-dev-shm-usage"],
       localState: {
         'browser.enabled_labs_experiments': [
           'same-site-by-default-cookies@2',
