@@ -213,7 +213,7 @@ Array [
     >
       <h2
         className="servicesListSummary"
-        qa-data-sel="services-returned"
+        data-qa-sel="services-returned"
       >
         Showing 5 services
       </h2>
