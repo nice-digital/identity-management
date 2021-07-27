@@ -17,6 +17,7 @@ import validateDeletionSuccessMessage, { validateRegistrationValidationMessages 
 import validateUserStatusActive, { validateUserStatusLocked, validateUserStatusListPageLocked } from "../support/check/validateUserStatus";
 import identityLogInPage from "../support/check/identityLogInPage";
 import validateRoleChange from "../support/check/validateRoleChange";
+import validateDownloadPageResultCount from "../support/check/validateAdminDownloadPage";
 
 Then(
   /^I expect the error message is displayed$/,
@@ -59,7 +60,7 @@ Then(
 );
 
 Then(
-  /^I expect I appear on the Identity Admin homepage$/,
+  /^I expect I appear on the Identity Administration homepage$/,
   identityAdminHomepage
 );
 
@@ -121,4 +122,8 @@ Then(
 Then(
   /^I expect the user roles to be successfully changed$/,
   validateRoleChange
+);
+Then(
+	/^I expect the result list count contains "([^"]*)"$/,
+	validateDownloadPageResultCount
 );

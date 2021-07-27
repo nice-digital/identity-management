@@ -30,6 +30,7 @@ export default {
   },
   adminHomePage:{
     manageUsersButton: toDataQASelAttr('manage-users'),
+    manageServicesButton: toDataQASelAttr('manage-services')
   },
   userListPage: {
     userlist: toDataQASelAttr('list-of-users'),
@@ -88,4 +89,17 @@ export default {
     saveButton: '.btn',
     roleChangeSuccess: '.alert--success',
   },
+  serviceListPage: {
+    servicelist: toDataQASelAttr('list-of-websites'),
+  },
+  adminDownloadPage: {
+    filterByServiceNameUrl: toDataQASelAttr("filter-search-input"),
+	  pageResultCount: toDataQASelAttr("services-returned"),
+  //numberResultsOnPage: toDataQASelAttr("result-on-the-page-index"),
+  // paginationSection: toDataQASelAttr("pagination-section"),
+  //firstPager: toQAselAndChild("pagination-section", 1),
+	//secondPager: toQAselAndChild("pagination-section", 2),
+	//nextPager: "body .pagination__pager.next",
+  //id="user-search" for filter
+	},
 };
