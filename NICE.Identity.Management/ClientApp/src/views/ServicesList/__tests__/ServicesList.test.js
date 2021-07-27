@@ -120,8 +120,8 @@ describe("ServicesList", () => {
 		);
 		await nextTick();
 		wrapper.update();
-		wrapper.find("#filter_environment_dev").simulate("change", {
-			target: { value: "dev" },
+		wrapper.find("#filter_environments_dev").simulate("change", {
+			target: { value: "Dev" },
 		});
 		await nextTick();
 		wrapper.update();

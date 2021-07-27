@@ -120,36 +120,36 @@ Array [
               className="filter-group__heading"
             >
               <button
-                aria-controls="group-environment"
+                aria-controls="group-environments"
                 aria-expanded={true}
                 onClick={[Function]}
                 type="button"
               >
                 <span
-                  id="group-heading-environment"
+                  id="group-heading-environments"
                 >
-                  Environment
+                  Environments
                 </span>
               </button>
             </h3>
             <fieldset
               aria-hidden={false}
               className="filter-group__options"
-              id="group-environment"
+              id="group-environments"
             >
               <legend>
-                Environment
+                Environments
               </legend>
               <label
                 className="filter-option"
-                htmlFor="filter_environment_alpha"
+                htmlFor="filter_environments_alpha"
               >
                 <input
                   checked={false}
-                  id="filter_environment_alpha"
-                  name="environment"
+                  id="filter_environments_alpha"
+                  name="environments"
                   onChange={[Function]}
-                  title="Environment - Alpha"
+                  title="Environments - Alpha"
                   type="checkbox"
                   value="Alpha"
                 />
@@ -161,14 +161,14 @@ Array [
               </label>
               <label
                 className="filter-option"
-                htmlFor="filter_environment_test"
+                htmlFor="filter_environments_test"
               >
                 <input
                   checked={false}
-                  id="filter_environment_test"
-                  name="environment"
+                  id="filter_environments_test"
+                  name="environments"
                   onChange={[Function]}
-                  title="Environment - Test"
+                  title="Environments - Test"
                   type="checkbox"
                   value="Test"
                 />
@@ -180,14 +180,14 @@ Array [
               </label>
               <label
                 className="filter-option"
-                htmlFor="filter_environment_dev"
+                htmlFor="filter_environments_dev"
               >
                 <input
                   checked={false}
-                  id="filter_environment_dev"
-                  name="environment"
+                  id="filter_environments_dev"
+                  name="environments"
                   onChange={[Function]}
-                  title="Environment - Dev"
+                  title="Environments - Dev"
                   type="checkbox"
                   value="Dev"
                 />
