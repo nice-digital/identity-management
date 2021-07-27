@@ -165,8 +165,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ isLoading: true });
 
 		let statusFiltersChecked = this.state.statusFiltersChecked;
+		const unchecked = statusFiltersChecked.includes(status);
 
-		statusFiltersChecked = statusFiltersChecked.includes(status)
+		statusFiltersChecked = unchecked
 			? statusFiltersChecked.filter((statusFilter) => statusFilter !== status)
 			: statusFiltersChecked.concat(status);
 
@@ -174,16 +175,16 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
 
-		let users = this.state.searchQuery
-				? this.state.users
-				: this.state.originalUsers,
+		let users = this.state.originalUsers,
 			pageNumber = this.state.pageNumber;
 
-		if (statusFiltersChecked.length)
+		if (statusFiltersChecked.length) {
 			users = this.usersByStatus(statusFiltersChecked, users);
+		}
 
-		if (this.state.serviceFiltersChecked.length)
+		if (this.state.serviceFiltersChecked.length) {
 			users = this.usersByService(this.state.serviceFiltersChecked, users);
+		}
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
@@ -203,8 +204,9 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ isLoading: true });
 
 		let serviceFiltersChecked = this.state.serviceFiltersChecked;
+		const unchecked = serviceFiltersChecked.includes(serviceId);
 
-		serviceFiltersChecked = serviceFiltersChecked.includes(serviceId)
+		serviceFiltersChecked = unchecked
 			? serviceFiltersChecked.filter((filter) => filter !== serviceId)
 			: serviceFiltersChecked.concat(serviceId);
 
@@ -212,24 +214,15 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
 
-		let users = this.state.searchQuery
-				? this.state.users
-				: this.state.originalUsers,
-			pageNumber = this.state.pageNumber,
-			filtersActive = false;
+		let users = this.state.originalUsers,
+			pageNumber = this.state.pageNumber;
 
 		if (serviceFiltersChecked.length) {
 			users = this.usersByService(serviceFiltersChecked, users);
-			filtersActive = true;
 		}
 
 		if (this.state.statusFiltersChecked.length) {
 			users = this.usersByStatus(this.state.statusFiltersChecked, users);
-			filtersActive = true;
-		}
-
-		if (!filtersActive) {
-			users = this.state.originalUsers;
 		}
 
 		pageNumber = this.pastPageRange(
@@ -291,15 +284,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		serviceFiltersChecked: Array<string>,
 		users: Array<UserType>,
 	): Array<UserType> => {
-		return (users = users.filter((user) => {
+		return users.filter((user) => {
 			const userServices = user.hasAccessToWebsiteIds;
 
-			if (
-				userServices.some((id) => serviceFiltersChecked.indexOf(`${id}`) >= 0)
-			) {
+			let checkedUserServices = userServices.filter((userService) =>
+				serviceFiltersChecked.includes(`${userService}`),
+			);
+
+			if (checkedUserServices.length === serviceFiltersChecked.length) {
 				return user;
 			}
-		}));
+		});
 	};
 
 	usersByStatus = (
