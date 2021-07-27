@@ -8,6 +8,8 @@ import {
 
 import "@nice-digital/nds-filters/scss/filters.scss";
 
+import "./FilterBox.scss";
+
 type FiltersType = {
 	name: string;
 	value: string;
@@ -18,6 +20,7 @@ type FilterBoxProps = {
 	filters: (FiltersType | string)[];
 	selected: Array<string>;
 	onCheckboxChange: (e: string) => void;
+	hideFilterPanelHeading?: boolean;
 };
 
 export const FilterBox = (props: FilterBoxProps): React.ReactElement => {
@@ -57,10 +60,16 @@ export const FilterBox = (props: FilterBoxProps): React.ReactElement => {
 	});
 
 	return (
-		<FilterPanel heading="">
-			<FilterGroup heading={props.name} selectedCount={selectedCount}>
-				{FilterOptions}
-			</FilterGroup>
-		</FilterPanel>
+		<div
+			className={
+				props.hideFilterPanelHeading ? "filter-panel-hide-heading" : undefined
+			}
+		>
+			<FilterPanel heading="">
+				<FilterGroup heading={props.name} selectedCount={selectedCount}>
+					{FilterOptions}
+				</FilterGroup>
+			</FilterPanel>
+		</div>
 	);
 };
