@@ -151,7 +151,7 @@ Array [
                   onChange={[Function]}
                   title="Environment - Alpha"
                   type="checkbox"
-                  value="alpha"
+                  value="Alpha"
                 />
                 <span
                   className="filter-option__text"
@@ -170,7 +170,7 @@ Array [
                   onChange={[Function]}
                   title="Environment - Test"
                   type="checkbox"
-                  value="test"
+                  value="Test"
                 />
                 <span
                   className="filter-option__text"
@@ -189,7 +189,7 @@ Array [
                   onChange={[Function]}
                   title="Environment - Dev"
                   type="checkbox"
-                  value="dev"
+                  value="Dev"
                 />
                 <span
                   className="filter-option__text"
@@ -343,7 +343,7 @@ Array [
                     Website
                   </dt>
                   <dd>
-                    idam
+                    test-idam
                   </dd>
                 </div>
               </dl>,

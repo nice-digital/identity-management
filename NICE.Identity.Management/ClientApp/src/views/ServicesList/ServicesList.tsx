@@ -337,7 +337,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"}/>
 
 							<FilterBox
-								name="Environment"
+								name="Environments"
 								filters={this.state.environmentsForFilter}
 								selected={environmentFiltersChecked}
 								onCheckboxChange={this.filterWebsitesByEnvironment}
