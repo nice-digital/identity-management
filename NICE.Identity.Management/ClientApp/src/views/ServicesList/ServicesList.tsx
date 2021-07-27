@@ -334,7 +334,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"}/>
+							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"} />
 
 							<FilterBox
 								name="Environments"
@@ -350,7 +350,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 								<p>Loading...</p>
 							) : websites.length ? (
 								<>
-									<h2 className={styles.servicesListSummary}>{paginationText}</h2>
+									<h2 className={styles.servicesListSummary} qa-data-sel="services-returned">{paginationText}</h2>
 									<ul className="list--unstyled" data-qa-sel="list-of-websites">
 										{websitesPaginated.map((website) => {
 											const {

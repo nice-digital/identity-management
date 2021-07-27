@@ -81,18 +81,19 @@ Array [
         >
           <label
             className="input__label"
-            htmlFor="user-search"
+            htmlFor="filter-search"
           >
             Filter by service name or URL
           </label>
           <input
             autoComplete="off"
             className="input__input"
-            id="user-search"
-            name="user-search"
+            data-qa-sel="filter-search-input"
+            id="filter-search"
+            name="filter-search"
             onChange={[Function]}
             type="search"
-            unique="userSearch"
+            unique="filterSearch"
           />
         </div>
       </div>
@@ -212,6 +213,7 @@ Array [
     >
       <h2
         className="servicesListSummary"
+        qa-data-sel="services-returned"
       >
         Showing 5 services
       </h2>

@@ -25,10 +25,11 @@ export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
 			<Input
 				type="search"
 				label={props.label}
-				unique="userSearch"
-				name="user-search"
+				unique="filterSearch"
+				name="filter-search"
 				onChange={handleInputChange}
 				autoComplete="off"
+				data-qa-sel="filter-search-input"
 			/>
 		</Panel>
 	);
