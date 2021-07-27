@@ -341,6 +341,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 								filters={this.state.environmentsForFilter}
 								selected={environmentFiltersChecked}
 								onCheckboxChange={this.filterWebsitesByEnvironment}
+								hideFilterPanelHeading={true}
 							/>
 
 						</GridItem>

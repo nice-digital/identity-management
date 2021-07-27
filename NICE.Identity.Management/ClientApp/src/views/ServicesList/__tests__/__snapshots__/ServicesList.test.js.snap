@@ -97,107 +97,111 @@ Array [
         </div>
       </div>
       <div
-        className="filter-panel undefined"
+        className="filter-panel-hide-heading"
       >
-        <h2
-          className="filter-panel__heading"
-        >
-          <a
-            aria-controls="filter-panel-body"
-            aria-expanded="true"
-            href="#filter-panel-body"
-          />
-        </h2>
         <div
-          aria-hidden={false}
-          className="filter-panel__body"
-          id="filter-panel-body"
+          className="filter-panel undefined"
         >
-          <div
-            className="filter-group"
+          <h2
+            className="filter-panel__heading"
           >
-            <h3
-              className="filter-group__heading"
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
             >
-              <button
-                aria-controls="group-environments"
-                aria-expanded={true}
-                onClick={[Function]}
-                type="button"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  id="group-heading-environments"
+                <button
+                  aria-controls="group-environments"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
+                  <span
+                    id="group-heading-environments"
+                  >
+                    Environments
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-environments"
+              >
+                <legend>
                   Environments
-                </span>
-              </button>
-            </h3>
-            <fieldset
-              aria-hidden={false}
-              className="filter-group__options"
-              id="group-environments"
-            >
-              <legend>
-                Environments
-              </legend>
-              <label
-                className="filter-option"
-                htmlFor="filter_environments_alpha"
-              >
-                <input
-                  checked={false}
-                  id="filter_environments_alpha"
-                  name="environments"
-                  onChange={[Function]}
-                  title="Environments - Alpha"
-                  type="checkbox"
-                  value="Alpha"
-                />
-                <span
-                  className="filter-option__text"
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_alpha"
                 >
-                  Alpha
-                </span>
-              </label>
-              <label
-                className="filter-option"
-                htmlFor="filter_environments_test"
-              >
-                <input
-                  checked={false}
-                  id="filter_environments_test"
-                  name="environments"
-                  onChange={[Function]}
-                  title="Environments - Test"
-                  type="checkbox"
-                  value="Test"
-                />
-                <span
-                  className="filter-option__text"
+                  <input
+                    checked={false}
+                    id="filter_environments_alpha"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Alpha"
+                    type="checkbox"
+                    value="Alpha"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Alpha
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_test"
                 >
-                  Test
-                </span>
-              </label>
-              <label
-                className="filter-option"
-                htmlFor="filter_environments_dev"
-              >
-                <input
-                  checked={false}
-                  id="filter_environments_dev"
-                  name="environments"
-                  onChange={[Function]}
-                  title="Environments - Dev"
-                  type="checkbox"
-                  value="Dev"
-                />
-                <span
-                  className="filter-option__text"
+                  <input
+                    checked={false}
+                    id="filter_environments_test"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Test"
+                    type="checkbox"
+                    value="Test"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Test
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_dev"
                 >
-                  Dev
-                </span>
-              </label>
-            </fieldset>
+                  <input
+                    checked={false}
+                    id="filter_environments_dev"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Dev"
+                    type="checkbox"
+                    value="Dev"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Dev
+                  </span>
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
