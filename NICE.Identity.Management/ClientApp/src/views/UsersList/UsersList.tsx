@@ -287,7 +287,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return users.filter((user) => {
 			const userServices = user.hasAccessToWebsiteIds;
 
-			let checkedUserServices = userServices.filter((userService) =>
+			const checkedUserServices = userServices.filter((userService) =>
 				serviceFiltersChecked.includes(`${userService}`),
 			);
 
