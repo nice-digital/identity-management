@@ -159,7 +159,7 @@ describe("UsersList", () => {
 		});
 	});
 
-	it("should filter users to those who have access to a specific service when radio button is clicked", async () => {
+	it("should filter users to those who have access to a specific website when radio button is clicked", async () => {
 		fetch.mockResponseOnce(JSON.stringify(users));
 		fetch.mockResponseOnce(JSON.stringify(services));
 		const wrapper = mount(
