@@ -311,7 +311,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				websiteFiltersChecked.includes(`${userService}`),
 			);
 
-			if (checkedUserServices.length === serviceFiltersChecked.length) {
+			if (checkedUserWebsites.length === websiteFiltersChecked.length) {
 				return user;
 			}
 		});
