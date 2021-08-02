@@ -120,7 +120,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			this.setState({ error: websites });
 		}
 
-		let environments = Array.isArray(websites)
+		const environments = Array.isArray(websites)
 			? websites
 					.reduce(
 						(result: Array<EnvironmentFilterType>, website: WebsiteType) => {
