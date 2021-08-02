@@ -107,7 +107,7 @@ describe("UsersList", () => {
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find("p").text()).toEqual(
-			`No results found for ${dummyText}`,
+			`No results found for "${dummyText}"`,
 		);
 	});
 

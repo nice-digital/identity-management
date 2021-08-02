@@ -368,7 +368,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 									/>
 								</>
 							) : searchQuery ? (
-								<p>No results found for {searchQuery}</p>
+								<p>No results found for &quot;{searchQuery}&quot;</p>
 							) : (
 								<p>No results found</p>
 							)}

@@ -51,7 +51,10 @@ type ServicesListState = {
 	environmentsForFilter: Array<string>;
 };
 
-export class ServicesList extends Component<ServicesListProps, ServicesListState> {
+export class ServicesList extends Component<
+	ServicesListProps,
+	ServicesListState
+> {
 	constructor(props: ServicesListProps) {
 		super(props);
 
@@ -96,17 +99,24 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 
 		if (isDataError(websites)) {
 			this.setState({ error: websites });
-		}else{
-			const allEnvironments = websites.map((website: { environment: { name: string; }; }) => website.environment.name);
+		} else {
+			const allEnvironments = websites.map(
+				(website: { environment: { name: string } }) =>
+					website.environment.name,
+			);
 
-			const environmentsForFilter = allEnvironments.reduce(function (accumulatedEnvironments: string[], currentEnvironment: string) {
+			const environmentsForFilter = allEnvironments.reduce(function (
+				accumulatedEnvironments: string[],
+				currentEnvironment: string,
+			) {
 				if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
 					accumulatedEnvironments.push(currentEnvironment);
 				}
 				return accumulatedEnvironments;
-			}, []);
+			},
+			[]);
 
-			this.setState({environmentsForFilter});
+			this.setState({ environmentsForFilter });
 		}
 
 		this.setState({ originalWebsites: websites, websites, isLoading: false });
@@ -137,7 +147,9 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		let environmentFiltersChecked = this.state.environmentFiltersChecked;
 
 		environmentFiltersChecked = environmentFiltersChecked.includes(environment)
-			? environmentFiltersChecked.filter((environmentFilter) => environmentFilter !== environment)
+			? environmentFiltersChecked.filter(
+					(environmentFilter) => environmentFilter !== environment,
+					)
 			: environmentFiltersChecked.concat(environment);
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
@@ -148,7 +160,10 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			pageNumber = this.state.pageNumber;
 
 		if (environmentFiltersChecked.length)
-			websites = this.websitesByEnvironment(environmentFiltersChecked, websites);
+			websites = this.websitesByEnvironment(
+				environmentFiltersChecked,
+				websites,
+			);
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
@@ -171,8 +186,8 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			`${Endpoints.websitesList}?q=${searchQuery}`,
 		);
 
-		let websites = originalWebsites, 
-		pageNumber = this.state.pageNumber;
+		let websites = originalWebsites,
+			pageNumber = this.state.pageNumber;
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
@@ -183,7 +198,10 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		}
 
 		if (this.state.environmentFiltersChecked.length) {
-			websites = this.websitesByEnvironment(this.state.environmentFiltersChecked, websites);
+			websites = this.websitesByEnvironment(
+				this.state.environmentFiltersChecked,
+				websites,
+			);
 		}
 
 		pageNumber = this.pastPageRange(
@@ -205,17 +223,13 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 		environmentFiltersChecked: Array<string>,
 		websites: Array<WebsiteType>,
 	): Array<WebsiteType> => {
-
 		return (websites = websites.filter((website) => {
 			const websiteEnvironment = website.environment.name;
 
-			if (
-				environmentFiltersChecked.includes(websiteEnvironment) 
-			) {
+			if (environmentFiltersChecked.includes(websiteEnvironment)) {
 				return website;
 			}
 		}));
-
 	};
 
 	getPaginateStartAndFinishPosition = (
@@ -299,8 +313,15 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 	};
 
 	render(): JSX.Element {
-		const { websites, searchQuery, error, isLoading, pageNumber, itemsPerPage, environmentFiltersChecked } =
-			this.state;
+		const {
+			websites,
+			searchQuery,
+			error,
+			isLoading,
+			pageNumber,
+			itemsPerPage,
+			environmentFiltersChecked,
+		} = this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
 			websites.length,
@@ -318,8 +339,6 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 			? websites.slice(paginationPositions.start, paginationPositions.finish)
 			: websites;
 
-
-
 		return (
 			<>
 				<Breadcrumbs>
@@ -334,7 +353,10 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterWebsitesBySearch} label={"Filter by service name or URL"} />
+							<FilterSearch
+								onInputChange={this.filterWebsitesBySearch}
+								label={"Filter by service name or URL"}
+							/>
 
 							<FilterBox
 								name="Environments"
@@ -343,21 +365,21 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 								onCheckboxChange={this.filterWebsitesByEnvironment}
 								hideFilterPanelHeading={true}
 							/>
-
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!websites.length}>
 							{isLoading ? (
 								<p>Loading...</p>
 							) : websites.length ? (
 								<>
-									<h2 className={styles.servicesListSummary} data-qa-sel="services-returned">{paginationText}</h2>
+									<h2
+										className={styles.servicesListSummary}
+										data-qa-sel="services-returned"
+									>
+										{paginationText}
+									</h2>
 									<ul className="list--unstyled" data-qa-sel="list-of-websites">
 										{websitesPaginated.map((website) => {
-											const {
-												id,
-												host,
-												service
-											} = website;
+											const { id, host, service } = website;
 											const servicesListHeading = {
 												headingText: `${service.name}`,
 												// Add this in when IDAM-441 is done
@@ -397,7 +419,7 @@ export class ServicesList extends Component<ServicesListProps, ServicesListState
 									/>
 								</>
 							) : searchQuery ? (
-								<p>No results found for {searchQuery}</p>
+								<p>No results found for &quot;{searchQuery}&quot;</p>
 							) : (
 								<p>No results found</p>
 							)}
