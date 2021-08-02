@@ -15,7 +15,7 @@ import {
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
-import { UserType, HistoryType, ServiceType } from "../../models/types";
+import { UserType, HistoryType, WebsiteType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
 import { FilterBox } from "../../components/FilterBox/FilterBox";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
@@ -29,13 +29,15 @@ type CardMetaData = {
 	value: React.ReactNode;
 };
 
-type FiltersType = {
+type EnvironmentFilterType = {
 	name: string;
-	value: string;
+	order: number;
+	websites: Array<WebsiteFilterType>;
 };
 
-type ServicesByEnvironmentType = {
-	[key: string]: Array<FiltersType>;
+type WebsiteFilterType = {
+	name: string;
+	value: string;
 };
 
 type statusFilters = {
@@ -55,12 +57,12 @@ type UsersListState = {
 	path: string;
 	originalUsers: Array<UserType>;
 	users: Array<UserType>;
-	services: ServicesByEnvironmentType;
+	environments: Array<EnvironmentFilterType>;
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
 	statusFiltersChecked: Array<string>;
-	serviceFiltersChecked: Array<string>;
+	websiteFiltersChecked: Array<string>;
 	pageNumber: number;
 	itemsPerPage: number | string;
 };
@@ -93,10 +95,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			path: "",
 			originalUsers: [],
 			users: [],
-			services: {} as ServicesByEnvironmentType,
+			environments: [],
 			isLoading: true,
 			statusFiltersChecked: [],
-			serviceFiltersChecked: [],
+			websiteFiltersChecked: [],
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
 		};
@@ -108,36 +110,54 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		this.setState({ isLoading: true });
 
 		const users = await fetchData(Endpoints.usersList);
-		const services = await fetchData(Endpoints.servicesList);
+		const websites = await fetchData(Endpoints.websitesList);
 
 		if (isDataError(users)) {
 			this.setState({ error: users });
 		}
 
-		if (isDataError(services)) {
-			this.setState({ error: services });
+		if (isDataError(websites)) {
+			this.setState({ error: websites });
 		}
 
-		const servicesByEnvironment = Array.isArray(services)
-			? services.reduce(
-					(result: ServicesByEnvironmentType, service: ServiceType) => {
-						service.websites.map((website) => {
-							const environmentName = website.environment.name;
-							const updatedService = { ...service, value: `${website.id}` };
-							updatedService.websites = [{ ...website }];
-							result[environmentName] = result[environmentName] || [];
-							result[environmentName].push(updatedService);
-						});
-						return result;
-					},
-					Object.create(null),
-			  ) // eslint-disable-line
-			: {};
+		let environments = Array.isArray(websites)
+			? websites
+					.reduce(
+						(result: Array<EnvironmentFilterType>, website: WebsiteType) => {
+							const environment = {
+								name: website.environment.name,
+								order: website.environment.order,
+								websites: [
+									{ name: website.service.name, value: `${website.id}` },
+								],
+							};
+
+							const existingEnvironmentIndex = result.findIndex(
+								(item) => item.name === environment.name,
+							);
+
+							if (existingEnvironmentIndex > -1) {
+								result[existingEnvironmentIndex].websites.push(
+									environment.websites[0],
+								);
+							} else {
+								result.push(environment);
+							}
+
+							return result;
+						},
+						[],
+					)
+					.sort(
+						(a: EnvironmentFilterType, b: EnvironmentFilterType) =>
+							a.order - b.order,
+					)
+			: [];
 
 		this.setState({
 			originalUsers: users,
 			users,
-			services: servicesByEnvironment,
+			environments,
 			isLoading: false,
 		});
 	}
@@ -182,8 +202,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			users = this.usersByStatus(statusFiltersChecked, users);
 		}
 
-		if (this.state.serviceFiltersChecked.length) {
-			users = this.usersByService(this.state.serviceFiltersChecked, users);
+		if (this.state.websiteFiltersChecked.length) {
+			users = this.usersByWebsite(this.state.websiteFiltersChecked, users);
 		}
 
 		pageNumber = this.pastPageRange(
@@ -200,15 +220,15 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		});
 	};
 
-	filterUsersByService = (serviceId: string): void => {
+	filterUsersByWebsite = (websiteId: string): void => {
 		this.setState({ isLoading: true });
 
-		let serviceFiltersChecked = this.state.serviceFiltersChecked;
-		const unchecked = serviceFiltersChecked.includes(serviceId);
+		let websiteFiltersChecked = this.state.websiteFiltersChecked;
+		const unchecked = websiteFiltersChecked.includes(websiteId);
 
-		serviceFiltersChecked = unchecked
-			? serviceFiltersChecked.filter((filter) => filter !== serviceId)
-			: serviceFiltersChecked.concat(serviceId);
+		websiteFiltersChecked = unchecked
+			? websiteFiltersChecked.filter((filter) => filter !== websiteId)
+			: websiteFiltersChecked.concat(websiteId);
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
@@ -217,8 +237,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		let users = this.state.originalUsers,
 			pageNumber = this.state.pageNumber;
 
-		if (serviceFiltersChecked.length) {
-			users = this.usersByService(serviceFiltersChecked, users);
+		if (websiteFiltersChecked.length) {
+			users = this.usersByWebsite(websiteFiltersChecked, users);
 		}
 
 		if (this.state.statusFiltersChecked.length) {
@@ -233,7 +253,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 
 		this.setState({
 			users,
-			serviceFiltersChecked,
+			websiteFiltersChecked,
 			pageNumber,
 			isLoading: false,
 		});
@@ -261,8 +281,8 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 			users = this.usersByStatus(this.state.statusFiltersChecked, users);
 		}
 
-		if (this.state.serviceFiltersChecked.length) {
-			users = this.usersByService(this.state.serviceFiltersChecked, users);
+		if (this.state.websiteFiltersChecked.length) {
+			users = this.usersByWebsite(this.state.websiteFiltersChecked, users);
 		}
 
 		pageNumber = this.pastPageRange(
@@ -280,15 +300,15 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		});
 	};
 
-	usersByService = (
-		serviceFiltersChecked: Array<string>,
+	usersByWebsite = (
+		websiteFiltersChecked: Array<string>,
 		users: Array<UserType>,
 	): Array<UserType> => {
 		return users.filter((user) => {
-			const userServices = user.hasAccessToWebsiteIds;
+			const userWebsites = user.hasAccessToWebsiteIds;
 
-			const checkedUserServices = userServices.filter((userService) =>
-				serviceFiltersChecked.includes(`${userService}`),
+			const checkedUserWebsites = userWebsites.filter((userService) =>
+				websiteFiltersChecked.includes(`${userService}`),
 			);
 
 			if (checkedUserServices.length === serviceFiltersChecked.length) {
@@ -406,13 +426,13 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	render(): JSX.Element {
 		const {
 			users,
-			services,
+			environments,
 			searchQuery,
 			error,
 			isLoading,
 			pageNumber,
 			itemsPerPage,
-			serviceFiltersChecked,
+			websiteFiltersChecked,
 			statusFiltersChecked,
 		} = this.state;
 
@@ -453,15 +473,17 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								selected={statusFiltersChecked}
 								onCheckboxChange={this.filterUsersByStatus}
 							/>
-							{Object.keys(services).map((key, index) => (
-								<FilterBox
-									name={key}
-									filters={services[key]}
-									selected={serviceFiltersChecked}
-									onCheckboxChange={this.filterUsersByService}
-									key={index}
-								/>
-							))}
+							{environments.map(
+								(environment: EnvironmentFilterType, index: number) => (
+									<FilterBox
+										name={environment.name}
+										filters={environment.websites}
+										selected={websiteFiltersChecked}
+										onCheckboxChange={this.filterUsersByWebsite}
+										key={index}
+									/>
+								),
+							)}
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={!users.length}>
 							{isLoading ? (
