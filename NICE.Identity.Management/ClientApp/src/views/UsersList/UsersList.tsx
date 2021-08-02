@@ -466,7 +466,10 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterUsersBySearch} />
+							<FilterSearch
+								onInputChange={this.filterUsersBySearch}
+								label={"Filter by name or email address"}
+							/>
 							<FilterBox
 								name="Status"
 								filters={["Active", "Pending", "Locked"]}
@@ -538,7 +541,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 									/>
 								</>
 							) : searchQuery ? (
-								<p>No results found for {searchQuery}</p>
+								<p>No results found for &quot;{searchQuery}&quot;</p>
 							) : (
 								<p>No results found</p>
 							)}

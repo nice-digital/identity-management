@@ -1,5 +1,5 @@
-Feature: Admin Page Dispalys Users
-  As a user of NICE Identity Admin page
+Feature: Manage Users Page Dispalys Users
+  As a user of NICE Identity Manage Users page
   We expect to be presented with a list of users
 
   Background:
@@ -7,7 +7,7 @@ Feature: Admin Page Dispalys Users
     When I log into accounts with username "ACCOUNTS_EMAIL5" and password "ACCOUNTS_PASSWORD2"
     Given I click on the manage user button
 
-  Scenario: Navigate to Identity Admin homepage
+  Scenario: Navigate to Manage Users
     Given I expect user "Kristin Patrick" to exist in the list
     When I click on the first user in the list
     And I click on the delete user link
