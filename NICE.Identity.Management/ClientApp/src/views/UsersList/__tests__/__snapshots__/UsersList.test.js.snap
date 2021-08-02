@@ -97,347 +97,355 @@ Array [
           />
         </div>
       </div>
-      <div
-        className="filter-panel undefined"
-      >
-        <h2
-          className="filter-panel__heading"
-        >
-          <a
-            aria-controls="filter-panel-body"
-            aria-expanded="true"
-            href="#filter-panel-body"
-          />
-        </h2>
+      <div>
         <div
-          aria-hidden={false}
-          className="filter-panel__body"
-          id="filter-panel-body"
+          className="filter-panel undefined"
         >
-          <div
-            className="filter-group"
+          <h2
+            className="filter-panel__heading"
           >
-            <h3
-              className="filter-group__heading"
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
             >
-              <button
-                aria-controls="group-status"
-                aria-expanded={true}
-                onClick={[Function]}
-                type="button"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  id="group-heading-status"
+                <button
+                  aria-controls="group-status"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
+                  <span
+                    id="group-heading-status"
+                  >
+                    Status
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-status"
+              >
+                <legend>
                   Status
-                </span>
-              </button>
-            </h3>
-            <fieldset
-              aria-hidden={false}
-              className="filter-group__options"
-              id="group-status"
-            >
-              <legend>
-                Status
-              </legend>
-              <label
-                className="filter-option"
-                htmlFor="filter_status_active"
-              >
-                <input
-                  checked={false}
-                  id="filter_status_active"
-                  name="status"
-                  onChange={[Function]}
-                  title="Status - Active"
-                  type="checkbox"
-                  value="Active"
-                />
-                <span
-                  className="filter-option__text"
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_status_active"
                 >
-                  Active
-                </span>
-              </label>
-              <label
-                className="filter-option"
-                htmlFor="filter_status_pending"
-              >
-                <input
-                  checked={false}
-                  id="filter_status_pending"
-                  name="status"
-                  onChange={[Function]}
-                  title="Status - Pending"
-                  type="checkbox"
-                  value="Pending"
-                />
-                <span
-                  className="filter-option__text"
+                  <input
+                    checked={false}
+                    id="filter_status_active"
+                    name="status"
+                    onChange={[Function]}
+                    title="Status - Active"
+                    type="checkbox"
+                    value="Active"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Active
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_status_pending"
                 >
-                  Pending
-                </span>
-              </label>
-              <label
-                className="filter-option"
-                htmlFor="filter_status_locked"
-              >
-                <input
-                  checked={false}
-                  id="filter_status_locked"
-                  name="status"
-                  onChange={[Function]}
-                  title="Status - Locked"
-                  type="checkbox"
-                  value="Locked"
-                />
-                <span
-                  className="filter-option__text"
+                  <input
+                    checked={false}
+                    id="filter_status_pending"
+                    name="status"
+                    onChange={[Function]}
+                    title="Status - Pending"
+                    type="checkbox"
+                    value="Pending"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Pending
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_status_locked"
                 >
-                  Locked
-                </span>
-              </label>
-            </fieldset>
+                  <input
+                    checked={false}
+                    id="filter_status_locked"
+                    name="status"
+                    onChange={[Function]}
+                    title="Status - Locked"
+                    type="checkbox"
+                    value="Locked"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Locked
+                  </span>
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
-      <div
-        className="filter-panel undefined"
-      >
-        <h2
-          className="filter-panel__heading"
-        >
-          <a
-            aria-controls="filter-panel-body"
-            aria-expanded="true"
-            href="#filter-panel-body"
-          />
-        </h2>
+      <div>
         <div
-          aria-hidden={false}
-          className="filter-panel__body"
-          id="filter-panel-body"
+          className="filter-panel undefined"
         >
-          <div
-            className="filter-group"
+          <h2
+            className="filter-panel__heading"
           >
-            <h3
-              className="filter-group__heading"
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
             >
-              <button
-                aria-controls="group-dev"
-                aria-expanded={true}
-                onClick={[Function]}
-                type="button"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  id="group-heading-dev"
+                <button
+                  aria-controls="group-dev"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
+                  <span
+                    id="group-heading-dev"
+                  >
+                    Dev
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-dev"
+              >
+                <legend>
                   Dev
-                </span>
-              </button>
-            </h3>
-            <fieldset
-              aria-hidden={false}
-              className="filter-group__options"
-              id="group-dev"
-            >
-              <legend>
-                Dev
-              </legend>
-              <label
-                className="filter-option"
-                htmlFor="filter_dev_3"
-              >
-                <input
-                  checked={false}
-                  id="filter_dev_3"
-                  name="dev"
-                  onChange={[Function]}
-                  title="Dev - Comment Collection"
-                  type="checkbox"
-                  value="3"
-                />
-                <span
-                  className="filter-option__text"
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_dev_3"
                 >
-                  Comment Collection
-                </span>
-              </label>
-              <label
-                className="filter-option"
-                htmlFor="filter_dev_1"
-              >
-                <input
-                  checked={false}
-                  id="filter_dev_1"
-                  name="dev"
-                  onChange={[Function]}
-                  title="Dev - EPPI Reviewer"
-                  type="checkbox"
-                  value="1"
-                />
-                <span
-                  className="filter-option__text"
+                  <input
+                    checked={false}
+                    id="filter_dev_3"
+                    name="dev"
+                    onChange={[Function]}
+                    title="Dev - Comment Collection"
+                    type="checkbox"
+                    value="3"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Comment Collection
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_dev_1"
                 >
-                  EPPI Reviewer
-                </span>
-              </label>
-            </fieldset>
+                  <input
+                    checked={false}
+                    id="filter_dev_1"
+                    name="dev"
+                    onChange={[Function]}
+                    title="Dev - EPPI Reviewer"
+                    type="checkbox"
+                    value="1"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    EPPI Reviewer
+                  </span>
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
-      <div
-        className="filter-panel undefined"
-      >
-        <h2
-          className="filter-panel__heading"
-        >
-          <a
-            aria-controls="filter-panel-body"
-            aria-expanded="true"
-            href="#filter-panel-body"
-          />
-        </h2>
+      <div>
         <div
-          aria-hidden={false}
-          className="filter-panel__body"
-          id="filter-panel-body"
+          className="filter-panel undefined"
         >
-          <div
-            className="filter-group"
+          <h2
+            className="filter-panel__heading"
           >
-            <h3
-              className="filter-group__heading"
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
             >
-              <button
-                aria-controls="group-test"
-                aria-expanded={true}
-                onClick={[Function]}
-                type="button"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  id="group-heading-test"
+                <button
+                  aria-controls="group-test"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
+                  <span
+                    id="group-heading-test"
+                  >
+                    Test
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-test"
+              >
+                <legend>
                   Test
-                </span>
-              </button>
-            </h3>
-            <fieldset
-              aria-hidden={false}
-              className="filter-group__options"
-              id="group-test"
-            >
-              <legend>
-                Test
-              </legend>
-              <label
-                className="filter-option"
-                htmlFor="filter_test_2"
-              >
-                <input
-                  checked={false}
-                  id="filter_test_2"
-                  name="test"
-                  onChange={[Function]}
-                  title="Test - EPPI Reviewer"
-                  type="checkbox"
-                  value="2"
-                />
-                <span
-                  className="filter-option__text"
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_test_2"
                 >
-                  EPPI Reviewer
-                </span>
-              </label>
-              <label
-                className="filter-option"
-                htmlFor="filter_test_5"
-              >
-                <input
-                  checked={false}
-                  id="filter_test_5"
-                  name="test"
-                  onChange={[Function]}
-                  title="Test - Idam Docker"
-                  type="checkbox"
-                  value="5"
-                />
-                <span
-                  className="filter-option__text"
+                  <input
+                    checked={false}
+                    id="filter_test_2"
+                    name="test"
+                    onChange={[Function]}
+                    title="Test - EPPI Reviewer"
+                    type="checkbox"
+                    value="2"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    EPPI Reviewer
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_test_5"
                 >
-                  Idam Docker
-                </span>
-              </label>
-            </fieldset>
+                  <input
+                    checked={false}
+                    id="filter_test_5"
+                    name="test"
+                    onChange={[Function]}
+                    title="Test - Idam Docker"
+                    type="checkbox"
+                    value="5"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Idam Docker
+                  </span>
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
-      <div
-        className="filter-panel undefined"
-      >
-        <h2
-          className="filter-panel__heading"
-        >
-          <a
-            aria-controls="filter-panel-body"
-            aria-expanded="true"
-            href="#filter-panel-body"
-          />
-        </h2>
+      <div>
         <div
-          aria-hidden={false}
-          className="filter-panel__body"
-          id="filter-panel-body"
+          className="filter-panel undefined"
         >
-          <div
-            className="filter-group"
+          <h2
+            className="filter-panel__heading"
           >
-            <h3
-              className="filter-group__heading"
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
             >
-              <button
-                aria-controls="group-alpha"
-                aria-expanded={true}
-                onClick={[Function]}
-                type="button"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  id="group-heading-alpha"
+                <button
+                  aria-controls="group-alpha"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
+                  <span
+                    id="group-heading-alpha"
+                  >
+                    Alpha
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-alpha"
+              >
+                <legend>
                   Alpha
-                </span>
-              </button>
-            </h3>
-            <fieldset
-              aria-hidden={false}
-              className="filter-group__options"
-              id="group-alpha"
-            >
-              <legend>
-                Alpha
-              </legend>
-              <label
-                className="filter-option"
-                htmlFor="filter_alpha_4"
-              >
-                <input
-                  checked={false}
-                  id="filter_alpha_4"
-                  name="alpha"
-                  onChange={[Function]}
-                  title="Alpha - Comment Collection"
-                  type="checkbox"
-                  value="4"
-                />
-                <span
-                  className="filter-option__text"
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_alpha_4"
                 >
-                  Comment Collection
-                </span>
-              </label>
-            </fieldset>
+                  <input
+                    checked={false}
+                    id="filter_alpha_4"
+                    name="alpha"
+                    onChange={[Function]}
+                    title="Alpha - Comment Collection"
+                    type="checkbox"
+                    value="4"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Comment Collection
+                  </span>
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
