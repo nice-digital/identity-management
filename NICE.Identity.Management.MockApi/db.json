@@ -126,7 +126,7 @@
       "environment": {
         "id": 73,
         "name": "Alpha",
-        "order": 0
+        "order": 3
       },
       "service":{
         "id": 2,
@@ -167,7 +167,7 @@
       "environment": {
         "id": 72,
         "name": "Test",
-        "order": 0
+        "order": 4
       },
       "service":{
         "id": 1,
@@ -208,7 +208,7 @@
       "environment": {
         "id": 72,
         "name": "Test",
-        "order": 0
+        "order": 4
       },
       "service":{
         "id": 3,
@@ -237,7 +237,7 @@
       "environment": {
         "id": 71,
         "name": "Dev",
-        "order": 0
+        "order": 5
       },
       "service":{
         "id": 2,
@@ -278,7 +278,7 @@
       "environment": {
         "id": 71,
         "name": "Dev",
-        "order": 0
+        "order": 5
       },
       "service":{
         "id": 1,
