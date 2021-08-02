@@ -15,25 +15,21 @@ import {
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
-import { UserType, HistoryType } from "../../models/types";
+import { HistoryType, WebsiteType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterStatus } from "../../components/FilterStatus/FilterStatus";
-import { UserStatus } from "../../components/UserStatus/UserStatus";
+import { FilterBox } from "../../components/FilterBox/FilterBox";
+import { WebsiteEnvironment } from "../../components/WebsiteEnvironment/WebsiteEnvironment";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
 
-import styles from "./UsersList.module.scss";
+import styles from "./ServicesList.module.scss";
 
 type CardMetaData = {
 	label?: string;
 	value: React.ReactNode;
 };
 
-type statusFilterOptions = {
-	[key: string]: (user: UserType) => boolean;
-};
-
-type UsersListProps = {
+type ServicesListProps = {
 	basename: string;
 	location: {
 		pathname: string;
@@ -42,20 +38,24 @@ type UsersListProps = {
 	history: HistoryType;
 };
 
-type UsersListState = {
+type ServicesListState = {
 	path: string;
-	originalUsers: Array<UserType>;
-	users: Array<UserType>;
+	originalWebsites: Array<WebsiteType>;
+	websites: Array<WebsiteType>;
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
-	statusFilter?: string;
+	environmentFiltersChecked: Array<string>;
 	pageNumber: number;
 	itemsPerPage: number | string;
+	environmentsForFilter: Array<string>;
 };
 
-export class UsersList extends Component<UsersListProps, UsersListState> {
-	constructor(props: UsersListProps) {
+export class ServicesList extends Component<
+	ServicesListProps,
+	ServicesListState
+> {
+	constructor(props: ServicesListProps) {
 		super(props);
 
 		const querystring = this.props.location.search;
@@ -80,26 +80,46 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 
 		this.state = {
 			path: "",
-			originalUsers: [],
-			users: [],
+			originalWebsites: [],
+			websites: [],
 			isLoading: true,
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
+			environmentFiltersChecked: [],
+			environmentsForFilter: [],
 		};
 
-		document.title = "NICE Accounts - Users list";
+		document.title = "NICE Accounts - Services list";
 	}
 
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const users = await fetchData(Endpoints.usersList);
+		const websites = await fetchData(Endpoints.websitesList);
 
-		if (isDataError(users)) {
-			this.setState({ error: users });
+		if (isDataError(websites)) {
+			this.setState({ error: websites });
+		} else {
+			const allEnvironments = websites.map(
+				(website: { environment: { name: string } }) =>
+					website.environment.name,
+			);
+
+			const environmentsForFilter = allEnvironments.reduce(function (
+				accumulatedEnvironments: string[],
+				currentEnvironment: string,
+			) {
+				if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
+					accumulatedEnvironments.push(currentEnvironment);
+				}
+				return accumulatedEnvironments;
+			},
+			[]);
+
+			this.setState({ environmentsForFilter });
 		}
 
-		this.setState({ originalUsers: users, users, isLoading: false });
+		this.setState({ originalWebsites: websites, websites, isLoading: false });
 	}
 
 	pastPageRange = (
@@ -121,91 +141,105 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		return pageNumber;
 	};
 
-	filterUsersByStatus = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	filterWebsitesByEnvironment = (environment: string): void => {
 		this.setState({ isLoading: true });
 
-		const statusFilter = e.target.value;
+		let environmentFiltersChecked = this.state.environmentFiltersChecked;
 
-		let users = this.state.originalUsers,
-			pageNumber = this.state.pageNumber;
+		environmentFiltersChecked = environmentFiltersChecked.includes(environment)
+			? environmentFiltersChecked.filter(
+					(environmentFilter) => environmentFilter !== environment,
+					)
+			: environmentFiltersChecked.concat(environment);
 
 		const itemsPerPage = Number(this.state.itemsPerPage)
 			? Number(this.state.itemsPerPage)
 			: this.state.itemsPerPage;
 
-		if (statusFilter) {
-			users = this.usersByStatus(statusFilter, users);
-		}
-
-		pageNumber = this.pastPageRange(
-			itemsPerPage,
-			pageNumber,
-			this.state.users.length,
-		);
-
-		this.setState({ users, statusFilter, pageNumber, isLoading: false });
-	};
-
-	filterUsersBySearch = async (searchQuery: string): Promise<void> => {
-		this.setState({ isLoading: true });
-
-		const originalUsers = await fetchData(
-			`${Endpoints.usersList}?q=${searchQuery}`,
-		);
-
-		let users = originalUsers,
+		let websites = this.state.originalWebsites,
 			pageNumber = this.state.pageNumber;
 
-		const itemsPerPage = Number(this.state.itemsPerPage)
-			? Number(this.state.itemsPerPage)
-			: this.state.itemsPerPage;
-
-		if (isDataError(originalUsers)) {
-			this.setState({ error: originalUsers });
-		}
-
-		if (this.state.statusFilter) {
-			users = this.usersByStatus(this.state.statusFilter, users);
-		}
+		if (environmentFiltersChecked.length)
+			websites = this.websitesByEnvironment(
+				environmentFiltersChecked,
+				websites,
+			);
 
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
 			pageNumber,
-			this.state.users.length,
+			this.state.websites.length,
 		);
 
 		this.setState({
-			originalUsers,
-			users,
+			websites,
+			environmentFiltersChecked,
+			pageNumber,
+			isLoading: false,
+		});
+	};
+
+	filterWebsitesBySearch = async (searchQuery: string): Promise<void> => {
+		this.setState({ isLoading: true });
+
+		const originalWebsites = await fetchData(
+			`${Endpoints.websitesList}?q=${searchQuery}`,
+		);
+
+		let websites = originalWebsites,
+			pageNumber = this.state.pageNumber;
+
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
+
+		if (isDataError(originalWebsites)) {
+			this.setState({ error: originalWebsites });
+		}
+
+		if (this.state.environmentFiltersChecked.length) {
+			websites = this.websitesByEnvironment(
+				this.state.environmentFiltersChecked,
+				websites,
+			);
+		}
+
+		pageNumber = this.pastPageRange(
+			itemsPerPage,
+			pageNumber,
+			this.state.websites.length,
+		);
+
+		this.setState({
+			originalWebsites,
+			websites,
 			searchQuery,
 			pageNumber,
 			isLoading: false,
 		});
 	};
 
-	usersByStatus = (
-		statusFilter: string,
-		users: Array<UserType>,
-	): Array<UserType> => {
-		const statusFilterOptions: statusFilterOptions = {
-			active: (user) => !user.isLockedOut && user.hasVerifiedEmailAddress,
-			pending: (user) => !user.hasVerifiedEmailAddress,
-			locked: (user) => user.isLockedOut,
-		};
+	websitesByEnvironment = (
+		environmentFiltersChecked: Array<string>,
+		websites: Array<WebsiteType>,
+	): Array<WebsiteType> => {
+		return (websites = websites.filter((website) => {
+			const websiteEnvironment = website.environment.name;
 
-		const filteredUsers = users.filter(statusFilterOptions[statusFilter]);
-
-		return filteredUsers;
+			if (environmentFiltersChecked.includes(websiteEnvironment)) {
+				return website;
+			}
+		}));
 	};
 
 	getPaginateStartAndFinishPosition = (
-		consultationsCount: number,
+		websitesCount: number,
 		pageNumber: number,
 		itemsPerPage: number | string,
 	): { start: number; finish: number } => {
 		const paginationPositions = {
 			start: 0,
-			finish: consultationsCount,
+			finish: websitesCount,
 		};
 
 		const itemAmountIsNumber = Number(itemsPerPage);
@@ -213,25 +247,25 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		if (itemAmountIsNumber) {
 			paginationPositions.start = (pageNumber - 1) * itemAmountIsNumber;
 			paginationPositions.finish =
-				paginationPositions.start + itemAmountIsNumber <= consultationsCount
+				paginationPositions.start + itemAmountIsNumber <= websitesCount
 					? paginationPositions.start + itemAmountIsNumber
-					: consultationsCount;
+					: websitesCount;
 		}
 
 		return paginationPositions;
 	};
 
 	getPaginationText = (
-		usersCount: number,
+		websitesCount: number,
 		start: number,
 		finish: number,
 	): string => {
 		const amountPerPage = finish - start;
 		const paginationExtract =
-			usersCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
+			websitesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
 
-		return `Showing ${paginationExtract}${usersCount} user${
-			usersCount === 1 ? "" : "s"
+		return `Showing ${paginationExtract}${websitesCount} service${
+			websitesCount === 1 ? "" : "s"
 		}`;
 	};
 
@@ -245,7 +279,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 		pageNumber = this.pastPageRange(
 			itemsPerPage,
 			pageNumber,
-			this.state.users.length,
+			this.state.websites.length,
 		);
 
 		path = appendQueryParameter(path, "amount", itemsPerPage.toString());
@@ -279,24 +313,31 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 	};
 
 	render(): JSX.Element {
-		const { users, searchQuery, error, isLoading, pageNumber, itemsPerPage } =
-			this.state;
+		const {
+			websites,
+			searchQuery,
+			error,
+			isLoading,
+			pageNumber,
+			itemsPerPage,
+			environmentFiltersChecked,
+		} = this.state;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
-			users.length,
+			websites.length,
 			pageNumber,
 			itemsPerPage,
 		);
 
 		const paginationText = this.getPaginationText(
-			users.length,
+			websites.length,
 			paginationPositions.start,
 			paginationPositions.finish,
 		);
 
-		const usersPaginated = users.length
-			? users.slice(paginationPositions.start, paginationPositions.finish)
-			: users;
+		const websitesPaginated = websites.length
+			? websites.slice(paginationPositions.start, paginationPositions.finish)
+			: websites;
 
 		return (
 			<>
@@ -304,56 +345,66 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 					<Breadcrumb to="/overview" elementType={Link}>
 						Administration
 					</Breadcrumb>
-					<Breadcrumb>Users</Breadcrumb>
+					<Breadcrumb>Services</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader heading="Users" />
+				<PageHeader heading="Services" />
 
 				{!error ? (
 					<Grid>
 						<GridItem cols={12} md={3}>
-							<FilterSearch onInputChange={this.filterUsersBySearch} label={"Filter by name or email address"}/>
-							<FilterStatus onCheckboxChange={this.filterUsersByStatus} />
+							<FilterSearch
+								onInputChange={this.filterWebsitesBySearch}
+								label={"Filter by service name or URL"}
+							/>
+
+							<FilterBox
+								name="Environments"
+								filters={this.state.environmentsForFilter}
+								selected={environmentFiltersChecked}
+								onCheckboxChange={this.filterWebsitesByEnvironment}
+								hideFilterPanelHeading={true}
+							/>
 						</GridItem>
-						<GridItem cols={12} md={9} aria-busy={!users.length}>
+						<GridItem cols={12} md={9} aria-busy={!websites.length}>
 							{isLoading ? (
 								<p>Loading...</p>
-							) : users.length ? (
+							) : websites.length ? (
 								<>
-									<h2 className={styles.usersListSummary}>{paginationText}</h2>
-									<ul className="list--unstyled" data-qa-sel="list-of-users">
-										{usersPaginated.map((user) => {
-											const {
-												userId,
-												emailAddress,
-												nameIdentifier,
-												firstName,
-												lastName,
-											} = user;
-											const usersListHeading = {
-												headingText: `${firstName} ${lastName}`,
-												link: {
-													elementType: Link,
-													destination: `/users/${userId}`,
-												},
+									<h2
+										className={styles.servicesListSummary}
+										data-qa-sel="services-returned"
+									>
+										{paginationText}
+									</h2>
+									<ul className="list--unstyled" data-qa-sel="list-of-websites">
+										{websitesPaginated.map((website) => {
+											const { id, host, service } = website;
+											const servicesListHeading = {
+												headingText: `${service.name}`,
+												// Add this in when IDAM-441 is done
+												// link: {
+												// 	elementType: Link,
+												// 	destination: `/websites/${id}`,
+												// },
 											};
 
-											const usersListMetadata: Array<CardMetaData> = [
+											const servicesListMetadata: Array<CardMetaData> = [
 												{
-													value: <UserStatus user={user} />,
+													value: <WebsiteEnvironment website={website} />,
 												},
 												{
-													label: "Email address",
-													value: emailAddress,
+													label: "Website",
+													value: host,
 												},
 											];
 
 											return (
-												<li key={nameIdentifier}>
+												<li key={id}>
 													<Card
-														{...usersListHeading}
-														metadata={usersListMetadata}
-														key={nameIdentifier}
+														{...servicesListHeading}
+														metadata={servicesListMetadata}
+														key={id}
 													/>
 												</li>
 											);
@@ -363,7 +414,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										onChangePage={this.changePage}
 										onChangeAmount={this.changeAmount}
 										itemsPerPage={itemsPerPage}
-										consultationCount={users.length}
+										consultationCount={websites.length}
 										currentPage={pageNumber}
 									/>
 								</>

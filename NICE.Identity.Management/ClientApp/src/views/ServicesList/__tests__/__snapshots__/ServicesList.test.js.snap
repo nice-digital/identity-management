@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsersList should match the snapshot after data has been loaded 1`] = `
+exports[`ServicesList should match the snapshot after data has been loaded 1`] = `
 Array [
   Array [
     <nav
@@ -24,7 +24,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <span>
-            Users
+            Services
           </span>
         </li>
       </ol>
@@ -48,7 +48,7 @@ Array [
       \\"@type\\": \\"ListItem\\",
       \\"position\\": 2,
       \\"item\\": {
-        \\"name\\": \\"Users\\"
+        \\"name\\": \\"Services\\"
       }
     }
   ]
@@ -64,7 +64,7 @@ Array [
     <h1
       className="page-header__heading"
     >
-      Users
+      Services
     </h1>
   </div>,
   <div
@@ -83,7 +83,7 @@ Array [
             className="input__label"
             htmlFor="filter-search"
           >
-            Filter by name or email address
+            Filter by service name or URL
           </label>
           <input
             autoComplete="off"
@@ -98,100 +98,113 @@ Array [
         </div>
       </div>
       <div
-        className="panel"
+        className="filter-panel-hide-heading"
       >
-        <form>
+        <div
+          className="filter-panel undefined"
+        >
+          <h2
+            className="filter-panel__heading"
+          >
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
           <div
-            aria-labelledby="filter-header"
-            role="group"
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
           >
             <div
-              id="filter-header"
+              className="filter-group"
             >
-              <strong>
-                Show:
-              </strong>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                defaultChecked={true}
-                id="filter-status-all"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value=""
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-all"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  className="visually-hidden"
+                <button
+                  aria-controls="group-environments"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
-                  Show: 
-                </span>
-                All
-              </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-active"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="active"
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-active"
+                  <span
+                    id="group-heading-environments"
+                  >
+                    Environments
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-environments"
               >
-                Active
-              </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-pending"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="pending"
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-pending"
-              >
-                Pending
-              </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-locked"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="locked"
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-locked"
-              >
-                Locked
-              </label>
+                <legend>
+                  Environments
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_alpha"
+                >
+                  <input
+                    checked={false}
+                    id="filter_environments_alpha"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Alpha"
+                    type="checkbox"
+                    value="Alpha"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Alpha
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_test"
+                >
+                  <input
+                    checked={false}
+                    id="filter_environments_test"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Test"
+                    type="checkbox"
+                    value="Test"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Test
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_dev"
+                >
+                  <input
+                    checked={false}
+                    id="filter_environments_dev"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Dev"
+                    type="checkbox"
+                    value="Dev"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Dev
+                  </span>
+                </label>
+              </fieldset>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
     <div
@@ -199,13 +212,14 @@ Array [
       data-g="12 md:9"
     >
       <h2
-        className="usersListSummary"
+        className="servicesListSummary"
+        data-qa-sel="services-returned"
       >
-        Showing 4 users
+        Showing 5 services
       </h2>
       <ul
         className="list--unstyled"
-        data-qa-sel="list-of-users"
+        data-qa-sel="list-of-websites"
       >
         <li>
           <article
@@ -218,12 +232,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/users/1"
-                    onClick={[Function]}
-                  >
-                    Kristin Patrick
-                  </a>
+                  Comment Collection
                 </p>
               </header>,
               <dl
@@ -234,10 +243,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
+                      className="tag tag--alpha"
+                      data-qa-sel="environment-alpha"
                     >
-                      Active
+                      Alpha
                     </span>
                   </dd>
                 </div>
@@ -247,10 +256,10 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    kristin.patrick@example.com
+                    alpha-comments.nice.org.uk
                   </dd>
                 </div>
               </dl>,
@@ -268,12 +277,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/users/2"
-                    onClick={[Function]}
-                  >
-                    Thomas Holding
-                  </a>
+                  EPPI Reviewer
                 </p>
               </header>,
               <dl
@@ -284,10 +288,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
+                      className="tag tag--new"
+                      data-qa-sel="environment-test"
                     >
-                      Active
+                      Test
                     </span>
                   </dd>
                 </div>
@@ -297,10 +301,10 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    thomas.holding@example.com
+                    test-eppi.nice.org.uk
                   </dd>
                 </div>
               </dl>,
@@ -318,12 +322,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/users/3"
-                    onClick={[Function]}
-                  >
-                    Aisha Bartlett
-                  </a>
+                  Idam Docker
                 </p>
               </header>,
               <dl
@@ -334,10 +333,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
+                      className="tag tag--new"
+                      data-qa-sel="environment-test"
                     >
-                      Active
+                      Test
                     </span>
                   </dd>
                 </div>
@@ -347,10 +346,10 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    aisha.bartlett@example.com
+                    test-idam
                   </dd>
                 </div>
               </dl>,
@@ -368,12 +367,7 @@ Array [
                 <p
                   className="card__heading"
                 >
-                  <a
-                    href="/users/4"
-                    onClick={[Function]}
-                  >
-                    Theo Bradford
-                  </a>
+                  Comment Collection
                 </p>
               </header>,
               <dl
@@ -384,10 +378,10 @@ Array [
                 >
                   <dd>
                     <span
-                      className="tag"
-                      data-qa-sel="user-status"
+                      className="tag tag--updated"
+                      data-qa-sel="environment-dev"
                     >
-                      Locked
+                      Dev
                     </span>
                   </dd>
                 </div>
@@ -397,10 +391,55 @@ Array [
                   <dt
                     className="visually-hidden"
                   >
-                    Email address
+                    Website
                   </dt>
                   <dd>
-                    theo.bradford@example.com
+                    dev-comments.nice.org.uk
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  EPPI Reviewer
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--updated"
+                      data-qa-sel="environment-dev"
+                    >
+                      Dev
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    dev-eppi.nice.org.uk
                   </dd>
                 </div>
               </dl>,
@@ -451,7 +490,7 @@ Array [
 ]
 `;
 
-exports[`UsersList should show error message when fetch returns 401 error 1`] = `
+exports[`ServicesList should show error message when fetch returns 401 error 1`] = `
 Array [
   Array [
     <nav
@@ -475,7 +514,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <span>
-            Users
+            Services
           </span>
         </li>
       </ol>
@@ -499,7 +538,7 @@ Array [
       \\"@type\\": \\"ListItem\\",
       \\"position\\": 2,
       \\"item\\": {
-        \\"name\\": \\"Users\\"
+        \\"name\\": \\"Services\\"
       }
     }
   ]
@@ -515,7 +554,7 @@ Array [
     <h1
       className="page-header__heading"
     >
-      Users
+      Services
     </h1>
   </div>,
   <div
@@ -531,7 +570,7 @@ Array [
 ]
 `;
 
-exports[`UsersList should show error message when fetch returns 500 error 1`] = `
+exports[`ServicesList should show error message when fetch returns 500 error 1`] = `
 Array [
   Array [
     <nav
@@ -555,7 +594,7 @@ Array [
           className="breadcrumbs__crumb"
         >
           <span>
-            Users
+            Services
           </span>
         </li>
       </ol>
@@ -579,7 +618,7 @@ Array [
       \\"@type\\": \\"ListItem\\",
       \\"position\\": 2,
       \\"item\\": {
-        \\"name\\": \\"Users\\"
+        \\"name\\": \\"Services\\"
       }
     }
   ]
@@ -595,7 +634,7 @@ Array [
     <h1
       className="page-header__heading"
     >
-      Users
+      Services
     </h1>
   </div>,
   <div
