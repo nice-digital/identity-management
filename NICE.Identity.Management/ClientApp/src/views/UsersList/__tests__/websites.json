@@ -1,0 +1,195 @@
+[
+	{
+		"id": 4,
+		"serviceId": 2,
+		"environmentId": 73,
+		"host": "alpha-comments.nice.org.uk",
+		"environment": {
+			"id": 73,
+			"name": "Alpha",
+			"order": 3
+		},
+		"service": {
+			"id": 2,
+			"name": "Comment Collection",
+			"websites": [
+				{
+					"id": 4,
+					"serviceId": 2,
+					"environmentId": 73,
+					"host": "alpha-comments.nice.org.uk",
+					"environment": {
+						"id": 73,
+						"name": "Alpha",
+						"order": 0
+					},
+					"service": null
+				},
+				{
+					"id": 3,
+					"serviceId": 2,
+					"environmentId": 71,
+					"host": "dev-comments.nice.org.uk",
+					"environment": {
+						"id": 71,
+						"name": "Dev",
+						"order": 0
+					},
+					"service": null
+				}
+			]
+		}
+	},
+	{
+		"id": 2,
+		"serviceId": 1,
+		"environmentId": 72,
+		"host": "test-eppi.nice.org.uk",
+		"environment": {
+			"id": 72,
+			"name": "Test",
+			"order": 2
+		},
+		"service": {
+			"id": 1,
+			"name": "EPPI Reviewer",
+			"websites": [
+				{
+					"id": 2,
+					"serviceId": 1,
+					"environmentId": 72,
+					"host": "test-eppi.nice.org.uk",
+					"environment": {
+						"id": 72,
+						"name": "Test",
+						"order": 0
+					},
+					"service": null
+				},
+				{
+					"id": 1,
+					"serviceId": 1,
+					"environmentId": 71,
+					"host": "dev-eppi.nice.org.uk",
+					"environment": {
+						"id": 71,
+						"name": "Dev",
+						"order": 0
+					},
+					"service": null
+				}
+			]
+		}
+	},
+	{
+		"id": 5,
+		"serviceId": 3,
+		"environmentId": 72,
+		"host": "test-idam",
+		"environment": {
+			"id": 72,
+			"name": "Test",
+			"order": 0
+		},
+		"service": {
+			"id": 3,
+			"name": "Idam Docker",
+			"websites": [
+				{
+					"id": 5,
+					"serviceId": 3,
+					"environmentId": 72,
+					"host": "test-idam",
+					"environment": {
+						"id": 72,
+						"name": "Test",
+						"order": 0
+					},
+					"service": null
+				}
+			]
+		}
+	},
+	{
+		"id": 3,
+		"serviceId": 2,
+		"environmentId": 71,
+		"host": "dev-comments.nice.org.uk",
+		"environment": {
+			"id": 71,
+			"name": "Dev",
+			"order": 0
+		},
+		"service": {
+			"id": 2,
+			"name": "Comment Collection",
+			"websites": [
+				{
+					"id": 3,
+					"serviceId": 2,
+					"environmentId": 71,
+					"host": "dev-comments.nice.org.uk",
+					"environment": {
+						"id": 71,
+						"name": "Dev",
+						"order": 0
+					},
+					"service": null
+				},
+				{
+					"id": 4,
+					"serviceId": 2,
+					"environmentId": 73,
+					"host": "alpha-comments.nice.org.uk",
+					"environment": {
+						"id": 73,
+						"name": "Alpha",
+						"order": 0
+					},
+					"service": null
+				}
+			]
+		}
+	},
+	{
+		"id": 1,
+		"serviceId": 1,
+		"environmentId": 71,
+		"host": "dev-eppi.nice.org.uk",
+		"environment": {
+			"id": 71,
+			"name": "Dev",
+			"order": 0
+		},
+		"service": {
+			"id": 1,
+			"name": "EPPI Reviewer",
+			"websites": [
+				{
+					"id": 1,
+					"serviceId": 1,
+					"environmentId": 71,
+					"host": "dev-eppi.nice.org.uk",
+					"environment": {
+						"id": 71,
+						"name": "Dev",
+						"order": 0
+					},
+					"service": null
+				},
+				{
+					"id": 2,
+					"serviceId": 1,
+					"environmentId": 72,
+					"host": "test-eppi.nice.org.uk",
+					"environment": {
+						"id": 72,
+						"name": "Test",
+						"order": 0
+					},
+					"service": null
+				}
+			]
+		}
+	}
+]

@@ -1,4 +1,3 @@
-
 {
 	"logger": {},
 	"fontBaseName": "nice-icons",
@@ -18,30 +17,13 @@
 		"baseClass": "icon",
 		"classPrefix": "icon--"
 	},
-	"stylesheets": [
-		"scss"
-	],
+	"stylesheets": ["scss"],
 	"htmlDemo": true,
 	"htmlDemoTemplate": "templates/nice-icons.tmpl.html",
 	"htmlDemoFilename": "demo",
-	"styles": [
-		"font",
-		"icon"
-	],
-	"types": [
-		"eot",
-		"woff2",
-		"woff",
-		"ttf",
-		"svg"
-	],
-	"order": [
-		"eot",
-		"woff2",
-		"woff",
-		"ttf",
-		"svg"
-	],
+	"styles": ["font", "icon"],
+	"types": ["eot", "woff2", "woff", "ttf", "svg"],
+	"order": ["eot", "woff2", "woff", "ttf", "svg"],
 	"embed": [],
 	"engine": "node",
 	"autoHint": false,
@@ -231,9 +213,7 @@
 	"fontSrc1": "url(\"/fonts/nice-icons.eot?55bf026e1b793243f075116b452ac8ce\")",
 	"fontSrc2": "url(\"/fonts/nice-icons.eot?55bf026e1b793243f075116b452ac8ce#iefix\") format(\"embedded-opentype\"),\n\t\turl(\"/fonts/nice-icons.woff2?55bf026e1b793243f075116b452ac8ce\") format(\"woff2\"),\n\t\turl(\"/fonts/nice-icons.woff?55bf026e1b793243f075116b452ac8ce\") format(\"woff\"),\n\t\turl(\"/fonts/nice-icons.ttf?55bf026e1b793243f075116b452ac8ce\") format(\"truetype\"),\n\t\turl(\"/fonts/nice-icons.svg?55bf026e1b793243f075116b452ac8ce#nice-icons\") format(\"svg\")",
 	"fontRawSrcs": [
-		[
-			"url(\"/fonts/nice-icons.eot?55bf026e1b793243f075116b452ac8ce\")"
-		],
+		["url(\"/fonts/nice-icons.eot?55bf026e1b793243f075116b452ac8ce\")"],
 		[
 			"url(\"/fonts/nice-icons.eot?55bf026e1b793243f075116b452ac8ce#iefix\") format(\"embedded-opentype\")",
 			"url(\"/fonts/nice-icons.woff2?55bf026e1b793243f075116b452ac8ce\") format(\"woff2\")",

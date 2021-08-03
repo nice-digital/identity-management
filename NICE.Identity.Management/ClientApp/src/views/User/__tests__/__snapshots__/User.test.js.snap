@@ -22,9 +22,7 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
     >
       Users
     </Breadcrumb>
-    <Breadcrumb
-      elementType="a"
-    >
+    <Breadcrumb>
       Kristin Patrick
     </Breadcrumb>
   </Breadcrumbs>

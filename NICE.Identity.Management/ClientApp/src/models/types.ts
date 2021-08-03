@@ -13,6 +13,7 @@ export type UserType = {
 	isInAuthenticationProvider: boolean;
 	allowContactMe: boolean;
 	isStaffMember: boolean;
+	hasAccessToWebsiteIds: Array<number>;
 };
 
 export type ServiceType = {
@@ -37,12 +38,14 @@ export type WebsiteType = {
 	serviceId: number;
 	host: string;
 	environment: EnvironmentType;
+	environmentId: number;
 	service: ServiceType;
 };
 
 export type EnvironmentType = {
 	id: number;
 	name: string;
+	order: number;
 };
 
 export type RoleType = {
