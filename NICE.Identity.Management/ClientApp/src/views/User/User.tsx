@@ -105,15 +105,25 @@ export class User extends Component<UserProps, UserState> {
 									: `${user.firstName} ${user.lastName}`
 							}
 							cta={
-								<Button
-									data-qa-sel="add-user-role-button"
-									variant="cta"
-									to={`/users/${this.props.match.params.id}/services`}
-									elementType={Link}
-									disabled={isLoading}
-								>
-									{isLoading ? "Loading..." : "Add role"}
-								</Button>
+								<>
+									<Button
+										data-qa-sel="add-user-role-button"
+										variant="cta"
+										to={`/users/${this.props.match.params.id}/services`}
+										elementType={Link}
+										disabled={isLoading}
+									>
+										{isLoading ? "Loading..." : "Add role"}
+									</Button>
+									<Button
+										data-qa-sel="edit-profile-button"
+										to={`/users/${this.props.match.params.id}/edit`}
+										elementType={Link}
+										disabled={isLoading}
+									>
+										Edit profile
+									</Button>
+								</>
 							}
 						/>
 						<Grid>
