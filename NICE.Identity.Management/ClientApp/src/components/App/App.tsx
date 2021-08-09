@@ -11,6 +11,7 @@ import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
+import { EditUser } from "./../../views/EditUser/EditUser";
 
 export class App extends React.Component {
 	render(): JSX.Element {
@@ -34,22 +35,23 @@ export class App extends React.Component {
 					aria-label="Start of content"
 					aria-live="polite"
 				>
-						<Route path="/" exact render={() => <Redirect to="/overview" />} />
-						<Route path="/overview" exact component={Overview} />
-						<Route path="/users" exact component={UsersList} />
-						<Route path="/users/:id" exact component={User} />
-						<Route path="/users/:id/delete" exact component={DeleteUser} />
-						<Route path="/users/:id/services" exact component={SelectService} />
-						<Route
-							path="/users/:id/services/:serviceId/environments"
-							exact
-							component={SelectEnvironment}
-						/>
-						<Route
-							path="/users/:id/services/:serviceId/environments/:websiteId/roles"
-							exact
-							component={SelectRoles}
-						/>
+					<Route path="/" exact render={() => <Redirect to="/overview" />} />
+					<Route path="/overview" exact component={Overview} />
+					<Route path="/users" exact component={UsersList} />
+					<Route path="/users/:id" exact component={User} />
+					<Route path="/users/:id/delete" exact component={DeleteUser} />
+					<Route path="/users/:id/services" exact component={SelectService} />
+					<Route path="/users/:id/edit" exact component={EditUser} />
+					<Route
+						path="/users/:id/services/:serviceId/environments"
+						exact
+						component={SelectEnvironment}
+					/>
+					<Route
+						path="/users/:id/services/:serviceId/environments/:websiteId/roles"
+						exact
+						component={SelectRoles}
+					/>
 				</Container>
 
 				<Footer />
