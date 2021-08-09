@@ -475,6 +475,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								filters={["Active", "Pending", "Locked"]}
 								selected={statusFiltersChecked}
 								onCheckboxChange={this.filterUsersByStatus}
+								hideFilterPanelHeading={true}
 							/>
 							{environments.map(
 								(environment: EnvironmentFilterType, index: number) => (
@@ -483,6 +484,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 										filters={environment.websites}
 										selected={websiteFiltersChecked}
 										onCheckboxChange={this.filterUsersByWebsite}
+										hideFilterPanelHeading={true}
 										key={index}
 									/>
 								),
@@ -493,7 +495,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								<p>Loading...</p>
 							) : users.length ? (
 								<>
-									<h2 className={styles.usersListSummary}>{paginationText}</h2>
+									<h2
+										className={styles.usersListSummary}
+										data-qa-sel="users-returned"
+									>
+										{paginationText}
+									</h2>
 									<ul className="list--unstyled" data-qa-sel="list-of-users">
 										{usersPaginated.map((user) => {
 											const {
