@@ -8,11 +8,18 @@ Feature: Manage Users Page Dispalys Users
     Given I click on the manage user button
 
   Scenario: Navigate to Manage Users
-    Given I expect user "Kristin Patrick" to exist in the list
+    Given I expect user "Aisha Bartlett" to exist in the list
     When I click on the first user in the list
     And I click on the delete user link
     And I click on the confirm delete button
     # Then I expect the deletion successful message "The user Kristin Patrick was successfully deleted." to be displayed
     # When I click on the back to users link
     # And I expect user "Kristin Patrick" does not exist in the list
+    # And I expect user "Kristin Patrick" does not exist in the list
+    Given I select active and pending status filter
+    Then I expect the users result list count contains "Showing 4 users"
+    Given I select alpha and test service filter
+    Then I expect the users result list count contains "Showing 1 user"
+
+
 

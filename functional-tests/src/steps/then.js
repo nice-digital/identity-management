@@ -24,6 +24,7 @@ import validateUserStatusActive, {
 } from '../support/check/validateUserStatus';
 import identityLogInPage from '../support/check/identityLogInPage';
 import validateRoleChange from '../support/check/validateRoleChange';
+import validateServiceDownloadPageResultCount,  { validateUserDownloadPageResultCount} from '../support/check/validateAdminUserServicePage';
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
 
@@ -93,8 +94,7 @@ Then(
 );
 
 Then(
-  /^I expect that the status of the user on the user list page is also Locked$/,
-  validateUserStatusListPageLocked
+  /^I expect that the status of the user on the user list page is also Locked$/, validateUserStatusListPageLocked
 );
 
 Then(
@@ -103,3 +103,12 @@ Then(
 );
 
 Then(/^I expect website "([^"]*)" to exist in the list$/, findWebsiteList);
+
+Then(
+	/^I expect the services result list count contains "([^"]*)"$/,
+	validateServiceDownloadPageResultCount
+);
+Then(
+	/^I expect the users result list count contains "([^"]*)"$/,
+	validateUserDownloadPageResultCount
+);

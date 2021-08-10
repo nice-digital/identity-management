@@ -93,4 +93,10 @@ export default {
     saveButton: '.btn',
     roleChangeSuccess: '.alert--success',
   },
+  validateAdminUserServicePage: {
+		filterByNameEmail: toDataQASelAttr("filter-search-input"),
+		filterByServiceURL: toDataQASelAttr("filter-search-input"),
+		pageServiceResultCount: toDataQASelAttr("services-returned"),
+    pageUserResultCount: toDataQASelAttr("users-returned"),
+  },
 };

@@ -10,5 +10,7 @@ Feature: Manage Services Page Dispalys Websites
   Scenario: Navigate to Manage Services homepage
     Then I expect website "EPPI Reviewer" to exist in the list
     # More things to test when IDAM-441 is done and you can navigate further
+    Given I select alpha and test status filter
+    Then I expect the services result list count contains "Showing 3 services"
 
 
