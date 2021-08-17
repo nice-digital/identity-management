@@ -15,11 +15,7 @@ Feature: Manage Users Page Dispalys Users
 # Then I expect the deletion successful message "The user Kristin Patrick was successfully deleted." to be displayed
 # When I click on the back to users link
 # And I expect user "Kristin Patrick" does not exist in the list
-# And I expect user "Kristin Patrick" does not exist in the list
-#Given I select active and pending status filter  - #this is working on local run
-#Then I expect the users result list count contains "Showing 6 users"
-#Given I select alpha and test service filter
-#Then I expect the users result list count contains "Showing 1 user"
+
 
 
 

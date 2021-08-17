@@ -8,6 +8,8 @@ import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted
 import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton";
 import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
 import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave } from "../support/action/selectService";
+import validateServiceEnvFilterChecked, { enterNameToFilter, clickCancelFilter } from "../support/check/validateFilterChecked";
+
 
 When(
   /^I log into accounts with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
@@ -104,3 +106,7 @@ When(
   /^I click Save$/,
   clickSave
 );
+
+When(/^I add name "([^"]*)" to the filter$/, enterNameToFilter);
+
+When(/^I click on the cancel filter$/, clickCancelFilter);
