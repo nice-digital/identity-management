@@ -93,4 +93,8 @@ export default {
     saveButton: '.btn',
     roleChangeSuccess: '.alert--success',
   },
+  validateAdminUserServicePage: {
+    pageServiceResultCount: toDataQASelAttr("services-returned"),
+    pageUserResultCount: toDataQASelAttr("users-returned"),
+  },
 };

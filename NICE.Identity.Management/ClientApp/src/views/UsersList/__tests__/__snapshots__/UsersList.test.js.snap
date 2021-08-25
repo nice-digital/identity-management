@@ -97,7 +97,9 @@ Array [
           />
         </div>
       </div>
-      <div>
+      <div
+        className="filter-panel-hide-heading"
+      >
         <div
           className="filter-panel undefined"
         >
@@ -204,7 +206,9 @@ Array [
           </div>
         </div>
       </div>
-      <div>
+      <div
+        className="filter-panel-hide-heading"
+      >
         <div
           className="filter-panel undefined"
         >
@@ -292,7 +296,9 @@ Array [
           </div>
         </div>
       </div>
-      <div>
+      <div
+        className="filter-panel-hide-heading"
+      >
         <div
           className="filter-panel undefined"
         >
@@ -380,7 +386,9 @@ Array [
           </div>
         </div>
       </div>
-      <div>
+      <div
+        className="filter-panel-hide-heading"
+      >
         <div
           className="filter-panel undefined"
         >
@@ -456,6 +464,7 @@ Array [
     >
       <h2
         className="usersListSummary"
+        data-qa-sel="users-returned"
       >
         Showing 4 users
       </h2>
