@@ -3,6 +3,8 @@ import { RouteComponentProps, Link } from "react-router-dom";
 
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
+import { Button } from "@nice-digital/nds-button";
+import { PageHeader } from "@nice-digital/nds-page-header";
 
 import { useFetch } from "../../helpers/useFetch";
 import { Endpoints } from "../../data/endpoints";
@@ -46,14 +48,50 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			</Breadcrumbs>
 
 			{!error ? (
-				<Grid equalHeight>
-					<GridItem cols={12} md={4} className="mb--d">
-						{`${user.firstName} ${user.lastName}`}
-					</GridItem>
-				</Grid>
+				<>
+					{isLoading ? (
+						<>
+							<PageHeader preheading="Confirm" heading="Edit user" />
+							<p>Loading...</p>
+						</>
+					) : (
+						<PageHeader
+							preheading="Personal details for"
+							heading={`${user.firstName} ${user.lastName}`}
+							cta={
+								<>
+									<Button
+										data-qa-sel="edit-user-profile"
+										variant="cta"
+										// onClick={this.handleDeleteClick}
+										// disabled={isDeleteButtonLoading}
+									>
+										Save profile
+									</Button>
+									<Button
+										to={`/users/${id}`}
+										variant="secondary"
+										elementType={Link}
+										// disabled={isDeleteButtonLoading}
+									>
+										Cancel
+									</Button>
+								</>
+							}
+						/>
+					)}
+				</>
 			) : (
 				<ErrorMessage error={error}></ErrorMessage>
 			)}
 		</>
 	);
 };
+
+{
+	/* <Grid equalHeight>
+	<GridItem cols={12} md={4} className="mb--d">
+		{`${user.firstName} ${user.lastName}`}
+	</GridItem>
+</Grid> */
+}
