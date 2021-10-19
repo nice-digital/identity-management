@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import {
 	EnvironmentType,
 	ServiceType,
@@ -11,14 +10,17 @@ import {
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
+
+import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
-//import { Checkbox } from "@nice-digital/nds-checkbox";
-import "@nice-digital/nds-checkbox/scss/checkbox.scss";
+import { Button } from "@nice-digital/nds-button";
+
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { AddRoleConfirmation } from "../../components/AddRoleConfirmation/AddRoleConfirmation";
 import { ToggleCheckbox } from "../../components/ToggleCheckbox/ToggleCheckbox";
-import { Button } from "@nice-digital/nds-button";
+
+import "@nice-digital/nds-checkbox/scss/checkbox.scss";
 
 type TParams = { id: string; serviceId: string; websiteId: string };
 

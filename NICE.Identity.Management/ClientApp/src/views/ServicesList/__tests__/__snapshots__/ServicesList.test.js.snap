@@ -1,0 +1,651 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ServicesList should match the snapshot after data has been loaded 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Services
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Services\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Services
+    </h1>
+  </div>,
+  <div
+    className="grid"
+  >
+    <div
+      data-g="12 md:3"
+    >
+      <div
+        className="panel"
+      >
+        <div
+          className="input"
+        >
+          <label
+            className="input__label"
+            htmlFor="filter-search"
+          >
+            Filter by service name or URL
+          </label>
+          <input
+            autoComplete="off"
+            className="input__input"
+            data-qa-sel="filter-search-input"
+            id="filter-search"
+            name="filter-search"
+            onChange={[Function]}
+            type="search"
+            unique="filterSearch"
+          />
+        </div>
+      </div>
+      <div
+        className="filter-panel-hide-heading"
+      >
+        <div
+          className="filter-panel undefined"
+        >
+          <h2
+            className="filter-panel__heading"
+          >
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
+            >
+              <h3
+                className="filter-group__heading"
+              >
+                <button
+                  aria-controls="group-environments"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    id="group-heading-environments"
+                  >
+                    Environments
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-environments"
+              >
+                <legend>
+                  Environments
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_alpha"
+                >
+                  <input
+                    checked={false}
+                    id="filter_environments_alpha"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Alpha"
+                    type="checkbox"
+                    value="Alpha"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Alpha
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_test"
+                >
+                  <input
+                    checked={false}
+                    id="filter_environments_test"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Test"
+                    type="checkbox"
+                    value="Test"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Test
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_environments_dev"
+                >
+                  <input
+                    checked={false}
+                    id="filter_environments_dev"
+                    name="environments"
+                    onChange={[Function]}
+                    title="Environments - Dev"
+                    type="checkbox"
+                    value="Dev"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Dev
+                  </span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-busy={false}
+      data-g="12 md:9"
+    >
+      <h2
+        className="servicesListSummary"
+        data-qa-sel="services-returned"
+      >
+        Showing 5 services
+      </h2>
+      <ul
+        className="list--unstyled"
+        data-qa-sel="list-of-websites"
+      >
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  Comment Collection
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--alpha"
+                      data-qa-sel="environment-alpha"
+                    >
+                      Alpha
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    alpha-comments.nice.org.uk
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  EPPI Reviewer
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--new"
+                      data-qa-sel="environment-test"
+                    >
+                      Test
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    test-eppi.nice.org.uk
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  Idam Docker
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--new"
+                      data-qa-sel="environment-test"
+                    >
+                      Test
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    test-idam
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  Comment Collection
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--updated"
+                      data-qa-sel="environment-dev"
+                    >
+                      Dev
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    dev-comments.nice.org.uk
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+        <li>
+          <article
+            className="card"
+          >
+            Array [
+              <header
+                className="card__header"
+              >
+                <p
+                  className="card__heading"
+                >
+                  EPPI Reviewer
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
+              >
+                <div
+                  className="card__metadatum"
+                >
+                  <dd>
+                    <span
+                      className="tag tag--updated"
+                      data-qa-sel="environment-dev"
+                    >
+                      Dev
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Website
+                  </dt>
+                  <dd>
+                    dev-eppi.nice.org.uk
+                  </dd>
+                </div>
+              </dl>,
+            ]
+          </article>
+        </li>
+      </ul>
+      <div
+        className="flex flexAlignCenter"
+      >
+        <div
+          className="mr--e"
+          data-qa-sel="number-of-results-on-page"
+        >
+          <label
+            className="bold mr--c"
+            htmlFor="itemsPerPage"
+          >
+            Items per page
+          </label>
+          <select
+            data-qa-sel="result-on-the-page-index"
+            id="itemsPerPage"
+            name="itemsPerPage"
+            onChange={[Function]}
+            value="all"
+          >
+            <option
+              value="25"
+            >
+              25
+            </option>
+            <option
+              value="50"
+            >
+              50
+            </option>
+            <option
+              value="all"
+            >
+              All
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`ServicesList should show error message when fetch returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Services
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Services\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Services
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`ServicesList should show error message when fetch returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Services
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Services\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Services
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;

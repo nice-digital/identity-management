@@ -15,4 +15,5 @@ export const Endpoints = {
 
 	verificationEmail: `${API_BASE_URL}/VerificationEmail/VerificationEmail`,
 	
+	websitesList: `${API_BASE_URL}/websites`,
 };

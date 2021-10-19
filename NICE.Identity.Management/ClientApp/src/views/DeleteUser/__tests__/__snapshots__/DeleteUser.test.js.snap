@@ -39,9 +39,7 @@ exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
     >
       Kristin Patrick
     </Breadcrumb>
-    <Breadcrumb
-      elementType="a"
-    >
+    <Breadcrumb>
       Delete user
     </Breadcrumb>
   </Breadcrumbs>

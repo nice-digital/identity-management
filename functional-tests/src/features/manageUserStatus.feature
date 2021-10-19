@@ -1,6 +1,6 @@
 Feature: Lock/Unlock Users
   As a user of NICE Identity Admin User
-  We can access the NICE Admin User page
+  We can access the NICE Manage Users page
   We can click to view a users detail page
   We can lock the user
   We can unlock the user
@@ -11,7 +11,7 @@ Feature: Lock/Unlock Users
     Given I click on the manage user button
 
   Scenario: Lock/Unlock user
-    Given I expect I appear on the Identity Admin homepage
+    Given I expect I appear on the Manage Users page
     When I click on the second user in the list
     Then I expect that the status of the user appears as Active
     When I click on the Lock user button
