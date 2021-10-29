@@ -22,7 +22,7 @@ export const validateUserStatusListPageLocked = () => {
   waitForVisible(selectors.adminUserPage.userStatus);
   checkContainsText(
     'element',
-    selectors.adminHomepage.secondUserStatus,
+    selectors.userListPage.secondUserStatus,
     'Locked'
   );
   pause(1000);

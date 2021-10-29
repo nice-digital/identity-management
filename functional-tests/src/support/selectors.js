@@ -28,7 +28,11 @@ export default {
     firstNameValidationMessage: '.input.input--error:nth-child(6)',
     lastNameValidationMessage: '.input.input--error:nth-child(7)',
   },
-  adminHomepage: {
+  adminHomePage: {
+    manageUsersButton: toDataQASelAttr('manage-users'),
+    manageServicesButton: toDataQASelAttr('manage-services'),
+  },
+  userListPage: {
     userlist: toDataQASelAttr('list-of-users'),
     firstUserCard: toChildAndQASel(1, 'list-of-users'),
     secondUserCard: toChildAndQASel(2, 'list-of-users'),
@@ -43,6 +47,10 @@ export default {
     globalNavSignOut: "[id$='my-account']",
     userStatusListPage:
       "[data-qa-sel='list-of-users'] [data-qa-sel='user-status']",
+  },
+  websiteListPage: {
+    websitelist: toDataQASelAttr('list-of-websites'),
+    firstWebsiteCard: toChildAndQASel(1, 'list-of-websites'),
   },
   adminUserPage: {
     deleteUserLink: toDataQASelAttr('delete-user-link'),
@@ -84,5 +92,9 @@ export default {
     fourthRole: '.checkbox:nth-of-type(4)',
     saveButton: '.btn',
     roleChangeSuccess: '.alert--success',
+  },
+  validateAdminUserServicePage: {
+    pageServiceResultCount: toDataQASelAttr("services-returned"),
+    pageUserResultCount: toDataQASelAttr("users-returned"),
   },
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router";
-import fetchMock from "fetch-mock";
 import toJson from "enzyme-to-json";
 
 import { nextTick } from "../../../utils/nextTick";
@@ -9,7 +8,6 @@ import singleUser from "./singleUser.json";
 import singleUserRoles from "./singleUserRoles.json";
 import { SelectRoles } from "../SelectRoles";
 
-import * as fetchData from "../../../helpers/fetchData";
 import { Endpoints } from "../../../data/endpoints";
 import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 import { AddRoleConfirmation } from "../../../components/AddRoleConfirmation/AddRoleConfirmation";
@@ -22,29 +20,38 @@ describe("SelectRoles", () => {
 		url: "",
 	};
 
-	afterEach(fetchMock.reset);
+	const consoleErrorReset = console.error;
+
+	beforeEach(() => {
+		fetch.resetMocks();
+		console.error = consoleErrorReset;
+	});
 
 	it("should show loading message before data has been loaded", () => {
-		fetchMock.get("*", {});
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = shallow(<SelectRoles match={match} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
-	it("should call fetchData during componentDidMount", () => {
-		fetchMock.get("*", {});
-		const wrapper = shallow(<SelectRoles match={match} />);
-		const instance = wrapper.instance();
-		jest.spyOn(fetchData, "fetchData");
-		instance.componentDidMount();
-		expect(fetchData.fetchData).toHaveBeenCalledTimes(1);
+	it("should call fetchData during componentDidMount", async () => {
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
+		const wrapper = mount(<MemoryRouter><SelectRoles match={match} /></MemoryRouter>);
+		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
+		wrapper.instance().componentDidMount();
+		await nextTick();
+		wrapper.update();
+		expect(spy).toHaveBeenCalled();
+		expect(fetch.mock.calls.length).toEqual(2);
+		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.user(match.params.id));
+		expect(fetch.mock.calls[1][0]).toEqual(Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId));
+		spy.mockClear();
 	});
 
 	it("should match the snapshot after data has been loaded", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			singleUserRoles,
-		);
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = shallow(<SelectRoles match={match} />);
 		await nextTick();
 		wrapper.update();
@@ -52,11 +59,9 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when user fetchData function returns 500 error", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), 500);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			singleUserRoles,
-		);
+		console.error = jest.fn();
+		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -68,11 +73,9 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when user fetchData function returns 401 error", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), 401);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			singleUserRoles,
-		);
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -84,11 +87,9 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when services fetchData function returns 500 error", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			500,
-		);
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -100,11 +101,9 @@ describe("SelectRoles", () => {
 	});
 
 	it("should show error message when services fetchData function returns 401 error", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			401,
-		);
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -116,12 +115,9 @@ describe("SelectRoles", () => {
 	});
 
 	it("should display confirmation message once fetchData patch is successfully complete", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			singleUserRoles,
-		);
-		fetchMock.patch("*", singleUserRoles);
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -136,12 +132,10 @@ describe("SelectRoles", () => {
 	});
 
 	it("should disable button when form submitted", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			singleUserRoles,
-		);
-		fetchMock.patch("*", {});
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
+		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -156,12 +150,10 @@ describe("SelectRoles", () => {
 	});
 
 	it("should disable all checkboxes when form submitted", async () => {
-		fetchMock.get(Endpoints.user(match.params.id), singleUser);
-		fetchMock.get(
-			Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-			singleUserRoles,
-		);
-		fetchMock.patch("*", {});
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(singleUser));
+		fetch.mockResponseOnce(JSON.stringify(singleUserRoles));
+		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(
 			<MemoryRouter>
 				<SelectRoles match={match} />
@@ -175,29 +167,4 @@ describe("SelectRoles", () => {
 			expect(checkbox.props().disabled).toEqual(true);
 		});
 	});
-
-	// fires handleCheckboxChange after checkbox changed
-
-	// it("should trigger handleCheckboxChange prop function on checkbox change ", async () => {
-	// 	fetchMock.get(Endpoints.user(match.params.id), singleUser);
-	// 	fetchMock.get(
-	// 		Endpoints.userRolesByWebsite(match.params.id, match.params.websiteId),
-	// 		singleUserRoles,
-	// 	);
-	// 	const wrapper = mount(
-	// 		<MemoryRouter>
-	// 			<SelectRoles match={match} />
-	// 		</MemoryRouter>,
-	// 	);
-	// 	await nextTick();
-	// 	wrapper.update();
-	// 	const spy = jest.spyOn(SelectRoles.prototype, "handleCheckboxChange");
-	// 	wrapper.update();
-	// 	wrapper
-	// 		.find({ type: "checkbox" })
-	// 		.first()
-	// 		.simulate("change");
-	// 	await nextTick();
-	// 	expect(spy).toHaveBeenCalledTimes(1);
-	// });
 });

@@ -13,6 +13,16 @@ Array [
         <li
           className="breadcrumbs__crumb"
         >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
           <span>
             Users
           </span>
@@ -25,13 +35,23 @@ Array [
           "__html": "{
   \\"@context\\": \\"http://schema.org\\",
   \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": {
-    \\"@type\\": \\"ListItem\\",
-    \\"position\\": 1,
-    \\"item\\": {
-      \\"name\\": \\"Users\\"
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Users\\"
+      }
     }
-  }
+  ]
 }",
         }
       }
@@ -61,115 +81,381 @@ Array [
         >
           <label
             className="input__label"
-            htmlFor="userSearch"
+            htmlFor="filter-search"
           >
             Filter by name or email address
           </label>
           <input
             autoComplete="off"
             className="input__input"
-            id="userSearch"
-            name="user-search"
+            data-qa-sel="filter-search-input"
+            id="filter-search"
+            name="filter-search"
             onChange={[Function]}
             type="search"
+            unique="filterSearch"
           />
         </div>
       </div>
       <div
-        className="panel"
+        className="filter-panel-hide-heading"
       >
-        <form>
+        <div
+          className="filter-panel undefined"
+        >
+          <h2
+            className="filter-panel__heading"
+          >
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
           <div
-            aria-labelledby="filter-header"
-            role="group"
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
           >
             <div
-              id="filter-header"
+              className="filter-group"
             >
-              <strong>
-                Show:
-              </strong>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                defaultChecked={true}
-                id="filter-status-all"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value=""
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-all"
+              <h3
+                className="filter-group__heading"
               >
-                <span
-                  className="visually-hidden"
+                <button
+                  aria-controls="group-status"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
                 >
-                  Show: 
-                </span>
-                All
-              </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-active"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="active"
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-active"
+                  <span
+                    id="group-heading-status"
+                  >
+                    Status
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-status"
               >
-                Active
-              </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-pending"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="pending"
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-pending"
-              >
-                Pending
-              </label>
-            </div>
-            <div
-              className="radio"
-            >
-              <input
-                className="radio__input"
-                id="filter-status-locked"
-                name="filter-status"
-                onChange={[Function]}
-                type="radio"
-                value="locked"
-              />
-              <label
-                className="radio__label"
-                htmlFor="filter-status-locked"
-              >
-                Locked
-              </label>
+                <legend>
+                  Status
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_status_active"
+                >
+                  <input
+                    checked={false}
+                    id="filter_status_active"
+                    name="status"
+                    onChange={[Function]}
+                    title="Status - Active"
+                    type="checkbox"
+                    value="Active"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Active
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_status_pending"
+                >
+                  <input
+                    checked={false}
+                    id="filter_status_pending"
+                    name="status"
+                    onChange={[Function]}
+                    title="Status - Pending"
+                    type="checkbox"
+                    value="Pending"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Pending
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_status_locked"
+                >
+                  <input
+                    checked={false}
+                    id="filter_status_locked"
+                    name="status"
+                    onChange={[Function]}
+                    title="Status - Locked"
+                    type="checkbox"
+                    value="Locked"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Locked
+                  </span>
+                </label>
+              </fieldset>
             </div>
           </div>
-        </form>
+        </div>
+      </div>
+      <div
+        className="filter-panel-hide-heading"
+      >
+        <div
+          className="filter-panel undefined"
+        >
+          <h2
+            className="filter-panel__heading"
+          >
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
+            >
+              <h3
+                className="filter-group__heading"
+              >
+                <button
+                  aria-controls="group-dev"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    id="group-heading-dev"
+                  >
+                    Dev
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-dev"
+              >
+                <legend>
+                  Dev
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_dev_3"
+                >
+                  <input
+                    checked={false}
+                    id="filter_dev_3"
+                    name="dev"
+                    onChange={[Function]}
+                    title="Dev - Comment Collection"
+                    type="checkbox"
+                    value="3"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Comment Collection
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_dev_1"
+                >
+                  <input
+                    checked={false}
+                    id="filter_dev_1"
+                    name="dev"
+                    onChange={[Function]}
+                    title="Dev - EPPI Reviewer"
+                    type="checkbox"
+                    value="1"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    EPPI Reviewer
+                  </span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="filter-panel-hide-heading"
+      >
+        <div
+          className="filter-panel undefined"
+        >
+          <h2
+            className="filter-panel__heading"
+          >
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
+            >
+              <h3
+                className="filter-group__heading"
+              >
+                <button
+                  aria-controls="group-test"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    id="group-heading-test"
+                  >
+                    Test
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-test"
+              >
+                <legend>
+                  Test
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_test_2"
+                >
+                  <input
+                    checked={false}
+                    id="filter_test_2"
+                    name="test"
+                    onChange={[Function]}
+                    title="Test - EPPI Reviewer"
+                    type="checkbox"
+                    value="2"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    EPPI Reviewer
+                  </span>
+                </label>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_test_5"
+                >
+                  <input
+                    checked={false}
+                    id="filter_test_5"
+                    name="test"
+                    onChange={[Function]}
+                    title="Test - Idam Docker"
+                    type="checkbox"
+                    value="5"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Idam Docker
+                  </span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="filter-panel-hide-heading"
+      >
+        <div
+          className="filter-panel undefined"
+        >
+          <h2
+            className="filter-panel__heading"
+          >
+            <a
+              aria-controls="filter-panel-body"
+              aria-expanded="true"
+              href="#filter-panel-body"
+            />
+          </h2>
+          <div
+            aria-hidden={false}
+            className="filter-panel__body"
+            id="filter-panel-body"
+          >
+            <div
+              className="filter-group"
+            >
+              <h3
+                className="filter-group__heading"
+              >
+                <button
+                  aria-controls="group-alpha"
+                  aria-expanded={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    id="group-heading-alpha"
+                  >
+                    Alpha
+                  </span>
+                </button>
+              </h3>
+              <fieldset
+                aria-hidden={false}
+                className="filter-group__options"
+                id="group-alpha"
+              >
+                <legend>
+                  Alpha
+                </legend>
+                <label
+                  className="filter-option"
+                  htmlFor="filter_alpha_4"
+                >
+                  <input
+                    checked={false}
+                    id="filter_alpha_4"
+                    name="alpha"
+                    onChange={[Function]}
+                    title="Alpha - Comment Collection"
+                    type="checkbox"
+                    value="4"
+                  />
+                  <span
+                    className="filter-option__text"
+                  >
+                    Comment Collection
+                  </span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -178,6 +464,7 @@ Array [
     >
       <h2
         className="usersListSummary"
+        data-qa-sel="users-returned"
       >
         Showing 4 users
       </h2>
@@ -189,192 +476,200 @@ Array [
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/1"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Kristin Patrick
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--consultation"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/1"
+                    onClick={[Function]}
                   >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Kristin Patrick
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  kristin.patrick@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    kristin.patrick@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
         <li>
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/2"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Thomas Holding
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--consultation"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/2"
+                    onClick={[Function]}
                   >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Thomas Holding
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  thomas.holding@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    thomas.holding@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
         <li>
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/3"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Aisha Bartlett
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag tag--consultation"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/3"
+                    onClick={[Function]}
                   >
-                    Active
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Aisha Bartlett
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  aisha.bartlett@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag tag--consultation"
+                      data-qa-sel="user-status"
+                    >
+                      Active
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    aisha.bartlett@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
         <li>
           <article
             className="card"
           >
-            <header
-              className="card__header"
-            >
-              <p
-                className="card__heading"
+            Array [
+              <header
+                className="card__header"
               >
-                <a
-                  href="/users/4"
-                  onClick={[Function]}
+                <p
+                  className="card__heading"
                 >
-                  Theo Bradford
-                </a>
-              </p>
-            </header>
-            <dl
-              className="card__metadata"
-            >
-              <div
-                className="card__metadatum"
-              >
-                <dd>
-                  <span
-                    className="tag"
-                    data-qa-sel="user-status"
+                  <a
+                    href="/users/4"
+                    onClick={[Function]}
                   >
-                    Locked
-                  </span>
-                </dd>
-              </div>
-              <div
-                className="card__metadatum"
+                    Theo Bradford
+                  </a>
+                </p>
+              </header>,
+              <dl
+                className="card__metadata"
               >
-                <dt
-                  className="visually-hidden"
+                <div
+                  className="card__metadatum"
                 >
-                  Email address
-                </dt>
-                <dd>
-                  theo.bradford@example.com
-                </dd>
-              </div>
-            </dl>
+                  <dd>
+                    <span
+                      className="tag"
+                      data-qa-sel="user-status"
+                    >
+                      Locked
+                    </span>
+                  </dd>
+                </div>
+                <div
+                  className="card__metadatum"
+                >
+                  <dt
+                    className="visually-hidden"
+                  >
+                    Email address
+                  </dt>
+                  <dd>
+                    theo.bradford@example.com
+                  </dd>
+                </div>
+              </dl>,
+            ]
           </article>
         </li>
       </ul>
@@ -421,7 +716,7 @@ Array [
 ]
 `;
 
-exports[`UsersList should show error message when fetch returns 401 error 1`] = `
+exports[`UsersList should show error message when fetch users returns 401 error 1`] = `
 Array [
   Array [
     <nav
@@ -431,6 +726,16 @@ Array [
       <ol
         className="breadcrumbs"
       >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
         <li
           className="breadcrumbs__crumb"
         >
@@ -446,13 +751,23 @@ Array [
           "__html": "{
   \\"@context\\": \\"http://schema.org\\",
   \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": {
-    \\"@type\\": \\"ListItem\\",
-    \\"position\\": 1,
-    \\"item\\": {
-      \\"name\\": \\"Users\\"
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Users\\"
+      }
     }
-  }
+  ]
 }",
         }
       }
@@ -481,7 +796,7 @@ Array [
 ]
 `;
 
-exports[`UsersList should show error message when fetch returns 500 error 1`] = `
+exports[`UsersList should show error message when fetch users returns 500 error 1`] = `
 Array [
   Array [
     <nav
@@ -491,6 +806,16 @@ Array [
       <ol
         className="breadcrumbs"
       >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
         <li
           className="breadcrumbs__crumb"
         >
@@ -506,13 +831,183 @@ Array [
           "__html": "{
   \\"@context\\": \\"http://schema.org\\",
   \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": {
-    \\"@type\\": \\"ListItem\\",
-    \\"position\\": 1,
-    \\"item\\": {
-      \\"name\\": \\"Users\\"
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Users\\"
+      }
     }
-  }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`UsersList should show error message when fetch websites returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Users\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`UsersList should show error message when fetch websites returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Users\\"
+      }
+    }
+  ]
 }",
         }
       }

@@ -20,7 +20,7 @@ import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string };
 
-type UserProps = {} & RouteComponentProps<TParams>;
+type UserProps = Record<string, unknown> & RouteComponentProps<TParams>;
 
 type UserState = {
 	user: UserType;
@@ -40,11 +40,11 @@ export class User extends Component<UserProps, UserState> {
 		};
 	}
 
-	handleError = (error: Error) => {
+	handleError = (error: Error): void => {
 		this.setState({ error });
 	};
 
-	updateData = (updatedData: UserType) => {
+	updateData = (updatedData: UserType): void => {
 		if (!Object.keys(updatedData).length) {
 			this.setState({ redirect: true });
 		} else {
@@ -52,23 +52,22 @@ export class User extends Component<UserProps, UserState> {
 		}
 	};
 
-	async componentDidMount() {
+	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		let user = await fetchData(Endpoints.user(this.props.match.params.id));
+		const user = await fetchData(Endpoints.user(this.props.match.params.id));
 
 		if (isDataError(user)) {
 			this.setState({ error: user });
 		}
 
 		this.setState({ user, isLoading: false });
-		document.title = `NICE Accounts - ${user.firstName} ${user.lastName}`
+		document.title = `NICE Accounts - ${user.firstName} ${user.lastName}`;
 	}
 
-	render() {
+	render(): JSX.Element {
 		const { user, error, redirect, isLoading } = this.state;
 		const showResendVerificationButton = !user.hasVerifiedEmailAddress;
-
 
 		if (redirect) {
 			return <Redirect to="/users" />;
@@ -131,12 +130,12 @@ export class User extends Component<UserProps, UserState> {
 												<div>
 													<UserStatus user={user} />
 												</div>
-												{ showResendVerificationButton &&
+												{showResendVerificationButton && (
 													<ResendVerification
 														nameIdentifier={user.nameIdentifier}
 														onError={this.handleError}
 													/>
-												}
+												)}
 
 												<UnlockUser
 													id={user.userId}
@@ -191,7 +190,7 @@ export class User extends Component<UserProps, UserState> {
 												{user.isMigrated ? "Yes" : "No"}
 											</span>
 										</div>
-										
+
 										<div className={`${styles.summaryList} pv--c mb--d`}>
 											<span className={styles.summaryListLabel}>
 												Is in Authentication Provider (Auth0)

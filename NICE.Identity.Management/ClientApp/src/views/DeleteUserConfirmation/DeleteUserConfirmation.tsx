@@ -9,10 +9,12 @@ type DeleteUserConfirmationProps = {
 	fullName: string;
 };
 
-export const DeleteUserConfirmation = (props: DeleteUserConfirmationProps) => {
+export const DeleteUserConfirmation = (
+	props: DeleteUserConfirmationProps,
+): React.ReactElement => {
 	const { fullName } = props;
 
-	document.title = `NICE Accounts - ${fullName} deleted`
+	document.title = `NICE Accounts - ${fullName} deleted`;
 
 	return (
 		<>

@@ -7,7 +7,6 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -26,7 +25,6 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -45,7 +43,6 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -60,9 +57,7 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
     >
       Select service
     </Breadcrumb>
-    <Breadcrumb
-      elementType="a"
-    >
+    <Breadcrumb>
       Select environment
     </Breadcrumb>
   </Breadcrumbs>
@@ -72,6 +67,7 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
   />
   <Grid
     elementType="div"
+    equalHeight={false}
     gutter="standard"
     horizontalAlignment="left"
     reverse={false}
@@ -79,7 +75,6 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
   >
     <GridItem
       cols={8}
-      elementType="div"
     >
       <StackedNav
         aria-label="Environments"
@@ -89,7 +84,6 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
           elementType={
             Object {
               "$$typeof": Symbol(react.forward_ref),
-              "displayName": "Link",
               "propTypes": Object {
                 "innerRef": [Function],
                 "onClick": [Function],
@@ -108,7 +102,6 @@ exports[`SelectEnvironment should match the snapshot after data has been loaded 
           elementType={
             Object {
               "$$typeof": Symbol(react.forward_ref),
-              "displayName": "Link",
               "propTypes": Object {
                 "innerRef": [Function],
                 "onClick": [Function],

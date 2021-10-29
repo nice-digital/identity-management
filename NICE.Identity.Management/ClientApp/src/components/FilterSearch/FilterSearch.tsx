@@ -4,10 +4,11 @@ import { Input } from "@nice-digital/nds-forms";
 
 type FilterSearchProps = {
 	onInputChange: (searchQuery: string) => void;
+	label: string;
 };
 
-export const FilterSearch = (props: FilterSearchProps) => {
-	let typingTimer: number = 0;
+export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
+	let typingTimer = 0;
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value.trim();
@@ -23,11 +24,12 @@ export const FilterSearch = (props: FilterSearchProps) => {
 		<Panel>
 			<Input
 				type="search"
-				label="Filter by name or email address"
-				unique="userSearch"
-				name="user-search"
+				label={props.label}
+				unique="filterSearch"
+				name="filter-search"
 				onChange={handleInputChange}
 				autoComplete="off"
+				data-qa-sel="filter-search-input"
 			/>
 		</Panel>
 	);

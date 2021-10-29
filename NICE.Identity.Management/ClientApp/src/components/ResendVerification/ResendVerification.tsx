@@ -15,20 +15,23 @@ type ResendVerificationState = {
 	hasSent: boolean;
 };
 
-export class ResendVerification extends Component<ResendVerificationProps, ResendVerificationState> {
+export class ResendVerification extends Component<
+	ResendVerificationProps,
+	ResendVerificationState
+> {
 	constructor(props: ResendVerificationProps) {
 		super(props);
 
 		this.state = {
 			isLoading: false,
-			hasSent: false
+			hasSent: false,
 		};
 	}
 
-	handleClick = async () => {
+	handleClick = async (): Promise<void> => {
 		this.setState({ isLoading: true });
 
-		let fetchOptions = {
+		const fetchOptions = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -36,7 +39,7 @@ export class ResendVerification extends Component<ResendVerificationProps, Resen
 			}),
 		};
 
-		let jobStatus = await fetchData(
+		const jobStatus = await fetchData(
 			Endpoints.verificationEmail,
 			fetchOptions,
 		);
@@ -48,7 +51,7 @@ export class ResendVerification extends Component<ResendVerificationProps, Resen
 		this.setState({ isLoading: false, hasSent: true });
 	};
 
-	render() {
+	render(): JSX.Element {
 		const { isLoading, hasSent } = this.state;
 		const isButtonDisabled = isLoading || hasSent;
 

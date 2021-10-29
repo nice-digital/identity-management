@@ -8,7 +8,7 @@ type PagerProps = {
 	onChangePage: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
-export const Pager = (props: PagerProps) => {
+export const Pager = (props: PagerProps): React.ReactElement => {
 	const { active, label, type, onChangePage } = props;
 
 	const listClasses = `${styles.paginationPager} ${

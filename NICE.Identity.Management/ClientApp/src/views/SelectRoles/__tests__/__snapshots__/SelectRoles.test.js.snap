@@ -7,7 +7,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -26,7 +25,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -45,7 +43,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -64,7 +61,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
           "propTypes": Object {
             "innerRef": [Function],
             "onClick": [Function],
@@ -79,9 +75,7 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
     >
       Select environment
     </Breadcrumb>
-    <Breadcrumb
-      elementType="a"
-    >
+    <Breadcrumb>
       Select role
     </Breadcrumb>
   </Breadcrumbs>
@@ -91,6 +85,7 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
   />
   <Grid
     elementType="div"
+    equalHeight={false}
     gutter="standard"
     horizontalAlignment="left"
     reverse={false}
@@ -98,7 +93,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
   >
     <GridItem
       cols={8}
-      elementType="div"
     >
       <form
         onSubmit={[Function]}
@@ -139,7 +133,6 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
           buttonType="submit"
           className="mt--d"
           disabled={false}
-          variant="primary"
         >
           Save
         </Button>
