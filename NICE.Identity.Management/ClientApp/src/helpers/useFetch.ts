@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export const useFetch = <T>(url: string, options = {}) => {
+type doFetchType = (overrideUrl?: string, overrideOptions?: Record<string, any>) => Promise<void>;
+
+export const useFetch = <T>(url: string, options = {}): { data: T, isLoading: boolean, error: Error | undefined, doFetch: doFetchType } => {
 	const [data, setData] = useState<T>({} as T);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<Error>();
 
-	const doFetch = async (overrideUrl = url, overrideOptions = options) => {
+	const doFetch: doFetchType = async (overrideUrl = url, overrideOptions = options) => {
 		try {
 			setIsLoading(true);
 			const response = await fetch(overrideUrl, overrideOptions);
