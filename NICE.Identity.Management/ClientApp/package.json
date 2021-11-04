@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@nice-digital/design-system": "^1.2.17-alpha.0",
+    "@nice-digital/design-system": "^1.2.29",
     "@nice-digital/global-nav": "github:nice-digital/global-nav",
-    "@nice-digital/nds-radio": "^1.0.17-alpha.0",
     "@nice-digital/nds-stacked-nav": "^1.0.27-alpha.0",
     "concurrently": "^6.2.0",
     "query-string": "^6.12.1",
