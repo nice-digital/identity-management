@@ -19,8 +19,8 @@ export const useFetch = (url: string, options = {}): doFetchType => {
 		if (response.status === 200 || response.status === 201) {
 			return data;
 		} else {
-			// need to change this to use the data
-			const error = new Error("Multiple users found with same email address.");
+			// const error = new Error("Multiple users found with same email address.");
+			const error = new Error(data.message);
 			console.error(error);
 			return error;
 		}
