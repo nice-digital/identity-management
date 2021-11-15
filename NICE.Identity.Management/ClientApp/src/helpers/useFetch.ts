@@ -1,26 +1,30 @@
 import { useCallback, useState } from "react";
 
-type doFetchType = (overrideUrl?: string, overrideOptions?: Record<string, any>) => Promise<void>;
+type doFetchType = <T>(overrideUrl?: string, overrideOptions?: Record<string, unknown>) => Promise<T | Error>;
 
-export const useFetch = <T>(url: string, options = {}): { data: T, isLoading: boolean, error: Error | undefined, doFetch: doFetchType } => {
-	const [data, setData] = useState<T>({} as T);
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<Error>();
+export const useFetch = (url: string, options = {}): doFetchType => {
 
-	const doFetch = useCallback(		
-		async (overrideUrl = url, overrideOptions = options) => {
-			try {
-				setIsLoading(true);
-				const response = await fetch(overrideUrl, overrideOptions);
-				const data = await response.json();
-				setData(data);
-			} catch (error) {
-				setError(error);
-			} finally {
-				setIsLoading(false);
-			}
-		}, [setData, setIsLoading, setError, url, options]
-	);
+	const doFetch: doFetchType = async (overrideUrl = url, overrideOptions = options) => {
+		let response, data;
 
-	return { data, isLoading, error, doFetch };
+		try {
+			response = await fetch(overrideUrl, overrideOptions);
+			data = await response.json();
+		} catch (err) {			
+			const error: Error = err;
+			console.error(error);
+			return error;
+		}
+
+		if (response.status === 200 || response.status === 201) {
+			return data;
+		} else {
+			// need to change this to use the data
+			const error = new Error("Multiple users found with same email address.");
+			console.error(error);
+			return error;
+		}
+	};
+
+	return doFetch;
 };
