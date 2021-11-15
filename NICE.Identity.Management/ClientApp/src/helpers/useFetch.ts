@@ -1,5 +1,3 @@
-import { useCallback, useState } from "react";
-
 type doFetchType = <T>(overrideUrl?: string, overrideOptions?: Record<string, unknown>) => Promise<T | Error>;
 
 export const useFetch = (url: string, options = {}): doFetchType => {
