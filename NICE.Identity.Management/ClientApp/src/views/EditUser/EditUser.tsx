@@ -113,9 +113,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			const duplicateEmailErrorMessage =
 				"Multiple users found with same email address.";
 			const isDuplicateEmail =
-				error["message"].indexOf(duplicateEmailErrorMessage) > -1 ||
-				error["title"].indexOf(duplicateEmailErrorMessage) > -1;
-			// ^ the above shouldn't check 'title'
+				error["message"].indexOf(duplicateEmailErrorMessage) > -1;
 
 			if (isDuplicateEmail) {
 				validationErrors["emailAddressDuplicate"] = true;
