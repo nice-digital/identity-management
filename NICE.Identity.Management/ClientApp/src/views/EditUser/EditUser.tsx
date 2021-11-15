@@ -110,12 +110,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			setRedirect(true);
 		} else {
 			const error = data as Error;
-			const duplicateEmailError =
-				error["message"].indexOf(
-					"Multiple users found with same email address.",
-				) > -1;
+			const duplicateEmailErrorMessage =
+				"Multiple users found with same email address.";
+			const isDuplicateEmail =
+				error["message"].indexOf(duplicateEmailErrorMessage) > -1 ||
+				error["title"].indexOf(duplicateEmailErrorMessage) > -1;
+			// ^ the above shouldn't check 'title'
 
-			if (duplicateEmailError) {
+			if (isDuplicateEmail) {
 				validationErrors["emailAddressDuplicate"] = true;
 				setEmailDuplicatePattern({
 					pattern: updateEmailDuplicatePattern(emailAddress.value),
