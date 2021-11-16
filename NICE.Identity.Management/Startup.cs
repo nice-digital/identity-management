@@ -19,6 +19,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using NICE.Identity.Management.Controllers;
+using NICE.Identity.Management.Extensions;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -233,7 +235,9 @@ namespace NICE.Identity.Management
 				{
 					startupLogger.LogWarning($"User: {httpContext.User.DisplayName()} with id: {httpContext.User.NameIdentifier()} has tried accessing {httpContext.Request.Host.Value}{httpContext.Request.Path} but does not have access");
 					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-					await httpContext.Response.WriteAsync("You do not have access to this website. Please contact support if you think this is incorrect.");
+
+					var permissionDeniedViewAsString = await new PermissionDeniedController().RenderViewAsync(httpContext: httpContext);
+					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
 
