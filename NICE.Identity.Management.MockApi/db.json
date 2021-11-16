@@ -485,6 +485,34 @@
           "hasRole": false
         }
       ]
+    },
+    {
+      "id": 6,
+      "user": 7,
+      "serviceId": 3,
+      "websiteId": 5,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": false
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
     }
   ],
   "claims": [
