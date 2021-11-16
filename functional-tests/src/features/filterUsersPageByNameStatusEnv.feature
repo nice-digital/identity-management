@@ -8,9 +8,9 @@ Feature: The list of users is reduced when user filter by name, status and servi
     Given I click on the manage user button
 
   Scenario: User can filter by name, status and services
-    Given I expect the users result list count contains "Showing 6 users"
+    Given I expect the users result list count contains "Showing 7 users"
     Given I select active and pending status filter
-    Then I expect the users result list count contains "Showing 6 users"
+    Then I expect the users result list count contains "Showing 7 users"
     Given I select alpha and test service filter
     Then I expect the users result list count contains "Showing 1 user"
     When I add name "Polly" to the filter
