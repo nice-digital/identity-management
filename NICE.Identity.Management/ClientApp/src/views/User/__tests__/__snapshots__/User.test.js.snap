@@ -28,27 +28,49 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
   </Breadcrumbs>
   <PageHeader
     cta={
-      <Button
-        data-qa-sel="add-user-role-button"
-        disabled={false}
-        elementType={
-          Object {
-            "$$typeof": Symbol(react.forward_ref),
-            "propTypes": Object {
-              "innerRef": [Function],
-              "onClick": [Function],
-              "replace": [Function],
-              "target": [Function],
-              "to": [Function],
-            },
-            "render": [Function],
+      <React.Fragment>
+        <Button
+          data-qa-sel="add-user-role-button"
+          disabled={false}
+          elementType={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "propTypes": Object {
+                "innerRef": [Function],
+                "onClick": [Function],
+                "replace": [Function],
+                "target": [Function],
+                "to": [Function],
+              },
+              "render": [Function],
+            }
           }
-        }
-        to="/users/1/services"
-        variant="cta"
-      >
-        Add role
-      </Button>
+          to="/users/1/services"
+          variant="cta"
+        >
+          Add role
+        </Button>
+        <Button
+          data-qa-sel="edit-profile-button"
+          disabled={false}
+          elementType={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "propTypes": Object {
+                "innerRef": [Function],
+                "onClick": [Function],
+                "replace": [Function],
+                "target": [Function],
+                "to": [Function],
+              },
+              "render": [Function],
+            }
+          }
+          to="/users/1/edit"
+        >
+          Edit profile
+        </Button>
+      </React.Fragment>
     }
     heading="Kristin Patrick"
     preheading="User profile for"
