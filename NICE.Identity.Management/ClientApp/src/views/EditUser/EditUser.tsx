@@ -175,11 +175,9 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			formElement.name === "emailAddress" &&
 			Object.prototype.hasOwnProperty.call(emailBlockedPattern, "pattern")
 		) {
-			const pattern = new RegExp(emailDuplicatePattern.pattern);
+			const pattern = new RegExp(emailBlockedPattern.pattern);
 
-			validationErrors["emailAddressDuplicate"] = !pattern.test(
-				formElement.value,
-			)
+			validationErrors["emailAddressBlocked"] = !pattern.test(formElement.value)
 				? true
 				: false;
 		}
