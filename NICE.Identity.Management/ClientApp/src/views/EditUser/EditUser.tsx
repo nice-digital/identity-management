@@ -18,6 +18,10 @@ import "@nice-digital/nds-radio/scss/radio.scss";
 type TParams = { id: string };
 type EditUserProps = Record<string, unknown> & RouteComponentProps<TParams>;
 type EditUserForm = Record<string, HTMLInputElement>;
+type CustomError = {
+	error: Error;
+	status: number;
+};
 
 export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const { id } = props.match.params;
@@ -27,8 +31,9 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const [isSaveButtonLoading, setIsSaveButtonLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	const [validationErrorList, setValidationErrorList] = useState<any>({});
-	const [emailDuplicatePattern, setEmailDuplicatePattern] =
+	const [emailBlockedPattern, setEmailBlockedPattern] =
 		useState<{ pattern: string }>(Object);
+	const [emailBlockedMessage, setEmailBlockedMessage] = useState<string>("");
 	const [redirect, setRedirect] = useState(false);
 
 	const doFetch = useFetch(Endpoints.user(id));
@@ -41,8 +46,9 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 				setIsLoading(true);
 				const data = await doFetch<UserType>();
 
-				if (isDataError(data)) {
-					setError(data as Error);
+				if (containsError(data)) {
+					const errorObject = data as CustomError;
+					setError(errorObject.error);
 				} else {
 					setUser(data as UserType);
 				}
@@ -55,6 +61,10 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			isMounted = true;
 		};
 	}, []);
+
+	const containsError = (data: Record<string, unknown>) => {
+		return Object.prototype.hasOwnProperty.call(data, "error");
+	};
 
 	const formHasChanged = (form: EditUserForm): boolean => {
 		const formValuesAreDifferent = [
@@ -105,21 +115,18 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 
 		const data = await doFetch<UserType>(Endpoints.user(id), fetchOptions);
 
-		if (!isDataError(data)) {
+		if (!containsError(data)) {
 			setUser(data as UserType);
 			setRedirect(true);
 		} else {
-			const error = data as Error;
-			const duplicateEmailErrorMessage =
-				"Multiple users found with same email address.";
-			const isDuplicateEmail =
-				error["message"].indexOf(duplicateEmailErrorMessage) > -1;
+			const errorObject = data as CustomError;
 
-			if (isDuplicateEmail) {
-				validationErrors["emailAddressDuplicate"] = true;
-				setEmailDuplicatePattern({
-					pattern: updateEmailDuplicatePattern(emailAddress.value),
+			if (errorObject.status === 422) {
+				validationErrors["emailAddressBlocked"] = true;
+				setEmailBlockedPattern({
+					pattern: updateEmailBlockedPattern(emailAddress.value),
 				});
+				setEmailBlockedMessage(errorObject.error.message);
 				setValidationErrorList(validationErrors);
 			} else {
 				setError(error);
@@ -129,12 +136,12 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		setIsSaveButtonLoading(false);
 	};
 
-	const updateEmailDuplicatePattern = (emailAddress: string): string => {
+	const updateEmailBlockedPattern = (emailAddress: string): string => {
 		const regexPattern = Object.prototype.hasOwnProperty.call(
-			emailDuplicatePattern,
+			emailBlockedPattern,
 			"pattern",
 		)
-			? emailDuplicatePattern.pattern.replace("?!(", `?!(${emailAddress}|`)
+			? emailBlockedPattern.pattern.replace("?!(", `?!(${emailAddress}|`)
 			: `^(?!(${emailAddress})$).*`;
 
 		return regexPattern;
@@ -150,9 +157,9 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 
 		if (
 			formElement.name === "emailAddress" &&
-			validationErrors["emailAddressDuplicate"]
+			validationErrors["emailAddressBlocked"]
 		) {
-			validationErrors["emailAddressDuplicate"] = false;
+			validationErrors["emailAddressBlocked"] = false;
 		}
 
 		setValidationErrorList(validationErrors);
@@ -166,7 +173,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 
 		if (
 			formElement.name === "emailAddress" &&
-			Object.prototype.hasOwnProperty.call(emailDuplicatePattern, "pattern")
+			Object.prototype.hasOwnProperty.call(emailBlockedPattern, "pattern")
 		) {
 			const pattern = new RegExp(emailDuplicatePattern.pattern);
 
@@ -235,18 +242,19 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											type="email"
 											required
 											autoComplete="off"
-											{...emailDuplicatePattern}
+											{...emailBlockedPattern}
 											onBlur={handleBlur}
 											onChange={handleChange}
 											error={
 												validationErrorList.emailAddress ||
-												validationErrorList.emailAddressDuplicate
+												validationErrorList.emailAddressBlocked
 											}
-											errorMessage={
-												validationErrorList.emailAddressDuplicate
-													? "Email address is already in use"
-													: "Email address is in an invalid format"
-											}
+											// errorMessage={
+											// 	validationErrorList.emailAddressBlocked
+											// 		? "Email address is already in use"
+											// 		: "Email address is in an invalid format"
+											// }
+											errorMessage={emailBlockedMessage}
 											defaultValue={user.emailAddress}
 											disabled={isSaveButtonLoading}
 										/>
