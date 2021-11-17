@@ -221,6 +221,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 							)}
 
 							<PageHeader
+								data-qa-sel="page-header-edit-user"
 								preheading="Personal details for"
 								heading={`${user.firstName} ${user.lastName}`}
 							/>
@@ -228,6 +229,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 								<GridItem cols={12} md={6} lg={4}>
 									<form onSubmit={handleSubmit} noValidate>
 										<Input
+											data-qa-sel="email-input-edit-user"
 											label="Email address"
 											name="emailAddress"
 											type="email"
@@ -249,6 +251,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											disabled={isSaveButtonLoading}
 										/>
 										<Input
+											data-qa-sel="firstname-input-edit-user"
 											label="First name"
 											name="firstName"
 											type="text"
@@ -265,6 +268,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											disabled={isSaveButtonLoading}
 										/>
 										<Input
+											data-qa-sel="lastname-input-edit-user"
 											label="Last name"
 											name="lastName"
 											type="text"
@@ -288,18 +292,20 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 												disabled={isSaveButtonLoading}
 											>
 												<Radio
+													data-qa-sel="optIn-radio-edit-user"
 													value="optIn"
 													label="Opt in"
 													defaultChecked={user.allowContactMe}
 												/>
 												<Radio
+													data-qa-sel="optOut-radio-edit-user"
 													value="optOut"
 													label="Opt out"
 													defaultChecked={!user.allowContactMe}
 												/>
 											</FormGroup>
 											<Button
-												data-qa-sel="edit-user-profile"
+												data-qa-sel="save-button-edit-user"
 												variant="cta"
 												type="submit"
 												disabled={isSaveButtonLoading}

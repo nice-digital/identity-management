@@ -100,362 +100,502 @@ Array [
       <div
         className="filter-panel-hide-heading"
       >
-        <div
-          className="filter-panel undefined"
-        >
-          <h2
-            className="filter-panel__heading"
-          >
-            <a
-              aria-controls="filter-panel-body"
-              aria-expanded="true"
-              href="#filter-panel-body"
-            />
-          </h2>
+        <form>
           <div
-            aria-hidden={false}
-            className="filter-panel__body"
-            id="filter-panel-body"
+            className="filter-panel"
           >
-            <div
-              className="filter-group"
+            <h2
+              className="filter-panel__heading"
             >
-              <h3
-                className="filter-group__heading"
+              <button
+                aria-controls="filter-panel-body"
+                aria-expanded={true}
+                onClick={[Function]}
+                type="button"
               >
-                <button
-                  aria-controls="group-status"
-                  aria-expanded={true}
-                  onClick={[Function]}
-                  type="button"
+                <svg
+                  aria-hidden={true}
+                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  fill="none"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <span
-                    id="group-heading-status"
+                  <path
+                    d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </h2>
+            <div
+              aria-hidden={false}
+              className="filter-panel__body"
+              id="filter-panel-body"
+            >
+              <div
+                className="filter-group"
+              >
+                <h3
+                  className="filter-group__heading"
+                >
+                  <button
+                    aria-controls="group-status"
+                    aria-expanded={true}
+                    onClick={[Function]}
+                    type="button"
                   >
+                    <svg
+                      aria-hidden={true}
+                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      fill="none"
+                      focusable="false"
+                      height="1em"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <span
+                      id="group-heading-status"
+                    >
+                      Status
+                       
+                    </span>
+                  </button>
+                </h3>
+                <fieldset
+                  aria-hidden={false}
+                  className="filter-group__options"
+                  id="group-status"
+                >
+                  <legend>
                     Status
-                  </span>
-                </button>
-              </h3>
-              <fieldset
-                aria-hidden={false}
-                className="filter-group__options"
-                id="group-status"
-              >
-                <legend>
-                  Status
-                </legend>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_status_active"
-                >
-                  <input
-                    checked={false}
-                    id="filter_status_active"
-                    name="status"
-                    onChange={[Function]}
-                    title="Status - Active"
-                    type="checkbox"
-                    value="Active"
-                  />
-                  <span
-                    className="filter-option__text"
+                  </legend>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_status_active"
                   >
-                    Active
-                  </span>
-                </label>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_status_pending"
-                >
-                  <input
-                    checked={false}
-                    id="filter_status_pending"
-                    name="status"
-                    onChange={[Function]}
-                    title="Status - Pending"
-                    type="checkbox"
-                    value="Pending"
-                  />
-                  <span
-                    className="filter-option__text"
+                    <input
+                      checked={false}
+                      id="filter_status_active"
+                      name="status"
+                      onChange={[Function]}
+                      title="Status - Active"
+                      type="checkbox"
+                      value="Active"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Active
+                    </span>
+                  </label>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_status_pending"
                   >
-                    Pending
-                  </span>
-                </label>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_status_locked"
-                >
-                  <input
-                    checked={false}
-                    id="filter_status_locked"
-                    name="status"
-                    onChange={[Function]}
-                    title="Status - Locked"
-                    type="checkbox"
-                    value="Locked"
-                  />
-                  <span
-                    className="filter-option__text"
+                    <input
+                      checked={false}
+                      id="filter_status_pending"
+                      name="status"
+                      onChange={[Function]}
+                      title="Status - Pending"
+                      type="checkbox"
+                      value="Pending"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Pending
+                    </span>
+                  </label>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_status_locked"
                   >
-                    Locked
-                  </span>
-                </label>
-              </fieldset>
+                    <input
+                      checked={false}
+                      id="filter_status_locked"
+                      name="status"
+                      onChange={[Function]}
+                      title="Status - Locked"
+                      type="checkbox"
+                      value="Locked"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Locked
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div
         className="filter-panel-hide-heading"
       >
-        <div
-          className="filter-panel undefined"
-        >
-          <h2
-            className="filter-panel__heading"
-          >
-            <a
-              aria-controls="filter-panel-body"
-              aria-expanded="true"
-              href="#filter-panel-body"
-            />
-          </h2>
+        <form>
           <div
-            aria-hidden={false}
-            className="filter-panel__body"
-            id="filter-panel-body"
+            className="filter-panel"
           >
-            <div
-              className="filter-group"
+            <h2
+              className="filter-panel__heading"
             >
-              <h3
-                className="filter-group__heading"
+              <button
+                aria-controls="filter-panel-body"
+                aria-expanded={true}
+                onClick={[Function]}
+                type="button"
               >
-                <button
-                  aria-controls="group-dev"
-                  aria-expanded={true}
-                  onClick={[Function]}
-                  type="button"
+                <svg
+                  aria-hidden={true}
+                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  fill="none"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <span
-                    id="group-heading-dev"
+                  <path
+                    d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </h2>
+            <div
+              aria-hidden={false}
+              className="filter-panel__body"
+              id="filter-panel-body"
+            >
+              <div
+                className="filter-group"
+              >
+                <h3
+                  className="filter-group__heading"
+                >
+                  <button
+                    aria-controls="group-dev"
+                    aria-expanded={true}
+                    onClick={[Function]}
+                    type="button"
                   >
+                    <svg
+                      aria-hidden={true}
+                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      fill="none"
+                      focusable="false"
+                      height="1em"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <span
+                      id="group-heading-dev"
+                    >
+                      Dev
+                       
+                    </span>
+                  </button>
+                </h3>
+                <fieldset
+                  aria-hidden={false}
+                  className="filter-group__options"
+                  id="group-dev"
+                >
+                  <legend>
                     Dev
-                  </span>
-                </button>
-              </h3>
-              <fieldset
-                aria-hidden={false}
-                className="filter-group__options"
-                id="group-dev"
-              >
-                <legend>
-                  Dev
-                </legend>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_dev_3"
-                >
-                  <input
-                    checked={false}
-                    id="filter_dev_3"
-                    name="dev"
-                    onChange={[Function]}
-                    title="Dev - Comment Collection"
-                    type="checkbox"
-                    value="3"
-                  />
-                  <span
-                    className="filter-option__text"
+                  </legend>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_dev_3"
                   >
-                    Comment Collection
-                  </span>
-                </label>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_dev_1"
-                >
-                  <input
-                    checked={false}
-                    id="filter_dev_1"
-                    name="dev"
-                    onChange={[Function]}
-                    title="Dev - EPPI Reviewer"
-                    type="checkbox"
-                    value="1"
-                  />
-                  <span
-                    className="filter-option__text"
+                    <input
+                      checked={false}
+                      id="filter_dev_3"
+                      name="dev"
+                      onChange={[Function]}
+                      title="Dev - Comment Collection"
+                      type="checkbox"
+                      value="3"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Comment Collection
+                    </span>
+                  </label>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_dev_1"
                   >
-                    EPPI Reviewer
-                  </span>
-                </label>
-              </fieldset>
+                    <input
+                      checked={false}
+                      id="filter_dev_1"
+                      name="dev"
+                      onChange={[Function]}
+                      title="Dev - EPPI Reviewer"
+                      type="checkbox"
+                      value="1"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      EPPI Reviewer
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div
         className="filter-panel-hide-heading"
       >
-        <div
-          className="filter-panel undefined"
-        >
-          <h2
-            className="filter-panel__heading"
-          >
-            <a
-              aria-controls="filter-panel-body"
-              aria-expanded="true"
-              href="#filter-panel-body"
-            />
-          </h2>
+        <form>
           <div
-            aria-hidden={false}
-            className="filter-panel__body"
-            id="filter-panel-body"
+            className="filter-panel"
           >
-            <div
-              className="filter-group"
+            <h2
+              className="filter-panel__heading"
             >
-              <h3
-                className="filter-group__heading"
+              <button
+                aria-controls="filter-panel-body"
+                aria-expanded={true}
+                onClick={[Function]}
+                type="button"
               >
-                <button
-                  aria-controls="group-test"
-                  aria-expanded={true}
-                  onClick={[Function]}
-                  type="button"
+                <svg
+                  aria-hidden={true}
+                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  fill="none"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <span
-                    id="group-heading-test"
+                  <path
+                    d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </h2>
+            <div
+              aria-hidden={false}
+              className="filter-panel__body"
+              id="filter-panel-body"
+            >
+              <div
+                className="filter-group"
+              >
+                <h3
+                  className="filter-group__heading"
+                >
+                  <button
+                    aria-controls="group-test"
+                    aria-expanded={true}
+                    onClick={[Function]}
+                    type="button"
                   >
+                    <svg
+                      aria-hidden={true}
+                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      fill="none"
+                      focusable="false"
+                      height="1em"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <span
+                      id="group-heading-test"
+                    >
+                      Test
+                       
+                    </span>
+                  </button>
+                </h3>
+                <fieldset
+                  aria-hidden={false}
+                  className="filter-group__options"
+                  id="group-test"
+                >
+                  <legend>
                     Test
-                  </span>
-                </button>
-              </h3>
-              <fieldset
-                aria-hidden={false}
-                className="filter-group__options"
-                id="group-test"
-              >
-                <legend>
-                  Test
-                </legend>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_test_2"
-                >
-                  <input
-                    checked={false}
-                    id="filter_test_2"
-                    name="test"
-                    onChange={[Function]}
-                    title="Test - EPPI Reviewer"
-                    type="checkbox"
-                    value="2"
-                  />
-                  <span
-                    className="filter-option__text"
+                  </legend>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_test_2"
                   >
-                    EPPI Reviewer
-                  </span>
-                </label>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_test_5"
-                >
-                  <input
-                    checked={false}
-                    id="filter_test_5"
-                    name="test"
-                    onChange={[Function]}
-                    title="Test - Idam Docker"
-                    type="checkbox"
-                    value="5"
-                  />
-                  <span
-                    className="filter-option__text"
+                    <input
+                      checked={false}
+                      id="filter_test_2"
+                      name="test"
+                      onChange={[Function]}
+                      title="Test - EPPI Reviewer"
+                      type="checkbox"
+                      value="2"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      EPPI Reviewer
+                    </span>
+                  </label>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_test_5"
                   >
-                    Idam Docker
-                  </span>
-                </label>
-              </fieldset>
+                    <input
+                      checked={false}
+                      id="filter_test_5"
+                      name="test"
+                      onChange={[Function]}
+                      title="Test - Idam Docker"
+                      type="checkbox"
+                      value="5"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Idam Docker
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div
         className="filter-panel-hide-heading"
       >
-        <div
-          className="filter-panel undefined"
-        >
-          <h2
-            className="filter-panel__heading"
-          >
-            <a
-              aria-controls="filter-panel-body"
-              aria-expanded="true"
-              href="#filter-panel-body"
-            />
-          </h2>
+        <form>
           <div
-            aria-hidden={false}
-            className="filter-panel__body"
-            id="filter-panel-body"
+            className="filter-panel"
           >
-            <div
-              className="filter-group"
+            <h2
+              className="filter-panel__heading"
             >
-              <h3
-                className="filter-group__heading"
+              <button
+                aria-controls="filter-panel-body"
+                aria-expanded={true}
+                onClick={[Function]}
+                type="button"
               >
-                <button
-                  aria-controls="group-alpha"
-                  aria-expanded={true}
-                  onClick={[Function]}
-                  type="button"
+                <svg
+                  aria-hidden={true}
+                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  fill="none"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <span
-                    id="group-heading-alpha"
-                  >
-                    Alpha
-                  </span>
-                </button>
-              </h3>
-              <fieldset
-                aria-hidden={false}
-                className="filter-group__options"
-                id="group-alpha"
-              >
-                <legend>
-                  Alpha
-                </legend>
-                <label
-                  className="filter-option"
-                  htmlFor="filter_alpha_4"
-                >
-                  <input
-                    checked={false}
-                    id="filter_alpha_4"
-                    name="alpha"
-                    onChange={[Function]}
-                    title="Alpha - Comment Collection"
-                    type="checkbox"
-                    value="4"
+                  <path
+                    d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                    fill="currentColor"
                   />
-                  <span
-                    className="filter-option__text"
+                </svg>
+              </button>
+            </h2>
+            <div
+              aria-hidden={false}
+              className="filter-panel__body"
+              id="filter-panel-body"
+            >
+              <div
+                className="filter-group"
+              >
+                <h3
+                  className="filter-group__heading"
+                >
+                  <button
+                    aria-controls="group-alpha"
+                    aria-expanded={true}
+                    onClick={[Function]}
+                    type="button"
                   >
-                    Comment Collection
-                  </span>
-                </label>
-              </fieldset>
+                    <svg
+                      aria-hidden={true}
+                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      fill="none"
+                      focusable="false"
+                      height="1em"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <span
+                      id="group-heading-alpha"
+                    >
+                      Alpha
+                       
+                    </span>
+                  </button>
+                </h3>
+                <fieldset
+                  aria-hidden={false}
+                  className="filter-group__options"
+                  id="group-alpha"
+                >
+                  <legend>
+                    Alpha
+                  </legend>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_alpha_4"
+                  >
+                    <input
+                      checked={false}
+                      id="filter_alpha_4"
+                      name="alpha"
+                      onChange={[Function]}
+                      title="Alpha - Comment Collection"
+                      type="checkbox"
+                      value="4"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Comment Collection
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div
