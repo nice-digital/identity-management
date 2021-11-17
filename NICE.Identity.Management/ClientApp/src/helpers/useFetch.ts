@@ -1,4 +1,8 @@
-type doFetchType = <T>(overrideUrl?: string, overrideOptions?: Record<string, unknown>) => Promise<T | Error>;
+type CustomError = {
+	error: Error;
+	status: number;
+}
+type doFetchType = <T>(overrideUrl?: string, overrideOptions?: Record<string, unknown>) => Promise<T | CustomError>;
 
 export const useFetch = (url: string, options = {}): doFetchType => {
 
@@ -11,15 +15,15 @@ export const useFetch = (url: string, options = {}): doFetchType => {
 		} catch (err) {			
 			const error: Error = err;
 			console.error(error);
-			return error;
+			return { error, status: response.status };
 		}
 
 		if (response.status === 200 || response.status === 201) {
 			return data;
 		} else {
-			const error = new Error(data.message);
+			const error = new Error(data.message || data.title);
 			console.error(error);
-			return error;
+			return { error, status: data?.status };
 		}
 	};
 

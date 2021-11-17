@@ -15,7 +15,37 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [1, 2, 3]
+      "hasAccessToWebsiteIds": [
+        1,
+        2,
+        3
+      ],
+      "userEmailHistory": [
+        {
+          "userEmailHistoryId": 1,
+          "userId": 1195,
+          "emailAddress": "jcwilliams+id5@gmail.com",
+          "archivedByUserId": null,
+          "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+          "archivedByUserDisplayName": null
+        },
+        {
+          "userEmailHistoryId": 2,
+          "userId": 1195,
+          "emailAddress": "updated@gmail.com",
+          "archivedByUserId": 1196,
+          "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+          "archivedByUserDisplayName": "John Holland"
+        },
+        {
+          "userEmailHistoryId": 3,
+          "userId": 1195,
+          "emailAddress": "updated2@gmail.com",
+          "archivedByUserId": null,
+          "archivedDateUTC": "2021-10-26T15:14:00.7624903",
+          "archivedByUserDisplayName": null
+        }
+      ]
     },
     {
       "userId": 2,
@@ -32,7 +62,10 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [3]
+      "hasAccessToWebsiteIds": [
+        3
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 3,
@@ -49,7 +82,11 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [3, 4]
+      "hasAccessToWebsiteIds": [
+        3,
+        4
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 4,
@@ -66,7 +103,12 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [1, 4, 5]
+      "hasAccessToWebsiteIds": [
+        1,
+        4,
+        5
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 5,
@@ -83,7 +125,11 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [2, 4]
+      "hasAccessToWebsiteIds": [
+        2,
+        4
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 6,
@@ -100,7 +146,8 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [5, 4]
+      "hasAccessToWebsiteIds": [5, 4],
+      "userEmailHistory": []
     },
     {
       "userId": 7,
@@ -117,7 +164,8 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [5, 4]
+      "hasAccessToWebsiteIds": [5, 4],
+      "userEmailHistory": []
     }
   ],
   "services": [

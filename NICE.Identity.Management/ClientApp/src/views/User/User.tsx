@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
+import { StaticContext } from "react-router";
+import Moment from "moment";
+
+import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
+import { Table } from "@nice-digital/nds-table";
 
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
@@ -20,7 +25,12 @@ import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string };
 
-type UserProps = Record<string, unknown> & RouteComponentProps<TParams>;
+type LocationState = {
+	hasBeenEdited: boolean;
+};
+
+type UserProps = Record<string, unknown> &
+	RouteComponentProps<TParams, StaticContext, LocationState>;
 
 type UserState = {
 	user: UserType;
@@ -132,6 +142,12 @@ export class User extends Component<UserProps, UserState> {
 									<p>Loading...</p>
 								) : (
 									<>
+										{this.props.location.state?.hasBeenEdited && (
+											<Alert type="info" role="status" aria-live="polite">
+												<p>The user profile has been updated successfully.</p>
+											</Alert>
+										)}
+
 										<div className={`${styles.summaryList} pv--c`}>
 											<span className={styles.summaryListLabel}>
 												Account information
@@ -220,9 +236,46 @@ export class User extends Component<UserProps, UserState> {
 										<Link
 											data-qa-sel="delete-user-link"
 											to={`/users/${user.userId}/delete`}
+											className="pv--c mb--d"
+											style={{ display: "inline-block" }}
 										>
 											Delete user
 										</Link>
+
+										{user.userEmailHistory.length > 0 && (
+											<>
+												<hr className="mv--b" />
+
+												<h2 className="h3">Email audit trail</h2>
+												<Table style={{ display: "table" }}>
+													<thead>
+														<tr>
+															<th>Who modified user profile</th>
+															<th>Date modified</th>
+															<th>Previous email address</th>
+														</tr>
+													</thead>
+													<tbody>
+														{user.userEmailHistory
+															.slice(0)
+															.reverse()
+															.map((historicalEmail) => (
+																<tr key={historicalEmail.userEmailHistoryId}>
+																	<td>
+																		{historicalEmail.archivedByUserDisplayName}
+																	</td>
+																	<td>
+																		{Moment(
+																			historicalEmail.archivedDateUTC,
+																		).format("DD-MM-YYYY HH:mm")}
+																	</td>
+																	<td>{historicalEmail.emailAddress}</td>
+																</tr>
+															))}
+													</tbody>
+												</Table>
+											</>
+										)}
 									</>
 								)}
 							</GridItem>
