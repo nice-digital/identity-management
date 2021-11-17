@@ -15,7 +15,7 @@ export const useFetch = (url: string, options = {}): doFetchType => {
 		} catch (err) {			
 			const error: Error = err;
 			console.error(error);
-			return { error, status: response.status };
+			return { error, status: err.response };
 		}
 
 		if (response.status === 200 || response.status === 201) {
