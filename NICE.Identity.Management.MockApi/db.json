@@ -23,7 +23,7 @@
       "userEmailHistory": [
         {
           "userEmailHistoryId": 1,
-          "userId": 1195,
+          "userId": 1,
           "emailAddress": "jcwilliams+id5@gmail.com",
           "archivedByUserId": null,
           "archivedDateUTC": "2021-10-26T14:52:54.1478773",
@@ -31,15 +31,15 @@
         },
         {
           "userEmailHistoryId": 2,
-          "userId": 1195,
+          "userId": 1,
           "emailAddress": "updated@gmail.com",
-          "archivedByUserId": 1196,
+          "archivedByUserId": 2,
           "archivedDateUTC": "2021-10-26T14:54:35.5142339",
-          "archivedByUserDisplayName": "John Holland"
+          "archivedByUserDisplayName": "Thomas Holding"
         },
         {
           "userEmailHistoryId": 3,
-          "userId": 1195,
+          "userId": 1,
           "emailAddress": "updated2@gmail.com",
           "archivedByUserId": null,
           "archivedDateUTC": "2021-10-26T15:14:00.7624903",
