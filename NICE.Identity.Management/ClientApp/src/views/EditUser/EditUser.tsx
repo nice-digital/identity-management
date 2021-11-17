@@ -211,7 +211,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 						</>
 					) : (
 						<>
-							{redirect && <Redirect to={`/users/${id}`} />}
+							{redirect && (
+								<Redirect
+									to={{
+										pathname: `/users/${id}`,
+										state: { hasBeenEdited: true },
+									}}
+								/>
+							)}
 
 							<PageHeader
 								preheading="Personal details for"
