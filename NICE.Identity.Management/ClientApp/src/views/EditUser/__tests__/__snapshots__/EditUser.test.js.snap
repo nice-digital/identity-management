@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditUser should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      data-qa-sel="breadcrumb-user-link"
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/users"
+    >
+      Users
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/users/1"
+    >
+      undefined undefined
+    </Breadcrumb>
+    <Breadcrumb>
+      Edit user
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    data-qa-sel="page-header-edit-user"
+    heading="undefined undefined"
+    preheading="Personal details for"
+  />
+  <Grid
+    elementType="div"
+    equalHeight={false}
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      cols={12}
+      lg={4}
+      md={6}
+    >
+      <form
+        noValidate={true}
+        onSubmit={[Function]}
+      >
+        <Input
+          autoComplete="off"
+          data-qa-sel="email-input-edit-user"
+          disabled={false}
+          errorMessage="Email address is in an invalid format"
+          label="Email address"
+          name="emailAddress"
+          onBlur={[Function]}
+          onChange={[Function]}
+          required={true}
+          type="email"
+        />
+        <Input
+          autoComplete="off"
+          data-qa-sel="firstname-input-edit-user"
+          disabled={false}
+          errorMessage="First name should contain letters and should not exceed 100 characters"
+          label="First name"
+          maxLength="100"
+          minLength="2"
+          name="firstName"
+          onBlur={[Function]}
+          onChange={[Function]}
+          pattern="^((?![<>]).)*$"
+          required={true}
+          type="text"
+        />
+        <Input
+          autoComplete="off"
+          data-qa-sel="lastname-input-edit-user"
+          disabled={false}
+          errorMessage="Last name should contain letters and should not exceed 100 characters"
+          label="Last name"
+          maxLength="100"
+          minLength="2"
+          name="lastName"
+          onBlur={[Function]}
+          onChange={[Function]}
+          pattern="^((?![<>]).)*$"
+          required={true}
+          type="text"
+        />
+        <div
+          className="form-group-container form-group-container--no-border"
+        >
+          <FormGroup
+            disabled={false}
+            legend="Audience insight community membership"
+            name="audienceInsight"
+          >
+            <Radio
+              data-qa-sel="optIn-radio-edit-user"
+              label="Opt in"
+              value="optIn"
+            />
+            <Radio
+              data-qa-sel="optOut-radio-edit-user"
+              defaultChecked={true}
+              label="Opt out"
+              value="optOut"
+            />
+          </FormGroup>
+          <Button
+            data-qa-sel="save-button-edit-user"
+            disabled={false}
+            type="submit"
+            variant="cta"
+          >
+            Save profile
+          </Button>
+          <Button
+            disabled={false}
+            elementType={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "propTypes": Object {
+                  "innerRef": [Function],
+                  "onClick": [Function],
+                  "replace": [Function],
+                  "target": [Function],
+                  "to": [Function],
+                },
+                "render": [Function],
+              }
+            }
+            to="/users/1"
+            variant="secondary"
+          >
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </GridItem>
+  </Grid>
+</Fragment>
+`;
