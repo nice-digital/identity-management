@@ -210,6 +210,18 @@ export class User extends Component<UserProps, UserState> {
 
 										<div className={`${styles.summaryList} pv--c mb--d`}>
 											<span className={styles.summaryListLabel}>
+												Audience insight community membership
+											</span>
+											<span
+												className={styles.summaryListDetail}
+												data-qa-sel="audience-user-profile"
+											>
+												{user.allowContactMe ? "Yes" : "No"}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
 												Is migrated from NICE Accounts
 											</span>
 											<span className={styles.summaryListDetail}>
