@@ -108,6 +108,7 @@ export class User extends Component<UserProps, UserState> {
 				{!error ? (
 					<>
 						<PageHeader
+							data-qa-sel="name-user-profile"
 							preheading="User profile for"
 							heading={
 								isLoading
@@ -176,7 +177,10 @@ export class User extends Component<UserProps, UserState> {
 											<span className={styles.summaryListLabel}>
 												Email address
 											</span>
-											<span className={styles.summaryListDetail}>
+											<span
+												className={styles.summaryListDetail}
+												data-qa-sel="email-user-profile"
+											>
 												{user.emailAddress}
 											</span>
 										</div>
