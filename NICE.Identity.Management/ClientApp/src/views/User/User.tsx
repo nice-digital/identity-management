@@ -144,7 +144,12 @@ export class User extends Component<UserProps, UserState> {
 								) : (
 									<>
 										{this.props.location.state?.hasBeenEdited && (
-											<Alert type="info" role="status" aria-live="polite">
+											<Alert
+												type="info"
+												role="status"
+												aria-live="polite"
+												data-qa-sel="successful-message-user-profile"
+											>
 												<p>The user profile has been updated successfully.</p>
 											</Alert>
 										)}
