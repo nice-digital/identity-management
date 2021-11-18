@@ -18,7 +18,7 @@ describe("User", () => {
 
 	const location = {
 		state: {}
-	}
+	};
 
 	const consoleErrorReset = console.error;
 
