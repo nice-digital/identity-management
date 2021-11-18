@@ -2,45 +2,43 @@
     This is the permission denied view. It's the only server-side view in the project. The rest of the front-end is rendered by react and is in the ClientApp folder.
 *@
 @{
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<link rel="stylesheet" href="https://www.nice.org.uk/consultations/styles/main.css" />
-			<link href="//fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet" type="text/css">
-			<meta name="viewport" content="width=device-width" />
-			<title>Permission Denied</title>
-		</head>
-		<body>
-		<div>
-			<main role="main">
-				<div class="container">
-					<div class="panel page-header">
-						<h1 class="heading mt--c">Something's gone wrong</h1>
-						<p>You do not have access to this website. Please <a href="https://www.nice.org.uk/get-involved/contact-us">contact support</a> if you think this is incorrect.</p>
-					</div>
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://www.nice.org.uk/consultations/styles/main.css" />
+		<link href="//fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="width=device-width" />
+		<title>Permission Denied</title>
+	</head>
+	<body>
+	<div>
+		<main role="main">
+			<div class="container">
+				<div class="panel page-header">
+					<h1 class="heading mt--c">Something's gone wrong</h1>
+					<p>You do not have access to this website. Please <a href="https://www.nice.org.uk/get-involved/contact-us">contact support</a> if you think this is incorrect.</p>
 				</div>
-			</main>
-		</div>
+			</div>
+		</main>
+	</div>
 
-		<!-- Global nav - this block must be below the "loud" scipts comment above, as it relies on window.__AUTH__ which is set in that block. -->
-		<script>
-			//var global_nav_config_
-			var global_nav_config = {
-				service: "",
-				header: {
-					search: false,
-					auth: {
-						provider: "idam",
-						environment: "live",
-						links: [{ text: "Sign out", url: "/account/logout" }],
-						displayName: " "
-					},
-					cookie: false
+	<script>
+	var global_nav_config = {
+			service: "",
+			header: {
+				search: false,
+				auth: {
+					provider: "idam",
+					environment: "live",
+					links: [{ text: "Sign out", url: "/account/logout" }],
+					displayName: " "
 				},
-				footer: true
-			};
-		</script>
-		<script src="https://cdn.nice.org.uk/global-nav/global-nav.min.js"></script>
-		</body>
-	</html>
+				cookie: false
+			},
+			footer: true
+		};
+	</script>
+	<script src="https://cdn.nice.org.uk/global-nav/global-nav.min.js"></script>
+	</body>
+</html>
 }
