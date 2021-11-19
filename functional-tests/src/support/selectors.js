@@ -97,4 +97,22 @@ export default {
     pageServiceResultCount: toDataQASelAttr("services-returned"),
     pageUserResultCount: toDataQASelAttr("users-returned"),
   },
+  UserProfile: {
+    editButton: toDataQASelAttr('edit-profile-button'),
+    updatedUserName: toDataQASelAttr('name-user-profile'),
+    updatedEmailAddress: toDataQASelAttr('email-user-profile'),
+    updatedAudienceInsight: toDataQASelAttr('audience-user-profile'),
+    SuccessfulMessage: toDataQASelAttr('successful-message-user-profile'),
+
+   },
+  editUserProfile: {
+   
+    EmailAddress: toDataQASelAttr('email-input-edit-user'),
+    FirstName: toDataQASelAttr('firstname-input-edit-user'),
+    LastName: toDataQASelAttr('lastname-input-edit-user'),
+    optIn: toDataQASelAttr('optIn-radio-edit-user'),
+    optOut: toDataQASelAttr('optOut-radio-edit-user'),
+    saveProfileButton: toDataQASelAttr('save-button-edit-user'),
+    userBreadcrumb: toDataQASelAttr('breadcrumb-user-link'), 
+   },
 };

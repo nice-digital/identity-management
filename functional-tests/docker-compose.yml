@@ -63,6 +63,10 @@ services:
       - ACCOUNTS_EMAIL5
       - ACCOUNTS_PASSWORD
       - ACCOUNTS_PASSWORD2
+      - USER_EMAIL1
+      - FIRSTNAME1
+      - LASTNAME1
+      - FIRSTNAME1LASTNAME1
 
   # Identity management dotnet core web app
   idammanagement:
