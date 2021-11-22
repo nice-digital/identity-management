@@ -15,7 +15,7 @@ namespace NICE.Identity.Management.Extensions
 {
 	public static class ControllerExtensions
 	{
-		public static async Task<string> RenderViewAsync(this Controller controller, string viewName = "Index", bool partial = false, HttpContext httpContext = null)
+		public static async Task<string> RenderViewAsync(this Controller controller, string viewName, bool partial = false, HttpContext httpContext = null)
 		{
 			var ignore = new object();
 			return await RenderViewAsync(controller, viewName, ignore, partial, httpContext);

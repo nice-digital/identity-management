@@ -236,7 +236,7 @@ namespace NICE.Identity.Management
 					startupLogger.LogWarning($"User: {httpContext.User.DisplayName()} with id: {httpContext.User.NameIdentifier()} has tried accessing {httpContext.Request.Host.Value}{httpContext.Request.Path} but does not have access");
 					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 
-					var permissionDeniedViewAsString = await new PermissionDeniedController().RenderViewAsync(httpContext: httpContext);
+					var permissionDeniedViewAsString = await new PermissionDeniedController().RenderViewAsync(httpContext: httpContext, viewName: "PermissionDenied");
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
