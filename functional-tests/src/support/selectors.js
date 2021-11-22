@@ -110,7 +110,7 @@ export default {
     EmailAddress: toDataQASelAttr('email-input-edit-user'),
     FirstName: toDataQASelAttr('firstname-input-edit-user'),
     LastName: toDataQASelAttr('lastname-input-edit-user'),
-    optIn: toDataQASelAttr('optIn-radio-edit-user'),
+    optIn: '.radio__label',
     optOut: toDataQASelAttr('optOut-radio-edit-user'),
     saveProfileButton: toDataQASelAttr('save-button-edit-user'),
     userBreadcrumb: toDataQASelAttr('breadcrumb-user-link'), 

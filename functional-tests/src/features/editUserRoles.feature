@@ -14,10 +14,10 @@ Feature: Edit User Roles
     When I click on the last user in the list
     Then I click on the Edit profile button
     Then I edit user email "USER_EMAIL1", firstname "FIRSTNAME1" and lastname "LASTNAME1"
-#And I edit the audience insight option
-#Then I click on the save button
-# Then I expect the successful message "The user profile has been updated successfully" to be displayed
-#Then I check user profile is updated
+    Then I edit the audience insight option
+    Then I click on the save button
+    Then I expect the successful message to be displayed
+    Then I check user profile is updated
 
 
 

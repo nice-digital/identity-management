@@ -136,7 +136,7 @@ Then(
 	saveUserEditButton
 );
 Then(
-	/^I expect the successful message "([^"]*)" to be displayed$/,
+	/^I expect the successful message to be displayed$/,
 	validateProfileSuccessfulMessage
 );
 Then(
