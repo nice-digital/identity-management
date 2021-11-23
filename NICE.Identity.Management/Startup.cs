@@ -64,7 +64,8 @@ namespace NICE.Identity.Management
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-            services.AddControllers();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             // Add authentication services
             var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");

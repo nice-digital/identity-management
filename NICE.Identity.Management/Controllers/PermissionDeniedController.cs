@@ -10,7 +10,7 @@ namespace NICE.Identity.Management.Controllers
 	{
 		public IActionResult Index()
 		{
-			return View();
+			return View("PermissionDenied");
 		}
 	}
 }
