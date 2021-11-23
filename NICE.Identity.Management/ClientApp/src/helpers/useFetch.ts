@@ -12,7 +12,7 @@ export const useFetch = (url: string, options = {}): doFetchType => {
 		try {
 			response = await fetch(overrideUrl, overrideOptions);
 			data = await response.json();
-		} catch (err) {			
+		} catch (err) {
 			const error: Error = err;
 			console.error(error);
 			return { error, status: err.response };
@@ -23,7 +23,7 @@ export const useFetch = (url: string, options = {}): doFetchType => {
 		} else {
 			const error = new Error(data.message || data.title);
 			console.error(error);
-			return { error, status: data?.status };
+			return { error, status: data.status };
 		}
 	};
 

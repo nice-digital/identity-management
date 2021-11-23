@@ -30,11 +30,16 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSaveButtonLoading, setIsSaveButtonLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+	const [redirect, setRedirect] = useState(false);
+
 	const [validationErrorList, setValidationErrorList] = useState<any>({});
+	const [emailBlockedArray, setEmailBlockedArray] = useState<
+		Array<Record<string, string>>
+	>([]);
 	const [emailBlockedPattern, setEmailBlockedPattern] =
 		useState<{ pattern: string }>(Object);
-	const [emailBlockedMessage, setEmailBlockedMessage] = useState<string>("");
-	const [redirect, setRedirect] = useState(false);
+	const [emailBlockedCurrentMessage, setEmailBlockedCurrentMessage] =
+		useState<string>("Email address is in an invalid format");
 
 	const doFetch = useFetch(Endpoints.user(id));
 
@@ -50,7 +55,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 					const errorObject = data as CustomError;
 					setError(errorObject.error);
 				} else {
-					setUser(data as UserType);
+					const userData = data as UserType;
+					setUser(userData);
+
+					if (userData.emailAddress.indexOf("@nice.org.uk") > -1) {
+						setEmailBlockedPattern({
+							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
+						});
+					}
 				}
 
 				setIsLoading(false);
@@ -64,6 +76,13 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 
 	const containsError = (data: Record<string, unknown>) => {
 		return Object.prototype.hasOwnProperty.call(data, "error");
+	};
+
+	const checkBlockedArray = (emailAddress: string) => {
+		const blockedEmail =
+			emailBlockedArray.find((x) => x.emailAddress === emailAddress) || {};
+
+		return blockedEmail;
 	};
 
 	const formHasChanged = (form: EditUserForm): boolean => {
@@ -90,8 +109,11 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		const form = e.currentTarget;
 		const { emailAddress, firstName, lastName, audienceInsight_optIn } = form;
 		const validationErrors = { ...validationErrorList };
+		const blockedArray = [...emailBlockedArray];
+		const blockedEmailFound =
+			Object.keys(checkBlockedArray(emailAddress.value)).length > 0;
 
-		if (!form.checkValidity()) {
+		if (!form.checkValidity() || blockedEmailFound) {
 			setIsSaveButtonLoading(false);
 			return false;
 		}
@@ -122,11 +144,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			const errorObject = data as CustomError;
 
 			if (errorObject.status === 422) {
-				validationErrors["emailAddressBlocked"] = true;
-				setEmailBlockedPattern({
-					pattern: updateEmailBlockedPattern(emailAddress.value),
+				validationErrors["emailAddress"] = true;
+				blockedArray.push({
+					emailAddress: emailAddress.value,
+					message: errorObject.error.message,
 				});
-				setEmailBlockedMessage(errorObject.error.message);
+
+				setEmailBlockedArray(blockedArray);
+				setEmailBlockedCurrentMessage(errorObject.error.message);
 				setValidationErrorList(validationErrors);
 			} else {
 				setError(error);
@@ -136,30 +161,28 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		setIsSaveButtonLoading(false);
 	};
 
-	const updateEmailBlockedPattern = (emailAddress: string): string => {
-		const regexPattern = Object.prototype.hasOwnProperty.call(
-			emailBlockedPattern,
-			"pattern",
-		)
-			? emailBlockedPattern.pattern.replace("?!(", `?!(${emailAddress}|`)
-			: `^(?!(${emailAddress})$).*`;
-
-		return regexPattern;
-	};
-
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const formElement = e.currentTarget;
 		const validationErrors = { ...validationErrorList };
 
-		if (validationErrors[formElement.name] && formElement.validity.valid) {
-			validationErrors[formElement.name] = false;
-		}
+		let isNowValid = formElement.validity.valid;
 
-		if (
-			formElement.name === "emailAddress" &&
-			validationErrors["emailAddressBlocked"]
-		) {
-			validationErrors["emailAddressBlocked"] = false;
+		if (validationErrors[formElement.name] === true) {
+			if (formElement.name === "emailAddress") {
+				const blockedEmail = checkBlockedArray(formElement.value);
+				const message =
+					Object.keys(emailBlockedPattern).length > 0
+						? "Email address must end in '@nice.org.uk'"
+						: "Email address is in an invalid format";
+				isNowValid = isNowValid
+					? Object.keys(blockedEmail).length === 0
+					: false;
+				setEmailBlockedCurrentMessage(blockedEmail.message || message);
+			}
+
+			if (isNowValid) {
+				validationErrors[formElement.name] = false;
+			}
 		}
 
 		setValidationErrorList(validationErrors);
@@ -169,18 +192,19 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		const formElement = e.currentTarget;
 		const validationErrors = { ...validationErrorList };
 
-		validationErrors[formElement.name] = !formElement.validity.valid;
+		let isNowValid = formElement.validity.valid;
 
-		if (
-			formElement.name === "emailAddress" &&
-			Object.prototype.hasOwnProperty.call(emailBlockedPattern, "pattern")
-		) {
-			const pattern = new RegExp(emailBlockedPattern.pattern);
-
-			validationErrors["emailAddressBlocked"] = !pattern.test(formElement.value)
-				? true
-				: false;
+		if (formElement.name === "emailAddress") {
+			const blockedEmail = checkBlockedArray(formElement.value);
+			const message =
+				Object.keys(emailBlockedPattern).length > 0
+					? "Email address must end in '@nice.org.uk'"
+					: "Email address is in an invalid format";
+			isNowValid = isNowValid ? Object.keys(blockedEmail).length === 0 : false;
+			setEmailBlockedCurrentMessage(blockedEmail.message || message);
 		}
+
+		validationErrors[formElement.name] = !isNowValid;
 
 		setValidationErrorList(validationErrors);
 	};
@@ -243,16 +267,8 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											{...emailBlockedPattern}
 											onBlur={handleBlur}
 											onChange={handleChange}
-											error={
-												validationErrorList.emailAddress ||
-												validationErrorList.emailAddressBlocked
-											}
-											// errorMessage={
-											// 	validationErrorList.emailAddressBlocked
-											// 		? "Email address is already in use"
-											// 		: "Email address is in an invalid format"
-											// }
-											errorMessage={emailBlockedMessage}
+											error={validationErrorList.emailAddress}
+											errorMessage={emailBlockedCurrentMessage}
 											defaultValue={user.emailAddress}
 											disabled={isSaveButtonLoading}
 										/>
