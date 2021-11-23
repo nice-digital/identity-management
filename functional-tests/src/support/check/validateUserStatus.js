@@ -28,4 +28,11 @@ export const validateUserStatusListPageLocked = () => {
   pause(1000);
 };
 
+export const validateProfileSuccessfulMessage = () => {
+ waitForVisible(selectors.UserProfile.SuccessfulMessage);
+ checkContainsText(
+ 'element', selectors.UserProfile.SuccessfulMessage, 'The user profile has been updated successfully.');
+  pause(1000);
+};
+
 export default validateUserStatusActive;

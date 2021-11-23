@@ -25,6 +25,13 @@ import validateUserStatusActive, {
 import identityLogInPage from '../support/check/identityLogInPage';
 import validateRoleChange from '../support/check/validateRoleChange';
 import validateServiceDownloadPageResultCount,  { validateUserDownloadPageResultCount} from '../support/check/validateAdminUserServicePage';
+import editUserProfile from '../support/action/editUserProfile'
+import editUserEmailName from '../support/action/editUserEmailName'
+import editAudienceInsight from '../support/action/editAudienceInsight'
+import saveUserEditButton from '../support/action/saveUserEditButton'
+import validateProfileSuccessfulMessage from '../support/check/validateUserStatus'
+import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile'
+
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
 
@@ -112,3 +119,29 @@ Then(
 	/^I expect the users result list count contains "([^"]*)"$/,
 	validateUserDownloadPageResultCount
 );
+Then(
+	/^I click on the Edit profile button$/,
+	editUserProfile
+);
+Then(
+	/^I edit user email "([A-Z0-9_]+)", firstname "([A-Z0-9_]+)" and lastname "([A-Z0-9_]+)"$/,
+	editUserEmailName
+);
+Then(
+	/^I edit the audience insight option$/,
+	editAudienceInsight
+);
+Then(
+	/^I click on the save button$/,
+	saveUserEditButton
+);
+Then(
+	/^I expect the successful message to be displayed$/,
+	validateProfileSuccessfulMessage
+);
+Then(
+	/^I check user profile is updated$/,
+	checkUpdatedUserProfile
+);
+
+
