@@ -36,7 +36,7 @@ namespace NICE.Identity.Management.Extensions
 				HttpContext context = httpContext ?? controller.HttpContext;
 				var actionContext = GetActionContext(context.RequestServices);
 				IViewEngine viewEngine = context.RequestServices.GetService(typeof(IRazorViewEngine)) as IRazorViewEngine;
-				ViewEngineResult viewResult = viewEngine.FindView(actionContext, viewName, !partial); // viewEngine.FindView(controller.ControllerContext, viewName, !partial);
+				ViewEngineResult viewResult = viewEngine.FindView(actionContext, viewName, !partial);
 
 				if (viewResult.Success == false)
 				{
@@ -64,29 +64,5 @@ namespace NICE.Identity.Management.Extensions
 			httpContext.RequestServices = serviceProvider;
 			return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 		}
-
-		//private IView FindView(ActionContext actionContext, string viewName)
-		//{
-		//	var getViewResult = _viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
-		//	if (getViewResult.Success)
-		//	{
-		//		return getViewResult.View;
-		//	}
-
-		//	var findViewResult = _viewEngine.FindView(actionContext, viewName, isMainPage: true);
-		//	if (findViewResult.Success)
-		//	{
-		//		return findViewResult.View;
-		//	}
-
-		//	var searchedLocations = getViewResult.SearchedLocations.Concat(findViewResult.SearchedLocations);
-		//	var errorMessage = string.Join(
-		//		Environment.NewLine,
-		//		new[] { $"Unable to find view '{viewName}'. The following locations were searched:" }.Concat(
-		//			searchedLocations));
-		//	;
-
-		//	throw new InvalidOperationException(errorMessage);
-		//}
 	}
 }
