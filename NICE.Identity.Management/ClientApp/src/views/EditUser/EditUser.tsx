@@ -8,7 +8,6 @@ import { Input } from "@nice-digital/nds-input";
 import { Radio } from "@nice-digital/nds-radio";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { useFetch } from "../../helpers/useFetch";
-import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
@@ -17,11 +16,11 @@ import "@nice-digital/nds-radio/scss/radio.scss";
 
 type TParams = { id: string };
 type EditUserProps = Record<string, unknown> & RouteComponentProps<TParams>;
-type EditUserForm = Record<string, HTMLInputElement>;
 type CustomError = {
 	error: Error;
 	status: number;
 };
+type FormDataType = Record<string, string | boolean | null>;
 
 export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const { id } = props.match.params;
@@ -41,6 +40,13 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const [emailBlockedCurrentMessage, setEmailBlockedCurrentMessage] =
 		useState<string>("Email address is in an invalid format");
 
+	const [formData, setFormData] = useState<FormDataType>({
+		emailAddress: "",
+		firstName: "",
+		lastName: "",
+		audienceInsight: null,
+	});
+
 	const doFetch = useFetch(Endpoints.user(id));
 
 	useEffect(() => {
@@ -56,7 +62,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 					setError(errorObject.error);
 				} else {
 					const userData = data as UserType;
+					const updatedFormData = {
+						emailAddress: userData.emailAddress,
+						firstName: userData.firstName,
+						lastName: userData.lastName,
+						audienceInsight: userData.allowContactMe,
+					};
 					setUser(userData);
+					setFormData(updatedFormData);
 
 					if (userData.emailAddress.indexOf("@nice.org.uk") > -1) {
 						setEmailBlockedPattern({
@@ -85,12 +98,12 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		return blockedEmail;
 	};
 
-	const formHasChanged = (form: EditUserForm): boolean => {
+	const formHasChanged = (): boolean => {
 		const formValuesAreDifferent = [
-			user.emailAddress !== form.emailAddress.value,
-			user.firstName !== form.firstName.value,
-			user.lastName !== form.lastName.value,
-			user.allowContactMe !== form.audienceInsight_optIn.checked,
+			user.emailAddress !== formData.emailAddress,
+			user.firstName !== formData.firstName,
+			user.lastName !== formData.lastName,
+			user.allowContactMe !== formData.audienceInsight,
 		];
 
 		if (formValuesAreDifferent.includes(true)) {
@@ -107,18 +120,18 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		setIsSaveButtonLoading(true);
 
 		const form = e.currentTarget;
-		const { emailAddress, firstName, lastName, audienceInsight_optIn } = form;
+		const { emailAddress, firstName, lastName, audienceInsight } = formData;
 		const validationErrors = { ...validationErrorList };
 		const blockedArray = [...emailBlockedArray];
 		const blockedEmailFound =
-			Object.keys(checkBlockedArray(emailAddress.value)).length > 0;
+			Object.keys(checkBlockedArray(emailAddress as string)).length > 0;
 
 		if (!form.checkValidity() || blockedEmailFound) {
 			setIsSaveButtonLoading(false);
 			return false;
 		}
 
-		if (!formHasChanged(form)) {
+		if (!formHasChanged()) {
 			setRedirect(true);
 			return false;
 		}
@@ -128,10 +141,10 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				userId: Number(id),
-				emailAddress: emailAddress.value,
-				firstName: firstName.value,
-				lastName: lastName.value,
-				allowContactMe: audienceInsight_optIn.checked,
+				emailAddress: emailAddress,
+				firstName: firstName,
+				lastName: lastName,
+				allowContactMe: audienceInsight,
 			}),
 		};
 
@@ -146,7 +159,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			if (errorObject.status === 422) {
 				validationErrors["emailAddress"] = true;
 				blockedArray.push({
-					emailAddress: emailAddress.value,
+					emailAddress: emailAddress as string,
 					message: errorObject.error.message,
 				});
 
@@ -162,17 +175,23 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		const formElement = e.currentTarget;
+		const formElement = e.target;
+		const formElementName = formElement.name;
+		let isNowValid = formElement.validity.valid;
+		const updatedFormData = { ...formData };
 		const validationErrors = { ...validationErrorList };
 
-		let isNowValid = formElement.validity.valid;
+		updatedFormData[formElementName] =
+			formElement.type === "radio"
+				? !updatedFormData[formElementName]
+				: formElement.value;
 
-		if (validationErrors[formElement.name] === true) {
-			if (formElement.name === "emailAddress") {
+		if (validationErrors[formElementName] === true) {
+			if (formElementName === "emailAddress") {
 				const blockedEmail = checkBlockedArray(formElement.value);
 				const message =
 					Object.keys(emailBlockedPattern).length > 0
-						? "Email address must end in '@nice.org.uk'"
+						? "Email address must be valid and end in '@nice.org.uk'"
 						: "Email address is in an invalid format";
 				isNowValid = isNowValid
 					? Object.keys(blockedEmail).length === 0
@@ -181,30 +200,31 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			}
 
 			if (isNowValid) {
-				validationErrors[formElement.name] = false;
+				validationErrors[formElementName] = false;
 			}
 		}
 
+		setFormData(updatedFormData);
 		setValidationErrorList(validationErrors);
 	};
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
-		const formElement = e.currentTarget;
+		const formElement = e.target;
+		const formElementName = formElement.name;
+		let isNowValid = formElement.validity.valid;
 		const validationErrors = { ...validationErrorList };
 
-		let isNowValid = formElement.validity.valid;
-
-		if (formElement.name === "emailAddress") {
+		if (formElementName === "emailAddress") {
 			const blockedEmail = checkBlockedArray(formElement.value);
 			const message =
 				Object.keys(emailBlockedPattern).length > 0
-					? "Email address must end in '@nice.org.uk'"
+					? "Email address must be valid and end in '@nice.org.uk'"
 					: "Email address is in an invalid format";
 			isNowValid = isNowValid ? Object.keys(blockedEmail).length === 0 : false;
 			setEmailBlockedCurrentMessage(blockedEmail.message || message);
 		}
 
-		validationErrors[formElement.name] = !isNowValid;
+		validationErrors[formElementName] = !isNowValid;
 
 		setValidationErrorList(validationErrors);
 	};
@@ -269,7 +289,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											onChange={handleChange}
 											error={validationErrorList.emailAddress}
 											errorMessage={emailBlockedCurrentMessage}
-											defaultValue={user.emailAddress}
+											value={formData.emailAddress}
 											disabled={isSaveButtonLoading}
 										/>
 										<Input
@@ -286,7 +306,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											onChange={handleChange}
 											error={validationErrorList.firstName}
 											errorMessage="First name should contain letters and should not exceed 100 characters"
-											defaultValue={user.firstName}
+											value={formData.firstName}
 											disabled={isSaveButtonLoading}
 										/>
 										<Input
@@ -303,7 +323,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											onChange={handleChange}
 											error={validationErrorList.lastName}
 											errorMessage="Last name should contain letters and should not exceed 100 characters"
-											defaultValue={user.lastName}
+											value={formData.lastName}
 											disabled={isSaveButtonLoading}
 										/>
 
@@ -312,18 +332,19 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 												legend="Audience insight community membership"
 												name="audienceInsight"
 												disabled={isSaveButtonLoading}
+												onChange={handleChange}
 											>
 												<Radio
 													data-qa-sel="optIn-radio-edit-user"
 													value="optIn"
 													label="Opt in"
-													defaultChecked={user.allowContactMe}
+													checked={formData.audienceInsight}
 												/>
 												<Radio
 													data-qa-sel="optOut-radio-edit-user"
 													value="optOut"
 													label="Opt out"
-													defaultChecked={!user.allowContactMe}
+													checked={!formData.audienceInsight}
 												/>
 											</FormGroup>
 											<Button
@@ -332,7 +353,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 												type="submit"
 												disabled={isSaveButtonLoading}
 											>
-												Save profile
+												{isSaveButtonLoading ? "Loading..." : "Save profile"}
 											</Button>
 											<Button
 												to={`/users/${id}`}

@@ -38,7 +38,7 @@ exports[`EditUser should match the snapshot after data has been loaded 1`] = `
       }
       to="/users/1"
     >
-      undefined undefined
+      Kristin Patrick
     </Breadcrumb>
     <Breadcrumb>
       Edit user
@@ -46,7 +46,7 @@ exports[`EditUser should match the snapshot after data has been loaded 1`] = `
   </Breadcrumbs>
   <PageHeader
     data-qa-sel="page-header-edit-user"
-    heading="undefined undefined"
+    heading="Kristin Patrick"
     preheading="Personal details for"
   />
   <Grid
@@ -70,13 +70,14 @@ exports[`EditUser should match the snapshot after data has been loaded 1`] = `
           autoComplete="off"
           data-qa-sel="email-input-edit-user"
           disabled={false}
-          errorMessage=""
+          errorMessage="Email address is in an invalid format"
           label="Email address"
           name="emailAddress"
           onBlur={[Function]}
           onChange={[Function]}
           required={true}
           type="email"
+          value="kristin.patrick@example.com"
         />
         <Input
           autoComplete="off"
@@ -92,6 +93,7 @@ exports[`EditUser should match the snapshot after data has been loaded 1`] = `
           pattern="^((?![<>]).)*$"
           required={true}
           type="text"
+          value="Kristin"
         />
         <Input
           autoComplete="off"
@@ -107,6 +109,7 @@ exports[`EditUser should match the snapshot after data has been loaded 1`] = `
           pattern="^((?![<>]).)*$"
           required={true}
           type="text"
+          value="Patrick"
         />
         <div
           className="form-group-container form-group-container--no-border"
@@ -115,15 +118,17 @@ exports[`EditUser should match the snapshot after data has been loaded 1`] = `
             disabled={false}
             legend="Audience insight community membership"
             name="audienceInsight"
+            onChange={[Function]}
           >
             <Radio
+              checked={true}
               data-qa-sel="optIn-radio-edit-user"
               label="Opt in"
               value="optIn"
             />
             <Radio
+              checked={false}
               data-qa-sel="optOut-radio-edit-user"
-              defaultChecked={true}
               label="Opt out"
               value="optOut"
             />
