@@ -75,7 +75,7 @@ describe("EditUser", () => {
 		});
 		await nextTick();
 		wrapper.update();
-		expect(wrapper.find(Redirect).exists()).toBe(false);
+		expect(wrapper.find(Redirect).exists()).toBe(true);
 	});
 
 });
