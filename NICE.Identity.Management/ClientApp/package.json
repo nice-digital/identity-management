@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@nice-digital/design-system": "^1.2.30",
-		"@nice-digital/global-nav": "^4.1.666-GN-115-Mega-nav-prod",
+		"@nice-digital/global-nav": "^4.1.668",
 		"@nice-digital/nds-stacked-nav": "^1.2.12",
 		"concurrently": "^6.2.0",
 		"query-string": "^6.12.1",
