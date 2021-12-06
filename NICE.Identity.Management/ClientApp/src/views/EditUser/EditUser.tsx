@@ -167,7 +167,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 				setEmailBlockedCurrentMessage(errorObject.error.message);
 				setValidationErrorList(validationErrors);
 			} else {
-				setError(error);
+				setError(errorObject.error);
 			}
 		}
 
