@@ -5,7 +5,6 @@
   "dependencies": {
     "@nice-digital/design-system": "^1.2.30",
     "@nice-digital/global-nav": "^4.1.668",
-    "@nice-digital/nds-stacked-nav": "^1.2.12",
     "concurrently": "^6.2.0",
     "moment": "^2.29.1",
     "query-string": "^6.12.1",
