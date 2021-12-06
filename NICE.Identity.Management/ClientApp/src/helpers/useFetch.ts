@@ -12,10 +12,11 @@ export const useFetch = (url: string, options = {}): doFetchType => {
 		try {
 			response = await fetch(overrideUrl, overrideOptions);
 			data = await response.json();
-		} catch (err) {
-			const error: Error = err;
+		} catch (err: unknown) {
+			const error = err as Error;
+			const typedErr = err as Record<string, unknown>;
 			console.error(error);
-			return { error, status: err.response };
+			return { error, status: typedErr.response };
 		}
 
 		if (response.status === 200 || response.status === 201) {
