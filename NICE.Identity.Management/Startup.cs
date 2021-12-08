@@ -16,20 +16,21 @@ using NICE.Identity.Authentication.Sdk.Extensions;
 using NICE.Identity.Management.Configuration;
 using ProxyKit;
 using System;
-using System.IO;
 using System.Net;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using NICE.Identity.Management.Controllers;
-using NICE.Identity.Management.Extensions;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.FileProviders;
+using NICE.Identity.Management.Controllers;
+using NICE.Identity.Management.Extensions;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace NICE.Identity.Management
 {
@@ -73,9 +74,8 @@ namespace NICE.Identity.Management
 			});
 
 			services.AddRouting(options => options.LowercaseUrls = true);
-
 			services.AddControllersWithViews();
-			services.AddRazorPages(); //(options => options.EnableEndpointRouting = true);
+			services.AddRazorPages();
 
 			// Add authentication services
 			var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
@@ -140,7 +140,6 @@ namespace NICE.Identity.Management
 
 			app.RunProxy("/api", async context =>
 			{
-				// System.Diagnostics.Debugger.Launch();
 				var apiEndpoint = Configuration.GetSection("WebAppConfiguration")["AuthorisationServiceUri"];
 				apiEndpoint += apiEndpoint.EndsWith("/") ? "api" : "/api";
 				startupLogger.LogDebug($"Proxy to endpoint {apiEndpoint}");
@@ -155,13 +154,13 @@ namespace NICE.Identity.Management
 					startupLogger.LogDebug("Proxy Add Authorization");
 					var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
 
-#if DEBUG
-					if (env.IsDevelopment())
-					{
-						AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
-						accessToken ??= AccessKeyForLocalDevelopmentUse;
-					}
-#endif
+					#if DEBUG
+						if (env.IsDevelopment())
+						{
+							AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
+							accessToken ??= AccessKeyForLocalDevelopmentUse;
+						}
+					#endif
 
 					forwardContext.UpstreamRequest.Headers.Authorization =
 						new AuthenticationHeaderValue("Bearer", accessToken);
@@ -196,14 +195,13 @@ namespace NICE.Identity.Management
 			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
 
-
+			app.UseRouting();
 
 			app.UseAuthentication();
 			app.UseAuthorization();
 
+
 			app.UseStaticFiles();
-
-
 			app.UseSpaStaticFiles(new StaticFileOptions()
 			{
 				OnPrepareResponse = context =>
@@ -234,9 +232,6 @@ namespace NICE.Identity.Management
 				}
 			});
 
-
-
-
 			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
@@ -248,7 +243,7 @@ namespace NICE.Identity.Management
 				return next();
 			});
 
-			app.UseRouting();
+			//app.UseRouting();
 
 			app.UseEndpoints(endpoints =>
 			{
@@ -288,6 +283,7 @@ namespace NICE.Identity.Management
 			{
 				// DotNetCore SpaServices requires RawTarget property, which isn't set on a TestServer.
 				// So set it here to allow integration tests to work with SSR via SpaServices
+
 				builder.Use((httpContext, next) =>
 				{
 					var httpRequestFeature = httpContext.Features.Get<IHttpRequestFeature>();
@@ -300,11 +296,9 @@ namespace NICE.Identity.Management
 				builder.UseSpa(spa =>
 				{
 					spa.Options.SourcePath = "ClientApp";
-
 					spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions()
 					{
-						OnPrepareResponse = ctx =>
-						{
+						OnPrepareResponse = ctx => {
 							// do not cache files. also see UseSpaStaticFiles
 							var headers = ctx.Context.Response.GetTypedHeaders();
 							headers.CacheControl = new CacheControlHeaderValue
@@ -320,8 +314,8 @@ namespace NICE.Identity.Management
 
 					//if (env.IsDevelopment())
 					//{
-					//	//spa.UseReactDevelopmentServer(npmScript: "start");
-					//	spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+					spa.UseReactDevelopmentServer(npmScript: "start");
+					spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
 					//}
 				});
 			});
