@@ -30,7 +30,6 @@ using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderVal
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace NICE.Identity.Management
 {
@@ -314,8 +313,8 @@ namespace NICE.Identity.Management
 
 					//if (env.IsDevelopment())
 					//{
-					spa.UseReactDevelopmentServer(npmScript: "start");
-					spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+					//spa.UseReactDevelopmentServer(npmScript: "start");
+					//spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
 					//}
 				});
 			});
