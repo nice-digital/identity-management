@@ -8,6 +8,7 @@ import { Overview } from "../../views/Overview/Overview";
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
 import { ServicesList } from "../../views/ServicesList/ServicesList";
+import { OrganisationsList } from "../../views/OrganisationsList/OrganisationsList";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
@@ -54,6 +55,7 @@ export class App extends React.Component {
 						component={SelectRoles}
 					/>
 					<Route path="/services" exact component={ServicesList} />
+					<Route path="/organisations" exact component={OrganisationsList} />
 				</Container>
 
 				<Footer />

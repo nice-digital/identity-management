@@ -9,6 +9,8 @@ export const Endpoints = {
 	servicesList: `${API_BASE_URL}/services`,
 	service: (serviceId: string | number): string =>
 		`${API_BASE_URL}/services/${serviceId}`,
+
+	organisationsList: `${API_BASE_URL}/organisations`,
 	
 	userRolesByWebsite: (userId: string | number, websiteId: string | number): string =>
 		`${API_BASE_URL}/users/${userId}/rolesbywebsite/${websiteId}`,
