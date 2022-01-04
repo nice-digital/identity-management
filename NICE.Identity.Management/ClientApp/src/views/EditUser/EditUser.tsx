@@ -191,7 +191,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 				const blockedEmail = checkBlockedArray(formElement.value);
 				const message =
 					Object.keys(emailBlockedPattern).length > 0
-						? "Email address must be valid and end in '@nice.org.uk'"
+						? "A staff member's email address must be valid and end in '@nice.org.uk'"
 						: "Email address is in an invalid format";
 				isNowValid = isNowValid
 					? Object.keys(blockedEmail).length === 0
@@ -218,7 +218,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			const blockedEmail = checkBlockedArray(formElement.value);
 			const message =
 				Object.keys(emailBlockedPattern).length > 0
-					? "Email address must be valid and end in '@nice.org.uk'"
+					? "A staff member's email address must be valid and end in '@nice.org.uk'"
 					: "Email address is in an invalid format";
 			isNowValid = isNowValid ? Object.keys(blockedEmail).length === 0 : false;
 			setEmailBlockedCurrentMessage(blockedEmail.message || message);
