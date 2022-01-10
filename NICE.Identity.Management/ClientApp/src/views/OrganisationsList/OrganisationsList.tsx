@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-
 import { Link } from "react-router-dom";
+import Moment from "moment";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
+import { Button } from "@nice-digital/nds-button";
 import { Card } from "@nice-digital/nds-card";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
@@ -11,18 +12,25 @@ import {
 	removeQueryParameter,
 	stripMultipleQueries,
 } from "../../utils/querystring";
-
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
-import { HistoryType, WebsiteType } from "../../models/types";
+import { HistoryType, OrganisationType } from "../../models/types";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterBox } from "../../components/FilterBox/FilterBox";
-import { WebsiteEnvironment } from "../../components/WebsiteEnvironment/WebsiteEnvironment";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
 
-// import styles from "./OrganisationsList.module.scss";
+import styles from "./OrganisationsList.module.scss";
+
+type CardMetaData = {
+	label?: string;
+	value: React.ReactNode;
+};
+
+type sortOption = {
+	identifier: string;
+	label: string;
+};
 
 type OrganisationsListProps = {
 	basename: string;
@@ -35,15 +43,19 @@ type OrganisationsListProps = {
 
 type OrganisationsListState = {
 	path: string;
-	originalWebsites: Array<WebsiteType>;
-	websites: Array<WebsiteType>;
+	organisations: Array<OrganisationType>;
 	searchQuery?: string;
 	error?: Error;
 	isLoading: boolean;
-	environmentFiltersChecked: Array<string>;
-	// pageNumber: number;
-	// itemsPerPage: number | string;
-	environmentsForFilter: Array<string>;
+	pageNumber: number;
+	itemsPerPage: number | string;
+	sortedBy: string;
+};
+
+type SortOptionsProps = {
+	options: Array<sortOption>;
+	selectedIdentifier: string;
+	onSortClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
 export class OrganisationsList extends Component<
@@ -53,35 +65,39 @@ export class OrganisationsList extends Component<
 	constructor(props: OrganisationsListProps) {
 		super(props);
 
-		// const querystring = this.props.location.search;
+		const querystring = this.props.location.search;
 
-		// const querystringObject = queryStringToObject(querystring);
+		const querystringObject = queryStringToObject(querystring);
 
-		// const pageNumber = Number(
-		// 	querystringObject.page
-		// 		? Array.isArray(querystringObject.page)
-		// 			? querystringObject.page[0]
-		// 			: querystringObject.page
-		// 		: 1,
-		// );
+		const pageNumber = Number(
+			querystringObject.page
+				? Array.isArray(querystringObject.page)
+					? querystringObject.page[0]
+					: querystringObject.page
+				: 1,
+		);
 
-		// let itemsPerPage = querystringObject.amount
-		// 	? Array.isArray(querystringObject.amount)
-		// 		? querystringObject.amount[0]
-		// 		: querystringObject.amount
-		// 	: 25;
+		let itemsPerPage = querystringObject.amount
+			? Array.isArray(querystringObject.amount)
+				? querystringObject.amount[0]
+				: querystringObject.amount
+			: 5;
 
-		// itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
+		itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
+
+		const sortedBy = querystringObject.sort
+			? Array.isArray(querystringObject.sort)
+				? querystringObject.sort[0]
+				: querystringObject.sort
+			: "alpha-asc";
 
 		this.state = {
-			path: "",
-			originalWebsites: [],
-			websites: [],
+			path: querystring,
+			organisations: [],
 			isLoading: true,
-			// pageNumber: pageNumber,
-			// itemsPerPage: itemsPerPage,
-			environmentFiltersChecked: [],
-			environmentsForFilter: [],
+			pageNumber: pageNumber,
+			itemsPerPage: itemsPerPage,
+			sortedBy: sortedBy,
 		};
 
 		document.title = "NICE Accounts - Organisations list";
@@ -90,225 +106,222 @@ export class OrganisationsList extends Component<
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const organisations = await fetchData(Endpoints.organisationsList);
+		let organisations = await fetchData(Endpoints.organisationsList);
 
-		if (isDataError(websites)) {
-			this.setState({ error: websites });
-		} else {
-			const allEnvironments = websites.map(
-				(website: { environment: { name: string } }) =>
-					website.environment.name,
-			);
-
-			const environmentsForFilter = allEnvironments.reduce(function (
-				accumulatedEnvironments: string[],
-				currentEnvironment: string,
-			) {
-				if (accumulatedEnvironments.indexOf(currentEnvironment) === -1) {
-					accumulatedEnvironments.push(currentEnvironment);
-				}
-				return accumulatedEnvironments;
-			},
-			[]);
-
-			this.setState({ environmentsForFilter });
+		if (isDataError(organisations)) {
+			this.setState({ error: organisations });
 		}
 
-		this.setState({ originalWebsites: websites, websites, isLoading: false });
+		organisations = this.sortOrganisations(this.state.sortedBy, organisations);
+
+		this.setState({
+			organisations,
+			isLoading: false,
+		});
 	}
 
-	// pastPageRange = (
-	// 	itemsPerPage: string | number,
-	// 	pageNumber: number,
-	// 	dataCount: number,
-	// ): number => {
-	// 	let pastPageRange = false;
+	pastPageRange = (
+		itemsPerPage: string | number,
+		pageNumber: number,
+		dataCount: number,
+	): number => {
+		let pastPageRange = false;
 
-	// 	if (Number(itemsPerPage)) {
-	// 		itemsPerPage = Number(itemsPerPage);
-	// 		pastPageRange = pageNumber * itemsPerPage >= dataCount;
-	// 	}
+		if (Number(itemsPerPage)) {
+			itemsPerPage = Number(itemsPerPage);
+			pastPageRange = pageNumber * itemsPerPage >= dataCount;
+		}
 
-	// 	if (pastPageRange || itemsPerPage === "all") {
-	// 		pageNumber = 1;
-	// 	}
+		if (pastPageRange || itemsPerPage === "all") {
+			pageNumber = 1;
+		}
 
-	// 	return pageNumber;
-	// };
+		return pageNumber;
+	};
 
-	// filterWebsitesByEnvironment = (environment: string): void => {
-	// 	this.setState({ isLoading: true });
+	filterOrganisationsBySearch = async (searchQuery: string): Promise<void> => {
+		this.setState({ isLoading: true });
 
-	// 	let environmentFiltersChecked = this.state.environmentFiltersChecked;
+		let organisations = await fetchData(
+			`${Endpoints.organisationsList}?q=${searchQuery}`,
+		);
 
-	// 	environmentFiltersChecked = environmentFiltersChecked.includes(environment)
-	// 		? environmentFiltersChecked.filter(
-	// 				(environmentFilter) => environmentFilter !== environment,
-	// 		  )
-	// 		: environmentFiltersChecked.concat(environment);
+		if (isDataError(organisations)) {
+			this.setState({ error: organisations });
+		}
 
-	// 	const itemsPerPage = Number(this.state.itemsPerPage)
-	// 		? Number(this.state.itemsPerPage)
-	// 		: this.state.itemsPerPage;
+		organisations = this.sortOrganisations(this.state.sortedBy, organisations);
 
-	// 	let websites = this.state.originalWebsites,
-	// 		pageNumber = this.state.pageNumber;
+		const itemsPerPage = Number(this.state.itemsPerPage)
+			? Number(this.state.itemsPerPage)
+			: this.state.itemsPerPage;
 
-	// 	if (environmentFiltersChecked.length)
-	// 		websites = this.websitesByEnvironment(
-	// 			environmentFiltersChecked,
-	// 			websites,
-	// 		);
+		const pageNumber = this.pastPageRange(
+			itemsPerPage,
+			this.state.pageNumber,
+			this.state.organisations.length,
+		);
 
-	// 	pageNumber = this.pastPageRange(
-	// 		itemsPerPage,
-	// 		pageNumber,
-	// 		this.state.websites.length,
-	// 	);
+		this.setState({
+			organisations,
+			searchQuery,
+			pageNumber,
+			isLoading: false,
+		});
+	};
 
-	// 	this.setState({
-	// 		websites,
-	// 		environmentFiltersChecked,
-	// 		pageNumber,
-	// 		isLoading: false,
-	// 	});
-	// };
+	getPaginateStartAndFinishPosition = (
+		websitesCount: number,
+		pageNumber: number,
+		itemsPerPage: number | string,
+	): { start: number; finish: number } => {
+		const paginationPositions = {
+			start: 0,
+			finish: websitesCount,
+		};
 
-	// filterWebsitesBySearch = async (searchQuery: string): Promise<void> => {
-	// 	this.setState({ isLoading: true });
+		const itemAmountIsNumber = Number(itemsPerPage);
 
-	// 	const originalWebsites = await fetchData(
-	// 		`${Endpoints.websitesList}?q=${searchQuery}`,
-	// 	);
+		if (itemAmountIsNumber) {
+			paginationPositions.start = (pageNumber - 1) * itemAmountIsNumber;
+			paginationPositions.finish =
+				paginationPositions.start + itemAmountIsNumber <= websitesCount
+					? paginationPositions.start + itemAmountIsNumber
+					: websitesCount;
+		}
 
-	// 	let websites = originalWebsites,
-	// 		pageNumber = this.state.pageNumber;
+		return paginationPositions;
+	};
 
-	// 	const itemsPerPage = Number(this.state.itemsPerPage)
-	// 		? Number(this.state.itemsPerPage)
-	// 		: this.state.itemsPerPage;
+	getPaginationText = (
+		websitesCount: number,
+		start: number,
+		finish: number,
+	): string => {
+		const amountPerPage = finish - start;
+		const paginationExtract =
+			websitesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
 
-	// 	if (isDataError(originalWebsites)) {
-	// 		this.setState({ error: originalWebsites });
-	// 	}
+		return `Showing ${paginationExtract}${websitesCount} service${
+			websitesCount === 1 ? "" : "s"
+		}`;
+	};
 
-	// 	if (this.state.environmentFiltersChecked.length) {
-	// 		websites = this.websitesByEnvironment(
-	// 			this.state.environmentFiltersChecked,
-	// 			websites,
-	// 		);
-	// 	}
+	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+		let itemsPerPage = (e.target as HTMLSelectElement).value || 25,
+			pageNumber = this.state.pageNumber,
+			path = stripMultipleQueries(this.state.path, ["amount", "page"]);
 
-	// 	pageNumber = this.pastPageRange(
-	// 		itemsPerPage,
-	// 		pageNumber,
-	// 		this.state.websites.length,
-	// 	);
+		itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
 
-	// 	this.setState({
-	// 		originalWebsites,
-	// 		websites,
-	// 		searchQuery,
-	// 		pageNumber,
-	// 		isLoading: false,
-	// 	});
-	// };
+		pageNumber = this.pastPageRange(
+			itemsPerPage,
+			pageNumber,
+			this.state.organisations.length,
+		);
 
-	// websitesByEnvironment = (
-	// 	environmentFiltersChecked: Array<string>,
-	// 	websites: Array<WebsiteType>,
-	// ): Array<WebsiteType> => {
-	// 	return (websites = websites.filter((website) => {
-	// 		const websiteEnvironment = website.environment.name;
+		path = appendQueryParameter(path, "amount", itemsPerPage.toString());
+		path = appendQueryParameter(path, "page", pageNumber);
 
-	// 		if (environmentFiltersChecked.includes(websiteEnvironment)) {
-	// 			return website;
-	// 		}
-	// 	}));
-	// };
+		this.setState({ itemsPerPage, path, pageNumber }, () => {
+			this.props.history.push(path);
+		});
+	};
 
-	// getPaginateStartAndFinishPosition = (
-	// 	websitesCount: number,
-	// 	pageNumber: number,
-	// 	itemsPerPage: number | string,
-	// ): { start: number; finish: number } => {
-	// 	const paginationPositions = {
-	// 		start: 0,
-	// 		finish: websitesCount,
-	// 	};
+	changePage = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+		e.preventDefault();
 
-	// 	const itemAmountIsNumber = Number(itemsPerPage);
+		let pageNumber =
+				(e.target as HTMLAnchorElement).getAttribute("data-pager") || 1,
+			path = removeQueryParameter(this.state.path, "page");
 
-	// 	if (itemAmountIsNumber) {
-	// 		paginationPositions.start = (pageNumber - 1) * itemAmountIsNumber;
-	// 		paginationPositions.finish =
-	// 			paginationPositions.start + itemAmountIsNumber <= websitesCount
-	// 				? paginationPositions.start + itemAmountIsNumber
-	// 				: websitesCount;
-	// 	}
+		if (pageNumber === "previous") {
+			pageNumber = this.state.pageNumber - 1;
+		}
+		if (pageNumber === "next") {
+			pageNumber = this.state.pageNumber + 1;
+		}
 
-	// 	return paginationPositions;
-	// };
+		pageNumber = Number(pageNumber);
+		path = appendQueryParameter(path, "page", pageNumber);
 
-	// getPaginationText = (
-	// 	websitesCount: number,
-	// 	start: number,
-	// 	finish: number,
-	// ): string => {
-	// 	const amountPerPage = finish - start;
-	// 	const paginationExtract =
-	// 		websitesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
+		this.setState({ pageNumber, path }, () => {
+			this.props.history.push(path);
+		});
+	};
 
-	// 	return `Showing ${paginationExtract}${websitesCount} service${
-	// 		websitesCount === 1 ? "" : "s"
-	// 	}`;
-	// };
+	sortOrganisations = (
+		sortBy: string,
+		organisations: Array<OrganisationType>,
+	): Array<OrganisationType> => {
+		const sortFunctions: {
+			[key: string]: (a: OrganisationType, b: OrganisationType) => number;
+		} = {
+			"alpha-asc": (a, b) => a.name.localeCompare(b.name),
+			"alpha-desc": (a, b) => b.name.localeCompare(a.name),
+			"date-asc": (a, b) => a.dateAdded.localeCompare(b.dateAdded),
+			"date-desc": (a, b) => b.dateAdded.localeCompare(a.dateAdded),
+		};
 
-	// changeAmount = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-	// 	let itemsPerPage = (e.target as HTMLSelectElement).value || 25,
-	// 		pageNumber = this.state.pageNumber,
-	// 		path = stripMultipleQueries(this.state.path, ["amount", "page"]);
+		const sortedOrganisations = organisations.sort(sortFunctions[sortBy]);
 
-	// 	itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
+		return sortedOrganisations;
+	};
 
-	// 	pageNumber = this.pastPageRange(
-	// 		itemsPerPage,
-	// 		pageNumber,
-	// 		this.state.websites.length,
-	// 	);
+	handleSortClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+		e.preventDefault();
 
-	// 	path = appendQueryParameter(path, "amount", itemsPerPage.toString());
-	// 	path = appendQueryParameter(path, "page", pageNumber);
+		let path = removeQueryParameter(this.state.path, "sort");
 
-	// 	this.setState({ itemsPerPage, path, pageNumber }, () => {
-	// 		this.props.history.push(path);
-	// 	});
-	// };
+		const sortBy =
+			(e.target as HTMLAnchorElement).getAttribute("data-sort") ?? "alpha-asc";
+		const organisations = this.sortOrganisations(
+			sortBy,
+			this.state.organisations,
+		);
 
-	// changePage = (e: React.MouseEvent<HTMLAnchorElement>): void => {
-	// 	e.preventDefault();
+		path = appendQueryParameter(path, "sort", sortBy);
 
-	// 	let pageNumber =
-	// 			(e.target as HTMLAnchorElement).getAttribute("data-pager") || 1,
-	// 		path = removeQueryParameter(this.state.path, "page");
-
-	// 	if (pageNumber === "previous") {
-	// 		pageNumber = this.state.pageNumber - 1;
-	// 	}
-	// 	if (pageNumber === "next") {
-	// 		pageNumber = this.state.pageNumber + 1;
-	// 	}
-
-	// 	pageNumber = Number(pageNumber);
-	// 	path = appendQueryParameter(path, "page", pageNumber);
-
-	// 	this.setState({ pageNumber, path }, () => {
-	// 		this.props.history.push(path);
-	// 	});
-	// };
+		this.setState({ sortedBy: sortBy, path, organisations }, () => {
+			this.props.history.push(path);
+		});
+	};
 
 	render(): JSX.Element {
-		const { error } = this.state;
+		const {
+			organisations,
+			searchQuery,
+			error,
+			isLoading,
+			pageNumber,
+			itemsPerPage,
+		} = this.state;
+
+		const paginationPositions = this.getPaginateStartAndFinishPosition(
+			organisations.length,
+			pageNumber,
+			itemsPerPage,
+		);
+
+		const paginationText = this.getPaginationText(
+			organisations.length,
+			paginationPositions.start,
+			paginationPositions.finish,
+		);
+
+		const organisationsPaginated = organisations.length
+			? organisations.slice(
+					paginationPositions.start,
+					paginationPositions.finish,
+			  )
+			: organisations;
+
+		const sortOptions = [
+			{ identifier: "alpha-asc", label: "A - Z" },
+			{ identifier: "alpha-desc", label: "Z - A" },
+			{ identifier: "date-asc", label: "Date ascending" },
+			{ identifier: "date-desc", label: "Date descending" },
+		];
 
 		return (
 			<>
@@ -319,26 +332,89 @@ export class OrganisationsList extends Component<
 					<Breadcrumb>Organisations</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader heading="Organisations" />
+				<PageHeader heading="Organisations" className="page-header mb--d" />
 
 				{!error ? (
 					<Grid>
+						<GridItem cols={12}>
+							<Button
+								to={`/organisations/add`}
+								variant="cta"
+								elementType={Link}
+								className="mb--e"
+							>
+								Add organisation
+							</Button>
+						</GridItem>
 						<GridItem cols={12} md={3}>
-							{/* <FilterSearch
-								onInputChange={this.filterWebsitesBySearch}
-								label={"Filter by service name or URL"}
-							/> */}
-
-							{/* <FilterBox
-								name="Environments"
-								filters={this.state.environmentsForFilter}
-								selected={environmentFiltersChecked}
-								onCheckboxChange={this.filterWebsitesByEnvironment}
-								hideFilterPanelHeading={true}
-							/> */}
+							<FilterSearch
+								onInputChange={this.filterOrganisationsBySearch}
+								label={"Filter by organisation name"}
+							/>
 						</GridItem>
 						<GridItem cols={12} md={9} aria-busy={true}>
-							<p>Something</p>
+							{isLoading ? (
+								<p>Loading...</p>
+							) : organisationsPaginated.length ? (
+								<>
+									<div className="text-right">
+										<SortOptions
+											options={sortOptions}
+											selectedIdentifier={this.state.sortedBy}
+											onSortClick={this.handleSortClick}
+										/>
+									</div>
+									<h2
+										className={styles.organisationsListSummary}
+										data-qa-sel="organisations-returned"
+									>
+										{paginationText}
+									</h2>
+									<ul
+										className="list--unstyled"
+										data-qa-sel="list-of-organisations"
+									>
+										{organisationsPaginated.map((organisation) => {
+											const { id, name, dateAdded } = organisation;
+											const organisationsListHeading = {
+												headingText: `${name}`,
+												link: {
+													elementType: Link,
+													destination: `/organisations/${id}`,
+												},
+											};
+
+											const organisationsListMetadata: Array<CardMetaData> = [
+												{
+													label: "Date created",
+													value: Moment(dateAdded).format("DD-MM-YYYY"),
+												},
+											];
+
+											return (
+												<li key={id}>
+													<Card
+														{...organisationsListHeading}
+														metadata={organisationsListMetadata}
+														key={id}
+													/>
+												</li>
+											);
+										})}
+									</ul>
+									<Pagination
+										onChangePage={this.changePage}
+										onChangeAmount={this.changeAmount}
+										itemsPerPage={itemsPerPage}
+										consultationCount={organisations.length}
+										currentPage={pageNumber}
+									/>
+								</>
+							) : searchQuery ? (
+								<p>No results found for &quot;{searchQuery}&quot;</p>
+							) : (
+								<p>No results found</p>
+							)}
 						</GridItem>
 					</Grid>
 				) : (
@@ -348,3 +424,29 @@ export class OrganisationsList extends Component<
 		);
 	}
 }
+
+export const SortOptions = (props: SortOptionsProps): React.ReactElement => (
+	<ul className="list list--piped">
+		{props.options.map((option, index) => (
+			<li key={option.identifier}>
+				{option.identifier === props.selectedIdentifier ? (
+					<span
+						className={`pv--c ${
+							index === 0
+								? "pr--c"
+								: index == props.options.length - 1
+								? "pl--c"
+								: "ph--c"
+						}`}
+					>
+						{option.label}
+					</span>
+				) : (
+					<a onClick={props.onSortClick} data-sort={option.identifier}>
+						{option.label}
+					</a>
+				)}
+			</li>
+		))}
+	</ul>
+);

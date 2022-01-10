@@ -9,6 +9,8 @@ import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
 import { ServicesList } from "../../views/ServicesList/ServicesList";
 import { OrganisationsList } from "../../views/OrganisationsList/OrganisationsList";
+import { Organisation } from "../../views/Organisation/Organisation";
+import { AddOrganisation } from "../../views/AddOrganisation/AddOrganisation";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
@@ -56,6 +58,16 @@ export class App extends React.Component {
 					/>
 					<Route path="/services" exact component={ServicesList} />
 					<Route path="/organisations" exact component={OrganisationsList} />
+					<Route path="/organisations/add" exact component={AddOrganisation} />
+					<Route
+						path={"/organisations/:id"}
+						render={({ location }) => {
+							// to stop rendering of component for 'add' route
+							const idRegExp = new RegExp(/[0-9]+$/g);
+							const endOfRoute = location.pathname.split("/").pop() ?? "";
+							return idRegExp.test(endOfRoute) && <Organisation />;
+						}}
+					/>
 				</Container>
 
 				<Footer />
