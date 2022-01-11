@@ -66,9 +66,7 @@ export class OrganisationsList extends Component<
 		super(props);
 
 		const querystring = this.props.location.search;
-
 		const querystringObject = queryStringToObject(querystring);
-
 		const pageNumber = Number(
 			querystringObject.page
 				? Array.isArray(querystringObject.page)
@@ -76,20 +74,18 @@ export class OrganisationsList extends Component<
 					: querystringObject.page
 				: 1,
 		);
-
 		let itemsPerPage = querystringObject.amount
 			? Array.isArray(querystringObject.amount)
 				? querystringObject.amount[0]
 				: querystringObject.amount
 			: 5;
-
-		itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
-
 		const sortedBy = querystringObject.sort
 			? Array.isArray(querystringObject.sort)
 				? querystringObject.sort[0]
 				: querystringObject.sort
 			: "alpha-asc";
+
+		itemsPerPage = Number(itemsPerPage) ? Number(itemsPerPage) : itemsPerPage;
 
 		this.state = {
 			path: querystring,
