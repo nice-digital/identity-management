@@ -33,9 +33,7 @@ type sortOption = {
 };
 
 type OrganisationsListProps = {
-	basename: string;
 	location: {
-		pathname: string;
 		search: string;
 	};
 	history: HistoryType;
@@ -78,7 +76,7 @@ export class OrganisationsList extends Component<
 			? Array.isArray(querystringObject.amount)
 				? querystringObject.amount[0]
 				: querystringObject.amount
-			: 5;
+			: 25;
 		const sortedBy = querystringObject.sort
 			? Array.isArray(querystringObject.sort)
 				? querystringObject.sort[0]
@@ -106,9 +104,12 @@ export class OrganisationsList extends Component<
 
 		if (isDataError(organisations)) {
 			this.setState({ error: organisations });
+		} else {
+			organisations = this.sortOrganisations(
+				this.state.sortedBy,
+				organisations,
+			);
 		}
-
-		organisations = this.sortOrganisations(this.state.sortedBy, organisations);
 
 		this.setState({
 			organisations,
@@ -198,7 +199,7 @@ export class OrganisationsList extends Component<
 		const paginationExtract =
 			websitesCount > amountPerPage ? `${start + 1} to ${finish} of ` : "";
 
-		return `Showing ${paginationExtract}${websitesCount} service${
+		return `Showing ${paginationExtract}${websitesCount} organisation${
 			websitesCount === 1 ? "" : "s"
 		}`;
 	};
