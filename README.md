@@ -121,7 +121,7 @@ npm start
 
 #### Run the .NET Core app
 
-Run the .NET Core app using either of the two options, as described in [Run everything together - fastest approach](#run-everything-together)
+Run the .NET Core app using either of the two options, as described in [Run everything together - fastest approach](#run-everything-together---fastest-approach)
 
 ### Identity API Database
 
