@@ -78,7 +78,7 @@ REACT_APP_AUTH0_API_URL= this should have the value for whatever ApiIdentifier i
 ESLINT_NO_DEV_ERRORS=true
 ```
 
-You may be wondering why the Identity management site has it's own endpoint when we already have the Identity API? This is because the Identity management site uses it's own API endpoint to then proxy calls to the Identity API. See [Identity API](identity-api)
+You may be wondering why the Identity management site has it's own endpoint when we already have the Identity API? This is because the Identity management site uses it's own API endpoint to then proxy calls to the Identity API. See [Identity API](#identity-api)
 
 #### Identity API
 
