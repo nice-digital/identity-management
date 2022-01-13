@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.SpaServices.Extensions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,9 +17,13 @@ using NICE.Identity.Management.Configuration;
 using ProxyKit;
 using System;
 using System.Net;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.Extensions.FileProviders;
 using NICE.Identity.Management.Controllers;
 using NICE.Identity.Management.Extensions;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
@@ -30,6 +35,8 @@ namespace NICE.Identity.Management
 {
 	public class Startup
 	{
+		private const string CorsPolicyName = "CorsPolicy";
+
 		public Startup(IConfiguration configuration, IWebHostEnvironment environment)
 		{
 			Configuration = configuration;
@@ -39,6 +46,7 @@ namespace NICE.Identity.Management
 		public IConfiguration Configuration { get; }
 		public IWebHostEnvironment Environment { get; }
 		private const string AdministratorRole = "Administrator";
+		public static string AccessKeyForLocalDevelopmentUse;
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -53,26 +61,27 @@ namespace NICE.Identity.Management
 			// This bypasses any certificate validation on proxy requests
 			// Only done due to local APIs not having certificates configured 
 			services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-            {
-                    ClientCertificateOptions = ClientCertificateOption.Manual,
-                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
-            }));
-            services.Configure<CookiePolicyOptions>(options =>
+			{
+				ClientCertificateOptions = ClientCertificateOption.Manual,
+				ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+			}));
+			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+			services.AddRouting(options => options.LowercaseUrls = true);
+			services.AddControllersWithViews();
+			services.AddRazorPages();
 
-            // Add authentication services
-            var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
-            services.AddAuthentication(authConfiguration, allowNonSecureCookie: Environment.IsDevelopment());
-            services.AddAuthorisation(authConfiguration);
+			// Add authentication services
+			var authConfiguration = new AuthConfiguration(Configuration, "WebAppConfiguration");
+			services.AddAuthentication(authConfiguration, allowNonSecureCookie: Environment.IsDevelopment());
+			services.AddAuthorisation(authConfiguration);
 
-            // In production, the React files will be served from this directory
+			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
 				configuration.RootPath = "ClientApp/build";
@@ -80,28 +89,40 @@ namespace NICE.Identity.Management
 
 			services.AddHealthChecks();
 			services.AddHealthChecksUI(setupSettings: setup =>
-				{
-					setup.UseApiEndpointDelegatingHandler<HealthCheckDelegatingHandler>();
-				})
+			{
+				setup.UseApiEndpointDelegatingHandler<HealthCheckDelegatingHandler>();
+			})
 				.AddInMemoryStorage();
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy(CorsPolicyName,
+					builder => builder.WithOrigins(AppSettings.EnvironmentConfig.CorsOrigin, "http://localhost:3000")
+						.AllowAnyMethod()
+						.AllowAnyHeader()
+						.AllowCredentials());
+			});
+
+			services.AddOptions();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		[Obsolete] //obselete added as proxykit marked the runproxy as deprecated. we should switch to https://github.com/microsoft/reverse-proxy when it's released though. - currently it's just a release candidate.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, ILogger<Startup> startupLogger,
 			IHostApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
 			startupLogger.LogInformation("Identity management is starting up");
 
-            app.Use(async (context, next) =>
-                {
-                    context.Response.OnStarting(() =>
-                    {
-                        context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
-                        return Task.FromResult(0);
-                    });
-                    await next();
-                }
-            );
+			app.Use(async (context, next) =>
+			{
+				context.Response.OnStarting(() =>
+				{
+					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
+					return Task.FromResult(0);
+				});
+				await next();
+			}
+			);
 
 			if (env.IsDevelopment())
 			{
@@ -114,49 +135,61 @@ namespace NICE.Identity.Management
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
-            app.RunProxy("/api",async context =>
-            {
-                var apiEndpoint = Configuration.GetSection("WebAppConfiguration")["ApiIdentifier"];
-                startupLogger.LogDebug($"Proxy to endpoint {apiEndpoint}");
-                var forwardContext = context
-                    .ForwardTo(apiEndpoint)
-                    .CopyXForwardedHeaders()
-                    .AddXForwardedHeaders();
-                // TODO: Add token expiration handling
-                startupLogger.LogDebug("Proxy call started");
-                if (!forwardContext.UpstreamRequest.Headers.Contains("Authorization"))
-                {
-                    startupLogger.LogDebug("Proxy Add Authorization");
-                    var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-                    forwardContext.UpstreamRequest.Headers.Authorization = 
-                        new AuthenticationHeaderValue("Bearer", accessToken);
-                    startupLogger.LogDebug($"Proxy Authorization: {forwardContext.UpstreamRequest.Headers.Authorization}");
-                }
+			app.UseCors(CorsPolicyName);
 
-                try
-                {
-                    startupLogger.LogDebug("Proxy send started");
-                    var response = await forwardContext.Send();
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        var errorMessage = $"Proxy error: {response.StatusCode.ToString()}:{response.ReasonPhrase} - " +
-                                           $"{await response.Content.ReadAsStringAsync()}"; 
-                        startupLogger.LogError(errorMessage);
-                    }
-                    response.Headers.Remove("Authorization");
-                    startupLogger.LogDebug($"Proxy response: {await response.Content.ReadAsStringAsync()}");
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    startupLogger.LogError(e.Message);
-                    return new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.InternalServerError,
-                        ReasonPhrase = e.Message
-                    };
-                }
-            });
+			app.RunProxy("/api", async context =>
+			{
+				var apiEndpoint = Configuration.GetSection("WebAppConfiguration")["AuthorisationServiceUri"];
+				apiEndpoint += apiEndpoint.EndsWith("/") ? "api" : "/api";
+				startupLogger.LogDebug($"Proxy to endpoint {apiEndpoint}");
+				var forwardContext = context
+					.ForwardTo(apiEndpoint)
+					.CopyXForwardedHeaders()
+					.AddXForwardedHeaders();
+				// TODO: Add token expiration handling
+				startupLogger.LogDebug("Proxy call started");
+				if (!forwardContext.UpstreamRequest.Headers.Contains("Authorization"))
+				{
+					startupLogger.LogDebug("Proxy Add Authorization");
+					var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+
+					#if DEBUG
+						if (env.IsDevelopment())
+						{
+							AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
+							accessToken ??= AccessKeyForLocalDevelopmentUse;
+						}
+					#endif
+
+					forwardContext.UpstreamRequest.Headers.Authorization =
+						new AuthenticationHeaderValue("Bearer", accessToken);
+					startupLogger.LogDebug($"Proxy Authorization: {forwardContext.UpstreamRequest.Headers.Authorization}");
+				}
+
+				try
+				{
+					startupLogger.LogDebug("Proxy send started");
+					var response = await forwardContext.Send();
+					if (!response.IsSuccessStatusCode)
+					{
+						var errorMessage = $"Proxy error: {response.StatusCode.ToString()}:{response.ReasonPhrase} - " +
+										   $"{await response.Content.ReadAsStringAsync()}";
+						startupLogger.LogError(errorMessage);
+					}
+					response.Headers.Remove("Authorization");
+					startupLogger.LogDebug($"Proxy response: {await response.Content.ReadAsStringAsync()}");
+					return response;
+				}
+				catch (Exception e)
+				{
+					startupLogger.LogError(e.Message);
+					return new HttpResponseMessage()
+					{
+						StatusCode = HttpStatusCode.InternalServerError,
+						ReasonPhrase = e.Message
+					};
+				}
+			});
 
 			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
@@ -164,10 +197,11 @@ namespace NICE.Identity.Management
 			app.UseRouting();
 
 			app.UseAuthentication();
-			app.UseAuthorization(); 
+			app.UseAuthorization();
+
 
 			app.UseStaticFiles();
-			app.UseSpaStaticFiles( new StaticFileOptions()
+			app.UseSpaStaticFiles(new StaticFileOptions()
 			{
 				OnPrepareResponse = context =>
 				{
@@ -188,7 +222,7 @@ namespace NICE.Identity.Management
 						headers.CacheControl = new CacheControlHeaderValue
 						{
 							Public = true,
-							NoCache = true, 
+							NoCache = true,
 							NoStore = true,
 							MustRevalidate = true,
 							MaxAge = TimeSpan.FromDays(0),
@@ -200,13 +234,15 @@ namespace NICE.Identity.Management
 			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
-				    context.Request.Headers["Front-End-Https"] == "on" ||
+					context.Request.Headers["Front-End-Https"] == "on" ||
 					context.Request.Headers.ContainsKey("X-ARR-SSL"))
 				{
 					context.Request.Scheme = "https";
 				}
 				return next();
 			});
+
+			//app.UseRouting();
 
 			app.UseEndpoints(endpoints =>
 			{
@@ -244,6 +280,9 @@ namespace NICE.Identity.Management
 
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
+				// DotNetCore SpaServices requires RawTarget property, which isn't set on a TestServer.
+				// So set it here to allow integration tests to work with SSR via SpaServices
+
 				builder.Use((httpContext, next) =>
 				{
 					var httpRequestFeature = httpContext.Features.Get<IHttpRequestFeature>();
@@ -252,7 +291,7 @@ namespace NICE.Identity.Management
 						httpRequestFeature.RawTarget = httpRequestFeature.Path;
 					return next();
 				});
-				
+
 				builder.UseSpa(spa =>
 				{
 					spa.Options.SourcePath = "ClientApp";
@@ -264,7 +303,7 @@ namespace NICE.Identity.Management
 							headers.CacheControl = new CacheControlHeaderValue
 							{
 								Public = true,
-								NoCache = true, 
+								NoCache = true,
 								NoStore = true,
 								MustRevalidate = true,
 								MaxAge = TimeSpan.FromDays(0)
@@ -274,11 +313,12 @@ namespace NICE.Identity.Management
 
 					//if (env.IsDevelopment())
 					//{
-					//	spa.UseReactDevelopmentServer(npmScript: "start");
+					//spa.UseReactDevelopmentServer(npmScript: "start");
+					//spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
 					//}
 				});
 			});
 		}
 
-    }
+	}
 }

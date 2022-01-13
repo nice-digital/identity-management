@@ -16,6 +16,10 @@ describe("User", () => {
 		url: "",
 	};
 
+	const location = {
+		state: {}
+	};
+
 	const consoleErrorReset = console.error;
 
 	beforeEach(() => {
@@ -25,13 +29,13 @@ describe("User", () => {
 
 	it("should show loading message before data has been loaded", () => {
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = shallow(<User match={match} />);
+		const wrapper = shallow(<User location={location} match={match} />);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
 	it("should call fetch during componentDidMount", () => {
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = mount(<MemoryRouter><User match={match} /></MemoryRouter>);
+		const wrapper = mount(<MemoryRouter><User location={location} match={match} /></MemoryRouter>);
 		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
 		wrapper.instance().componentDidMount();
 		wrapper.update();
@@ -43,7 +47,7 @@ describe("User", () => {
 
 	it("should match the snapshot after data has been loaded", async () => {
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = shallow(<User match={match} />);
+		const wrapper = shallow(<User location={location} match={match} />);
 		await nextTick();
 		wrapper.update();
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
@@ -54,7 +58,7 @@ describe("User", () => {
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
 		const wrapper = mount(
 			<MemoryRouter>
-				<User match={match} />
+				<User location={location} match={match} />
 			</MemoryRouter>,
 		);
 		await nextTick();
@@ -67,7 +71,7 @@ describe("User", () => {
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
 		const wrapper = mount(
 			<MemoryRouter>
-				<User match={match} />
+				<User location={location} match={match} />
 			</MemoryRouter>,
 		);
 		await nextTick();

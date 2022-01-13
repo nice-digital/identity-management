@@ -3,9 +3,9 @@ export const fetchData = async (url: string, options?: Record<string, unknown>):
 	try {
 		response = await fetch(url, options);
 		data = await response.json();
-	} catch (err) {
-		console.error(err);
-		const error: Error = err;
+	} catch (err: unknown) {
+		const error = err as Error;
+		console.error(error);
 		return error;
 	}
 

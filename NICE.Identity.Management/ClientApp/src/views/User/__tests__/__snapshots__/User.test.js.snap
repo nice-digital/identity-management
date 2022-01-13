@@ -28,28 +28,51 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
   </Breadcrumbs>
   <PageHeader
     cta={
-      <Button
-        data-qa-sel="add-user-role-button"
-        disabled={false}
-        elementType={
-          Object {
-            "$$typeof": Symbol(react.forward_ref),
-            "propTypes": Object {
-              "innerRef": [Function],
-              "onClick": [Function],
-              "replace": [Function],
-              "target": [Function],
-              "to": [Function],
-            },
-            "render": [Function],
+      <React.Fragment>
+        <Button
+          data-qa-sel="add-user-role-button"
+          disabled={false}
+          elementType={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "propTypes": Object {
+                "innerRef": [Function],
+                "onClick": [Function],
+                "replace": [Function],
+                "target": [Function],
+                "to": [Function],
+              },
+              "render": [Function],
+            }
           }
-        }
-        to="/users/1/services"
-        variant="cta"
-      >
-        Add role
-      </Button>
+          to="/users/1/services"
+          variant="cta"
+        >
+          Add role
+        </Button>
+        <Button
+          data-qa-sel="edit-profile-button"
+          disabled={false}
+          elementType={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "propTypes": Object {
+                "innerRef": [Function],
+                "onClick": [Function],
+                "replace": [Function],
+                "target": [Function],
+                "to": [Function],
+              },
+              "render": [Function],
+            }
+          }
+          to="/users/1/edit"
+        >
+          Edit profile
+        </Button>
+      </React.Fragment>
     }
+    data-qa-sel="name-user-profile"
     heading="Kristin Patrick"
     preheading="User profile for"
   />
@@ -85,14 +108,38 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
                   "allowContactMe": true,
                   "emailAddress": "kristin.patrick@example.com",
                   "firstName": "Kristin",
+                  "hasAccessToWebsiteIds": Array [
+                    1,
+                    2,
+                    3,
+                  ],
                   "hasVerifiedEmailAddress": true,
                   "initialRegistrationDate": "2019-01-23T12:29:54.911Z",
+                  "isInAuthenticationProvider": true,
                   "isLockedOut": false,
                   "isMigrated": false,
                   "isStaffMember": false,
                   "lastLoggedInDate": "2019-01-23T12:29:54.911Z",
                   "lastName": "Patrick",
                   "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+                  "userEmailHistory": Array [
+                    Object {
+                      "archivedByUserDisplayName": null,
+                      "archivedByUserId": null,
+                      "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+                      "emailAddress": "jcwilliams+id5@gmail.com",
+                      "userEmailHistoryId": 1,
+                      "userId": 1,
+                    },
+                    Object {
+                      "archivedByUserDisplayName": "John Holland",
+                      "archivedByUserId": 2,
+                      "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+                      "emailAddress": "updated@gmail.com",
+                      "userEmailHistoryId": 2,
+                      "userId": 1,
+                    },
+                  ],
                   "userId": 1,
                 }
               }
@@ -116,6 +163,7 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
         </span>
         <span
           className="summaryListDetail"
+          data-qa-sel="email-user-profile"
         >
           kristin.patrick@example.com
         </span>
@@ -168,6 +216,21 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
         <span
           className="summaryListLabel"
         >
+          Audience insight community membership
+        </span>
+        <span
+          className="summaryListDetail"
+          data-qa-sel="audience-user-profile"
+        >
+          Yes
+        </span>
+      </div>
+      <div
+        className="summaryList pv--c mb--d"
+      >
+        <span
+          className="summaryListLabel"
+        >
           Is migrated from NICE Accounts
         </span>
         <span
@@ -187,7 +250,7 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
         <span
           className="summaryListDetail"
         >
-          No
+          Yes
         </span>
       </div>
       <hr
@@ -202,11 +265,68 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
         The account will no longer be available, and all data in the account will be permanently deleted.
       </p>
       <Link
+        className="pv--c mb--d"
         data-qa-sel="delete-user-link"
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
         to="/users/1/delete"
       >
         Delete user
       </Link>
+      <hr
+        className="mv--b"
+      />
+      <h2
+        className="h3"
+      >
+        Email audit trail
+      </h2>
+      <Table
+        style={
+          Object {
+            "display": "table",
+          }
+        }
+      >
+        <thead>
+          <tr>
+            <th>
+              Who modified user profile
+            </th>
+            <th>
+              Date modified
+            </th>
+            <th>
+              Previous email address
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              John Holland
+            </td>
+            <td>
+              26-10-2021 14:54
+            </td>
+            <td>
+              updated@gmail.com
+            </td>
+          </tr>
+          <tr>
+            <td />
+            <td>
+              26-10-2021 14:52
+            </td>
+            <td>
+              jcwilliams+id5@gmail.com
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     </GridItem>
   </Grid>
 </Fragment>

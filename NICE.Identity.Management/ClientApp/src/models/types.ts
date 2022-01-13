@@ -14,6 +14,16 @@ export type UserType = {
 	allowContactMe: boolean;
 	isStaffMember: boolean;
 	hasAccessToWebsiteIds: Array<number>;
+	userEmailHistory: Array<UserEmailHistoryType>;
+};
+
+export type UserEmailHistoryType = {
+    userEmailHistoryId: number;
+    userId: number;
+    emailAddress: string;
+    archivedByUserId?: number;
+    archivedDateUTC: string;
+    archivedByUserDisplayName?: string;
 };
 
 export type ServiceType = {

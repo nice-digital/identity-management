@@ -12,6 +12,7 @@ import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
+import { EditUser } from "./../../views/EditUser/EditUser";
 
 export class App extends React.Component {
 	render(): JSX.Element {
@@ -41,6 +42,7 @@ export class App extends React.Component {
 					<Route path="/users/:id" exact component={User} />
 					<Route path="/users/:id/delete" exact component={DeleteUser} />
 					<Route path="/users/:id/services" exact component={SelectService} />
+					<Route path="/users/:id/edit" exact component={EditUser} />
 					<Route
 						path="/users/:id/services/:serviceId/environments"
 						exact

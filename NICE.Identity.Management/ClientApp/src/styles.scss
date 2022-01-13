@@ -1,0 +1,9 @@
+//design system overrides
+
+.form-group-container {
+  &--no-border {
+    .form-group {
+      border: 0;
+    }
+  }
+}

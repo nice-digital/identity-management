@@ -15,7 +15,37 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [1, 2, 3]
+      "hasAccessToWebsiteIds": [
+        1,
+        2,
+        3
+      ],
+      "userEmailHistory": [
+        {
+          "userEmailHistoryId": 1,
+          "userId": 1,
+          "emailAddress": "jcwilliams+id5@gmail.com",
+          "archivedByUserId": null,
+          "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+          "archivedByUserDisplayName": null
+        },
+        {
+          "userEmailHistoryId": 2,
+          "userId": 1,
+          "emailAddress": "updated@gmail.com",
+          "archivedByUserId": 2,
+          "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+          "archivedByUserDisplayName": "Thomas Holding"
+        },
+        {
+          "userEmailHistoryId": 3,
+          "userId": 1,
+          "emailAddress": "updated2@gmail.com",
+          "archivedByUserId": null,
+          "archivedDateUTC": "2021-10-26T15:14:00.7624903",
+          "archivedByUserDisplayName": null
+        }
+      ]
     },
     {
       "userId": 2,
@@ -32,7 +62,10 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [3]
+      "hasAccessToWebsiteIds": [
+        3
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 3,
@@ -49,7 +82,11 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [3, 4]
+      "hasAccessToWebsiteIds": [
+        3,
+        4
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 4,
@@ -66,7 +103,12 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [1, 4, 5]
+      "hasAccessToWebsiteIds": [
+        1,
+        4,
+        5
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 5,
@@ -83,7 +125,11 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [2, 4]
+      "hasAccessToWebsiteIds": [
+        2,
+        4
+      ],
+      "userEmailHistory": []
     },
     {
       "userId": 6,
@@ -100,7 +146,26 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [5, 4]
+      "hasAccessToWebsiteIds": [5, 4],
+      "userEmailHistory": []
+    },
+    {
+      "userId": 7,
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f7777",
+      "firstName": "Donald",
+      "lastName": "Kerabatso",
+      "emailAddress": "iamthewalrus@vilennin.com",
+      "allowContactMe": false,
+      "hasVerifiedEmailAddress": true,
+      "isLockedOut": false,
+      "initialRegistrationDate": "2020-10-27T12:29:54.911Z",
+      "lastLoggedInDate": "2021-10-27T12:29:54.911Z",
+      "isStaffMember": false,
+      "acceptedTerms": true,
+      "isMigrated": false,
+      "isInAuthenticationProvider": true,
+      "hasAccessToWebsiteIds": [5, 4],
+      "userEmailHistory": []
     }
   ],
   "services": [
@@ -128,7 +193,7 @@
         "name": "Alpha",
         "order": 3
       },
-      "service":{
+      "service": {
         "id": 2,
         "name": "Comment Collection",
         "websites": [
@@ -169,7 +234,7 @@
         "name": "Test",
         "order": 4
       },
-      "service":{
+      "service": {
         "id": 1,
         "name": "EPPI Reviewer",
         "websites": [
@@ -210,7 +275,7 @@
         "name": "Test",
         "order": 4
       },
-      "service":{
+      "service": {
         "id": 3,
         "name": "Idam Docker",
         "websites": [
@@ -239,7 +304,7 @@
         "name": "Dev",
         "order": 5
       },
-      "service":{
+      "service": {
         "id": 2,
         "name": "Comment Collection",
         "websites": [
@@ -280,7 +345,7 @@
         "name": "Dev",
         "order": 5
       },
-      "service":{
+      "service": {
         "id": 1,
         "name": "EPPI Reviewer",
         "websites": [
@@ -444,6 +509,34 @@
     {
       "id": 5,
       "user": 6,
+      "serviceId": 3,
+      "websiteId": 5,
+      "roles": [
+        {
+          "id": 991,
+          "name": "Product contributor",
+          "hasRole": false
+        },
+        {
+          "id": 992,
+          "name": "Product manager",
+          "hasRole": false
+        },
+        {
+          "id": 993,
+          "name": "Product administrator",
+          "hasRole": false
+        },
+        {
+          "id": 994,
+          "name": "Product editor",
+          "hasRole": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "user": 7,
       "serviceId": 3,
       "websiteId": 5,
       "roles": [
@@ -818,7 +911,5 @@
       "isInAuthenticationProvider": true
     }
   ],
-  "verificationemail": [
-    { "verificationemail": 1 }
-  ]
+  "verificationemail": [{ "verificationemail": 1 }]
 }

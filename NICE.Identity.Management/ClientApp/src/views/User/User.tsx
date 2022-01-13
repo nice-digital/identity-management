@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
+import { StaticContext } from "react-router";
+import Moment from "moment";
+
+import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
+import { Table } from "@nice-digital/nds-table";
 
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
@@ -20,7 +25,12 @@ import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string };
 
-type UserProps = Record<string, unknown> & RouteComponentProps<TParams>;
+type LocationState = {
+	hasBeenEdited: boolean;
+};
+
+type UserProps = Record<string, unknown> &
+	RouteComponentProps<TParams, StaticContext, LocationState>;
 
 type UserState = {
 	user: UserType;
@@ -98,6 +108,7 @@ export class User extends Component<UserProps, UserState> {
 				{!error ? (
 					<>
 						<PageHeader
+							data-qa-sel="name-user-profile"
 							preheading="User profile for"
 							heading={
 								isLoading
@@ -105,15 +116,25 @@ export class User extends Component<UserProps, UserState> {
 									: `${user.firstName} ${user.lastName}`
 							}
 							cta={
-								<Button
-									data-qa-sel="add-user-role-button"
-									variant="cta"
-									to={`/users/${this.props.match.params.id}/services`}
-									elementType={Link}
-									disabled={isLoading}
-								>
-									{isLoading ? "Loading..." : "Add role"}
-								</Button>
+								<>
+									<Button
+										data-qa-sel="add-user-role-button"
+										variant="cta"
+										to={`/users/${this.props.match.params.id}/services`}
+										elementType={Link}
+										disabled={isLoading}
+									>
+										{isLoading ? "Loading..." : "Add role"}
+									</Button>
+									<Button
+										data-qa-sel="edit-profile-button"
+										to={`/users/${this.props.match.params.id}/edit`}
+										elementType={Link}
+										disabled={isLoading}
+									>
+										Edit profile
+									</Button>
+								</>
 							}
 						/>
 						<Grid>
@@ -122,6 +143,17 @@ export class User extends Component<UserProps, UserState> {
 									<p>Loading...</p>
 								) : (
 									<>
+										{this.props.location.state?.hasBeenEdited && (
+											<Alert
+												type="info"
+												role="status"
+												aria-live="polite"
+												data-qa-sel="successful-message-user-profile"
+											>
+												<p>The user profile has been updated successfully.</p>
+											</Alert>
+										)}
+
 										<div className={`${styles.summaryList} pv--c`}>
 											<span className={styles.summaryListLabel}>
 												Account information
@@ -150,7 +182,10 @@ export class User extends Component<UserProps, UserState> {
 											<span className={styles.summaryListLabel}>
 												Email address
 											</span>
-											<span className={styles.summaryListDetail}>
+											<span
+												className={styles.summaryListDetail}
+												data-qa-sel="email-user-profile"
+											>
 												{user.emailAddress}
 											</span>
 										</div>
@@ -184,6 +219,18 @@ export class User extends Component<UserProps, UserState> {
 
 										<div className={`${styles.summaryList} pv--c mb--d`}>
 											<span className={styles.summaryListLabel}>
+												Audience insight community membership
+											</span>
+											<span
+												className={styles.summaryListDetail}
+												data-qa-sel="audience-user-profile"
+											>
+												{user.allowContactMe ? "Yes" : "No"}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
 												Is migrated from NICE Accounts
 											</span>
 											<span className={styles.summaryListDetail}>
@@ -210,9 +257,46 @@ export class User extends Component<UserProps, UserState> {
 										<Link
 											data-qa-sel="delete-user-link"
 											to={`/users/${user.userId}/delete`}
+											className="pv--c mb--d"
+											style={{ display: "inline-block" }}
 										>
 											Delete user
 										</Link>
+
+										{user.userEmailHistory.length > 0 && (
+											<>
+												<hr className="mv--b" />
+
+												<h2 className="h3">Email audit trail</h2>
+												<Table style={{ display: "table" }}>
+													<thead>
+														<tr>
+															<th>Who modified user profile</th>
+															<th>Date modified</th>
+															<th>Previous email address</th>
+														</tr>
+													</thead>
+													<tbody>
+														{user.userEmailHistory
+															.slice(0)
+															.reverse()
+															.map((historicalEmail) => (
+																<tr key={historicalEmail.userEmailHistoryId}>
+																	<td>
+																		{historicalEmail.archivedByUserDisplayName}
+																	</td>
+																	<td>
+																		{Moment(
+																			historicalEmail.archivedDateUTC,
+																		).format("DD-MM-YYYY HH:mm")}
+																	</td>
+																	<td>{historicalEmail.emailAddress}</td>
+																</tr>
+															))}
+													</tbody>
+												</Table>
+											</>
+										)}
 									</>
 								)}
 							</GridItem>

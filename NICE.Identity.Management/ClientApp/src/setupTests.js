@@ -1,10 +1,14 @@
 import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { enableFetchMocks } from "jest-fetch-mock";
+import enableHooks from "jest-react-hooks-shallow";
+
 
 configure({ adapter: new Adapter() });
 
 enableFetchMocks();
+
+enableHooks(jest);
 
 // https://twitter.com/kentcdodds/status/1163644392789250048?s=19
 beforeEach(() => {
