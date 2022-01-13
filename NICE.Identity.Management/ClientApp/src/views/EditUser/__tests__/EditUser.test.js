@@ -3,7 +3,6 @@ import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 import toJson from "enzyme-to-json";
-import { Input } from "@nice-digital/nds-input";
 
 import { EditUser } from "../EditUser";
 import singleUser from "./singleUser.json";
