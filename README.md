@@ -9,7 +9,23 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 </details>
 
-- [Secrets.json](#secretsjson)
+  - [Overview](#overview)
+- [Stack](#stack)
+- [Set up](#set-up)
+  - [Secrets.json](#secretsjson)
+  - [Running the UI](#running-the-ui)
+  - [Prerequisites](#prerequisites)
+    - [Key Secrets.json configuration settings](#key-secretsjson-configuration-settings)
+    - [React app environment variables](#react-app-environment-variables)
+    - [Identity API](#identity-api)
+  - [Running the app](#running-the-app)
+  - [Run everything together - fastest approach](#run-everything-together---fastest-approach)
+  - [Run everything individually](#run-everything-individually)
+    - [Run the React app](#run-the-react-app)
+    - [Run the .NET Core app](#run-the-net-core-app)
+  - [Identity API Database](#identity-api-database)
+  - [Common issues](#common-issues)
+    - [The dreaded Unexpected token < in JSON at position 0](#the-dreaded-unexpected-token--in-json-at-position-0)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
