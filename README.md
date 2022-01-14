@@ -63,10 +63,13 @@ The UI consists of the .NET Core app and the React app. The React app calls the 
 
 In order to run the Identity management site you have to ensure key configuration settings have the correct values inside the `WebAppConfiguration` object.
 
-- `ApiIdentifier` - this identifies the Identity API the app will use to authenticate itself against
+- `ApiIdentifier` - this identifies the Identity API
 - `ClientId` - this needs to match the `ClientId` of the app defined in the Identity provider (Auth0) for the relevant environment
 - `ClientSecret` - this needs to match the `ClientSecret` of the app defined in the Identity provider (Auth0) for the relevant environment
-- `AuthorisationServiceUri`- this configuration setting is very important if you want to run against a local instance of the Identity API. Note, this is different to the `ApiIdentifier`. The `ApiIdentifier` authenticates the app when logging in. Whereas `AuthorisationServiceUri` points the Identity API to a local instance, which then authenticates against Auth0 using machine to machine tokens. Therefore, it's also important the local intance of the API has the correct values in the `secrets.json` file.
+- `AuthorisationServiceUri`- this configuration setting is very important if you want to run against a local instance of the Identity API. Note, this is different to the `ApiIdentifier`. `AuthorisationServiceUri` points the Identity API to a local instance, which then authenticates against Auth0 using machine to machine tokens. Therefore, it's also important the local intance of the API has the correct values in the `secrets.json` file.
+- `Domain` - this is the Auth0 tenant used to authenticate the app
+
+TODO: It's not entirely clearly why the local instance needs to authenticate against `ApiIdentifier` when we are using `AuthorisationServiceUri`
 
 #### React app environment variables
 
