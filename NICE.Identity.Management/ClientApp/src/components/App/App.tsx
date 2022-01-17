@@ -16,6 +16,7 @@ import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 import { EditUser } from "./../../views/EditUser/EditUser";
+import { DeleteOrganisation } from "./../../views/DeleteOrganisation/DeleteOrganisation";
 
 export class App extends React.Component {
 	render(): JSX.Element {
@@ -59,7 +60,8 @@ export class App extends React.Component {
 					<Route path="/services" exact component={ServicesList} />
 					<Route path="/organisations" exact component={OrganisationsList} />
 					<Route path="/organisations/add" exact component={AddOrganisation} />
-					<Route
+					<Route path="/organisations/:id" exact component={Organisation} />
+					{/* <Route
 						path={"/organisations/:id"}
 						render={({ location }) => {
 							// to stop rendering of component for 'add' route
@@ -67,7 +69,8 @@ export class App extends React.Component {
 							const endOfRoute = location.pathname.split("/").pop() ?? "";
 							return idRegExp.test(endOfRoute) && <Organisation />;
 						}}
-					/>
+					/> */}
+					<Route path="/organisations/:id/delete" exact component={DeleteOrganisation} />
 				</Container>
 
 				<Footer />
