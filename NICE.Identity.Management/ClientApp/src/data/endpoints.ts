@@ -11,6 +11,9 @@ export const Endpoints = {
 		`${API_BASE_URL}/services/${serviceId}`,
 
 	organisationsList: `${API_BASE_URL}/organisations`,
+
+	organisation: (organisationId: string | number): string =>
+		`${API_BASE_URL}/organisations/${organisationId}`,
 	
 	userRolesByWebsite: (userId: string | number, websiteId: string | number): string =>
 		`${API_BASE_URL}/users/${userId}/rolesbywebsite/${websiteId}`,
