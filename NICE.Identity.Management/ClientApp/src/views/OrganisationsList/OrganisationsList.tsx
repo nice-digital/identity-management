@@ -294,7 +294,7 @@ export class OrganisationsList extends Component<
 			itemsPerPage,
 		} = this.state;
 
-		const paginationPositions = this.getPaginateStartAndFinishPosition(
+		const paginatePositions = this.getPaginateStartAndFinishPosition(
 			organisations.length,
 			pageNumber,
 			itemsPerPage,
@@ -302,15 +302,12 @@ export class OrganisationsList extends Component<
 
 		const paginationText = this.getPaginationText(
 			organisations.length,
-			paginationPositions.start,
-			paginationPositions.finish,
+			paginatePositions.start,
+			paginatePositions.finish,
 		);
 
 		const organisationsPaginated = organisations.length
-			? organisations.slice(
-					paginationPositions.start,
-					paginationPositions.finish,
-			  )
+			? organisations.slice(paginatePositions.start, paginatePositions.finish)
 			: organisations;
 
 		const sortOptions = [
