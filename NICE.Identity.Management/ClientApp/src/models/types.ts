@@ -41,7 +41,7 @@ export type ServiceWebsiteType = {
 export type OrganisationType = {
 	id: number;
 	name: string;
-	dateAdded: string;
+	dateAdded: Date;
 };
 
 export type UserRoleType = {
