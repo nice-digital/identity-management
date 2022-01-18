@@ -19,6 +19,8 @@ type CustomError = {
 type AddOrganisationState = {
 	formName: string;
 	validationError: boolean;
+	validationErrorMessage: string;
+	orgNameBlockedArray: Array<string>;
 	hasSubmitted: boolean;
 	error?: Error;
 	isSaveButtonLoading: boolean;
@@ -33,12 +35,21 @@ export class AddOrganisation extends Component<
 		this.state = {
 			formName: "",
 			validationError: false,
+			validationErrorMessage:
+				"Organisation name should be alphanumeric and be between 2-100 characters",
+			orgNameBlockedArray: [],
 			hasSubmitted: false,
 			isSaveButtonLoading: false,
 		};
 
 		document.title = "NICE Accounts - Add organisation";
 	}
+
+	toggleValidationMessage = (blockedOrgNameFound: boolean): string => {
+		return blockedOrgNameFound
+			? "Organisation already exists - name should be unique"
+			: "Organisation name should be alphanumeric and be between 2-100 characters";
+	};
 
 	handleSubmit = async (
 		e: React.FormEvent<HTMLFormElement>,
@@ -47,10 +58,13 @@ export class AddOrganisation extends Component<
 		this.setState({ isSaveButtonLoading: true });
 
 		const form = e.currentTarget;
+		const blockedOrgNameFound = this.state.orgNameBlockedArray.includes(
+			this.state.formName,
+		);
 		let hasSubmitted = true;
 		let formName = "";
 
-		if (!form.checkValidity()) {
+		if (!form.checkValidity() || blockedOrgNameFound) {
 			this.setState({ validationError: true, isSaveButtonLoading: false });
 			return false;
 		}
@@ -73,9 +87,16 @@ export class AddOrganisation extends Component<
 			const errorObject = organisation as CustomError;
 
 			if (errorObject.dataMessage.indexOf("that organisation already exists")) {
+				const orgNameBlockedArray = [...this.state.orgNameBlockedArray];
 				hasSubmitted = false;
 				formName = this.state.formName;
-				this.setState({ validationError: true });
+				orgNameBlockedArray.push(formName);
+				this.setState({
+					validationError: true,
+					validationErrorMessage:
+						"Organisation already exists - name should be unique",
+					orgNameBlockedArray,
+				});
 			} else {
 				this.setState({ error: organisation });
 			}
@@ -90,19 +111,35 @@ export class AddOrganisation extends Component<
 
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const formElement = e.target;
-		const isNowValid = formElement.validity.valid;
+		const blockedOrgNameFound = this.state.orgNameBlockedArray.includes(
+			e.target.value,
+		);
+		const isNowValid = formElement.validity.valid
+			? !blockedOrgNameFound
+			: false;
+		const validationErrorMessage =
+			this.toggleValidationMessage(blockedOrgNameFound);
 		let { validationError } = this.state;
 
 		if (validationError && isNowValid) {
 			validationError = false;
 		}
 
-		this.setState({ formName: e.target.value, validationError });
+		this.setState({
+			formName: e.target.value,
+			validationError,
+			validationErrorMessage,
+		});
 	};
 
 	handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const formElement = e.target;
-		const isNowValid = formElement.validity.valid;
+		const blockedOrgNameFound = this.state.orgNameBlockedArray.includes(
+			this.state.formName,
+		);
+		const isNowValid = formElement.validity.valid
+			? !blockedOrgNameFound
+			: false;
 
 		this.setState({ validationError: !isNowValid });
 	};
@@ -159,9 +196,11 @@ export class AddOrganisation extends Component<
 										onChange={this.handleChange}
 										onBlur={this.handleBlur}
 										error={this.state.validationError}
-										errorMessage="Organisation name should be alphanumeric and should not exceed 100 characters"
+										errorMessage={this.state.validationErrorMessage}
 										value={formName}
 										disabled={isSaveButtonLoading}
+										placeholder="Add organisation name"
+										className={"mb--e"}
 									/>
 									<Button
 										data-qa-sel="save-button-add-organisation"
