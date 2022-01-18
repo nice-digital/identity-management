@@ -336,6 +336,7 @@ export class OrganisationsList extends Component<
 								variant="cta"
 								elementType={Link}
 								className="mb--e"
+								data-qa-sel="add-organisation"
 							>
 								Add organisation
 							</Button>
@@ -436,7 +437,11 @@ export const SortOptions = (props: SortOptionsProps): React.ReactElement => (
 						{option.label}
 					</span>
 				) : (
-					<a onClick={props.onSortClick} data-sort={option.identifier}>
+					<a
+						onClick={props.onSortClick}
+						data-sort={option.identifier}
+						data-qa-sel={`sort-${option.identifier}`}
+					>
 						{option.label}
 					</a>
 				)}
