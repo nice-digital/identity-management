@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
+import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { FormGroup } from "@nice-digital/nds-form-group";
@@ -39,6 +40,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		useState<{ pattern: string }>(Object);
 	const [emailBlockedCurrentMessage, setEmailBlockedCurrentMessage] =
 		useState<string>("Email address is in an invalid format");
+	const [isAD, setIsAD] = useState(false);
 
 	const [formData, setFormData] = useState<FormDataType>({
 		emailAddress: "",
@@ -75,6 +77,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 						setEmailBlockedPattern({
 							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
 						});
+						setIsAD(true);
 					}
 				}
 
@@ -191,7 +194,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 				const blockedEmail = checkBlockedArray(formElement.value);
 				const message =
 					Object.keys(emailBlockedPattern).length > 0
-						? "Email address must be valid and end in '@nice.org.uk'"
+						? "A staff member's email address must be valid and end in '@nice.org.uk'"
 						: "Email address is in an invalid format";
 				isNowValid = isNowValid
 					? Object.keys(blockedEmail).length === 0
@@ -218,7 +221,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			const blockedEmail = checkBlockedArray(formElement.value);
 			const message =
 				Object.keys(emailBlockedPattern).length > 0
-					? "Email address must be valid and end in '@nice.org.uk'"
+					? "A staff member's email address must be valid and end in '@nice.org.uk'"
 					: "Email address is in an invalid format";
 			isNowValid = isNowValid ? Object.keys(blockedEmail).length === 0 : false;
 			setEmailBlockedCurrentMessage(blockedEmail.message || message);
@@ -274,6 +277,19 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 								preheading="Personal details for"
 								heading={`${user.firstName} ${user.lastName}`}
 							/>
+							{isAD && (
+								<Alert
+									type="caution"
+									role="status"
+									aria-live="polite"
+									data-qa-sel="ad-warning-edit-user"
+								>
+									<p>
+										Changes are not possible for this record. Staff details are
+										managed through Active Directory.
+									</p>
+								</Alert>
+							)}
 							<Grid>
 								<GridItem cols={12} md={6} lg={4}>
 									<form onSubmit={handleSubmit} noValidate>
@@ -290,7 +306,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											error={validationErrorList.emailAddress}
 											errorMessage={emailBlockedCurrentMessage}
 											value={formData.emailAddress}
-											disabled={isSaveButtonLoading}
+											disabled={isAD || isSaveButtonLoading}
 										/>
 										<Input
 											data-qa-sel="firstname-input-edit-user"
@@ -307,7 +323,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											error={validationErrorList.firstName}
 											errorMessage="First name should contain letters and should not exceed 100 characters"
 											value={formData.firstName}
-											disabled={isSaveButtonLoading}
+											disabled={isAD || isSaveButtonLoading}
 										/>
 										<Input
 											data-qa-sel="lastname-input-edit-user"
@@ -324,14 +340,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 											error={validationErrorList.lastName}
 											errorMessage="Last name should contain letters and should not exceed 100 characters"
 											value={formData.lastName}
-											disabled={isSaveButtonLoading}
+											disabled={isAD || isSaveButtonLoading}
 										/>
 
 										<div className="form-group-container form-group-container--no-border">
 											<FormGroup
 												legend="Audience insight community membership"
 												name="audienceInsight"
-												disabled={isSaveButtonLoading}
+												disabled={isAD || isSaveButtonLoading}
 												onChange={handleChange}
 											>
 												<Radio
@@ -351,7 +367,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 												data-qa-sel="save-button-edit-user"
 												variant="cta"
 												type="submit"
-												disabled={isSaveButtonLoading}
+												disabled={isAD || isSaveButtonLoading}
 											>
 												{isSaveButtonLoading ? "Loading..." : "Save profile"}
 											</Button>
@@ -359,7 +375,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 												to={`/users/${id}`}
 												variant="secondary"
 												elementType={Link}
-												disabled={isSaveButtonLoading}
+												disabled={isAD || isSaveButtonLoading}
 											>
 												Cancel
 											</Button>
