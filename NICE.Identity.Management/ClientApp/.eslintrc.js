@@ -5,6 +5,7 @@ module.exports = {
 		ecmaVersion: 2018,
 		sourceType: "module",
 		project: "./tsconfig.json",
+		// tsconfigRootDir: __dirname,
 	},
 	extends: [
 		"eslint:recommended",
@@ -44,5 +45,8 @@ module.exports = {
 				"@typescript-eslint/explicit-module-boundary-types": "off",
 			},
 		},
-	],	
+	],
+	env: {
+    	browser: true,
+	}
 };
