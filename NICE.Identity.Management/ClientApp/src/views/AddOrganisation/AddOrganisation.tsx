@@ -11,6 +11,11 @@ import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
+type CustomError = {
+	error: Error;
+	dataMessage: string;
+};
+
 type AddOrganisationState = {
 	formName: string;
 	validationError: boolean;
@@ -42,6 +47,8 @@ export class AddOrganisation extends Component<
 		this.setState({ isSaveButtonLoading: true });
 
 		const form = e.currentTarget;
+		let hasSubmitted = true;
+		let formName = "";
 
 		if (!form.checkValidity()) {
 			this.setState({ validationError: true, isSaveButtonLoading: false });
@@ -59,16 +66,25 @@ export class AddOrganisation extends Component<
 		const organisation = await fetchData(
 			Endpoints.organisationsList,
 			fetchOptions,
+			true,
 		);
 
 		if (isDataError(organisation)) {
-			this.setState({ error: organisation });
+			const errorObject = organisation as CustomError;
+
+			if (errorObject.dataMessage.indexOf("that organisation already exists")) {
+				hasSubmitted = false;
+				formName = this.state.formName;
+				this.setState({ validationError: true });
+			} else {
+				this.setState({ error: organisation });
+			}
 		}
 
 		this.setState({
 			isSaveButtonLoading: false,
-			hasSubmitted: true,
-			formName: "",
+			hasSubmitted,
+			formName,
 		});
 	};
 

@@ -1,4 +1,4 @@
-export const fetchData = async (url: string, options?: Record<string, unknown>): Promise<any>  => {
+export const fetchData = async (url: string, options?: Record<string, unknown>, returnErrorMessage = false): Promise<any>  => {
 	let response, data;
 	try {
 		response = await fetch(url, options);
@@ -12,8 +12,10 @@ export const fetchData = async (url: string, options?: Record<string, unknown>):
 	if (response.status === 200 || response.status === 201) {
 		return data;
 	} else {
-		const error = new Error(data.message);
+		const dataMessage = data.message || data.title;
+		const error = new Error(dataMessage);
+		const errorMessage = returnErrorMessage ? { error, dataMessage } : null;
 		console.error(error);
-		return error;
+		return errorMessage ?? error;
 	}
 };
