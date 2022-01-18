@@ -75,6 +75,7 @@ Array [
     >
       <a
         className="btn btn--cta mb--e"
+        data-qa-sel="add-organisation"
         href="/organisations/add"
         onClick={[Function]}
       >
@@ -128,6 +129,7 @@ Array [
           </li>
           <li>
             <a
+              data-qa-sel="sort-alpha-desc"
               data-sort="alpha-desc"
               onClick={[Function]}
             >
@@ -136,6 +138,7 @@ Array [
           </li>
           <li>
             <a
+              data-qa-sel="sort-date-asc"
               data-sort="date-asc"
               onClick={[Function]}
             >
@@ -144,6 +147,7 @@ Array [
           </li>
           <li>
             <a
+              data-qa-sel="sort-date-desc"
               data-sort="date-desc"
               onClick={[Function]}
             >
