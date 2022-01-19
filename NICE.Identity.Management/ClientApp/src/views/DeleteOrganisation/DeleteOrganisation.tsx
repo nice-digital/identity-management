@@ -5,8 +5,10 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { PageHeader } from "@nice-digital/nds-page-header";
 
+import { DeleteOrganisationConfirmation } from "../DeleteOrganisationConfirmation/DeleteOrganisationConfirmation";
 import { OrganisationType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
@@ -83,49 +85,70 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 
 		return (
 			<>
-				{/* Delete Confirmation */}
-				
-				<>
-					<Breadcrumbs>
-						<Breadcrumb to="/organisations" elementType={Link}>
-							Organisations
-						</Breadcrumb>
-						{error ? (
-							<Breadcrumb>Error</Breadcrumb>
-						) : (
-							<Breadcrumb to={`/organisations/${id}`} elementType={Link}>
-								{lastBreadcrumb}
+				{hasBeenDeleted ? (
+					<DeleteOrganisationConfirmation
+						name={`${organisation.name}`}
+					/>
+				) : (
+					<>
+						<Breadcrumbs>
+							<Breadcrumb to="/organisations" elementType={Link}>
+								Organisations
 							</Breadcrumb>
+							{error ? (
+								<Breadcrumb>Error</Breadcrumb>
+							) : (
+								<Breadcrumb to={`/organisations/${id}`} elementType={Link}>
+									{lastBreadcrumb}
+								</Breadcrumb>
+							)}
+							<Breadcrumb>Delete organisation</Breadcrumb>
+						</Breadcrumbs>
+
+						{!error ? (
+							<>
+								{isLoading ? (
+									<>
+										<PageHeader preheading="Confirm" heading="Delete organisation" />
+										<p>Loading...</p>
+									</>
+								) : (
+									<>
+										<PageHeader
+											preheading="Are you sure you want to delete organisation?"
+											heading={`${organisation.name}`}
+											cta={
+												<>
+													<Button
+														data-qa-sel="confirm-delete-organisation"
+														variant="cta"
+														onClick={this.handleDeleteClick}
+														disabled={isDeleteButtonLoading}
+													>
+														{isDeleteButtonLoading ? "Loading..." : "Confirm"}
+													</Button>
+													<Button
+														to={`/organisations/${id}`}
+														variant="secondary"
+														elementType={Link}
+														disabled={isDeleteButtonLoading}
+													>
+														Cancel
+													</Button>
+												</>
+											}
+										/>
+									</>
+								)}
+							</>
+						) : (
+							<>
+								<PageHeader heading="Error" />
+								<ErrorMessage error={error}></ErrorMessage>
+							</>
 						)}
-						<Breadcrumb>Delete organisation</Breadcrumb>
-					</Breadcrumbs>
-				</>
-
-
-				<PageHeader
-					preheading="Are you sure you want to delete organisation?"
-					heading={`${organisation.name}`}
-					cta={
-						<>
-							<Button
-								data-qa-sel="confirm-delete-organisation"
-								variant="cta"
-								onClick={this.handleDeleteClick}
-								disabled={isDeleteButtonLoading}
-							>
-								{isDeleteButtonLoading ? "Loading..." : "Confirm"}
-							</Button>
-							<Button
-								to={`/organisations/${id}`}
-								variant="secondary"
-								elementType={Link}
-								disabled={isDeleteButtonLoading}
-							>
-								Cancel
-							</Button>
-						</>
-					}
-				/>
+					</>
+				)}
 			</>
 		)
 	}
