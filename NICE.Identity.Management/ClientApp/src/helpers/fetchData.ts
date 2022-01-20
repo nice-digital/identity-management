@@ -5,8 +5,9 @@ export const fetchData = async (url: string, options?: Record<string, unknown>, 
 		data = await response.json();
 	} catch (err: unknown) {
 		const error = err as Error;
+		const errorMessage = returnErrorMessage ? { error, dataMessage: "Failed" } : null;
 		console.error(error);
-		return error;
+		return errorMessage ?? error;
 	}
 
 	if (response.status === 200 || response.status === 201) {
