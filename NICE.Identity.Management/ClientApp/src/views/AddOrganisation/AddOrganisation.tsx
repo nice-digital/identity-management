@@ -86,7 +86,9 @@ export class AddOrganisation extends Component<
 		if (isDataError(organisation)) {
 			const errorObject = organisation as CustomError;
 
-			if (errorObject.dataMessage.indexOf("that organisation already exists")) {
+			if (
+				errorObject.dataMessage.indexOf("that organisation already exists") > -1
+			) {
 				const orgNameBlockedArray = [...this.state.orgNameBlockedArray];
 				hasSubmitted = false;
 				formName = this.state.formName;
