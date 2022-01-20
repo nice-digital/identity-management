@@ -106,7 +106,7 @@ describe("EditUser", () => {
 		console.error = jest.fn();
 		const error = new Error("Not allowed");
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockRejectOnce(error);		
+		fetch.mockRejectOnce(error);
 		const wrapper = mount(
 			<MemoryRouter>
 				<EditUser match={match} />
