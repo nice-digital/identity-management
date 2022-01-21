@@ -59,7 +59,7 @@ export class App extends React.Component {
 					<Route path="/services" exact component={ServicesList} />
 					<Route path="/organisations" exact component={OrganisationsList} />
 					<Route path="/organisations/add" exact component={AddOrganisation} />
-					<Route
+					{/* <Route
 						path={"/organisations/:id"}
 						render={({ location }) => {
 							// to stop rendering of component for 'add' route
@@ -67,7 +67,7 @@ export class App extends React.Component {
 							const endOfRoute = location.pathname.split("/").pop() ?? "";
 							return idRegExp.test(endOfRoute) && <Organisation />;
 						}}
-					/>
+					/> */}
 				</Container>
 
 				<Footer />
