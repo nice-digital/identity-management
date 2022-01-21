@@ -30,7 +30,19 @@ import editUserEmailName from '../support/action/editUserEmailName'
 import editAudienceInsight from '../support/action/editAudienceInsight'
 import saveUserEditButton from '../support/action/saveUserEditButton'
 import validateProfileSuccessfulMessage from '../support/check/validateUserStatus'
-import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile'
+import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile';
+import validateOrganisationsDownloadPageResultCount from '../support/check/validateAdminOrgPage';
+import validateAdminOrgPage, { validateFirstLinkInPagination } from "../support/check/validateAdminOrgPage";
+import clickPaginationOption, {
+	clickSecondPaginationOption,
+	clickNextPagination,
+	clickPreviousPagination,
+} from "../support/action/clickPaginationOption";
+import editOrganisationName from '../support/action/editOrganisationName';
+import saveNewOrganisationName from '../support/action/saveNewOrganisationName';
+import validateNewOrgResponseMessage from '../support/check/validateNewOrgResponseMessage';
+import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb } from '../support/action/navigateToOrgListPage'
+import findOrganisationList from '../support/check/findOrganisationList'
 
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
@@ -143,5 +155,28 @@ Then(
 	/^I check user profile is updated$/,
 	checkUpdatedUserProfile
 );
+Then(
+	/^I expect the organisations result list count contains "([^"]*)"$/,
+	validateOrganisationsDownloadPageResultCount
+);
+Then(
+	/^I expect the first pagination option is "([^"]*)"$/,
+	validateFirstLinkInPagination
+);
+Then(/^I click the second pagination option$/, clickSecondPaginationOption);
+
+Then(/^I click the next pagination option$/, clickNextPagination);
+
+Then(/^I click the previous pagination option$/, clickPreviousPagination);
+
+Then(/^I add new organisation name "([^"]*)"$/, editOrganisationName);
+
+Then(/^I click on the save organisation button$/, saveNewOrganisationName);
+
+Then(/^I expect the feedback message "([^"]*)" to be displayed$/, validateNewOrgResponseMessage);
+
+Then(/^I navigate back to organisation list admin page$/, navigateToOrgListPageUsingBreadscrumb);
+
+Then(/^I click on the first organisation in the list$/, findOrganisationList);
 
 

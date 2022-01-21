@@ -31,6 +31,7 @@ export default {
   adminHomePage: {
     manageUsersButton: toDataQASelAttr('manage-users'),
     manageServicesButton: toDataQASelAttr('manage-services'),
+    manageOrganisationsButton: toDataQASelAttr('manage-organisations'),
   },
   userListPage: {
     userlist: toDataQASelAttr('list-of-users'),
@@ -97,6 +98,9 @@ export default {
     pageServiceResultCount: toDataQASelAttr("services-returned"),
     pageUserResultCount: toDataQASelAttr("users-returned"),
   },
+  validateAdminOrganisationPage: {
+    pageOrganisationResultCount: toDataQASelAttr("organisations-returned"),
+  },
   UserProfile: {
     editButton: toDataQASelAttr('edit-profile-button'),
     updatedUserName: toDataQASelAttr('name-user-profile'),
@@ -115,4 +119,31 @@ export default {
     saveProfileButton: toDataQASelAttr('save-button-edit-user'),
     userBreadcrumb: toDataQASelAttr('breadcrumb-user-link'), 
    },
+
+  organisationListPage: {
+
+    addNewOrganisation: toDataQASelAttr('add-organisation'),
+    deleteOrgName: toDataQASelAttr('filter-search-input'),
+    numberResultsOnPage: toDataQASelAttr("result-on-the-page-index"),
+		paginationSection: toDataQASelAttr('pagination-section'),
+		firstPager: toChildAndQASel(1, 'pagination-section'),
+	  secondPager: toChildAndQASel(2, "pagination-section"),
+		nextPager: "body .Pagination_paginationPager__1fauf Pagination_next__1qMPZ",
+		sortAlphaDescending: toDataQASelAttr("sort-alpha-desc"),
+		sortDateDescending: toDataQASelAttr("sort-date-desc"),
+    organisationlist: toDataQASelAttr("list-of-organisations"),
+    firstOrgCard: toChildAndQASel(1, "list-of-organisations"),
+    
+     },
+  manageNewOrgPage: {
+    
+    deleteNewOrgName: toDataQASelAttr('name-input-add-organisation'),
+       },  
+
+  addNewOrganisation: {
+    
+    inputOrganisationName: toDataQASelAttr('name-input-add-organisation'),
+    saveNewOrgButton: toDataQASelAttr('save-button-add-organisation'),
+    submitResponseFeedback: toDataQASelAttr('successful-message-add-organisation'),
+    },
 };

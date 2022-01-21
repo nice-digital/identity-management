@@ -4,7 +4,7 @@ Feature: The list of users is reduced when user filter by service name and servi
 
   Background:
     Given I open the url "/"
-    When I log into accounts with username "ACCOUNTS_EMAIL4" and password "ACCOUNTS_PASSWORD2"
+    When I log into accounts with username "ACCOUNTS_EMAIL" and password "ACCOUNTS_PASSWORD2"
     Given I click on the manage services button
 
   Scenario: User can filter by service name and services
