@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
 
+import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { PageHeader } from "@nice-digital/nds-page-header";
@@ -114,30 +115,34 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 									</>
 								) : (
 									<>
-										<PageHeader
-											preheading="Are you sure you want to delete organisation?"
-											heading={`${organisation.name}`}
-											cta={
-												<>
-													<Button
-														data-qa-sel="confirm-delete-organisation"
-														variant="cta"
-														onClick={this.handleDeleteClick}
-														disabled={isDeleteButtonLoading}
-													>
-														{isDeleteButtonLoading ? "Loading..." : "Confirm"}
-													</Button>
-													<Button
-														to={`/organisations/${id}`}
-														variant="secondary"
-														elementType={Link}
-														disabled={isDeleteButtonLoading}
-													>
-														Cancel
-													</Button>
-												</>
-											}
-										/>
+										<PageHeader	heading={`${organisation.name}`} />
+							
+										<Alert
+											type="info"
+											role="status"
+											aria-live="polite"
+											data-qa-sel="warning-message-delete-organisation"
+										>
+											<p>Once you delete an organisation, the action cannot be undone.
+											Are you sure you want to proceed?</p>
+										</Alert>
+
+										<Button
+											data-qa-sel="confirm-delete-organisation"
+											variant="cta"
+											onClick={this.handleDeleteClick}
+											disabled={isDeleteButtonLoading}
+										>
+											{isDeleteButtonLoading ? "Loading..." : "Confirm"}
+										</Button>
+										<Button
+											to={`/organisations/${id}`}
+											variant="secondary"
+											elementType={Link}
+											disabled={isDeleteButtonLoading}
+										>
+											Cancel
+										</Button>
 									</>
 								)}
 							</>

@@ -44,41 +44,46 @@ exports[`DeleteOrgaisation should match the snapshot after data has been loaded 
     </Breadcrumb>
   </Breadcrumbs>
   <PageHeader
-    cta={
-      <React.Fragment>
-        <Button
-          data-qa-sel="confirm-delete-organisation"
-          disabled={false}
-          onClick={[Function]}
-          variant="cta"
-        >
-          Confirm
-        </Button>
-        <Button
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/organisations/1"
-          variant="secondary"
-        >
-          Cancel
-        </Button>
-      </React.Fragment>
-    }
     heading="NICE"
-    preheading="Are you sure you want to delete organisation?"
   />
+  <Alert
+    aria-live="polite"
+    data-qa-sel="warning-message-delete-organisation"
+    role="status"
+    type="info"
+  >
+    <p>
+      Once you delete an organisation, the action cannot be undone. Are you sure you want to proceed?
+    </p>
+  </Alert>
+  <Button
+    data-qa-sel="confirm-delete-organisation"
+    disabled={false}
+    onClick={[Function]}
+    variant="cta"
+  >
+    Confirm
+  </Button>
+  <Button
+    disabled={false}
+    elementType={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "innerRef": [Function],
+          "onClick": [Function],
+          "replace": [Function],
+          "target": [Function],
+          "to": [Function],
+        },
+        "render": [Function],
+      }
+    }
+    to="/organisations/1"
+    variant="secondary"
+  >
+    Cancel
+  </Button>
 </Fragment>
 `;
 
