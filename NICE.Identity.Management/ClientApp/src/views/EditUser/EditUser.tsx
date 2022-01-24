@@ -300,7 +300,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 									type="caution"
 									role="status"
 									aria-live="polite"
-									data-qa-sel="ad-warning-edit-user"
+									data-qa-sel="eppi-warning-edit-user"
 								>
 									<p>
 										This user may have access to EPPI R5 - only professional email 
