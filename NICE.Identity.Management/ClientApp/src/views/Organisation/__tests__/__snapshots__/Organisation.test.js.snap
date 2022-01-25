@@ -31,51 +31,6 @@ exports[`Organisation should match the snapshot after data has been loaded 1`] =
   </Breadcrumbs>
   <PageHeader
     className="page-header mb--d"
-    cta={
-      <React.Fragment>
-        <Button
-          data-qa-sel="edit-organisation-button"
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/organisations/1/edit"
-          variant="cta"
-        >
-          Edit organisation
-        </Button>
-        <Button
-          data-qa-sel="edit-organisations-users-button"
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/users-organisations/1/edit"
-        >
-          Edit users
-        </Button>
-      </React.Fragment>
-    }
     heading="TEST"
   />
   <Grid
