@@ -13,6 +13,7 @@ import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 import { EditUser } from "./../../views/EditUser/EditUser";
+import { Website } from "../../views/Website/Website";
 
 export class App extends React.Component {
 	render(): JSX.Element {
@@ -54,6 +55,7 @@ export class App extends React.Component {
 						component={SelectRoles}
 					/>
 					<Route path="/services" exact component={ServicesList} />
+					<Route path="/websites/:id" exact component={Website} />
 				</Container>
 
 				<Footer />

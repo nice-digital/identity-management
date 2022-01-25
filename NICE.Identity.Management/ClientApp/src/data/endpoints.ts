@@ -8,7 +8,7 @@ export const Endpoints = {
 
 	servicesList: `${API_BASE_URL}/services`,
 	service: (serviceId: string | number): string =>
-		`${API_BASE_URL}/services/${serviceId}`,
+        `${API_BASE_URL}/services/${serviceId}`,
 	
 	userRolesByWebsite: (userId: string | number, websiteId: string | number): string =>
 		`${API_BASE_URL}/users/${userId}/rolesbywebsite/${websiteId}`,
@@ -16,4 +16,5 @@ export const Endpoints = {
 	verificationEmail: `${API_BASE_URL}/VerificationEmail/VerificationEmail`,
 	
 	websitesList: `${API_BASE_URL}/websites`,
+	website: (websiteId: string | number): string => `${API_BASE_URL}/websites/${websiteId}`,
 };

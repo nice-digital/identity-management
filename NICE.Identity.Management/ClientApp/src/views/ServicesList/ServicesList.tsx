@@ -382,11 +382,10 @@ export class ServicesList extends Component<
 											const { id, host, service } = website;
 											const servicesListHeading = {
 												headingText: `${service.name}`,
-												// Add this in when IDAM-441 is done
-												// link: {
-												// 	elementType: Link,
-												// 	destination: `/websites/${id}`,
-												// },
+												link: {
+													elementType: Link,
+													destination: `/websites/${id}`,
+												},
 											};
 
 											const servicesListMetadata: Array<CardMetaData> = [
