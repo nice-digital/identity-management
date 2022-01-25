@@ -154,8 +154,8 @@ export class Organisation extends Component<OrganisationProps, OrganisationState
 
 						<h2 className="h3">Permanently delete this organisation</h2>
 						<p>
-							This organisation will no longer be available, and all data in associated with the
-							organisation will be permanently deleted.
+							This organisation will no longer be available, and all associated data will be 
+							permanently deleted.
 						</p>
 						<Link
 							data-qa-sel="delete-organisation-link"
