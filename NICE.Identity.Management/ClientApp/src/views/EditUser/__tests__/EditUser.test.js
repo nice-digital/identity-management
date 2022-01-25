@@ -210,7 +210,7 @@ describe("EditUser", () => {
         );
         await nextTick();
         wrapper.update();
-        expect(wrapper.find("p").text()).toEqual("This user may have access to EPPI R5 - only professional email addresses a can be associated to this profile. Please verify via EPPI user admin pages before changing the email address.");
+        expect(wrapper.find("p").text()).toEqual("This user may have access to EPPI R5 - only a professional email address can be associated to this profile. Please verify via the EPPI user admin page before changing the email address.");
         expect(wrapper.find(Alert).exists()).toBe(true);
     });
 });
