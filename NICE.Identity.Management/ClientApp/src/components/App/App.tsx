@@ -60,16 +60,15 @@ export class App extends React.Component {
 					<Route path="/services" exact component={ServicesList} />
 					<Route path="/organisations" exact component={OrganisationsList} />
 					<Route path="/organisations/add" exact component={AddOrganisation} />
-					<Route path="/organisations/:id" exact component={Organisation} />
-					{/* <Route
+					<Route
 						path={"/organisations/:id"}
-						render={({ location }) => {
+						render={(props) => {
 							// to stop rendering of component for 'add' route
 							const idRegExp = new RegExp(/[0-9]+$/g);
-							const endOfRoute = location.pathname.split("/").pop() ?? "";
-							return idRegExp.test(endOfRoute) && <Organisation />;
+							const endOfRoute = props.location.pathname.split("/").pop() ?? "";
+							return idRegExp.test(endOfRoute) && <Organisation {...props} />;
 						}}
-					/> */}
+					/>
 					<Route path="/organisations/:id/delete" exact component={DeleteOrganisation} />
 				</Container>
 
