@@ -45,6 +45,8 @@ export class Organisation extends Component<OrganisationProps, OrganisationState
 				redirect: false,
 				isLoading: true,
 			};
+
+			document.title = "NICE Accounts - Organisation details";
 		}
 
 		async componentDidMount(): Promise<void> {
@@ -132,7 +134,7 @@ export class Organisation extends Component<OrganisationProps, OrganisationState
 												Users
 											</span>
 											<span className={styles.summaryListDetail}>
-												<ul className="list--unstyled" data-qa-sel="list-of-users">
+												<ul className="list--unstyled" data-qa-sel="list-of-organisations">
 													{users.map((user) => {
 													return (
 														<li key={user.userId}>
