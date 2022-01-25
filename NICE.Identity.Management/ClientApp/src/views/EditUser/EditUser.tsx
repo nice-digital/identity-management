@@ -303,9 +303,9 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 									data-qa-sel="eppi-warning-edit-user"
 								>
 									<p>
-										This user may have access to EPPI R5 - only professional email 
-										addresses a can be associated to this profile. Please verify via EPPI
-										user admin pages before changing the email address.
+										This user may have access to EPPI R5 - only a professional email 
+										address can be associated to this profile. Please verify via the EPPI
+										user admin page before changing the email address.
 									</p>
 								</Alert>
 							)}
