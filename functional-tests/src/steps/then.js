@@ -40,9 +40,9 @@ import clickPaginationOption, {
 } from "../support/action/clickPaginationOption";
 import editOrganisationName from '../support/action/editOrganisationName';
 import saveNewOrganisationName from '../support/action/saveNewOrganisationName';
-import validateNewOrgResponseMessage from '../support/check/validateNewOrgResponseMessage';
-import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb } from '../support/action/navigateToOrgListPage'
-import findOrganisationList from '../support/check/findOrganisationList'
+import validateNewOrgResponseMessage , { validateErrorMessage } from '../support/check/validateNewOrgResponseMessage';
+import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb } from '../support/action/navigateToOrgListPage';
+import findOrganisationList from '../support/check/findOrganisationList';
 
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
@@ -178,5 +178,7 @@ Then(/^I expect the feedback message "([^"]*)" to be displayed$/, validateNewOrg
 Then(/^I navigate back to organisation list admin page$/, navigateToOrgListPageUsingBreadscrumb);
 
 Then(/^I click on the first organisation in the list$/, findOrganisationList);
+
+Then(/^I expect to see error message "([^"]*)"$/, validateErrorMessage);
 
 

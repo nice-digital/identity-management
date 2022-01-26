@@ -10,4 +10,15 @@ export const validateNewOrgResponseMessage = (message) => {
 	pause(1000);
 };
 
+export const validateErrorMessage = (message) => {
+
+	waitForVisible('.input__error');
+	checkContainsText('.input__error', message);
+	pause(1000);
+  };
+
+
 export default validateNewOrgResponseMessage;
+
+
+	
