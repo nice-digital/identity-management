@@ -75,13 +75,19 @@ export class Organisation extends Component<
 			<>
 				<Breadcrumbs>
 					<Breadcrumb
-						data-qa-sel="breadcrumb-organisation-link"
-						to="/overview"
+						data-qa-sel="breadcrumb-administration-link"
+						to="/"
 						elementType={Link}
 					>
 						Administration
 					</Breadcrumb>
-					<Breadcrumb>Organisation</Breadcrumb>
+					<Breadcrumb
+						data-qa-sel="breadcrumb-organisation-link"
+						to="/organisations"
+						elementType={Link}
+					>
+						Organisation
+					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
 
