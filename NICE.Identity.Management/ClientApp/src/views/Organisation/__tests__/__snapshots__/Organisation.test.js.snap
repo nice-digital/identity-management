@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Organisation should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      data-qa-sel="breadcrumb-organisation-link"
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/overview"
+    >
+      Administration
+    </Breadcrumb>
+    <Breadcrumb>
+      Organisation
+    </Breadcrumb>
+    <Breadcrumb>
+      TEST
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    className="page-header mb--d"
+    heading="TEST"
+  />
+  <Grid
+    elementType="div"
+    equalHeight={false}
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      aria-busy={false}
+      cols={12}
+      md={9}
+    >
+      <div
+        className="summaryList pv--c"
+      >
+        <span
+          className="summaryListLabel"
+        >
+          Date added
+        </span>
+        <span
+          className="summaryListDetail"
+          data-qa-sel="dateAdded-organisation"
+        >
+          19 January 2022 17:05
+        </span>
+      </div>
+    </GridItem>
+    <GridItem
+      aria-busy={false}
+      cols={12}
+      md={9}
+    >
+      <p>
+        There are currently no users assigned to this organisation.
+      </p>
+    </GridItem>
+  </Grid>
+  <hr
+    className="mv--b"
+  />
+  <h2
+    className="h3"
+  >
+    Permanently delete this organisation
+  </h2>
+  <p>
+    This organisation will no longer be available, and all associated data will be permanently deleted.
+  </p>
+  <Link
+    className="pv--c mb--d"
+    data-qa-sel="delete-organisation-link"
+    style={
+      Object {
+        "display": "inline-block",
+      }
+    }
+    to="/organisations/1/delete"
+  >
+    Delete organisation
+  </Link>
+</Fragment>
+`;
+
+exports[`Organisation should show error message when fetch returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            data-qa-sel="breadcrumb-organisation-link"
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Organisation
+          </span>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Error
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Organisation\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"name\\": \\"Error\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`Organisation should show error message when fetch returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            data-qa-sel="breadcrumb-organisation-link"
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Organisation
+          </span>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Error
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Organisation\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"name\\": \\"Error\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
