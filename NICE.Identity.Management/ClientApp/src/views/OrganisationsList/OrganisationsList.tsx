@@ -256,8 +256,8 @@ export class OrganisationsList extends Component<
 		} = {
 			"alpha-asc": (a, b) => a.name.localeCompare(b.name),
 			"alpha-desc": (a, b) => b.name.localeCompare(a.name),
-			"date-asc": (a, b) => a.dateAdded.localeCompare(b.dateAdded),
-			"date-desc": (a, b) => b.dateAdded.localeCompare(a.dateAdded),
+			"date-asc": (a, b) => (a.dateAdded > b.dateAdded ? 1 : -1),
+			"date-desc": (a, b) => (b.dateAdded > a.dateAdded ? 1 : -1),
 		};
 
 		const sortedOrganisations = organisations.sort(sortFunctions[sortBy]);
