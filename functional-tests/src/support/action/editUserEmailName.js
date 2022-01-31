@@ -1,25 +1,36 @@
 import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
+import clickElement from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
+import pressButton from '@nice-digital/wdio-cucumber-steps/lib/support/action/pressButton';
+import setInputField from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
 import selectors from '../selectors';
 
-
-
 export const editUserEmailName = (email, firstname, lastname) => {
-
   waitForVisible(selectors.editUserProfile.EmailAddress);
-  browser.clearElement(selectors.editUserProfile.EmailAddress);
-  browser.click(selectors.editUserProfile.EmailAddress);
-  browser.addValue(selectors.editUserProfile.EmailAddress, process.env[email]);
+  clickElement('click', 'selector', selectors.editUserProfile.EmailAddress);
+  pressButton(['Control', 'a', 'Delete']);
+  setInputField(
+    'set',
+    process.env[email],
+    selectors.editUserProfile.EmailAddress
+  );
 
   waitForVisible(selectors.editUserProfile.FirstName);
-  browser.clearElement(selectors.editUserProfile.FirstName);
-  browser.click(selectors.editUserProfile.FirstName);
-  browser.addValue(selectors.editUserProfile.FirstName, process.env[firstname]);
+  clickElement('click', 'selector', selectors.editUserProfile.FirstName);
+  pressButton(['Control', 'a', 'Delete']);
+  setInputField(
+    'set',
+    process.env[firstname],
+    selectors.editUserProfile.FirstName
+  );
 
   waitForVisible(selectors.editUserProfile.LastName);
-  browser.clearElement(selectors.editUserProfile.LastName);
-  browser.click(selectors.editUserProfile.LastName);
-  browser.addValue(selectors.editUserProfile.LastName, process.env[lastname]);
+  clickElement('click', 'selector', selectors.editUserProfile.LastName);
+  pressButton(['Control', 'a', 'Delete']);
+  setInputField(
+    'set',
+    process.env[lastname],
+    selectors.editUserProfile.LastName
+  );
 };
 
 export default editUserEmailName;
-
