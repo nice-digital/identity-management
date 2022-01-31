@@ -114,8 +114,7 @@ describe("OrganisationsList", () => {
 		instance.filterOrganisationsBySearch(dummyText);
 		await nextTick();
 		wrapper.update();
-        console.log(wrapper.debug());
-		expect(wrapper.find("p").text()).toEqual(
+        expect(wrapper.find("p").text()).toEqual(
 			`No results found for "${dummyText}"`,
 		);
 	});
