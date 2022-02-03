@@ -38,6 +38,12 @@ export type ServiceWebsiteType = {
 	environment: EnvironmentType;
 };
 
+export type OrganisationType = {
+	id: number;
+	name: string;
+	dateAdded: Date;
+};
+
 export type UserRoleType = {
 	userId: number;
 	websites: Array<WebsiteType>;

@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 import toJson from "enzyme-to-json";
 import { Input } from "@nice-digital/nds-input";
 import { Alert } from "@nice-digital/nds-alert";
-
 import { EditUser } from "../EditUser";
 import singleUser from "./singleUser.json";
 import singleUserWithEPPIEmail from "./singleUserWithEPPIEmail.json";
