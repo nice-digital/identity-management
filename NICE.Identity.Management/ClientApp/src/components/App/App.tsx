@@ -44,6 +44,7 @@ export class App extends React.Component {
 				{ text: "Health checks", url: "/healthchecks-ui" },
 				{ text: "Sign out", url: "/Account/Logout" },
 			],
+			displayName:  myAccountDetails.displayName,
 			provider: "idam",
 		};
 
