@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteOrgaisation should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/organisations"
+    >
+      Organisations
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/organisations/1"
+    >
+      NICE
+    </Breadcrumb>
+    <Breadcrumb>
+      Delete organisation
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="NICE"
+  />
+  <Alert
+    aria-live="polite"
+    data-qa-sel="warning-message-delete-organisation"
+    role="status"
+    type="info"
+  >
+    <p>
+      Once you delete an organisation, the action cannot be undone. Are you sure you want to proceed?
+    </p>
+  </Alert>
+  <Button
+    data-qa-sel="confirm-delete-organisation"
+    disabled={false}
+    onClick={[Function]}
+    variant="cta"
+  >
+    Confirm
+  </Button>
+  <Button
+    disabled={false}
+    elementType={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "innerRef": [Function],
+          "onClick": [Function],
+          "replace": [Function],
+          "target": [Function],
+          "to": [Function],
+        },
+        "render": [Function],
+      }
+    }
+    to="/organisations/1"
+    variant="secondary"
+  >
+    Cancel
+  </Button>
+</Fragment>
+`;
+
+exports[`DeleteOrgaisation should show error message when fetchData function returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/organisations"
+            onClick={[Function]}
+          >
+            Organisations
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Error
+          </span>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Delete organisation
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/organisations\\",
+        \\"name\\": \\"Organisations\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Error\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"name\\": \\"Delete organisation\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`DeleteOrgaisation should show error message when fetchData function returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/organisations"
+            onClick={[Function]}
+          >
+            Organisations
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Error
+          </span>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Delete organisation
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/organisations\\",
+        \\"name\\": \\"Organisations\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Error\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"name\\": \\"Delete organisation\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
