@@ -81,3 +81,15 @@ export type HistoryType = {
 	) => void;
 	location: HistoryLocationType;
 };
+
+export type UserAndRolesType = {
+	userId: number;
+	user: UserType;
+	roles: Array<RoleType>;
+};
+
+export type WebsiteUsersAndRolesType = {
+	websiteId: number;
+	website: WebsiteType;
+	usersAndRoles: Array<UserAndRolesType>;
+};

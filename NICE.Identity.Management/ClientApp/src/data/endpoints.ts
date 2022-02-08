@@ -17,4 +17,7 @@ export const Endpoints = {
 	
 	websitesList: `${API_BASE_URL}/websites`,
 	website: (websiteId: string | number): string => `${API_BASE_URL}/websites/${websiteId}`,
+
+	usersAndRolesByWebsite: (websiteId: string | number): string =>
+	`${API_BASE_URL}/websites/${websiteId}/usersandrolesbywebsite`,
 };
