@@ -56,10 +56,9 @@ export class App extends React.Component {
 			provider: "idam",
 		};
 
-
-
 		this.setState({
-			isLoading: false
+			isLoading: false,
+			auth: auth
 		});
 	}
 	render(): JSX.Element {
