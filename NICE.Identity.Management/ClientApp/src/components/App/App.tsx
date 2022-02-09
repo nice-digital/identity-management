@@ -33,6 +33,8 @@ export class App extends React.Component {
 		auth: {} as IdamProviderProps
 	}
 	async componentDidMount(): Promise<void> {
+               this.setState({ isLoading: true });
+               
 		const fetchOptions = {
 			method: "GET",
 			headers: { "Content-Type": "application/json" }
