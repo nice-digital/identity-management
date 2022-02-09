@@ -58,9 +58,6 @@ export class App extends React.Component {
 		};
 
 
-		if (isDataError(myAccountDetails)) {
-			this.setState({ error: myAccountDetails });
-		}
 
 		this.setState({
 			isLoading: false
