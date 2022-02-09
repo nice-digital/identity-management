@@ -10,7 +10,7 @@ import { Grid, GridItem } from "@nice-digital/nds-grid";
 
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
-import { RoleType, WebsiteUsersAndRolesType } from "../../models/types";
+import { UserAndRolesType, WebsiteUsersAndRolesType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { FilterBox } from "../../components/FilterBox/FilterBox";
 
@@ -25,9 +25,12 @@ type WebsiteProps = Record<string, unknown> &
 
 type WebsiteState = {
 	websiteUsersAndRoles: WebsiteUsersAndRolesType;
+	usersAndRoles: Array<UserAndRolesType>;
 	error?: Error;
 	redirect: boolean;
 	isLoading: boolean;
+	rolesForFilter: Array<string>;
+	roleFiltersChecked: Array<string>;
 };
 
 export class Website extends Component<WebsiteProps, WebsiteState> {
@@ -36,8 +39,11 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 
 		this.state = {
 			websiteUsersAndRoles: {} as WebsiteUsersAndRolesType,
+			usersAndRoles: [],
 			redirect: false,
 			isLoading: true,
+			rolesForFilter: [],
+			roleFiltersChecked: []
 		};
 	}
 
@@ -48,38 +54,96 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 
 		if (isDataError(websiteUsersAndRoles)) {
 			this.setState({ error: websiteUsersAndRoles });
+		} else {
+			const allRoles: Array<string> = []
+			websiteUsersAndRoles.usersAndRoles
+				.slice(0)
+				.map((user: UserAndRolesType) => {
+					user.roles
+						.slice(0)
+						.map((roles) => {
+							allRoles.push(roles.name)
+						})
+				});	
+			
+			const rolesForFilter = allRoles.reduce(function (
+				accumulatedRoles: string[],
+				currentRoles: string,
+			) {
+				if (accumulatedRoles.indexOf(currentRoles) === -1) {
+					accumulatedRoles.push(currentRoles);
+				}
+				return accumulatedRoles;
+			},
+			[]);
+
+			this.setState({ rolesForFilter });
+
 		}
 
-		this.setState({ websiteUsersAndRoles, isLoading: false });
+		this.setState({ websiteUsersAndRoles, usersAndRoles: websiteUsersAndRoles.usersAndRoles, isLoading: false });
 		document.title = `NICE Accounts - ${websiteUsersAndRoles.website.host}`;
 	}
 
-	getRolesToFilterBy = (websiteUsersAndRoles: WebsiteUsersAndRolesType): Array<string> => {
+	getListOfUsersByFilteredRole = (
+		roleFiltersChecked: Array<string>,
+		usersAndRoles: Array<UserAndRolesType>
+	): Array<UserAndRolesType> => {
+		const usersfilteredByRoles: Array<UserAndRolesType> = []
 
-		const rolesList: Array<string> = []
-
-		websiteUsersAndRoles.usersAndRoles
+		usersAndRoles
 			.slice(0)
-			.map((user) => {
+			.map((user: UserAndRolesType) => {
 				user.roles
 					.slice(0)
-					.map((roles) => {
-						if (!rolesList.includes(roles.name))	{
-							rolesList.push(roles.name)
+					.map((role) => {
+						if (roleFiltersChecked.includes(role.name)) {
+							if (usersfilteredByRoles.indexOf(user) === -1) {
+								usersfilteredByRoles.push(user)
+							}
 						}
 					})
 			});	
 
-		console.log(rolesList)
-		return rolesList
+		return usersfilteredByRoles
 	}
 
-	filterUsersByRoles = (): void => {
+	filterUsersByRoles = (role: string): void => {
 		this.setState({ isLoading: true });
+
+		let roleFiltersChecked = this.state.roleFiltersChecked;
+
+		roleFiltersChecked = roleFiltersChecked.includes(role)
+			? roleFiltersChecked.filter(
+					(roleFilter) => roleFilter !== role,
+					)
+			: roleFiltersChecked.concat(role);
+
+		// const itemsPerPage = Number(this.state.itemsPerPage)
+		// 	? Number(this.state.itemsPerPage)
+		// 	: this.state.itemsPerPage;
+
+		let usersAndRoles = this.state.websiteUsersAndRoles.usersAndRoles;
+		// 	pageNumber = this.state.pageNumber;
+
+		if (roleFiltersChecked.length) {
+			usersAndRoles = this.getListOfUsersByFilteredRole(
+				roleFiltersChecked,
+				usersAndRoles,
+			);
+		}
+
+		// pageNumber = this.pastPageRange(
+		// 	itemsPerPage,
+		// 	pageNumber,
+		// 	this.state.websites.length,
+		// );
+
+		this.setState({ usersAndRoles, isLoading: false, roleFiltersChecked });
 	}
 
     render(): JSX.Element {
-		const { websiteUsersAndRoles, isLoading } = this.state;
+		const { websiteUsersAndRoles, usersAndRoles, isLoading } = this.state;
 		const lastBreadcrumb = isLoading ? "Loading service details" : websiteUsersAndRoles.website.service.name;
 
         return(
@@ -102,8 +166,8 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 						<GridItem cols={12} md={3}>
 							<FilterBox
 								name="Roles"
-								filters={this.getRolesToFilterBy(websiteUsersAndRoles)}
-								selected={[""]}
+								filters={this.state.rolesForFilter}
+								selected={this.state.roleFiltersChecked}
 								onCheckboxChange={this.filterUsersByRoles}
 								hideFilterPanelHeading={true}
 							/>
@@ -120,7 +184,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 									</tr>
 								</thead>
 								<tbody>
-									{websiteUsersAndRoles.usersAndRoles
+									{usersAndRoles
 										.slice(0)
 										.map((user) => (
 											<tr key={user.user.nameIdentifier}>
