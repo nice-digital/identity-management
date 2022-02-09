@@ -49,7 +49,6 @@ export class App extends React.Component {
 		}
 		const auth: IdamProviderProps = {
 			links: [
-				{ text: myAccountDetails.displayName, url: "#" },
 				{ text: "Health checks", url: "/healthchecks-ui" },
 				{ text: "Sign out", url: "/Account/Logout" },
 			],
