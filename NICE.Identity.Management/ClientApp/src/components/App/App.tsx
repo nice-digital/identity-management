@@ -57,10 +57,6 @@ export class App extends React.Component {
 			provider: "idam",
 		};
 
-		this.setState({
-			isLoading: true,
-			auth: auth
-		});
 
 		if (isDataError(myAccountDetails)) {
 			this.setState({ error: myAccountDetails });
