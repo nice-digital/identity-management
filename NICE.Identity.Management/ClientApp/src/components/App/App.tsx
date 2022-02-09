@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Header, Footer, IdamProviderProps, Link } from "@nice-digital/global-nav";
+import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
 import { Container } from "@nice-digital/nds-container";
 
 import { Overview } from "../../views/Overview/Overview";

@@ -23,5 +23,7 @@ export const Endpoints = {
 	verificationEmail: `${API_BASE_URL}/VerificationEmail/VerificationEmail`,
 	
 	websitesList: `${API_BASE_URL}/websites`,
+
+	//Accesses the account controller to get the status endpoint which returns JSON data containing the username.
 	identityManagementUser: `${APP_BASE_URL}/account/status`,
 };
