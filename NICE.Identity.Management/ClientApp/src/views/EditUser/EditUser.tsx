@@ -41,6 +41,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const [emailBlockedCurrentMessage, setEmailBlockedCurrentMessage] =
 		useState<string>("Email address is in an invalid format");
 	const [isAD, setIsAD] = useState(false);
+	const [isEPPI, setIsEPPI] = useState(false);
 
 	const [formData, setFormData] = useState<FormDataType>({
 		emailAddress: "",
@@ -78,6 +79,10 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
 						});
 						setIsAD(true);
+					} else if(userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 
+								|| userData.emailAddress.indexOf("@rcp.ac.uk") > -1
+								|| userData.emailAddress.indexOf("@rcog.org.uk") > -1) {
+						setIsEPPI(true);
 					}
 				}
 
@@ -287,6 +292,20 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 									<p>
 										Changes are not possible for this record. Staff details are
 										managed through Active Directory.
+									</p>
+								</Alert>
+							)}
+							{isEPPI && (
+								<Alert
+									type="caution"
+									role="status"
+									aria-live="polite"
+									data-qa-sel="eppi-warning-edit-user"
+								>
+									<p>
+										This user may have access to EPPI R5 - only a professional email 
+										address can be associated to this profile. Please verify via the EPPI
+										user admin page before changing the email address.
 									</p>
 								</Alert>
 							)}

@@ -1,0 +1,22 @@
+.summaryList {
+  display: flex;
+
+  &Label {
+    font-weight: bold;
+    flex: 1;
+  }
+  
+  &Detail {
+    flex: 3;
+    display: flex;
+    align-self: flex-start;
+
+    > * {
+      margin: 0;
+    }
+  }
+}
+
+.userName{
+  margin-left:20px;
+}

@@ -4,9 +4,10 @@ import { MemoryRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 import toJson from "enzyme-to-json";
 import { Input } from "@nice-digital/nds-input";
-
+import { Alert } from "@nice-digital/nds-alert";
 import { EditUser } from "../EditUser";
 import singleUser from "./singleUser.json";
+import singleUserWithEPPIEmail from "./singleUserWithEPPIEmail.json";
 import { nextTick } from "../../../utils/nextTick";
 
 import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
@@ -197,4 +198,18 @@ describe("EditUser", () => {
 		expect(wrapper.find({ label: "Email address" }).prop("error")).toEqual(true);
 		expect(wrapper.find({ label: "Email address" }).prop("errorMessage")).toBe("Multiple users found with same email address.");
 	});
+
+	it("should display alert message if editing an EPPI user", async () => {
+        console.error = jest.fn();
+        fetch.mockResponseOnce(JSON.stringify(singleUserWithEPPIEmail));
+        const wrapper = mount(
+            <MemoryRouter>
+                <EditUser match={match} />
+            </MemoryRouter>,
+        );
+        await nextTick();
+        wrapper.update();
+        expect(wrapper.find("p").text()).toEqual("This user may have access to EPPI R5 - only a professional email address can be associated to this profile. Please verify via the EPPI user admin page before changing the email address.");
+        expect(wrapper.find(Alert).exists()).toBe(true);
+    });
 });
