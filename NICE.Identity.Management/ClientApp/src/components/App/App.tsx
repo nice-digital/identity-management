@@ -43,7 +43,10 @@ export class App extends React.Component {
 			Endpoints.identityManagementUser,
 			fetchOptions,
 		) as MyAccountDetails;
-
+		
+		if (isDataError(myAccountDetails)) {
+			this.setState({ error: myAccountDetails });
+		}
 		const auth: IdamProviderProps = {
 			links: [
 				{ text: myAccountDetails.displayName, url: "#" },
