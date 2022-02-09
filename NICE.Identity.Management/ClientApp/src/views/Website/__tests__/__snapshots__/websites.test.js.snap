@@ -1,0 +1,517 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Website should match the snapshot after data has been loaded 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Services
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Identity Admin
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Services\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"name\\": \\"Identity Admin\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Identity Admin (Live)
+    </h1>
+  </div>,
+  <div
+    className="grid"
+  >
+    <div
+      data-g="12 md:3"
+    >
+      <div
+        className="filter-panel-hide-heading"
+      >
+        <form>
+          <div
+            className="filter-panel"
+          >
+            <h2
+              className="filter-panel__heading"
+            >
+              <button
+                aria-controls="filter-panel-body"
+                aria-expanded={true}
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  fill="none"
+                  focusable="false"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+            </h2>
+            <div
+              aria-hidden={false}
+              className="filter-panel__body"
+              id="filter-panel-body"
+            >
+              <div
+                className="filter-group"
+              >
+                <h3
+                  className="filter-group__heading"
+                >
+                  <button
+                    aria-controls="group-roles"
+                    aria-expanded={true}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      fill="none"
+                      focusable="false"
+                      height="1em"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <span
+                      id="group-heading-roles"
+                    >
+                      Roles
+                       
+                    </span>
+                  </button>
+                </h3>
+                <fieldset
+                  aria-hidden={false}
+                  className="filter-group__options"
+                  id="group-roles"
+                >
+                  <legend>
+                    Roles
+                  </legend>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_roles_editor"
+                  >
+                    <input
+                      checked={false}
+                      id="filter_roles_editor"
+                      name="roles"
+                      onChange={[Function]}
+                      title="Roles - Editor"
+                      type="checkbox"
+                      value="Editor"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Editor
+                    </span>
+                  </label>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_roles_readonly"
+                  >
+                    <input
+                      checked={false}
+                      id="filter_roles_readonly"
+                      name="roles"
+                      onChange={[Function]}
+                      title="Roles - ReadOnly"
+                      type="checkbox"
+                      value="ReadOnly"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      ReadOnly
+                    </span>
+                  </label>
+                  <label
+                    className="filter-option"
+                    htmlFor="filter_roles_administrator"
+                  >
+                    <input
+                      checked={false}
+                      id="filter_roles_administrator"
+                      name="roles"
+                      onChange={[Function]}
+                      title="Roles - Administrator"
+                      type="checkbox"
+                      value="Administrator"
+                    />
+                    <span
+                      className="filter-option__text"
+                    >
+                      Administrator
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      aria-busy={true}
+      data-g="12 md:9"
+    >
+      <h2
+        className="websiteSummary"
+        data-qa-sel="users-returned"
+      >
+        Showing 4 users
+      </h2>
+      <table
+        className="table"
+        data-qa-sel="list-of-users"
+        style={
+          Object {
+            "display": "table",
+          }
+        }
+      >
+        <thead>
+          <tr>
+            <th>
+              User name
+            </th>
+            <th>
+              Email address
+            </th>
+            <th>
+              Roles(s)
+            </th>
+            <th>
+              Is staff
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            className="userRecord"
+          >
+            <td>
+              Thomas
+               
+              Holding
+            </td>
+            <td>
+              thomas.holding@example.com
+            </td>
+            <td>
+              <div>
+                Editor
+              </div>
+              <div>
+                ReadOnly
+              </div>
+            </td>
+            <td>
+              Yes
+            </td>
+          </tr>
+          <tr
+            className="userRecord"
+          >
+            <td>
+              Aisha
+               
+              Bartlett
+            </td>
+            <td>
+              aisha.bartlett@example.com
+            </td>
+            <td>
+              <div>
+                ReadOnly
+              </div>
+            </td>
+            <td>
+              Yes
+            </td>
+          </tr>
+          <tr
+            className="userRecord"
+          >
+            <td>
+              Theo
+               
+              Bradford
+            </td>
+            <td>
+              theo.bradford@example.com
+            </td>
+            <td>
+              <div>
+                Administrator
+              </div>
+            </td>
+            <td>
+              No
+            </td>
+          </tr>
+          <tr
+            className="userRecord"
+          >
+            <td>
+              Kristin
+               
+              Patrick
+            </td>
+            <td>
+              kristin.patrick@example.com
+            </td>
+            <td>
+              <div>
+                Administrator
+              </div>
+            </td>
+            <td>
+              Yes
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        className="flex flexAlignCenter"
+      >
+        <div
+          className="mr--e"
+          data-qa-sel="number-of-results-on-page"
+        >
+          <label
+            className="bold mr--c"
+            htmlFor="itemsPerPage"
+          >
+            Items per page
+          </label>
+          <select
+            data-qa-sel="result-on-the-page-index"
+            id="itemsPerPage"
+            name="itemsPerPage"
+            onChange={[Function]}
+            value="all"
+          >
+            <option
+              value="25"
+            >
+              25
+            </option>
+            <option
+              value="50"
+            >
+              50
+            </option>
+            <option
+              value="all"
+            >
+              All
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Website should show error message when fetch returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Services
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span />
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Services\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {}
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`Website should show error message when fetch returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Services
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span />
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Services\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {}
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;

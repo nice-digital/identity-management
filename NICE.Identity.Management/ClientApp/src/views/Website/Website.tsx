@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { RouteComponentProps, Link } from "react-router-dom";
-import { StaticContext } from "react-router";
 
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
@@ -14,16 +13,14 @@ import { isDataError } from "../../helpers/isDataError";
 import { UserAndRolesType, WebsiteUsersAndRolesType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { FilterBox } from "../../components/FilterBox/FilterBox";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { Pagination } from "../../components/Pagination/Pagination";
+
+import styles from "./Website.module.scss";
 
 type TParams = { id: string };
 
-type LocationState = {
-	hasBeenEdited: boolean;
-};
-
-type WebsiteProps = Record<string, unknown> &
-	RouteComponentProps<TParams, StaticContext, LocationState>;
+type WebsiteProps = Record<string, unknown> & RouteComponentProps<TParams>;
 
 type WebsiteState = {
 	path: string;
@@ -107,10 +104,10 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 
 			this.setState({ rolesForFilter });
 
+			document.title = `NICE Accounts - ${websiteUsersAndRoles.website.host}`;
 		}
 
 		this.setState({ websiteUsersAndRoles, usersAndRoles: websiteUsersAndRoles.usersAndRoles, isLoading: false });
-		document.title = `NICE Accounts - ${websiteUsersAndRoles.website.host}`;
 	}
 
 	getListOfUsersByFilteredRole = (
@@ -271,22 +268,23 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 	};
 
     render(): JSX.Element {
-		const { websiteUsersAndRoles, usersAndRoles, isLoading, pageNumber, itemsPerPage, } = this.state;
-		const lastBreadcrumb = isLoading ? "Loading service details" : websiteUsersAndRoles.website.service.name;
+		const { websiteUsersAndRoles, usersAndRoles, error, isLoading, pageNumber, itemsPerPage, } = this.state;
+
+		const lastBreadcrumb = isLoading ? "Loading service details" : websiteUsersAndRoles.website?.service?.name;
 
 		const paginationPositions = this.getPaginateStartAndFinishPosition(
-			usersAndRoles.length,
+			usersAndRoles?.length,
 			pageNumber,
 			itemsPerPage,
 		);
 
 		const paginationText = this.getPaginationText(
-			usersAndRoles.length,
+			usersAndRoles?.length,
 			paginationPositions.start,
 			paginationPositions.finish,
 		);
 
-		const usersPaginated = usersAndRoles.length
+		const usersPaginated = usersAndRoles?.length
 		? usersAndRoles.slice(paginationPositions.start, paginationPositions.finish)
 		: usersAndRoles;
 
@@ -298,69 +296,76 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
+				{!error ? (
+					<>
+						<PageHeader
+							heading={isLoading ? "Service name" : `${websiteUsersAndRoles.website.service.name} (${websiteUsersAndRoles.website.environment.name})`}
+						/>
 
-				<PageHeader
-					heading={isLoading ? "Service name" : `${websiteUsersAndRoles.website.service.name} (${websiteUsersAndRoles.website.environment.name})`}
-				/>
-
-				{isLoading ? (
-					<p>Loading...</p>
-				) : (
-					<Grid>
-						<GridItem cols={12} md={3}>
-							<FilterBox
-								name="Roles"
-								filters={this.state.rolesForFilter}
-								selected={this.state.roleFiltersChecked}
-								onCheckboxChange={this.filterUsersByRoles}
-								hideFilterPanelHeading={true}
-							/>
-						</GridItem>
-						<GridItem cols={12} md={9} aria-busy={true} >
-							<h2 className="h3">{paginationText}</h2>
-							<Table style={{ display: "table" }}>
-								<thead>
-									<tr>
-										<th>User name</th>
-										<th>Email address</th>
-										<th>Roles(s)</th>
-										<th>Is staff</th>
-									</tr>
-								</thead>
-								<tbody>
-									{usersPaginated
-										.slice(0)
-										.map((user) => (
-											<tr key={user.user.nameIdentifier}>
-												<td>
-													{user.user.firstName} {user.user.lastName}
-												</td>
-												<td>
-													{user.user.emailAddress}
-												</td>
-												<td>
-													{user.roles
-														.slice(0)
-														.map((roles, index) => (
-															<div key={index}>{roles.name}</div>
-													))}
-												</td>
-												<td>
-													{user.user.isStaffMember ? "Yes" : "No"}
-												</td>
+						{isLoading ? (
+							<p>Loading...</p>
+						) : usersAndRoles.length ?  (
+							<Grid>
+								<GridItem cols={12} md={3}>
+									<FilterBox
+										name="Roles"
+										filters={this.state.rolesForFilter}
+										selected={this.state.roleFiltersChecked}
+										onCheckboxChange={this.filterUsersByRoles}
+										hideFilterPanelHeading={true}
+									/>
+								</GridItem>
+								<GridItem cols={12} md={9} aria-busy={true} >
+									<h2 className={styles.websiteSummary} data-qa-sel="users-returned">{paginationText}</h2>
+									<Table style={{ display: "table" }}  data-qa-sel='list-of-users'>
+										<thead>
+											<tr>
+												<th>User name</th>
+												<th>Email address</th>
+												<th>Roles(s)</th>
+												<th>Is staff</th>
 											</tr>
-									))}
-								</tbody>
-							</Table>
-							<Pagination
+										</thead>
+										<tbody>
+											{usersPaginated
+												.slice(0)
+												.map((user) => (
+													<tr key={user.user.nameIdentifier} className="userRecord">
+														<td>
+															{user.user.firstName} {user.user.lastName}
+														</td>
+														<td>
+															{user.user.emailAddress}
+														</td>
+														<td>
+															{user.roles
+																.slice(0)
+																.map((roles, index) => (
+																	<div key={index}>{roles.name}</div>
+															))}
+														</td>
+														<td>
+															{user.user.isStaffMember ? "Yes" : "No"}
+														</td>
+													</tr>
+											))}
+										</tbody>
+									</Table>
+									<Pagination
 										onChangePage={this.changePage}
 										onChangeAmount={this.changeAmount}
 										itemsPerPage={itemsPerPage}
 										consultationCount={usersAndRoles.length}
 										currentPage={pageNumber}
 									/>
-						</GridItem>
-					</Grid>
+								</GridItem>
+							</Grid>
+						) : (	
+							<p>No results found</p>
+						)}
+					</>
+				) : (
+					<ErrorMessage error={error}></ErrorMessage>
 				)}
             </>
         );

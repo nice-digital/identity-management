@@ -1,0 +1,45 @@
+{
+    "websiteId": 8,
+    "serviceId": 4,
+    "environmentId": 5,
+    "usersAndRoles": [],
+    "service": {
+        "id": 14,
+        "name": "Test Site",
+        "websites": null
+    },
+    "website": {
+        "id": 8,
+        "serviceId": 4,
+        "environmentId": 5,
+        "host": "test-site.nice.org.uk",
+        "environment": {
+            "id": 5,
+            "name": "Test",
+            "order": 2
+        },
+        "service": {
+            "id": 14,
+            "name": "Test Site",
+            "websites": [
+                {
+                    "id": 8,
+                    "serviceId": 4,
+                    "environmentId": 5,
+                    "host": "test-site.nice.org.uk",
+                    "environment": {
+                        "id": 5,
+                        "name": "Test",
+                        "order": 2
+                    },
+                    "service": null
+                }
+            ]
+        }
+    },
+    "environment": {
+        "id": 5,
+        "name": "Test",
+        "order": 2
+    }
+}
