@@ -19,7 +19,7 @@ export const Overview = (): React.ReactElement => {
 			{!error ? (
 				<Grid equalHeight>
 					<GridItem cols={12} md={4} className="mb--d">
-						<Panel>
+						<Panel className="mb--a">
 							<h2>User admin</h2>
 							<p>
 								Find and manage user accounts; includes editing permissions and
@@ -37,7 +37,7 @@ export const Overview = (): React.ReactElement => {
 					</GridItem>
 
 					<GridItem cols={12} md={4} className="mb--d">
-						<Panel>
+						<Panel className="mb--a">
 							<h2>Services admin</h2>
 							<p>
 								Find and manage services and their roles; includes searches for
@@ -55,7 +55,7 @@ export const Overview = (): React.ReactElement => {
 					</GridItem>
 
 					<GridItem cols={12} md={4} className="mb--d">
-						<Panel>
+						<Panel className="mb--a">
 							<h2>Organisation admin</h2>
 							<p>
 								Find and manage organisations; includes viewing and managing

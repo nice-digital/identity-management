@@ -45,9 +45,14 @@ export class AddOrganisation extends Component<
 		document.title = "NICE Accounts - Add organisation";
 	}
 
-	toggleValidationMessage = (blockedOrgNameFound: boolean): string => {
+	toggleValidationMessage = (
+		blockedOrgNameFound: boolean,
+		orgName = "",
+	): string => {
 		return blockedOrgNameFound
-			? "Organisation already exists - name should be unique"
+			? `Cannot add ${
+					orgName || "organisation"
+			  }, that organisation already exists!`
 			: "Organisation name should be alphanumeric and be between 2-100 characters";
 	};
 
@@ -95,8 +100,7 @@ export class AddOrganisation extends Component<
 				orgNameBlockedArray.push(formName);
 				this.setState({
 					validationError: true,
-					validationErrorMessage:
-						"Organisation already exists - name should be unique",
+					validationErrorMessage: `Cannot add ${formName}, that organisation already exists!`,
 					orgNameBlockedArray,
 				});
 			} else {
@@ -119,8 +123,10 @@ export class AddOrganisation extends Component<
 		const isNowValid = formElement.validity.valid
 			? !blockedOrgNameFound
 			: false;
-		const validationErrorMessage =
-			this.toggleValidationMessage(blockedOrgNameFound);
+		const validationErrorMessage = this.toggleValidationMessage(
+			blockedOrgNameFound,
+			e.target.value,
+		);
 		let { validationError } = this.state;
 
 		if (validationError && isNowValid) {

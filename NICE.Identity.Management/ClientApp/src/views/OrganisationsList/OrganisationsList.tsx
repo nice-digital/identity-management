@@ -65,7 +65,7 @@ export const OrganisationsList = (): React.ReactElement => {
 
 	if (outOfRange) {
 		qs.set("page", "1");
-		return <Redirect to={`/organisations2?${qs}`} />;
+		return <Redirect to={`/organisations?${qs}`} />;
 	}
 
 	return (

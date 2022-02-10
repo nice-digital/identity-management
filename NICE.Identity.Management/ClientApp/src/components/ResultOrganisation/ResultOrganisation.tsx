@@ -28,7 +28,7 @@ export const ResultOrganisation = ({
 	const organisationsListMetadata: Array<CardMetaData> = [
 		{
 			label: "Date created",
-			value: Moment(dateAdded).format("DD-MM-YYYY"),
+			value: Moment(dateAdded).format("D MMMM YYYY HH:mm"),
 		},
 	];
 
