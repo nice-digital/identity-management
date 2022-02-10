@@ -3,7 +3,6 @@ import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 import toJson from "enzyme-to-json";
-import { Input } from "@nice-digital/nds-input";
 import { Alert } from "@nice-digital/nds-alert";
 import { EditUser } from "../EditUser";
 import singleUser from "./singleUser.json";
@@ -22,20 +21,22 @@ describe("EditUser", () => {
 
     const consoleErrorReset = console.error;
 
-	beforeEach(() => {
+	beforeEach(() => {		
 		fetch.resetMocks();
 		console.error = consoleErrorReset;
 	});
 
     it("should show loading message before data has been loaded", () => {
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = shallow(<EditUser match={match} />);
+		const wrapper = mount(<MemoryRouter initialEntries={["/users/1/edit"]}><EditUser match={match} /></MemoryRouter>);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
     it("should match the snapshot after data has been loaded", async () => {
+		console.error = jest.fn();
         fetch.mockResponseOnce(JSON.stringify(singleUser));
-        const wrapper = shallow(<EditUser match={match} />);
+        const wrapper = mount(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
         await nextTick();
         wrapper.update();
         expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();

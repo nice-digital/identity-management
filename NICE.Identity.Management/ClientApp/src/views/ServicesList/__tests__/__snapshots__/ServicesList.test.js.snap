@@ -89,6 +89,7 @@ Array [
             autoComplete="off"
             className="input__input"
             data-qa-sel="filter-search-input"
+            defaultValue=""
             id="filter-search"
             name="filter-search"
             onChange={[Function]}
