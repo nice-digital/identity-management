@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { removeQueryParameter } from "../../utils/querystring";
 
 type ItemsPerPageProps = {
 	amount: number | string;
@@ -9,7 +8,7 @@ type ItemsPerPageProps = {
 export const ItemsPerPage = (props: ItemsPerPageProps): React.ReactElement => {
 	const { amount } = props;
 	const history = useHistory();
-	const { search: querystring, pathname } = useLocation();
+	const { search: querystring } = useLocation();
 
 	return (
 		<div className="mr--e" data-qa-sel="number-of-results-on-page">
