@@ -2,7 +2,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
 	? process.env.REACT_APP_API_BASE_URL
 	: "#{REACT_APP_API_BASE_URL}";
 
-const APP_BASE_URL = API_BASE_URL.replace("/api", '');
+const APP_BASE_URL = `${API_BASE_URL}` == 'http://api:8090' ? `${API_BASE_URL}` : API_BASE_URL.replace("/api", '');
 
 export const Endpoints = {
 	usersList: `${API_BASE_URL}/users`, // get all users
