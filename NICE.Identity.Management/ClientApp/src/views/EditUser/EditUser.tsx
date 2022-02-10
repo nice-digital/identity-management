@@ -50,7 +50,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		audienceInsight: null,
 	});
 
-	const doFetch = useFetch(Endpoints.user(id));
+	const doFetch = useFetch();
 
 	useEffect(() => {
 		let isMounted = true;
@@ -58,7 +58,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		(async () => {
 			if (isMounted) {
 				setIsLoading(true);
-				const data = await doFetch<UserType>();
+				const data = await doFetch<UserType>(Endpoints.user(id));
 
 				if (containsError(data)) {
 					const errorObject = data as CustomError;
@@ -79,9 +79,11 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
 						});
 						setIsAD(true);
-					} else if(userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 
-								|| userData.emailAddress.indexOf("@rcp.ac.uk") > -1
-								|| userData.emailAddress.indexOf("@rcog.org.uk") > -1) {
+					} else if (
+						userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
+						userData.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
+						userData.emailAddress.indexOf("@rcog.org.uk") > -1
+					) {
 						setIsEPPI(true);
 					}
 				}
@@ -93,7 +95,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		return () => {
 			isMounted = true;
 		};
-	}, []);
+	}, [doFetch, id]);
 
 	const containsError = (data: Record<string, unknown>) => {
 		return Object.prototype.hasOwnProperty.call(data, "error");
@@ -303,9 +305,10 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 									data-qa-sel="eppi-warning-edit-user"
 								>
 									<p>
-										This user may have access to EPPI R5 - only a professional email 
-										address can be associated to this profile. Please verify via the EPPI
-										user admin page before changing the email address.
+										This user may have access to EPPI R5 - only a professional
+										email address can be associated to this profile. Please
+										verify via the EPPI user admin page before changing the
+										email address.
 									</p>
 								</Alert>
 							)}
