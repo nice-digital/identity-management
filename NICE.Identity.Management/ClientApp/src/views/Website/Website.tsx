@@ -340,9 +340,11 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 														<td>
 															{user.roles
 																.slice(0)
-																.map((roles, index) => (
-																	<div key={index}>{roles.name}</div>
-															))}
+																.map((roles, index) => {
+																	if (this.state.roleFiltersChecked.includes(roles.name) || this.state.roleFiltersChecked.length === 0) {
+																		return <div key={index}>{roles.name}</div>;
+																	}
+																})}
 														</td>
 														<td>
 															{user.user.isStaffMember ? "Yes" : "No"}

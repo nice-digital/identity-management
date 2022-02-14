@@ -134,6 +134,12 @@
                     "hasRole": true,
                     "name": "Administrator",
                     "description": "This user has full access and unrestricted access."
+                },
+                {
+                    "id": 1114,
+                    "hasRole": true,
+                    "name": "ReadOnly",
+                    "description": "This user has only readonly access to IdAM"
                 }
             ]
         }

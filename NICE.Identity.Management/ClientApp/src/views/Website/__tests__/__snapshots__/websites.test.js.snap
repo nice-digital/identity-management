@@ -332,6 +332,9 @@ Array [
               <div>
                 Administrator
               </div>
+              <div>
+                ReadOnly
+              </div>
             </td>
             <td>
               Yes
