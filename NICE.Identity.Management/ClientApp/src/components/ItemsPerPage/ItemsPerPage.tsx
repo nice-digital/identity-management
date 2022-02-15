@@ -1,12 +1,9 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { useListInfo } from "../../helpers/useListInfo";
 
-type ItemsPerPageProps = {
-	amount: number | string;
-};
-
-export const ItemsPerPage = (props: ItemsPerPageProps): React.ReactElement => {
-	const { amount } = props;
+export const ItemsPerPage = (): React.ReactElement => {
+	const { itemsPerPage } = useListInfo();
 	const history = useHistory();
 	const { search: querystring } = useLocation();
 
@@ -19,13 +16,13 @@ export const ItemsPerPage = (props: ItemsPerPageProps): React.ReactElement => {
 				id="itemsPerPage"
 				name="itemsPerPage"
 				onChange={(event) => {
-					const qs = new URLSearchParams(querystring);
-					qs.set("amount", event.target.value);
+					const querystringObject = new URLSearchParams(querystring);
+					querystringObject.set("amount", event.target.value);
 					history.push({
-						search: qs.toString(),
+						search: `${querystringObject}`,
 					});
 				}}
-				value={amount}
+				value={itemsPerPage}
 				data-qa-sel="result-on-the-page-index"
 			>
 				<option value="25">25</option>

@@ -1,15 +1,19 @@
 import { useCallback } from "react";
-import { useLocation } from "react-router-dom";
-import {
-	sortOptions,
-	SortOptions,
-} from "./sortOptions";
+import { useListInfo } from "./useListInfo";
+import { getPaginationRange } from "./getPaginationRange";
+import { SortOptions } from "./sortOptions";
 
 type CustomError = {
 	error: Error;
 	status: number;
 }
-type doFetchType = <T>(url?: string, options?: Record<string, unknown>) => Promise<T | CustomError>;
+
+type DataObject<T> = {
+	data?: T;
+	totalCount?: number;
+};
+
+type doFetchType = <T>(url?: string, options?: Record<string, unknown>, isListPage?: boolean) => Promise<DataObject<T> | CustomError >;
 
 type SortableListEntry = { name: string; dateAdded: string; };
 
@@ -21,10 +25,11 @@ const sortFunctions: Record<SortOptions, (a: SortableListEntry, b: SortableListE
 };
 
 export const useFetch = (): doFetchType => {
-	const { search: querystring } = useLocation();
-	//const { search: querystring } = useListInfo();
+	const listInfo = useListInfo();
 	
-	const doFetch: doFetchType = useCallback(async (url = "", options = {}) => {
+	const doFetch: doFetchType = useCallback(async (url = "", options = {}, isListPage = false) => {
+		const listInfoLoaded = !!Object.keys(listInfo).length;
+		const { pageNumber, itemsPerPage, currentSortOrder } = listInfo;
 		let response, data;
 
 		try {
@@ -34,21 +39,23 @@ export const useFetch = (): doFetchType => {
 			const error = err as Error;
 			const typedErr = err as Record<string, unknown>;
 			console.error(error);
-			return { error, status: typedErr.response };
+			return { error, status: typedErr.response } as CustomError;
 		}
 
 		if (response.status === 200 || response.status === 201) {
-			const qs = new URLSearchParams(querystring);
-			
-			return data.length
-				? data.sort(sortFunctions[qs.get("sort") as SortOptions || "alpha-asc"])
-				: data;
+			if (isListPage && data.length && listInfoLoaded) {
+				const paginationRange = getPaginationRange(pageNumber, itemsPerPage, data.length);
+				const processedData = data.sort(sortFunctions[currentSortOrder as SortOptions || "alpha-asc"])
+					.slice(Number(paginationRange.start) - 1, Number(paginationRange.finish));
+				return { data: processedData, totalCount: data.length };
+			}
+			return { data, totalCount: data.length};
 		} else {
 			const error = new Error(data.message || data.title);
 			console.error(error);
-			return { error, status: data.status };
+			return { error, status: data.status } as CustomError;
 		}
-	}, [querystring]);
+	}, [listInfo]);
 
 	return doFetch;
 };

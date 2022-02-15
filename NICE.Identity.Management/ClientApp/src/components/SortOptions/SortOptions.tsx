@@ -4,6 +4,7 @@ import {
 	sortOptions,
 	SortOptions as AllSortOptions,
 } from "../../helpers/sortOptions";
+import { useListInfo } from "../../helpers/useListInfo";
 
 export type SortOptionsProps = {
 	defaultSortOrder?: AllSortOptions;
@@ -12,19 +13,20 @@ export type SortOptionsProps = {
 export const SortOptions: FC<SortOptionsProps> = ({
 	defaultSortOrder = "alpha-asc",
 }) => {
-	const { search: querystring } = useLocation();
-	const qs = new URLSearchParams(querystring);
-	const currentSortOrder = qs.get("sort") || defaultSortOrder;
+	const { currentSortOrder } = useListInfo();
+	const { search: querystring, pathname } = useLocation();
+	const querystringObject = new URLSearchParams(querystring);
+	const currentSortOrderOrDefault = currentSortOrder || defaultSortOrder;
 
 	return (
 		<ul className="list list--piped">
 			{Object.entries(sortOptions).map((option, index, sortOptions) => {
 				const [key, value] = option;
-				qs.set("sort", key);
+				querystringObject.set("sort", key);
 
 				return (
 					<li key={key}>
-						{key === currentSortOrder ? (
+						{key === currentSortOrderOrDefault ? (
 							<span
 								className={`pv--c ${
 									index === 0
@@ -37,7 +39,10 @@ export const SortOptions: FC<SortOptionsProps> = ({
 								{value}
 							</span>
 						) : (
-							<Link to={`${qs}`} data-qa-sel={`sort-${key}`}>
+							<Link
+								to={`${pathname}?${querystringObject}`}
+								data-qa-sel={`sort-${key}`}
+							>
 								{value}
 							</Link>
 						)}

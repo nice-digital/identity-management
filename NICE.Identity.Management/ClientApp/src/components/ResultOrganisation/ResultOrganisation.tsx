@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import Moment from "moment";
-import { OrganisationType } from "../../models/types";
 import { Card } from "@nice-digital/nds-card";
+import { OrganisationType } from "../../models/types";
 
 type CardMetaData = {
 	label?: string;
@@ -13,9 +13,7 @@ type ResultsOrganisationProps = {
 	item: OrganisationType;
 };
 
-export const ResultOrganisation = ({
-	item,
-}: ResultsOrganisationProps): React.ReactElement => {
+export const ResultOrganisation: FC<ResultsOrganisationProps> = ({ item }) => {
 	const { id, name, dateAdded } = item;
 	const organisationsListHeading = {
 		headingText: `${name}`,

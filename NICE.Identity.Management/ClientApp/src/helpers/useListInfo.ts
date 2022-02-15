@@ -1,39 +1,44 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { getPaginationRange } from "./getPaginationRange";
 
-type ListInfoType = {
-    pageNumber: number;
-    itemsPerPage: string | number;
-    totalPages: number;
-    outOfRange: boolean;
-    paginationStart: number;
-    paginationFinish: number;
+type UseListInfoType = (dataLength?: number | null) => {
+    pageNumber: number,
+    itemsPerPage: string | number,
+    totalPages: number | null,
+    outOfRange: boolean | null,
+    paginationStart: number | null,
+    paginationFinish: number | null,
+	searchQuery: string,
+	currentSortOrder: string,
 };
 
-export const useListInfo = (dataLength: number) => {
-  const [data, setData] = useState<ListInfoType>(Object);
-  const { search: querystring } = useLocation();
-  
-  useEffect(() => {
-    const qs = new URLSearchParams(querystring);
-	const { page, amount, q: searchQuery } = Object.fromEntries(qs);
+export const useListInfo: UseListInfoType = (dataLength) => {
+	const [data, setData] = useState(Object);
+	const { search: querystring } = useLocation();
 
-    const pageNumber = Number(page) || 1;
-	const showAllItemsPerPage = amount === "all";
-	const itemsPerPage = showAllItemsPerPage ? "all" : Number(amount) || 25;
-	const totalPages = showAllItemsPerPage ? 1 : Math.ceil(dataLength / Number(itemsPerPage));
-	const outOfRange = pageNumber > 0 && pageNumber <= totalPages ? false : true;
+	useEffect(() => {
+		const querystringObject = new URLSearchParams(querystring);
+		const { page, amount, sort, q: searchQuery } = Object.fromEntries(querystringObject);
+		
+		const pageNumber = Number(page) || 1;
+		const showAllItemsPerPage = amount === "all";
+		const itemsPerPage = showAllItemsPerPage ? "all" : Number(amount) || 25;
+		const currentSortOrder = sort;
+		
+		let totalPages = null;
+		let paginationStart = null;
+		let paginationFinish = null;
+		
+		if (dataLength) {
+			({ start: paginationStart, finish: paginationFinish } = getPaginationRange(pageNumber, itemsPerPage, dataLength));
+			totalPages = showAllItemsPerPage ? 1 : Math.ceil(dataLength / Number(itemsPerPage));
+		}
+		
+		const outOfRange = totalPages ? pageNumber < 0 || pageNumber > totalPages : null;
 
-	let paginationStart = 0;
-	let paginationFinish = dataLength;
+		setData({ pageNumber, itemsPerPage, totalPages, outOfRange, paginationStart, paginationFinish, searchQuery, currentSortOrder });
+	}, [querystring, dataLength]);
 
-	if (Number(itemsPerPage)) {
-		paginationStart = pageNumber * Number(itemsPerPage) - (Number(itemsPerPage) - 1);
-		paginationFinish = pageNumber * Number(itemsPerPage);
-	}
-
-    setData({ pageNumber, itemsPerPage, totalPages, outOfRange, paginationStart, paginationFinish });
-  }, [querystring, dataLength]);
-
-  return data;
+	return data;
 };

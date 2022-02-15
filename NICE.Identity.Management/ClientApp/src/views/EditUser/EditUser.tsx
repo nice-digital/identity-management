@@ -21,6 +21,10 @@ type CustomError = {
 	error: Error;
 	status: number;
 };
+type DataObjectType = {
+	data: UserType;
+	totalCount: number;
+};
 type FormDataType = Record<string, string | boolean | null>;
 
 export const EditUser = (props: EditUserProps): React.ReactElement => {
@@ -58,13 +62,13 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		(async () => {
 			if (isMounted) {
 				setIsLoading(true);
-				const data = await doFetch<UserType>(Endpoints.user(id));
+				const dataObject = await doFetch<UserType>(Endpoints.user(id));
 
-				if (containsError(data)) {
-					const errorObject = data as CustomError;
+				if (containsError(dataObject)) {
+					const errorObject = dataObject as CustomError;
 					setError(errorObject.error);
 				} else {
-					const userData = data as UserType;
+					const userData = (dataObject as DataObjectType).data;
 					const updatedFormData = {
 						emailAddress: userData.emailAddress,
 						firstName: userData.firstName,
@@ -158,13 +162,17 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			}),
 		};
 
-		const data = await doFetch<UserType>(Endpoints.user(id), fetchOptions);
+		const dataObject = await doFetch<UserType>(
+			Endpoints.user(id),
+			fetchOptions,
+		);
 
-		if (!containsError(data)) {
-			setUser(data as UserType);
+		if (!containsError(dataObject)) {
+			const userData = (dataObject as DataObjectType).data;
+			setUser(userData);
 			setRedirect(true);
 		} else {
-			const errorObject = data as CustomError;
+			const errorObject = dataObject as CustomError;
 
 			if (errorObject.status === 422) {
 				validationErrors["emailAddress"] = true;

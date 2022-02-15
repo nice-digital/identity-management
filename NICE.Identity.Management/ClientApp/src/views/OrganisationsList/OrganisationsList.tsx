@@ -12,12 +12,10 @@ import { PageHeader } from "@nice-digital/nds-page-header";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
 import { ResultsList } from "../../components/ResultsList/ResultsList";
-import {
-	SortOptions,
-	SortOptionsProps,
-} from "../../components/SortOptions/SortOptions";
+import { SortOptions } from "../../components/SortOptions/SortOptions";
 import { ItemsPerPage } from "../../components/ItemsPerPage/ItemsPerPage";
 import { ResultOrganisation } from "../../components/ResultOrganisation/ResultOrganisation";
+import { PaginationText } from "../../components/PaginationText/PaginationText";
 
 import styles from "./OrganisationsList.module.scss";
 
@@ -26,32 +24,39 @@ type CustomError = {
 	status: number;
 };
 
-export const OrganisationsList = (): React.ReactElement => {
+type DataObjectType = {
+	data: Array<OrganisationType>;
+	totalCount: number;
+};
+
+export const OrganisationsList: FC = () => {
 	const [organisations, setOrganisations] =
 		useState<Array<OrganisationType>>(Object);
+	const [organisationsCount, setOrganisationsCount] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
-	const { pageNumber, itemsPerPage, totalPages, outOfRange } = useListInfo(
-		isLoading ? 0 : organisations.length,
-	);
-	const { search: querystring } = useLocation();
-	const qs = new URLSearchParams(querystring);
-	const { q: searchQuery } = Object.fromEntries(qs);
+	const { pageNumber, totalPages, outOfRange, searchQuery } =
+		useListInfo(organisationsCount);
 	const doFetch = useFetch();
+	const { search: querystring } = useLocation();
+	const querystringObject = new URLSearchParams(querystring);
 
 	useEffect(() => {
 		setIsLoading(true);
 		(async () => {
-			const data = await doFetch<Array<OrganisationType>>(
+			const dataObject = await doFetch<DataObjectType | CustomError>(
 				`${Endpoints.organisationsList}?q=${searchQuery || ""}`,
+				{},
+				true,
 			);
 
-			if (containsError(data)) {
-				const errorObject = data as CustomError;
+			if (containsError(dataObject)) {
+				const errorObject = dataObject as CustomError;
 				setError(errorObject.error);
 			} else {
-				const organisationsData = data as Array<OrganisationType>;
-				setOrganisations(organisationsData);
+				const organisationsData = dataObject as unknown;
+				setOrganisations((organisationsData as DataObjectType).data);
+				setOrganisationsCount((organisationsData as DataObjectType).totalCount);
 			}
 			setIsLoading(false);
 		})();
@@ -64,8 +69,8 @@ export const OrganisationsList = (): React.ReactElement => {
 	};
 
 	if (outOfRange) {
-		qs.set("page", "1");
-		return <Redirect to={`/organisations?${qs}`} />;
+		querystringObject.set("page", "1");
+		return <Redirect to={`/organisations?${querystringObject}`} />;
 	}
 
 	return (
@@ -101,24 +106,30 @@ export const OrganisationsList = (): React.ReactElement => {
 								<div className="text-right">
 									<SortOptions />
 								</div>
-								<PaginationText dataLength={organisations.length} />
+								<PaginationText
+									dataLength={organisationsCount}
+									labelSingular="organisation"
+									labelPlural="organisations"
+								/>
 								<ResultsList
 									data={organisations}
 									elementType={ResultOrganisation}
 									qaSelExtract="organisations"
 								/>
 								<div className={`${styles.flex} ${styles.flexSpaceBetween}`}>
-									<ItemsPerPage amount={itemsPerPage} />
+									<ItemsPerPage />
 									<EnhancedPagination
 										currentPage={pageNumber}
 										elementType={Link}
 										method="to"
 										mapPageNumberToHref={(pageNumber) => {
-											const qs = new URLSearchParams(querystring);
-											qs.set("page", pageNumber.toString());
-											return `?${qs}`;
+											const querystringObject = new URLSearchParams(
+												querystring,
+											);
+											querystringObject.set("page", pageNumber.toString());
+											return `?${querystringObject}`;
 										}}
-										totalPages={totalPages}
+										totalPages={totalPages || 1}
 									/>
 								</div>
 							</>
@@ -133,25 +144,5 @@ export const OrganisationsList = (): React.ReactElement => {
 				<ErrorMessage error={error}></ErrorMessage>
 			)}
 		</>
-	);
-};
-
-type PaginationTextProps = { dataLength: number };
-
-export const PaginationText: FC<PaginationTextProps> = ({ dataLength }) => {
-	const { paginationStart, paginationFinish, itemsPerPage } =
-		useListInfo(dataLength);
-
-	return (
-		<h2
-			className={styles.organisationsListSummary}
-			data-qa-sel="organisations-returned"
-		>
-			{`Showing ${
-				dataLength > itemsPerPage
-					? `${paginationStart} to ${paginationFinish} of `
-					: ""
-			}${dataLength} organisation${dataLength === 1 ? "" : "s"}`}
-		</h2>
 	);
 };
