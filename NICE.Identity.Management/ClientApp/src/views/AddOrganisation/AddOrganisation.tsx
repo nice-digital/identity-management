@@ -20,7 +20,6 @@ type AddOrganisationState = {
 	formName: string;
 	validationError: boolean;
 	validationErrorMessage: string;
-	orgNameBlockedArray: Array<string>;
 	hasSubmitted: boolean;
 	error?: Error;
 	isSaveButtonLoading: boolean;
@@ -37,7 +36,6 @@ export class AddOrganisation extends Component<
 			validationError: false,
 			validationErrorMessage:
 				"Organisation name should be alphanumeric and be between 2-100 characters",
-			orgNameBlockedArray: [],
 			hasSubmitted: false,
 			isSaveButtonLoading: false,
 		};
@@ -49,10 +47,9 @@ export class AddOrganisation extends Component<
 		blockedOrgNameFound: boolean,
 		orgName = "",
 	): string => {
+		const orgNameOrDefault = orgName || "organisation";
 		return blockedOrgNameFound
-			? `Cannot add ${
-					orgName || "organisation"
-			  }, that organisation already exists!`
+			? `Cannot add ${orgNameOrDefault}, that organisation already exists!`
 			: "Organisation name should be alphanumeric and be between 2-100 characters";
 	};
 
@@ -62,14 +59,10 @@ export class AddOrganisation extends Component<
 		e.preventDefault();
 		this.setState({ isSaveButtonLoading: true });
 
+		const { formName, validationError } = this.state;
 		const form = e.currentTarget;
-		const blockedOrgNameFound = this.state.orgNameBlockedArray.includes(
-			this.state.formName,
-		);
-		let hasSubmitted = true;
-		let formName = "";
 
-		if (!form.checkValidity() || blockedOrgNameFound) {
+		if (!form.checkValidity() || validationError) {
 			this.setState({ validationError: true, isSaveButtonLoading: false });
 			return false;
 		}
@@ -78,7 +71,7 @@ export class AddOrganisation extends Component<
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				name: this.state.formName,
+				name: formName,
 			}),
 		};
 
@@ -89,44 +82,19 @@ export class AddOrganisation extends Component<
 		);
 
 		if (isDataError(organisation)) {
-			const errorObject = organisation as CustomError;
-
-			if (
-				errorObject.dataMessage.indexOf("that organisation already exists") > -1
-			) {
-				const orgNameBlockedArray = [...this.state.orgNameBlockedArray];
-				hasSubmitted = false;
-				formName = this.state.formName;
-				orgNameBlockedArray.push(formName);
-				this.setState({
-					validationError: true,
-					validationErrorMessage: `Cannot add ${formName}, that organisation already exists!`,
-					orgNameBlockedArray,
-				});
-			} else {
-				this.setState({ error: organisation });
-			}
+			this.setState({ error: organisation });
 		}
 
 		this.setState({
 			isSaveButtonLoading: false,
-			hasSubmitted,
-			formName,
+			hasSubmitted: true,
+			formName: "",
 		});
 	};
 
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const formElement = e.target;
-		const blockedOrgNameFound = this.state.orgNameBlockedArray.includes(
-			e.target.value,
-		);
-		const isNowValid = formElement.validity.valid
-			? !blockedOrgNameFound
-			: false;
-		const validationErrorMessage = this.toggleValidationMessage(
-			blockedOrgNameFound,
-			e.target.value,
-		);
+		const isNowValid = formElement.validity.valid;
 		let { validationError } = this.state;
 
 		if (validationError && isNowValid) {
@@ -136,28 +104,45 @@ export class AddOrganisation extends Component<
 		this.setState({
 			formName: e.target.value,
 			validationError,
-			validationErrorMessage,
 		});
 	};
 
-	handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	handleBlur = async (
+		e: React.ChangeEvent<HTMLInputElement>,
+	): Promise<void> => {
 		const formElement = e.target;
-		const blockedOrgNameFound = this.state.orgNameBlockedArray.includes(
-			this.state.formName,
-		);
+		const formName = this.state.formName.trim();
+		let fetchOrgName;
+		let fetchedOrgNameFound = false;
+
+		if (formElement.validity.valid) {
+			fetchOrgName = await fetchData(
+				`${Endpoints.organisationsList}?q=${formName}`,
+			);
+
+			fetchedOrgNameFound = fetchOrgName.length
+				? fetchOrgName.some((org: any) => org.name === formName)
+				: fetchedOrgNameFound;
+		}
+
 		const isNowValid = formElement.validity.valid
-			? !blockedOrgNameFound
+			? !fetchedOrgNameFound
 			: false;
 
-		this.setState({ validationError: !isNowValid });
+		const validationErrorMessage = this.toggleValidationMessage(
+			fetchedOrgNameFound,
+			formName,
+		);
+
+		this.setState({
+			validationError: !isNowValid,
+			validationErrorMessage,
+			formName,
+		});
 	};
 
 	render(): JSX.Element {
 		const { formName, hasSubmitted, error, isSaveButtonLoading } = this.state;
-
-		// if (hasSubmitted) {
-		// 	return <Redirect to="/organisations" />;
-		// }
 
 		return (
 			<>

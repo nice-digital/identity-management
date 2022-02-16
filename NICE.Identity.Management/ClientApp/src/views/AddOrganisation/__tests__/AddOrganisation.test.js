@@ -6,6 +6,7 @@ import { nextTick } from "../../../utils/nextTick";
 import { Alert } from "@nice-digital/nds-alert";
 import { AddOrganisation } from "../AddOrganisation";
 import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
+import organisations from "./organisations.json";
 
 describe("AddOrganisation", () => {
 	const consoleErrorReset = console.error;
@@ -122,8 +123,7 @@ describe("AddOrganisation", () => {
 
 	it("should show validation error when org name is in use already", async () => {
 		console.error = jest.fn();
-		const duplicateMessage = "Failed to create organisation Org One - exception: Cannot add Org One, that organisation already exists";
-		fetch.mockResponseOnce(JSON.stringify({ title: duplicateMessage }),  { status: 500 });
+		fetch.mockResponseOnce(JSON.stringify(organisations));
 		const wrapper = mount(
 			<MemoryRouter>
 				<AddOrganisation />
@@ -132,20 +132,21 @@ describe("AddOrganisation", () => {
 		wrapper.find("#orgName").prop("onChange")({
 			target: {
 				name: "orgName",
-				value: "Org One",
+				value: "Org 1",
 				validity: { valid: true }
 			}
 		});
-		wrapper.find("form").prop("onSubmit")({
-			preventDefault: () => false, 
-			currentTarget: { 
-				checkValidity: () => true
-			},
+		wrapper.find("#orgName").prop("onBlur")({
+			target: {
+				name: "orgName",
+				value: "Org 1",
+				validity: { valid: true }
+			}
 		});
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find({ label: "Organisation name" }).prop("error")).toEqual(true);
-		expect(wrapper.find({ label: "Organisation name" }).prop("errorMessage")).toBe("Organisation already exists - name should be unique");
+		expect(wrapper.find({ label: "Organisation name" }).prop("errorMessage")).toBe("Cannot add Org 1, that organisation already exists!");
 	});
 
 });
