@@ -911,5 +911,21 @@
       "isInAuthenticationProvider": true
     }
   ],
-  "verificationemail": [{ "verificationemail": 1 }]
+  "verificationemail": [{ "verificationemail": 1 }],
+
+  "accountstatus":
+  {
+    "isAuthenticated":true,
+    "displayName":"commenttestuser+5@gmail.com",
+    "links":[
+       {
+          "Key":"Sign out",
+          "Value":"/account/logout"
+       },
+       {
+          "Key":"Health checks",
+          "Value":"/healthchecks-ui"
+       }
+    ]
+  }
 }
