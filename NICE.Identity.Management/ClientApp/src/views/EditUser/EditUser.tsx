@@ -57,48 +57,39 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const doFetch = useFetch();
 
 	useEffect(() => {
-		let isMounted = true;
-
+		setIsLoading(true);
 		(async () => {
-			if (isMounted) {
-				setIsLoading(true);
-				const dataObject = await doFetch<UserType>(Endpoints.user(id));
+			const dataObject = await doFetch<UserType>(Endpoints.user(id));
 
-				if (containsError(dataObject)) {
-					const errorObject = dataObject as CustomError;
-					setError(errorObject.error);
-				} else {
-					const userData = (dataObject as DataObjectType).data;
-					const updatedFormData = {
-						emailAddress: userData.emailAddress,
-						firstName: userData.firstName,
-						lastName: userData.lastName,
-						audienceInsight: userData.allowContactMe,
-					};
-					setUser(userData);
-					setFormData(updatedFormData);
+			if (containsError(dataObject)) {
+				const errorObject = dataObject as CustomError;
+				setError(errorObject.error);
+			} else {
+				const userData = (dataObject as DataObjectType).data;
+				const updatedFormData = {
+					emailAddress: userData.emailAddress,
+					firstName: userData.firstName,
+					lastName: userData.lastName,
+					audienceInsight: userData.allowContactMe,
+				};
+				setUser(userData);
+				setFormData(updatedFormData);
 
-					if (userData.emailAddress.indexOf("@nice.org.uk") > -1) {
-						setEmailBlockedPattern({
-							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
-						});
-						setIsAD(true);
-					} else if (
-						userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
-						userData.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
-						userData.emailAddress.indexOf("@rcog.org.uk") > -1
-					) {
-						setIsEPPI(true);
-					}
+				if (userData.emailAddress.indexOf("@nice.org.uk") > -1) {
+					setEmailBlockedPattern({
+						pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
+					});
+					setIsAD(true);
+				} else if (
+					userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
+					userData.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
+					userData.emailAddress.indexOf("@rcog.org.uk") > -1
+				) {
+					setIsEPPI(true);
 				}
-
-				setIsLoading(false);
 			}
+			setIsLoading(false);
 		})();
-
-		return () => {
-			isMounted = true;
-		};
 	}, [doFetch, id]);
 
 	const containsError = (data: Record<string, unknown>) => {
