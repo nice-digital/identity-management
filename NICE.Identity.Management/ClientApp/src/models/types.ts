@@ -98,4 +98,5 @@ export type WebsiteUsersAndRolesType = {
 	websiteId: number;
 	website: WebsiteType;
 	usersAndRoles: Array<UserAndRolesType>;
+	allRoles: Array<RoleType>;
 };

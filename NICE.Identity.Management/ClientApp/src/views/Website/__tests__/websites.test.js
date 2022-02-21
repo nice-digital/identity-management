@@ -90,12 +90,21 @@ describe("Website", () => {
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 	});
 
-    it("should show no results message when fetch returns an empty array", async () => {
-		fetch.mockResponseOnce(JSON.stringify(emptyUsersAndRoles));
-		const wrapper = shallow(<Website {...websiteProps} />);
+    it("should show no results message when filter returns 0 results", async () => {
+		fetch.mockResponseOnce(JSON.stringify(usersAndRoles));
+		const wrapper = mount(
+			<MemoryRouter>
+				<Website {...websiteProps} />
+			</MemoryRouter>,
+		);
 		await nextTick();
 		wrapper.update();
-		expect(wrapper.find("p").text()).toEqual("No results found");
+		wrapper.find("#filter_roles_owner").simulate("change", {
+			target: { value: "Owner" },
+		});
+		await nextTick();
+		wrapper.update();
+		expect(wrapper.find("td").text()).toEqual("0 results found");
 	});
 
     it("should filter users to all in admins when checkbox is clicked", async () => {

@@ -39,6 +39,12 @@
                     "hasRole": true,
                     "name": "ReadOnly",
                     "description": "This user has only readonly access to IdAM"
+                },
+                {
+                    "id": 108,
+                    "hasRole": true,
+                    "name": "Administrator",
+                    "description": "This user has full access and unrestricted access."
                 }
             ]
         },
@@ -130,16 +136,22 @@
             },
             "roles": [
                 {
-                    "id": 108,
+                    "id": 1113,
                     "hasRole": true,
-                    "name": "Administrator",
-                    "description": "This user has full access and unrestricted access."
+                    "name": "Editor",
+                    "description": "This user can edit Idam permissions"
                 },
                 {
                     "id": 1114,
                     "hasRole": true,
                     "name": "ReadOnly",
                     "description": "This user has only readonly access to IdAM"
+                },
+                {
+                    "id": 1116,
+                    "websiteId": 59,
+                    "name": "Creator",
+                    "description": "This user can create roles"
                 }
             ]
         }
@@ -182,5 +194,37 @@
         "id": 6,
         "name": "Live",
         "order": 0
-    }
+    },
+    "allRoles": [
+        {
+            "id": 108,
+            "websiteId": 59,
+            "name": "Administrator",
+            "description": "This user has full access and unrestricted access."
+        },
+        {
+            "id": 1113,
+            "websiteId": 59,
+            "name": "Editor",
+            "description": "This user can edit Idam permissions"
+        },
+        {
+            "id": 1114,
+            "websiteId": 59,
+            "name": "ReadOnly",
+            "description": "This user has only readonly access to IdAM"
+        },
+        {
+            "id": 1115,
+            "websiteId": 59,
+            "name": "Owner",
+            "description": "This user owns IdAM"
+        },
+        {
+            "id": 1116,
+            "websiteId": 59,
+            "name": "Creator",
+            "description": "This user can create roles"
+        }
+    ]
 }

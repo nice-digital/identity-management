@@ -10,7 +10,7 @@ import { Grid, GridItem } from "@nice-digital/nds-grid";
 
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
-import { UserAndRolesType, WebsiteUsersAndRolesType } from "../../models/types";
+import { RoleType, UserAndRolesType, WebsiteUsersAndRolesType } from "../../models/types";
 import { Endpoints } from "../../data/endpoints";
 import { FilterBox } from "../../components/FilterBox/FilterBox";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
@@ -26,6 +26,7 @@ type WebsiteState = {
 	path: string;
 	websiteUsersAndRoles: WebsiteUsersAndRolesType;
 	usersAndRoles: Array<UserAndRolesType>;
+	allRoles: Array<RoleType>;
 	error?: Error;
 	redirect: boolean;
 	isLoading: boolean;
@@ -63,6 +64,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			path: "",
 			websiteUsersAndRoles: {} as WebsiteUsersAndRolesType,
 			usersAndRoles: [],
+			allRoles: [],
 			redirect: false,
 			isLoading: true,
 			pageNumber: pageNumber,
@@ -81,15 +83,12 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			this.setState({ error: websiteUsersAndRoles });
 		} else {
 			const allRoles: Array<string> = []
-			websiteUsersAndRoles.usersAndRoles
+			websiteUsersAndRoles.allRoles
 				.slice(0)
-				.map((user: UserAndRolesType) => {
-					user.roles
-						.slice(0)
-						.map((roles) => {
-							allRoles.push(roles.name)
-						})
+				.map((role: RoleType) => {
+					allRoles.push(role.name)
 				});	
+				
 			
 			const rolesForFilter = allRoles.reduce(function (
 				accumulatedRoles: string[],
@@ -102,6 +101,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			},
 			[]);
 
+			rolesForFilter.sort();
 			this.setState({ rolesForFilter });
 
 			document.title = `NICE Accounts - ${websiteUsersAndRoles.website.host}`;
@@ -115,19 +115,25 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 		usersAndRoles: Array<UserAndRolesType>
 	): Array<UserAndRolesType> => {
 		const usersfilteredByRoles: Array<UserAndRolesType> = []
+		let currentUsersRoles: Array<string> = []
 
 		usersAndRoles
 			.slice(0)
 			.map((user: UserAndRolesType) => {
+				currentUsersRoles = []
 				user.roles
 					.slice(0)
 					.map((role) => {
-						if (roleFiltersChecked.includes(role.name)) {
-							if (usersfilteredByRoles.indexOf(user) === -1) {
-								usersfilteredByRoles.push(user)
-							}
-						}
+						currentUsersRoles.push(role.name)
 					})
+
+					const matchesFilter = roleFiltersChecked.every(element => {
+						return currentUsersRoles.includes(element)
+					});
+
+					if (matchesFilter) {
+						usersfilteredByRoles.push(user)
+					}
 			});	
 
 		return usersfilteredByRoles
@@ -291,7 +297,17 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
         return(
             <>
 				<Breadcrumbs>
-					<Breadcrumb to="/overview" elementType={Link}>
+					<Breadcrumb
+							data-qa-sel="breadcrumb-administration-link"
+							to="/"
+							elementType={Link}
+						>
+						Administration
+					</Breadcrumb>
+					<Breadcrumb data-qa-sel="breadcrumb-service-link"
+						to="/services" 
+						elementType={Link}
+						>
 						Services
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
@@ -304,7 +320,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 
 						{isLoading ? (
 							<p>Loading...</p>
-						) : usersAndRoles.length ?  (
+						) : (
 							<Grid>
 								<GridItem cols={12} md={3}>
 									<FilterBox
@@ -327,7 +343,8 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 											</tr>
 										</thead>
 										<tbody>
-											{usersPaginated
+										{usersAndRoles.length ?  (
+											usersPaginated
 												.slice(0)
 												.map((user) => (
 													<tr key={user.user.nameIdentifier} className="userRecord">
@@ -350,7 +367,12 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 															{user.user.isStaffMember ? "Yes" : "No"}
 														</td>
 													</tr>
-											))}
+											))
+										) : (
+											<tr>
+												<td colSpan={4}>0 results found</td>
+											</tr>
+										)}
 										</tbody>
 									</Table>
 									<Pagination
@@ -362,8 +384,6 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 									/>
 								</GridItem>
 							</Grid>
-						) : (	
-							<p>No results found</p>
 						)}
 					</>
 				) : (
