@@ -11,11 +11,6 @@ import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 
-type CustomError = {
-	error: Error;
-	dataMessage: string;
-};
-
 type AddOrganisationState = {
 	formName: string;
 	validationError: boolean;
