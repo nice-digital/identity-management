@@ -1,25 +1,23 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { getPaginationRange } from "./getPaginationRange";
 
-type UseListInfoType = (dataLength?: number | null) => {
+type ListInfo = {
     pageNumber: number,
     itemsPerPage: string | number,
     totalPages: number | null,
     outOfRange: boolean | null,
     paginationStart: number | null,
     paginationFinish: number | null,
-	searchQuery: string,
-	currentSortOrder: string,
+	searchQuery: string | null,
+	currentSortOrder: string | null,
 };
 
-export const useListInfo: UseListInfoType = (dataLength) => {
-	const [data, setData] = useState(Object);
+export const useListInfo = (dataLength?: number): ListInfo => {
 	const { search: querystring } = useLocation();
-
-	useEffect(() => {
-		const querystringObject = new URLSearchParams(querystring);
-		const { page, amount, sort, q: searchQuery } = Object.fromEntries(querystringObject);
+	
+	return useMemo<ListInfo>(() => {
+		const { page, amount, sort, q: searchQuery } = Object.fromEntries(new URLSearchParams(querystring));
 		
 		const pageNumber = Number(page) || 1;
 		const showAllItemsPerPage = amount === "all";
@@ -37,8 +35,6 @@ export const useListInfo: UseListInfoType = (dataLength) => {
 		
 		const outOfRange = totalPages ? pageNumber < 0 || pageNumber > totalPages : null;
 
-		setData({ pageNumber, itemsPerPage, totalPages, outOfRange, paginationStart, paginationFinish, searchQuery, currentSortOrder });
+		return { pageNumber, itemsPerPage, totalPages, outOfRange, paginationStart, paginationFinish, searchQuery, currentSortOrder };
 	}, [querystring, dataLength]);
-
-	return data;
 };

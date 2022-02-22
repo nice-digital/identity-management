@@ -8,7 +8,7 @@ import { FormGroup } from "@nice-digital/nds-form-group";
 import { Input } from "@nice-digital/nds-input";
 import { Radio } from "@nice-digital/nds-radio";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { useFetch } from "../../helpers/useFetch";
+import { useFetch, isError, CustomError } from "../../helpers/useFetch";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
@@ -17,14 +17,6 @@ import "@nice-digital/nds-radio/scss/radio.scss";
 
 type TParams = { id: string };
 type EditUserProps = Record<string, unknown> & RouteComponentProps<TParams>;
-type CustomError = {
-	error: Error;
-	status: number;
-};
-type DataObjectType = {
-	data: UserType;
-	totalCount: number;
-};
 type FormDataType = Record<string, string | boolean | null>;
 
 export const EditUser = (props: EditUserProps): React.ReactElement => {
@@ -59,31 +51,29 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	useEffect(() => {
 		setIsLoading(true);
 		(async () => {
-			const dataObject = await doFetch<UserType>(Endpoints.user(id));
+			const data = await doFetch<UserType>(Endpoints.user(id));
 
-			if (containsError(dataObject)) {
-				const errorObject = dataObject as CustomError;
-				setError(errorObject.error);
+			if (isError(data)) {
+				setError(data.error);
 			} else {
-				const userData = (dataObject as DataObjectType).data;
 				const updatedFormData = {
-					emailAddress: userData.emailAddress,
-					firstName: userData.firstName,
-					lastName: userData.lastName,
-					audienceInsight: userData.allowContactMe,
+					emailAddress: data.emailAddress,
+					firstName: data.firstName,
+					lastName: data.lastName,
+					audienceInsight: data.allowContactMe,
 				};
-				setUser(userData);
+				setUser(data);
 				setFormData(updatedFormData);
 
-				if (userData.emailAddress.indexOf("@nice.org.uk") > -1) {
+				if (data.emailAddress.indexOf("@nice.org.uk") > -1) {
 					setEmailBlockedPattern({
 						pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
 					});
 					setIsAD(true);
 				} else if (
-					userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
-					userData.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
-					userData.emailAddress.indexOf("@rcog.org.uk") > -1
+					data.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
+					data.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
+					data.emailAddress.indexOf("@rcog.org.uk") > -1
 				) {
 					setIsEPPI(true);
 				}
@@ -153,17 +143,14 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 			}),
 		};
 
-		const dataObject = await doFetch<UserType>(
-			Endpoints.user(id),
-			fetchOptions,
-		);
+		const data = await doFetch<UserType>(Endpoints.user(id), fetchOptions);
 
-		if (!containsError(dataObject)) {
-			const userData = (dataObject as DataObjectType).data;
+		if (!containsError(data)) {
+			const userData = data as UserType;
 			setUser(userData);
 			setRedirect(true);
 		} else {
-			const errorObject = dataObject as CustomError;
+			const errorObject = data as CustomError;
 
 			if (errorObject.status === 422) {
 				validationErrors["emailAddress"] = true;

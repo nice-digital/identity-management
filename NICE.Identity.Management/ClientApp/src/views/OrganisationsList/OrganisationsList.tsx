@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { useFetch } from "../../helpers/useFetch";
+import { useListFetch, isError } from "../../helpers/useListFetch";
 import { useListInfo } from "../../helpers/useListInfo";
 import { Endpoints } from "../../data/endpoints";
 import { OrganisationType } from "../../models/types";
@@ -19,16 +19,6 @@ import { PaginationText } from "../../components/PaginationText/PaginationText";
 
 import styles from "./OrganisationsList.module.scss";
 
-type CustomError = {
-	error: Error;
-	status: number;
-};
-
-type DataObjectType = {
-	data: Array<OrganisationType>;
-	totalCount: number;
-};
-
 export const OrganisationsList: FC = () => {
 	const [organisations, setOrganisations] =
 		useState<Array<OrganisationType>>(Object);
@@ -37,36 +27,26 @@ export const OrganisationsList: FC = () => {
 	const [error, setError] = useState<Error | null>(null);
 	const { pageNumber, totalPages, outOfRange, searchQuery } =
 		useListInfo(organisationsCount);
-	const doFetch = useFetch();
+	const listFetch = useListFetch<OrganisationType>();
 	const { search: querystring } = useLocation();
 	const querystringObject = new URLSearchParams(querystring);
 
 	useEffect(() => {
 		setIsLoading(true);
 		(async () => {
-			const dataObject = await doFetch<DataObjectType | CustomError>(
+			const listData = await listFetch(
 				`${Endpoints.organisationsList}?q=${searchQuery || ""}`,
-				{},
-				true,
 			);
 
-			if (containsError(dataObject)) {
-				const errorObject = dataObject as CustomError;
-				setError(errorObject.error);
+			if (isError(listData)) {
+				setError(listData.error);
 			} else {
-				const organisationsData = dataObject as unknown;
-				setOrganisations((organisationsData as DataObjectType).data);
-				setOrganisationsCount((organisationsData as DataObjectType).totalCount);
+				setOrganisations(listData.items);
+				setOrganisationsCount(listData.totalCount);
 			}
 			setIsLoading(false);
 		})();
-	}, [searchQuery, doFetch]);
-
-	const containsError = (
-		data: Array<Record<string, unknown>> | Record<string, unknown>,
-	) => {
-		return Object.prototype.hasOwnProperty.call(data, "error");
-	};
+	}, [searchQuery, listFetch]);
 
 	if (outOfRange) {
 		querystringObject.set("page", "1");
