@@ -37,7 +37,6 @@ type WebsiteState = {
 	usersAndRoles: Array<UserAndRolesType>;
 	allRoles: Array<RoleType>;
 	error?: Error;
-	redirect: boolean;
 	isLoading: boolean;
 	pageNumber: number;
 	itemsPerPage: number | string;
@@ -74,7 +73,6 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			websiteUsersAndRoles: {} as WebsiteUsersAndRolesType,
 			usersAndRoles: [],
 			allRoles: [],
-			redirect: false,
 			isLoading: true,
 			pageNumber: pageNumber,
 			itemsPerPage: itemsPerPage,
@@ -218,7 +216,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 		pageNumber: number,
 		itemsPerPage: number | string,
 	): { start: number; finish: number } => {
-		const paginationPositions = {
+		const paginatePositions = {
 			start: 0,
 			finish: userCount,
 		};
@@ -226,14 +224,14 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 		const itemAmountIsNumber = Number(itemsPerPage);
 
 		if (itemAmountIsNumber) {
-			paginationPositions.start = (pageNumber - 1) * itemAmountIsNumber;
-			paginationPositions.finish =
-				paginationPositions.start + itemAmountIsNumber <= userCount
-					? paginationPositions.start + itemAmountIsNumber
+			paginatePositions.start = (pageNumber - 1) * itemAmountIsNumber;
+			paginatePositions.finish =
+				paginatePositions.start + itemAmountIsNumber <= userCount
+					? paginatePositions.start + itemAmountIsNumber
 					: userCount;
 		}
 
-		return paginationPositions;
+		return paginatePositions;
 	};
 
 	changeAmount = (e: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -293,7 +291,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			? "Loading service details"
 			: websiteUsersAndRoles.website?.service?.name;
 
-		const paginationPositions = this.getPaginateStartAndFinishPosition(
+		const paginatePositions = this.getPaginateStartAndFinishPosition(
 			usersAndRoles?.length,
 			pageNumber,
 			itemsPerPage,
@@ -301,15 +299,12 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 
 		const paginationText = this.getPaginationText(
 			usersAndRoles?.length,
-			paginationPositions.start,
-			paginationPositions.finish,
+			paginatePositions.start,
+			paginatePositions.finish,
 		);
 
-		const usersPaginated = usersAndRoles?.length
-			? usersAndRoles.slice(
-					paginationPositions.start,
-					paginationPositions.finish,
-			)
+		const usersAndRolesPaginated = usersAndRoles.length
+			? usersAndRoles.slice(paginatePositions.start, paginatePositions.finish)
 			: usersAndRoles;
 
 		return (
@@ -375,30 +370,39 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 										</thead>
 										<tbody>
 											{usersAndRoles.length ? (
-												usersPaginated.slice(0).map((user) => (
-													<tr
-														key={user.user.nameIdentifier}
-														className="userRecord"
-													>
-														<td>
-															{user.user.firstName} {user.user.lastName}
-														</td>
-														<td>{user.user.emailAddress}</td>
-														<td>
-															{user.roles.slice(0).map((roles, index) => {
-																if (
-																	this.state.roleFiltersChecked.includes(
-																		roles.name,
-																	) ||
-																	this.state.roleFiltersChecked.length === 0
-																) {
-																	return <div key={index}>{roles.name}</div>;
-																}
-															})}
-														</td>
-														<td>{user.user.isStaffMember ? "Yes" : "No"}</td>
-													</tr>
-												))
+												usersAndRolesPaginated.slice(0).map((userAndRole) => {
+													const {
+														user: {
+															firstName,
+															lastName,
+															emailAddress,
+															nameIdentifier,
+															isStaffMember,
+														},
+														roles,
+													} = userAndRole;
+													return (
+														<tr key={nameIdentifier} className="userRecord">
+															<td>
+																{firstName} {lastName}
+															</td>
+															<td>{emailAddress}</td>
+															<td>
+																{roles.slice(0).map((role, index) => {
+																	if (
+																		this.state.roleFiltersChecked.includes(
+																			role.name,
+																		) ||
+																		this.state.roleFiltersChecked.length === 0
+																	) {
+																		return <div key={index}>{role.name}</div>;
+																	}
+																})}
+															</td>
+															<td>{isStaffMember ? "Yes" : "No"}</td>
+														</tr>
+													);
+												})
 											) : (
 												<tr>
 													<td colSpan={4}>0 results found</td>
