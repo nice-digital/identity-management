@@ -303,7 +303,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			paginatePositions.finish,
 		);
 
-		const usersAndRolesPaginated = usersAndRoles.length
+		const usersAndRolesPaginated = usersAndRoles?.length
 			? usersAndRoles.slice(paginatePositions.start, paginatePositions.finish)
 			: usersAndRoles;
 
