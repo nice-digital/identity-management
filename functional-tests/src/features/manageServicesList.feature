@@ -8,9 +8,12 @@ Feature: Manage Services Page Dispalys Websites
     Given I click on the manage services button
 
   Scenario: Navigate to Manage Services homepage
-    Then I expect website "EPPI Reviewer" to exist in the list
-# More things to test when IDAM-441 is done and you can navigate further
-#Given I select alpha and test status filter
-#Then I expect the services result list count contains "Showing 3 services"
-
-
+    Then I select Dev status filter
+    When I add name "EPPI Reviewer" to the filter
+    When I click on the first service on the list
+    Then I expect the users result list count contains "Showing 5 users"
+    Given I select Product manager and Product administrator roles filter
+    Then I expect the users result list count contains "Showing 2 users"
+    Then I click on the cancel filter on the service detail page
+    Given I select Product editor role filter
+    Then I expect the users result list count contains "Showing 1 user"

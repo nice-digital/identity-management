@@ -7,7 +7,7 @@ import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink } from ".
 import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted";
 import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton";
 import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
-import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave } from "../support/action/selectService";
+import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave, clickFirstService } from "../support/action/selectService";
 import validateServiceEnvFilterChecked, { enterNameToFilter, clickCancelFilter } from "../support/check/validateFilterChecked";
 
 
@@ -110,3 +110,8 @@ When(
 When(/^I add name "([^"]*)" to the filter$/, enterNameToFilter);
 
 When(/^I click on the cancel filter$/, clickCancelFilter);
+
+When(
+  /^I click on the first service on the list$/,
+  clickFirstService
+);

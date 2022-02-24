@@ -31,5 +31,26 @@ export const clickCancelFilter = () => {
 	pause(2000);
 };
 
+export const validateServiceEnvChecked = () => {
+	browser.click("[for='filter_environments_dev']");
+	pause(2000);
+};
+
+export const validateUserRolesFilterChecked = () => {
+	browser.click("[for='filter_roles_product-administrator']");
+	browser.click("[for='filter_roles_product-manager']");
+	pause(2000);
+};
+
+export const validateUserRoleFilterChecked = () => {
+	browser.click("[for='filter_roles_product-editor']");
+	pause(2000);
+};
+
+export const clickCancelFilterServiceDetailPage = () => {
+	browser.click("[for='filter_roles_product-administrator']");
+	browser.click("[for='filter_roles_product-manager']");
+	pause(2000);
+};
 
 export default validateServiceEnvFilterChecked;

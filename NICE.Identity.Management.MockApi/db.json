@@ -911,6 +911,283 @@
       "isInAuthenticationProvider": true
     }
   ],
+  "usersandrolesbywebsite":
+      {
+      "websiteId":1,
+      "serviceId":1,
+      "environmentId":71,
+      "usersAndRoles":[
+        {
+          "userId":1,
+          "user":{
+             "userId":1,
+             "nameIdentifier":"auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+             "firstName":"Kristin",
+             "lastName":"Patrick",
+             "emailAddress":"kristin.patrick@example.com",
+             "allowContactMe":true,
+             "hasVerifiedEmailAddress":true,
+             "isLockedOut":false,
+             "initialRegistrationDate":"2019-10-23T12:29:54.911Z",
+             "lastLoggedInDate":"2019-02-25T01:29:54.911Z",
+             "isStaffMember":false,
+             "acceptedTerms":true,
+             "isMigrated":false,
+             "isInAuthenticationProvider":true,
+             "hasAccessToWebsiteIds":[
+                1,
+                2,
+                3
+             ],
+             "userEmailHistory":[
+                {
+                   "userEmailHistoryId":1,
+                   "userId":1,
+                   "emailAddress":"jcwilliams+id5@gmail.com",
+                   "archivedByUserId":null,
+                   "archivedDateUTC":"2021-10-26T14:52:54.1478773",
+                   "archivedByUserDisplayName":null
+                },
+                {
+                   "userEmailHistoryId":2,
+                   "userId":1,
+                   "emailAddress":"updated@gmail.com",
+                   "archivedByUserId":2,
+                   "archivedDateUTC":"2021-10-26T14:54:35.5142339",
+                   "archivedByUserDisplayName":"Thomas Holding"
+                },
+                {
+                   "userEmailHistoryId":3,
+                   "userId":1,
+                   "emailAddress":"updated2@gmail.com",
+                   "archivedByUserId":null,
+                   "archivedDateUTC":"2021-10-26T15:14:00.7624903",
+                   "archivedByUserDisplayName":null
+                }
+             ]
+          },
+          "roles":[
+             {
+                "id":991,
+                "hasRole":true,
+                "name":"Product contributor",
+                "description":"Some text here"
+             },
+             {
+                "id":992,
+                "hasRole":true,
+                "name":"Product manager",
+                "description":"Some text here"
+             },
+             {
+                "id":993,
+                "hasRole":true,
+                "name":"Product administrator",
+                "description":"Some text here"
+             }
+          ]
+       },
+       {
+            "userId":2,
+            "user":{
+               "userId":2,
+               "nameIdentifier":"auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+               "firstName":"Thomas",
+               "lastName":"Holding",
+               "emailAddress":"thomas.holding@example.com",
+               "allowContactMe":true,
+               "hasVerifiedEmailAddress":true,
+               "isLockedOut":false,
+               "initialRegistrationDate":"2019-10-24T12:29:54.911Z",
+               "lastLoggedInDate":"2019-10-24T12:29:54.911Z",
+               "isStaffMember":false,
+               "acceptedTerms":true,
+               "isMigrated":false,
+               "isInAuthenticationProvider":true,
+               "hasAccessToWebsiteIds":[
+                  1
+               ],
+               "userEmailHistory":[]
+            },
+            "roles":[
+               {
+                 "id":992,
+                 "hasRole":true,
+                 "name":"Product manager",
+                 "description":"Some text here"
+               },
+               {
+                  "id":993,
+                  "hasRole":true,
+                  "name":"Product administrator",
+                  "description":"Some text here"
+               }
+            ]
+         },
+         {
+        "userId": 3,
+        "user":{
+          "userId": 3,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+          "firstName": "Aisha",
+          "lastName": "Bartlett",
+          "emailAddress": "aisha.bartlett@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-25T12:29:54.911Z",
+          "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [
+            3,
+            4
+          ],
+          "userEmailHistory": []
+        },
+        "roles":[
+          {
+            "id":994,
+            "hasRole":true,
+            "name":"Product editor",
+            "description":"Some text here"
+         }
+       ]
+    },
+    {
+      "userId": 4,
+      "user":{
+            "userId": 4,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+            "firstName": "Theo",
+            "lastName": "Bradford",
+            "emailAddress": "theo.bradford@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": false,
+            "isLockedOut": false,
+            "initialRegistrationDate": "2019-10-26T12:29:54.911Z",
+            "lastLoggedInDate": null,
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+            1,
+            4,
+            5
+          ],
+          "userEmailHistory": []
+        },
+        "roles":[
+          {
+             "id":991,
+             "hasRole":true,
+             "name":"Product contributor",
+             "description":"Some text here"
+          }
+       ]
+    },
+    {
+      "userId": 5,
+      "user":{
+            "userId": 5,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
+            "firstName": "Polly",
+            "lastName": "Greaves",
+            "emailAddress": "polly.greaves@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": false,
+            "isLockedOut": true,
+            "initialRegistrationDate": "2019-10-27T12:29:54.911Z",
+            "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+            2,
+            4
+          ],
+            "userEmailHistory": []
+        },  
+        "roles":[
+          {
+            "id":992,
+            "hasRole":true,
+            "name":"Product manager",
+            "description":"Some text here"
+          }
+       ]    
+      } 
+  ],
+  "service": {
+  "id": 1,
+  "name": "EPPI Reviewer",
+  "websites": null
+},
+    "website": {
+    "id": 1,
+    "serviceId": 1,
+    "environmentId": 71,
+    "host": "dev-eppi.nice.org.uk",
+    "environment": {
+        "id": 71,
+        "name": "Dev",
+        "order": 5
+    },
+    "service": {
+        "id": 1,
+        "name": "EPPI Reviewer",
+        "websites": [
+            {
+                "id": 1,
+                "serviceId": 1,
+                "environmentId": 71,
+                "host": "dev-eppi.nice.org.uk",
+                "environment": {
+                    "id": 71,
+                    "name": "Dev",
+                    "order": 0
+                },
+                "service": null
+            }
+        ]
+    }
+},
+"environment": {
+    "id": 71,
+    "name": "Dev",
+    "order": 0
+},
+"allRoles": [
+  {
+    "id":991,
+    "websiteId": 1,
+    "name": "Product contributor",
+    "description": "Some text here"
+  },
+  {
+    "id": 992,
+    "websiteId": 1,
+    "name": "Product manager",
+    "description": "Some text here"
+  },
+  {
+    "id": 993,
+    "websiteId": 1,
+    "name": "Product administrator",
+    "description": "Some text here"
+  },
+  {
+    "id":994,
+    "websiteId": 1,
+    "name":"Product editor",
+    "description":"Some text here"
+  }
+]
+ },
   "verificationemail": [{ "verificationemail": 1 }],
 
   "accountstatus":

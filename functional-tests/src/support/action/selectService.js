@@ -41,4 +41,9 @@ export const clickSave = () => {
   clickElement('click', 'selector', selectors.rolesListPage.saveButton);
 };
 
+export const clickFirstService = () => {
+  browser.waitForVisible("[data-qa-sel='list-of-websites']");
+  clickElement('click', 'selector',"[data-qa-sel='list-of-websites']");
+};
+
 export default clickIdamDockerService;
