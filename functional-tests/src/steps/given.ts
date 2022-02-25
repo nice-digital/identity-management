@@ -1,5 +1,4 @@
-import '@nice-digital/wdio-cucumber-steps/lib/given';
-import { Given } from 'cucumber';
+import { Given } from '@cucumber/cucumber';
 import navigateToRegPage from '../support/action/navigateToRegPage';
 import {
   navigateToUserListPageUsingBreadscrumb,

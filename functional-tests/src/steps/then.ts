@@ -1,6 +1,5 @@
-import '@nice-digital/wdio-cucumber-steps/lib/then';
+import { Then } from '@cucumber/cucumber';
 import loginErrorMessage from '../support/check/loginErrorMessage';
-import { Then } from 'cucumber';
 import userNameInput from '../support/check/userNameInput';
 import passwordInput from '../support/check/passwordInput';
 import confirmEmailInput from '../support/check/confirmEmailInput';
@@ -12,7 +11,7 @@ import manageUsersPage from '../support/check/manageUsersPage';
 import adminHomepage from '../support/check/adminHomepage';
 import createaccount from '../support/action/createaccount';
 import finduser from '../support/action/finduser';
-import deleteUser from '../support/action/deleteUser';
+import {deleteUser} from '../support/action/deleteUser';
 import findUserList, { userNotInList } from '../support/check/findUserInList';
 import findWebsiteList from '../support/check/findWebsiteInList';
 import validateDeletionSuccessMessage, {
