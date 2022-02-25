@@ -15,5 +15,7 @@ Feature: Manage Services Page Dispalys Websites
     Given I select Product manager and Product administrator roles filter
     Then I expect the users result list count contains "Showing 2 users"
     Then I click on the cancel filter on the service detail page
+    Then I expect the users result list count contains "Showing 5 users"
     Given I select Product editor role filter
     Then I expect the users result list count contains "Showing 1 user"
+    Then I verify user details is displayed

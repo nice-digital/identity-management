@@ -31,7 +31,7 @@ import editAudienceInsight from '../support/action/editAudienceInsight';
 import saveUserEditButton from '../support/action/saveUserEditButton';
 import validateProfileSuccessfulMessage from '../support/check/validateUserStatus';
 import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile';
-import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserChecked } from '../support/check/validateFilterChecked';
+import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserRoleChecked } from '../support/check/validateFilterChecked';
 
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
@@ -154,4 +154,7 @@ Then(
 	clickCancelFilterServiceDetailPage
 );
 
- 
+Then(
+	/^I verify user details is displayed$/,
+	validateServiceUserRoleChecked
+);
