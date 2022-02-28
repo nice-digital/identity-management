@@ -2,16 +2,15 @@ import React from "react";
 import { mount } from "enzyme";
 import { MemoryRouter } from "react-router";
 import toJson from "enzyme-to-json";
-
 import { nextTick } from "../../../utils/nextTick";
-
 import { OrganisationsList } from "../OrganisationsList";
 import organisations from "./organisations.json";
 import organisations2 from "./organisations2.json";
-
 import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 
 describe("OrganisationsList", () => {
+	const dummyText = "SomeText";
+
     const consoleErrorReset = console.error;
 
 	beforeEach(() => {
@@ -57,13 +56,26 @@ describe("OrganisationsList", () => {
 		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
 	});
 
-	it("should show no results message when fetch returns an empty array", async () => {
+	it("should show no results message when initial fetch returns an empty array", async () => {
 		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify([]));
 		const wrapper = mount(<MemoryRouter><OrganisationsList /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find("p").text()).toEqual("No results found");
+	});
+
+	it("should show no results message when search fetch returns an empty array", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify([]));
+		const wrapper = mount(
+			<MemoryRouter initialEntries={[`/organisations?q=${dummyText}`]}>
+                <OrganisationsList />
+            </MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		expect(wrapper.find("p").text()).toEqual(`No results found for "${dummyText}"`);
 	});
 
     it("should show 25 (default page amount) or less results by default when paginated", async () => {
@@ -109,6 +121,21 @@ describe("OrganisationsList", () => {
 		expect(organisationsListSummary.text()).toEqual("Showing 26 to 32 of 32 organisations");
 		expect(wrapper.find(".pagination__item--count").text()).toEqual("Page 2 of 2");
 		expect(listContainer.find(".card").length).toEqual(7);
+	});
+
+	it("should sort results by alphabetical descending when querystring sort is set to alpha-desc", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(organisations2));
+		const wrapper = mount(
+			<MemoryRouter initialEntries={['/organisations?sort=alpha-desc']}>
+                <OrganisationsList />
+            </MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		const listContainer = wrapper.find("[data-qa-sel='list-of-organisations']");
+		const firstResult = listContainer.find(".card").first();
+		expect(firstResult.find("a").text()).toEqual("Zulu");
 	});
 
 });
