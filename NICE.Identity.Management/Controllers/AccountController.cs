@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using NICE.Identity.Authentication.Sdk.Authentication;
+using NICE.Identity.Authentication.Sdk.Domain;
 using NICE.Identity.Management.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace NICE.Identity.Management.Controllers
@@ -55,10 +58,15 @@ namespace NICE.Identity.Management.Controllers
 				        links: new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("Sign in", _linkGenerator.GetPathByAction(HttpContext, nameof(Login))) }));
 		        }
 
-				//todo: once the profile page is up, add a link to it and any other accessible system potentially using this.User.Claims
+                //todo: once the profile page is up, add a link to it and any other accessible system potentially using this.User.Claims
+                var claims = this.User.Claims;
+                var displayName = claims?.FirstOrDefault(x => x.Type.Equals("name", StringComparison.OrdinalIgnoreCase))?.Value;
 
-				return new ActionResult<Status>(new Status(isAuthenticated: true, displayName: this.User.Identity.Name,
-			        links: new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("Sign out", _linkGenerator.GetPathByAction(HttpContext, nameof(Logout))) }));
+                return new ActionResult<Status>(new Status(isAuthenticated: true, displayName: displayName,
+			        links: new List<KeyValuePair<string, string>> { 
+                        new KeyValuePair<string, string>("Sign out", _linkGenerator.GetPathByAction(HttpContext, nameof(Logout))),
+                        new KeyValuePair<string, string>("Health checks", "/healthchecks-ui")
+                    }));
 	        }
 	        catch (Exception e)
 	        {

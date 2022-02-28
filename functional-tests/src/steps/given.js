@@ -6,7 +6,7 @@ import {
   navigateToUserListPageFromAdminPage,
 } from '../support/action/navigateToUserListPage';
 import {  navigateToWebsiteListPageFromAdminPage } from '../support/action/navigateToWebsiteListPage';
-import validateServiceEnvFilterChecked, {  validateUserStatusFilterChecked, validateUserEnvFilterChecked } from '../support/check/validateFilterChecked';
+import validateServiceEnvFilterChecked, {  validateUserStatusFilterChecked, validateUserEnvFilterChecked, validateUserRolesFilterChecked, validateUserRoleFilterChecked } from '../support/check/validateFilterChecked';
 import navigateToOrganisationListPageFromAdminPage from '../support/action/navigateToOrganisationListPage';
 import manageOrganisationsPage from '../support/check/manageOrganisationsPage';
 import sortAlphaOrganisationList from '../support/action/sortOrganisationList';
@@ -45,3 +45,6 @@ Given(/^I expect I appear on the Organisations list page$/, manageOrganisationsP
 Given(/^I sort orgnanisation list using the alphabetical sorting descending order$/, sortAlphaOrganisationList);
 
 Given(/^I sort organisation list using the date sorting descending order$/, sortDateOrganisationList);
+Given(/^I select Product manager and Product administrator roles filter$/, validateUserRolesFilterChecked);
+
+Given(/^I select Product editor role filter$/, validateUserRoleFilterChecked);

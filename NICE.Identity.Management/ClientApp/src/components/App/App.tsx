@@ -9,28 +9,64 @@ import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
 import { ServicesList } from "../../views/ServicesList/ServicesList";
 import { OrganisationsList } from "../../views/OrganisationsList/OrganisationsList";
+import { Organisation } from "../../views/Organisation/Organisation";
 import { AddOrganisation } from "../../views/AddOrganisation/AddOrganisation";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 import { EditUser } from "./../../views/EditUser/EditUser";
+import { DeleteOrganisation } from "./../../views/DeleteOrganisation/DeleteOrganisation";
+import { Website } from "../../views/Website/Website";
+
+import { Endpoints } from "../../data/endpoints";
+import { fetchData } from "../../helpers/fetchData";
+import { isDataError } from "../../helpers/isDataError";
+
+export type MyAccountDetails = {
+	displayName: string;
+	links: [];
+};
 
 export class App extends React.Component {
-	render(): JSX.Element {
+	state = {
+		isLoading: false,
+		auth: {} as IdamProviderProps,
+	};
+
+	async componentDidMount(): Promise<void> {
+		this.setState({ isLoading: true });
+
+		const myAccountDetails = (await fetchData(
+			Endpoints.identityManagementUser,
+		)) as MyAccountDetails;
+
+		if (isDataError(myAccountDetails)) {
+			this.setState({ error: myAccountDetails });
+		}
+
 		const auth: IdamProviderProps = {
 			links: [
 				{ text: "Health checks", url: "/healthchecks-ui" },
 				{ text: "Sign out", url: "/Account/Logout" },
 			],
-			displayName: "John",
+			displayName: myAccountDetails.displayName,
 			provider: "idam",
 		};
 
+		this.setState({
+			isLoading: false,
+			auth,
+		});
+	}
+	render(): JSX.Element {
 		return (
 			<Router>
-				<Header search={false} auth={auth} />
-
+				{this.state.isLoading ? (
+					<p>Loading...</p>
+				) : (
+					<Header search={false} auth={this.state.auth} />
+				)}
 				<Container
 					elementType="main"
 					role="main"
@@ -58,6 +94,21 @@ export class App extends React.Component {
 					<Route path="/services" exact component={ServicesList} />
 					<Route path="/organisations" exact component={OrganisationsList} />
 					<Route path="/organisations/add" exact component={AddOrganisation} />
+					<Route
+						path={"/organisations/:id"}
+						render={(props) => {
+							// to stop rendering of component for 'add' route
+							const idRegExp = new RegExp(/[0-9]+$/g);
+							const endOfRoute = props.location.pathname.split("/").pop() ?? "";
+							return idRegExp.test(endOfRoute) && <Organisation {...props} />;
+						}}
+					/>
+					<Route
+						path="/organisations/:id/delete"
+						exact
+						component={DeleteOrganisation}
+					/>
+					<Route path="/websites/:id" exact component={Website} />
 				</Container>
 
 				<Footer />

@@ -41,7 +41,7 @@ export type ServiceWebsiteType = {
 export type OrganisationType = {
 	id: number;
 	name: string;
-	dateAdded: string;
+	dateAdded: Date;
 };
 
 export type UserRoleType = {
@@ -86,4 +86,17 @@ export type HistoryType = {
 		action: "PUSH" | "REPLACE" | "POP" | null,
 	) => void;
 	location: HistoryLocationType;
+};
+
+export type UserAndRolesType = {
+	userId: number;
+	user: UserType;
+	roles: Array<RoleType>;
+};
+
+export type WebsiteUsersAndRolesType = {
+	websiteId: number;
+	website: WebsiteType;
+	usersAndRoles: Array<UserAndRolesType>;
+	allRoles: Array<RoleType>;
 };

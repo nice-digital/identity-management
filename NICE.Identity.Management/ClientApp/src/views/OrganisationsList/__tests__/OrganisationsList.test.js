@@ -75,7 +75,9 @@ describe("OrganisationsList", () => {
 		);
 		await nextTick();
 		wrapper.update();
-		expect(wrapper.find("p").text()).toEqual(`No results found for "${dummyText}"`);
+        expect(wrapper.find("p").text()).toEqual(
+			`No results found for "${dummyText}"`,
+		);
 	});
 
     it("should show 25 (default page amount) or less results by default when paginated", async () => {

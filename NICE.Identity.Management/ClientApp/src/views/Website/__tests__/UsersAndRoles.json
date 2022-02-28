@@ -1,0 +1,230 @@
+{
+    "websiteId": 5,
+    "serviceId": 14,
+    "environmentId": 6,
+    "usersAndRoles": [
+        {
+            "userId": 2,
+            "user": {
+                "userId": 2,
+                "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+                "firstName": "Thomas",
+                "lastName": "Holding",
+                "emailAddress": "thomas.holding@example.com",
+                "allowContactMe": false,
+                "hasVerifiedEmailAddress": true,
+                "isLockedOut": false,
+                "initialRegistrationDate": "2020-01-17T14:56:41.3290867",
+                "lastLoggedInDate": "2022-02-07T18:31:05.8915207",
+                "isStaffMember": true,
+                "acceptedTerms": null,
+                "isMigrated": true,
+                "isInAuthenticationProvider": true,
+                "hasAccessToWebsiteIds": [
+                    26,
+                    24,
+                    59
+                ],
+                "userEmailHistory": null
+            },
+            "roles": [
+                {
+                    "id": 1113,
+                    "hasRole": true,
+                    "name": "Editor",
+                    "description": "This user can edit Idam permissions"
+                },
+                {
+                    "id": 1114,
+                    "hasRole": true,
+                    "name": "ReadOnly",
+                    "description": "This user has only readonly access to IdAM"
+                },
+                {
+                    "id": 108,
+                    "hasRole": true,
+                    "name": "Administrator",
+                    "description": "This user has full access and unrestricted access."
+                }
+            ]
+        },
+        {
+            "userId": 3,
+            "user": {
+                "userId": 3,
+                "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+                "firstName": "Aisha",
+                "lastName": "Bartlett",
+                "emailAddress": "aisha.bartlett@example.com",
+                "allowContactMe": false,
+                "hasVerifiedEmailAddress": true,
+                "isLockedOut": false,
+                "initialRegistrationDate": "2020-01-17T14:56:41.737298",
+                "lastLoggedInDate": null,
+                "isStaffMember": true,
+                "acceptedTerms": null,
+                "isMigrated": true,
+                "isInAuthenticationProvider": false,
+                "hasAccessToWebsiteIds": [
+                    26,
+                    59
+                ],
+                "userEmailHistory": null
+            },
+            "roles": [
+                {
+                    "id": 1114,
+                    "hasRole": true,
+                    "name": "ReadOnly",
+                    "description": "This user has only readonly access to IdAM"
+                }
+            ]
+        },
+        {
+            "userId": 4,
+            "user": {
+                "userId": 4,
+                "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+                "firstName": "Theo",
+                "lastName": "Bradford",
+                "emailAddress": "theo.bradford@example.com",
+                "allowContactMe": false,
+                "hasVerifiedEmailAddress": true,
+                "isLockedOut": false,
+                "initialRegistrationDate": "2020-01-17T14:56:41.757282",
+                "lastLoggedInDate": null,
+                "isStaffMember": false,
+                "acceptedTerms": null,
+                "isMigrated": true,
+                "isInAuthenticationProvider": false,
+                "hasAccessToWebsiteIds": [
+                    26,
+                    59
+                ],
+                "userEmailHistory": null
+            },
+            "roles": [
+                {
+                    "id": 108,
+                    "hasRole": true,
+                    "name": "Administrator",
+                    "description": "This user has full access and unrestricted access."
+                }
+            ]
+        },
+        {
+            "userId": 1,
+            "user": {
+                "userId": 1,
+                "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+                "firstName": "Kristin",
+                "lastName": "Patrick",
+                "emailAddress": "kristin.patrick@example.com",
+                "allowContactMe": false,
+                "hasVerifiedEmailAddress": true,
+                "isLockedOut": false,
+                "initialRegistrationDate": "2020-01-17T14:56:41.9308949",
+                "lastLoggedInDate": "2021-11-08T14:46:18.5733094",
+                "isStaffMember": true,
+                "acceptedTerms": null,
+                "isMigrated": true,
+                "isInAuthenticationProvider": true,
+                "hasAccessToWebsiteIds": [
+                    59
+                ],
+                "userEmailHistory": null
+            },
+            "roles": [
+                {
+                    "id": 1113,
+                    "hasRole": true,
+                    "name": "Editor",
+                    "description": "This user can edit Idam permissions"
+                },
+                {
+                    "id": 1114,
+                    "hasRole": true,
+                    "name": "ReadOnly",
+                    "description": "This user has only readonly access to IdAM"
+                },
+                {
+                    "id": 1116,
+                    "websiteId": 59,
+                    "name": "Creator",
+                    "description": "This user can create roles"
+                }
+            ]
+        }
+    ],
+    "service": {
+        "id": 14,
+        "name": "Identity Admin",
+        "websites": null
+    },
+    "website": {
+        "id": 5,
+        "serviceId": 14,
+        "environmentId": 6,
+        "host": "identityadmin.nice.org.uk",
+        "environment": {
+            "id": 6,
+            "name": "Live",
+            "order": 1
+        },
+        "service": {
+            "id": 14,
+            "name": "Identity Admin",
+            "websites": [
+                {
+                    "id": 5,
+                    "serviceId": 14,
+                    "environmentId": 6,
+                    "host": "identityadmin.nice.org.uk",
+                    "environment": {
+                        "id": 6,
+                        "name": "Live",
+                        "order": 1
+                    },
+                    "service": null
+                }
+            ]
+        }
+    },
+    "environment": {
+        "id": 6,
+        "name": "Live",
+        "order": 0
+    },
+    "allRoles": [
+        {
+            "id": 108,
+            "websiteId": 59,
+            "name": "Administrator",
+            "description": "This user has full access and unrestricted access."
+        },
+        {
+            "id": 1113,
+            "websiteId": 59,
+            "name": "Editor",
+            "description": "This user can edit Idam permissions"
+        },
+        {
+            "id": 1114,
+            "websiteId": 59,
+            "name": "ReadOnly",
+            "description": "This user has only readonly access to IdAM"
+        },
+        {
+            "id": 1115,
+            "websiteId": 59,
+            "name": "Owner",
+            "description": "This user owns IdAM"
+        },
+        {
+            "id": 1116,
+            "websiteId": 59,
+            "name": "Creator",
+            "description": "This user can create roles"
+        }
+    ]
+}

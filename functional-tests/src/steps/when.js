@@ -7,7 +7,7 @@ import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink } from ".
 import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted";
 import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton";
 import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
-import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave } from "../support/action/selectService";
+import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave, clickFirstService } from "../support/action/selectService";
 import validateServiceEnvFilterChecked, { enterNameToFilter, clickCancelFilter } from "../support/check/validateFilterChecked";
 import deleteEnteredText from "../support/check/deleteInputText";
 import deleteInputText, { deleteNewOrgEnteredText } from "../support/check/deleteInputText";
@@ -131,3 +131,7 @@ When(
 
 When(/^I click on the add organisation button$/, addNewOrganisation);
 
+When(
+  /^I click on the first service on the list$/,
+  clickFirstService
+);
