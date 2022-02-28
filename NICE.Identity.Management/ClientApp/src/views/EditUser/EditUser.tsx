@@ -49,37 +49,45 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const doFetch = useFetch();
 
 	useEffect(() => {
-		setIsLoading(true);
+		let isMounted = true;
 		(async () => {
-			const data = await doFetch<UserType>(Endpoints.user(id));
+			if (isMounted) {
+				setIsLoading(true);
+				const data = await doFetch<UserType>(Endpoints.user(id));
 
-			if (isError(data)) {
-				setError(data.error);
-			} else {
-				const updatedFormData = {
-					emailAddress: data.emailAddress,
-					firstName: data.firstName,
-					lastName: data.lastName,
-					audienceInsight: data.allowContactMe,
-				};
-				setUser(data);
-				setFormData(updatedFormData);
+				if (isError(data)) {
+					setError(data.error);
+				} else {
+					const updatedFormData = {
+						emailAddress: data.emailAddress,
+						firstName: data.firstName,
+						lastName: data.lastName,
+						audienceInsight: data.allowContactMe,
+					};
+					setUser(data);
+					setFormData(updatedFormData);
 
-				if (data.emailAddress.indexOf("@nice.org.uk") > -1) {
-					setEmailBlockedPattern({
-						pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
-					});
-					setIsAD(true);
-				} else if (
-					data.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
-					data.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
-					data.emailAddress.indexOf("@rcog.org.uk") > -1
-				) {
-					setIsEPPI(true);
+					if (data.emailAddress.indexOf("@nice.org.uk") > -1) {
+						setEmailBlockedPattern({
+							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
+						});
+						setIsAD(true);
+					} else if (
+						data.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
+						data.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
+						data.emailAddress.indexOf("@rcog.org.uk") > -1
+					) {
+						setIsEPPI(true);
+					}
 				}
+
+				setIsLoading(false);
 			}
-			setIsLoading(false);
 		})();
+
+		return () => {
+			isMounted = true;
+		};
 	}, [doFetch, id]);
 
 	const containsError = (data: Record<string, unknown>) => {
