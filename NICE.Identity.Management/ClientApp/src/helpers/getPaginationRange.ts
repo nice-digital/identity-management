@@ -2,7 +2,7 @@ type getPaginationRangeType = (pageNumber: number, itemsPerPage: string | number
 
 export const getPaginationRange: getPaginationRangeType  = (pageNumber, itemsPerPage, dataLength) => {
     const showAllItemsPerPage = itemsPerPage === "all";
-    let paginationStart = 0;
+    let paginationStart = 1;
     let paginationFinish = dataLength;
 
     if (!showAllItemsPerPage) {
