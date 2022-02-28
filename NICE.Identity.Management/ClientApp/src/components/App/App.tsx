@@ -23,23 +23,31 @@ import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 
+type AppState = {
+	isLoading: boolean;
+	auth: IdamProviderProps;
+	error?: Error;
+};
+
 export type MyAccountDetails = {
 	displayName: string;
 	links: [];
 };
 
-export class App extends React.Component {
-	state = {
-		isLoading: false,
-		auth: {} as IdamProviderProps,
-	};
+export class App extends React.Component<Record<string, never>, AppState> {
+	constructor(props = {}) {
+		super(props);
+
+		this.state = {
+			isLoading: false,
+			auth: {} as IdamProviderProps,
+		};
+	}
 
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const myAccountDetails = (await fetchData(
-			Endpoints.identityManagementUser,
-		)) as MyAccountDetails;
+		const myAccountDetails = await fetchData(Endpoints.identityManagementUser);
 
 		if (isDataError(myAccountDetails)) {
 			this.setState({ error: myAccountDetails });
@@ -59,7 +67,10 @@ export class App extends React.Component {
 			auth,
 		});
 	}
+
 	render(): JSX.Element {
+		// needs error handling below
+
 		return (
 			<Router>
 				{this.state.isLoading ? (
