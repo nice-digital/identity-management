@@ -35,7 +35,7 @@ export const useListFetch = <TItem extends SortableItem>(): ListFetchType<TItem>
         
         const paginationRange = getPaginationRange(pageNumber, itemsPerPage, data.length);
         const processedData = data.sort(sortFunctions[currentSortOrder as SortOptions || "alpha-asc"])
-                .slice(Number(paginationRange.start) - 1, Number(paginationRange.finish));
+            .slice(paginationRange.start - 1, paginationRange.finish);
         return { items: processedData, totalCount: data.length };
         
     }, [pageNumber, itemsPerPage, currentSortOrder, doFetch]);
