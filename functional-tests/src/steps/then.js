@@ -25,12 +25,13 @@ import validateUserStatusActive, {
 import identityLogInPage from '../support/check/identityLogInPage';
 import validateRoleChange from '../support/check/validateRoleChange';
 import validateServiceDownloadPageResultCount,  { validateUserDownloadPageResultCount} from '../support/check/validateAdminUserServicePage';
-import editUserProfile from '../support/action/editUserProfile'
-import editUserEmailName from '../support/action/editUserEmailName'
-import editAudienceInsight from '../support/action/editAudienceInsight'
-import saveUserEditButton from '../support/action/saveUserEditButton'
-import validateProfileSuccessfulMessage from '../support/check/validateUserStatus'
-import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile'
+import editUserProfile from '../support/action/editUserProfile';
+import editUserEmailName from '../support/action/editUserEmailName';
+import editAudienceInsight from '../support/action/editAudienceInsight';
+import saveUserEditButton from '../support/action/saveUserEditButton';
+import validateProfileSuccessfulMessage from '../support/check/validateUserStatus';
+import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile';
+import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserRoleChecked } from '../support/check/validateFilterChecked';
 
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
@@ -143,5 +144,17 @@ Then(
 	/^I check user profile is updated$/,
 	checkUpdatedUserProfile
 );
+Then(
+	/^I select Dev status filter$/,
+	validateServiceEnvChecked
+);
 
+Then(
+	/^I click on the cancel filter on the service detail page$/,
+	clickCancelFilterServiceDetailPage
+);
 
+Then(
+	/^I verify user details is displayed$/,
+	validateServiceUserRoleChecked
+);

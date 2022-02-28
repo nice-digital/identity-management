@@ -1,5 +1,6 @@
 import pause from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
-import waitForVisible from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible";
+import checkContainsText from '@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText';
+import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
 
 export const validateServiceEnvFilterChecked = () => {
 	browser.click("[for='filter_environments_alpha']");
@@ -31,5 +32,34 @@ export const clickCancelFilter = () => {
 	pause(2000);
 };
 
+export const validateServiceEnvChecked = () => {
+	browser.click("[for='filter_environments_dev']");
+	pause(2000);
+};
+
+export const validateUserRolesFilterChecked = () => {
+	browser.click("[for='filter_roles_product-administrator']");
+	browser.click("[for='filter_roles_product-manager']");
+	pause(2000);
+};
+
+export const validateUserRoleFilterChecked = () => {
+	browser.click("[for='filter_roles_product-editor']");
+	pause(2000);
+};
+
+export const clickCancelFilterServiceDetailPage = () => {
+	browser.click("[for='filter_roles_product-administrator']");
+	browser.click("[for='filter_roles_product-manager']");
+	pause(2000);
+};
+
+export const validateServiceUserRoleChecked = () => {
+	
+	checkContainsText("element", ".userRecord:first-child td:nth-child(1)", 'Aisha Bartlett');
+	checkContainsText("element", ".userRecord:first-child td:nth-child(2)", 'aisha.bartlett@example.com');
+	checkContainsText("element", ".userRecord:first-child td:nth-child(3)", 'Product editor');
+	checkContainsText("element", ".userRecord:first-child td:nth-child(4)", 'No');
+};
 
 export default validateServiceEnvFilterChecked;

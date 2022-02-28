@@ -17,6 +17,7 @@ import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnviron
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 import { EditUser } from "./../../views/EditUser/EditUser";
 import { DeleteOrganisation } from "./../../views/DeleteOrganisation/DeleteOrganisation";
+import { Website } from "../../views/Website/Website";
 
 import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
@@ -110,6 +111,7 @@ export class App extends React.Component {
 						exact
 						component={DeleteOrganisation}
 					/>
+					<Route path="/websites/:id" exact component={Website} />
 				</Container>
 
 				<Footer />

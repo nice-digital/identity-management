@@ -6,7 +6,7 @@ import {
   navigateToUserListPageFromAdminPage,
 } from '../support/action/navigateToUserListPage';
 import {  navigateToWebsiteListPageFromAdminPage } from '../support/action/navigateToWebsiteListPage';
-import validateServiceEnvFilterChecked, {  validateUserStatusFilterChecked, validateUserEnvFilterChecked } from '../support/check/validateFilterChecked';
+import validateServiceEnvFilterChecked, {  validateUserStatusFilterChecked, validateUserEnvFilterChecked, validateUserRolesFilterChecked, validateUserRoleFilterChecked } from '../support/check/validateFilterChecked';
 
 Given(/^I navigate to the registration page$/, navigateToRegPage);
 
@@ -30,3 +30,7 @@ Given(/^I select alpha and test status filter$/, validateServiceEnvFilterChecked
 Given(/^I select active and pending status filter$/, validateUserStatusFilterChecked);
 
 Given(/^I select alpha and test service filter$/, validateUserEnvFilterChecked);
+
+Given(/^I select Product manager and Product administrator roles filter$/, validateUserRolesFilterChecked);
+
+Given(/^I select Product editor role filter$/, validateUserRoleFilterChecked);
