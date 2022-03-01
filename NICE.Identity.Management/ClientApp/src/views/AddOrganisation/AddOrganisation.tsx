@@ -48,6 +48,20 @@ export class AddOrganisation extends Component<
 			: "Organisation name should be alphanumeric and be between 2-100 characters";
 	};
 
+	fetchedOrgNameFound = async (formName: string): Promise<boolean> => {
+		let fetchedOrgNameFound = false;
+
+		const fetchOrgName = await fetchData(
+			`${Endpoints.organisationsList}?q=${formName}`,
+		);
+
+		fetchedOrgNameFound = fetchOrgName.length
+			? fetchOrgName.some((org: any) => org.name === formName)
+			: fetchedOrgNameFound;
+
+		return fetchedOrgNameFound;
+	};
+
 	handleSubmit = async (
 		e: React.FormEvent<HTMLFormElement>,
 	): Promise<void | boolean> => {
@@ -56,9 +70,21 @@ export class AddOrganisation extends Component<
 
 		const { formName, validationError } = this.state;
 		const form = e.currentTarget;
+		const trimmedFormName = formName.trim();
+		const fetchedOrgNameFound =
+			document.activeElement?.id === "orgName" && !validationError
+				? await this.fetchedOrgNameFound(trimmedFormName)
+				: false;
 
-		if (!form.checkValidity() || validationError) {
-			this.setState({ validationError: true, isSaveButtonLoading: false });
+		if (!form.checkValidity() || validationError || fetchedOrgNameFound) {
+			const validationErrorMessage = fetchedOrgNameFound
+				? this.toggleValidationMessage(true, trimmedFormName)
+				: this.state.validationErrorMessage;
+			this.setState({
+				validationError: true,
+				validationErrorMessage,
+				isSaveButtonLoading: false,
+			});
 			return false;
 		}
 
@@ -66,7 +92,7 @@ export class AddOrganisation extends Component<
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				name: formName,
+				name: trimmedFormName,
 			}),
 		};
 
@@ -107,17 +133,10 @@ export class AddOrganisation extends Component<
 	): Promise<void> => {
 		const formElement = e.target;
 		const formName = this.state.formName.trim();
-		let fetchOrgName;
 		let fetchedOrgNameFound = false;
 
 		if (formElement.validity.valid) {
-			fetchOrgName = await fetchData(
-				`${Endpoints.organisationsList}?q=${formName}`,
-			);
-
-			fetchedOrgNameFound = fetchOrgName.length
-				? fetchOrgName.some((org: any) => org.name === formName)
-				: fetchedOrgNameFound;
+			fetchedOrgNameFound = await this.fetchedOrgNameFound(formName);
 		}
 
 		const isNowValid = formElement.validity.valid
