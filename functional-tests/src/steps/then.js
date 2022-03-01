@@ -181,10 +181,9 @@ Then(/^I navigate back to organisation list admin page$/, navigateToOrgListPageU
 Then(/^I click on the first organisation in the list$/, findOrganisationList);
 
 Then(/^I expect to see error message "([^"]*)"$/, validateErrorMessage);
-	/^I select Dev status filter$/,
+Then(/^I select Dev status filter$/,
 	validateServiceEnvChecked
 );
-
 Then(
 	/^I click on the cancel filter on the service detail page$/,
 	clickCancelFilterServiceDetailPage
