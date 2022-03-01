@@ -321,7 +321,7 @@ Array [
         </li>
       </ul>
       <div
-        className="flex flexSpaceBetween"
+        className="flex flexAlignCenter"
       >
         <div
           className="mr--e"

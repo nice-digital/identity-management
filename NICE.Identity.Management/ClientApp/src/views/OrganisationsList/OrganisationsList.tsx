@@ -96,7 +96,7 @@ export const OrganisationsList: FC = () => {
 									elementType={ResultOrganisation}
 									qaSelExtract="organisations"
 								/>
-								<div className={`${styles.flex} ${styles.flexSpaceBetween}`}>
+								<div className={`${styles.flex} ${styles.flexAlignCenter}`}>
 									<ItemsPerPage />
 									<EnhancedPagination
 										currentPage={pageNumber}
