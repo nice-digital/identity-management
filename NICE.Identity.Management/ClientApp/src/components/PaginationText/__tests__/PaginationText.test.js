@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import { MemoryRouter } from "react-router";
 import toJson from "enzyme-to-json";
 import { nextTick } from "../../../utils/nextTick";
-import { PaginationText } from "../paginationText";
+import { PaginationText } from "../PaginationText";
 
 describe("PaginationText", () => {
     const paginationTextOrgProps = {
