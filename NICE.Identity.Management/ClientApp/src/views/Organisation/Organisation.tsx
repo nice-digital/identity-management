@@ -6,7 +6,7 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 
-//import { Button } from "@nice-digital/nds-button";
+import { Button } from "@nice-digital/nds-button";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ToFormattedDateString } from "../../helpers/dateHelpers";
@@ -98,7 +98,7 @@ export class Organisation extends Component<
 								isLoading ? "Organisation details" : `${organisation.name}`
 							}
 							className="page-header mb--d"
-							/* 							cta={ reinstate this after the edit org and edit user pages are created
+							cta={
 								<>
 									<Button
 										data-qa-sel="edit-organisation-button"
@@ -109,16 +109,16 @@ export class Organisation extends Component<
 									>
 										{isLoading ? "Loading..." : "Edit organisation"}
 									</Button>
-									<Button
+									{/* <Button
 										data-qa-sel="edit-organisations-users-button"
 										to={`/users-organisations/${this.props.match.params.id}/edit`}
 										elementType={Link}
 										disabled={isLoading}
 									>
 										Edit users
-									</Button>
+									</Button> */}
 								</>
-							} */
+							}
 						/>
 						<Grid>
 							<GridItem cols={12} md={9} aria-busy={isLoading}>
@@ -131,7 +131,7 @@ export class Organisation extends Component<
 											className={styles.summaryListDetail}
 											data-qa-sel="dateAdded-organisation"
 										>
-											{ToFormattedDateString(organisation.dateAdded)}
+											{ToFormattedDateString(new Date(organisation.dateAdded))}
 										</span>
 									</div>
 								) : (

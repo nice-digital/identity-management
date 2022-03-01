@@ -11,6 +11,7 @@ import { ServicesList } from "../../views/ServicesList/ServicesList";
 import { OrganisationsList } from "../../views/OrganisationsList/OrganisationsList";
 import { Organisation } from "../../views/Organisation/Organisation";
 import { AddOrganisation } from "../../views/AddOrganisation/AddOrganisation";
+import { EditOrganisation } from "../../views/EditOrganisation/EditOrganisation";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
@@ -24,27 +25,27 @@ import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 
 export type MyAccountDetails = {
-	displayName: string,
-	links: []
+	displayName: string;
+	links: [];
 };
 
 export class App extends React.Component {
 	state = {
 		isLoading: false,
-		auth: {} as IdamProviderProps
-	}
+		auth: {} as IdamProviderProps,
+	};
 	async componentDidMount(): Promise<void> {
-               this.setState({ isLoading: true });
-               
+		this.setState({ isLoading: true });
+
 		const fetchOptions = {
 			method: "GET",
-			headers: { "Content-Type": "application/json" }
+			headers: { "Content-Type": "application/json" },
 		};
-		const myAccountDetails = await fetchData(
+		const myAccountDetails = (await fetchData(
 			Endpoints.identityManagementUser,
 			fetchOptions,
-		) as MyAccountDetails;
-		
+		)) as MyAccountDetails;
+
 		if (isDataError(myAccountDetails)) {
 			this.setState({ error: myAccountDetails });
 		}
@@ -53,23 +54,23 @@ export class App extends React.Component {
 				{ text: "Health checks", url: "/healthchecks-ui" },
 				{ text: "Sign out", url: "/Account/Logout" },
 			],
-			displayName:  myAccountDetails.displayName,
+			displayName: myAccountDetails.displayName,
 			provider: "idam",
 		};
 
 		this.setState({
 			isLoading: false,
-			auth: auth
+			auth: auth,
 		});
 	}
 	render(): JSX.Element {
 		return (
 			<Router>
 				{this.state.isLoading ? (
-									<p>Loading...</p>
-								) : (
-				<Header search={false} auth={this.state.auth} />
-								)}
+					<p>Loading...</p>
+				) : (
+					<Header search={false} auth={this.state.auth} />
+				)}
 				<Container
 					elementType="main"
 					role="main"
@@ -110,6 +111,11 @@ export class App extends React.Component {
 						path="/organisations/:id/delete"
 						exact
 						component={DeleteOrganisation}
+					/>
+					<Route
+						path="/organisations/:id/edit"
+						exact
+						component={EditOrganisation}
 					/>
 					<Route path="/websites/:id" exact component={Website} />
 				</Container>
