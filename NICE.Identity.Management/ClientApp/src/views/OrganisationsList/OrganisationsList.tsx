@@ -110,6 +110,7 @@ export const OrganisationsList: FC = () => {
 											return `?${querystringObject}`;
 										}}
 										totalPages={totalPages || 1}
+										data-qa-sel="pagination-section"
 									/>
 								</div>
 							</>
