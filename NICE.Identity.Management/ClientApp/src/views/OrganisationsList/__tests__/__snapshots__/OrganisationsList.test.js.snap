@@ -360,6 +360,7 @@ Array [
         <nav
           aria-label="Pagination"
           className="pagination "
+          data-qa-sel="pagination-section"
           role="navigation"
         >
           <ol
