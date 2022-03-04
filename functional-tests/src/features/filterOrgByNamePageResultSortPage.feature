@@ -23,4 +23,4 @@ Feature: The list of Organisation is reduced when user filter by name
 	    Given I sort orgnanisation list using the alphabetical sorting descending order
 		When I check the first organisation on the page it displays "Testing Nursing Society"
 		Given I sort organisation list using the date sorting descending order
-	    When I check the first organisation on the page it displays "Testing Nursing Society"
+	    When I check the first organisation on the page it displays "Abbot Medical London"

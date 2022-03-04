@@ -15,11 +15,8 @@ export const validateOrganisationsDownloadPageResultCount = (countText) => {
 };
 
 export const validateFirstLinkInPagination = (linkText) => {
-	waitForVisible(selectors.organisationListPage.firstPager);
-	checkContainsText(
-		"selector",
-		selectors.organisationListPage.firstPager,
-		linkText
+	waitForVisible(".pagination__inactive");
+	checkContainsText("element", ".pagination__inactive", linkText
 	);
 	pause(1000);
 };

@@ -34,11 +34,7 @@ import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile';
 import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserRoleChecked } from '../support/check/validateFilterChecked';
 import validateOrganisationsDownloadPageResultCount from '../support/check/validateAdminOrgPage';
 import validateAdminOrgPage, { validateFirstLinkInPagination } from "../support/check/validateAdminOrgPage";
-import clickPaginationOption, {
-	clickSecondPaginationOption,
-	clickNextPagination,
-	clickPreviousPagination,
-} from "../support/action/clickPaginationOption";
+import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } from "../support/action/clickPaginationOption";
 import editOrganisationName from '../support/action/editOrganisationName';
 import saveNewOrganisationName from '../support/action/saveNewOrganisationName';
 import validateNewOrgResponseMessage , { validateErrorMessage } from '../support/check/validateNewOrgResponseMessage';
@@ -164,8 +160,6 @@ Then(
 	/^I expect the first pagination option is "([^"]*)"$/,
 	validateFirstLinkInPagination
 );
-Then(/^I click the second pagination option$/, clickSecondPaginationOption);
-
 Then(/^I click the next pagination option$/, clickNextPagination);
 
 Then(/^I click the previous pagination option$/, clickPreviousPagination);
@@ -181,15 +175,9 @@ Then(/^I navigate back to organisation list admin page$/, navigateToOrgListPageU
 Then(/^I click on the first organisation in the list$/, findOrganisationList);
 
 Then(/^I expect to see error message "([^"]*)"$/, validateErrorMessage);
-Then(/^I select Dev status filter$/,
-	validateServiceEnvChecked
-);
-Then(
-	/^I click on the cancel filter on the service detail page$/,
-	clickCancelFilterServiceDetailPage
-);
 
-Then(
-	/^I verify user details is displayed$/,
-	validateServiceUserRoleChecked
-);
+Then(/^I select Dev status filter$/, validateServiceEnvChecked);
+
+Then(/^I click on the cancel filter on the service detail page$/, clickCancelFilterServiceDetailPage);
+
+Then(/^I verify user details is displayed$/, validateServiceUserRoleChecked);
