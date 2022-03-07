@@ -15,6 +15,7 @@ type AddOrganisationState = {
 	formName: string;
 	validationError: boolean;
 	validationErrorMessage: string;
+	fetchedOrgNameFound: boolean;
 	hasSubmitted: boolean;
 	error?: Error;
 	isSaveButtonLoading: boolean;
@@ -31,12 +32,15 @@ export class AddOrganisation extends Component<
 			validationError: false,
 			validationErrorMessage:
 				"Organisation name should be alphanumeric and be between 2-100 characters",
+			fetchedOrgNameFound: false,
 			hasSubmitted: false,
 			isSaveButtonLoading: false,
 		};
 
 		document.title = "NICE Accounts - Add organisation";
 	}
+
+	typingTimer = 0;
 
 	toggleValidationMessage = (
 		blockedOrgNameFound: boolean,
@@ -48,7 +52,7 @@ export class AddOrganisation extends Component<
 			: "Organisation name should be alphanumeric and be between 2-100 characters";
 	};
 
-	fetchedOrgNameFound = async (formName: string): Promise<boolean> => {
+	checkOrgName = async (formName: string): Promise<void> => {
 		let fetchedOrgNameFound = false;
 
 		const fetchOrgName = await fetchData(
@@ -59,7 +63,8 @@ export class AddOrganisation extends Component<
 			? fetchOrgName.some((org: any) => org.name === formName)
 			: fetchedOrgNameFound;
 
-		return fetchedOrgNameFound;
+		this.setState({ fetchedOrgNameFound });
+		this.typingTimer = 0;
 	};
 
 	handleSubmit = async (
@@ -68,17 +73,20 @@ export class AddOrganisation extends Component<
 		e.preventDefault();
 		this.setState({ isSaveButtonLoading: true });
 
-		const { formName, validationError } = this.state;
+		const { validationError } = this.state;
 		const form = e.currentTarget;
-		const trimmedFormName = formName.trim();
-		const fetchedOrgNameFound =
-			document.activeElement?.id === "orgName" && !validationError
-				? await this.fetchedOrgNameFound(trimmedFormName)
-				: false;
+		const formName = this.state.formName.trim();
+
+		if (this.typingTimer) {
+			clearTimeout(this.typingTimer);
+			await this.checkOrgName(formName);
+		}
+
+		const { fetchedOrgNameFound } = this.state;
 
 		if (!form.checkValidity() || validationError || fetchedOrgNameFound) {
 			const validationErrorMessage = fetchedOrgNameFound
-				? this.toggleValidationMessage(true, trimmedFormName)
+				? this.toggleValidationMessage(true, formName)
 				: this.state.validationErrorMessage;
 			this.setState({
 				validationError: true,
@@ -92,7 +100,7 @@ export class AddOrganisation extends Component<
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				name: trimmedFormName,
+				name: formName,
 			}),
 		};
 
@@ -115,15 +123,19 @@ export class AddOrganisation extends Component<
 
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const formElement = e.target;
+		const formName = formElement.value;
 		const isNowValid = formElement.validity.valid;
 		let { validationError } = this.state;
 
-		if (validationError && isNowValid) {
+		if (isNowValid) {
 			validationError = false;
 		}
 
+		clearTimeout(this.typingTimer);
+		this.typingTimer = setTimeout(this.checkOrgName, 1000, formName.trim());
+
 		this.setState({
-			formName: e.target.value,
+			formName,
 			validationError,
 		});
 	};
@@ -133,11 +145,13 @@ export class AddOrganisation extends Component<
 	): Promise<void> => {
 		const formElement = e.target;
 		const formName = this.state.formName.trim();
-		let fetchedOrgNameFound = false;
 
-		if (formElement.validity.valid) {
-			fetchedOrgNameFound = await this.fetchedOrgNameFound(formName);
+		if (this.typingTimer) {
+			clearTimeout(this.typingTimer);
+			await this.checkOrgName(formName);
 		}
+
+		const { fetchedOrgNameFound } = this.state;
 
 		const isNowValid = formElement.validity.valid
 			? !fetchedOrgNameFound
