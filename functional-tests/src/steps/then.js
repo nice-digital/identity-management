@@ -33,7 +33,7 @@ import validateProfileSuccessfulMessage from '../support/check/validateUserStatu
 import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile';
 import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserRoleChecked } from '../support/check/validateFilterChecked';
 import validateOrganisationsDownloadPageResultCount from '../support/check/validateAdminOrgPage';
-import validateAdminOrgPage, { validateFirstLinkInPagination } from "../support/check/validateAdminOrgPage";
+import validateAdminOrgPage, { validateFirstLinkInPagination, validatePreviousPage } from "../support/check/validateAdminOrgPage";
 import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } from "../support/action/clickPaginationOption";
 import editOrganisationName from '../support/action/editOrganisationName';
 import saveNewOrganisationName from '../support/action/saveNewOrganisationName';
@@ -161,6 +161,8 @@ Then(
 	validateFirstLinkInPagination
 );
 Then(/^I click the next pagination option$/, clickNextPagination);
+
+Then(/^I expect the first pagination option is now "([^"]*)"$/, validatePreviousPage);
 
 Then(/^I click the previous pagination option$/, clickPreviousPagination);
 
