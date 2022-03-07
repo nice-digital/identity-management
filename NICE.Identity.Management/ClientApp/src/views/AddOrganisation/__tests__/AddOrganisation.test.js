@@ -43,6 +43,7 @@ describe("AddOrganisation", () => {
 
 	it("should display confirmation message once fetchData post is successfully complete", async () => {
 		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify([]));
 		fetch.mockResponseOnce(JSON.stringify({}));
 		const wrapper = mount(
 			<MemoryRouter>
@@ -71,6 +72,7 @@ describe("AddOrganisation", () => {
     it("should show error message when fetchData post fails", async () => {
 		console.error = jest.fn();
 		const error = new Error("Not allowed");
+		fetch.mockResponseOnce(JSON.stringify([]));
 		fetch.mockRejectOnce(error);
 		const wrapper = mount(
 			<MemoryRouter>
@@ -97,11 +99,13 @@ describe("AddOrganisation", () => {
 
 	it("should show validation error when name is invalid format", async () => {
 		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify([]));
 		const wrapper = mount(
 			<MemoryRouter>
 				<AddOrganisation />
 			</MemoryRouter>,
 		);
+		
 		wrapper.find("#orgName").prop("onChange")({
 			target: {
 				name: "orgName",
