@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
+import { Grid, GridItem } from "@nice-digital/nds-grid";
 
 type DeleteOrganisationConfirmationProps = {
 	name: string;
@@ -27,12 +28,16 @@ export const DeleteOrganisationConfirmation = (
 
 			<PageHeader heading="Organisation deleted" />
 
-			<Alert type="success" data-qa-sel="deletion-success">
-				<p>The organisation {name} was successfully deleted.</p>
-				<Link data-qa-sel="back-to-organisations" to="/organisations">
-					Back to organisations
-				</Link>
-			</Alert>
+			<Grid>
+				<GridItem cols={12} md={9}>
+					<Alert type="success" data-qa-sel="deletion-success">
+						<p>The organisation {name} was successfully deleted.</p>
+						<Link data-qa-sel="back-to-organisations" to="/organisations">
+							Back to organisations
+						</Link>
+					</Alert>
+				</GridItem>
+			</Grid>
 		</>
 	);
 };

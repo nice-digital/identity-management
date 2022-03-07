@@ -92,7 +92,8 @@ exports[`SelectRoles should match the snapshot after data has been loaded 1`] = 
     verticalAlignment="top"
   >
     <GridItem
-      cols={8}
+      cols={12}
+      md={9}
     >
       <form
         onSubmit={[Function]}

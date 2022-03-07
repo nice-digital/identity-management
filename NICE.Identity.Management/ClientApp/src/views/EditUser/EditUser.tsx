@@ -279,32 +279,40 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 								heading={`${user.firstName} ${user.lastName}`}
 							/>
 							{isAD && (
-								<Alert
-									type="caution"
-									role="status"
-									aria-live="polite"
-									data-qa-sel="ad-warning-edit-user"
-								>
-									<p>
-										Changes are not possible for this record. Staff details are
-										managed through Active Directory.
-									</p>
-								</Alert>
+								<Grid>
+									<GridItem cols={12} md={9}>
+										<Alert
+											type="caution"
+											role="status"
+											aria-live="polite"
+											data-qa-sel="ad-warning-edit-user"
+										>
+											<p>
+												Changes are not possible for this record. Staff details
+												are managed through Active Directory.
+											</p>
+										</Alert>
+									</GridItem>
+								</Grid>
 							)}
 							{isEPPI && (
-								<Alert
-									type="caution"
-									role="status"
-									aria-live="polite"
-									data-qa-sel="eppi-warning-edit-user"
-								>
-									<p>
-										This user may have access to EPPI R5 - only a professional
-										email address can be associated to this profile. Please
-										verify via the EPPI user admin page before changing the
-										email address.
-									</p>
-								</Alert>
+								<Grid>
+									<GridItem cols={12} md={9}>
+										<Alert
+											type="caution"
+											role="status"
+											aria-live="polite"
+											data-qa-sel="eppi-warning-edit-user"
+										>
+											<p>
+												This user may have access to EPPI R5 - only a
+												professional email address can be associated to this
+												profile. Please verify via the EPPI user admin page
+												before changing the email address.
+											</p>
+										</Alert>
+									</GridItem>
+								</Grid>
 							)}
 							<Grid>
 								<GridItem cols={12} md={6} lg={4}>

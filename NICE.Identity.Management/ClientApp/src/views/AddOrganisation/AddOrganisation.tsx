@@ -189,17 +189,21 @@ export class AddOrganisation extends Component<
 				{!error ? (
 					<>
 						{hasSubmitted && (
-							<Alert
-								type="info"
-								role="status"
-								aria-live="polite"
-								data-qa-sel="successful-message-add-organisation"
-							>
-								<p>New organisation has been added successfully.</p>
-								<Link to={`/organisations`}>
-									Back to organisation admin page
-								</Link>
-							</Alert>
+							<Grid>
+								<GridItem cols={12} md={9}>
+									<Alert
+										type="info"
+										role="status"
+										aria-live="polite"
+										data-qa-sel="successful-message-add-organisation"
+									>
+										<p>New organisation has been added successfully.</p>
+										<Link to={`/organisations`}>
+											Back to organisation admin page
+										</Link>
+									</Alert>
+								</GridItem>
+							</Grid>
 						)}
 						<Grid>
 							<GridItem cols={12} md={6} lg={4}>
