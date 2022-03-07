@@ -15,15 +15,15 @@ export const validateOrganisationsDownloadPageResultCount = (countText) => {
 };
 
 export const validateFirstLinkInPagination = (linkText) => {
-	waitForVisible(selectors.organisationListPage.firstPager);
-	checkContainsText(
-		"selector",
-		selectors.organisationListPage.firstPager,
-		linkText
-	);
+	waitForVisible(".pagination__inactive");
+	checkContainsText("element", ".pagination__inactive", linkText);
 	pause(1000);
 };
 
-
+export const validatePreviousPage = (falseCase) => {
+	waitForVisible(".pagination__item:nth-of-type(1)");
+	checkContainsText("button", ".pagination__item:nth-of-type(1)", falseCase, "Previous page");
+	pause(1000);
+};
 
 export default validateOrganisationsDownloadPageResultCount;
