@@ -54,13 +54,14 @@ export class AddOrganisation extends Component<
 
 	checkOrgName = async (formName: string): Promise<void> => {
 		let fetchedOrgNameFound = false;
+		formName = formName.toLowerCase();
 
 		const fetchOrgName = await fetchData(
 			`${Endpoints.organisationsList}?q=${formName}`,
 		);
 
 		fetchedOrgNameFound = fetchOrgName.length
-			? fetchOrgName.some((org: any) => org.name === formName)
+			? fetchOrgName.some((org: any) => org.name.toLowerCase() === formName)
 			: fetchedOrgNameFound;
 
 		this.setState({ fetchedOrgNameFound });
