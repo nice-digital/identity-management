@@ -8,7 +8,7 @@ import { FormGroup } from "@nice-digital/nds-form-group";
 import { Input } from "@nice-digital/nds-input";
 import { Radio } from "@nice-digital/nds-radio";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { useFetch } from "../../helpers/useFetch";
+import { useFetch, isError, CustomError } from "../../helpers/useFetch";
 import { Endpoints } from "../../data/endpoints";
 import { UserType } from "../../models/types";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
@@ -17,10 +17,6 @@ import "@nice-digital/nds-radio/scss/radio.scss";
 
 type TParams = { id: string };
 type EditUserProps = Record<string, unknown> & RouteComponentProps<TParams>;
-type CustomError = {
-	error: Error;
-	status: number;
-};
 type FormDataType = Record<string, string | boolean | null>;
 
 export const EditUser = (props: EditUserProps): React.ReactElement => {
@@ -50,38 +46,37 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		audienceInsight: null,
 	});
 
-	const doFetch = useFetch(Endpoints.user(id));
+	const doFetch = useFetch();
 
 	useEffect(() => {
 		let isMounted = true;
-
 		(async () => {
 			if (isMounted) {
 				setIsLoading(true);
-				const data = await doFetch<UserType>();
+				const data = await doFetch<UserType>(Endpoints.user(id));
 
-				if (containsError(data)) {
-					const errorObject = data as CustomError;
-					setError(errorObject.error);
+				if (isError(data)) {
+					setError(data.error);
 				} else {
-					const userData = data as UserType;
 					const updatedFormData = {
-						emailAddress: userData.emailAddress,
-						firstName: userData.firstName,
-						lastName: userData.lastName,
-						audienceInsight: userData.allowContactMe,
+						emailAddress: data.emailAddress,
+						firstName: data.firstName,
+						lastName: data.lastName,
+						audienceInsight: data.allowContactMe,
 					};
-					setUser(userData);
+					setUser(data);
 					setFormData(updatedFormData);
 
-					if (userData.emailAddress.indexOf("@nice.org.uk") > -1) {
+					if (data.emailAddress.indexOf("@nice.org.uk") > -1) {
 						setEmailBlockedPattern({
 							pattern: "^[A-Za-z0-9._%+-]+@nice.org.uk$",
 						});
 						setIsAD(true);
-					} else if(userData.emailAddress.indexOf("@rcplondon.ac.uk") > -1 
-								|| userData.emailAddress.indexOf("@rcp.ac.uk") > -1
-								|| userData.emailAddress.indexOf("@rcog.org.uk") > -1) {
+					} else if (
+						data.emailAddress.indexOf("@rcplondon.ac.uk") > -1 ||
+						data.emailAddress.indexOf("@rcp.ac.uk") > -1 ||
+						data.emailAddress.indexOf("@rcog.org.uk") > -1
+					) {
 						setIsEPPI(true);
 					}
 				}
@@ -93,7 +88,7 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		return () => {
 			isMounted = true;
 		};
-	}, []);
+	}, [doFetch, id]);
 
 	const containsError = (data: Record<string, unknown>) => {
 		return Object.prototype.hasOwnProperty.call(data, "error");
@@ -159,7 +154,8 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 		const data = await doFetch<UserType>(Endpoints.user(id), fetchOptions);
 
 		if (!containsError(data)) {
-			setUser(data as UserType);
+			const userData = data as UserType;
+			setUser(userData);
 			setRedirect(true);
 		} else {
 			const errorObject = data as CustomError;
@@ -283,31 +279,40 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 								heading={`${user.firstName} ${user.lastName}`}
 							/>
 							{isAD && (
-								<Alert
-									type="caution"
-									role="status"
-									aria-live="polite"
-									data-qa-sel="ad-warning-edit-user"
-								>
-									<p>
-										Changes are not possible for this record. Staff details are
-										managed through Active Directory.
-									</p>
-								</Alert>
+								<Grid>
+									<GridItem cols={12} md={9}>
+										<Alert
+											type="caution"
+											role="status"
+											aria-live="polite"
+											data-qa-sel="ad-warning-edit-user"
+										>
+											<p>
+												Changes are not possible for this record. Staff details
+												are managed through Active Directory.
+											</p>
+										</Alert>
+									</GridItem>
+								</Grid>
 							)}
 							{isEPPI && (
-								<Alert
-									type="caution"
-									role="status"
-									aria-live="polite"
-									data-qa-sel="eppi-warning-edit-user"
-								>
-									<p>
-										This user may have access to EPPI R5 - only a professional email 
-										address can be associated to this profile. Please verify via the EPPI
-										user admin page before changing the email address.
-									</p>
-								</Alert>
+								<Grid>
+									<GridItem cols={12} md={9}>
+										<Alert
+											type="caution"
+											role="status"
+											aria-live="polite"
+											data-qa-sel="eppi-warning-edit-user"
+										>
+											<p>
+												This user may have access to EPPI R5 - only a
+												professional email address can be associated to this
+												profile. Please verify via the EPPI user admin page
+												before changing the email address.
+											</p>
+										</Alert>
+									</GridItem>
+								</Grid>
 							)}
 							<Grid>
 								<GridItem cols={12} md={6} lg={4}>

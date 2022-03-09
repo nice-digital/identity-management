@@ -5,6 +5,7 @@ import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { PageHeader } from "@nice-digital/nds-page-header";
+import { Grid, GridItem } from "@nice-digital/nds-grid";
 
 import { DeleteOrganisationConfirmation } from "../DeleteOrganisationConfirmation/DeleteOrganisationConfirmation";
 import { OrganisationType } from "../../models/types";
@@ -16,7 +17,8 @@ import { isDataError } from "../../helpers/isDataError";
 
 type TParams = { id: string };
 
-type DeleteOrganisationProps = Record<string, unknown> & RouteComponentProps<TParams>;
+type DeleteOrganisationProps = Record<string, unknown> &
+	RouteComponentProps<TParams>;
 
 type DeleteOrganisationState = {
 	organisation: OrganisationType;
@@ -26,7 +28,10 @@ type DeleteOrganisationState = {
 	isDeleteButtonLoading: boolean;
 };
 
-export class DeleteOrganisation extends Component<DeleteOrganisationProps, DeleteOrganisationState> {
+export class DeleteOrganisation extends Component<
+	DeleteOrganisationProps,
+	DeleteOrganisationState
+> {
 	constructor(props: DeleteOrganisationProps) {
 		super(props);
 
@@ -64,7 +69,9 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const organisation = await fetchData(Endpoints.organisation(this.props.match.params.id));
+		const organisation = await fetchData(
+			Endpoints.organisation(this.props.match.params.id),
+		);
 
 		if (isDataError(organisation)) {
 			this.setState({ error: organisation });
@@ -75,10 +82,16 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 	}
 
 	render(): JSX.Element {
-		const { isLoading, isDeleteButtonLoading, error, hasBeenDeleted, organisation } = this.state;
+		const {
+			isLoading,
+			isDeleteButtonLoading,
+			error,
+			hasBeenDeleted,
+			organisation,
+		} = this.state;
 		const { id } = this.props.match.params;
 
-		let lastBreadcrumb = `${organisation.name}`;
+		let lastBreadcrumb = organisation.name;
 
 		if (isLoading) {
 			lastBreadcrumb = "Loading organisation details";
@@ -87,9 +100,7 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 		return (
 			<>
 				{hasBeenDeleted ? (
-					<DeleteOrganisationConfirmation
-						name={`${organisation.name}`}
-					/>
+					<DeleteOrganisationConfirmation name={organisation.name} />
 				) : (
 					<>
 						<Breadcrumbs>
@@ -110,39 +121,51 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 							<>
 								{isLoading ? (
 									<>
-										<PageHeader preheading="Confirm" heading="Delete organisation" />
-										<p>Loading...</p>
+										<PageHeader
+											preheading="Confirm"
+											heading="Delete organisation"
+										/>
+										<Grid>
+											<GridItem cols={12} md={9}>
+												<p>Loading...</p>
+											</GridItem>
+										</Grid>
 									</>
 								) : (
 									<>
-										<PageHeader	heading={`${organisation.name}`} />
-							
-										<Alert
-											type="info"
-											role="status"
-											aria-live="polite"
-											data-qa-sel="warning-message-delete-organisation"
-										>
-											<p>Once you delete an organisation, the action cannot be undone.
-											Are you sure you want to proceed?</p>
-										</Alert>
+										<PageHeader heading={`${organisation.name}`} />
+										<Grid>
+											<GridItem cols={12} md={9}>
+												<Alert
+													type="info"
+													role="status"
+													aria-live="polite"
+													data-qa-sel="warning-message-delete-organisation"
+												>
+													<p>
+														Once you delete an organisation, the action cannot
+														be undone. Are you sure you want to proceed?
+													</p>
+												</Alert>
 
-										<Button
-											data-qa-sel="confirm-delete-organisation"
-											variant="cta"
-											onClick={this.handleDeleteClick}
-											disabled={isDeleteButtonLoading}
-										>
-											{isDeleteButtonLoading ? "Loading..." : "Confirm"}
-										</Button>
-										<Button
-											to={`/organisations/${id}`}
-											variant="secondary"
-											elementType={Link}
-											disabled={isDeleteButtonLoading}
-										>
-											Cancel
-										</Button>
+												<Button
+													data-qa-sel="confirm-delete-organisation"
+													variant="cta"
+													onClick={this.handleDeleteClick}
+													disabled={isDeleteButtonLoading}
+												>
+													{isDeleteButtonLoading ? "Loading..." : "Confirm"}
+												</Button>
+												<Button
+													to={`/organisations/${id}`}
+													variant="secondary"
+													elementType={Link}
+													disabled={isDeleteButtonLoading}
+												>
+													Cancel
+												</Button>
+											</GridItem>
+										</Grid>
 									</>
 								)}
 							</>
@@ -155,6 +178,6 @@ export class DeleteOrganisation extends Component<DeleteOrganisationProps, Delet
 					</>
 				)}
 			</>
-		)
+		);
 	}
 }

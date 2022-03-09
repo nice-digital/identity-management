@@ -1,13 +1,18 @@
 import React from "react";
 import { Panel } from "@nice-digital/nds-panel";
 import { Input } from "@nice-digital/nds-forms";
+import { useHistory, useLocation } from "react-router-dom";
 
 type FilterSearchProps = {
-	onInputChange: (searchQuery: string) => void;
+	onInputChange?: (searchQuery: string) => void;
 	label: string;
 };
 
 export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
+	const history = useHistory();
+	const { search: querystring } = useLocation();
+	const querystringObject = new URLSearchParams(querystring);
+
 	let typingTimer = 0;
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +21,20 @@ export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
 		clearTimeout(typingTimer);
 
 		typingTimer = window.setTimeout(() => {
-			props.onInputChange(val);
+			if (props.onInputChange) {
+				props.onInputChange(val);
+			} else {
+				querystringObject.set("q", val);
+				querystringObject.set("page", "1");
+
+				if (!val) {
+					querystringObject.delete("q");
+				}
+
+				history.push({
+					search: `${querystringObject}`,
+				});
+			}
 		}, 1000);
 	};
 
@@ -30,6 +48,7 @@ export const FilterSearch = (props: FilterSearchProps): React.ReactElement => {
 				onChange={handleInputChange}
 				autoComplete="off"
 				data-qa-sel="filter-search-input"
+				defaultValue={querystringObject.get("q") || ""}
 			/>
 		</Panel>
 	);

@@ -14,6 +14,8 @@ import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 type AddOrganisationState = {
 	formName: string;
 	validationError: boolean;
+	validationErrorMessage: string;
+	fetchedOrgNameFound: boolean;
 	hasSubmitted: boolean;
 	error?: Error;
 	isSaveButtonLoading: boolean;
@@ -28,6 +30,9 @@ export class AddOrganisation extends Component<
 		this.state = {
 			formName: "",
 			validationError: false,
+			validationErrorMessage:
+				"Organisation name should be alphanumeric and be between 2-100 characters",
+			fetchedOrgNameFound: false,
 			hasSubmitted: false,
 			isSaveButtonLoading: false,
 		};
@@ -35,16 +40,60 @@ export class AddOrganisation extends Component<
 		document.title = "NICE Accounts - Add organisation";
 	}
 
+	typingTimer = 0;
+
+	toggleValidationMessage = (
+		blockedOrgNameFound: boolean,
+		orgName = "",
+	): string => {
+		const orgNameOrDefault = orgName || "organisation";
+		return blockedOrgNameFound
+			? `Cannot add ${orgNameOrDefault}, that organisation already exists!`
+			: "Organisation name should be alphanumeric and be between 2-100 characters";
+	};
+
+	checkOrgName = async (formName: string): Promise<void> => {
+		let fetchedOrgNameFound = false;
+		formName = formName.toLowerCase();
+
+		const fetchOrgName = await fetchData(
+			`${Endpoints.organisationsList}?q=${formName}`,
+		);
+
+		fetchedOrgNameFound = fetchOrgName.length
+			? fetchOrgName.some((org: any) => org.name.toLowerCase() === formName)
+			: fetchedOrgNameFound;
+
+		this.setState({ fetchedOrgNameFound });
+		this.typingTimer = 0;
+	};
+
 	handleSubmit = async (
 		e: React.FormEvent<HTMLFormElement>,
 	): Promise<void | boolean> => {
 		e.preventDefault();
 		this.setState({ isSaveButtonLoading: true });
 
+		const { validationError } = this.state;
 		const form = e.currentTarget;
+		const formName = this.state.formName.trim();
 
-		if (!form.checkValidity()) {
-			this.setState({ validationError: true, isSaveButtonLoading: false });
+		if (this.typingTimer) {
+			clearTimeout(this.typingTimer);
+			await this.checkOrgName(formName);
+		}
+
+		const { fetchedOrgNameFound } = this.state;
+
+		if (!form.checkValidity() || validationError || fetchedOrgNameFound) {
+			const validationErrorMessage = fetchedOrgNameFound
+				? this.toggleValidationMessage(true, formName)
+				: this.state.validationErrorMessage;
+			this.setState({
+				validationError: true,
+				validationErrorMessage,
+				isSaveButtonLoading: false,
+			});
 			return false;
 		}
 
@@ -52,13 +101,14 @@ export class AddOrganisation extends Component<
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				name: this.state.formName,
+				name: formName,
 			}),
 		};
 
 		const organisation = await fetchData(
 			Endpoints.organisationsList,
 			fetchOptions,
+			true,
 		);
 
 		if (isDataError(organisation)) {
@@ -74,29 +124,54 @@ export class AddOrganisation extends Component<
 
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const formElement = e.target;
+		const formName = formElement.value;
 		const isNowValid = formElement.validity.valid;
 		let { validationError } = this.state;
 
-		if (validationError && isNowValid) {
+		if (isNowValid) {
 			validationError = false;
 		}
 
-		this.setState({ formName: e.target.value, validationError });
+		clearTimeout(this.typingTimer);
+		this.typingTimer = setTimeout(this.checkOrgName, 1000, formName.trim());
+
+		this.setState({
+			formName,
+			validationError,
+		});
 	};
 
-	handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
+	handleBlur = async (
+		e: React.ChangeEvent<HTMLInputElement>,
+	): Promise<void> => {
 		const formElement = e.target;
-		const isNowValid = formElement.validity.valid;
+		const formName = this.state.formName.trim();
 
-		this.setState({ validationError: !isNowValid });
+		if (this.typingTimer) {
+			clearTimeout(this.typingTimer);
+			await this.checkOrgName(formName);
+		}
+
+		const { fetchedOrgNameFound } = this.state;
+
+		const isNowValid = formElement.validity.valid
+			? !fetchedOrgNameFound
+			: false;
+
+		const validationErrorMessage = this.toggleValidationMessage(
+			fetchedOrgNameFound,
+			formName,
+		);
+
+		this.setState({
+			validationError: !isNowValid,
+			validationErrorMessage,
+			formName,
+		});
 	};
 
 	render(): JSX.Element {
 		const { formName, hasSubmitted, error, isSaveButtonLoading } = this.state;
-
-		// if (hasSubmitted) {
-		// 	return <Redirect to="/organisations" />;
-		// }
 
 		return (
 			<>
@@ -115,17 +190,21 @@ export class AddOrganisation extends Component<
 				{!error ? (
 					<>
 						{hasSubmitted && (
-							<Alert
-								type="info"
-								role="status"
-								aria-live="polite"
-								data-qa-sel="successful-message-add-organisation"
-							>
-								<p>New organisation has been added successfully.</p>
-								<Link to={`/organisations`}>
-									Back to organisation admin page
-								</Link>
-							</Alert>
+							<Grid>
+								<GridItem cols={12} md={9}>
+									<Alert
+										type="info"
+										role="status"
+										aria-live="polite"
+										data-qa-sel="successful-message-add-organisation"
+									>
+										<p>New organisation has been added successfully.</p>
+										<Link to={`/organisations`}>
+											Back to organisation admin page
+										</Link>
+									</Alert>
+								</GridItem>
+							</Grid>
 						)}
 						<Grid>
 							<GridItem cols={12} md={6} lg={4}>
@@ -143,9 +222,11 @@ export class AddOrganisation extends Component<
 										onChange={this.handleChange}
 										onBlur={this.handleBlur}
 										error={this.state.validationError}
-										errorMessage="Organisation name should be alphanumeric and should not exceed 100 characters"
+										errorMessage={this.state.validationErrorMessage}
 										value={formName}
 										disabled={isSaveButtonLoading}
+										placeholder="Add organisation name"
+										className={"mb--e"}
 									/>
 									<Button
 										data-qa-sel="save-button-add-organisation"

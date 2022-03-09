@@ -9,7 +9,11 @@ import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccount
 import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
 import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave, clickFirstService } from "../support/action/selectService";
 import validateServiceEnvFilterChecked, { enterNameToFilter, clickCancelFilter } from "../support/check/validateFilterChecked";
-
+import deleteEnteredText from "../support/check/deleteInputText";
+import deleteInputText, { deleteNewOrgEnteredText } from "../support/check/deleteInputText";
+import selectFromDropdownByIndex from '../support/action/selectFromDropdownByIndex';
+import checkFirstOrgInList from '../support/check/checkFirstOrgInList';
+import addNewOrganisation from '../support/action/addNewOrganisation';
 
 When(
   /^I log into accounts with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
@@ -110,6 +114,22 @@ When(
 When(/^I add name "([^"]*)" to the filter$/, enterNameToFilter);
 
 When(/^I click on the cancel filter$/, clickCancelFilter);
+
+When(/^I delete entered organisation name$/, deleteEnteredText);
+
+When(/^I delete entered new organisation name$/, deleteNewOrgEnteredText);
+
+When(
+	/^I change the number of results on the page by selecting index "([^"]*)"$/,
+	selectFromDropdownByIndex
+);
+
+When(
+  /^I check the first organisation on the page it displays "([^"]*)"$/,
+  checkFirstOrgInList
+);
+
+When(/^I click on the add organisation button$/, addNewOrganisation);
 
 When(
   /^I click on the first service on the list$/,
