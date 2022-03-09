@@ -1,5 +1,6 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-export const finduser = (userApi, username) => {
+
+export async function finduser(userApi: string, username: string): Promise<void> {
 
   const request = new XMLHttpRequest();
 

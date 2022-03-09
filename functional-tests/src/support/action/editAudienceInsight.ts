@@ -1,11 +1,12 @@
-import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
+import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
+import { clickElement } from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
 import selectors from '../selectors';
 
 
-export const editAudienceInsight = () => {
+export async function editAudienceInsight(): Promise<void> {
 
-  waitForVisible(selectors.editUserProfile.optIn);
-  browser.click(selectors.editUserProfile.optIn);
+  await waitForDisplayed(selectors.editUserProfile.optIn, "");
+  await clickElement("click", "selector", selectors.editUserProfile.optIn);
  
 };
 

@@ -7,8 +7,9 @@
   "scripts": {
     "test": "wdio run wdio.conf.ts",
     "test:teamcity": "wdio run wdio.teamcity.conf.js",
-    "test:docker": "npm test:teamcity -- --hostname hub --baseUrl http://idam:8080",
-    "wait:docker": "waitforit -t 120 --strict idammanagement:8080"
+    "test:docker": "npm test -- --hostname hub --baseUrl http://idam:8080",
+    "wait:docker": "waitforit -t 120 --strict idammanagement:8080",
+    "wait-then-test": "npm run wait:docker && npm run test:docker"
   },
   "repository": {
     "type": "git",

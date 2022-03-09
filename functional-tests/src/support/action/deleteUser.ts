@@ -1,7 +1,9 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 export async function deleteUser(username: string, userApi: string): Promise<void> {
+  
   const getUserRequest = new XMLHttpRequest();
+
   getUserRequest.open('GET', process.env[userApi] + '/users', false);
   getUserRequest.setRequestHeader('Authorization', 'Bearer ' + process.env.access_token);
   getUserRequest.setRequestHeader('Content-Type', 'application/json');

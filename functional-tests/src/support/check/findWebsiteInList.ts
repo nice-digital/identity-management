@@ -1,15 +1,15 @@
-import checkContainsText from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
-import waitForVisible from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible";
-import checkURL from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
-import pause from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
+import {checkContainsText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
+import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
+import {checkUrl} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
+import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
 import selectors from "../selectors";
 
-export const findWebsiteList = (website) => {
+export async function findWebsiteList(website: string): Promise<void> {
   browser.refresh();
-  waitForVisible(selectors.websiteListPage.websitelist);
-  checkURL("http://idam:8080/services");
-  checkContainsText("element", selectors.websiteListPage.websitelist, website);
-  pause(1000);
+  await waitForDisplayed(selectors.websiteListPage.websitelist, "");
+  await checkUrl("", "http://idam:8080/services");
+  await checkContainsText("element", selectors.websiteListPage.websitelist, "", website);
+  await pause("1000");
 };
 
 export default findWebsiteList;

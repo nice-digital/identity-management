@@ -1,44 +1,40 @@
-import clickElement from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
-import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
+import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
+import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
 import selectors from '../selectors';
 
-export const clickIdamDockerService = () => {
-  waitForVisible(selectors.serviceListPage.thirdService);
-  clickElement('click', 'selector', selectors.serviceListPage.thirdService);
+export async function clickIdamDockerService(): Promise<void> {
+  await waitForDisplayed(selectors.serviceListPage.thirdService, "");
+  await clickElement('click', 'selector', selectors.serviceListPage.thirdService);
 };
 
-export const clickTestEnvironment = () => {
-  waitForVisible(selectors.environmentListPage.firstEnvironment);
-  clickElement(
-    'click',
-    'selector',
-    selectors.environmentListPage.firstEnvironment
-  );
+export async function clickTestEnvironment(): Promise<void> {
+  await waitForDisplayed(selectors.environmentListPage.firstEnvironment, "");
+  await clickElement('click', 'selector', selectors.environmentListPage.firstEnvironment);
 };
 
-export const clickFirstRole = () => {
-  waitForVisible(selectors.rolesListPage.firstRole);
-  clickElement('click', 'selector', selectors.rolesListPage.firstRole);
+export async function clickFirstRole(): Promise<void> {
+  await waitForDisplayed(selectors.rolesListPage.firstRole, "");
+  await clickElement('click', 'selector', selectors.rolesListPage.firstRole);
 };
 
-export const clickSecondRole = () => {
-  waitForVisible(selectors.rolesListPage.secondRole);
-  clickElement('click', 'selector', selectors.rolesListPage.secondRole);
+export async function clickSecondRole(): Promise<void> {
+  await waitForDisplayed(selectors.rolesListPage.secondRole, "");
+  await clickElement('click', 'selector', selectors.rolesListPage.secondRole);
 };
 
-export const clickThirdRole = () => {
-  waitForVisible(selectors.rolesListPage.thirdRole);
-  clickElement('click', 'selector', selectors.rolesListPage.thirdRole);
+export async function clickThirdRole(): Promise<void> {
+  await waitForDisplayed(selectors.rolesListPage.thirdRole, "");
+  await clickElement('click', 'selector', selectors.rolesListPage.thirdRole);
 };
 
-export const clickFourthRole = () => {
-  waitForVisible(selectors.rolesListPage.fourthRole);
-  clickElement('click', 'selector', selectors.rolesListPage.fourthRole);
+export async function clickFourthRole(): Promise<void> {
+  await waitForDisplayed(selectors.rolesListPage.fourthRole, "");
+  await clickElement('click', 'selector', selectors.rolesListPage.fourthRole);
 };
 
-export const clickSave = () => {
-  waitForVisible(selectors.rolesListPage.saveButton);
-  clickElement('click', 'selector', selectors.rolesListPage.saveButton);
+export async function clickSave(): Promise<void> {
+  await waitForDisplayed(selectors.rolesListPage.saveButton, "");
+  await clickElement('click', 'selector', selectors.rolesListPage.saveButton);
 };
 
 export default clickIdamDockerService;

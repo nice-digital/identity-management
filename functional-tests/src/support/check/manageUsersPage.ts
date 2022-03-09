@@ -1,13 +1,12 @@
-import waitForVisible from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible";
-import checkContainsText from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText"
+import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
+import {checkContainsText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText"
+import {checkUrl} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
 import selectors from "../selectors";
-import emailInput from "./emailInput";
-import checkUrl from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
 
-export const manageUsersPage = () => {
-  checkUrl("http://idam:8080/users");
-  // waitForVisible(selectors.adminHomepage.usernameField);
-  // waitForVisible(selectors.adminHomepage.roleField);
+export async function manageUsersPage(): Promise<void> {
+  await checkUrl("", "http://idam:8080/users");
+  // waitForDisplayed(selectors.adminHomepage.usernameField);
+  // waitForDisplayed(selectors.adminHomepage.roleField);
   // checkContainsText('element', selectors.adminHomepage.pageTitle, 'User Admin Portal');
 }
 

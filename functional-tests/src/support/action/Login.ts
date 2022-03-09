@@ -1,30 +1,23 @@
-import setInputField from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
-import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
-import click from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
-import waitFor from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitFor';
-// import scroll from '@nice-digital/wdio-cucumber-steps/lib/support/action/scroll';
+import {setInputField} from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
+import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
+import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
+import {waitFor} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitFor';
+import {pause} from '@nice-digital/wdio-cucumber-steps/lib/support/action/pause';
 import selectors from '../selectors';
-import emailInput from '../check/emailInput';
+// import scroll from '@nice-digital/wdio-cucumber-steps/lib/support/action/scroll';
+// import emailInput from '../check/emailInput';
 
-export const Login = (username, password) => {
-  waitForVisible(selectors.loginPage.usernameField);
-  waitForVisible(selectors.loginPage.passwordField);
-  click('click', 'element', 'body #ccc-recommended-settings');
+export async function Login(username: string, password: string): Promise<void> {
+  await waitForDisplayed(selectors.loginPage.usernameField, "");
+  await waitForDisplayed(selectors.loginPage.passwordField, "");
+  await clickElement('click', 'selector', 'body #ccc-recommended-settings');
   // click('click', 'element', '.CoronaMessage_button__2a9qf');
-  browser.setValue(selectors.loginPage.usernameField, process.env[username]);
-  browser.setValue(selectors.loginPage.passwordField, process.env[password]);
+  await setInputField("set", process.env[username], selectors.loginPage.usernameField);
+  await setInputField("set", process.env[password], selectors.loginPage.passwordField);
   // waitFor(selectors.loginPage.signInButton, 'enabled')
   // scroll(selectors.loginPage.signInButton);
-  click('click', 'element', selectors.loginPage.signInButton);
-  browser.pause(1000);
+  await clickElement('click', 'selector', selectors.loginPage.signInButton);
+  await pause("1000");
 };
 
 export default Login;
-
-// export const Login = (username, password) => {
-//   browser.waitForVisible("body .auth0-lock-input[name='email']", 10000);
-//   browser.waitForVisible("body .auth0-lock-input[name='password']", 10000);
-//   browser.setValue(".auth0-lock-input[name='email']", process.env[username]);
-//   browser.setValue(".auth0-lock-input[name='password']", process.env[password]);
-//   browser.submitForm(".auth0-lock-input[name='email']");
-// }

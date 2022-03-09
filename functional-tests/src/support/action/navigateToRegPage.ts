@@ -1,13 +1,13 @@
-import waitForVisible from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForVisible';
-import click from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
+import { waitForDisplayed } from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
+import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
 import selectors from '../selectors';
 
-export const navigateToRegPage = () => {
-  waitForVisible('body #ccc-recommended-settings');
-  click('click', 'element', 'body #ccc-recommended-settings');
-  waitForVisible(selectors.loginPage.registerLink);
-  click('click', 'element', selectors.loginPage.registerLink);
-  waitForVisible(selectors.registrationPage.emailInput);
+export async function navigateToRegPage(): Promise<void> {
+  await waitForDisplayed('body #ccc-recommended-settings', "");
+  await clickElement('click', 'selector', 'body #ccc-recommended-settings');
+  await waitForDisplayed(selectors.loginPage.registerLink, "");
+  await clickElement('click', 'selector', selectors.loginPage.registerLink);
+  await waitForDisplayed(selectors.registrationPage.emailInput, "");
 };
 
 export default navigateToRegPage;
