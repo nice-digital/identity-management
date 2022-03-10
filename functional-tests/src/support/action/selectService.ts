@@ -37,4 +37,9 @@ export async function clickSave(): Promise<void> {
   await clickElement('click', 'selector', selectors.rolesListPage.saveButton);
 };
 
+export async function clickFirstService(): Promise<void> {
+  await waitForDisplayed("[data-qa-sel='list-of-websites']", "");
+  await clickElement('click', 'selector',"[data-qa-sel='list-of-websites']");
+};
+
 export default clickIdamDockerService;
