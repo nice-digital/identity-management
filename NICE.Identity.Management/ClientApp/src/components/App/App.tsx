@@ -3,7 +3,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
 import { Container } from "@nice-digital/nds-container";
-
 import { Overview } from "../../views/Overview/Overview";
 import { UsersList } from "../../views/UsersList/UsersList";
 import { User } from "./../../views/User/User";
@@ -12,6 +11,7 @@ import { OrganisationsList } from "../../views/OrganisationsList/OrganisationsLi
 import { Organisation } from "../../views/Organisation/Organisation";
 import { AddOrganisation } from "../../views/AddOrganisation/AddOrganisation";
 import { EditOrganisation } from "../../views/EditOrganisation/EditOrganisation";
+import { EditOrganisationUsers } from "../../views/EditOrganisationUsers/EditOrganisationUsers";
 import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
 import { SelectService } from "./../../views/SelectService/SelectService";
 import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
@@ -99,13 +99,9 @@ export class App extends React.Component {
 					<Route path="/organisations" exact component={OrganisationsList} />
 					<Route path="/organisations/add" exact component={AddOrganisation} />
 					<Route
-						path={"/organisations/:id"}
-						render={(props) => {
-							// to stop rendering of component for 'add' route
-							const idRegExp = new RegExp(/[0-9]+$/g);
-							const endOfRoute = props.location.pathname.split("/").pop() ?? "";
-							return idRegExp.test(endOfRoute) && <Organisation {...props} />;
-						}}
+						path="/organisations/:id(\d+)"
+						exact
+						component={Organisation}
 					/>
 					<Route
 						path="/organisations/:id/delete"
@@ -116,6 +112,11 @@ export class App extends React.Component {
 						path="/organisations/:id/edit"
 						exact
 						component={EditOrganisation}
+					/>
+					<Route
+						path="/organisations/:id/users"
+						exact
+						component={EditOrganisationUsers}
 					/>
 					<Route path="/websites/:id" exact component={Website} />
 				</Container>
