@@ -14,20 +14,25 @@ export const config: WebdriverIO.Config = {
 
 	capabilities: [
 		{
-		acceptInsecureCerts: true, // Because of self-signed cert inside Docker
-		// acceptSslCerts: true,
-		maxInstances: 1,
-		browserName: "chrome",
-			"goog:chromeOptions": {
-				args: ["--window-size=1366,768",
-			// '--headless',
-      '--no-sandbox',
-      '--disable-gpu',
-      '--disable-setuid-sandbox',
-			'--ignore-certificate-errors',
-      '--disable-dev-shm-usage'].concat(isInDocker ? "--headless" : []),
-			},
-		},
+    acceptInsecureCerts: true, // Because of self-signed cert inside Docker
+    // acceptSslCerts: true,
+    maxInstances: 2,
+    browserName: 'chrome',
+    // chromeOptions: {
+    //   // w3c: false,
+    //   args: ['--headless', '--window-size=1366,1000'],
+    // },
+    'goog:chromeOptions': {
+      args: ['--disable-dev-shm-usage'],
+      localState: {
+        'browser.enabled_labs_experiments': [
+          'same-site-by-default-cookies@2',
+          'cookies-without-same-site-must-be-secure@2',
+          'mixed-forms-interstitial@2',
+        ],
+      },
+    },
+  },
 	],
 
 	logLevel: "warn",
