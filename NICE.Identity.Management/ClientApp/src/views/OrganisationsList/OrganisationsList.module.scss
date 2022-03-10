@@ -1,4 +1,10 @@
-.organisationsListSummary {
-  font-size: 1.25rem;
-  margin: 0;
+.flex {
+  display: flex;
+
+  &SpaceBetween {
+    justify-content: space-between;
+  }
+  &AlignCenter {
+    align-items: center;
+  }
 }

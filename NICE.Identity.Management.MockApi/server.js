@@ -24,6 +24,7 @@ const rewriter = jsonServer.rewriter({
   '/claims/:authenticationProviderUserId': '/claims',
   '/verificationemail/verificationemail': '/verificationemail',
   '/account/status': '/accountstatus',
+  '/users/usersbyorganisation/:organisationId': '/usersbyorganisation',
 });
 
 const server = jsonServer.create();

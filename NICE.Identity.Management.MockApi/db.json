@@ -182,6 +182,271 @@
       "name": "Idam Docker"
     }
   ],
+  "organisations": [
+    {
+      "id": 1,
+      "name": "ClinicalTrial Pharma",
+      "dateAdded": "2022-01-01T16:46:02.41"
+    },
+    {
+      "id": 2,
+      "name": "Testing Nursing Society",
+      "dateAdded": "2022-01-02T16:46:02.41"
+    },
+    {
+      "id": 3,
+      "name": "Hall Public Health-patchapiupdates",
+      "dateAdded": "2022-01-03T16:46:02.41"
+    },
+    {
+      "id": 4,
+      "name": "Clinical Trial 2 Nursing",
+      "dateAdded": "2022-01-03T16:46:02.41"
+    },
+    {
+      "id": 5,
+      "name": "Just1Organization",
+      "dateAdded": "2022-01-04T16:46:02.41"
+    },
+    {
+      "id": 6,
+      "name": "Just2Organization",
+      "dateAdded": "2022-01-05T08:24:02.41"
+    },
+    {
+      "id": 7,
+      "name": "Royal College of Ragged Trousered Philanthropy",
+      "dateAdded": "2022-01-06T07:26:02.41"
+    },
+    {
+      "id": 8,
+      "name": "abbot medical",
+      "dateAdded": "2022-01-07T16:46:02.41"
+    },
+    {
+      "id": 9,
+      "name": "Just3Organization",
+      "dateAdded": "2022-01-08T16:46:02.41"
+    },
+    {
+      "id": 10,
+      "name": "Just4Organization",
+      "dateAdded": "2022-01-09T16:46:02.41"
+    },
+    {
+      "id": 11,
+      "name": "Just5Organization",
+      "dateAdded": "2022-01-10T12:09:02.41"
+    },
+    {
+      "id": 12,
+      "name": "Just6Organization",
+      "dateAdded": "2022-01-11T15:11:02.41"
+    },
+    {
+      "id": 13,
+      "name": "Just7Organization",
+      "dateAdded": "2022-01-12T13:28:02.41"
+    },
+    {
+      "id": 14,
+      "name": "Just8Organization",
+      "dateAdded": "2022-01-13T11:08:02.41"
+    },
+    {
+      "id": 15,
+      "name": "Just9Organization",
+      "dateAdded": "2022-01-14T10:16:02.41"
+    },
+    {
+      "id": 16,
+      "name": "Just10organization",
+      "dateAdded": "2022-01-15T16:46:02.41"
+    },
+    {
+      "id": 17,
+      "name": "Just11Organization",
+      "dateAdded": "2022-01-15T08:46:02.41"
+    },
+    {
+      "id": 18,
+      "name": "Just12Organization",
+      "dateAdded": "2022-01-16T09:04:02.41"
+    },
+    {
+      "id": 19,
+      "name": "Just13Organization",
+      "dateAdded": "2022-01-17T16:11:02.41"
+    },
+    {
+      "id": 20,
+      "name": "Just14Organization",
+      "dateAdded": "2022-01-18T11:21:02.41"
+    },
+    {
+      "id": 21,
+      "name": "Just15Organization",
+      "dateAdded": "2022-01-19T16:46:02.41"
+    },
+    {
+      "id": 22,
+      "name": "Just16Organization",
+      "dateAdded": "2022-02-27T16:46:02.41"
+    },
+    {
+      "id": 23,
+      "name": "Just17Organization",
+      "dateAdded": "2022-02-28T16:46:02.41"
+    },
+    {
+      "id": 24,
+      "name": "Just18Organization",
+      "dateAdded": "2022-03-01T16:46:02.41"
+    },
+    {
+      "id": 25,
+      "name": "Just19Organization",
+      "dateAdded": "2022-02-25T16:46:02.41"
+    },
+    {
+      "id": 26,
+      "name": "Just20Organization",
+      "dateAdded": "2022-03-02T16:46:02.41"
+    }
+  ],
+  "usersByOrganisation":  [
+    {
+      "userId": 1,
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+      "firstName": "Kristin",
+      "lastName": "Patrick",
+      "emailAddress": "kristin.patrick@example.com",
+      "allowContactMe": true,
+      "hasVerifiedEmailAddress": true,
+      "isLockedOut": false,
+      "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+      "lastLoggedInDate": "2019-02-25T01:29:54.911Z",
+      "isStaffMember": false,
+      "acceptedTerms": true,
+      "isMigrated": false,
+      "isInAuthenticationProvider": true,
+      "hasAccessToWebsiteIds": [
+        1,
+        2,
+        3
+      ],
+      "userEmailHistory": [
+        {
+          "userEmailHistoryId": 1,
+          "userId": 1,
+          "emailAddress": "jcwilliams+id5@gmail.com",
+          "archivedByUserId": null,
+          "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+          "archivedByUserDisplayName": null
+        },
+        {
+          "userEmailHistoryId": 2,
+          "userId": 1,
+          "emailAddress": "updated@gmail.com",
+          "archivedByUserId": 2,
+          "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+          "archivedByUserDisplayName": "Thomas Holding"
+        },
+        {
+          "userEmailHistoryId": 3,
+          "userId": 1,
+          "emailAddress": "updated2@gmail.com",
+          "archivedByUserId": null,
+          "archivedDateUTC": "2021-10-26T15:14:00.7624903",
+          "archivedByUserDisplayName": null
+        }
+      ]
+    },
+    {
+      "userId": 2,
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+      "firstName": "Thomas",
+      "lastName": "Holding",
+      "emailAddress": "thomas.holding@example.com",
+      "allowContactMe": true,
+      "hasVerifiedEmailAddress": true,
+      "isLockedOut": false,
+      "initialRegistrationDate": "2019-10-24T12:29:54.911Z",
+      "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
+      "isStaffMember": false,
+      "acceptedTerms": true,
+      "isMigrated": false,
+      "isInAuthenticationProvider": true,
+      "hasAccessToWebsiteIds": [
+        3
+      ],
+      "userEmailHistory": []
+    },
+    {
+      "userId": 3,
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+      "firstName": "Aisha",
+      "lastName": "Bartlett",
+      "emailAddress": "aisha.bartlett@example.com",
+      "allowContactMe": true,
+      "hasVerifiedEmailAddress": true,
+      "isLockedOut": false,
+      "initialRegistrationDate": "2019-10-25T12:29:54.911Z",
+      "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
+      "isStaffMember": false,
+      "acceptedTerms": true,
+      "isMigrated": false,
+      "isInAuthenticationProvider": true,
+      "hasAccessToWebsiteIds": [
+        3,
+        4
+      ],
+      "userEmailHistory": []
+    },
+    {
+      "userId": 4,
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+      "firstName": "Theo",
+      "lastName": "Bradford",
+      "emailAddress": "theo.bradford@example.com",
+      "allowContactMe": true,
+      "hasVerifiedEmailAddress": false,
+      "isLockedOut": false,
+      "initialRegistrationDate": "2019-10-26T12:29:54.911Z",
+      "lastLoggedInDate": null,
+      "isStaffMember": false,
+      "acceptedTerms": true,
+      "isMigrated": false,
+      "isInAuthenticationProvider": true,
+      "hasAccessToWebsiteIds": [
+        1,
+        4,
+        5
+      ],
+      "userEmailHistory": []
+    },
+    {
+      "userId": 5,
+      "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
+      "firstName": "Polly",
+      "lastName": "Greaves",
+      "emailAddress": "polly.greaves@example.com",
+      "allowContactMe": true,
+      "hasVerifiedEmailAddress": false,
+      "isLockedOut": true,
+      "initialRegistrationDate": "2019-10-27T12:29:54.911Z",
+      "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
+      "isStaffMember": false,
+      "acceptedTerms": true,
+      "isMigrated": false,
+      "isInAuthenticationProvider": true,
+      "hasAccessToWebsiteIds": [
+        2,
+        4
+      ],
+      "userEmailHistory": []
+    }
+	],
   "websites": [
     {
       "id": 4,
@@ -911,6 +1176,283 @@
       "isInAuthenticationProvider": true
     }
   ],
+  "usersandrolesbywebsite":
+      {
+      "websiteId":1,
+      "serviceId":1,
+      "environmentId":71,
+      "usersAndRoles":[
+        {
+          "userId":1,
+          "user":{
+             "userId":1,
+             "nameIdentifier":"auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+             "firstName":"Kristin",
+             "lastName":"Patrick",
+             "emailAddress":"kristin.patrick@example.com",
+             "allowContactMe":true,
+             "hasVerifiedEmailAddress":true,
+             "isLockedOut":false,
+             "initialRegistrationDate":"2019-10-23T12:29:54.911Z",
+             "lastLoggedInDate":"2019-02-25T01:29:54.911Z",
+             "isStaffMember":false,
+             "acceptedTerms":true,
+             "isMigrated":false,
+             "isInAuthenticationProvider":true,
+             "hasAccessToWebsiteIds":[
+                1,
+                2,
+                3
+             ],
+             "userEmailHistory":[
+                {
+                   "userEmailHistoryId":1,
+                   "userId":1,
+                   "emailAddress":"jcwilliams+id5@gmail.com",
+                   "archivedByUserId":null,
+                   "archivedDateUTC":"2021-10-26T14:52:54.1478773",
+                   "archivedByUserDisplayName":null
+                },
+                {
+                   "userEmailHistoryId":2,
+                   "userId":1,
+                   "emailAddress":"updated@gmail.com",
+                   "archivedByUserId":2,
+                   "archivedDateUTC":"2021-10-26T14:54:35.5142339",
+                   "archivedByUserDisplayName":"Thomas Holding"
+                },
+                {
+                   "userEmailHistoryId":3,
+                   "userId":1,
+                   "emailAddress":"updated2@gmail.com",
+                   "archivedByUserId":null,
+                   "archivedDateUTC":"2021-10-26T15:14:00.7624903",
+                   "archivedByUserDisplayName":null
+                }
+             ]
+          },
+          "roles":[
+             {
+                "id":991,
+                "hasRole":true,
+                "name":"Product contributor",
+                "description":"Some text here"
+             },
+             {
+                "id":992,
+                "hasRole":true,
+                "name":"Product manager",
+                "description":"Some text here"
+             },
+             {
+                "id":993,
+                "hasRole":true,
+                "name":"Product administrator",
+                "description":"Some text here"
+             }
+          ]
+       },
+       {
+            "userId":2,
+            "user":{
+               "userId":2,
+               "nameIdentifier":"auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+               "firstName":"Thomas",
+               "lastName":"Holding",
+               "emailAddress":"thomas.holding@example.com",
+               "allowContactMe":true,
+               "hasVerifiedEmailAddress":true,
+               "isLockedOut":false,
+               "initialRegistrationDate":"2019-10-24T12:29:54.911Z",
+               "lastLoggedInDate":"2019-10-24T12:29:54.911Z",
+               "isStaffMember":false,
+               "acceptedTerms":true,
+               "isMigrated":false,
+               "isInAuthenticationProvider":true,
+               "hasAccessToWebsiteIds":[
+                  1
+               ],
+               "userEmailHistory":[]
+            },
+            "roles":[
+               {
+                 "id":992,
+                 "hasRole":true,
+                 "name":"Product manager",
+                 "description":"Some text here"
+               },
+               {
+                  "id":993,
+                  "hasRole":true,
+                  "name":"Product administrator",
+                  "description":"Some text here"
+               }
+            ]
+         },
+         {
+        "userId": 3,
+        "user":{
+          "userId": 3,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+          "firstName": "Aisha",
+          "lastName": "Bartlett",
+          "emailAddress": "aisha.bartlett@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-25T12:29:54.911Z",
+          "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [
+            3,
+            4
+          ],
+          "userEmailHistory": []
+        },
+        "roles":[
+          {
+            "id":994,
+            "hasRole":true,
+            "name":"Product editor",
+            "description":"Some text here"
+         }
+       ]
+    },
+    {
+      "userId": 4,
+      "user":{
+            "userId": 4,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+            "firstName": "Theo",
+            "lastName": "Bradford",
+            "emailAddress": "theo.bradford@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": false,
+            "isLockedOut": false,
+            "initialRegistrationDate": "2019-10-26T12:29:54.911Z",
+            "lastLoggedInDate": null,
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+            1,
+            4,
+            5
+          ],
+          "userEmailHistory": []
+        },
+        "roles":[
+          {
+             "id":991,
+             "hasRole":true,
+             "name":"Product contributor",
+             "description":"Some text here"
+          }
+       ]
+    },
+    {
+      "userId": 5,
+      "user":{
+            "userId": 5,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
+            "firstName": "Polly",
+            "lastName": "Greaves",
+            "emailAddress": "polly.greaves@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": false,
+            "isLockedOut": true,
+            "initialRegistrationDate": "2019-10-27T12:29:54.911Z",
+            "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+            2,
+            4
+          ],
+            "userEmailHistory": []
+        },  
+        "roles":[
+          {
+            "id":992,
+            "hasRole":true,
+            "name":"Product manager",
+            "description":"Some text here"
+          }
+       ]    
+      } 
+  ],
+  "service": {
+  "id": 1,
+  "name": "EPPI Reviewer",
+  "websites": null
+},
+    "website": {
+    "id": 1,
+    "serviceId": 1,
+    "environmentId": 71,
+    "host": "dev-eppi.nice.org.uk",
+    "environment": {
+        "id": 71,
+        "name": "Dev",
+        "order": 5
+    },
+    "service": {
+        "id": 1,
+        "name": "EPPI Reviewer",
+        "websites": [
+            {
+                "id": 1,
+                "serviceId": 1,
+                "environmentId": 71,
+                "host": "dev-eppi.nice.org.uk",
+                "environment": {
+                    "id": 71,
+                    "name": "Dev",
+                    "order": 0
+                },
+                "service": null
+            }
+        ]
+    }
+},
+"environment": {
+    "id": 71,
+    "name": "Dev",
+    "order": 0
+},
+"allRoles": [
+  {
+    "id":991,
+    "websiteId": 1,
+    "name": "Product contributor",
+    "description": "Some text here"
+  },
+  {
+    "id": 992,
+    "websiteId": 1,
+    "name": "Product manager",
+    "description": "Some text here"
+  },
+  {
+    "id": 993,
+    "websiteId": 1,
+    "name": "Product administrator",
+    "description": "Some text here"
+  },
+  {
+    "id":994,
+    "websiteId": 1,
+    "name":"Product editor",
+    "description":"Some text here"
+  }
+]
+ },
   "verificationemail": [{ "verificationemail": 1 }],
 
   "accountstatus":

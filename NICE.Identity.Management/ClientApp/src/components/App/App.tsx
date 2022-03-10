@@ -17,58 +17,67 @@ import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnviron
 import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
 import { EditUser } from "./../../views/EditUser/EditUser";
 import { DeleteOrganisation } from "./../../views/DeleteOrganisation/DeleteOrganisation";
+import { Website } from "../../views/Website/Website";
 
 import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 
-export type MyAccountDetails = {
-	displayName: string,
-	links: []
+type AppState = {
+	isLoading: boolean;
+	auth: IdamProviderProps;
+	error?: Error;
 };
 
-export class App extends React.Component {
-	state = {
-		isLoading: false,
-		auth: {} as IdamProviderProps
-	}
-	async componentDidMount(): Promise<void> {
-               this.setState({ isLoading: true });
-               
-		const fetchOptions = {
-			method: "GET",
-			headers: { "Content-Type": "application/json" }
+export type MyAccountDetails = {
+	displayName: string;
+	links: [];
+};
+
+export class App extends React.Component<Record<string, never>, AppState> {
+	constructor(props = {}) {
+		super(props);
+
+		this.state = {
+			isLoading: false,
+			auth: {} as IdamProviderProps,
 		};
-		const myAccountDetails = await fetchData(
-			Endpoints.identityManagementUser,
-			fetchOptions,
-		) as MyAccountDetails;
-		
+	}
+
+	async componentDidMount(): Promise<void> {
+		this.setState({ isLoading: true });
+
+		const myAccountDetails = await fetchData(Endpoints.identityManagementUser);
+
 		if (isDataError(myAccountDetails)) {
 			this.setState({ error: myAccountDetails });
 		}
+
 		const auth: IdamProviderProps = {
 			links: [
 				{ text: "Health checks", url: "/healthchecks-ui" },
 				{ text: "Sign out", url: "/Account/Logout" },
 			],
-			displayName:  myAccountDetails.displayName,
+			displayName: myAccountDetails.displayName,
 			provider: "idam",
 		};
 
 		this.setState({
 			isLoading: false,
-			auth: auth
+			auth,
 		});
 	}
+
 	render(): JSX.Element {
+		// needs error handling below
+
 		return (
 			<Router>
 				{this.state.isLoading ? (
-									<p>Loading...</p>
-								) : (
-				<Header search={false} auth={this.state.auth} />
-								)}
+					<p>Loading...</p>
+				) : (
+					<Header search={false} auth={this.state.auth} />
+				)}
 				<Container
 					elementType="main"
 					role="main"
@@ -110,6 +119,7 @@ export class App extends React.Component {
 						exact
 						component={DeleteOrganisation}
 					/>
+					<Route path="/websites/:id" exact component={Website} />
 				</Container>
 
 				<Footer />
