@@ -46,44 +46,58 @@ exports[`DeleteOrgaisation should match the snapshot after data has been loaded 
   <PageHeader
     heading="NICE"
   />
-  <Alert
-    aria-live="polite"
-    data-qa-sel="warning-message-delete-organisation"
-    role="status"
-    type="info"
+  <Grid
+    elementType="div"
+    equalHeight={false}
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
   >
-    <p>
-      Once you delete an organisation, the action cannot be undone. Are you sure you want to proceed?
-    </p>
-  </Alert>
-  <Button
-    data-qa-sel="confirm-delete-organisation"
-    disabled={false}
-    onClick={[Function]}
-    variant="cta"
-  >
-    Confirm
-  </Button>
-  <Button
-    disabled={false}
-    elementType={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "propTypes": Object {
-          "innerRef": [Function],
-          "onClick": [Function],
-          "replace": [Function],
-          "target": [Function],
-          "to": [Function],
-        },
-        "render": [Function],
-      }
-    }
-    to="/organisations/1"
-    variant="secondary"
-  >
-    Cancel
-  </Button>
+    <GridItem
+      cols={12}
+      md={9}
+    >
+      <Alert
+        aria-live="polite"
+        data-qa-sel="warning-message-delete-organisation"
+        role="status"
+        type="info"
+      >
+        <p>
+          Once you delete an organisation, the action cannot be undone. Are you sure you want to proceed?
+        </p>
+      </Alert>
+      <Button
+        data-qa-sel="confirm-delete-organisation"
+        disabled={false}
+        onClick={[Function]}
+        variant="cta"
+      >
+        Confirm
+      </Button>
+      <Button
+        disabled={false}
+        elementType={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "propTypes": Object {
+              "innerRef": [Function],
+              "onClick": [Function],
+              "replace": [Function],
+              "target": [Function],
+              "to": [Function],
+            },
+            "render": [Function],
+          }
+        }
+        to="/organisations/1"
+        variant="secondary"
+      >
+        Cancel
+      </Button>
+    </GridItem>
+  </Grid>
 </Fragment>
 `;
 

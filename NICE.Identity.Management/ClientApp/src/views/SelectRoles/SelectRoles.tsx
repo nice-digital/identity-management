@@ -185,14 +185,18 @@ export class SelectRoles extends Component<SelectRolesProps, SelectRolesState> {
 						/>
 
 						{hasBeenUpdated && (
-							<AddRoleConfirmation
-								id={user.userId}
-								fullName={`${user.firstName} ${user.lastName}`}
-							/>
+							<Grid>
+								<GridItem cols={12} md={9}>
+									<AddRoleConfirmation
+										id={user.userId}
+										fullName={`${user.firstName} ${user.lastName}`}
+									/>
+								</GridItem>
+							</Grid>
 						)}
 
 						<Grid>
-							<GridItem cols={8}>
+							<GridItem cols={12} md={9}>
 								{isLoading ? (
 									<p>Loading...</p>
 								) : (

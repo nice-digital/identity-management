@@ -24,31 +24,36 @@ import { Endpoints } from "../../data/endpoints";
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 
+type AppState = {
+	isLoading: boolean;
+	auth: IdamProviderProps;
+	error?: Error;
+};
+
 export type MyAccountDetails = {
 	displayName: string;
 	links: [];
 };
 
-export class App extends React.Component {
-	state = {
-		isLoading: false,
-		auth: {} as IdamProviderProps,
-	};
+export class App extends React.Component<Record<string, never>, AppState> {
+	constructor(props = {}) {
+		super(props);
+
+		this.state = {
+			isLoading: false,
+			auth: {} as IdamProviderProps,
+		};
+	}
+
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const fetchOptions = {
-			method: "GET",
-			headers: { "Content-Type": "application/json" },
-		};
-		const myAccountDetails = (await fetchData(
-			Endpoints.identityManagementUser,
-			fetchOptions,
-		)) as MyAccountDetails;
+		const myAccountDetails = await fetchData(Endpoints.identityManagementUser);
 
 		if (isDataError(myAccountDetails)) {
 			this.setState({ error: myAccountDetails });
 		}
+
 		const auth: IdamProviderProps = {
 			links: [
 				{ text: "Health checks", url: "/healthchecks-ui" },
@@ -60,9 +65,10 @@ export class App extends React.Component {
 
 		this.setState({
 			isLoading: false,
-			auth: auth,
+			auth,
 		});
 	}
+
 	render(): JSX.Element {
 		return (
 			<Router>

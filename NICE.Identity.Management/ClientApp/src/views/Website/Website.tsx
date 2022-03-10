@@ -148,19 +148,20 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 	filterUsersByRoles = (role: string): void => {
 		this.setState({ isLoading: true });
 
-		let roleFiltersChecked = this.state.roleFiltersChecked,
-			pageNumber = this.state.pageNumber;
+		let roleFiltersChecked = this.state.roleFiltersChecked;
+		// let pageNumber = this.state.pageNumber;
+		// commented out as it appears not to be in use
 
 		roleFiltersChecked = roleFiltersChecked.includes(role)
 			? roleFiltersChecked.filter((roleFilter) => roleFilter !== role)
 			: roleFiltersChecked.concat(role);
 
-		const itemsPerPage = Number(this.state.itemsPerPage)
-			? Number(this.state.itemsPerPage)
-			: this.state.itemsPerPage;
+		// const itemsPerPage = Number(this.state.itemsPerPage)
+		// 	? Number(this.state.itemsPerPage)
+		// 	: this.state.itemsPerPage;
+		// commented out as it appears not to be in use
 
 		let usersAndRoles = this.state.websiteUsersAndRoles.usersAndRoles;
-		pageNumber = this.state.pageNumber;
 
 		if (roleFiltersChecked.length) {
 			usersAndRoles = this.getListOfUsersByFilteredRole(
@@ -169,12 +170,14 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 			);
 		}
 
-		pageNumber = this.pastPageRange(
-			itemsPerPage,
-			pageNumber,
-			this.state.usersAndRoles.length,
-		);
+		// pageNumber = this.pastPageRange(
+		// 	itemsPerPage,
+		// 	pageNumber,
+		// 	this.state.usersAndRoles.length,
+		// );
+		// commented out as it appears not to be in use
 
+		// should pageNumber be set below?
 		this.setState({ usersAndRoles, isLoading: false, roleFiltersChecked });
 	};
 

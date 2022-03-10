@@ -1,9 +1,8 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import { MemoryRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 import toJson from "enzyme-to-json";
-import { Input } from "@nice-digital/nds-input";
 import { Alert } from "@nice-digital/nds-alert";
 import { EditUser } from "../EditUser";
 import singleUser from "./singleUser.json";
@@ -22,20 +21,22 @@ describe("EditUser", () => {
 
     const consoleErrorReset = console.error;
 
-	beforeEach(() => {
+	beforeEach(() => {		
 		fetch.resetMocks();
 		console.error = consoleErrorReset;
 	});
 
     it("should show loading message before data has been loaded", () => {
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = shallow(<EditUser match={match} />);
+		const wrapper = mount(<MemoryRouter initialEntries={["/users/1/edit"]}><EditUser match={match} /></MemoryRouter>);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
     it("should match the snapshot after data has been loaded", async () => {
+		console.error = jest.fn();
         fetch.mockResponseOnce(JSON.stringify(singleUser));
-        const wrapper = shallow(<EditUser match={match} />);
+        const wrapper = mount(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
         await nextTick();
         wrapper.update();
         expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
@@ -108,7 +109,7 @@ describe("EditUser", () => {
 		console.error = jest.fn();
 		const error = new Error("Not allowed");
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockRejectOnce(error);		
+		fetch.mockRejectOnce(error);
 		const wrapper = mount(
 			<MemoryRouter>
 				<EditUser match={match} />
@@ -170,7 +171,7 @@ describe("EditUser", () => {
 	it("should show validation error when email is in use already", async () => {
 		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({ error: { message: "Multiple users found with same email address." }, status: 422 }));
+		fetch.mockResponseOnce(JSON.stringify({ title: "Email address is already in use", status: 422 }), { status: 422 });
 		const wrapper = mount(
 			<MemoryRouter>
 				<EditUser match={match} />
@@ -195,8 +196,10 @@ describe("EditUser", () => {
 		});
 		await nextTick();
 		wrapper.update();
+		await nextTick();
+		wrapper.update();
 		expect(wrapper.find({ label: "Email address" }).prop("error")).toEqual(true);
-		expect(wrapper.find({ label: "Email address" }).prop("errorMessage")).toBe("Multiple users found with same email address.");
+		expect(wrapper.find({ label: "Email address" }).prop("errorMessage")).toBe("Email address is already in use");
 	});
 
 	it("should display alert message if editing an EPPI user", async () => {
