@@ -1,10 +1,14 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-import toJson from "enzyme-to-json";
+import { shallow } from "enzyme";
 import { App } from "../App";
 
 describe("App", () => {
+	beforeEach(() => {
+		fetch.resetMocks();
+	});
+
 	it("should mount without crashing", () => {
+		fetch.mockResponseOnce(JSON.stringify({ displayName: "John Holland", links: []}));
 		const wrapper = shallow(<App />);
 		expect(wrapper).toHaveLength(1);
 	});

@@ -71,7 +71,10 @@ export class Organisation extends Component<
 
 	render(): JSX.Element {
 		const { organisation, users, error, isLoading } = this.state;
-		const lastBreadcrumb = `${organisation.name}`;
+		const lastBreadcrumb = isLoading
+			? "Loading organisation details"
+			: `${organisation.name}`;
+
 		return (
 			<>
 				<Breadcrumbs>
@@ -121,80 +124,83 @@ export class Organisation extends Component<
 								</>
 							}
 						/>
-						{this.props.location?.state?.hasBeenEdited && (
-							<Alert
-								type="info"
-								role="status"
-								aria-live="polite"
-								data-qa-sel="successful-message-edit-organisation"
-							>
-								<p>The organisation details have been updated successfully.</p>
-							</Alert>
-						)}
-						<Grid>
-							<GridItem cols={12} md={9} aria-busy={isLoading}>
-								{isLoading ? (
-									<p className="OrganisationDateAddedLoadingMsg">Loading...</p>
-								) : organisation.dateAdded != null ? (
-									<div className={`${styles.summaryList} pv--c`}>
-										<span className={styles.summaryListLabel}>Date added</span>
-										<span
-											className={styles.summaryListDetail}
-											data-qa-sel="dateAdded-organisation"
-										>
-											{ToFormattedDateString(new Date(organisation.dateAdded))}
-										</span>
-									</div>
-								) : (
-									<p>This organisation does not have a date added value.</p>
-								)}
-							</GridItem>
-							<GridItem cols={12} md={9} aria-busy={isLoading}>
-								{isLoading ? (
-									<p className="OrganisationUsersListLoadingMsg">Loading...</p>
-								) : users.length ? (
-									<div className={`${styles.summaryList} pv--c`}>
-										<span className={styles.summaryListLabel}>Users</span>
-										<span className={styles.summaryListDetail}>
-											<ul
-												className="list--unstyled"
-												data-qa-sel="list-of-organisations"
-											>
-												{users.map((user) => {
-													return (
-														<li key={user.userId}>
-															<UserStatus user={user} />
-															<span className={styles.userName}>
-																{user.firstName + " " + user.lastName}
-															</span>
-														</li>
-													);
-												})}
-											</ul>
-										</span>
-									</div>
-								) : (
-									<p>
-										There are currently no users assigned to this organisation.
-									</p>
-								)}
-							</GridItem>
-						</Grid>
-						<hr className="mv--b" />
 
-						<h2 className="h3">Permanently delete this organisation</h2>
-						<p>
-							This organisation will no longer be available, and all associated
-							data will be permanently deleted.
-						</p>
-						<Link
-							data-qa-sel="delete-organisation-link"
-							to={`/organisations/${organisation.id}/delete`}
-							className="pv--c mb--d"
-							style={{ display: "inline-block" }}
-						>
-							Delete organisation
-						</Link>
+						{isLoading ? (
+							<p>Loading...</p>
+						) : (
+							<>
+								{this.props.location?.state?.hasBeenEdited && (
+									<Alert
+										type="info"
+										role="status"
+										aria-live="polite"
+										data-qa-sel="successful-message-edit-organisation"
+									>
+										<p>
+											The organisation details have been updated successfully.
+										</p>
+									</Alert>
+								)}
+								<Grid>
+									<GridItem cols={12} md={9} aria-busy={isLoading}>
+										<div className={`${styles.summaryList} pv--c`}>
+											<span className={styles.summaryListLabel}>
+												Date added
+											</span>
+											<span
+												className={styles.summaryListDetail}
+												data-qa-sel="dateAdded-organisation"
+											>
+												{ToFormattedDateString(
+													new Date(organisation.dateAdded),
+												)}
+											</span>
+										</div>
+
+										{users.length ? (
+											<div className={`${styles.summaryList} pv--c`}>
+												<span className={styles.summaryListLabel}>Users</span>
+												<span className={styles.summaryListDetail}>
+													<ul
+														className="list--unstyled"
+														data-qa-sel="list-of-organisations"
+													>
+														{users.map((user) => (
+															<li key={user.userId}>
+																<UserStatus user={user} />
+																<span className={styles.userName}>
+																	{`${user.firstName} ${user.lastName}`}
+																</span>
+															</li>
+														))}
+													</ul>
+												</span>
+											</div>
+										) : (
+											<p>
+												There are currently no users assigned to this
+												organisation.
+											</p>
+										)}
+									</GridItem>
+								</Grid>
+
+								<hr className="mv--b" />
+								<h2 className="h3">Permanently delete this organisation</h2>
+								<p>
+									This organisation will no longer be available, and all
+									associated data will be permanently deleted.
+								</p>
+								<Link
+									data-qa-sel="delete-organisation-link"
+									to={`/organisations/${organisation.id}/delete`}
+									className="pv--c mb--d"
+									style={{ display: "inline-block" }}
+								>
+									Delete organisation
+								</Link>
+							</>
+						)}
 					</>
 				) : (
 					<>
