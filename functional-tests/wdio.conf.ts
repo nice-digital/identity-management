@@ -35,7 +35,7 @@ export const config: WebdriverIO.Config = {
   },
 	],
 
-	logLevel: "debug",
+	logLevel: "warn",
 
 	baseUrl: "https://niceorg/consultations/",
 	reporters: [
