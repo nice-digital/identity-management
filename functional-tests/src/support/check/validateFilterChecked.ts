@@ -36,25 +36,25 @@ export async function clickCancelFilter(): Promise<void> {
 };
 
 export async function validateServiceEnvChecked(): Promise<void> {
-	clickElement("click", "selector", "[for='filter_environments_dev']");
-	pause("2000");
+	await clickElement("click", "selector", "[for='filter_environments_dev']");
+	await pause("2000");
 };
 
 export async function validateUserRolesFilterChecked(): Promise<void> {
-	clickElement("click", "selector", "[for='filter_roles_product-administrator']");
-	clickElement("click", "selector", "[for='filter_roles_product-manager']");
-	pause("2000");
+	await clickElement("click", "selector", "[for='filter_roles_product-administrator']");
+	await clickElement("click", "selector", "[for='filter_roles_product-manager']");
+	await pause("2000");
 };
 
 export async function validateUserRoleFilterChecked(): Promise<void> {
-	clickElement("click", "selector", "[for='filter_roles_product-editor']");
-	pause("2000");
+	await clickElement("click", "selector", "[for='filter_roles_product-editor']");
+	await pause("2000");
 };
 
 export async function clickCancelFilterServiceDetailPage(): Promise<void> {
-	clickElement("click", "selector", "[for='filter_roles_product-administrator']");
-	clickElement("click", "selector", "[for='filter_roles_product-manager']");
-	pause("2000");
+	await clickElement("click", "selector", "[for='filter_roles_product-administrator']");
+	await clickElement("click", "selector", "[for='filter_roles_product-manager']");
+	await pause("2000");
 };
 
 export async function validateServiceUserRoleChecked(): Promise<void> {

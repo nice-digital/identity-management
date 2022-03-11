@@ -3,8 +3,8 @@ import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action
 import selectors from "../selectors";
 
 export async function registerLink(): Promise<void> {    
-    waitForDisplayed(selectors.loginPage.registerLink, "");
-    clickElement('click', 'selector', selectors.loginPage.registerLink);
+    await waitForDisplayed(selectors.loginPage.registerLink, "");
+    await clickElement('click', 'selector', selectors.loginPage.registerLink);
  };
  
 export default registerLink;

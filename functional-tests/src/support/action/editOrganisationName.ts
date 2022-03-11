@@ -7,10 +7,10 @@ import selectors from '../selectors';
 export async function editOrganisationName(name: string): Promise<void> {
 
 
-  waitForDisplayed(selectors.addNewOrganisation.inputOrganisationName, "");
-  clickElement('click', 'selector', selectors.addNewOrganisation.inputOrganisationName);
-  pressButton("['Ctrl', 'A', 'Delete']");
-  setInputField(
+  await waitForDisplayed(selectors.addNewOrganisation.inputOrganisationName, "");
+  await clickElement('click', 'selector', selectors.addNewOrganisation.inputOrganisationName);
+  await browser.keys(['Control', 'a', 'Delete']);
+  await setInputField(
     'set',
     name,
     selectors.addNewOrganisation.inputOrganisationName

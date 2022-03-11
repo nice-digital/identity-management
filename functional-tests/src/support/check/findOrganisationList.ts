@@ -4,8 +4,8 @@ import selectors from "../selectors";
 
 
 export async function findOrganisationList(): Promise<void> {
-    waitForDisplayed(selectors.organisationListPage.firstOrgCard, "");
-    clickElement("click", "selector", selectors.organisationListPage.firstOrgCard);
+    await waitForDisplayed(selectors.organisationListPage.firstOrgCard, "");
+    await clickElement("click", "selector", selectors.organisationListPage.firstOrgCard);
   };
   
 export default findOrganisationList;

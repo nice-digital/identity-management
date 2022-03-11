@@ -6,9 +6,9 @@ import {checkEqualsText} from "@nice-digital/wdio-cucumber-steps/lib/support/che
 import selectors from "../selectors";
 
 export async function clickGlobalNavAccountButton(): Promise<void> {
-  clickElement('click', 'selector', selectors.userListPage.globalNavMyAccount);
+  await clickElement('click', 'selector', selectors.userListPage.globalNavMyAccount);
   await browser.pause(1000);
-  clickElement('click', 'selector', selectors.userListPage.globalNavSignOut);
+  await clickElement('click', 'selector', selectors.userListPage.globalNavSignOut);
 }
 
 export default clickGlobalNavAccountButton; 

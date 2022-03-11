@@ -4,7 +4,7 @@ import {pause} from '@nice-digital/wdio-cucumber-steps/lib/support/action/pause'
 import selectors from '../selectors';
 
 export async function validateUserStatusActive(): Promise<void> {
-  await pause("1000");
+  await pause("5000");
   await waitForDisplayed(selectors.adminUserPage.userStatus, "");
   await checkContainsText('element', selectors.adminUserPage.userStatus, "", "Active");
   await pause("1000");

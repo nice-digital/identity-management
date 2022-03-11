@@ -5,7 +5,7 @@ import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause"
 import selectors from "../selectors";
 
 export async function findWebsiteList(website: string): Promise<void> {
-  browser.refresh();
+  await browser.refresh();
   await waitForDisplayed(selectors.websiteListPage.websitelist, "");
   await checkUrl("", "http://idam:8080/services");
   await checkContainsText("element", selectors.websiteListPage.websitelist, "", website);

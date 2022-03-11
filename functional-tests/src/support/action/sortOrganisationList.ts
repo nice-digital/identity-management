@@ -4,15 +4,15 @@ import selectors from "../selectors";
 
 export async function sortAlphaOrganisationList(): Promise<void> {
 
-	waitForDisplayed(selectors.organisationListPage.sortAlphaDescending, "");
-    clickElement('click', 'selector', selectors.organisationListPage.sortAlphaDescending);
+	await waitForDisplayed(selectors.organisationListPage.sortAlphaDescending, "");
+    await clickElement('click', 'selector', selectors.organisationListPage.sortAlphaDescending);
   
 };
 
 export async function sortDateOrganisationList(): Promise<void> {
 
-	waitForDisplayed(selectors.organisationListPage.sortDateDescending, "");
-    clickElement('click', 'selector', selectors.organisationListPage.sortDateDescending);
+	await waitForDisplayed(selectors.organisationListPage.sortDateDescending, "");
+    await clickElement('click', 'selector', selectors.organisationListPage.sortDateDescending);
 };
 
 

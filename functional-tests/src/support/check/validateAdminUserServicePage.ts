@@ -16,7 +16,7 @@ export async function validateServiceDownloadPageResultCount(countText: string):
 
 export async function validateUserDownloadPageResultCount(countText: string): Promise<void> {
 	await waitForDisplayed(selectors.validateAdminUserServicePage.pageUserResultCount, "");
-	checkContainsText(
+	await checkContainsText(
 		"element",
 		selectors.validateAdminUserServicePage.pageUserResultCount,
 		"",

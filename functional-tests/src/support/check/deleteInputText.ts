@@ -6,18 +6,18 @@ import selectors from "../selectors";
 
 export async function deleteEnteredText(): Promise<void> {
 
-	waitForDisplayed(selectors.organisationListPage.deleteOrgName, "");
-	clickElement('click', 'selector', selectors.organisationListPage.deleteOrgName);
-	pressButton("['Ctrl', 'A', 'Delete']");
-	pause("2000");
+	await waitForDisplayed(selectors.organisationListPage.deleteOrgName, "");
+	await clickElement('click', 'selector', selectors.organisationListPage.deleteOrgName);
+	await browser.keys(['Control', 'a', 'Delete']);
+	await pause("2000");
 };
 
 export async function deleteNewOrgEnteredText(): Promise<void> {
 
-	waitForDisplayed(selectors.manageNewOrgPage.deleteNewOrgName, "");
-	clickElement('click', 'selector', selectors.manageNewOrgPage.deleteNewOrgName);
-	pressButton("['Ctrl', 'A', 'Delete']");
-	pause("2000");
+	await waitForDisplayed(selectors.manageNewOrgPage.deleteNewOrgName, "");
+	await clickElement('click', 'selector', selectors.manageNewOrgPage.deleteNewOrgName);
+	await browser.keys(['Control', 'a', 'Delete']);
+	await pause("2000");
 };
 
 export default deleteEnteredText;

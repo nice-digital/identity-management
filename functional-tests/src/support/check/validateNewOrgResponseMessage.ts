@@ -5,16 +5,16 @@ import selectors from "../selectors";
 
 
 export async function validateNewOrgResponseMessage(message: string): Promise<void> {
-	waitForDisplayed(selectors.addNewOrganisation.submitResponseFeedback, "");
-	checkContainsText("element", selectors.addNewOrganisation.submitResponseFeedback, "", message);
-	pause("1000");
+	await waitForDisplayed(selectors.addNewOrganisation.submitResponseFeedback, "");
+	await checkContainsText("element", selectors.addNewOrganisation.submitResponseFeedback, "", message);
+	await pause("1000");
 };
 
 export async function validateErrorMessage(message: string): Promise<void> {
 
-	waitForDisplayed('.input__error', "");
-	checkContainsText("element", '.input__error', "", message);
-	pause("1000");
+	await waitForDisplayed('.input__error', "");
+	await checkContainsText("element", '.input__error', "", message);
+	await pause("1000");
   };
 
 

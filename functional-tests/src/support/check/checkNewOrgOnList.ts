@@ -6,17 +6,17 @@ import selectors from '../selectors';
 
 export async function checkNewOrgOnList(): Promise<void> {
 
-  waitForDisplayed(selectors.UserProfile.updatedUserName, "");
-  checkContainsText("element", selectors.UserProfile.updatedUserName, "", 'Barry Bahamas');
-	pause("1000");
+  await waitForDisplayed(selectors.UserProfile.updatedUserName, "");
+  await checkContainsText("element", selectors.UserProfile.updatedUserName, "", 'Barry Bahamas');
+	await pause("1000");
   
-  waitForDisplayed(selectors.UserProfile.updatedEmailAddress, "");
-  checkContainsText("element", selectors.UserProfile.updatedEmailAddress, "", 'donaldbahamas@vilennin.com');
-	pause("1000");
+  await waitForDisplayed(selectors.UserProfile.updatedEmailAddress, "");
+  await checkContainsText("element", selectors.UserProfile.updatedEmailAddress, "", 'donaldbahamas@vilennin.com');
+	await pause("1000");
 
-  waitForDisplayed(selectors.UserProfile.updatedAudienceInsight, "");
-  checkContainsText("element", selectors.UserProfile.updatedAudienceInsight, "", 'Yes');
-  pause("1000");
+  await waitForDisplayed(selectors.UserProfile.updatedAudienceInsight, "");
+  await checkContainsText("element", selectors.UserProfile.updatedAudienceInsight, "", 'Yes'); 
+  await pause("1000");
 
 };
 

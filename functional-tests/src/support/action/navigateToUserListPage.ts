@@ -3,13 +3,13 @@ import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action
 import selectors from '../selectors';
 
 export async function navigateToUserListPageUsingBreadscrumb(): Promise<void> {
-  clickElement('click', 'selector', selectors.adminUserPage.usersBreadcrumb);
-  waitForDisplayed(selectors.userListPage.userlist, "");
+  await clickElement('click', 'selector', selectors.adminUserPage.usersBreadcrumb);
+  await waitForDisplayed(selectors.userListPage.userlist, "");
 };
 
-export const navigateToUserListPageFromAdminPage = () => {
-  clickElement('click', 'element', selectors.adminHomePage.manageUsersButton);
-  waitForDisplayed(selectors.userListPage.userlist, "");
+export async function navigateToUserListPageFromAdminPage(): Promise<void> {
+  await clickElement('click', 'element', selectors.adminHomePage.manageUsersButton);
+  await waitForDisplayed(selectors.userListPage.userlist, "");
 };
 
 export default navigateToUserListPageUsingBreadscrumb;

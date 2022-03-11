@@ -6,8 +6,8 @@ import selectors from '../selectors';
 
 export async function saveNewOrganisationName(): Promise<void> {
 
-  waitForDisplayed(selectors.addNewOrganisation.saveNewOrgButton, "");
-  clickElement('click', 'selector', selectors.addNewOrganisation.saveNewOrgButton); 
+  await waitForDisplayed(selectors.addNewOrganisation.saveNewOrgButton, "");
+  await clickElement('click', 'selector', selectors.addNewOrganisation.saveNewOrgButton); 
 
 };
 

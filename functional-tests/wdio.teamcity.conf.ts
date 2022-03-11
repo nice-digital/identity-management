@@ -1,26 +1,32 @@
 const isInDocker = !!process.env.IN_DOCKER,
 	isTeamCity = !!process.env.TEAMCITY_VERSION;
-  
+
 export const config: WebdriverIO.Config = {
    runner: 'local',
-    specs: ["./src/features/**/*.feature"],
+    specs: ["./src/features/**/editUserRoles.feature"],
     capabilities: [
         {
-            browserName: 'firefox'
+            browserName: 'firefox',
+            acceptInsecureCerts : true,
+            "moz:firefoxOptions": {
+              "prefs": {
+          "dom.ipc.processCount": 8,
+          "security.insecure_field_warning.contextual.enabled": false,
+          "security.insecure_connection_text.enabled": true,
+          "security.warn_submit_secure_to_insecure": false,
+          "security.certerrors.permanentOverride": false,
+          "network.stricttransportsecurity.preloadlist": false,
+          "security.enterprise_roots.enabled": true,
+          "javascript.options.showInConsole": false
+        },
+            // flag to activate Firefox headless mode (see https://github.com/mozilla/geckodriver/blob/master/README.md#firefox-capabilities for more details about moz:firefoxOptions)
+            //args: ['-headless']
+          }
         }
     ],
-    services: [
-        ['firefox-profile', {
-            extensions: [
-                '/path/to/extensionA.xpi', // path to .xpi file
-                '/path/to/extensionB' // or path to unpacked Firefox extension
-            ],
-            'xpinstall.signatures.required': false,
-            'browser.startup.homepage': 'https://webdriver.io',
-            legacy: true // only use for firefox <= 55
-        }]
-    ],
+    services: ['selenium-standalone'],
     logLevel: 'debug',
+    baseUrl: "http://idam:8080",
     reporters: [
 		"spec",
 		isTeamCity && "teamcity",

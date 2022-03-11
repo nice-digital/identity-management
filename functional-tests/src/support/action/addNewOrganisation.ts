@@ -4,8 +4,8 @@ import selectors from '../selectors';
 
 export async function addNewOrganisation(): Promise<void> {
 
-  waitForDisplayed(selectors.organisationListPage.addNewOrganisation, "");
-  clickElement('click', 'selector', selectors.organisationListPage.addNewOrganisation);
+  await waitForDisplayed(selectors.organisationListPage.addNewOrganisation, "");
+  await clickElement('click', 'selector', selectors.organisationListPage.addNewOrganisation);
 };
 
 export default addNewOrganisation;
