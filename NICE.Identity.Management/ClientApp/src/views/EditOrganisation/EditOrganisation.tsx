@@ -221,8 +221,6 @@ export class EditOrganisation extends Component<
 		} = this.state;
 		const organisationId = this.props.match.params.id;
 
-		//if no change to name
-
 		return (
 			<>
 				<Breadcrumbs>
@@ -245,7 +243,7 @@ export class EditOrganisation extends Component<
 					<>
 						<PageHeader heading="Edit organisation" />
 						{isLoading ? (
-							<p>Loading</p>
+							<p>Loading...</p>
 						) : (
 							<>
 								{hasSubmitted && (
