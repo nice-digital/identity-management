@@ -16,7 +16,7 @@ export const config: WebdriverIO.Config = {
 		{
     acceptInsecureCerts: true, // Because of self-signed cert inside Docker
     // acceptSslCerts: true,
-    maxInstances: 2,
+    maxInstances: 1,
     browserName: 'chrome',
     // chromeOptions: {
     //   // w3c: false,
