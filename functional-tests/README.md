@@ -26,7 +26,7 @@
 
 - [VS Code IDE](https://code.visualstudio.com/)
   - With recommended extensions (VS Code will prompt you to install these automatically)
-- [WebdriverIO 7](<[http://.webdriver.io/](https://webdriver.io/)>)
+- [WebdriverIO 7](https://webdriver.io/)
   - [Cucumber.js](https://github.com/cucumber/cucumber-js) for running BDD gherkin-syntax feature files
   - [wdio-cucumber-steps](https://github.com/nice-digital/wdio-cucumber-steps) for shared step definitions for Cucumber JS BDD tests in WebdriverIO
   - [Allure](https://docs.qameta.io/allure/) to generate a test report
