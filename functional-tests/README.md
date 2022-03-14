@@ -16,9 +16,6 @@
   - [Using npm](#using-npm)
 - [Excluding tests](#excluding-tests)
 - [Running single features](#running-single-features)
-- [Troubleshooting](#troubleshooting)
-  - [session not created: This version of ChromeDriver only supports Chrome version xx](#session-not-created-this-version-of-chromedriver-only-supports-chrome-version-xx)
-  - [Port 4444 is already in use](#port-4444-is-already-in-use)
 
 ## Stack
 
