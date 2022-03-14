@@ -1,4 +1,6 @@
-FROM node:10
+FROM node:14
+
+ENV IN_DOCKER=true
 
 # Install Java (for Allure) see https://stackoverflow.com/a/44154721/486434
 RUN apt-get update && \

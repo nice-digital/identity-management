@@ -46,6 +46,7 @@ services:
       # - nginx
       - idammanagement
     environment:
+      - TEAMCITY_VERSION
       - IDENTITYAPI_AUTH_SERVICE_URI
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_OAUTH_TOKEN_URL
