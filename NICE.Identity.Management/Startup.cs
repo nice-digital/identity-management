@@ -186,7 +186,7 @@ namespace NICE.Identity.Management
 				}
 			});
 
-			//app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
 
 			app.UseRouting();
