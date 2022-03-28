@@ -112,6 +112,7 @@ namespace NICE.Identity.Management
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
+					context.Response.Headers.Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
 					return Task.FromResult(0);
 				});
 				await next();
@@ -127,7 +128,7 @@ namespace NICE.Identity.Management
 				app.UseExceptionHandler("/Home/Error");
                 app.UseForwardedHeaders();
 				app.UseHsts();
-				//app.UseHttpsRedirection();
+				app.UseHttpsRedirection();
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
@@ -226,7 +227,7 @@ namespace NICE.Identity.Management
 				}
 			});
 
-			/*app.Use((context, next) =>
+			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
 					context.Request.Headers["Front-End-Https"] == "on" ||
@@ -235,7 +236,7 @@ namespace NICE.Identity.Management
 					context.Request.Scheme = "https";
 				}
 				return next();
-			});*/
+			});
 
 			//app.UseRouting();
 
