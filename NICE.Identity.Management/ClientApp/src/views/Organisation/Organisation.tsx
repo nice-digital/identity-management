@@ -131,7 +131,7 @@ export class Organisation extends Component<
 											className={styles.summaryListDetail}
 											data-qa-sel="dateAdded-organisation"
 										>
-											{ToFormattedDateString(organisation.dateAdded)}
+											{ToFormattedDateString(new Date(organisation.dateAdded))}
 										</span>
 									</div>
 								) : (

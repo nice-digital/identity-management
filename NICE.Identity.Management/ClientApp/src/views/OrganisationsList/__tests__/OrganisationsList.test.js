@@ -1,45 +1,15 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import { MemoryRouter } from "react-router";
-import { Redirect } from "react-router-dom";
 import toJson from "enzyme-to-json";
-
 import { nextTick } from "../../../utils/nextTick";
-import { Endpoints } from "../../../data/endpoints";
-
 import { OrganisationsList } from "../OrganisationsList";
 import organisations from "./organisations.json";
-
+import organisations2 from "./organisations2.json";
 import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 
 describe("OrganisationsList", () => {
-	// const match = {
-	// 	params: { id: 1 },
-	// 	isExact: true,
-	// 	path: "",
-	// 	url: "",
-	// };
-
-    const organisationsListProps = {
-		location: {
-			search: "?amount=all&page=1",
-		},
-		history: {
-			push: jest.fn(),
-		},
-	};
-
-    const organisationsListPropsOnePerPage = {
-		...organisationsListProps,
-		location: { search: "?amount=1&page=4" },
-	};
-
-	const organisationsListPropsThreePerPage = {
-		...organisationsListProps,
-		location: { search: "?amount=3&page=1" },
-	};
-
-    const dummyText = "SomeText";
+	const dummyText = "SomeText";
 
     const consoleErrorReset = console.error;
 
@@ -49,28 +19,18 @@ describe("OrganisationsList", () => {
 	});
 
     it("should show loading message before data has been loaded", () => {
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(organisations));
-		const wrapper = shallow(<OrganisationsList {...organisationsListProps} />);
+		const wrapper = mount(<MemoryRouter><OrganisationsList /></MemoryRouter>);
 		expect(wrapper.find("p").text()).toEqual("Loading...");
 	});
 
-    it("should call fetchData during componentDidMount", () => {
-		fetch.mockResponseOnce(JSON.stringify(organisations));
-		const wrapper = mount(<MemoryRouter><OrganisationsList {...organisationsListProps} /></MemoryRouter>);
-		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
-		wrapper.instance().componentDidMount();
-		wrapper.update();
-		expect(spy).toHaveBeenCalled();
-		expect(fetch.mock.calls.length).toEqual(1);
-		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.organisationsList);
-		spy.mockClear();
-	});
-
-    it("should match the snapshot after data has been loaded", async () => {
+	it("should match the snapshot after data has been loaded", async () => {
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(organisations));
 		const wrapper = mount(
 			<MemoryRouter>
-				<OrganisationsList {...organisationsListProps} />
+				<OrganisationsList />
 			</MemoryRouter>,
 		);
 		await nextTick();
@@ -78,40 +38,41 @@ describe("OrganisationsList", () => {
 		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
 	});
 
-    it("should show error message when fetch organisations returns 401 error", async () => {
+	it("should show error message when fetch organisations returns 401 error", async () => {
 		console.error = jest.fn();		
 		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(<MemoryRouter><OrganisationsList {...organisationsListProps} /></MemoryRouter>);
+		const wrapper = mount(<MemoryRouter><OrganisationsList /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
 	});
 
     it("should show error message when fetch organisations returns 500 error", async () => {
 		console.error = jest.fn();
 		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(<MemoryRouter><OrganisationsList {...organisationsListProps} /></MemoryRouter>);
+		const wrapper = mount(<MemoryRouter><OrganisationsList /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
 	});
 
-    it("should show no results message when fetch returns an empty array", async () => {
+	it("should show no results message when initial fetch returns an empty array", async () => {
+		console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = shallow(<OrganisationsList {...organisationsListProps} />);
+		const wrapper = mount(<MemoryRouter><OrganisationsList /></MemoryRouter>);
 		await nextTick();
 		wrapper.update();
 		expect(wrapper.find("p").text()).toEqual("No results found");
 	});
 
-    it("should show no results found message after search returns empty array", async () => {
-		fetch.mockResponseOnce(JSON.stringify(organisations));
-        fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = shallow(<OrganisationsList {...organisationsListProps} />);
-		const instance = wrapper.instance();
-		await nextTick();
-		wrapper.update();
-		instance.filterOrganisationsBySearch(dummyText);
+	it("should show no results message when search fetch returns an empty array", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify([]));
+		const wrapper = mount(
+			<MemoryRouter initialEntries={[`/organisations?q=${dummyText}`]}>
+                <OrganisationsList />
+            </MemoryRouter>,
+		);
 		await nextTick();
 		wrapper.update();
         expect(wrapper.find("p").text()).toEqual(
@@ -120,10 +81,11 @@ describe("OrganisationsList", () => {
 	});
 
     it("should show 25 (default page amount) or less results by default when paginated", async () => {
-		fetch.mockResponseOnce(JSON.stringify(organisations));
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(organisations2));
 		const wrapper = mount(
-			<MemoryRouter>
-				<OrganisationsList {...organisationsListProps} />
+			<MemoryRouter initialEntries={['/organisations']}>
+				<OrganisationsList />
 			</MemoryRouter>,
 		);
 		await nextTick();
@@ -132,42 +94,50 @@ describe("OrganisationsList", () => {
 		expect(listContainer.find(".card").length).toBeLessThanOrEqual(25);
 	});
 
-	it("should go to page 2 when next button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(organisations));
+	it("should show all results when querystring amount is set as 'all'", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(organisations2));
 		const wrapper = mount(
-			<MemoryRouter>
-                <OrganisationsList {...organisationsListPropsThreePerPage} />
-            </MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("[data-pager='next']").simulate("click");
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-organisations']");
-		const usersListSummary = wrapper.find(".organisationsListSummary");
-		expect(usersListSummary.text()).toEqual("Showing 4 to 4 of 4 organisations");
-		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 2 of 2");
-		expect(listContainer.find(".card").length).toEqual(1);
-	});
-
-	it("should go to first page when page 1 button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(organisations));
-		const wrapper = mount(
-			<MemoryRouter>
-				<OrganisationsList {...organisationsListPropsOnePerPage} />
+			<MemoryRouter initialEntries={['/organisations?amount=all']}>
+				<OrganisationsList />
 			</MemoryRouter>,
 		);
 		await nextTick();
 		wrapper.update();
-		wrapper.find("[data-pager='1']").simulate("click");
+		const listContainer = wrapper.find("[data-qa-sel='list-of-organisations']");
+		expect(listContainer.find(".card").length).toBeLessThanOrEqual(organisations2.length);
+	});
+
+	it("should show page 2 when querystring page is set to 2", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(organisations2));
+		const wrapper = mount(
+			<MemoryRouter initialEntries={['/organisations?page=2']}>
+                <OrganisationsList />
+            </MemoryRouter>,
+		);
 		await nextTick();
 		wrapper.update();
 		const listContainer = wrapper.find("[data-qa-sel='list-of-organisations']");
-		const usersListSummary = wrapper.find(".organisationsListSummary");
-		expect(usersListSummary.text()).toEqual("Showing 1 to 1 of 4 organisations");
-		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 1 of 4");
-		expect(listContainer.find(".card").length).toEqual(1);
+		const organisationsListSummary = wrapper.find(".paginationText");
+		expect(organisationsListSummary.text()).toEqual("Showing 26 to 32 of 32 organisations");
+		expect(wrapper.find(".pagination__item--count").text()).toEqual("Page 2 of 2");
+		expect(listContainer.find(".card").length).toEqual(7);
+	});
+
+	it("should sort results by alphabetical descending when querystring sort is set to alpha-desc", async () => {
+		console.error = jest.fn();
+		fetch.mockResponseOnce(JSON.stringify(organisations2));
+		const wrapper = mount(
+			<MemoryRouter initialEntries={['/organisations?sort=alpha-desc']}>
+                <OrganisationsList />
+            </MemoryRouter>,
+		);
+		await nextTick();
+		wrapper.update();
+		const listContainer = wrapper.find("[data-qa-sel='list-of-organisations']");
+		const firstResult = listContainer.find(".card").first();
+		expect(firstResult.find("a").text()).toEqual("Zulu");
 	});
 
 });

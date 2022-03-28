@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Avoid "Mount denied" errors for Chrome/Firefox containers on Windows
 # See https://github.com/docker/for-win/issues/1829#issuecomment-376328022
 export COMPOSE_CONVERT_WINDOWS_PATHS=1
@@ -10,8 +12,10 @@ docker exec functional-tests_database_1 kill 1 || :
 docker-compose down --remove-orphans && docker-compose rm -vf
 docker-compose build && docker-compose up -d
 
-# Wait for comments webapp before running the tests
-docker-compose run tests waitforit -t 120 --strict idammanagement:8080 -- npm run test:teamcity -- --host hub -b http://idam:8080
+# Wait for the web app to be up before running the tests
+docker-compose run -T tests npm run wait-then-test
+# Or for dev mode, uncomment:
+# winpty docker-compose exec tests bash
 
 # Generate an Allure test report
 docker-compose run -T tests allure generate --clean
@@ -24,6 +28,7 @@ docker cp functional-tests_tests_1:/tests/allure-report ./docker-output
 docker-compose logs --no-color > ./docker-output/logs.txt
 
 # Clean up
+nohup docker-compose down --remove-orphans --volumes > /dev/null 2>&1 &
 docker volume ls
 docker-compose down -v
 docker volume ls
