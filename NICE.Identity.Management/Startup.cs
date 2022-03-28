@@ -127,7 +127,7 @@ namespace NICE.Identity.Management
 				app.UseExceptionHandler("/Home/Error");
                 app.UseForwardedHeaders();
 				app.UseHsts();
-				app.UseHttpsRedirection();
+				//app.UseHttpsRedirection();
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
