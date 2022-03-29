@@ -134,7 +134,6 @@ namespace NICE.Identity.Management
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
-				app.UseForwardedHeaders();
 				app.UseHttpsRedirection();
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
