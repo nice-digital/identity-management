@@ -127,7 +127,6 @@ namespace NICE.Identity.Management
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
-				app.UseHttpsRedirection();
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
@@ -187,6 +186,7 @@ namespace NICE.Identity.Management
 				}
 			});
 
+			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
 
 			app.UseRouting();
