@@ -2,13 +2,11 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.SpaServices.Extensions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NICE.Identity.Authentication.Sdk.Configuration;
@@ -17,13 +15,9 @@ using NICE.Identity.Management.Configuration;
 using ProxyKit;
 using System;
 using System.Net;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.Extensions.FileProviders;
 using NICE.Identity.Management.Controllers;
 using NICE.Identity.Management.Extensions;
 using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderValue;
@@ -118,6 +112,8 @@ namespace NICE.Identity.Management
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
+					context.Response.Headers.Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+
 					return Task.FromResult(0);
 				});
 				await next();
@@ -131,7 +127,6 @@ namespace NICE.Identity.Management
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
-				app.UseHsts();
 				app.UseStatusCodePagesWithReExecute("/error/{0}"); // url to errorcontroller
 			}
 
