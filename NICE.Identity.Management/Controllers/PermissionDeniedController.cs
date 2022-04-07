@@ -8,9 +8,9 @@ namespace NICE.Identity.Management.Controllers
 {
 	public class PermissionDeniedController : Controller
 	{
+		[Produces("text/html")]
 		public IActionResult Index()
 		{
-			HttpContext.Response.Headers["Content-Type"] = "text/html; charset=UTF-8";
 			return View("PermissionDenied");
 		}
 	}
