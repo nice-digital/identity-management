@@ -107,7 +107,7 @@ export class FilterSuggestions<T> extends Component<
 					onChange={this.handleInputChange}
 					onBlur={this.handleInputBlur}
 					onKeyDown={this.handleInputKeyDown}
-					autocomplete="off"
+					autoComplete="off"
 					data-qa-sel="filter-suggestions-input"
 					className={styles.noMargin}
 				/>
