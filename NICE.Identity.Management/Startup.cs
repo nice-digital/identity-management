@@ -224,7 +224,7 @@ namespace NICE.Identity.Management
 				}
 			});
 			*/
-			/*app.Use((context, next) =>
+			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
 					context.Request.Headers["Front-End-Https"] == "on" ||
@@ -233,7 +233,7 @@ namespace NICE.Identity.Management
 					context.Request.Scheme = "https";
 				}
 				return next();
-			});*/
+			});
 
 			app.UseRouting();
 
