@@ -54,11 +54,11 @@ namespace NICE.Identity.Management
 			// TODO: remove httpClientBuilder
 			// This bypasses any certificate validation on proxy requests
 			// Only done due to local APIs not having certificates configured 
-			services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+			/*services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
 			{
 				ClientCertificateOptions = ClientCertificateOption.Manual,
 				ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
-			}));
+			}));*/
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -107,7 +107,7 @@ namespace NICE.Identity.Management
 		{
 			startupLogger.LogInformation("Identity management is starting up");
 
-			app.Use(async (context, next) =>
+			/*app.Use(async (context, next) =>
 			{
 				context.Response.OnStarting(() =>
 				{
@@ -116,7 +116,7 @@ namespace NICE.Identity.Management
 				});
 				await next();
 			}
-			);
+			);*/
 
 			if (env.IsDevelopment())
 			{
@@ -193,7 +193,7 @@ namespace NICE.Identity.Management
 			app.UseAuthorization();
 
 
-			app.UseStaticFiles();
+			/*app.UseStaticFiles();
 			app.UseSpaStaticFiles(new StaticFileOptions()
 			{
 				OnPrepareResponse = context =>
@@ -223,7 +223,7 @@ namespace NICE.Identity.Management
 					}
 				}
 			});
-
+			*/
 			/*app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
@@ -237,7 +237,7 @@ namespace NICE.Identity.Management
 
 			//app.UseRouting();
 
-			app.UseEndpoints(endpoints =>
+			/*app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
 				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint, new HealthCheckOptions()
@@ -270,7 +270,7 @@ namespace NICE.Identity.Management
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
-
+			*/
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
 				// DotNetCore SpaServices requires RawTarget property, which isn't set on a TestServer.
