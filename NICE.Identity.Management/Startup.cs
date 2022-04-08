@@ -235,9 +235,9 @@ namespace NICE.Identity.Management
 				return next();
 			});*/
 
-			//app.UseRouting();
+			app.UseRouting();
 
-			/*app.UseEndpoints(endpoints =>
+			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
 				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint, new HealthCheckOptions()
@@ -250,7 +250,7 @@ namespace NICE.Identity.Management
 					setup.AddCustomStylesheet("wwwroot/NICE.Style.css");
 				}).RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
 			});
-
+		
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Run(async context =>
@@ -270,7 +270,7 @@ namespace NICE.Identity.Management
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
-			*/
+		
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
 				// DotNetCore SpaServices requires RawTarget property, which isn't set on a TestServer.
