@@ -237,7 +237,7 @@ namespace NICE.Identity.Management
 
 			app.UseRouting();
 
-			app.UseEndpoints(endpoints =>
+			/*app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
 				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint, new HealthCheckOptions()
@@ -270,7 +270,7 @@ namespace NICE.Identity.Management
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
-		
+		*/
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
 				// DotNetCore SpaServices requires RawTarget property, which isn't set on a TestServer.
