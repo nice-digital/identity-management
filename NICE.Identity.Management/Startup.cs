@@ -269,7 +269,7 @@ namespace NICE.Identity.Management
 					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 
 					var permissionDeniedViewAsString = await new PermissionDeniedController().RenderViewAsync(httpContext: httpContext, viewName: "PermissionDenied");
-					httpContext.Response.ContentType = "text/html; hello";
+					httpContext.Response.ContentType = "text/html";
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
