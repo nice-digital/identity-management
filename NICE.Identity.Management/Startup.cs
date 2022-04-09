@@ -54,11 +54,11 @@ namespace NICE.Identity.Management
 			// TODO: remove httpClientBuilder
 			// This bypasses any certificate validation on proxy requests
 			// Only done due to local APIs not having certificates configured 
-			/*services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+			services.AddProxy(httpClientBuilder => httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
 			{
 				ClientCertificateOptions = ClientCertificateOption.Manual,
 				ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
-			}));*/
+			}));
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -107,16 +107,18 @@ namespace NICE.Identity.Management
 		{
 			startupLogger.LogInformation("Identity management is starting up");
 
-			/*app.Use(async (context, next) =>
+			app.Use(async (context, next) =>
 			{
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
+					context.Response.Headers.Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+
 					return Task.FromResult(0);
 				});
 				await next();
 			}
-			);*/
+			);
 
 			if (env.IsDevelopment())
 			{
@@ -130,7 +132,7 @@ namespace NICE.Identity.Management
 
 			app.UseCors(CorsPolicyName);
 
-			/*app.RunProxy("/api", async context =>
+			app.RunProxy("/api", async context =>
 			{
 				var apiEndpoint = Configuration.GetSection("WebAppConfiguration")["AuthorisationServiceUri"];
 				apiEndpoint += apiEndpoint.EndsWith("/") ? "api" : "/api";
@@ -146,13 +148,13 @@ namespace NICE.Identity.Management
 					startupLogger.LogDebug("Proxy Add Authorization");
 					var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
 
-					#if DEBUG
-						if (env.IsDevelopment())
-						{
-							AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
-							accessToken ??= AccessKeyForLocalDevelopmentUse;
-						}
-					#endif
+#if DEBUG
+					if (env.IsDevelopment())
+					{
+						AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
+						accessToken ??= AccessKeyForLocalDevelopmentUse;
+					}
+#endif
 
 					forwardContext.UpstreamRequest.Headers.Authorization =
 						new AuthenticationHeaderValue("Bearer", accessToken);
@@ -182,7 +184,7 @@ namespace NICE.Identity.Management
 						ReasonPhrase = e.Message
 					};
 				}
-			});*/
+			});
 
 			app.UseHttpsRedirection();
 			//app.UseCookiePolicy();
@@ -193,7 +195,7 @@ namespace NICE.Identity.Management
 			app.UseAuthorization();
 
 
-			/*app.UseStaticFiles();
+			app.UseStaticFiles();
 			app.UseSpaStaticFiles(new StaticFileOptions()
 			{
 				OnPrepareResponse = context =>
@@ -223,7 +225,7 @@ namespace NICE.Identity.Management
 					}
 				}
 			});
-			*/
+
 			app.Use((context, next) =>
 			{
 				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
@@ -235,9 +237,9 @@ namespace NICE.Identity.Management
 				return next();
 			});
 
-			app.UseRouting();
+			//app.UseRouting();
 
-			/*app.UseEndpoints(endpoints =>
+			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
 				endpoints.MapHealthChecks(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint, new HealthCheckOptions()
@@ -250,7 +252,7 @@ namespace NICE.Identity.Management
 					setup.AddCustomStylesheet("wwwroot/NICE.Style.css");
 				}).RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
 			});
-		
+
 			app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
 			{
 				builder.Run(async context =>
@@ -267,10 +269,11 @@ namespace NICE.Identity.Management
 					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 
 					var permissionDeniedViewAsString = await new PermissionDeniedController().RenderViewAsync(httpContext: httpContext, viewName: "PermissionDenied");
+					httpContext.Response.ContentType = "text/html; hello";
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
-		*/
+
 			app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && httpContext.User.IsInRole(AdministratorRole), builder =>
 			{
 				// DotNetCore SpaServices requires RawTarget property, which isn't set on a TestServer.
