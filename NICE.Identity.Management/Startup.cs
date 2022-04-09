@@ -112,7 +112,6 @@ namespace NICE.Identity.Management
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
-					context.Response.Headers.Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
 
 					return Task.FromResult(0);
 				});
