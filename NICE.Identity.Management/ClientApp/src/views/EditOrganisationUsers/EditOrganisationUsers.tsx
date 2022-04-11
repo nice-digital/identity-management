@@ -105,7 +105,7 @@ export class EditOrganisationUsers extends Component<
 			);
 			usersSearch = usersSearch.filter(
 				(user: UserType) =>
-					String(`${user.firstName} ${user.lastName}`)
+					`${user.firstName} ${user.lastName}`
 						.toLowerCase()
 						.indexOf(searchQuery) > -1 &&
 					user.hasVerifiedEmailAddress &&
