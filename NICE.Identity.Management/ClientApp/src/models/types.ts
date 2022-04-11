@@ -44,6 +44,18 @@ export type OrganisationType = {
 	dateAdded: string;
 };
 
+export type UsersAndJobIdType = {
+	userId: number;
+	user: UserType;
+	jobId: number;
+}
+
+export type UsersAndJobIdsByOrganisationType = {
+	organisationId: number;
+	organisation: OrganisationType;
+	users: UsersAndJobIdType[];
+}
+
 export type UserRoleType = {
 	userId: number;
 	websites: Array<WebsiteType>;
