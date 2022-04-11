@@ -1,51 +1,161 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Alert } from "@nice-digital/nds-alert";
+import { RouteComponentProps, Link } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
-import { Button } from "@nice-digital/nds-button";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { Input } from "@nice-digital/nds-input";
-// import { Endpoints } from "../../data/endpoints";
-// import { fetchData } from "../../helpers/fetchData";
-// import { isDataError } from "../../helpers/isDataError";
+import { Table } from "@nice-digital/nds-table";
+import { Endpoints } from "../../data/endpoints";
+import { fetchData } from "../../helpers/fetchData";
+import { isDataError } from "../../helpers/isDataError";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { UsersAndJobIdsByOrganisationType, UserType } from "../../models/types";
+import { UserStatus } from "../../components/UserStatus/UserStatus";
+import { FilterSuggestions } from "../../components/FilterSuggestions/FilterSuggestions";
+import { SuggestionUser } from "../../components/SuggestionUser/SuggestionUser";
+import styles from "./EditOrganisationUsers.module.scss";
+
+type TParams = { id: string };
+
+type EditOrganisationProps = Record<string, unknown> &
+	RouteComponentProps<TParams>;
 
 type EditOrganisationUsersState = {
-	// formName: string;
-	// validationError: boolean;
-	hasSubmitted: boolean;
+	organisation: UsersAndJobIdsByOrganisationType;
+	usersSearch: UserType[];
+	isLoading: boolean;
 	error?: Error;
-	isSaveButtonLoading: boolean;
 };
 export class EditOrganisationUsers extends Component<
-	Record<string, never>,
+	EditOrganisationProps,
 	EditOrganisationUsersState
 > {
-	constructor(props = {}) {
+	constructor(props: EditOrganisationProps) {
 		super(props);
 
 		this.state = {
-			// formName: "",
-			// validationError: false,
-			hasSubmitted: false,
-			isSaveButtonLoading: false,
+			organisation: {} as UsersAndJobIdsByOrganisationType,
+			usersSearch: [],
+			isLoading: true,
 		};
 
-		document.title = "NICE Accounts - Edit users";
+		document.title = "NICE Accounts - Edit organisation users";
 	}
 
-	handleSubmit = (): void => {
-		console.log("mark");
+	async componentDidMount(): Promise<void> {
+		this.setState({ isLoading: true });
+		const organisationId = this.props.match.params.id;
+
+		const organisation = await fetchData(
+			Endpoints.usersAndJobIdsByOrganisation(organisationId),
+		);
+
+		if (isDataError(organisation)) {
+			this.setState({ error: organisation });
+		}
+
+		this.setState({ organisation, isLoading: false });
+	}
+
+	handleRemoveUserClick = async (
+		e: React.MouseEvent<HTMLAnchorElement>,
+		jobId: number,
+	): Promise<void> => {
+		e.preventDefault();
+		this.setState({ isLoading: true });
+
+		const organisation = { ...this.state.organisation };
+
+		const fetchOptions = {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				id: jobId,
+			}),
+		};
+
+		await fetchData(Endpoints.job(jobId), fetchOptions);
+
+		organisation.users = organisation.users.filter(
+			(orgUser) => orgUser.jobId !== jobId,
+		);
+
+		this.setState({ organisation, isLoading: false });
+	};
+
+	filterUsersSearchList = async (
+		searchQuery: string,
+	): Promise<void | boolean> => {
+		if (!searchQuery.length) {
+			this.setState({ usersSearch: [] });
+			return false;
+		}
+
+		searchQuery = searchQuery.toLowerCase();
+
+		let usersSearch = await fetchData(Endpoints.usersListSearch(searchQuery));
+
+		if (isDataError(usersSearch)) {
+			this.setState({ error: usersSearch });
+		} else {
+			const organisation = { ...this.state.organisation };
+			const existingUsersIds = organisation.users.map((user) => user.userId);
+
+			usersSearch = usersSearch.filter(
+				(user: UserType) => !existingUsersIds.includes(user.userId),
+			);
+			usersSearch = usersSearch.filter(
+				(user: UserType) =>
+					String(`${user.firstName} ${user.lastName}`)
+						.toLowerCase()
+						.indexOf(searchQuery) > -1 &&
+					user.hasVerifiedEmailAddress &&
+					!user.isLockedOut,
+			);
+
+			this.setState({ usersSearch });
+		}
+	};
+
+	addUserToOrganisation = async (item: UserType): Promise<void | boolean> => {
+		const itemIsEmpty = Object.keys(item).length === 0;
+
+		if (itemIsEmpty) {
+			this.setState({ usersSearch: [] });
+			return false;
+		}
+
+		this.setState({ isLoading: true });
+
+		const organisation = { ...this.state.organisation };
+
+		const fetchOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId: item.userId,
+				organisationId: Number(this.props.match.params.id),
+				isLead: false,
+			}),
+		};
+
+		const job = await fetchData(Endpoints.jobs, fetchOptions);
+
+		organisation.users = [
+			...organisation.users,
+			{ userId: item.userId, user: item, jobId: job.id },
+		];
+
+		this.setState({ organisation, usersSearch: [], isLoading: false });
 	};
 
 	render(): JSX.Element {
-		//const { formName, hasSubmitted, error, isSaveButtonLoading } = this.state;
-		const { hasSubmitted, error, isSaveButtonLoading } = this.state;
-
-		// if (hasSubmitted) {
-		// 	return <Redirect to="/organisations" />;
-		// }
+		const {
+			organisation: { organisation, users },
+			usersSearch,
+			isLoading,
+			error,
+		} = this.state;
+		const organisationId = this.props.match.params.id;
 
 		return (
 			<>
@@ -56,30 +166,85 @@ export class EditOrganisationUsers extends Component<
 					<Breadcrumb to="/organisations" elementType={Link}>
 						Organisations
 					</Breadcrumb>
-					<Breadcrumb to="/organisations/:id">ORG NAME</Breadcrumb>
+					<Breadcrumb
+						to={`/organisations/${organisationId}`}
+						elementType={Link}
+					>
+						{isLoading ? "Loading organisation details" : organisation.name}
+					</Breadcrumb>
 					<Breadcrumb>Edit users</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader heading="Edit users" />
+				<PageHeader
+					preheading={
+						isLoading ? "Loading Organisation Name" : organisation.name
+					}
+					heading="Users"
+					lead="Add or remove users from this organisation"
+				/>
 
 				{!error ? (
 					<>
-						{hasSubmitted && (
-							<Alert
-								type="info"
-								role="status"
-								aria-live="polite"
-								data-qa-sel="successful-message-edit-organisation"
-							>
-								<p>Org EDITED.</p>
-								{/* IS THIS :id ok */}
-								<Link to={`/organisations/:id`}>Back to organisation page</Link>
-							</Alert>
-						)}
-
 						<Grid>
-							<GridItem cols={12} md={6} lg={4}>
-								<p>Edit users for org</p>
+							<GridItem cols={12} md={3}>
+								<FilterSuggestions
+									label="Find and add an active user account; search excludes Pending and Locked accounts"
+									data={usersSearch}
+									qaSelExtract="add-organisation-user"
+									onInputChange={this.filterUsersSearchList}
+									onResultClick={this.addUserToOrganisation}
+									elementType={SuggestionUser}
+								/>
+							</GridItem>
+							<GridItem cols={12} md={9} aria-busy={isLoading}>
+								<h2 className={styles.orgUsersListSummary}>Current users</h2>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : (
+									<Table
+										style={{ display: "table" }}
+										data-qa-sel="list-of-organisation-users"
+									>
+										<thead>
+											<tr>
+												<th>User name</th>
+												<th>Email address</th>
+												<th>Status</th>
+												<th>Remove user</th>
+											</tr>
+										</thead>
+										<tbody>
+											{users.map((orgUser) => {
+												const {
+													user: { firstName, lastName, emailAddress },
+												} = orgUser;
+
+												return (
+													<tr key={orgUser.userId}>
+														<td>{`${firstName} ${lastName}`}</td>
+														<td>{emailAddress}</td>
+														<td>
+															<UserStatus user={orgUser.user} />
+														</td>
+														<td>
+															<a
+																onClick={(e) =>
+																	this.handleRemoveUserClick(
+																		e,
+																		orgUser.jobId as number,
+																	)
+																}
+																href={`#remove-org-user`}
+															>
+																Remove user
+															</a>
+														</td>
+													</tr>
+												);
+											})}
+										</tbody>
+									</Table>
+								)}
 							</GridItem>
 						</Grid>
 					</>
