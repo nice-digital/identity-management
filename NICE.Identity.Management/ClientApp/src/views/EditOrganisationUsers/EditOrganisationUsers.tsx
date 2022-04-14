@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
+import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
@@ -22,6 +23,7 @@ type EditOrganisationProps = Record<string, unknown> &
 type EditOrganisationUsersState = {
 	organisation: UsersAndJobIdsByOrganisationType;
 	usersSearch: UserType[];
+	confirmationMessage: string;
 	isLoading: boolean;
 	error?: Error;
 };
@@ -35,6 +37,7 @@ export class EditOrganisationUsers extends Component<
 		this.state = {
 			organisation: {} as UsersAndJobIdsByOrganisationType,
 			usersSearch: [],
+			confirmationMessage: "",
 			isLoading: true,
 		};
 
@@ -79,12 +82,18 @@ export class EditOrganisationUsers extends Component<
 			(orgUser) => orgUser.jobId !== jobId,
 		);
 
-		this.setState({ organisation, isLoading: false });
+		this.setState({
+			organisation,
+			confirmationMessage: "User has been successfully removed.",
+			isLoading: false,
+		});
 	};
 
 	filterUsersSearchList = async (
 		searchQuery: string,
 	): Promise<void | boolean> => {
+		this.setState({ confirmationMessage: "" });
+
 		if (!searchQuery.length) {
 			this.setState({ usersSearch: [] });
 			return false;
@@ -145,13 +154,19 @@ export class EditOrganisationUsers extends Component<
 			{ userId: item.userId, user: item, jobId: job.id },
 		];
 
-		this.setState({ organisation, usersSearch: [], isLoading: false });
+		this.setState({
+			organisation,
+			usersSearch: [],
+			confirmationMessage: "User has been successfully added.",
+			isLoading: false,
+		});
 	};
 
 	render(): JSX.Element {
 		const {
 			organisation: { organisation, users },
 			usersSearch,
+			confirmationMessage,
 			isLoading,
 			error,
 		} = this.state;
@@ -170,14 +185,14 @@ export class EditOrganisationUsers extends Component<
 						to={`/organisations/${organisationId}`}
 						elementType={Link}
 					>
-						{isLoading ? "Loading organisation details" : organisation.name}
+						{isLoading ? "Loading organisation details" : organisation?.name}
 					</Breadcrumb>
 					<Breadcrumb>Edit users</Breadcrumb>
 				</Breadcrumbs>
 
 				<PageHeader
 					preheading={
-						isLoading ? "Loading Organisation Name" : organisation.name
+						isLoading ? "Loading Organisation Name" : organisation?.name
 					}
 					heading="Users"
 					lead="Add or remove users from this organisation"
@@ -197,10 +212,20 @@ export class EditOrganisationUsers extends Component<
 								/>
 							</GridItem>
 							<GridItem cols={12} md={9} aria-busy={isLoading}>
+								{confirmationMessage && (
+									<Alert
+										type="info"
+										role="status"
+										aria-live="polite"
+										data-qa-sel="added-edit-organisation-users"
+									>
+										<p>{confirmationMessage}</p>
+									</Alert>
+								)}
 								<h2 className={styles.orgUsersListSummary}>Current users</h2>
 								{isLoading ? (
 									<p>Loading...</p>
-								) : (
+								) : users.length ? (
 									<Table
 										style={{ display: "table" }}
 										data-qa-sel="list-of-organisation-users"
@@ -244,6 +269,8 @@ export class EditOrganisationUsers extends Component<
 											})}
 										</tbody>
 									</Table>
+								) : (
+									<p>No users found for this organisation.</p>
 								)}
 							</GridItem>
 						</Grid>
