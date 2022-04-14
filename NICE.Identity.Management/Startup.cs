@@ -112,7 +112,6 @@ namespace NICE.Identity.Management
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
-					context.Response.Headers.Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
 
 					return Task.FromResult(0);
 				});
@@ -148,13 +147,13 @@ namespace NICE.Identity.Management
 					startupLogger.LogDebug("Proxy Add Authorization");
 					var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
 
-					#if DEBUG
-						if (env.IsDevelopment())
-						{
-							AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
-							accessToken ??= AccessKeyForLocalDevelopmentUse;
-						}
-					#endif
+#if DEBUG
+					if (env.IsDevelopment())
+					{
+						AccessKeyForLocalDevelopmentUse ??= accessToken; //this is a hack to enable the front-end to share the access token with the backend. local dev only. it'd be a major security flaw elsewhere.
+						accessToken ??= AccessKeyForLocalDevelopmentUse;
+					}
+#endif
 
 					forwardContext.UpstreamRequest.Headers.Authorization =
 						new AuthenticationHeaderValue("Bearer", accessToken);
@@ -269,6 +268,7 @@ namespace NICE.Identity.Management
 					httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
 
 					var permissionDeniedViewAsString = await new PermissionDeniedController().RenderViewAsync(httpContext: httpContext, viewName: "PermissionDenied");
+					httpContext.Response.ContentType = "text/html";
 					await httpContext.Response.WriteAsync(permissionDeniedViewAsString);
 				});
 			});
