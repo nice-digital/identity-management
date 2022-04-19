@@ -13,7 +13,7 @@ import adminHomepage from '../support/check/adminHomepage';
 import createaccount from '../support/action/createaccount';
 import finduser from '../support/action/finduser';
 import deleteUser from '../support/action/deleteUser';
-import findUserList, { userNotInList } from '../support/check/findUserInList';
+import findUserList, { userNotInList, findUserOrganisation } from '../support/check/findUserInList';
 import findWebsiteList from '../support/check/findWebsiteInList';
 import validateDeletionSuccessMessage, {
   validateRegistrationValidationMessages,
@@ -35,9 +35,9 @@ import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancel
 import validateOrganisationsDownloadPageResultCount from '../support/check/validateAdminOrgPage';
 import validateAdminOrgPage, { validateFirstLinkInPagination, validatePreviousPage } from "../support/check/validateAdminOrgPage";
 import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } from "../support/action/clickPaginationOption";
-import editOrganisationName from '../support/action/editOrganisationName';
-import saveNewOrganisationName from '../support/action/saveNewOrganisationName';
-import validateNewOrgResponseMessage , { validateErrorMessage } from '../support/check/validateNewOrgResponseMessage';
+import addOrganisationName, { editOrganisationName } from '../support/action/addOrganisationName';
+import saveNewOrganisationName, { saveEditOrgButton } from '../support/action/saveNewOrganisationName';
+import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisationDate, validateEditOrgResponseMessage } from '../support/check/validateNewOrgResponseMessage';
 import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb } from '../support/action/navigateToOrgListPage';
 import findOrganisationList from '../support/check/findOrganisationList';
 
@@ -166,7 +166,7 @@ Then(/^I expect the first pagination option is now "([^"]*)"$/, validatePrevious
 
 Then(/^I click the previous pagination option$/, clickPreviousPagination);
 
-Then(/^I add new organisation name "([^"]*)"$/, editOrganisationName);
+Then(/^I add new organisation name "([^"]*)"$/, addOrganisationName);
 
 Then(/^I click on the save organisation button$/, saveNewOrganisationName);
 
@@ -183,3 +183,13 @@ Then(/^I select Dev status filter$/, validateServiceEnvChecked);
 Then(/^I click on the cancel filter on the service detail page$/, clickCancelFilterServiceDetailPage);
 
 Then(/^I verify user details is displayed$/, validateServiceUserRoleChecked);
+
+Then(/^I expect organisation date added "([^"]*)" to be displayed$/, validateOrganisationDate);
+
+Then(/^I expect user "([^"]*)" to exist in the organisation list$/, findUserOrganisation);
+
+Then(/^I edit organisation name "([^"]*)"$/, editOrganisationName);
+
+Then(/^I click on the edit save organisation button$/, saveEditOrgButton);
+
+Then(/^I expect successful message "([^"]*)"$/, validateEditOrgResponseMessage);

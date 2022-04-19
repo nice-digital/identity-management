@@ -36,4 +36,11 @@ export const clickLastUserInList = () => {
   clickElement("click", "selector", selectors.userListPage.lastUserCard);
 };
 
+export const findUserOrganisation = (text) => {
+
+  waitForVisible(selectors.manageOrgPage.findUser);
+	checkContainsText("element", selectors.manageOrgPage.findUser, text);
+ 	pause(1000);
+  };
+
 export default findUserList;

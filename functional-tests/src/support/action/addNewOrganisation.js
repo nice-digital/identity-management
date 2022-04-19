@@ -8,4 +8,10 @@ export const addNewOrganisation = () => {
   click('click', 'selector', selectors.organisationListPage.addNewOrganisation);
 };
 
+export const editOrganisationButton = () => {
+
+  waitForVisible(selectors.manageOrgPage.editOrganisation);
+  click('click', 'selector', selectors.manageOrgPage.editOrganisation);
+};
+
 export default addNewOrganisation;

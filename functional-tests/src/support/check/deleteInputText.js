@@ -14,8 +14,8 @@ export const deleteEnteredText = () => {
 
 export const deleteNewOrgEnteredText = () => {
 
-	waitForVisible(selectors.manageNewOrgPage.deleteNewOrgName);
-	clickElement('click', 'selector', selectors.manageNewOrgPage.deleteNewOrgName);
+	waitForVisible(selectors.manageOrgPage.deleteNewOrgName);
+	clickElement('click', 'selector', selectors.manageOrgPage.deleteNewOrgName);
 	pressButton(['Control', 'a', 'Delete']);
 	pause(2000);
 };

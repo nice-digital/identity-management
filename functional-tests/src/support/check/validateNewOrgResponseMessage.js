@@ -12,11 +12,23 @@ export const validateNewOrgResponseMessage = (message) => {
 
 export const validateErrorMessage = (message) => {
 
-	waitForVisible('.input__error');
-	checkContainsText('.input__error', message);
+	waitForVisible(selectors.addNewOrganisation.errorMessage);
+	checkContainsText("element", selectors.addNewOrganisation.errorMessage, message);
 	pause(1000);
   };
 
+  export const validateOrganisationDate = (date) => {
+
+	waitForVisible(selectors.manageOrgPage.dateAdded);
+	checkContainsText("element", selectors.manageOrgPage.dateAdded, date);
+	pause(1000);
+  };
+
+  export const validateEditOrgResponseMessage = (message) => {
+	waitForVisible(selectors.manageOrgPage.editResponseFeedback);
+	checkContainsText("element", selectors.manageOrgPage.editResponseFeedback, message);
+	pause(1000);
+};
 
 export default validateNewOrgResponseMessage;
 

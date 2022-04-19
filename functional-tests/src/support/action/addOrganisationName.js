@@ -4,7 +4,7 @@ import pressButton from '@nice-digital/wdio-cucumber-steps/lib/support/action/pr
 import setInputField from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
 import selectors from '../selectors';
 
-export const editOrganisationName = (name) => {
+export const addOrganisationName = (name) => {
 
 
   waitForVisible(selectors.addNewOrganisation.inputOrganisationName);
@@ -15,7 +15,19 @@ export const editOrganisationName = (name) => {
     name,
     selectors.addNewOrganisation.inputOrganisationName
   );
+};
+
+
+export const editOrganisationName = (name) => {
+waitForVisible(selectors.manageOrgPage.editOrganisationName);
+clickElement('click', 'selector', selectors.manageOrgPage.editOrganisationName);
+pressButton(['Control', 'a', 'Delete']);
+setInputField(
+  'set',
+  name,
+  selectors.manageOrgPage.editOrganisationName
+);
 
 };
 
-export default editOrganisationName;
+export default addOrganisationName;
