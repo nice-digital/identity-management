@@ -5,7 +5,7 @@
 
   ul {
     list-style: none;
-    background-color: #fff;
+    background-color: $nds-colour-nice-white;
     border: 1px solid $nds-colour-border;
     border-top: 0;
     border-bottom: 0;
@@ -21,7 +21,7 @@
       line-height: 1.15;
 
       a {
-        background-color: #fff;
+        background-color: $nds-colour-nice-white;
         cursor: pointer;
         padding: rem($nds-spacing-small);
         display: block;
