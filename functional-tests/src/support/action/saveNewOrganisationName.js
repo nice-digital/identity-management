@@ -10,6 +10,13 @@ export const saveNewOrganisationName = () => {
   waitForVisible(selectors.addNewOrganisation.saveNewOrgButton);
   clickElement('click', 'selector', selectors.addNewOrganisation.saveNewOrgButton);
  
+};
+
+export const saveEditOrgButton = () => {
+
+  waitForVisible(selectors.manageOrgPage.saveEditOrgButton);
+  clickElement('click', 'selector', selectors.manageOrgPage.saveEditOrgButton);
+ 
 
 };
 

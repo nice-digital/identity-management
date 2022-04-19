@@ -13,7 +13,7 @@ import deleteEnteredText from "../support/check/deleteInputText";
 import deleteInputText, { deleteNewOrgEnteredText } from "../support/check/deleteInputText";
 import selectFromDropdownByIndex from '../support/action/selectFromDropdownByIndex';
 import checkFirstOrgInList from '../support/check/checkFirstOrgInList';
-import addNewOrganisation from '../support/action/addNewOrganisation';
+import addNewOrganisation, { editOrganisationButton } from '../support/action/addNewOrganisation';
 
 When(
   /^I log into accounts with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,
@@ -135,3 +135,5 @@ When(
   /^I click on the first service on the list$/,
   clickFirstService
 );
+
+When(/^I click on the edit organisation button$/, editOrganisationButton);
