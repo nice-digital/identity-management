@@ -15,7 +15,6 @@ export const SuggestionUser: FC<SuggestionUserProps> = ({
 	onMouseOver,
 }) => {
 	const { firstName, lastName, emailAddress } = item;
-	const index = Number(id.slice(id.length - 1));
 
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
 		e.preventDefault();
@@ -26,7 +25,7 @@ export const SuggestionUser: FC<SuggestionUserProps> = ({
 		<a
 			id={id}
 			onClick={handleClick}
-			onMouseOver={() => onMouseOver(index)}
+			onMouseOver={() => onMouseOver(Number(id.slice(id.length - 1)))}
 			href="#add-org-user"
 			tabIndex={-1}
 		>
