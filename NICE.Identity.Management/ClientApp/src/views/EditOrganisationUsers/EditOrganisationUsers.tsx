@@ -114,9 +114,10 @@ export class EditOrganisationUsers extends Component<
 			);
 			usersSearch = usersSearch.filter(
 				(user: UserType) =>
-					`${user.firstName} ${user.lastName}`
+					(`${user.firstName} ${user.lastName}`
 						.toLowerCase()
-						.indexOf(searchQuery) > -1 &&
+						.indexOf(searchQuery) > -1 ||
+						user.emailAddress.toLowerCase().indexOf(searchQuery) > -1) &&
 					user.hasVerifiedEmailAddress &&
 					!user.isLockedOut,
 			);
@@ -148,6 +149,10 @@ export class EditOrganisationUsers extends Component<
 		};
 
 		const job = await fetchData(Endpoints.jobs, fetchOptions);
+
+		if (isDataError(job)) {
+			this.setState({ error: job });
+		}
 
 		organisation.users = [
 			...organisation.users,

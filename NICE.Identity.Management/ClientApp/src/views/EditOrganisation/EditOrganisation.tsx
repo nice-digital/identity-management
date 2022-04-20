@@ -74,10 +74,12 @@ export class EditOrganisation extends Component<
 
 		if (formName !== orgName) {
 			const fetchOrgName = await fetchData(
-				`${Endpoints.organisationsList}?q=${formName}`,
+				Endpoints.organisationsListSearch(formName),
 			);
 
-			// should there be error handling??
+			if (isDataError(fetchOrgName)) {
+				this.setState({ error: fetchOrgName });
+			}
 
 			fetchedOrgNameFound = fetchOrgName.length
 				? fetchOrgName.some((org: any) => org.name.toLowerCase() === formName)
