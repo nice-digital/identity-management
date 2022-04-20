@@ -10,6 +10,7 @@ export const Endpoints = {
 	jobs: `${API_BASE_URL}/jobs`,
 	organisation: (organisationId: string | number): string => `${API_BASE_URL}/organisations/${organisationId}`,
 	organisationsList: `${API_BASE_URL}/organisations`,
+	organisationsListSearch: (searchQuery: string): string => `${API_BASE_URL}/organisations?q=${searchQuery}`,
 	service: (serviceId: string | number): string => `${API_BASE_URL}/services/${serviceId}`,
 	servicesList: `${API_BASE_URL}/services`,
 	user: (userId: string | number): string => `${API_BASE_URL}/users/${userId}`,
