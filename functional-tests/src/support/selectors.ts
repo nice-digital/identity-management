@@ -140,7 +140,11 @@ export default {
     editOrganisationName: toDataQASelAttr('name-input-edit-organisation'),
     saveEditOrgButton: toDataQASelAttr('save-button-edit-organisation'),
     editResponseFeedback: toDataQASelAttr('successful-message-edit-organisation'),
-
+    editUsers: toDataQASelAttr('edit-organisations-users-button'),
+    findCurrentUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(1)',
+    removeUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(4) > a:nth-child(1)',
+    userResponseFeedback: toDataQASelAttr('added-edit-organisation-users'),
+    addUser: '#suggestion1', 
     }, 
 
   addNewOrganisation: {

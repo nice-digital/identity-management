@@ -14,11 +14,10 @@ export async function deleteEnteredText(): Promise<void> {
 
 export async function deleteNewOrgEnteredText(): Promise<void> {
 
-	await waitForDisplayed(selectors.manageNewOrgPage.deleteNewOrgName, "");
-	await clickElement('click', 'selector', selectors.manageNewOrgPage.deleteNewOrgName);
+	await waitForDisplayed(selectors.manageOrgPage.deleteNewOrgName, "");
+	await clickElement('click', 'selector', selectors.manageOrgPage.deleteNewOrgName);
 	await browser.keys(['Control', 'a', 'Delete']);
 	await pause("2000");
 };
 
 export default deleteEnteredText;
-

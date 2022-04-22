@@ -12,7 +12,7 @@ import adminHomepage from '../support/check/adminHomepage';
 import createaccount from '../support/action/createaccount';
 import finduser from '../support/action/finduser';
 import { deleteUser } from '../support/action/deleteUser';
-import findUserList, { userNotInList, findUserOrganisation } from '../support/check/findUserInList';
+import findUserList, { userNotInList, findUserOrganisation, findCurrentUserOrganisation } from '../support/check/findUserInList';
 import findWebsiteList from '../support/check/findWebsiteInList';
 import validateDeletionSuccessMessage, {
   validateRegistrationValidationMessages,
@@ -36,10 +36,10 @@ import validateAdminOrgPage, { validateFirstLinkInPagination, validatePreviousPa
 import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } from "../support/action/clickPaginationOption";
 import addOrganisationName, { editOrganisationName } from '../support/action/addOrganisationName';
 import saveNewOrganisationName, { saveEditOrgButton } from '../support/action/saveNewOrganisationName';
-import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisationDate, validateEditOrgResponseMessage } from '../support/check/validateNewOrgResponseMessage';
+import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisationDate, validateEditOrgResponseMessage, validateUserMessage } from '../support/check/validateNewOrgResponseMessage';
 import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb } from '../support/action/navigateToOrgListPage';
 import findOrganisationList from '../support/check/findOrganisationList';
-
+import removeUserOrganisation from '../support/action/removeUserOrganisation';
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
 
@@ -192,3 +192,9 @@ Then(/^I edit organisation name "([^"]*)"$/, editOrganisationName);
 Then(/^I click on the edit save organisation button$/, saveEditOrgButton);
 
 Then(/^I expect successful message "([^"]*)"$/, validateEditOrgResponseMessage);
+
+Then(/^I expect user "([^"]*)" to exist in the organisation user list$/, findCurrentUserOrganisation);
+
+Then(/^I click to remove user "([^"]*)"$/, removeUserOrganisation);
+
+Then(/^I expect successful message for the user "([^"]*)"$/, validateUserMessage);
