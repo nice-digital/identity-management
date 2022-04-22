@@ -76,7 +76,11 @@ export class EditOrganisationUsers extends Component<
 			}),
 		};
 
-		await fetchData(Endpoints.job(jobId), fetchOptions);
+		const deletedJob = await fetchData(Endpoints.job(jobId), fetchOptions);
+
+		if (isDataError(deletedJob)) {
+			this.setState({ error: deletedJob });
+		}
 
 		organisation.users = organisation.users.filter(
 			(orgUser) => orgUser.jobId !== jobId,
