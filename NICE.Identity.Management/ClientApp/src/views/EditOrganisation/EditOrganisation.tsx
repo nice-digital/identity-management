@@ -69,10 +69,11 @@ export class EditOrganisation extends Component<
 
 	checkOrgName = async (formName: string): Promise<void> => {
 		const orgName = this.state.organisation.name.toLowerCase();
-		let fetchedOrgNameFound = false;
 		formName = formName.toLowerCase();
+		const namesAreDifferent = orgName !== formName;
+		let fetchedOrgNameFound = false;
 
-		if (formName !== orgName) {
+		if (namesAreDifferent) {
 			const fetchOrgName = await fetchData(
 				Endpoints.organisationsListSearch(formName),
 			);
