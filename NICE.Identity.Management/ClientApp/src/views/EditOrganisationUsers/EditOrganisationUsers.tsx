@@ -144,7 +144,7 @@ export class EditOrganisationUsers extends Component<
 			body: JSON.stringify({
 				userId: item.userId,
 				organisationId: Number(this.props.match.params.id),
-				isLead: false,
+				isLead: true,
 			}),
 		};
 
