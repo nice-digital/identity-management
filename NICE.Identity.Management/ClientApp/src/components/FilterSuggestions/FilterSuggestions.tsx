@@ -125,7 +125,11 @@ export class FilterSuggestions<T> extends Component<
 		clearTimeout(this.typingTimer);
 
 		this.typingTimer = window.setTimeout(() => {
-			if (val.length >= 3) this.props.onInputChange(val);
+			if (val.length >= 3) {
+				this.props.onInputChange(val);
+			} else {
+				this.props.onResultClick({} as T);
+			}
 		}, 1000);
 	};
 
