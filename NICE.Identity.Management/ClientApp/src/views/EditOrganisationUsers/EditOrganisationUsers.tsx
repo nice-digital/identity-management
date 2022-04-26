@@ -161,7 +161,11 @@ export class EditOrganisationUsers extends Component<
 		organisation.users = [
 			...organisation.users,
 			{ userId: item.userId, user: item, jobId: job.id },
-		];
+		].sort((a, b) =>
+			`${a.user.firstName}${a.user.lastName}`.localeCompare(
+				`${b.user.firstName}${b.user.lastName}`,
+			),
+		);
 
 		this.setState({
 			organisation,

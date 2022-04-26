@@ -15,6 +15,10 @@
     right: 0;
     z-index: 99;
 
+    max-height: 315px;    
+    overflow: hidden;
+    overflow-y: auto;
+
     li {
       margin: 0;
       border-bottom: 1px solid $nds-colour-border;

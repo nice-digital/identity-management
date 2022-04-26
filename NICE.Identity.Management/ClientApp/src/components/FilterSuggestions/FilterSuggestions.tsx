@@ -3,6 +3,8 @@ import { Panel } from "@nice-digital/nds-panel";
 import { Input } from "@nice-digital/nds-input";
 import styles from "./FilterSuggestions.module.scss";
 
+type SuggestionRefsType = Record<string, React.RefObject<HTMLLIElement>>;
+
 type FilterSuggestionsProps<T> = {
 	label: string;
 	data: T[];
@@ -20,23 +22,73 @@ export class FilterSuggestions<T> extends Component<
 	FilterSuggestionsProps<T>,
 	FilterSuggestionsState
 > {
+	suggestionIdPrefix: string;
+	dropdownRef: any;
+	suggestionRefs: any;
+
 	constructor(props: FilterSuggestionsProps<T>) {
 		super(props);
 
 		this.state = {
 			activeSuggestionIndex: 0,
 		};
+
+		this.suggestionIdPrefix = "suggestion";
+		this.dropdownRef = React.createRef<HTMLUListElement>();
+		this.suggestionRefs = {} as SuggestionRefsType;
+
+		for (let i = 1; i <= Object.keys(this.props.data).length; i++) {
+			this.suggestionRefs[`${this.suggestionIdPrefix}${i}`] = React.createRef();
+		}
 	}
 
 	typingTimer = 0;
-	suggestionIdPrefix = "suggestion";
+
+	componentDidUpdate(prevProps: FilterSuggestionsProps<T>): void {
+		if (prevProps.data !== this.props.data) {
+			this.suggestionRefs = {};
+
+			for (let i = 1; i <= Object.keys(this.props.data).length; i++) {
+				this.suggestionRefs[`${this.suggestionIdPrefix}${i}`] =
+					React.createRef();
+			}
+		}
+	}
+
+	setSuggestionsScroll = (activeSuggestionIndex: number, key: string): void => {
+		const dropdown = this.dropdownRef.current;
+		const activeSuggestion =
+			this.suggestionRefs[this.suggestionIdPrefix + activeSuggestionIndex]
+				?.current;
+
+		if (activeSuggestion) {
+			const activeSuggestionPosition = [
+				activeSuggestion.offsetTop,
+				activeSuggestion.offsetTop + activeSuggestion.offsetHeight,
+			];
+
+			const activeSuggestionIsInRange =
+				activeSuggestionPosition.filter(
+					(num) =>
+						num >= dropdown.scrollTop &&
+						num <= dropdown.scrollTop + dropdown.offsetHeight,
+				).length === 2;
+
+			if (!activeSuggestionIsInRange) {
+				dropdown.scrollTop =
+					key === "ArrowUp"
+						? activeSuggestionPosition[0]
+						: activeSuggestionPosition[1] - dropdown.offsetHeight;
+			}
+		}
+	};
 
 	handleInputKeyDown = (
 		e: React.KeyboardEvent<HTMLInputElement>,
 	): void | boolean => {
 		const key = e.key;
 		const suggestions = this.props.data;
-		const suggestionsCount = suggestions.length > 3 ? 3 : suggestions.length;
+		const suggestionsCount = suggestions.length;
 		let activeSuggestionIndex = this.state.activeSuggestionIndex;
 
 		if (!suggestionsCount) {
@@ -51,6 +103,7 @@ export class FilterSuggestions<T> extends Component<
 
 		if (key === "ArrowUp" || key === "ArrowDown") {
 			e.preventDefault();
+
 			activeSuggestionIndex =
 				key === "ArrowUp"
 					? activeSuggestionIndex === 0
@@ -59,6 +112,8 @@ export class FilterSuggestions<T> extends Component<
 					: activeSuggestionIndex === suggestionsCount
 					? 0
 					: activeSuggestionIndex + 1;
+
+			this.setSuggestionsScroll(activeSuggestionIndex, key);
 		}
 
 		this.setState({ activeSuggestionIndex });
@@ -70,7 +125,7 @@ export class FilterSuggestions<T> extends Component<
 		clearTimeout(this.typingTimer);
 
 		this.typingTimer = window.setTimeout(() => {
-			this.props.onInputChange(val);
+			if (val.length >= 3) this.props.onInputChange(val);
 		}, 1000);
 	};
 
@@ -112,23 +167,28 @@ export class FilterSuggestions<T> extends Component<
 					className={styles.noMargin}
 				/>
 				<div className={styles.suggestions}>
-					<ul>
-						{data.slice(0, 3).map((item, index) => (
-							<li
-								key={index}
-								data-qa-sel={`suggestions-for-${qaSelExtract}`}
-								className={
-									activeSuggestionIndex === index + 1 ? styles.active : ""
-								}
-							>
-								<ElementType
-									item={item}
-									onClick={onResultClick}
-									onMouseOver={this.setActiveSuggestionIndex}
-									id={`${this.suggestionIdPrefix}${index + 1}`}
-								/>
-							</li>
-						))}
+					<ul ref={this.dropdownRef}>
+						{data.map((item, index) => {
+							const suggestionId = `${this.suggestionIdPrefix}${index + 1}`;
+
+							return (
+								<li
+									key={index}
+									data-qa-sel={`suggestions-for-${qaSelExtract}`}
+									ref={this.suggestionRefs[suggestionId]}
+									className={
+										activeSuggestionIndex === index + 1 ? styles.active : ""
+									}
+								>
+									<ElementType
+										item={item}
+										onClick={onResultClick}
+										onMouseOver={this.setActiveSuggestionIndex}
+										id={suggestionId}
+									/>
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			</Panel>
