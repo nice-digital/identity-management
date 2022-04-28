@@ -5,12 +5,12 @@ import styles from "./FilterSuggestions.module.scss";
 
 type SuggestionRefsType = Record<string, React.RefObject<HTMLLIElement>>;
 
-type FilterSuggestionsProps<T> = {
+type FilterSuggestionsProps<TSuggestionItem> = {
 	label: string;
-	data: T[];
+	data: TSuggestionItem[];
 	qaSelExtract: string;
 	onInputChange: (searchQuery: string) => void;
-	onResultClick: (item: T) => void;
+	onResultClick: (item: TSuggestionItem) => void;
 	elementType: ElementType;
 };
 
@@ -18,15 +18,15 @@ type FilterSuggestionsState = {
 	activeSuggestionIndex: number;
 };
 
-export class FilterSuggestions<T> extends Component<
-	FilterSuggestionsProps<T>,
+export class FilterSuggestions<TSuggestionItem> extends Component<
+	FilterSuggestionsProps<TSuggestionItem>,
 	FilterSuggestionsState
 > {
 	suggestionIdPrefix: string;
 	dropdownRef: any;
 	suggestionRefs: any;
 
-	constructor(props: FilterSuggestionsProps<T>) {
+	constructor(props: FilterSuggestionsProps<TSuggestionItem>) {
 		super(props);
 
 		this.state = {
@@ -44,7 +44,7 @@ export class FilterSuggestions<T> extends Component<
 
 	typingTimer = 0;
 
-	componentDidUpdate(prevProps: FilterSuggestionsProps<T>): void {
+	componentDidUpdate(prevProps: FilterSuggestionsProps<TSuggestionItem>): void {
 		if (prevProps.data !== this.props.data) {
 			this.suggestionRefs = {};
 
@@ -128,7 +128,7 @@ export class FilterSuggestions<T> extends Component<
 			if (val.length >= 3) {
 				this.props.onInputChange(val);
 			} else {
-				this.props.onResultClick({} as T);
+				this.props.onResultClick({} as TSuggestionItem);
 			}
 		}, 1000);
 	};
@@ -137,7 +137,7 @@ export class FilterSuggestions<T> extends Component<
 		const focussedElementId = e.relatedTarget?.id || "";
 
 		if (!focussedElementId.startsWith(this.suggestionIdPrefix)) {
-			this.props.onResultClick({} as T);
+			this.props.onResultClick({} as TSuggestionItem);
 		}
 
 		this.setState({ activeSuggestionIndex: 0 });
