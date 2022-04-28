@@ -39,7 +39,7 @@ exports[`Organisation should match the snapshot after data has been loaded 1`] =
       }
       to="/organisations"
     >
-      Organisation
+      Organisations
     </Breadcrumb>
     <Breadcrumb>
       TEST
@@ -182,7 +182,7 @@ Array [
             href="/organisations"
             onClick={[Function]}
           >
-            Organisation
+            Organisations
           </a>
         </li>
         <li
@@ -214,7 +214,7 @@ Array [
       \\"position\\": 2,
       \\"item\\": {
         \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisation\\"
+        \\"name\\": \\"Organisations\\"
       }
     },
     {
@@ -282,7 +282,7 @@ Array [
             href="/organisations"
             onClick={[Function]}
           >
-            Organisation
+            Organisations
           </a>
         </li>
         <li
@@ -314,7 +314,7 @@ Array [
       \\"position\\": 2,
       \\"item\\": {
         \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisation\\"
+        \\"name\\": \\"Organisations\\"
       }
     },
     {

@@ -96,6 +96,13 @@ export class User extends Component<UserProps, UserState> {
 			<>
 				<Breadcrumbs>
 					<Breadcrumb
+						data-qa-sel="breadcrumb-administration-link"
+						to="/"
+						elementType={Link}
+					>
+						Administration
+					</Breadcrumb>
+					<Breadcrumb
 						data-qa-sel="breadcrumb-user-link"
 						to="/users"
 						elementType={Link}

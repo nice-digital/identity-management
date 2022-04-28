@@ -90,7 +90,7 @@ export class Organisation extends Component<
 						to="/organisations"
 						elementType={Link}
 					>
-						Organisation
+						Organisations
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
