@@ -242,7 +242,12 @@ export class EditOrganisation extends Component<
 					<Breadcrumb>Edit organisation</Breadcrumb>
 				</Breadcrumbs>
 
-				{!error ? (
+				{error ? (
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
+				) : (
 					<>
 						<PageHeader heading="Edit organisation" />
 						{isLoading ? (
@@ -299,11 +304,6 @@ export class EditOrganisation extends Component<
 								</Grid>
 							</>
 						)}
-					</>
-				) : (
-					<>
-						<PageHeader heading="Error" />
-						<ErrorMessage error={error}></ErrorMessage>
 					</>
 				)}
 			</>

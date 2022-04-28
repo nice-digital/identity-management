@@ -211,7 +211,9 @@ export class EditOrganisationUsers extends Component<
 					lead="Add or remove users from this organisation"
 				/>
 
-				{!error ? (
+				{error ? (
+					<ErrorMessage error={error}></ErrorMessage>
+				) : (
 					<>
 						<Grid>
 							<GridItem cols={12} md={3}>
@@ -288,8 +290,6 @@ export class EditOrganisationUsers extends Component<
 							</GridItem>
 						</Grid>
 					</>
-				) : (
-					<ErrorMessage error={error}></ErrorMessage>
 				)}
 			</>
 		);
