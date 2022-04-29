@@ -21,7 +21,7 @@ export async function validateErrorMessage(message: string): Promise<void> {
 
 	await waitForDisplayed(selectors.manageOrgPage.dateAdded, "");
 	await checkContainsText("element", selectors.manageOrgPage.dateAdded, "", date);
-	await pause("1000");
+
   };
 
   export async function validateEditOrgResponseMessage(message: string): Promise<void> {
