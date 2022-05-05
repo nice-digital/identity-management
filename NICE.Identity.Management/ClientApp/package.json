@@ -44,5 +44,8 @@
 	},
 	"browserslist": [
 		"extends @nice-digital/browserslist-config"
-	]
+	],
+	"volta": {
+		"node": "14.19.0"
+	}
 }
