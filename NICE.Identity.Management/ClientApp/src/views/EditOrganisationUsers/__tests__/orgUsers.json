@@ -1,7 +1,7 @@
 {
 	"organisationId": 1,
 	"organisation": { "id": 1, "name": "NICE", "dateAdded": null },
-	"users": [
+	"usersAndJobIds": [
 		{
 			"userId": 1206,
 			"user": {

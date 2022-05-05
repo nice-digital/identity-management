@@ -5,7 +5,6 @@ import toJson from "enzyme-to-json";
 import { nextTick } from "../../../utils/nextTick";
 import { Alert } from "@nice-digital/nds-alert";
 import { EditOrganisationUsers } from "../EditOrganisationUsers";
-import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 import orgUsers from "./orgUsers.json";
 import singleUser from "./singleUser.json";
 import users from "./users.json";
@@ -21,7 +20,7 @@ describe("EditOrganisationUsers", () => {
     const orgUsersEmpty = {
         organisationId: 1,
         organisation: { "id": 1, "name": "NICE", "dateAdded": null },
-        users: [],
+        usersAndJobIds: [],
     };
     
 
@@ -116,7 +115,7 @@ describe("EditOrganisationUsers", () => {
         console.error = jest.fn();
 		fetch.mockResponseOnce(JSON.stringify(orgUsers));
 		fetch.mockResponseOnce(JSON.stringify({}));
-        const orgUsersCount = orgUsers.users.length;
+        const orgUsersCount = orgUsers.usersAndJobIds.length;
         const wrapper = mount(
 			<MemoryRouter>
 				<EditOrganisationUsers match={match} />
