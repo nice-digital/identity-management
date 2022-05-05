@@ -52,7 +52,7 @@ export class EditOrganisationUsers extends Component<
 			Endpoints.usersAndJobIdsByOrganisation(organisationId),
 		);
 
-		if (isDataError(organisation)) {
+        if (isDataError(organisation)) {
 			this.setState({ error: organisation });
 		}
 
@@ -82,7 +82,7 @@ export class EditOrganisationUsers extends Component<
 			this.setState({ error: deletedJob });
 		}
 
-		organisation.users = organisation.users.filter(
+		organisation.usersAndJobIds = organisation.usersAndJobIds.filter(
 			(orgUser) => orgUser.jobId !== jobId,
 		);
 
@@ -111,7 +111,9 @@ export class EditOrganisationUsers extends Component<
 			this.setState({ error: usersSearch });
 		} else {
 			const organisation = { ...this.state.organisation };
-			const existingUsersIds = organisation.users.map((user) => user.userId);
+			const existingUsersIds = organisation.usersAndJobIds.map(
+				(usersAndJobIds) => usersAndJobIds.userId,
+			);
 
 			usersSearch = usersSearch.filter(
 				(user: UserType) => !existingUsersIds.includes(user.userId),
@@ -158,8 +160,8 @@ export class EditOrganisationUsers extends Component<
 			this.setState({ error: job });
 		}
 
-		organisation.users = [
-			...organisation.users,
+		organisation.usersAndJobIds = [
+			...organisation.usersAndJobIds,
 			{ userId: item.userId, user: item, jobId: job.id },
 		].sort((a, b) =>
 			`${a.user.firstName}${a.user.lastName}`.localeCompare(
@@ -177,7 +179,7 @@ export class EditOrganisationUsers extends Component<
 
 	render(): JSX.Element {
 		const {
-			organisation: { organisation, users },
+			organisation: { organisation, usersAndJobIds },
 			usersSearch,
 			confirmationMessage,
 			isLoading,
@@ -240,7 +242,7 @@ export class EditOrganisationUsers extends Component<
 								<h2 className={styles.orgUsersListSummary}>Current users</h2>
 								{isLoading ? (
 									<p>Loading...</p>
-								) : users.length ? (
+								) : usersAndJobIds.length ? (
 									<Table
 										style={{ display: "table" }}
 										data-qa-sel="list-of-organisation-users"
@@ -254,7 +256,7 @@ export class EditOrganisationUsers extends Component<
 											</tr>
 										</thead>
 										<tbody>
-											{users.map((orgUser) => {
+											{usersAndJobIds.map((orgUser) => {
 												const {
 													user: { firstName, lastName, emailAddress },
 												} = orgUser;
