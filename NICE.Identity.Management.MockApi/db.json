@@ -474,7 +474,7 @@
         "name": "ClinicalTrial Pharma",
         "dateAdded": "2022-01-01T16:46:02.4101236"
       },
-      "users": [
+      "usersAndJobIds": [
         {
           "userId": 1,
           "user": {
