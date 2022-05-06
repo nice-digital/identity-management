@@ -6,12 +6,12 @@
 		"@nice-digital/design-system": "^1.2.30",
 		"@nice-digital/global-nav": "^4.1.805",
 		"concurrently": "^6.2.0",
-		"moment": "^2.29.1",
+		"moment": "^2.29.3",
 		"query-string": "^6.12.1",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0",
 		"react-router-dom": "^5.0.1",
-		"react-scripts": "^4.0.3"
+		"react-scripts": "5.0.1"
 	},
 	"devDependencies": {
 		"@nice-digital/browserslist-config": "^2.0.1",
@@ -22,8 +22,8 @@
 		"@types/react": "^17.0.0",
 		"@types/react-dom": "^17.0.0",
 		"@types/react-router-dom": "^5.3.3",
-		"@typescript-eslint/eslint-plugin": "^4.28.0",
-		"@typescript-eslint/parser": "^4.28.0",
+		"@typescript-eslint/eslint-plugin": "^5.22.0",
+		"@typescript-eslint/parser": "^5.22.0",
 		"@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
 		"cross-env": "^5.2.1",
 		"enzyme": "^3.11.0",
