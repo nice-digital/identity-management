@@ -6,7 +6,7 @@ type ResultsListProps<T> = {
 	qaSelExtract: string;
 };
 
-export const ResultsList = <T extends unknown>({
+export const ResultsList = <T,>({
 	data,
 	elementType: ElementType,
 	qaSelExtract,

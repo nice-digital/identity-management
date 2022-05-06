@@ -31,6 +31,7 @@ module.exports = {
 	rules: { 
 		"@typescript-eslint/no-explicit-any": "off",
 	},
+	ignorePatterns: ['.eslintrc.js'],
 	overrides: [
 		{
 			files: ["setupTests.js", "**.test.js", "**.test.ts", "**.test.tsx"],
