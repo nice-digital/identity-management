@@ -1,7 +1,5 @@
 import { waitForDisplayed } from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
 import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
-import {pressButton} from '@nice-digital/wdio-cucumber-steps/lib/support/action/pressButton';
-import {setInputField} from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
 import selectors from '../selectors';
 
 export async function saveNewOrganisationName(): Promise<void> {
@@ -11,4 +9,13 @@ export async function saveNewOrganisationName(): Promise<void> {
 
 };
 
+export async function saveEditOrgButton(): Promise<void> {
+
+  await waitForDisplayed(selectors.manageOrgPage.saveEditOrgButton, "");
+  await clickElement('click', 'selector', selectors.manageOrgPage.saveEditOrgButton);
+ 
+};
+
 export default saveNewOrganisationName;
+
+

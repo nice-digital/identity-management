@@ -18,12 +18,12 @@ export type UserType = {
 };
 
 export type UserEmailHistoryType = {
-    userEmailHistoryId: number;
-    userId: number;
-    emailAddress: string;
-    archivedByUserId?: number;
-    archivedDateUTC: string;
-    archivedByUserDisplayName?: string;
+	userEmailHistoryId: number;
+	userId: number;
+	emailAddress: string;
+	archivedByUserId?: number;
+	archivedDateUTC: string;
+	archivedByUserDisplayName?: string;
 };
 
 export type ServiceType = {
@@ -42,6 +42,18 @@ export type OrganisationType = {
 	id: number;
 	name: string;
 	dateAdded: string;
+};
+
+export type UsersAndJobIdType = {
+	userId: number;
+	user: UserType;
+	jobId: number;
+};
+
+export type UsersAndJobIdsByOrganisationType = {
+	organisationId: number;
+	organisation: OrganisationType;
+	usersAndJobIds: UsersAndJobIdType[];
 };
 
 export type UserRoleType = {

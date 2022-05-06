@@ -39,7 +39,7 @@ exports[`Organisation should match the snapshot after data has been loaded 1`] =
       }
       to="/organisations"
     >
-      Organisation
+      Organisations
     </Breadcrumb>
     <Breadcrumb>
       TEST
@@ -47,6 +47,51 @@ exports[`Organisation should match the snapshot after data has been loaded 1`] =
   </Breadcrumbs>
   <PageHeader
     className="page-header mb--d"
+    cta={
+      <React.Fragment>
+        <Button
+          data-qa-sel="edit-organisation-button"
+          disabled={false}
+          elementType={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "propTypes": Object {
+                "innerRef": [Function],
+                "onClick": [Function],
+                "replace": [Function],
+                "target": [Function],
+                "to": [Function],
+              },
+              "render": [Function],
+            }
+          }
+          to="/organisations/1/edit"
+          variant="cta"
+        >
+          Edit organisation
+        </Button>
+        <Button
+          data-qa-sel="edit-organisations-users-button"
+          disabled={false}
+          elementType={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "propTypes": Object {
+                "innerRef": [Function],
+                "onClick": [Function],
+                "replace": [Function],
+                "target": [Function],
+                "to": [Function],
+              },
+              "render": [Function],
+            }
+          }
+          to="/organisations/1/users"
+        >
+          Edit users
+        </Button>
+      </React.Fragment>
+    }
     heading="TEST"
   />
   <Grid
@@ -77,12 +122,6 @@ exports[`Organisation should match the snapshot after data has been loaded 1`] =
           19 January 2022 17:05
         </span>
       </div>
-    </GridItem>
-    <GridItem
-      aria-busy={false}
-      cols={12}
-      md={9}
-    >
       <p>
         There are currently no users assigned to this organisation.
       </p>
@@ -143,7 +182,7 @@ Array [
             href="/organisations"
             onClick={[Function]}
           >
-            Organisation
+            Organisations
           </a>
         </li>
         <li
@@ -175,7 +214,7 @@ Array [
       \\"position\\": 2,
       \\"item\\": {
         \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisation\\"
+        \\"name\\": \\"Organisations\\"
       }
     },
     {
@@ -243,7 +282,7 @@ Array [
             href="/organisations"
             onClick={[Function]}
           >
-            Organisation
+            Organisations
           </a>
         </li>
         <li
@@ -275,7 +314,7 @@ Array [
       \\"position\\": 2,
       \\"item\\": {
         \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisation\\"
+        \\"name\\": \\"Organisations\\"
       }
     },
     {
