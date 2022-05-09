@@ -1,0 +1,52 @@
+@import '@nice-digital/nds-core/scss/core.scss';
+
+.suggestions {
+  position: relative;
+
+  ul {
+    list-style: none;
+    background-color: $nds-colour-nice-white;
+    border: 1px solid $nds-colour-border;
+    border-top: 0;
+    border-bottom: 0;
+    position: absolute;
+    margin: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+
+    max-height: 315px;    
+    overflow: hidden;
+    overflow-y: auto;
+
+    li {
+      margin: 0;
+      border-bottom: 1px solid $nds-colour-border;
+      line-height: 1.15;
+
+      a {
+        background-color: $nds-colour-nice-white;
+        cursor: pointer;
+        padding: rem($nds-spacing-small);
+        display: block;
+
+        small {
+          display: inline-block;
+          margin-top: 5px;
+          text-decoration: underline;
+          word-break: break-word;
+        }
+      }
+    }
+  }
+}
+
+.active {
+  a {
+    background-color: $nds-colour-nice-grey-3 !important;
+  }
+}
+
+.noMargin {
+  margin: 0;
+}

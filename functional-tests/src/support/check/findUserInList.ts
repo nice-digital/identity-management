@@ -36,4 +36,16 @@ export async function clickLastUserInList(): Promise<void> {
   await clickElement("click", "selector", selectors.userListPage.lastUserCard);
 };
 
+
+export async function findUserOrganisation(text: string): Promise<void> {
+  await waitForDisplayed(selectors.manageOrgPage.findUser, "");
+  await clickElement("click", "selector", selectors.manageOrgPage.findUser, text);
+};
+
+export async function findCurrentUserOrganisation(text: string): Promise<void> {
+  await waitForDisplayed(selectors.manageOrgPage.findCurrentUser, "");
+  await clickElement("click", "selector", selectors.manageOrgPage.findCurrentUser, text);
+};
+
+
 export default findUserList;
