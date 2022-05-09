@@ -447,6 +447,136 @@
       "userEmailHistory": []
     }
 	],
+"jobs": [
+    {
+      "id": 1,
+      "userId": 1,
+      "organisationId": 1,
+      "isLead": true
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "organisationId": 1,
+      "isLead": true
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "organisationId": 1,
+      "isLead": true
+    }
+    ],
+"usersandjobidsfororganisation": {
+      "organisationId": 1,
+      "organisation": {
+        "id": 1,
+        "name": "ClinicalTrial Pharma",
+        "dateAdded": "2022-01-01T16:46:02.4101236"
+      },
+      "usersAndJobIds": [
+        {
+          "userId": 1,
+          "user": {
+            "userId": 1,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+            "firstName": "Kristin",
+            "lastName": "Patrick",
+            "emailAddress": "kristin.patrick@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": true,
+            "isLockedOut": false,
+            "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+            "lastLoggedInDate": "2019-02-25T01:29:54.911Z",
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+              1,
+              2,
+              3
+            ],
+            "userEmailHistory": [
+              {
+                "userEmailHistoryId": 1,
+                "userId": 1,
+                "emailAddress": "jcwilliams+id5@gmail.com",
+                "archivedByUserId": null,
+                "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+                "archivedByUserDisplayName": null
+              },
+              {
+                "userEmailHistoryId": 2,
+                "userId": 1,
+                "emailAddress": "updated@gmail.com",
+                "archivedByUserId": 2,
+                "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+                "archivedByUserDisplayName": "Thomas Holding"
+              },
+              {
+                "userEmailHistoryId": 3,
+                "userId": 1,
+                "emailAddress": "updated2@gmail.com",
+                "archivedByUserId": null,
+                "archivedDateUTC": "2021-10-26T15:14:00.7624903",
+                "archivedByUserDisplayName": null
+              }
+            ]
+          },
+          "jobId": 1
+        },
+        {
+          "userId": 2,
+          "user": {
+            "userId": 2,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+            "firstName": "Thomas",
+            "lastName": "Holding",
+            "emailAddress": "thomas.holding@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": true,
+            "isLockedOut": false,
+            "initialRegistrationDate": "2019-10-24T12:29:54.911Z",
+            "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+              3
+            ],
+            "userEmailHistory": []
+          },
+          "jobId": 2
+        },
+        {
+          "userId": 3,
+          "user": {
+            "userId": 3,
+            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+            "firstName": "Aisha",
+            "lastName": "Bartlett",
+            "emailAddress": "aisha.bartlett@example.com",
+            "allowContactMe": true,
+            "hasVerifiedEmailAddress": true,
+            "isLockedOut": false,
+            "initialRegistrationDate": "2019-10-25T12:29:54.911Z",
+            "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
+            "isStaffMember": false,
+            "acceptedTerms": true,
+            "isMigrated": false,
+            "isInAuthenticationProvider": true,
+            "hasAccessToWebsiteIds": [
+              3,
+              4
+            ],
+            "userEmailHistory": []
+          },
+          "jobId": 3
+        }
+      ]
+    },
   "websites": [
     {
       "id": 4,

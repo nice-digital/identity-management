@@ -1,0 +1,94 @@
+{
+	"organisationId": 1,
+	"organisation": { "id": 1, "name": "NICE", "dateAdded": null },
+	"usersAndJobIds": [
+		{
+			"userId": 1206,
+			"user": {
+				"userId": 1206,
+				"nameIdentifier": "auth0|4221f206-80ad-491a-9302-7ebeb45b31a5",
+				"firstName": "Jonny",
+				"lastName": "Russell",
+				"emailAddress": "jonathan.russell@nice.org.uk",
+				"allowContactMe": false,
+				"hasVerifiedEmailAddress": true,
+				"isLockedOut": false,
+				"initialRegistrationDate": "2020-01-17T14:56:41.9038382",
+				"lastLoggedInDate": null,
+				"isStaffMember": true,
+				"acceptedTerms": null,
+				"isMigrated": true,
+				"isInAuthenticationProvider": false,
+				"hasAccessToWebsiteIds": [],
+				"userEmailHistory": null
+			},
+			"jobId": 1079
+		},
+		{
+			"userId": 1207,
+			"user": {
+				"userId": 1207,
+				"nameIdentifier": "auth0|609b2de3-da81-4356-bac4-250cbeb6c069",
+				"firstName": "Catherine",
+				"lastName": "Quigley",
+				"emailAddress": "catherine.quigley@nice.org.uk",
+				"allowContactMe": false,
+				"hasVerifiedEmailAddress": true,
+				"isLockedOut": false,
+				"initialRegistrationDate": "2020-01-17T14:56:41.911894",
+				"lastLoggedInDate": null,
+				"isStaffMember": true,
+				"acceptedTerms": null,
+				"isMigrated": true,
+				"isInAuthenticationProvider": false,
+				"hasAccessToWebsiteIds": [],
+				"userEmailHistory": null
+			},
+			"jobId": 1080
+		},
+		{
+			"userId": 1198,
+			"user": {
+				"userId": 1198,
+				"nameIdentifier": "auth0|75d721b6-253d-452f-9fb9-b9227422b977",
+				"firstName": "Andy",
+				"lastName": "Child",
+				"emailAddress": "andrew.child@nice.org.uk",
+				"allowContactMe": false,
+				"hasVerifiedEmailAddress": true,
+				"isLockedOut": false,
+				"initialRegistrationDate": "2020-01-17T14:56:41.7773512",
+				"lastLoggedInDate": null,
+				"isStaffMember": true,
+				"acceptedTerms": null,
+				"isMigrated": true,
+				"isInAuthenticationProvider": false,
+				"hasAccessToWebsiteIds": [],
+				"userEmailHistory": null
+			},
+			"jobId": 1081
+		},
+		{
+			"userId": 1196,
+			"user": {
+				"userId": 1196,
+				"nameIdentifier": "auth0|a8f03ca2-5798-47b7-a3f0-938488d925d0",
+				"firstName": "Colin",
+				"lastName": "Mazurkiewicz",
+				"emailAddress": "colin.mazurkiewicz@nice.org.uk",
+				"allowContactMe": false,
+				"hasVerifiedEmailAddress": true,
+				"isLockedOut": false,
+				"initialRegistrationDate": "2020-01-17T14:56:41.737298",
+				"lastLoggedInDate": null,
+				"isStaffMember": true,
+				"acceptedTerms": null,
+				"isMigrated": true,
+				"isInAuthenticationProvider": false,
+				"hasAccessToWebsiteIds": [],
+				"userEmailHistory": null
+			},
+			"jobId": 1082
+		}
+	]
+}

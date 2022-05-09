@@ -4,6 +4,25 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
+      data-qa-sel="breadcrumb-administration-link"
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/"
+    >
+      Administration
+    </Breadcrumb>
+    <Breadcrumb
       data-qa-sel="breadcrumb-user-link"
       elementType={
         Object {
@@ -346,6 +365,17 @@ Array [
           className="breadcrumbs__crumb"
         >
           <a
+            data-qa-sel="breadcrumb-administration-link"
+            href="/"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
             data-qa-sel="breadcrumb-user-link"
             href="/users"
             onClick={[Function]}
@@ -373,13 +403,21 @@ Array [
       \\"@type\\": \\"ListItem\\",
       \\"position\\": 1,
       \\"item\\": {
+        \\"@id\\": \\"/\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
         \\"@id\\": \\"/users\\",
         \\"name\\": \\"Users\\"
       }
     },
     {
       \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
+      \\"position\\": 3,
       \\"item\\": {
         \\"name\\": \\"Error\\"
       }
@@ -427,6 +465,17 @@ Array [
           className="breadcrumbs__crumb"
         >
           <a
+            data-qa-sel="breadcrumb-administration-link"
+            href="/"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
             data-qa-sel="breadcrumb-user-link"
             href="/users"
             onClick={[Function]}
@@ -454,13 +503,21 @@ Array [
       \\"@type\\": \\"ListItem\\",
       \\"position\\": 1,
       \\"item\\": {
+        \\"@id\\": \\"/\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
         \\"@id\\": \\"/users\\",
         \\"name\\": \\"Users\\"
       }
     },
     {
       \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
+      \\"position\\": 3,
       \\"item\\": {
         \\"name\\": \\"Error\\"
       }

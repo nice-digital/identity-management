@@ -104,7 +104,18 @@ export class DeleteOrganisation extends Component<
 				) : (
 					<>
 						<Breadcrumbs>
-							<Breadcrumb to="/organisations" elementType={Link}>
+							<Breadcrumb
+								data-qa-sel="breadcrumb-administration-link"
+								to="/"
+								elementType={Link}
+							>
+								Administration
+							</Breadcrumb>
+							<Breadcrumb
+								data-qa-sel="breadcrumb-organisation-link"
+								to="/organisations"
+								elementType={Link}
+							>
 								Organisations
 							</Breadcrumb>
 							{error ? (
