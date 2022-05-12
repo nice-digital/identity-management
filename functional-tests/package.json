@@ -43,5 +43,8 @@
   "dependencies": {
     "webdriverio": "^7.9.0",
     "xmlhttprequest": "^1.8.0"
+  },
+  "volta": {
+    "node": "14.19.0"
   }
 }

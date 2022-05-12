@@ -9,17 +9,22 @@ ENV ASPNETCORE_URLS http://+:8080
 RUN apt-get update && apt-get install git -y
 RUN git --version
 
-# Install node and npm
-# Latest Nodejs LTS as of 03/05/2018
-ENV NODE_VERSION 14.19.0
-ENV NODE_DOWNLOAD_SHA 223ca31e3440b79a3fe6828161b1843743eaa7610a88c0e1ac1d8e1d815b44cd
-ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz
+# bash will load volta() function via .bashrc 
+# using $VOLTA_HOME/load.sh
+SHELL ["/bin/bash", "-c"]
 
-RUN curl -SL "$NODE_DOWNLOAD_URL" --output nodejs.tar.gz \
-  && echo "$NODE_DOWNLOAD_SHA nodejs.tar.gz" | sha256sum -c - \
-  && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
-  && rm nodejs.tar.gz \
-  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
+# since we're starting non-interactive shell, 
+# we will need to tell bash to load .bashrc manually
+ENV BASH_ENV ~/.bashrc
+# needed by volta() function
+ENV VOLTA_HOME /root/.volta
+# make sure packages managed by volta will be in PATH
+ENV PATH $VOLTA_HOME/bin:$PATH
+
+# install volta
+RUN curl https://get.volta.sh | bash
+RUN volta install node
+
 RUN node -v
 RUN npm -v
 
@@ -48,6 +53,7 @@ COPY ./published-app/ClientApp/package.json ./app/ClientApp/
 #COPY ./published-app/ClientApp/package-lock.json ./app/ClientApp/
 WORKDIR /app/ClientApp
 RUN npm i --production
+RUN node -v
 
 # Copy .net app to a location on container and run application
 WORKDIR /app

@@ -32,8 +32,9 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	const [emailBlockedArray, setEmailBlockedArray] = useState<
 		Array<Record<string, string>>
 	>([]);
-	const [emailBlockedPattern, setEmailBlockedPattern] =
-		useState<{ pattern: string }>(Object);
+	const [emailBlockedPattern, setEmailBlockedPattern] = useState<{
+		pattern: string;
+	}>(Object);
 	const [emailBlockedCurrentMessage, setEmailBlockedCurrentMessage] =
 		useState<string>("Email address is in an invalid format");
 	const [isAD, setIsAD] = useState(false);
@@ -242,6 +243,13 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 	return (
 		<>
 			<Breadcrumbs>
+				<Breadcrumb
+					data-qa-sel="breadcrumb-administration-link"
+					to="/"
+					elementType={Link}
+				>
+					Administration
+				</Breadcrumb>
 				<Breadcrumb
 					data-qa-sel="breadcrumb-user-link"
 					to="/users"

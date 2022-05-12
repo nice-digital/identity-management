@@ -1,16 +1,15 @@
 import React, { Component } from "react";
+import { StaticContext } from "react-router";
 import { RouteComponentProps, Link } from "react-router-dom";
-
 import { OrganisationType, UserType } from "../../models/types";
+import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
-
-//import { Button } from "@nice-digital/nds-button";
+import { Button } from "@nice-digital/nds-button";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
 import { UserStatus } from "../../components/UserStatus/UserStatus";
 import { ToFormattedDateString } from "../../helpers/dateHelpers";
-
 import { fetchData } from "../../helpers/fetchData";
 import { isDataError } from "../../helpers/isDataError";
 import { Endpoints } from "../../data/endpoints";
@@ -19,10 +18,12 @@ import styles from "./Organisation.module.scss";
 
 type TParams = { id: string };
 
-type OrganisationProps = {
-	location: RouteComponentProps["location"];
-	history: RouteComponentProps["history"];
-} & RouteComponentProps<TParams>;
+type LocationState = {
+	hasBeenEdited: boolean;
+};
+
+type OrganisationProps = Record<string, unknown> &
+	RouteComponentProps<TParams, StaticContext, LocationState>;
 
 type OrganisationState = {
 	organisation: OrganisationType;
@@ -70,7 +71,10 @@ export class Organisation extends Component<
 
 	render(): JSX.Element {
 		const { organisation, users, error, isLoading } = this.state;
-		const lastBreadcrumb = `${organisation.name}`;
+		const lastBreadcrumb = isLoading
+			? "Loading organisation details"
+			: `${organisation.name}`;
+
 		return (
 			<>
 				<Breadcrumbs>
@@ -86,7 +90,7 @@ export class Organisation extends Component<
 						to="/organisations"
 						elementType={Link}
 					>
-						Organisation
+						Organisations
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
@@ -98,7 +102,7 @@ export class Organisation extends Component<
 								isLoading ? "Organisation details" : `${organisation.name}`
 							}
 							className="page-header mb--d"
-							/* 							cta={ reinstate this after the edit org and edit user pages are created
+							cta={
 								<>
 									<Button
 										data-qa-sel="edit-organisation-button"
@@ -107,83 +111,96 @@ export class Organisation extends Component<
 										elementType={Link}
 										disabled={isLoading}
 									>
-										{isLoading ? "Loading..." : "Edit organisation"}
+										Edit organisation
 									</Button>
 									<Button
 										data-qa-sel="edit-organisations-users-button"
-										to={`/users-organisations/${this.props.match.params.id}/edit`}
+										to={`/organisations/${this.props.match.params.id}/users`}
 										elementType={Link}
 										disabled={isLoading}
 									>
 										Edit users
 									</Button>
 								</>
-							} */
+							}
 						/>
-						<Grid>
-							<GridItem cols={12} md={9} aria-busy={isLoading}>
-								{isLoading ? (
-									<p className="OrganisationDateAddedLoadingMsg">Loading...</p>
-								) : organisation.dateAdded != null ? (
-									<div className={`${styles.summaryList} pv--c`}>
-										<span className={styles.summaryListLabel}>Date added</span>
-										<span
-											className={styles.summaryListDetail}
-											data-qa-sel="dateAdded-organisation"
-										>
-											{ToFormattedDateString(new Date(organisation.dateAdded))}
-										</span>
-									</div>
-								) : (
-									<p>This organisation does not have a date added value.</p>
-								)}
-							</GridItem>
-							<GridItem cols={12} md={9} aria-busy={isLoading}>
-								{isLoading ? (
-									<p className="OrganisationUsersListLoadingMsg">Loading...</p>
-								) : users.length ? (
-									<div className={`${styles.summaryList} pv--c`}>
-										<span className={styles.summaryListLabel}>Users</span>
-										<span className={styles.summaryListDetail}>
-											<ul
-												className="list--unstyled"
-												data-qa-sel="list-of-organisations"
-											>
-												{users.map((user) => {
-													return (
-														<li key={user.userId}>
-															<UserStatus user={user} />
-															<span className={styles.userName}>
-																{user.firstName + " " + user.lastName}
-															</span>
-														</li>
-													);
-												})}
-											</ul>
-										</span>
-									</div>
-								) : (
-									<p>
-										There are currently no users assigned to this organisation.
-									</p>
-								)}
-							</GridItem>
-						</Grid>
-						<hr className="mv--b" />
 
-						<h2 className="h3">Permanently delete this organisation</h2>
-						<p>
-							This organisation will no longer be available, and all associated
-							data will be permanently deleted.
-						</p>
-						<Link
-							data-qa-sel="delete-organisation-link"
-							to={`/organisations/${organisation.id}/delete`}
-							className="pv--c mb--d"
-							style={{ display: "inline-block" }}
-						>
-							Delete organisation
-						</Link>
+						{isLoading ? (
+							<p>Loading...</p>
+						) : (
+							<>
+								{this.props.location?.state?.hasBeenEdited && (
+									<Alert
+										type="info"
+										role="status"
+										aria-live="polite"
+										data-qa-sel="successful-message-edit-organisation"
+									>
+										<p>
+											The organisation details have been updated successfully.
+										</p>
+									</Alert>
+								)}
+								<Grid>
+									<GridItem cols={12} md={9} aria-busy={isLoading}>
+										<div className={`${styles.summaryList} pv--c`}>
+											<span className={styles.summaryListLabel}>
+												Date added
+											</span>
+											<span
+												className={styles.summaryListDetail}
+												data-qa-sel="dateAdded-organisation"
+											>
+												{ToFormattedDateString(
+													new Date(organisation.dateAdded),
+												)}
+											</span>
+										</div>
+
+										{users.length ? (
+											<div className={`${styles.summaryList} pv--c`}>
+												<span className={styles.summaryListLabel}>Users</span>
+												<span className={styles.summaryListDetail}>
+													<ul
+														className="list--unstyled"
+														data-qa-sel="list-of-organisations"
+													>
+														{users.map((user) => (
+															<li key={user.userId}>
+																<UserStatus user={user} />
+																<span className={styles.userName}>
+																	{`${user.firstName} ${user.lastName}`}
+																</span>
+															</li>
+														))}
+													</ul>
+												</span>
+											</div>
+										) : (
+											<p>
+												There are currently no users assigned to this
+												organisation.
+											</p>
+										)}
+									</GridItem>
+								</Grid>
+
+								<hr className="mv--b" />
+								<h2 className="h3">Permanently delete this organisation</h2>
+								<p>
+									This organisation will no longer be available, and all
+									associated data will be permanently deleted.
+								</p>
+								<Link
+									data-qa-sel="delete-organisation-link"
+									to={`/organisations/${organisation.id}/delete`}
+									className="pv--c mb--d"
+									style={{ display: "inline-block" }}
+								>
+									Delete organisation
+								</Link>
+							</>
+						)}
 					</>
 				) : (
 					<>

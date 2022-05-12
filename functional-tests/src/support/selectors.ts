@@ -131,15 +131,28 @@ export default {
     firstOrgCard: toChildAndQASel(1, "list-of-organisations"),
     
      },
-  manageNewOrgPage: {
+  manageOrgPage: {
     
     deleteNewOrgName: toDataQASelAttr('name-input-add-organisation'),
-       },  
+    dateAdded: toDataQASelAttr('dateAdded-organisation'),
+    findUser: '.list--unstyled > li:nth-child(2) > span:nth-child(2)',
+    editOrganisation: toDataQASelAttr('edit-organisation-button'),
+    editOrganisationName: toDataQASelAttr('name-input-edit-organisation'),
+    saveEditOrgButton: toDataQASelAttr('save-button-edit-organisation'),
+    editResponseFeedback: toDataQASelAttr('successful-message-edit-organisation'),
+    editUsers: toDataQASelAttr('edit-organisations-users-button'),
+    findCurrentUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(1)',
+    removeUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(4) > a:nth-child(1)',
+    userResponseFeedback: toDataQASelAttr('added-edit-organisation-users'),
+    addUser: '#suggestion1', 
+    }, 
 
   addNewOrganisation: {
     
     inputOrganisationName: toDataQASelAttr('name-input-add-organisation'),
     saveNewOrgButton: toDataQASelAttr('save-button-add-organisation'),
     submitResponseFeedback: toDataQASelAttr('successful-message-add-organisation'),
-    },
+    errorMessage: '.input__error',
+   },
+ 
 };
