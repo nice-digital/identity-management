@@ -1,0 +1,526 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditOrganisationUsers should match the snapshot after data has been loaded 1`] = `
+<Fragment>
+  <Breadcrumbs>
+    <Breadcrumb
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/overview"
+    >
+      Administration
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/organisations"
+    >
+      Organisations
+    </Breadcrumb>
+    <Breadcrumb
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/organisations/1"
+    >
+      NICE
+    </Breadcrumb>
+    <Breadcrumb>
+      Edit users
+    </Breadcrumb>
+  </Breadcrumbs>
+  <PageHeader
+    heading="Users"
+    lead="Add or remove users from this organisation"
+    preheading="NICE"
+  />
+  <Grid
+    elementType="div"
+    equalHeight={false}
+    gutter="standard"
+    horizontalAlignment="left"
+    reverse={false}
+    verticalAlignment="top"
+  >
+    <GridItem
+      cols={12}
+      md={3}
+    >
+      <FilterSuggestions
+        data={Array []}
+        elementType={[Function]}
+        label="Find and add an active user account; search excludes Pending and Locked accounts"
+        onInputChange={[Function]}
+        onResultClick={[Function]}
+        qaSelExtract="add-organisation-user"
+      />
+    </GridItem>
+    <GridItem
+      aria-busy={false}
+      cols={12}
+      md={9}
+    >
+      <h2
+        className="orgUsersListSummary"
+      >
+        Current users
+      </h2>
+      <Table
+        data-qa-sel="list-of-organisation-users"
+        style={
+          Object {
+            "display": "table",
+          }
+        }
+      >
+        <thead>
+          <tr>
+            <th>
+              User name
+            </th>
+            <th>
+              Email address
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Remove user
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Jonny Russell
+            </td>
+            <td>
+              jonathan.russell@nice.org.uk
+            </td>
+            <td>
+              <UserStatus
+                user={
+                  Object {
+                    "acceptedTerms": null,
+                    "allowContactMe": false,
+                    "emailAddress": "jonathan.russell@nice.org.uk",
+                    "firstName": "Jonny",
+                    "hasAccessToWebsiteIds": Array [],
+                    "hasVerifiedEmailAddress": true,
+                    "initialRegistrationDate": "2020-01-17T14:56:41.9038382",
+                    "isInAuthenticationProvider": false,
+                    "isLockedOut": false,
+                    "isMigrated": true,
+                    "isStaffMember": true,
+                    "lastLoggedInDate": null,
+                    "lastName": "Russell",
+                    "nameIdentifier": "auth0|4221f206-80ad-491a-9302-7ebeb45b31a5",
+                    "userEmailHistory": null,
+                    "userId": 1206,
+                  }
+                }
+              />
+            </td>
+            <td>
+              <a
+                href="#remove-org-user"
+                onClick={[Function]}
+              >
+                Remove user
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Catherine Quigley
+            </td>
+            <td>
+              catherine.quigley@nice.org.uk
+            </td>
+            <td>
+              <UserStatus
+                user={
+                  Object {
+                    "acceptedTerms": null,
+                    "allowContactMe": false,
+                    "emailAddress": "catherine.quigley@nice.org.uk",
+                    "firstName": "Catherine",
+                    "hasAccessToWebsiteIds": Array [],
+                    "hasVerifiedEmailAddress": true,
+                    "initialRegistrationDate": "2020-01-17T14:56:41.911894",
+                    "isInAuthenticationProvider": false,
+                    "isLockedOut": false,
+                    "isMigrated": true,
+                    "isStaffMember": true,
+                    "lastLoggedInDate": null,
+                    "lastName": "Quigley",
+                    "nameIdentifier": "auth0|609b2de3-da81-4356-bac4-250cbeb6c069",
+                    "userEmailHistory": null,
+                    "userId": 1207,
+                  }
+                }
+              />
+            </td>
+            <td>
+              <a
+                href="#remove-org-user"
+                onClick={[Function]}
+              >
+                Remove user
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Andy Child
+            </td>
+            <td>
+              andrew.child@nice.org.uk
+            </td>
+            <td>
+              <UserStatus
+                user={
+                  Object {
+                    "acceptedTerms": null,
+                    "allowContactMe": false,
+                    "emailAddress": "andrew.child@nice.org.uk",
+                    "firstName": "Andy",
+                    "hasAccessToWebsiteIds": Array [],
+                    "hasVerifiedEmailAddress": true,
+                    "initialRegistrationDate": "2020-01-17T14:56:41.7773512",
+                    "isInAuthenticationProvider": false,
+                    "isLockedOut": false,
+                    "isMigrated": true,
+                    "isStaffMember": true,
+                    "lastLoggedInDate": null,
+                    "lastName": "Child",
+                    "nameIdentifier": "auth0|75d721b6-253d-452f-9fb9-b9227422b977",
+                    "userEmailHistory": null,
+                    "userId": 1198,
+                  }
+                }
+              />
+            </td>
+            <td>
+              <a
+                href="#remove-org-user"
+                onClick={[Function]}
+              >
+                Remove user
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Colin Mazurkiewicz
+            </td>
+            <td>
+              colin.mazurkiewicz@nice.org.uk
+            </td>
+            <td>
+              <UserStatus
+                user={
+                  Object {
+                    "acceptedTerms": null,
+                    "allowContactMe": false,
+                    "emailAddress": "colin.mazurkiewicz@nice.org.uk",
+                    "firstName": "Colin",
+                    "hasAccessToWebsiteIds": Array [],
+                    "hasVerifiedEmailAddress": true,
+                    "initialRegistrationDate": "2020-01-17T14:56:41.737298",
+                    "isInAuthenticationProvider": false,
+                    "isLockedOut": false,
+                    "isMigrated": true,
+                    "isStaffMember": true,
+                    "lastLoggedInDate": null,
+                    "lastName": "Mazurkiewicz",
+                    "nameIdentifier": "auth0|a8f03ca2-5798-47b7-a3f0-938488d925d0",
+                    "userEmailHistory": null,
+                    "userId": 1196,
+                  }
+                }
+              />
+            </td>
+            <td>
+              <a
+                href="#remove-org-user"
+                onClick={[Function]}
+              >
+                Remove user
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    </GridItem>
+  </Grid>
+</Fragment>
+`;
+
+exports[`EditOrganisationUsers should show error message when fetchData function returns 401 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/organisations"
+            onClick={[Function]}
+          >
+            Organisations
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/organisations/1"
+            onClick={[Function]}
+          />
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Edit users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"@id\\": \\"/organisations\\",
+        \\"name\\": \\"Organisations\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"@id\\": \\"/organisations/1\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 4,
+      \\"item\\": {
+        \\"name\\": \\"Edit users\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+    <p
+      className="page-header__lead"
+    >
+      Add or remove users from this organisation
+    </p>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;
+
+exports[`EditOrganisationUsers should show error message when fetchData function returns 500 error 1`] = `
+Array [
+  Array [
+    <nav
+      aria-label="Breadcrumbs"
+      role="navigation"
+    >
+      <ol
+        className="breadcrumbs"
+      >
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/overview"
+            onClick={[Function]}
+          >
+            Administration
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/organisations"
+            onClick={[Function]}
+          >
+            Organisations
+          </a>
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <a
+            href="/organisations/1"
+            onClick={[Function]}
+          />
+        </li>
+        <li
+          className="breadcrumbs__crumb"
+        >
+          <span>
+            Edit users
+          </span>
+        </li>
+      </ol>
+    </nav>,
+    <script
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "{
+  \\"@context\\": \\"http://schema.org\\",
+  \\"@type\\": \\"BreadcrumbList\\",
+  \\"itemListElement\\": [
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 1,
+      \\"item\\": {
+        \\"@id\\": \\"/overview\\",
+        \\"name\\": \\"Administration\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 2,
+      \\"item\\": {
+        \\"@id\\": \\"/organisations\\",
+        \\"name\\": \\"Organisations\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 3,
+      \\"item\\": {
+        \\"@id\\": \\"/organisations/1\\"
+      }
+    },
+    {
+      \\"@type\\": \\"ListItem\\",
+      \\"position\\": 4,
+      \\"item\\": {
+        \\"name\\": \\"Edit users\\"
+      }
+    }
+  ]
+}",
+        }
+      }
+      type="application/ld+json"
+    />,
+  ],
+  <div
+    className="page-header"
+  >
+    <h1
+      className="page-header__heading"
+    >
+      Users
+    </h1>
+    <p
+      className="page-header__lead"
+    >
+      Add or remove users from this organisation
+    </p>
+  </div>,
+  <div
+    className="alert alert--error"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>,
+]
+`;

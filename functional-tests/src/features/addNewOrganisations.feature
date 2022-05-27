@@ -13,7 +13,8 @@ Feature: Add new Organisation
     Given I expect I appear on the Organisations list page
     When I click on the add organisation button
 	  Then I add new organisation name "ABBOT MEDICAL"
-	#  Then I expect to see error message "Organisation already exists - name should be unique"
+    Then I click on the save organisation button
+	  Then I expect to see error message "Cannot add ABBOT MEDICAL, that organisation already exists!"
     When I delete entered new organisation name
     Then I add new organisation name "Abbot Medical London"
     Then I click on the save organisation button

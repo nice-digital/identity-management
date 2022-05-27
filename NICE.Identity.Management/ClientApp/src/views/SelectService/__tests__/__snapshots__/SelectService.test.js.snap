@@ -4,6 +4,26 @@ exports[`SelectService should match the snapshot after data has been loaded 1`] 
 <Fragment>
   <Breadcrumbs>
     <Breadcrumb
+      data-qa-sel="breadcrumb-administration-link"
+      elementType={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/"
+    >
+      Administration
+    </Breadcrumb>
+    <Breadcrumb
+      data-qa-sel="breadcrumb-user-link"
       elementType={
         Object {
           "$$typeof": Symbol(react.forward_ref),

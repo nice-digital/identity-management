@@ -36,11 +36,18 @@ test('should mount without crashing', async () => {
 
 	//fireEvent.click(screen.getByText('Load Greeting'))
 
-  	await waitFor(() => screen.getByLabelText('Site header'));
+	await waitFor(() => screen.getByLabelText('Site header'));
 	//const linkElement = screen.getByText(/Loading.../i);
 	expect(screen.getByRole('heading', { name: "Administration"})).toBeInTheDocument();
-  	// expect(screen.getByRole('button')).toBeDisabled()
+	// expect(screen.getByRole('button')).toBeDisabled()
 	//screen.debug(undefined, 30000000);
 	//expect(screen.getByText('John Holland')).toBeInTheDocument();
 });
+
+// 	it("should mount without crashing", () => {
+// 		fetch.mockResponseOnce(JSON.stringify({ displayName: "John Holland", links: []}));
+// 		const wrapper = shallow(<App />);
+// 		expect(wrapper).toHaveLength(1);
+// 	});
+// });
 

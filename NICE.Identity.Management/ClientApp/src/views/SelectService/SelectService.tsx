@@ -70,7 +70,18 @@ export class SelectService extends Component<
 		return (
 			<>
 				<Breadcrumbs>
-					<Breadcrumb to="/users" elementType={Link}>
+					<Breadcrumb
+						data-qa-sel="breadcrumb-administration-link"
+						to="/"
+						elementType={Link}
+					>
+						Administration
+					</Breadcrumb>
+					<Breadcrumb
+						data-qa-sel="breadcrumb-user-link"
+						to="/users"
+						elementType={Link}
+					>
 						Users
 					</Breadcrumb>
 					<Breadcrumb to={`/users/${id}`} elementType={Link}>
