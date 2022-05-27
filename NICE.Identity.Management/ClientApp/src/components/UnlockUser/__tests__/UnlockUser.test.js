@@ -1,81 +1,26 @@
-// import { mount } from "enzyme";
-
-// import { nextTick } from "../../../utils/nextTick";
-
-// describe("UnlockUser", () => {
-// 	let userProps;
-
-// 	const consoleErrorReset = console.error;
-
-// 	beforeEach(() => {
-// 		userProps = {
-// 			id: 1,
-// 			isLocked: true,
-// 			onToggleLock: jest.fn(),
-// 			onError: jest.fn(),
-// 		};
-// 		fetch.resetMocks();
-// 		console.error = consoleErrorReset;
-// 	});
-
-// 	it("should show unlock text when locked", () => {
-// 		const wrapper = mount(<UnlockUser {...userProps} />);
-// 		expect(wrapper.find("button").text()).toEqual("Unlock user");
-// 	});
-
-// 	it("should show lock text when unlocked", () => {
-// 		userProps.isLocked = false;
-// 		const wrapper = mount(<UnlockUser {...userProps} />);
-// 		expect(wrapper.find("button").text()).toEqual("Lock user");
-// 	});
-
-// 	it("should disable button when clicked", () => {
-// 		console.error = jest.fn();
-// 		fetch.mockResponseOnce(JSON.stringify({}));
-// 		const wrapper = mount(<UnlockUser {...userProps} />);
-// 		wrapper.find("button").simulate("click");
-// 		wrapper.update();
-// 		expect(wrapper.find("button").props().disabled).toEqual(true);
-// 		expect(wrapper.find("button").text()).toEqual("Loading...");
-// 	});
-
-// 	it("should trigger onToggleLock prop function with server data once fetch is successfully complete", async () => {
-// 		const responseData = { a: 1 };
-// 		fetch.mockResponseOnce(JSON.stringify(responseData));
-// 		const wrapper = mount(<UnlockUser {...userProps} />);
-// 		wrapper.find("button").simulate("click");
-// 		await nextTick();
-// 		expect(userProps.onToggleLock).toHaveBeenCalledTimes(1);
-// 		expect(userProps.onToggleLock).toHaveBeenCalledWith(responseData);
-// 	});
-
-// 	it("should show error message when fetch fails", async () => {
-// 		console.error = jest.fn();
-// 		const error = new Error("Not allowed");
-// 		fetch.mockRejectOnce(error);
-// 		const wrapper = mount(<UnlockUser {...userProps} />);
-// 		wrapper.find("button").simulate("click");
-// 		await nextTick();
-// 		expect(userProps.onError).toHaveBeenCalledTimes(1);
-// 		expect(userProps.onError).toHaveBeenCalledWith(error);
-// 	});
-
-// 	it("should show error message when fetch returns non-200 error", async () => {
-// 		console.error = jest.fn();
-// 		const serverErrorMessage = "Not authorized";
-// 		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
-// 		const wrapper = mount(<UnlockUser {...userProps} />);
-// 		wrapper.find("button").simulate("click");
-// 		await nextTick();
-// 		expect(userProps.onError).toHaveBeenCalledTimes(1);
-// 	});
-// });
-
-
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 import userEvent from "@testing-library/user-event";
 import { UnlockUser } from "../UnlockUser";
+import { Endpoints } from "../../../data/endpoints";
+
+const consoleErrorReset = console.error;
+
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
+
+const server = setupServer(
+  rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+	return res(ctx.json({}));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 test("should show unlock text when locked", () => {
 	const userProps = {
@@ -112,4 +57,73 @@ test("should disable button when clicked", async () => {
 	const user = userEvent.setup();
 	await user.click(screen.getByText('Lock user'));
 	expect(screen.getByText('Loading...')).toBeDisabled();
+});
+
+test("should trigger onToggleLock prop function with server data once fetch is successfully complete", async () => {
+	const userProps = {
+		id: 1,
+		isLocked: true,
+		onToggleLock: jest.fn(),
+		onError: jest.fn(),
+	};
+	const responseData = { a: 1 };
+	server.use(
+		rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(ctx.json(responseData));
+		})
+	);
+	const {rerender} = render(<UnlockUser {...userProps} />);
+	fireEvent.click(screen.getByText('Unlock user'));
+	userProps.isLocked = false;
+	rerender(<UnlockUser {...userProps} />);
+	await waitFor(() => screen.getByText('Lock user'));
+	expect(userProps.onToggleLock).toHaveBeenCalledTimes(1);
+	expect(userProps.onToggleLock).toHaveBeenCalledWith(responseData);
+});
+
+test("should show error message when fetch fails", async () => {
+	console.error = jest.fn();	
+	const userProps = {
+		id: 1,
+		isLocked: true,
+		onToggleLock: jest.fn(),
+		onError: jest.fn(),
+	};
+	server.use(
+		rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {rerender} = render(<UnlockUser {...userProps} />);
+	fireEvent.click(screen.getByText('Unlock user'));
+	rerender(<UnlockUser {...userProps} />);
+	await waitFor(() => screen.getByText('Unlock user'));
+	expect(userProps.onError).toHaveBeenCalledTimes(1);
+});
+
+test("should show error message when fetch returns non-200 error", async () => {
+	console.error = jest.fn();
+	const userProps = {
+		id: 1,
+		isLocked: true,
+		onToggleLock: jest.fn(),
+		onError: jest.fn(),
+	};
+	const serverErrorMessage = "Not authorized";
+	server.use(
+		rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({ message: serverErrorMessage })
+			);
+		})
+	);
+	const {rerender} = render(<UnlockUser {...userProps} />);
+	fireEvent.click(screen.getByText('Unlock user'));
+	rerender(<UnlockUser {...userProps} />);
+	await waitFor(() => screen.getByText('Unlock user'));
+	expect(userProps.onError).toHaveBeenCalledTimes(1);
 });
