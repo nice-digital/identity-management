@@ -115,3 +115,133 @@ exports[`AddOrganisation should match the snapshot on load 1`] = `
   </Grid>
 </Fragment>
 `;
+
+exports[`should match the snapshot on load 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/overview"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations"
+        >
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Add organisation
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Add organisation"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Add organisation
+    </h1>
+  </div>
+  <div
+    class="grid"
+  >
+    <div
+      data-g="12 md:6 lg:4"
+    >
+      <form
+        novalidate=""
+      >
+        <div
+          class="input mb--e"
+        >
+          <label
+            class="input__label"
+            for="orgName"
+          >
+            Organisation name
+          </label>
+          <input
+            autocomplete="off"
+            class="input__input"
+            data-qa-sel="name-input-add-organisation"
+            id="orgName"
+            maxlength="100"
+            minlength="2"
+            name="orgName"
+            pattern="^((?![<>]).)*$"
+            placeholder="Add organisation name"
+            required=""
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          class="btn btn--cta"
+          data-qa-sel="save-button-add-organisation"
+          type="submit"
+        >
+          Save organisation
+        </button>
+        <a
+          class="btn btn--secondary"
+          href="/organisations"
+        >
+          Cancel
+        </a>
+      </form>
+    </div>
+  </div>
+</div>
+`;
