@@ -164,6 +164,7 @@ import userEvent from "@testing-library/user-event";
 import { AddOrganisation } from "../AddOrganisation";
 import { Endpoints } from "../../../data/endpoints";
 import organisations from "./organisations.json";
+import { act } from 'react-dom/test-utils';
 //import singleUser from "./singleUser.json";
 
 const consoleErrorReset = console.error;
@@ -241,82 +242,33 @@ test("should show validation error when name is invalid format", async () => {
   expect(orgNameInput).toBeInvalid();
 });
 
-describe('org name in use ', () => {
-
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
-
-  test.only("should show validation error when org name is in use already", async () => {
-  
-    jest.useFakeTimers();
-
-    const timeoutSpy = jest.spyOn(global, 'setTimeout');
-    
-    server.use(
-      rest.get(Endpoints.organisationsList, (req, res, ctx) => {
-        return res.once(ctx.json(organisations));
-      })
-    ); 
-  
-    const user = userEvent.setup({delay:null});
-    const {container} = render(<AddOrganisation />, {wrapper: MemoryRouter});
-    const orgNameInput = screen.getByLabelText("Organisation name");
-    orgNameInput.focus();
-
-    await waitFor(()=> {
-      user.type(orgNameInput, 'Org 1');
+test.only("should show validation error when org name is in use already", async () => {
+  jest.useFakeTimers();
+  server.use(
+    rest.get(Endpoints.organisationsList, (req, res, ctx) => {
+      return res.once(ctx.json(organisations));
     })
-
-    expect(timeoutSpy).toHaveBeenCalledTimes(1);
-
-    await waitFor(()=> {
-      expect(orgNameInput.value).toBe("Org 1")
-    })
-    
-    expect(timeoutSpy).toHaveBeenCalledTimes(8);
-
-    // await waitFor(()=> {
-      user.tab();
-    // })
-
-    expect(timeoutSpy).toHaveBeenCalledTimes(8);
-
-
-    await waitFor(()=> {
-      console.log("##### ", container.innerHTML)
-      expect(true).toBe(false)
-      // const orgInUseMessage = screen.findByText("Cannot add Org 1, that organisation already exists!")
-      // expect(orgInUseMessage).toBeInTheDocument()
-    })
-   
-    // jest.runAllTimers(); 
-    // jest.advanceTimersByTime(1001)
-    // jest.runOnlyPendingTimers();
-
-    // await waitFor(()=> {
-    //   expect(timeoutSpy).toHaveBeenCalledTimes(29);
-    //   expect(timeoutSpy).toHaveBeenNthCalledWith(1,expect.any(Function), 1000);
-    // })
-    
-
-    // try {
-    //   const orgInUseMessage = await screen.findByText("Cannot add Org 1, that organisation already exists!")
-    // } catch (e) {
-    //   console.log("##### ", e)
-    // }
-  
-    // const orgInUseMessage = await screen.findByText("Cannot add Org 1, that organisation already exists!");
-  
-    // await waitFor(() => {
-    //   expect(orgInUseMessage).toBeInTheDocument();  
-    // });
-  });
-
-
-  
+  );
+  const user = userEvent.setup();
+  render(<AddOrganisation />, {wrapper: MemoryRouter});
+  const orgNameInput = screen.getByLabelText("Organisation name");
+  orgNameInput.focus();
+  await act(async () => {
+    //user.type(orgNameInput, 'Org 1');
+    fireEvent.change(orgNameInput, {target: {value: "Org 1"}});
+    jest.runOnlyPendingTimers();
+  });   
+  user.tab();
+  // await waitFor(()=> {
+  //   user.type(orgNameInput, "Org 1");
+  // });
+  const orgInUseMessage = await screen.findByText("Cannot add Org 1, that organisation already exists!");
+  screen.debug();
+  expect(orgInUseMessage).toBeInTheDocument();
+  //await waitFor(() => screen.getByText("Cannot add Org 1, that organisation already exists!"), {timeout: 2000});
+  //screen.debug();
+  //expect(screen.getByText("Cannot add Org 1, that organisation already exists!")).toBeInTheDocument();
+  jest.useRealTimers();
+  // something
 });
-
-
 
