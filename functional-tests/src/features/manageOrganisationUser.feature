@@ -13,9 +13,11 @@ Feature: Manage organisation user
     When I add name "The Musical Streets" to the filter
     Then I click on the first organisation in the list
     When I click on the edit users button
+    Then the page should have no A accessibility issues
     Then I expect user "Aisha Bartlett" to exist in the organisation user list
     Then I click to remove user "Aisha Bartlett"
     And I expect successful message for the user "User has been successfully removed."
     When I search and add an active user "Aisha"
     And I expect successful message for the user "User has been successfully added."
+    Then the page should have no A accessibility issues
     Then I expect user "Aisha Bartlett" to exist in the organisation user list

@@ -8,3 +8,4 @@ Feature: Successful Login
 
   Scenario: Navigate to Identity Admin homepage
     Then I expect I appear on the Identity Admin homepage
+    Then the page should have no A accessibility issues
