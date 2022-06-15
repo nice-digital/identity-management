@@ -461,101 +461,105 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 					<Breadcrumb>Users</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader heading="Users" />
-
 				{!error ? (
-					<Grid>
-						<GridItem cols={12} md={3}>
-							<FilterSearch
-								onInputChange={this.filterUsersBySearch}
-								label={"Filter by name or email address"}
-							/>
-							<FilterBox
-								name="Status"
-								filters={["Active", "Pending", "Locked"]}
-								selected={statusFiltersChecked}
-								onCheckboxChange={this.filterUsersByStatus}
-								hideFilterPanelHeading={true}
-							/>
-							{environments.map(
-								(environment: EnvironmentFilterType, index: number) => (
-									<FilterBox
-										name={environment.name}
-										filters={environment.websites}
-										selected={websiteFiltersChecked}
-										onCheckboxChange={this.filterUsersByWebsite}
-										hideFilterPanelHeading={true}
-										key={index}
-									/>
-								),
-							)}
-						</GridItem>
-						<GridItem cols={12} md={9} aria-busy={!users.length}>
-							{isLoading ? (
-								<p>Loading...</p>
-							) : users.length ? (
-								<>
-									<h2
-										className={styles.usersListSummary}
-										data-qa-sel="users-returned"
-									>
-										{paginationText}
-									</h2>
-									<ul className="list--unstyled" data-qa-sel="list-of-users">
-										{usersPaginated.map((user) => {
-											const {
-												userId,
-												emailAddress,
-												nameIdentifier,
-												firstName,
-												lastName,
-											} = user;
-											const usersListHeading = {
-												headingText: `${firstName} ${lastName}`,
-												link: {
-													elementType: Link,
-													destination: `/users/${userId}`,
-												},
-											};
+					<>
+						<PageHeader heading="Users" />
+						<Grid>
+							<GridItem cols={12} md={3}>
+								<FilterSearch
+									onInputChange={this.filterUsersBySearch}
+									label={"Filter by name or email address"}
+								/>
+								<FilterBox
+									name="Status"
+									filters={["Active", "Pending", "Locked"]}
+									selected={statusFiltersChecked}
+									onCheckboxChange={this.filterUsersByStatus}
+									hideFilterPanelHeading={true}
+								/>
+								{environments.map(
+									(environment: EnvironmentFilterType, index: number) => (
+										<FilterBox
+											name={environment.name}
+											filters={environment.websites}
+											selected={websiteFiltersChecked}
+											onCheckboxChange={this.filterUsersByWebsite}
+											hideFilterPanelHeading={true}
+											key={index}
+										/>
+									),
+								)}
+							</GridItem>
+							<GridItem cols={12} md={9} aria-busy={!users.length}>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : users.length ? (
+									<>
+										<h2
+											className={styles.usersListSummary}
+											data-qa-sel="users-returned"
+										>
+											{paginationText}
+										</h2>
+										<ul className="list--unstyled" aria-label="users" data-qa-sel="list-of-users">
+											{usersPaginated.map((user) => {
+												const {
+													userId,
+													emailAddress,
+													nameIdentifier,
+													firstName,
+													lastName,
+												} = user;
+												const usersListHeading = {
+													headingText: `${firstName} ${lastName}`,
+													link: {
+														elementType: Link,
+														destination: `/users/${userId}`,
+													},
+												};
 
-											const usersListMetadata: Array<CardMetaData> = [
-												{
-													value: <UserStatus user={user} />,
-												},
-												{
-													label: "Email address",
-													value: emailAddress,
-												},
-											];
+												const usersListMetadata: Array<CardMetaData> = [
+													{
+														value: <UserStatus user={user} />,
+													},
+													{
+														label: "Email address",
+														value: emailAddress,
+													},
+												];
 
-											return (
-												<li key={nameIdentifier}>
-													<Card
-														{...usersListHeading}
-														metadata={usersListMetadata}
-														key={nameIdentifier}
-													/>
-												</li>
-											);
-										})}
-									</ul>
-									<Pagination
-										onChangePage={this.changePage}
-										onChangeAmount={this.changeAmount}
-										itemsPerPage={itemsPerPage}
-										consultationCount={users.length}
-										currentPage={pageNumber}
-									/>
-								</>
-							) : searchQuery ? (
-								<p>No results found for &quot;{searchQuery}&quot;</p>
-							) : (
-								<p>No results found</p>
-							)}
-						</GridItem>
-					</Grid>
+												return (
+													<li key={nameIdentifier}>
+														<Card
+															{...usersListHeading}
+															metadata={usersListMetadata}
+															key={nameIdentifier}
+														/>
+													</li>
+												);
+											})}
+										</ul>
+										<Pagination
+											onChangePage={this.changePage}
+											onChangeAmount={this.changeAmount}
+											itemsPerPage={itemsPerPage}
+											consultationCount={users.length}
+											currentPage={pageNumber}
+										/>
+									</>
+								) : searchQuery ? (
+									<p>No results found for &quot;{searchQuery}&quot;</p>
+								) : (
+									<p>No results found</p>
+								)}
+							</GridItem>
+						</Grid>
+					</>
 				) : (
-					<ErrorMessage error={error}></ErrorMessage>
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				)}
 			</>
 		);

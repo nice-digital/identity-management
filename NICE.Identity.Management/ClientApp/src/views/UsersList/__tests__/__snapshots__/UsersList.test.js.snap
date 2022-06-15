@@ -1,122 +1,114 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsersList should match the snapshot after data has been loaded 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Users
     </h1>
-  </div>,
+  </div>
   <div
-    className="grid"
+    class="grid"
   >
     <div
       data-g="12 md:3"
     >
       <div
-        className="panel"
+        class="panel"
       >
         <div
-          className="input"
+          class="input"
         >
           <label
-            className="input__label"
-            htmlFor="filter-search"
+            class="input__label"
+            for="filter-search"
           >
             Filter by name or email address
           </label>
           <input
-            autoComplete="off"
-            className="input__input"
+            autocomplete="off"
+            class="input__input"
             data-qa-sel="filter-search-input"
-            defaultValue=""
             id="filter-search"
             name="filter-search"
-            onChange={[Function]}
             type="search"
             unique="filterSearch"
+            value=""
           />
         </div>
       </div>
       <div
-        className="filter-panel-hide-heading"
+        class="filter-panel-hide-heading"
       >
         <form>
           <div
-            className="filter-panel"
+            class="filter-panel"
           >
             <h2
-              className="filter-panel__heading"
+              class="filter-panel__heading"
             >
               <button
                 aria-controls="filter-panel-body"
-                aria-expanded={true}
-                onClick={[Function]}
+                aria-expanded="true"
                 type="button"
               >
                 <svg
-                  aria-hidden={true}
-                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  aria-hidden="true"
+                  class="filter-panel__heading-icon filter-panel__heading-icon--expanded"
                   fill="none"
                   focusable="false"
                   height="1em"
@@ -132,25 +124,24 @@ Array [
               </button>
             </h2>
             <div
-              aria-hidden={false}
-              className="filter-panel__body"
+              aria-hidden="false"
+              class="filter-panel__body"
               id="filter-panel-body"
             >
               <div
-                className="filter-group"
+                class="filter-group"
               >
                 <h3
-                  className="filter-group__heading"
+                  class="filter-group__heading"
                 >
                   <button
                     aria-controls="group-status"
-                    aria-expanded={true}
-                    onClick={[Function]}
+                    aria-expanded="true"
                     type="button"
                   >
                     <svg
-                      aria-hidden={true}
-                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      aria-hidden="true"
+                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
                       fill="none"
                       focusable="false"
                       height="1em"
@@ -172,66 +163,60 @@ Array [
                   </button>
                 </h3>
                 <fieldset
-                  aria-hidden={false}
-                  className="filter-group__options"
+                  aria-hidden="false"
+                  class="filter-group__options"
                   id="group-status"
                 >
                   <legend>
                     Status
                   </legend>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_status_active"
+                    class="filter-option"
+                    for="filter_status_active"
                   >
                     <input
-                      checked={false}
                       id="filter_status_active"
                       name="status"
-                      onChange={[Function]}
                       title="Status - Active"
                       type="checkbox"
                       value="Active"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Active
                     </span>
                   </label>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_status_pending"
+                    class="filter-option"
+                    for="filter_status_pending"
                   >
                     <input
-                      checked={false}
                       id="filter_status_pending"
                       name="status"
-                      onChange={[Function]}
                       title="Status - Pending"
                       type="checkbox"
                       value="Pending"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Pending
                     </span>
                   </label>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_status_locked"
+                    class="filter-option"
+                    for="filter_status_locked"
                   >
                     <input
-                      checked={false}
                       id="filter_status_locked"
                       name="status"
-                      onChange={[Function]}
                       title="Status - Locked"
                       type="checkbox"
                       value="Locked"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Locked
                     </span>
@@ -243,24 +228,23 @@ Array [
         </form>
       </div>
       <div
-        className="filter-panel-hide-heading"
+        class="filter-panel-hide-heading"
       >
         <form>
           <div
-            className="filter-panel"
+            class="filter-panel"
           >
             <h2
-              className="filter-panel__heading"
+              class="filter-panel__heading"
             >
               <button
                 aria-controls="filter-panel-body"
-                aria-expanded={true}
-                onClick={[Function]}
+                aria-expanded="true"
                 type="button"
               >
                 <svg
-                  aria-hidden={true}
-                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  aria-hidden="true"
+                  class="filter-panel__heading-icon filter-panel__heading-icon--expanded"
                   fill="none"
                   focusable="false"
                   height="1em"
@@ -276,25 +260,24 @@ Array [
               </button>
             </h2>
             <div
-              aria-hidden={false}
-              className="filter-panel__body"
+              aria-hidden="false"
+              class="filter-panel__body"
               id="filter-panel-body"
             >
               <div
-                className="filter-group"
+                class="filter-group"
               >
                 <h3
-                  className="filter-group__heading"
+                  class="filter-group__heading"
                 >
                   <button
                     aria-controls="group-dev"
-                    aria-expanded={true}
-                    onClick={[Function]}
+                    aria-expanded="true"
                     type="button"
                   >
                     <svg
-                      aria-hidden={true}
-                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      aria-hidden="true"
+                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
                       fill="none"
                       focusable="false"
                       height="1em"
@@ -316,47 +299,43 @@ Array [
                   </button>
                 </h3>
                 <fieldset
-                  aria-hidden={false}
-                  className="filter-group__options"
+                  aria-hidden="false"
+                  class="filter-group__options"
                   id="group-dev"
                 >
                   <legend>
                     Dev
                   </legend>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_dev_3"
+                    class="filter-option"
+                    for="filter_dev_3"
                   >
                     <input
-                      checked={false}
                       id="filter_dev_3"
                       name="dev"
-                      onChange={[Function]}
                       title="Dev - Comment Collection"
                       type="checkbox"
                       value="3"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Comment Collection
                     </span>
                   </label>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_dev_1"
+                    class="filter-option"
+                    for="filter_dev_1"
                   >
                     <input
-                      checked={false}
                       id="filter_dev_1"
                       name="dev"
-                      onChange={[Function]}
                       title="Dev - EPPI Reviewer"
                       type="checkbox"
                       value="1"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       EPPI Reviewer
                     </span>
@@ -368,24 +347,23 @@ Array [
         </form>
       </div>
       <div
-        className="filter-panel-hide-heading"
+        class="filter-panel-hide-heading"
       >
         <form>
           <div
-            className="filter-panel"
+            class="filter-panel"
           >
             <h2
-              className="filter-panel__heading"
+              class="filter-panel__heading"
             >
               <button
                 aria-controls="filter-panel-body"
-                aria-expanded={true}
-                onClick={[Function]}
+                aria-expanded="true"
                 type="button"
               >
                 <svg
-                  aria-hidden={true}
-                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  aria-hidden="true"
+                  class="filter-panel__heading-icon filter-panel__heading-icon--expanded"
                   fill="none"
                   focusable="false"
                   height="1em"
@@ -401,25 +379,24 @@ Array [
               </button>
             </h2>
             <div
-              aria-hidden={false}
-              className="filter-panel__body"
+              aria-hidden="false"
+              class="filter-panel__body"
               id="filter-panel-body"
             >
               <div
-                className="filter-group"
+                class="filter-group"
               >
                 <h3
-                  className="filter-group__heading"
+                  class="filter-group__heading"
                 >
                   <button
                     aria-controls="group-test"
-                    aria-expanded={true}
-                    onClick={[Function]}
+                    aria-expanded="true"
                     type="button"
                   >
                     <svg
-                      aria-hidden={true}
-                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      aria-hidden="true"
+                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
                       fill="none"
                       focusable="false"
                       height="1em"
@@ -441,47 +418,43 @@ Array [
                   </button>
                 </h3>
                 <fieldset
-                  aria-hidden={false}
-                  className="filter-group__options"
+                  aria-hidden="false"
+                  class="filter-group__options"
                   id="group-test"
                 >
                   <legend>
                     Test
                   </legend>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_test_2"
+                    class="filter-option"
+                    for="filter_test_2"
                   >
                     <input
-                      checked={false}
                       id="filter_test_2"
                       name="test"
-                      onChange={[Function]}
                       title="Test - EPPI Reviewer"
                       type="checkbox"
                       value="2"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       EPPI Reviewer
                     </span>
                   </label>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_test_5"
+                    class="filter-option"
+                    for="filter_test_5"
                   >
                     <input
-                      checked={false}
                       id="filter_test_5"
                       name="test"
-                      onChange={[Function]}
                       title="Test - Idam Docker"
                       type="checkbox"
                       value="5"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Idam Docker
                     </span>
@@ -493,24 +466,23 @@ Array [
         </form>
       </div>
       <div
-        className="filter-panel-hide-heading"
+        class="filter-panel-hide-heading"
       >
         <form>
           <div
-            className="filter-panel"
+            class="filter-panel"
           >
             <h2
-              className="filter-panel__heading"
+              class="filter-panel__heading"
             >
               <button
                 aria-controls="filter-panel-body"
-                aria-expanded={true}
-                onClick={[Function]}
+                aria-expanded="true"
                 type="button"
               >
                 <svg
-                  aria-hidden={true}
-                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  aria-hidden="true"
+                  class="filter-panel__heading-icon filter-panel__heading-icon--expanded"
                   fill="none"
                   focusable="false"
                   height="1em"
@@ -526,25 +498,24 @@ Array [
               </button>
             </h2>
             <div
-              aria-hidden={false}
-              className="filter-panel__body"
+              aria-hidden="false"
+              class="filter-panel__body"
               id="filter-panel-body"
             >
               <div
-                className="filter-group"
+                class="filter-group"
               >
                 <h3
-                  className="filter-group__heading"
+                  class="filter-group__heading"
                 >
                   <button
                     aria-controls="group-alpha"
-                    aria-expanded={true}
-                    onClick={[Function]}
+                    aria-expanded="true"
                     type="button"
                   >
                     <svg
-                      aria-hidden={true}
-                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      aria-hidden="true"
+                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
                       fill="none"
                       focusable="false"
                       height="1em"
@@ -566,28 +537,26 @@ Array [
                   </button>
                 </h3>
                 <fieldset
-                  aria-hidden={false}
-                  className="filter-group__options"
+                  aria-hidden="false"
+                  class="filter-group__options"
                   id="group-alpha"
                 >
                   <legend>
                     Alpha
                   </legend>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_alpha_4"
+                    class="filter-option"
+                    for="filter_alpha_4"
                   >
                     <input
-                      checked={false}
                       id="filter_alpha_4"
                       name="alpha"
-                      onChange={[Function]}
                       title="Alpha - Comment Collection"
                       type="checkbox"
                       value="4"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Comment Collection
                     </span>
@@ -600,230 +569,219 @@ Array [
       </div>
     </div>
     <div
-      aria-busy={false}
+      aria-busy="false"
       data-g="12 md:9"
     >
       <h2
-        className="usersListSummary"
+        class="usersListSummary"
         data-qa-sel="users-returned"
       >
         Showing 4 users
       </h2>
       <ul
-        className="list--unstyled"
+        aria-label="users"
+        class="list--unstyled"
         data-qa-sel="list-of-users"
       >
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/users/1"
                 >
-                  <a
-                    href="/users/1"
-                    onClick={[Function]}
-                  >
-                    Kristin Patrick
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Kristin Patrick
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
-                    >
-                      Active
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--consultation"
+                    data-qa-sel="user-status"
                   >
-                    Email address
-                  </dt>
-                  <dd>
-                    kristin.patrick@example.com
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  kristin.patrick@example.com
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/users/2"
                 >
-                  <a
-                    href="/users/2"
-                    onClick={[Function]}
-                  >
-                    Thomas Holding
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Thomas Holding
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
-                    >
-                      Active
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--consultation"
+                    data-qa-sel="user-status"
                   >
-                    Email address
-                  </dt>
-                  <dd>
-                    thomas.holding@example.com
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  thomas.holding@example.com
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/users/3"
                 >
-                  <a
-                    href="/users/3"
-                    onClick={[Function]}
-                  >
-                    Aisha Bartlett
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Aisha Bartlett
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--consultation"
-                      data-qa-sel="user-status"
-                    >
-                      Active
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--consultation"
+                    data-qa-sel="user-status"
                   >
-                    Email address
-                  </dt>
-                  <dd>
-                    aisha.bartlett@example.com
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Active
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  aisha.bartlett@example.com
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/users/4"
                 >
-                  <a
-                    href="/users/4"
-                    onClick={[Function]}
-                  >
-                    Theo Bradford
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Theo Bradford
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag"
-                      data-qa-sel="user-status"
-                    >
-                      Locked
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag"
+                    data-qa-sel="user-status"
                   >
-                    Email address
-                  </dt>
-                  <dd>
-                    theo.bradford@example.com
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Locked
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Email address
+                </dt>
+                <dd>
+                  theo.bradford@example.com
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
       </ul>
       <div
-        className="flex flexAlignCenter"
+        class="flex flexAlignCenter"
       >
         <div
-          className="mr--e"
+          class="mr--e"
           data-qa-sel="number-of-results-on-page"
         >
           <label
-            className="bold mr--c"
-            htmlFor="itemsPerPage"
+            class="bold mr--c"
+            for="itemsPerPage"
           >
             Items per page
           </label>
@@ -831,8 +789,6 @@ Array [
             data-qa-sel="result-on-the-page-index"
             id="itemsPerPage"
             name="itemsPerPage"
-            onChange={[Function]}
-            value="all"
           >
             <option
               value="25"
@@ -853,79 +809,74 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`UsersList should show error message when fetch users returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Users
+      Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -933,79 +884,74 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`UsersList should show error message when fetch users returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Users
+      Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -1013,79 +959,74 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`UsersList should show error message when fetch websites returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch websites returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Users
+      Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -1093,79 +1034,74 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`UsersList should show error message when fetch websites returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch websites returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Users
+      Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -1173,6 +1109,6 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;

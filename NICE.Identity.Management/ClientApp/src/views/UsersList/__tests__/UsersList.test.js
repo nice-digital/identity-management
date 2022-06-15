@@ -1,17 +1,36 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
-import { MemoryRouter } from "react-router-dom";
-import toJson from "enzyme-to-json";
-
+import { act } from "react-dom/test-utils";
+import { render, waitFor, waitForElementToBeRemoved, fireEvent, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import { MemoryRouter } from "react-router";
 import { UsersList } from "../UsersList";
-import users from "./users.json";
+import { Endpoints } from "../../../data/endpoints";
+import usersFour from "./usersFour.json";
+import usersThirty from "./usersThirty.json";
 import websites from "./websites.json";
 
-import { nextTick } from "../../../utils/nextTick";
+const consoleErrorReset = console.error;
 
-import { Endpoints } from "../../../data/endpoints";
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
 
-describe("UsersList", () => {
+const server = setupServer(
+  rest.get(Endpoints.usersList, (req, res, ctx) => {
+    return res(ctx.json(usersFour));
+  }),
+  rest.get(Endpoints.websitesList, (req, res, ctx) => {
+    return res(ctx.json(websites));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("should show loading message before data has been loaded", () => {
 	const usersListProps = {
 		location: {
 			pathname: "/user",
@@ -21,212 +40,312 @@ describe("UsersList", () => {
 			push: jest.fn(),
 		},
 	};
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	const loadingMessage = screen.getByText("Loading...", { selector: "p" });
+	expect(loadingMessage).toBeInTheDocument();
+});
 
-	const usersListPropsOnePerPage = {
-		...usersListProps,
-		location: { search: "?amount=1&page=4" },
+test("should match the snapshot after data has been loaded", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "?amount=al",
+		},
+		history: {
+			push: jest.fn(),
+		},
 	};
+	const {container} = render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});	
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	const usersListPropsThreePerPage = {
-		...usersListProps,
-		location: { search: "?amount=3&page=1" },
+test("should show error message when fetch returns 401 error", async () => {
+	console.error = jest.fn();	
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
 	};
-	
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+		return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
+
+test("should show error message when fetch returns 500 error", async () => {
+	console.error = jest.fn();	
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
+
+test("should show error message when fetch websites returns 401 error", async () => {
+	console.error = jest.fn();	
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+		return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
+
+test("should show error message when fetch websites returns 500 error", async () => {
+	console.error = jest.fn();	
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
+
+test("should show no results message when fetch returns an empty array", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+			return res.once(
+				ctx.json([])
+			);
+		})
+	);
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	const noResultsMessage = await screen.findByText("No results found", { selector: "p" });
+	expect(noResultsMessage).toBeInTheDocument();
+});
+
+
+test("should show no results found message after search returns empty array", async () => {
+	jest.useFakeTimers();
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
 	const dummyText = "SomeText";
-
-	const consoleErrorReset = console.error;
-
-	beforeEach(() => {
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+			const search = req.url.searchParams.get('q')
+			
+			if (search === dummyText) {
+				return res.once(
+					ctx.json([])
+				);
+			} else {
+				return res(ctx.json(usersFour));				
+			}
+		})
+	);
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	const searchInput = screen.getByLabelText("Filter by name or email address");
+	searchInput.focus();
+	await act(async () => {
+		fireEvent.change(searchInput, {target: {value: dummyText}});
+		jest.advanceTimersByTime(1000);
 	});
+	const noResultsFoundMessage = await screen.findByText(`No results found for "${dummyText}"`);
+	expect(noResultsFoundMessage).toBeInTheDocument();
+	jest.useRealTimers();
+});
 
-	it("should show loading message before data has been loaded", () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = shallow(<UsersList {...usersListProps} />);
-		expect(wrapper.find("p").text()).toEqual("Loading...");
+test("should filter users to all active when radio button is clicked", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const activeCheckbox = screen.getByLabelText("Active");
+	const tagsBeforeFilter = screen.queryAllByText(/^(Active|Pending|Locked)/i, { selector: "span.tag"});
+	expect(tagsBeforeFilter.length).toEqual(4);
+	userEvent.click(activeCheckbox);
+	await waitForElementToBeRemoved(() => screen.getAllByText("Locked", { selector: "span.tag" }));
+	const tagsAfterFilter = screen.queryAllByText(/^(Active|Pending|Locked)/i, { selector: "span.tag"});
+	const tagsAfterFilterCount = tagsAfterFilter.length;
+	expect(tagsAfterFilterCount).toBeLessThan(4);
+	tagsAfterFilter.forEach((tag) => {
+		const {getByText} = within(tag);
+		expect(getByText("Active", { selector: "span.tag"})).toBeInTheDocument();
 	});
+});
 
-	it("should call fetchData during componentDidMount", () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
-		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
-		wrapper.instance().componentDidMount();
-		wrapper.update();
-		expect(spy).toHaveBeenCalled();
-		expect(fetch.mock.calls.length).toEqual(1);
-		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.usersList);
-		spy.mockClear();
-	});
+test("should filter users to those who have access to a specific website when radio button is clicked", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const eppiDevCheckbox = screen.getByTitle("Dev - EPPI Reviewer");
+	const tagsBeforeFilterCount = screen.queryAllByText(/^(Active|Pending|Locked)/i, { selector: "span.tag"}).length;
+	expect(tagsBeforeFilterCount).toEqual(4);
+	userEvent.click(eppiDevCheckbox);
+	await waitFor(() => screen.getByRole("heading", { name: "Showing 2 users" }));
+	const tagsAfterFilterCount = screen.queryAllByText(/^(Active|Pending|Locked)/i, { selector: "span.tag"}).length;	
+	expect(tagsAfterFilterCount).toBeLessThan(4);
+});
 
-	it("should match the snapshot after data has been loaded", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<UsersList {...usersListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should show 25 (default page amount) or less results by default when paginated", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+			return res.once(
+				ctx.json(usersThirty)
+			);
+		})
+	);
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const usersList = screen.getByRole("list", { name: "users"});
+	const { getAllByRole } = within(usersList);
+	const usersListItems = getAllByRole("listitem");
+	expect(usersListItems.length).toEqual(25);
+});
 
-	it("should show error message when fetch users returns 401 error", async () => {
-		console.error = jest.fn();		
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should go to page 2 when next button is clicked", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+			return res.once(
+				ctx.json(usersThirty)
+			);
+		})
+	);
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const nextPageButton = screen.getByRole("link", { name: "Go to next page"});
+	userEvent.click(nextPageButton);
+	const usersListSummary = await screen.findByText("Showing 26 to 30 of 30 users", { selector: "h2" });
+	const paginationCounter = screen.getByText("Page 2 of 2");
+	const usersList = screen.getByRole("list", { name: "users"});
+	const { getAllByRole } = within(usersList);
+	const usersListItems = getAllByRole("listitem");
+	expect(usersListSummary).toBeInTheDocument();
+	expect(paginationCounter).toBeInTheDocument();
+	expect(usersListItems.length).toEqual(5);
+});
 
-	it("should show error message when fetch users returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show error message when fetch websites returns 401 error", async () => {
-		console.error = jest.fn();		
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show error message when fetch websites returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(<MemoryRouter><UsersList {...usersListProps} /></MemoryRouter>);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show no results message when fetch returns an empty array", async () => {
-		fetch.mockResponseOnce(JSON.stringify([]));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = shallow(<UsersList {...usersListProps} />);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find("p").text()).toEqual("No results found");
-	});
-
-	it("should show no results found message after search returns empty array", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = shallow(<UsersList {...usersListProps} />);
-		const instance = wrapper.instance();
-		await nextTick();
-		wrapper.update();
-		instance.filterUsersBySearch(dummyText);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find("p").text()).toEqual(
-			`No results found for "${dummyText}"`,
-		);
-	});
-
-	it("should filter users to all active when radio button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<UsersList {...usersListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("#filter_status_active").simulate("change", {
-			target: { value: "active" },
-		});
-		await nextTick();
-		wrapper.update();
-		wrapper.find(".tag").forEach((tag) => {
-			expect(tag.text()).toEqual("Active");
-		});
-	});
-
-	it("should filter users to those who have access to a specific website when radio button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<UsersList {...usersListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("#filter_dev_3").simulate("change");
-		await nextTick();
-		wrapper.update();
-		const usersListSummary = wrapper.find(".usersListSummary");
-		expect(usersListSummary.text()).toEqual("Showing 2 users");
-	});
-
-	it("should show 25 (default page amount) or less results by default when paginated", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<UsersList {...usersListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-users']");
-		expect(listContainer.find(".card").length).toBeLessThanOrEqual(25);
-	});
-
-	it("should go to page 2 when next button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<UsersList {...usersListPropsThreePerPage} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("[data-pager='next']").simulate("click");
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-users']");
-		const usersListSummary = wrapper.find(".usersListSummary");
-		expect(usersListSummary.text()).toEqual("Showing 4 to 4 of 4 users");
-		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 2 of 2");
-		expect(listContainer.find(".card").length).toEqual(1);
-	});
-
-	it("should go to first page when page 1 button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(users));
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<UsersList {...usersListPropsOnePerPage} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("[data-pager='1']").simulate("click");
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-users']");
-		const usersListSummary = wrapper.find(".usersListSummary");
-		expect(usersListSummary.text()).toEqual("Showing 1 to 1 of 4 users");
-		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 1 of 4");
-		expect(listContainer.find(".card").length).toEqual(1);
-	});
+test("should go to first page when page 1 button is clicked", async () => {
+	const usersListProps = {
+		location: {
+			pathname: "/user",
+			search: "?page=2",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.usersList, (req, res, ctx) => {
+			return res.once(
+				ctx.json(usersThirty)
+			);
+		})
+	);
+	render(<UsersList {...usersListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const previousPageButton = screen.getByRole("link", { name: "Go to page 1"});
+	userEvent.click(previousPageButton);
+	const usersListSummary = await screen.findByText("Showing 1 to 25 of 30 users", { selector: "h2" });
+	const paginationCounter = screen.getByText("Page 1 of 2");
+	const usersList = screen.getByRole("list", { name: "users"});
+	const { getAllByRole } = within(usersList);
+	const usersListItems = getAllByRole("listitem");
+	expect(usersListSummary).toBeInTheDocument();
+	expect(paginationCounter).toBeInTheDocument();
+	expect(usersListItems.length).toEqual(25);
 });
