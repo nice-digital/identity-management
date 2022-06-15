@@ -28,7 +28,7 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.0" />
-    <PackageReference Include="NICE.Identity.Authentication.Sdk" Version="1.0.524" />
+    <PackageReference Include="NICE.Identity.Authentication.Sdk" Version="1.0.548-beta" />
     <PackageReference Include="NICE.Logging" Version="6.0.23" />
     <PackageReference Include="Polly" Version="7.2.1" />
     <PackageReference Include="ProxyKit" Version="2.3.4" />
