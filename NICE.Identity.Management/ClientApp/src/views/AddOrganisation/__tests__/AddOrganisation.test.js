@@ -43,7 +43,7 @@ test("should disable form submit button when clicked", async () => {
   expect(submitButton).toBeDisabled();
 });
 
-it("should display confirmation message once fetchData post is successfully complete", async () => {
+test("should display confirmation message once fetchData post is successfully complete", async () => {
   render(<AddOrganisation />, {wrapper: MemoryRouter});
   const orgNameInput = screen.getByLabelText("Organisation name");
   fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
