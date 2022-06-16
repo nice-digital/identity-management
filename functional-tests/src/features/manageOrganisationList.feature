@@ -11,7 +11,6 @@ Feature: Manage Organisation List
 
   Scenario: Navigate to Manage Organisations homepage
     Given I expect I appear on the Organisations list page
-    Then the page should have no A accessibility issues
     When I add name "Just1Organization" to the filter
     Then I click on the first organisation in the list
     

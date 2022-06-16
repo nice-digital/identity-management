@@ -8,4 +8,11 @@ export async function navigateToOrgListPageUsingBreadscrumb(): Promise<void> {
   await clickElement("click", "selector", ".breadcrumbs__crumb a[href='/organisations']");
   
 };
+
+export async function navigateDetailPage(): Promise<void> {
+
+  await waitForDisplayed(".btn.btn--secondary", "");
+  await clickElement("click", "selector", ".btn.btn--secondary");
+  
+};
 export default navigateToOrgListPageUsingBreadscrumb;

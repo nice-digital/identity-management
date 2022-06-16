@@ -145,6 +145,7 @@ export default {
     removeUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(4) > a:nth-child(1)',
     userResponseFeedback: toDataQASelAttr('added-edit-organisation-users'),
     addUser: '#suggestion1', 
+    deleteOrgButton: toDataQASelAttr('delete-organisation-link'),
     }, 
 
   addNewOrganisation: {

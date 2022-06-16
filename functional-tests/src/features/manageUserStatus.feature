@@ -16,6 +16,5 @@ Feature: Lock/Unlock Users
     Then I expect that the status of the user appears as Active
     When I click on the Lock user button
     Then I expect that the status of the user appears as Locked
-    Then the page should have no A accessibility issues
     Given I navigate to the user list page
     Then I expect that the status of the user on the user list page is also Locked

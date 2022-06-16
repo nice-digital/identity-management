@@ -13,11 +13,9 @@ Feature: Manage organisation details
     Given I expect I appear on the Organisations list page
     When I add name "Clinical Trial 2 Nursing" to the filter
     Then I click on the first organisation in the list
-    Then the page should have no A accessibility issues
     Then I expect organisation date added "3 January 2022 16:46" to be displayed
     Then I expect user "Thomas Holding" to exist in the organisation list
     When I click on the edit organisation button
-    Then the page should have no A accessibility issues
     Then I edit organisation name "abbot medical"
     Then I click on the edit save organisation button
 	  Then I expect to see error message "Cannot change to abbot medical, that organisation already exists!"

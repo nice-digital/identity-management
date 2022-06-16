@@ -12,14 +12,11 @@ Feature: Edit User Roles
     Given I expect I appear on the Manage Users page
     When I add name "Donald" to the filter
     When I click on the last user in the list
-    Then the page should have no A accessibility issues
     Then I click on the Edit profile button
-    Then the page should have no A accessibility issues
     Then I edit user email "USER_EMAIL1", firstname "FIRSTNAME1" and lastname "LASTNAME1"
     Then I edit the audience insight option
     Then I click on the save button
     Then I expect the successful message to be displayed
-    Then the page should have no A accessibility issues
     Then I check user profile is updated
 
 

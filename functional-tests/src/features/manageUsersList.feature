@@ -11,7 +11,6 @@ Feature: Manage Users Page Dispalys Users
     Given I expect user "Kristin Patrick" to exist in the list
     When I click on the first user in the list
     And I click on the delete user link
-    Then the page should have no A accessibility issues
     And I click on the confirm delete button
 # Then I expect the deletion successful message "The user Kristin Patrick was successfully deleted." to be displayed
 # When I click on the back to users link
