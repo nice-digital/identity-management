@@ -1,150 +1,178 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { render, waitForElementToBeRemoved, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
-import toJson from "enzyme-to-json";
-
-import { nextTick } from "../../../utils/nextTick";
-import singleUser from "./singleUser.json";
 import { DeleteUser } from "../DeleteUser";
-
 import { Endpoints } from "../../../data/endpoints";
+import singleUser from "./singleUser.json";
 
-import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
+const consoleErrorReset = console.error;
 
-describe("DeleteUser", () => {
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
+
+const server = setupServer(
+  rest.get(Endpoints.user("1"), (req, res, ctx) => {
+    return res(ctx.json(singleUser));
+  }),
+  rest.delete(Endpoints.user("1"), (req, res, ctx) => {
+    return res(ctx.json({}));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("should show loading message before data has been loaded", () => {
 	const match = {
 		params: { id: 1 },
 		isExact: true,
 		path: "",
 		url: "",
 	};
+	render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	expect(screen.getByText("Loading...")).toBeInTheDocument();
+});
 
-	const consoleErrorReset = console.error;
+test("should match the snapshot after data has been loaded", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	const {container} = render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	beforeEach(() => {
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
-	});
+test("should show error message when fetchData function returns 401 error", async () => {
+	console.error = jest.fn();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user(match.params.id), (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
+test("should show error message when fetchData function returns 500 error", async () => {
+	console.error = jest.fn();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user(match.params.id), (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	it("should show loading message before data has been loaded", () => {
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = shallow(<DeleteUser match={match} />);
-		expect(wrapper.find("p").text()).toEqual("Loading...");
-	});
+test("should show error message when fetchData delete fails", async () => {
+	console.error = jest.fn();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user(match.params.id), (req, res, ctx) => {
+			return res.once(
+				ctx.json({})
+			);
+		}),
+		rest.delete(Endpoints.user(match.params.id), (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	const confirmButton = await screen.findByText("Confirm", { selector: "button" });
+	userEvent.click(confirmButton);
+	const errorMessage = await screen.findByRole("heading", { name: "Error" });
+	expect(errorMessage).toBeInTheDocument();
+});
 
-	it("should call fetchData during componentDidMount", () => {
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = mount(<MemoryRouter><DeleteUser match={match} /></MemoryRouter>);
-		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
-		wrapper.instance().componentDidMount();
-		wrapper.update();
-		expect(spy).toHaveBeenCalled();
-		expect(fetch.mock.calls.length).toEqual(1);
-		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.user(match.params.id));
-		spy.mockClear();
-	});
+test("should show error message when fetchData delete returns non-200 error", async () => {
+	console.error = jest.fn();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user(match.params.id), (req, res, ctx) => {
+			return res.once(
+				ctx.json({})
+			);
+		}),
+		rest.delete(Endpoints.user(match.params.id), (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	const confirmButton = await screen.findByText("Confirm", { selector: "button" });
+	userEvent.click(confirmButton);
+	const errorMessage = await screen.findByRole("heading", { name: "Error" });
+	expect(errorMessage).toBeInTheDocument();
+});
 
-	it("should match the snapshot after data has been loaded", async () => {
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = shallow(<DeleteUser match={match} />);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should disable delete button when clicked", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	let confirmButton = await screen.findByText("Confirm", { selector: "button" });
+	userEvent.click(confirmButton);
+	confirmButton = await screen.findByRole("button", { name: "Loading..." });
+	expect(confirmButton).toHaveAttribute("disabled");
+	expect(confirmButton).toBeInTheDocument();
+});
 
-	it("should show error message when fetchData function returns 401 error", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(
-			<MemoryRouter>
-				<DeleteUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show error message when fetchData function returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(
-			<MemoryRouter>
-				<DeleteUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show error message when fetchData delete fails", async () => {
-		console.error = jest.fn();
-		const error = new Error("Not allowed");
-		fetch.mockResponseOnce(JSON.stringify({}));
-		fetch.mockRejectOnce(error);
-		const wrapper = mount(
-			<MemoryRouter>
-				<DeleteUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("button").simulate("click");
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-
-	it("should show error message when fetchData delete returns non-200 error", async () => {
-		console.error = jest.fn();
-		const serverErrorMessage = "Not authorized";
-		fetch.mockResponseOnce(JSON.stringify({}));
-		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
-		const wrapper = mount(
-			<MemoryRouter>
-				<DeleteUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("button").simulate("click");
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-
-	it("should disable delete button when clicked", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({}));
-		const wrapper = mount(
-			<MemoryRouter>
-				<DeleteUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("button").simulate("click");
-		expect(wrapper.find("button").props().disabled).toEqual(true);
-		expect(wrapper.find("button").text()).toEqual("Loading...");
-	});
-
-	it("should display confirmation message once fetchData delete is successfully complete", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({}));
-		const wrapper = mount(
-			<MemoryRouter>
-				<DeleteUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("button").simulate("click");
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find("h1").text()).toEqual("User deleted");
-	});
+test("should display confirmation message once fetchData delete is successfully complete", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	render(<DeleteUser match={match} />, {wrapper: MemoryRouter});
+	const confirmButton = await screen.findByText("Confirm", { selector: "button" });
+	userEvent.click(confirmButton);
+	const successMessage = await screen.findByRole("heading", { name: "User deleted" });
+	expect(successMessage).toBeInTheDocument();
 });

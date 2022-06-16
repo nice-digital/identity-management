@@ -1,72 +1,75 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-
+import { render, screen } from "@testing-library/react";
 import { Pagination } from "../Pagination";
 
-const paginationBaseFakeProps = {
-	onChangePage: jest.fn(),
-	onChangeAmount: jest.fn(),
-	consultationCount: 300,
-};
+test("shows first page pager when there are 6 pages or more", () => {
+	const paginationProps = {
+		onChangePage: jest.fn(),
+		onChangeAmount: jest.fn(),
+		consultationCount: 300,
+		itemsPerPage: 25,
+		currentPage: 8,
+	};	
+	render(<Pagination {...paginationProps} />);
+	expect(screen.getByRole("link", { name: "Go to first page" })).toBeInTheDocument();
+});
 
-const paginationLargeFakeProps = {
-	itemsPerPage: 25,
-	currentPage: 8,
-};
+test("shows last page pager when there are 6 pages or more", () => {
+	const paginationProps = {
+		onChangePage: jest.fn(),
+		onChangeAmount: jest.fn(),
+		consultationCount: 300,
+		itemsPerPage: 25,
+		currentPage: 8,
+	};	
+	render(<Pagination {...paginationProps} />);
+	expect(screen.getByRole("link", { name: "Go to last page" })).toBeInTheDocument();
+});
 
-const paginationNoneFakeProps = {
-	itemsPerPage: "all",
-	currentPage: 1,
-};
+test("shows previous page pager when there are multiple pages", () => {
+	const paginationProps = {
+		onChangePage: jest.fn(),
+		onChangeAmount: jest.fn(),
+		consultationCount: 300,
+		itemsPerPage: 25,
+		currentPage: 8,
+	};	
+	render(<Pagination {...paginationProps} />);
+	expect(screen.getByRole("link", { name: "Go to previous page" })).toBeInTheDocument();
+});
 
-describe("Pagination", () => {
-	it("shows first page pager when there are 6 pages or more", () => {
-		const pagination = mount(
-			<Pagination {...paginationBaseFakeProps} {...paginationLargeFakeProps} />,
-		);
+test("shows next page pager when there are multiple pages", () => {
+	const paginationProps = {
+		onChangePage: jest.fn(),
+		onChangeAmount: jest.fn(),
+		consultationCount: 300,
+		itemsPerPage: 25,
+		currentPage: 8,
+	};	
+	render(<Pagination {...paginationProps} />);
+	expect(screen.getByRole("link", { name: "Go to next page" })).toBeInTheDocument();
+});
 
-		expect(pagination.find(".first").exists()).toBe(true);
-	});
+test("hides pagers when all is selected in amount dropdown", () => {
+	const paginationProps = {
+		onChangePage: jest.fn(),
+		onChangeAmount: jest.fn(),
+		consultationCount: 300,
+		itemsPerPage: "all",
+		currentPage: 1,
+	};
+	render(<Pagination {...paginationProps} />);
+	expect(screen.queryByRole("navigation", { name: "Select page to navigate to" })).not.toBeInTheDocument();
+});
 
-	it("shows last page pager when there are 6 pages or more", () => {
-		const pagination = mount(
-			<Pagination {...paginationBaseFakeProps} {...paginationLargeFakeProps} />,
-		);
-
-		expect(pagination.find(".last").exists()).toBe(true);
-	});
-
-	it("shows previous page pager when there are multiple pages", () => {
-		const pagination = mount(
-			<Pagination {...paginationBaseFakeProps} {...paginationLargeFakeProps} />,
-		);
-
-		expect(pagination.find("[data-pager='previous']").exists()).toBe(true);
-	});
-
-	it("shows next page pager when there are multiple pages", () => {
-		const pagination = mount(
-			<Pagination {...paginationBaseFakeProps} {...paginationLargeFakeProps} />,
-		);
-
-		expect(pagination.find("[data-pager='next']").exists()).toBe(true);
-	});
-
-	it("hides pagers when all is selected in amount dropdown", () => {
-		const pagination = shallow(
-			<Pagination {...paginationBaseFakeProps} {...paginationNoneFakeProps} />,
-		);
-
-		expect(pagination.find(".pagination").exists()).toBe(false);
-	});
-
-	it("shows correct value in amount dropdown", () => {
-		const pagination = shallow(
-			<Pagination {...paginationBaseFakeProps} {...paginationNoneFakeProps} />,
-		);
-
-		expect(pagination.find("#itemsPerPage").prop("value")).toEqual(
-			paginationNoneFakeProps.itemsPerPage,
-		);
-	});
+test("shows correct value in amount dropdown", () => {
+	const paginationProps = {
+		onChangePage: jest.fn(),
+		onChangeAmount: jest.fn(),
+		consultationCount: 300,
+		itemsPerPage: "all",
+		currentPage: 1,
+	};
+	render(<Pagination {...paginationProps} />);
+	expect(screen.getByRole("option", { name: "All" }).selected).toBe(true);
 });

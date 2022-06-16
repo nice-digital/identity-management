@@ -1,36 +1,28 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import toJson from "enzyme-to-json";
-import { nextTick } from "../../../utils/nextTick";
 import { PaginationText } from "../PaginationText";
 
-describe("PaginationText", () => {
+test("should match the snapshot when pagination is default and organisations props passed in", async () => {
     const paginationTextOrgProps = {
         dataLength: 32,
-	    labelSingular: "organisation",
-	    labelPlural: "organisations",
+		labelSingular: "organisation",
+		labelPlural: "organisations",
 	};
+	const {container} = render(<PaginationText {...paginationTextOrgProps} />, {wrapper: MemoryRouter});
+	expect(container).toMatchSnapshot();
+});
 
-	it("should match the snapshot when pagination is default and organisations props passed in", async () => {
-		const wrapper = mount(
-			<MemoryRouter>
-				<PaginationText {...paginationTextOrgProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-    it("should match the snapshot when on page 2 and organisations props passed in", async () => {
-		const wrapper = mount(
-			<MemoryRouter initialEntries={['/organisations?page=2']}>
-				<PaginationText {...paginationTextOrgProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should match the snapshot when on page 2 and organisations props passed in", async () => {
+	const paginationTextOrgProps = {
+        dataLength: 32,
+		labelSingular: "organisation",
+		labelPlural: "organisations",
+	};
+	const {container} = render(
+		<MemoryRouter initialEntries={['/organisations?page=2']}>
+			<PaginationText {...paginationTextOrgProps} />
+		</MemoryRouter>,
+	);
+	expect(container).toMatchSnapshot();
 });
