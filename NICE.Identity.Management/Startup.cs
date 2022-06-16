@@ -24,6 +24,7 @@ using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderVal
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace NICE.Identity.Management
 {
@@ -46,7 +47,11 @@ namespace NICE.Identity.Management
 		public void ConfigureServices(IServiceCollection services)
 		{
 			AppSettings.Configure(services, Configuration, Environment.IsDevelopment() ? @"c:\" : Environment.ContentRootPath);
-
+			services.Configure<ForwardedHeadersOptions>(options =>
+			 {
+				 options.ForwardedHeaders =
+					 ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+			 });
 			//dependency injection goes here.
 			services.AddHttpContextAccessor();
 			services.AddTransient<HealthCheckDelegatingHandler>();
@@ -106,6 +111,8 @@ namespace NICE.Identity.Management
 			IHostApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
 			startupLogger.LogInformation("Identity management is starting up");
+
+			app.UseForwardedHeaders();
 
 			app.Use(async (context, next) =>
 			{
@@ -192,7 +199,6 @@ namespace NICE.Identity.Management
 
 			app.UseAuthentication();
 			app.UseAuthorization();
-			app.UseForwardedHeaders();
 
 			app.UseRequestResponseLogging();
 
