@@ -69,7 +69,6 @@ namespace NICE.Identity.Management
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
-				options.Secure = CookieSecurePolicy.Always;
 			});
 
 			services.AddRouting(options => options.LowercaseUrls = true);
@@ -111,14 +110,13 @@ namespace NICE.Identity.Management
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, ILogger<Startup> startupLogger,
 			IHostApplicationLifetime appLifetime, IAuthenticationService niceAuthenticationService, IHttpContextAccessor httpContextAccessor)
 		{
-
 			startupLogger.LogInformation("Identity management is starting up");
 
 			app.UseForwardedHeaders();
 
 			app.Use(async (context, next) =>
 			{
-				//context.Request.Scheme = "https";
+				context.Request.Scheme = "https";
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
