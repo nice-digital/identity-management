@@ -192,6 +192,7 @@ namespace NICE.Identity.Management
 
 			app.UseAuthentication();
 			app.UseAuthorization();
+			app.UseForwardedHeaders();
 
 			app.UseRequestResponseLogging();
 
