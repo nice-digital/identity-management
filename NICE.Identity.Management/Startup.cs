@@ -109,7 +109,7 @@ namespace NICE.Identity.Management
 
 			app.Use(async (context, next) =>
 			{
-				context.Request.Scheme = "https";
+				//context.Request.Scheme = "https";
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
