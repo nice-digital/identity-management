@@ -348,84 +348,88 @@ export class ServicesList extends Component<
 					<Breadcrumb>Services</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader heading="Services" />
-
 				{!error ? (
-					<Grid>
-						<GridItem cols={12} md={3}>
-							<FilterSearch
-								onInputChange={this.filterWebsitesBySearch}
-								label={"Filter by service name or URL"}
-							/>
+					<>
+						<PageHeader heading="Services" />
+						<Grid>
+							<GridItem cols={12} md={3}>
+								<FilterSearch
+									onInputChange={this.filterWebsitesBySearch}
+									label={"Filter by service name or URL"}
+								/>
 
-							<FilterBox
-								name="Environments"
-								filters={this.state.environmentsForFilter}
-								selected={environmentFiltersChecked}
-								onCheckboxChange={this.filterWebsitesByEnvironment}
-								hideFilterPanelHeading={true}
-							/>
-						</GridItem>
-						<GridItem cols={12} md={9} aria-busy={!websites.length}>
-							{isLoading ? (
-								<p>Loading...</p>
-							) : websites.length ? (
-								<>
-									<h2
-										className={styles.servicesListSummary}
-										data-qa-sel="services-returned"
-									>
-										{paginationText}
-									</h2>
-									<ul className="list--unstyled" data-qa-sel="list-of-websites">
-										{websitesPaginated.map((website) => {
-											const { id, host, service } = website;
-											const servicesListHeading = {
-												headingText: `${service.name}`,
-												link: {
-													elementType: Link,
-													destination: `/websites/${id}`,
-												},
-											};
+								<FilterBox
+									name="Environments"
+									filters={this.state.environmentsForFilter}
+									selected={environmentFiltersChecked}
+									onCheckboxChange={this.filterWebsitesByEnvironment}
+									hideFilterPanelHeading={true}
+								/>
+							</GridItem>
+							<GridItem cols={12} md={9} aria-busy={!websites.length}>
+								{isLoading ? (
+									<p>Loading...</p>
+								) : websites.length ? (
+									<>
+										<h2
+											className={styles.servicesListSummary}
+											data-qa-sel="services-returned"
+										>
+											{paginationText}
+										</h2>
+										<ul className="list--unstyled" aria-label="websites" data-qa-sel="list-of-websites">
+											{websitesPaginated.map((website) => {
+												const { id, host, service } = website;
+												const servicesListHeading = {
+													headingText: `${service.name}`,
+													link: {
+														elementType: Link,
+														destination: `/websites/${id}`,
+													},
+												};
 
-											const servicesListMetadata: Array<CardMetaData> = [
-												{
-													value: <WebsiteEnvironment website={website} />,
-												},
-												{
-													label: "Website",
-													value: host,
-												},
-											];
+												const servicesListMetadata: Array<CardMetaData> = [
+													{
+														value: <WebsiteEnvironment website={website} />,
+													},
+													{
+														label: "Website",
+														value: host,
+													},
+												];
 
-											return (
-												<li key={id}>
-													<Card
-														{...servicesListHeading}
-														metadata={servicesListMetadata}
-														key={id}
-													/>
-												</li>
-											);
-										})}
-									</ul>
-									<Pagination
-										onChangePage={this.changePage}
-										onChangeAmount={this.changeAmount}
-										itemsPerPage={itemsPerPage}
-										consultationCount={websites.length}
-										currentPage={pageNumber}
-									/>
-								</>
-							) : searchQuery ? (
-								<p>No results found for &quot;{searchQuery}&quot;</p>
-							) : (
-								<p>No results found</p>
-							)}
-						</GridItem>
-					</Grid>
+												return (
+													<li key={id}>
+														<Card
+															{...servicesListHeading}
+															metadata={servicesListMetadata}
+															key={id}
+														/>
+													</li>
+												);
+											})}
+										</ul>
+										<Pagination
+											onChangePage={this.changePage}
+											onChangeAmount={this.changeAmount}
+											itemsPerPage={itemsPerPage}
+											consultationCount={websites.length}
+											currentPage={pageNumber}
+										/>
+									</>
+								) : searchQuery ? (
+									<p>No results found for &quot;{searchQuery}&quot;</p>
+								) : (
+									<p>No results found</p>
+								)}
+							</GridItem>
+						</Grid>
+					</>
 				) : (
-					<ErrorMessage error={error}></ErrorMessage>
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				)}
 			</>
 		);

@@ -1,122 +1,114 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ServicesList should match the snapshot after data has been loaded 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Services
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Services
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Services\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Services"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Services
     </h1>
-  </div>,
+  </div>
   <div
-    className="grid"
+    class="grid"
   >
     <div
       data-g="12 md:3"
     >
       <div
-        className="panel"
+        class="panel"
       >
         <div
-          className="input"
+          class="input"
         >
           <label
-            className="input__label"
-            htmlFor="filter-search"
+            class="input__label"
+            for="filter-search"
           >
             Filter by service name or URL
           </label>
           <input
-            autoComplete="off"
-            className="input__input"
+            autocomplete="off"
+            class="input__input"
             data-qa-sel="filter-search-input"
-            defaultValue=""
             id="filter-search"
             name="filter-search"
-            onChange={[Function]}
             type="search"
             unique="filterSearch"
+            value=""
           />
         </div>
       </div>
       <div
-        className="filter-panel-hide-heading"
+        class="filter-panel-hide-heading"
       >
         <form>
           <div
-            className="filter-panel"
+            class="filter-panel"
           >
             <h2
-              className="filter-panel__heading"
+              class="filter-panel__heading"
             >
               <button
                 aria-controls="filter-panel-body"
-                aria-expanded={true}
-                onClick={[Function]}
+                aria-expanded="true"
                 type="button"
               >
                 <svg
-                  aria-hidden={true}
-                  className="filter-panel__heading-icon filter-panel__heading-icon--expanded"
+                  aria-hidden="true"
+                  class="filter-panel__heading-icon filter-panel__heading-icon--expanded"
                   fill="none"
                   focusable="false"
                   height="1em"
@@ -132,25 +124,24 @@ Array [
               </button>
             </h2>
             <div
-              aria-hidden={false}
-              className="filter-panel__body"
+              aria-hidden="false"
+              class="filter-panel__body"
               id="filter-panel-body"
             >
               <div
-                className="filter-group"
+                class="filter-group"
               >
                 <h3
-                  className="filter-group__heading"
+                  class="filter-group__heading"
                 >
                   <button
                     aria-controls="group-environments"
-                    aria-expanded={true}
-                    onClick={[Function]}
+                    aria-expanded="true"
                     type="button"
                   >
                     <svg
-                      aria-hidden={true}
-                      className="filter-group__heading-icon filter-group__heading-icon--expanded"
+                      aria-hidden="true"
+                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
                       fill="none"
                       focusable="false"
                       height="1em"
@@ -172,66 +163,60 @@ Array [
                   </button>
                 </h3>
                 <fieldset
-                  aria-hidden={false}
-                  className="filter-group__options"
+                  aria-hidden="false"
+                  class="filter-group__options"
                   id="group-environments"
                 >
                   <legend>
                     Environments
                   </legend>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_environments_alpha"
+                    class="filter-option"
+                    for="filter_environments_alpha"
                   >
                     <input
-                      checked={false}
                       id="filter_environments_alpha"
                       name="environments"
-                      onChange={[Function]}
                       title="Environments - Alpha"
                       type="checkbox"
                       value="Alpha"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Alpha
                     </span>
                   </label>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_environments_test"
+                    class="filter-option"
+                    for="filter_environments_test"
                   >
                     <input
-                      checked={false}
                       id="filter_environments_test"
                       name="environments"
-                      onChange={[Function]}
                       title="Environments - Test"
                       type="checkbox"
                       value="Test"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Test
                     </span>
                   </label>
                   <label
-                    className="filter-option"
-                    htmlFor="filter_environments_dev"
+                    class="filter-option"
+                    for="filter_environments_dev"
                   >
                     <input
-                      checked={false}
                       id="filter_environments_dev"
                       name="environments"
-                      onChange={[Function]}
                       title="Environments - Dev"
                       type="checkbox"
                       value="Dev"
                     />
                     <span
-                      className="filter-option__text"
+                      class="filter-option__text"
                     >
                       Dev
                     </span>
@@ -244,280 +229,266 @@ Array [
       </div>
     </div>
     <div
-      aria-busy={false}
+      aria-busy="false"
       data-g="12 md:9"
     >
       <h2
-        className="servicesListSummary"
+        class="servicesListSummary"
         data-qa-sel="services-returned"
       >
         Showing 5 services
       </h2>
       <ul
-        className="list--unstyled"
+        aria-label="websites"
+        class="list--unstyled"
         data-qa-sel="list-of-websites"
       >
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/websites/4"
                 >
-                  <a
-                    href="/websites/4"
-                    onClick={[Function]}
-                  >
-                    Comment Collection
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Comment Collection
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--alpha"
-                      data-qa-sel="environment-alpha"
-                    >
-                      Alpha
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--alpha"
+                    data-qa-sel="environment-alpha"
                   >
-                    Website
-                  </dt>
-                  <dd>
-                    alpha-comments.nice.org.uk
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Alpha
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Website
+                </dt>
+                <dd>
+                  alpha-comments.nice.org.uk
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/websites/2"
                 >
-                  <a
-                    href="/websites/2"
-                    onClick={[Function]}
-                  >
-                    EPPI Reviewer
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  EPPI Reviewer
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--new"
-                      data-qa-sel="environment-test"
-                    >
-                      Test
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--new"
+                    data-qa-sel="environment-test"
                   >
-                    Website
-                  </dt>
-                  <dd>
-                    test-eppi.nice.org.uk
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Test
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Website
+                </dt>
+                <dd>
+                  test-eppi.nice.org.uk
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/websites/5"
                 >
-                  <a
-                    href="/websites/5"
-                    onClick={[Function]}
-                  >
-                    Idam Docker
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Idam Docker
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--new"
-                      data-qa-sel="environment-test"
-                    >
-                      Test
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--new"
+                    data-qa-sel="environment-test"
                   >
-                    Website
-                  </dt>
-                  <dd>
-                    test-idam
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Test
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Website
+                </dt>
+                <dd>
+                  test-idam
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/websites/3"
                 >
-                  <a
-                    href="/websites/3"
-                    onClick={[Function]}
-                  >
-                    Comment Collection
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Comment Collection
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--updated"
-                      data-qa-sel="environment-dev"
-                    >
-                      Dev
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--updated"
+                    data-qa-sel="environment-dev"
                   >
-                    Website
-                  </dt>
-                  <dd>
-                    dev-comments.nice.org.uk
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Dev
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Website
+                </dt>
+                <dd>
+                  dev-comments.nice.org.uk
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/websites/1"
                 >
-                  <a
-                    href="/websites/1"
-                    onClick={[Function]}
-                  >
-                    EPPI Reviewer
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  EPPI Reviewer
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
-                >
-                  <dd>
-                    <span
-                      className="tag tag--updated"
-                      data-qa-sel="environment-dev"
-                    >
-                      Dev
-                    </span>
-                  </dd>
-                </div>
-                <div
-                  className="card__metadatum"
-                >
-                  <dt
-                    className="visually-hidden"
+                <dd>
+                  <span
+                    class="tag tag--updated"
+                    data-qa-sel="environment-dev"
                   >
-                    Website
-                  </dt>
-                  <dd>
-                    dev-eppi.nice.org.uk
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                    Dev
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="card__metadatum"
+              >
+                <dt
+                  class="visually-hidden"
+                >
+                  Website
+                </dt>
+                <dd>
+                  dev-eppi.nice.org.uk
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
       </ul>
       <div
-        className="flex flexAlignCenter"
+        class="flex flexAlignCenter"
       >
         <div
-          className="mr--e"
+          class="mr--e"
           data-qa-sel="number-of-results-on-page"
         >
           <label
-            className="bold mr--c"
-            htmlFor="itemsPerPage"
+            class="bold mr--c"
+            for="itemsPerPage"
           >
             Items per page
           </label>
@@ -525,8 +496,6 @@ Array [
             data-qa-sel="result-on-the-page-index"
             id="itemsPerPage"
             name="itemsPerPage"
-            onChange={[Function]}
-            value="all"
           >
             <option
               value="25"
@@ -547,79 +516,74 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`ServicesList should show error message when fetch returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Services
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Services
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Services\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Services"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Services
+      Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -627,79 +591,74 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`ServicesList should show error message when fetch returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Services
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Services
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Services\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Services"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Services
+      Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -707,6 +666,6 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;

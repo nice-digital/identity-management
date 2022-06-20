@@ -49,7 +49,7 @@ test("should match the snapshot after data has been loaded", async () => {
 	const usersListProps = {
 		location: {
 			pathname: "/user",
-			search: "?amount=al",
+			search: "?amount=all",
 		},
 		history: {
 			push: jest.fn(),

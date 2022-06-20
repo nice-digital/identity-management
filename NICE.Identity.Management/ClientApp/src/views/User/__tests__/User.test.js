@@ -78,7 +78,7 @@ test("should show error message when fetch returns 401 error", async () => {
 	expect(container).toMatchSnapshot();	
 });
 
-it("should show error message when fetch returns 500 error", async () => {
+test("should show error message when fetch returns 500 error", async () => {
 	console.error = jest.fn();	
 	const match = {
 		params: { id: 1 },
