@@ -18,4 +18,4 @@ Feature: Manage organisation user
     And I expect successful message for the user "User has been successfully removed."
     When I search and add an active user "Aisha"
     And I expect successful message for the user "User has been successfully added."
-    Then I expect user "Aisha Bartlett" to exist in the organisation user list
+     Then I expect user "Aisha Bartlett" to exist in the organisation user list

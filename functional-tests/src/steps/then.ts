@@ -37,7 +37,7 @@ import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } f
 import addOrganisationName, { editOrganisationName } from '../support/action/addOrganisationName';
 import saveNewOrganisationName, { saveEditOrgButton } from '../support/action/saveNewOrganisationName';
 import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisationDate, validateEditOrgResponseMessage, validateUserMessage } from '../support/check/validateNewOrgResponseMessage';
-import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb } from '../support/action/navigateToOrgListPage';
+import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb, navigateDetailPage } from '../support/action/navigateToOrgListPage';
 import findOrganisationList from '../support/check/findOrganisationList';
 import removeUserOrganisation from '../support/action/removeUserOrganisation';
 
@@ -198,3 +198,5 @@ Then(/^I expect user "([^"]*)" to exist in the organisation user list$/, findCur
 Then(/^I click to remove user "([^"]*)"$/, removeUserOrganisation);
 
 Then(/^I expect successful message for the user "([^"]*)"$/, validateUserMessage);
+
+Then(/^I click cancel button to navigate back to detail page$/, navigateDetailPage);

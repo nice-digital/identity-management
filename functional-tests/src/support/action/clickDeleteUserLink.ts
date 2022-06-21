@@ -23,4 +23,9 @@ export async function clickBackToUsersLink(): Promise<void> {
   await pause("1000");
 };
 
+export async function deleteOrgButton(): Promise<void> {
+  await waitForDisplayed(selectors.manageOrgPage.deleteOrgButton, "");
+  await clickElement("click", "selector", selectors.manageOrgPage.deleteOrgButton);
+};
+
 export default clickDeleteUserLink;
