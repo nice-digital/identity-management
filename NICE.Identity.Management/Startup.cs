@@ -109,7 +109,13 @@ namespace NICE.Identity.Management
 
 			app.Use(async (context, next) =>
 			{
-				//context.Request.Scheme = "https";
+				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
+								context.Request.Headers["Front-End-Https"] == "on" ||
+								context.Request.Headers.ContainsKey("X-ARR-SSL"))
+				{
+					context.Request.Scheme = "https";
+				}
+
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
@@ -225,20 +231,6 @@ namespace NICE.Identity.Management
 						};
 					}
 				}
-			});
-
-			app.Use((context, next) =>
-			{
-				var x = SeriLogger.GetLoggerConfiguration().CreateLogger();
-				x.Information("LOG-X-Forwarded-Proto:" + context.Request.Headers["X-Forwarded-Proto"]);
-				x.Information("LOG-HEADERS:" + Newtonsoft.Json.JsonConvert.SerializeObject(context.Request.Headers));
-				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
-					context.Request.Headers["Front-End-Https"] == "on" ||
-					context.Request.Headers.ContainsKey("X-ARR-SSL"))
-				{
-					context.Request.Scheme = "https";
-				}
-				return next();
 			});
 
 			//app.UseRouting();
