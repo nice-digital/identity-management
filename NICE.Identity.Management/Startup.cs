@@ -200,8 +200,6 @@ namespace NICE.Identity.Management
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.UseRequestResponseLogging();
-
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles(new StaticFileOptions()
 			{
