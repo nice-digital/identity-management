@@ -24,7 +24,6 @@ using CacheControlHeaderValue = Microsoft.Net.Http.Headers.CacheControlHeaderVal
 using IAuthenticationService = NICE.Identity.Authentication.Sdk.Authentication.IAuthenticationService;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace NICE.Identity.Management
 {
