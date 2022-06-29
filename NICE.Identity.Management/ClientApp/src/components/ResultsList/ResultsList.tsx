@@ -11,7 +11,7 @@ export const ResultsList = <T,>({
 	elementType: ElementType,
 	qaSelExtract,
 }: ResultsListProps<T>): React.ReactElement => (
-	<ul className="list--unstyled" data-qa-sel={`list-of-${qaSelExtract}`}>
+	<ul className="list--unstyled" aria-label={qaSelExtract} data-qa-sel={`list-of-${qaSelExtract}`}>
 		{data.map((item, index) => (
 			<li key={index}>
 				<ElementType item={item} />

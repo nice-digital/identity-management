@@ -1,374 +1,356 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditUser should match the snapshot after data has been loaded 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should display alert message if editing an EPPI user 1`] = `
+<p>
+  This user may have access to EPPI R5 - only a professional email address can be associated to this profile. Please verify via the EPPI user admin page before changing the email address.
+</p>
+`;
+
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
         >
-          <a
-            href="/users/1"
-            onClick={[Function]}
-          >
-            Kristin Patrick
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Edit user
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Kristin Patrick
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"@id\\": \\"/users/1\\",
-        \\"name\\": \\"Kristin Patrick\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Kristin Patrick"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Edit user\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit user"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
     data-qa-sel="page-header-edit-user"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       <span
-        className="page-header__pre-heading"
+        class="page-header__pre-heading"
       >
         Personal details for
       </span>
       Kristin Patrick
     </h1>
-  </div>,
+  </div>
   <div
-    className="grid"
+    class="grid"
   >
     <div
       data-g="12 md:6 lg:4"
     >
       <form
-        noValidate={true}
-        onSubmit={[Function]}
+        novalidate=""
       >
         <div
-          className="input"
+          class="input"
         >
           <label
-            className="input__label"
-            htmlFor="emailAddress"
+            class="input__label"
+            for="emailAddress"
           >
             Email address
           </label>
           <input
-            autoComplete="off"
-            className="input__input"
+            autocomplete="off"
+            class="input__input"
             data-qa-sel="email-input-edit-user"
-            disabled={false}
             id="emailAddress"
             name="emailAddress"
-            onBlur={[Function]}
-            onChange={[Function]}
-            required={true}
+            required=""
             type="email"
             value="kristin.patrick@example.com"
           />
         </div>
         <div
-          className="input"
+          class="input"
         >
           <label
-            className="input__label"
-            htmlFor="firstName"
+            class="input__label"
+            for="firstName"
           >
             First name
           </label>
           <input
-            autoComplete="off"
-            className="input__input"
+            autocomplete="off"
+            class="input__input"
             data-qa-sel="firstname-input-edit-user"
-            disabled={false}
             id="firstName"
-            maxLength="100"
-            minLength="2"
+            maxlength="100"
+            minlength="2"
             name="firstName"
-            onBlur={[Function]}
-            onChange={[Function]}
             pattern="^((?![<>]).)*$"
-            required={true}
+            required=""
             type="text"
             value="Kristin"
           />
         </div>
         <div
-          className="input"
+          class="input"
         >
           <label
-            className="input__label"
-            htmlFor="lastName"
+            class="input__label"
+            for="lastName"
           >
             Last name
           </label>
           <input
-            autoComplete="off"
-            className="input__input"
+            autocomplete="off"
+            class="input__input"
             data-qa-sel="lastname-input-edit-user"
-            disabled={false}
             id="lastName"
-            maxLength="100"
-            minLength="2"
+            maxlength="100"
+            minlength="2"
             name="lastName"
-            onBlur={[Function]}
-            onChange={[Function]}
             pattern="^((?![<>]).)*$"
-            required={true}
+            required=""
             type="text"
             value="Patrick"
           />
         </div>
         <div
-          className="form-group-container form-group-container--no-border"
+          class="form-group-container form-group-container--no-border"
         >
           <fieldset
-            className="form-group"
+            class="form-group"
           >
             <legend
-              className="form-group__legend"
+              class="form-group__legend"
             >
               Audience insight community membership
             </legend>
             <div
-              className="radio"
+              class="radio"
             >
               <input
-                checked={true}
-                className="radio__input"
+                checked=""
+                class="radio__input"
                 data-qa-sel="optIn-radio-edit-user"
-                disabled={false}
                 id="audienceInsight_optIn"
                 name="audienceInsight"
-                onChange={[Function]}
                 type="radio"
               />
               <label
-                className="radio__label"
-                htmlFor="audienceInsight_optIn"
+                class="radio__label"
+                for="audienceInsight_optIn"
               >
                 Opt in
               </label>
             </div>
             <div
-              className="radio"
+              class="radio"
             >
               <input
-                checked={false}
-                className="radio__input"
+                class="radio__input"
                 data-qa-sel="optOut-radio-edit-user"
-                disabled={false}
                 id="audienceInsight_optOut"
                 name="audienceInsight"
-                onChange={[Function]}
                 type="radio"
               />
               <label
-                className="radio__label"
-                htmlFor="audienceInsight_optOut"
+                class="radio__label"
+                for="audienceInsight_optOut"
               >
                 Opt out
               </label>
             </div>
           </fieldset>
           <button
-            className="btn btn--cta"
+            class="btn btn--cta"
             data-qa-sel="save-button-edit-user"
-            disabled={false}
             type="submit"
           >
             Save profile
           </button>
           <a
-            className="btn btn--secondary"
-            disabled={false}
+            class="btn btn--secondary"
             href="/users/1"
-            onClick={[Function]}
           >
             Cancel
           </a>
         </div>
       </form>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`EditUser should show error message when useFetch get call returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when useFetch get call returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
         >
-          <a
-            href="/users/1"
-            onClick={[Function]}
-          >
-            Error
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Edit user
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"@id\\": \\"/users/1\\",
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Edit user\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit user"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="alert alert--error"
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -376,108 +358,110 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`EditUser should show error message when useFetch get call returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when useFetch get call returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
         >
-          <a
-            href="/users/1"
-            onClick={[Function]}
-          >
-            Error
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Edit user
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"@id\\": \\"/users/1\\",
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Edit user\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit user"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="alert alert--error"
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -485,6 +469,117 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
+`;
+
+exports[`should show error message when useFetch patch fails 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit user"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
 `;

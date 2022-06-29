@@ -61,68 +61,74 @@ export const OrganisationsList: FC = () => {
 				</Breadcrumb>
 				<Breadcrumb>Organisations</Breadcrumb>
 			</Breadcrumbs>
-			<PageHeader heading="Organisations" className="page-header mb--d" />
+			
 			{!error ? (
-				<Grid>
-					<GridItem cols={12}>
-						<Button
-							to={`/organisations/add`}
-							variant="cta"
-							elementType={Link}
-							className="mb--e"
-							data-qa-sel="add-organisation"
-						>
-							Add organisation
-						</Button>
-					</GridItem>
-					<GridItem cols={12} md={3}>
-						<FilterSearch label={"Filter by organisation name"} />
-					</GridItem>
-					<GridItem cols={12} md={9} aria-busy={true}>
-						{isLoading ? (
-							<p>Loading...</p>
-						) : organisations.length ? (
-							<>
-								<div className="text-right">
-									<SortOptions />
-								</div>
-								<PaginationText
-									dataLength={organisationsCount}
-									labelSingular="organisation"
-									labelPlural="organisations"
-								/>
-								<ResultsList
-									data={organisations}
-									elementType={ResultOrganisation}
-									qaSelExtract="organisations"
-								/>
-								<div className={`${styles.flex} ${styles.flexAlignCenter}`}>
-									<ItemsPerPage />
-									<EnhancedPagination
-										currentPage={pageNumber}
-										elementType={Link}
-										method="to"
-										mapPageNumberToHref={(pageNumber) => {
-											const querystringObject = new URLSearchParams(
-												querystring,
-											);
-											querystringObject.set("page", pageNumber.toString());
-											return `?${querystringObject}`;
-										}}
-										totalPages={totalPages || 1}
-										data-qa-sel="pagination-section"
+				<>
+					<PageHeader heading="Organisations" className="page-header mb--d" />
+					<Grid>
+						<GridItem cols={12}>
+							<Button
+								to={`/organisations/add`}
+								variant="cta"
+								elementType={Link}
+								className="mb--e"
+								data-qa-sel="add-organisation"
+							>
+								Add organisation
+							</Button>
+						</GridItem>
+						<GridItem cols={12} md={3}>
+							<FilterSearch label={"Filter by organisation name"} />
+						</GridItem>
+						<GridItem cols={12} md={9} aria-busy={true}>
+							{isLoading ? (
+								<p>Loading...</p>
+							) : organisations.length ? (
+								<>
+									<div className="text-right">
+										<SortOptions />
+									</div>
+									<PaginationText
+										dataLength={organisationsCount}
+										labelSingular="organisation"
+										labelPlural="organisations"
 									/>
-								</div>
-							</>
-						) : searchQuery ? (
-							<p>No results found for &quot;{searchQuery}&quot;</p>
-						) : (
-							<p>No results found</p>
-						)}
-					</GridItem>
-				</Grid>
+									<ResultsList
+										data={organisations}
+										elementType={ResultOrganisation}
+										qaSelExtract="organisations"
+									/>
+									<div className={`${styles.flex} ${styles.flexAlignCenter}`}>
+										<ItemsPerPage />
+										<EnhancedPagination
+											currentPage={pageNumber}
+											elementType={Link}
+											method="to"
+											mapPageNumberToHref={(pageNumber) => {
+												const querystringObject = new URLSearchParams(
+													querystring,
+												);
+												querystringObject.set("page", pageNumber.toString());
+												return `?${querystringObject}`;
+											}}
+											totalPages={totalPages || 1}
+											data-qa-sel="pagination-section"
+										/>
+									</div>
+								</>
+							) : searchQuery ? (
+								<p>No results found for &quot;{searchQuery}&quot;</p>
+							) : (
+								<p>No results found</p>
+							)}
+						</GridItem>
+					</Grid>
+				</>
 			) : (
-				<ErrorMessage error={error}></ErrorMessage>
+				<>
+					<PageHeader heading="Error" />
+					<ErrorMessage error={error}></ErrorMessage>
+				</>
 			)}
 		</>
 	);

@@ -329,6 +329,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
+				
 				{!error ? (
 					<>
 						<PageHeader
@@ -424,8 +425,11 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 							</Grid>
 						)}
 					</>
-				) : (
-					<ErrorMessage error={error}></ErrorMessage>
+				) : (					
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				)}
 			</>
 		);

@@ -1,37 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ResultsList should match the snapshot when ResultOrganisation has been passed into elementType 1`] = `
-<ul
-  className="list--unstyled"
-  data-qa-sel="list-of-organisations"
->
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+exports[`should match the snapshot when ResultOrganisation has been passed into elementType 1`] = `
+<div>
+  <ul
+    aria-label="organisations"
+    class="list--unstyled"
+    data-qa-sel="list-of-organisations"
+  >
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1001"
-              onClick={[Function]}
             >
               NICE
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -39,37 +39,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1003"
-              onClick={[Function]}
             >
               Org 1
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -77,37 +74,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1004"
-              onClick={[Function]}
             >
               Org 2
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -115,37 +109,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1005"
-              onClick={[Function]}
             >
               Org 3
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -153,37 +144,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1006"
-              onClick={[Function]}
             >
               Org 4
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -191,37 +179,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1007"
-              onClick={[Function]}
             >
               Org 5
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -229,37 +214,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1008"
-              onClick={[Function]}
             >
               Org 6
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -267,37 +249,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1009"
-              onClick={[Function]}
             >
               Org 7
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -305,37 +284,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1010"
-              onClick={[Function]}
             >
               Org 8
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -343,37 +319,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1011"
-              onClick={[Function]}
             >
               Org 9
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -381,37 +354,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1012"
-              onClick={[Function]}
             >
               Org 10
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -419,37 +389,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1013"
-              onClick={[Function]}
             >
               Org 11
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -457,37 +424,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1014"
-              onClick={[Function]}
             >
               Org 12
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -495,37 +459,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1015"
-              onClick={[Function]}
             >
               Org 13
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -533,37 +494,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1016"
-              onClick={[Function]}
             >
               Org 14
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -571,37 +529,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1017"
-              onClick={[Function]}
             >
               Org 15
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -609,37 +564,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1018"
-              onClick={[Function]}
             >
               Org 16
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -647,37 +599,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1019"
-              onClick={[Function]}
             >
               Org 17
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -685,37 +634,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1020"
-              onClick={[Function]}
             >
               Org 18
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -723,37 +669,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1021"
-              onClick={[Function]}
             >
               Org 19
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -761,37 +704,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1022"
-              onClick={[Function]}
             >
               Org 20
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -799,37 +739,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1023"
-              onClick={[Function]}
             >
               Org 21
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -837,37 +774,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1024"
-              onClick={[Function]}
             >
               Org 22
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -875,37 +809,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1025"
-              onClick={[Function]}
             >
               Org 23
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -913,37 +844,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1026"
-              onClick={[Function]}
             >
               Org 24
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -951,37 +879,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1027"
-              onClick={[Function]}
             >
               Org 25
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -989,37 +914,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1028"
-              onClick={[Function]}
             >
               Org 26
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -1027,37 +949,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1029"
-              onClick={[Function]}
             >
               Org 27
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -1065,37 +984,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1030"
-              onClick={[Function]}
             >
               Org 28
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -1103,37 +1019,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               1 December 2021 00:00
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1031"
-              onClick={[Function]}
             >
               Org 29
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -1141,37 +1054,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               11 January 2022 13:13
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1032"
-              onClick={[Function]}
             >
               Org 30
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -1179,37 +1089,34 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               12 January 2022 13:14
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-  <li>
-    <article
-      className="card"
-    >
-      Array [
+        </dl>
+      </article>
+    </li>
+    <li>
+      <article
+        class="card"
+      >
         <header
-          className="card__header"
+          class="card__header"
         >
           <p
-            className="card__heading"
+            class="card__heading"
           >
             <a
               href="/organisations/1033"
-              onClick={[Function]}
             >
               Org 31
             </a>
           </p>
-        </header>,
+        </header>
         <dl
-          className="card__metadata"
+          class="card__metadata"
         >
           <div
-            className="card__metadatum"
+            class="card__metadatum"
           >
             <dt
-              className="visually-hidden"
+              class="visually-hidden"
             >
               Date created
             </dt>
@@ -1217,9 +1124,9 @@ exports[`ResultsList should match the snapshot when ResultOrganisation has been 
               13 January 2022 13:15
             </dd>
           </div>
-        </dl>,
-      ]
-    </article>
-  </li>
-</ul>
+        </dl>
+      </article>
+    </li>
+  </ul>
+</div>
 `;

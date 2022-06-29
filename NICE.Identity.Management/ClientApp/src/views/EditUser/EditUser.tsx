@@ -419,7 +419,10 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 					)}
 				</>
 			) : (
-				<ErrorMessage error={error} />
+				<>
+					<PageHeader heading="Error" />
+					<ErrorMessage error={error} />
+				</>
 			)}
 		</>
 	);
