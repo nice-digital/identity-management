@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useListInfo } from "../../helpers/useListInfo";
+import { useListInfo } from "src/helpers/useListInfo";
 
 export const ItemsPerPage = (): React.ReactElement => {
 	const { itemsPerPage } = useListInfo();

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "@nice-digital/nds-button";
-
-import { Endpoints } from "../../data/endpoints";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
 
 type ResendVerificationProps = {
 	nameIdentifier: string;

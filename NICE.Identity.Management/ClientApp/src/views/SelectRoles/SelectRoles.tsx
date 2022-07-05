@@ -6,19 +6,19 @@ import {
 	UserType,
 	RoleType,
 	WebsiteType,
-} from "../../models/types";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { Endpoints } from "../../data/endpoints";
+} from "src/models/types";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
 
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { Button } from "@nice-digital/nds-button";
 
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { AddRoleConfirmation } from "../../components/AddRoleConfirmation/AddRoleConfirmation";
-import { ToggleCheckbox } from "../../components/ToggleCheckbox/ToggleCheckbox";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { AddRoleConfirmation } from "src/components/AddRoleConfirmation/AddRoleConfirmation";
+import { ToggleCheckbox } from "src/components/ToggleCheckbox/ToggleCheckbox";
 
 import "@nice-digital/nds-checkbox/scss/checkbox.scss";
 

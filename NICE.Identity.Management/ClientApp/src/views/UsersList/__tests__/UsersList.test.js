@@ -6,7 +6,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
 import { UsersList } from "../UsersList";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import usersFour from "./usersFour.json";
 import usersThirty from "./usersThirty.json";
 import websites from "./websites.json";

@@ -1,22 +1,21 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { useListFetch, isError } from "../../helpers/useListFetch";
-import { useListInfo } from "../../helpers/useListInfo";
-import { Endpoints } from "../../data/endpoints";
-import { OrganisationType } from "../../models/types";
+import { useListFetch, isError } from "src/helpers/useListFetch";
+import { useListInfo } from "src/helpers/useListInfo";
+import { Endpoints } from "src/data/endpoints";
+import { OrganisationType } from "src/models/types";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { EnhancedPagination } from "@nice-digital/nds-enhanced-pagination";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { ResultsList } from "../../components/ResultsList/ResultsList";
-import { SortOptions } from "../../components/SortOptions/SortOptions";
-import { ItemsPerPage } from "../../components/ItemsPerPage/ItemsPerPage";
-import { ResultOrganisation } from "../../components/ResultOrganisation/ResultOrganisation";
-import { PaginationText } from "../../components/PaginationText/PaginationText";
-
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { FilterSearch } from "src/components/FilterSearch/FilterSearch";
+import { ResultsList } from "src/components/ResultsList/ResultsList";
+import { SortOptions } from "src/components/SortOptions/SortOptions";
+import { ItemsPerPage } from "src/components/ItemsPerPage/ItemsPerPage";
+import { ResultOrganisation } from "src/components/ResultOrganisation/ResultOrganisation";
+import { PaginationText } from "src/components/PaginationText/PaginationText";
 import styles from "./OrganisationsList.module.scss";
 
 export const OrganisationsList: FC = () => {

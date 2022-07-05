@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { Link } from "react-router-dom";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Card } from "@nice-digital/nds-card";
@@ -10,18 +9,16 @@ import {
 	appendQueryParameter,
 	removeQueryParameter,
 	stripMultipleQueries,
-} from "../../utils/querystring";
-
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { Endpoints } from "../../data/endpoints";
-import { UserType, HistoryType, WebsiteType } from "../../models/types";
-import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterBox } from "../../components/FilterBox/FilterBox";
-import { UserStatus } from "../../components/UserStatus/UserStatus";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { Pagination } from "../../components/Pagination/Pagination";
-
+} from "src/utils/querystring";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
+import { UserType, HistoryType, WebsiteType } from "src/models/types";
+import { FilterSearch } from "src/components/FilterSearch/FilterSearch";
+import { FilterBox } from "src/components/FilterBox/FilterBox";
+import { UserStatus } from "src/components/UserStatus/UserStatus";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { Pagination } from "src/components/Pagination/Pagination";
 import styles from "./UsersList.module.scss";
 
 type CardMetaData = {

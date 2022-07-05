@@ -4,7 +4,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
 import { Organisation } from "../Organisation";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import singleOrganisation from "./singleOrganisation.json";
 import singleUser from "./singleUser.json";
 

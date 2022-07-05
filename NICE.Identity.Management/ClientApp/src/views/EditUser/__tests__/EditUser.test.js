@@ -6,7 +6,7 @@ import { setupServer } from "msw/node";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { EditUser } from "../EditUser";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import singleUser from "./singleUser.json";
 import singleUserWithEPPIEmail from "./singleUserWithEPPIEmail.json";
 

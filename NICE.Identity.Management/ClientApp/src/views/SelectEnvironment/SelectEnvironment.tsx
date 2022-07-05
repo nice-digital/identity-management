@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-
-import { Endpoints } from "../../data/endpoints";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { UserType, ServiceType, WebsiteType } from "../../models/types";
+import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { StackedNav, StackedNavLink } from "@nice-digital/nds-stacked-nav";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
+import { Endpoints } from "src/data/endpoints";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { UserType, ServiceType, WebsiteType } from "src/models/types";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 
 type TParams = { id: string; serviceId: string };
 

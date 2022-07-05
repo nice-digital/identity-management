@@ -6,7 +6,7 @@ import { setupServer } from "msw/node";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { EditOrganisation } from "../EditOrganisation";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import singleOrganisation from "./singleOrganisation.json";
 import organisations from "./organisations.json";
 

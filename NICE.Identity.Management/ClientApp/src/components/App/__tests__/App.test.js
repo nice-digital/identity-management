@@ -1,9 +1,9 @@
 import React from "react";
-import {render, waitFor, screen} from '@testing-library/react';
-import {rest} from 'msw';
-import {setupServer} from 'msw/node';
-import { App } from '../App';
-import { Endpoints } from "../../../data/endpoints";
+import {render, waitFor, screen} from "@testing-library/react";
+import {rest} from "msw";
+import {setupServer} from "msw/node";
+import { App } from "../App";
+import { Endpoints } from "src/data/endpoints";
 
 const server = setupServer(
   rest.get(Endpoints.identityManagementUser.replace("/api", ""), (req, res, ctx) => {

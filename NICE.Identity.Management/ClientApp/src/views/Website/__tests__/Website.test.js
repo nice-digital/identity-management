@@ -5,7 +5,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
 import { Website } from "../Website";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import usersAndRoles from "./UsersAndRoles.json";
 
 const consoleErrorReset = console.error;

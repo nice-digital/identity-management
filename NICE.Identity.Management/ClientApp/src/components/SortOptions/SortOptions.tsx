@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import {
 	sortOptions,
 	SortOptions as AllSortOptions,
-} from "../../helpers/sortOptions";
-import { useListInfo } from "../../helpers/useListInfo";
+} from "src/helpers/sortOptions";
+import { useListInfo } from "src/helpers/useListInfo";
 
 export type SortOptionsProps = {
 	defaultSortOrder?: AllSortOptions;

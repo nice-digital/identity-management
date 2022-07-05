@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { SortOptions } from "../SortOptions";
-import { sortOptions } from "../../../helpers/sortOptions";
+import { sortOptions } from "src/helpers/sortOptions";
 
 test("should set A-Z sort option to active when querystring sort is unset", async () => {
 	render(

@@ -1,12 +1,12 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
-import { render, waitForElementToBeRemoved, fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { render, waitForElementToBeRemoved, screen, waitFor, within } from "@testing-library/react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { EditOrganisationUsers } from "../EditOrganisationUsers";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import orgUsers from "./orgUsers.json";
 import users from "./users.json";
 import usersMore from "./usersMore.json";

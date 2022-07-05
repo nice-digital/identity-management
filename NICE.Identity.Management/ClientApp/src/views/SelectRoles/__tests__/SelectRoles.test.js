@@ -5,7 +5,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
 import { SelectRoles } from "../SelectRoles";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import singleUser from "./singleUser.json";
 import singleUserRoles from "./singleUserRoles.json";
 

@@ -5,7 +5,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
 import { DeleteOrganisation } from "../DeleteOrganisation";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import singleOrganisation from "./singleOrganisation.json";
 
 const consoleErrorReset = console.error;

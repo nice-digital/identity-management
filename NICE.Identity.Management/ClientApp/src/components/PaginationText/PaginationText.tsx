@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useListInfo } from "../../helpers/useListInfo";
+import { useListInfo } from "src/helpers/useListInfo";
 
 import styles from "./PaginationText.module.scss";
 

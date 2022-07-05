@@ -10,17 +10,17 @@ import {
 	appendQueryParameter,
 	removeQueryParameter,
 	stripMultipleQueries,
-} from "../../utils/querystring";
+} from "src/utils/querystring";
 
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { Endpoints } from "../../data/endpoints";
-import { HistoryType, WebsiteType } from "../../models/types";
-import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { FilterBox } from "../../components/FilterBox/FilterBox";
-import { WebsiteEnvironment } from "../../components/WebsiteEnvironment/WebsiteEnvironment";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { Pagination } from "../../components/Pagination/Pagination";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
+import { HistoryType, WebsiteType } from "src/models/types";
+import { FilterSearch } from "src/components/FilterSearch/FilterSearch";
+import { FilterBox } from "src/components/FilterBox/FilterBox";
+import { WebsiteEnvironment } from "src/components/WebsiteEnvironment/WebsiteEnvironment";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { Pagination } from "src/components/Pagination/Pagination";
 
 import styles from "./ServicesList.module.scss";
 

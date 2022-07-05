@@ -1,28 +1,27 @@
 import React from "react";
-
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Header, Footer, IdamProviderProps } from "@nice-digital/global-nav";
 import { Container } from "@nice-digital/nds-container";
-import { Overview } from "../../views/Overview/Overview";
-import { UsersList } from "../../views/UsersList/UsersList";
-import { User } from "./../../views/User/User";
-import { ServicesList } from "../../views/ServicesList/ServicesList";
-import { OrganisationsList } from "../../views/OrganisationsList/OrganisationsList";
-import { Organisation } from "../../views/Organisation/Organisation";
-import { AddOrganisation } from "../../views/AddOrganisation/AddOrganisation";
-import { EditOrganisation } from "../../views/EditOrganisation/EditOrganisation";
-import { EditOrganisationUsers } from "../../views/EditOrganisationUsers/EditOrganisationUsers";
-import { DeleteUser } from "./../../views/DeleteUser/DeleteUser";
-import { SelectService } from "./../../views/SelectService/SelectService";
-import { SelectEnvironment } from "./../../views/SelectEnvironment/SelectEnvironment";
-import { SelectRoles } from "./../../views/SelectRoles/SelectRoles";
-import { EditUser } from "./../../views/EditUser/EditUser";
-import { DeleteOrganisation } from "./../../views/DeleteOrganisation/DeleteOrganisation";
-import { Website } from "../../views/Website/Website";
+import { Overview } from "src/views/Overview/Overview";
+import { UsersList } from "src/views/UsersList/UsersList";
+import { User } from "src/views/User/User";
+import { ServicesList } from "src/views/ServicesList/ServicesList";
+import { OrganisationsList } from "src/views/OrganisationsList/OrganisationsList";
+import { Organisation } from "src/views/Organisation/Organisation";
+import { AddOrganisation } from "src/views/AddOrganisation/AddOrganisation";
+import { EditOrganisation } from "src/views/EditOrganisation/EditOrganisation";
+import { EditOrganisationUsers } from "src/views/EditOrganisationUsers/EditOrganisationUsers";
+import { DeleteUser } from "src/views/DeleteUser/DeleteUser";
+import { SelectService } from "src/views/SelectService/SelectService";
+import { SelectEnvironment } from "src/views/SelectEnvironment/SelectEnvironment";
+import { SelectRoles } from "src/views/SelectRoles/SelectRoles";
+import { EditUser } from "src/views/EditUser/EditUser";
+import { DeleteOrganisation } from "src/views/DeleteOrganisation/DeleteOrganisation";
+import { Website } from "src/views/Website/Website";
 
-import { Endpoints } from "../../data/endpoints";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
 
 type AppState = {
 	isLoading: boolean;

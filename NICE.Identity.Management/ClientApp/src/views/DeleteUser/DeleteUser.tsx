@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
-import { PageHeader } from "@nice-digital/nds-page-header";
-
-import { DeleteUserConfirmation } from "../DeleteUserConfirmation/DeleteUserConfirmation";
-import { UserType } from "../../models/types";
-import { Endpoints } from "../../data/endpoints";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-
-import styles from "./DeleteUser.module.scss";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
+import { PageHeader } from "@nice-digital/nds-page-header";
+import { UserType } from "src/models/types";
+import { Endpoints } from "src/data/endpoints";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { DeleteUserConfirmation } from "../DeleteUserConfirmation/DeleteUserConfirmation";
+import styles from "./DeleteUser.module.scss";
 
 type TParams = { id: string };
 

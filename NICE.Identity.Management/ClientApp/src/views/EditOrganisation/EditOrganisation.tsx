@@ -5,11 +5,11 @@ import { Button } from "@nice-digital/nds-button";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Input } from "@nice-digital/nds-input";
-import { Endpoints } from "../../data/endpoints";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { OrganisationType } from "../../models/types";
+import { Endpoints } from "src/data/endpoints";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { OrganisationType } from "src/models/types";
 
 type TParams = { id: string };
 

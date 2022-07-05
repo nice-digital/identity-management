@@ -1,12 +1,12 @@
 import React from "react";
 import { act } from 'react-dom/test-utils';
-import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import { AddOrganisation } from "../AddOrganisation";
-import { Endpoints } from "../../../data/endpoints";
+import { Endpoints } from "src/data/endpoints";
 import organisations from "./organisations.json";
 
 const consoleErrorReset = console.error;
