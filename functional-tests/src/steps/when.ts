@@ -3,7 +3,7 @@ import { Login } from "../support/action/Login";
 import { When } from "@cucumber/cucumber";
 import registerLink from "../support/action/RegisterLink";
 import findUserList, { clickFirstUserInList, clickSecondUserInList, clickLastUserInList } from "../support/check/findUserInList";
-import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink } from "../support/action/clickDeleteUserLink";
+import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink, deleteOrgButton } from "../support/action/clickDeleteUserLink";
 import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted";
 import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton";
 import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
@@ -141,4 +141,6 @@ When(/^I click on the edit organisation button$/, editOrganisationButton);
 When(/^I click on the edit users button$/, editUsersButton);
 
 When(/^I search and add an active user "([^"]*)"$/, searchAddUser);
+
+When(/^I click on the delete organisation button$/, deleteOrgButton);
 

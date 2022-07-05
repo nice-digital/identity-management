@@ -46,7 +46,6 @@ namespace NICE.Identity.Management
 		public void ConfigureServices(IServiceCollection services)
 		{
 			AppSettings.Configure(services, Configuration, Environment.IsDevelopment() ? @"c:\" : Environment.ContentRootPath);
-
 			//dependency injection goes here.
 			services.AddHttpContextAccessor();
 			services.AddTransient<HealthCheckDelegatingHandler>();
@@ -109,6 +108,13 @@ namespace NICE.Identity.Management
 
 			app.Use(async (context, next) =>
 			{
+				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
+								context.Request.Headers["Front-End-Https"] == "on" ||
+								context.Request.Headers.ContainsKey("X-ARR-SSL"))
+				{
+					context.Request.Scheme = "https";
+				}
+
 				context.Response.OnStarting(() =>
 				{
 					context.Response.Headers.Add("Permissions-Policy", "interest-cohort=()");
@@ -193,7 +199,6 @@ namespace NICE.Identity.Management
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-
 			app.UseStaticFiles();
 			app.UseSpaStaticFiles(new StaticFileOptions()
 			{
@@ -223,17 +228,6 @@ namespace NICE.Identity.Management
 						};
 					}
 				}
-			});
-
-			app.Use((context, next) =>
-			{
-				if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
-					context.Request.Headers["Front-End-Https"] == "on" ||
-					context.Request.Headers.ContainsKey("X-ARR-SSL"))
-				{
-					context.Request.Scheme = "https";
-				}
-				return next();
 			});
 
 			//app.UseRouting();
