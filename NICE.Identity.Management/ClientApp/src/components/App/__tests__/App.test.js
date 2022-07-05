@@ -1,19 +1,4 @@
 import React from "react";
-// import { shallow } from "enzyme";
-// import { App } from "../App";
-
-// describe("App", () => {
-// 	beforeEach(() => {
-// 		fetch.resetMocks();
-// 	});
-
-// 	it("should mount without crashing", () => {
-// 		fetch.mockResponseOnce(JSON.stringify({ displayName: "John Holland", links: []}));
-// 		const wrapper = shallow(<App />);
-// 		expect(wrapper).toHaveLength(1);
-// 	});
-// });
-
 import {render, waitFor, screen} from '@testing-library/react';
 import {rest} from 'msw';
 import {setupServer} from 'msw/node';
@@ -31,23 +16,9 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('should mount without crashing', async () => {
-	//fetch.mockResponseOnce(JSON.stringify({ displayName: "John Holland", links: []}));
 	render(<App />);
-
-	//fireEvent.click(screen.getByText('Load Greeting'))
-
-	await waitFor(() => screen.getByLabelText('Site header'));
-	//const linkElement = screen.getByText(/Loading.../i);
-	expect(screen.getByRole('heading', { name: "Administration"})).toBeInTheDocument();
-	// expect(screen.getByRole('button')).toBeDisabled()
+	await waitFor(() => screen.getByText("My account", { selector: "button" }));
+	expect(screen.getByRole("heading", { name: "Administration"})).toBeInTheDocument();
+	expect(screen.getByText("John Holland", { selector: "span" })).toBeInTheDocument();
 	//screen.debug(undefined, 30000000);
-	//expect(screen.getByText('John Holland')).toBeInTheDocument();
 });
-
-// 	it("should mount without crashing", () => {
-// 		fetch.mockResponseOnce(JSON.stringify({ displayName: "John Holland", links: []}));
-// 		const wrapper = shallow(<App />);
-// 		expect(wrapper).toHaveLength(1);
-// 	});
-// });
-

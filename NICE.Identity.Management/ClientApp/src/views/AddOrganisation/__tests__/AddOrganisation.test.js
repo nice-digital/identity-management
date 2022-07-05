@@ -34,27 +34,39 @@ test("should match the snapshot on load", () => {
 });
 
 test("should disable form submit button when clicked", async () => {
+  jest.useFakeTimers();
   render(<AddOrganisation />, {wrapper: MemoryRouter});
   const orgNameInput = screen.getByLabelText("Organisation name");
-  fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
-  fireEvent.submit(orgNameInput);
-  const submitButton = screen.getByText("Loading...");
+  let submitButton = screen.getByText("Save organisation");
+  await act(async () => {
+    fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
+    jest.advanceTimersByTime(1000);
+  });
+  userEvent.click(submitButton);
+  submitButton = await screen.findByText("Loading...");
   expect(submitButton).toBeInTheDocument();
   expect(submitButton).toBeDisabled();
+  jest.useRealTimers();
 });
 
 test("should display confirmation message once fetchData post is successfully complete", async () => {
+  jest.useFakeTimers();
   render(<AddOrganisation />, {wrapper: MemoryRouter});
   const orgNameInput = screen.getByLabelText("Organisation name");
-  fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
-  fireEvent.submit(orgNameInput);
+  const submitButton = screen.getByText("Save organisation");
+  await act(async () => {
+    fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
+  });
+  userEvent.click(submitButton);
   const orgAddedMessage = await screen.findByText("New organisation has been added successfully.");
   expect(orgAddedMessage).toBeInTheDocument();
   expect(screen.getByRole("status")).toBeInTheDocument();
+  jest.useRealTimers();
 });
 
 test("should show error message when fetchData post fails", async () => {
-  console.error = jest.fn();	
+  jest.useFakeTimers();
+  console.error = jest.fn();
   server.use(
 		rest.post(Endpoints.organisationsList, (req, res, ctx) => {
 			return res.once(
@@ -65,23 +77,31 @@ test("should show error message when fetchData post fails", async () => {
 	);
   render(<AddOrganisation />, {wrapper: MemoryRouter});
   const orgNameInput = screen.getByLabelText("Organisation name");
-  fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
-  fireEvent.submit(orgNameInput);
+  const submitButton = screen.getByText("Save organisation");
+  await act(async () => {
+    fireEvent.change(orgNameInput, {target: {value: "Org Ninety Nine"}});
+  });
+  userEvent.click(submitButton);
   const errorAlert = await screen.findByRole("alert");
   expect(errorAlert).toBeInTheDocument();
+  jest.useRealTimers();
 });
 
 test("should show validation error when name is invalid format", async () => {
-  render(<AddOrganisation />, {wrapper: MemoryRouter});
+  jest.useFakeTimers();
+  render(<MemoryRouter><AddOrganisation /></MemoryRouter>);
   const orgNameInput = screen.getByLabelText("Organisation name");
   const user = userEvent.setup();
   orgNameInput.focus();
-	user.type(orgNameInput, 'a');
+  await act(async () => {
+    user.type(orgNameInput, 'a');
+  });
   user.tab();
   const orgNotFoundMessage = await screen.findByText("Organisation name should be alphanumeric and be between 2-100 characters");
   expect(screen.getByText("Save organisation")).toHaveFocus();
   expect(orgNotFoundMessage).toBeInTheDocument();
   expect(orgNameInput).toBeInvalid();
+  jest.useRealTimers();
 });
 
 test("should show validation error when org name is in use already", async () => {

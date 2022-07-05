@@ -3,7 +3,6 @@ import { render, waitFor, screen } from "@testing-library/react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
-//import userEvent from "@testing-library/user-event";
 import { User } from "../User";
 import { Endpoints } from "../../../data/endpoints";
 import singleUser from "./singleUser.json";
@@ -101,4 +100,3 @@ test("should show error message when fetch returns 500 error", async () => {
 	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
 	expect(container).toMatchSnapshot();	
 });
-
