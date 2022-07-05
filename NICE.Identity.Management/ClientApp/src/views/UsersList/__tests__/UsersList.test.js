@@ -193,7 +193,7 @@ test("should show no results found message after search returns empty array", as
 	const dummyText = "SomeText";
 	server.use(
 		rest.get(Endpoints.usersList, (req, res, ctx) => {
-			const search = req.url.searchParams.get('q')
+			const search = req.url.searchParams.get('q');
 			
 			if (search === dummyText) {
 				return res.once(

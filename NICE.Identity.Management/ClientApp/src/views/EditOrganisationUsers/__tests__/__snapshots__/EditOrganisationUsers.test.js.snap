@@ -1,109 +1,160 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditOrganisationUsers should match the snapshot after data has been loaded 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/overview"
-    >
-      Administration
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/organisations"
-    >
-      Organisations
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/organisations/1"
-    >
-      NICE
-    </Breadcrumb>
-    <Breadcrumb>
-      Edit users
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    heading="Users"
-    lead="Add or remove users from this organisation"
-    preheading="NICE"
-  />
-  <Grid
-    elementType="div"
-    equalHeight={false}
-    gutter="standard"
-    horizontalAlignment="left"
-    reverse={false}
-    verticalAlignment="top"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
   >
-    <GridItem
-      cols={12}
-      md={3}
+    <ol
+      class="breadcrumbs"
     >
-      <FilterSuggestions
-        data={Array []}
-        elementType={[Function]}
-        label="Find and add an active user account; search excludes Pending and Locked accounts"
-        onInputChange={[Function]}
-        onResultClick={[Function]}
-        qaSelExtract="add-organisation-user"
-      />
-    </GridItem>
-    <GridItem
-      aria-busy={false}
-      cols={12}
-      md={9}
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/overview"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations"
+        >
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations/1"
+        >
+          NICE
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/organisations/1",
+        "name": "NICE"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit users"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      <span
+        class="page-header__pre-heading"
+      >
+        NICE
+      </span>
+      Users
+    </h1>
+    <p
+      class="page-header__lead"
+    >
+      Add or remove users from this organisation
+    </p>
+  </div>
+  <div
+    class="grid"
+  >
+    <div
+      data-g="12 md:3"
+    >
+      <div
+        class="panel"
+      >
+        <div
+          class="input noMargin"
+        >
+          <label
+            class="input__label"
+            for="filter-suggestions"
+          >
+            Find and add an active user account; search excludes Pending and Locked accounts
+          </label>
+          <input
+            autocomplete="off"
+            class="input__input"
+            data-qa-sel="filter-suggestions-input"
+            id="filter-suggestions"
+            name="filter-suggestions"
+            type="search"
+            value=""
+          />
+        </div>
+        <div
+          class="suggestions"
+        >
+          <ul
+            aria-label="suggestions-add-organisation-user"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      aria-busy="false"
+      data-g="12 md:9"
     >
       <h2
-        className="orgUsersListSummary"
+        class="orgUsersListSummary"
       >
         Current users
       </h2>
-      <Table
+      <table
+        class="table"
         data-qa-sel="list-of-organisation-users"
-        style={
-          Object {
-            "display": "table",
-          }
-        }
+        style="display: table;"
       >
         <thead>
           <tr>
@@ -130,33 +181,16 @@ exports[`EditOrganisationUsers should match the snapshot after data has been loa
               jonathan.russell@nice.org.uk
             </td>
             <td>
-              <UserStatus
-                user={
-                  Object {
-                    "acceptedTerms": null,
-                    "allowContactMe": false,
-                    "emailAddress": "jonathan.russell@nice.org.uk",
-                    "firstName": "Jonny",
-                    "hasAccessToWebsiteIds": Array [],
-                    "hasVerifiedEmailAddress": true,
-                    "initialRegistrationDate": "2020-01-17T14:56:41.9038382",
-                    "isInAuthenticationProvider": false,
-                    "isLockedOut": false,
-                    "isMigrated": true,
-                    "isStaffMember": true,
-                    "lastLoggedInDate": null,
-                    "lastName": "Russell",
-                    "nameIdentifier": "auth0|4221f206-80ad-491a-9302-7ebeb45b31a5",
-                    "userEmailHistory": null,
-                    "userId": 1206,
-                  }
-                }
-              />
+              <span
+                class="tag tag--consultation"
+                data-qa-sel="user-status"
+              >
+                Active
+              </span>
             </td>
             <td>
               <a
                 href="#remove-org-user"
-                onClick={[Function]}
               >
                 Remove user
               </a>
@@ -170,33 +204,16 @@ exports[`EditOrganisationUsers should match the snapshot after data has been loa
               catherine.quigley@nice.org.uk
             </td>
             <td>
-              <UserStatus
-                user={
-                  Object {
-                    "acceptedTerms": null,
-                    "allowContactMe": false,
-                    "emailAddress": "catherine.quigley@nice.org.uk",
-                    "firstName": "Catherine",
-                    "hasAccessToWebsiteIds": Array [],
-                    "hasVerifiedEmailAddress": true,
-                    "initialRegistrationDate": "2020-01-17T14:56:41.911894",
-                    "isInAuthenticationProvider": false,
-                    "isLockedOut": false,
-                    "isMigrated": true,
-                    "isStaffMember": true,
-                    "lastLoggedInDate": null,
-                    "lastName": "Quigley",
-                    "nameIdentifier": "auth0|609b2de3-da81-4356-bac4-250cbeb6c069",
-                    "userEmailHistory": null,
-                    "userId": 1207,
-                  }
-                }
-              />
+              <span
+                class="tag tag--consultation"
+                data-qa-sel="user-status"
+              >
+                Active
+              </span>
             </td>
             <td>
               <a
                 href="#remove-org-user"
-                onClick={[Function]}
               >
                 Remove user
               </a>
@@ -210,33 +227,16 @@ exports[`EditOrganisationUsers should match the snapshot after data has been loa
               andrew.child@nice.org.uk
             </td>
             <td>
-              <UserStatus
-                user={
-                  Object {
-                    "acceptedTerms": null,
-                    "allowContactMe": false,
-                    "emailAddress": "andrew.child@nice.org.uk",
-                    "firstName": "Andy",
-                    "hasAccessToWebsiteIds": Array [],
-                    "hasVerifiedEmailAddress": true,
-                    "initialRegistrationDate": "2020-01-17T14:56:41.7773512",
-                    "isInAuthenticationProvider": false,
-                    "isLockedOut": false,
-                    "isMigrated": true,
-                    "isStaffMember": true,
-                    "lastLoggedInDate": null,
-                    "lastName": "Child",
-                    "nameIdentifier": "auth0|75d721b6-253d-452f-9fb9-b9227422b977",
-                    "userEmailHistory": null,
-                    "userId": 1198,
-                  }
-                }
-              />
+              <span
+                class="tag tag--consultation"
+                data-qa-sel="user-status"
+              >
+                Active
+              </span>
             </td>
             <td>
               <a
                 href="#remove-org-user"
-                onClick={[Function]}
               >
                 Remove user
               </a>
@@ -250,152 +250,123 @@ exports[`EditOrganisationUsers should match the snapshot after data has been loa
               colin.mazurkiewicz@nice.org.uk
             </td>
             <td>
-              <UserStatus
-                user={
-                  Object {
-                    "acceptedTerms": null,
-                    "allowContactMe": false,
-                    "emailAddress": "colin.mazurkiewicz@nice.org.uk",
-                    "firstName": "Colin",
-                    "hasAccessToWebsiteIds": Array [],
-                    "hasVerifiedEmailAddress": true,
-                    "initialRegistrationDate": "2020-01-17T14:56:41.737298",
-                    "isInAuthenticationProvider": false,
-                    "isLockedOut": false,
-                    "isMigrated": true,
-                    "isStaffMember": true,
-                    "lastLoggedInDate": null,
-                    "lastName": "Mazurkiewicz",
-                    "nameIdentifier": "auth0|a8f03ca2-5798-47b7-a3f0-938488d925d0",
-                    "userEmailHistory": null,
-                    "userId": 1196,
-                  }
-                }
-              />
+              <span
+                class="tag tag--consultation"
+                data-qa-sel="user-status"
+              >
+                Active
+              </span>
             </td>
             <td>
               <a
                 href="#remove-org-user"
-                onClick={[Function]}
               >
                 Remove user
               </a>
             </td>
           </tr>
         </tbody>
-      </Table>
-    </GridItem>
-  </Grid>
-</Fragment>
+      </table>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`EditOrganisationUsers should show error message when fetchData function returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetchData function returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations"
         >
-          <a
-            href="/organisations"
-            onClick={[Function]}
-          >
-            Organisations
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <a
-            href="/organisations/1"
-            onClick={[Function]}
-          />
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Edit users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations/1"
+        />
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisations\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"@id\\": \\"/organisations/1\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/organisations/1"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Edit users\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Users
+      Error
     </h1>
-    <p
-      className="page-header__lead"
-    >
-      Add or remove users from this organisation
-    </p>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -403,117 +374,105 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`EditOrganisationUsers should show error message when fetchData function returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetchData function returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations"
         >
-          <a
-            href="/organisations"
-            onClick={[Function]}
-          >
-            Organisations
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <a
-            href="/organisations/1"
-            onClick={[Function]}
-          />
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Edit users
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations/1"
+        />
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Edit users
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisations\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"@id\\": \\"/organisations/1\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/organisations/1"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Edit users\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Edit users"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
-      Users
+      Error
     </h1>
-    <p
-      className="page-header__lead"
-    >
-      Add or remove users from this organisation
-    </p>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -521,6 +480,6 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;

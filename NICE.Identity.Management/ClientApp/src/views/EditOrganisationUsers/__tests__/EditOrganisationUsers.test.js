@@ -1,199 +1,288 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { render, waitForElementToBeRemoved, fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
-import toJson from "enzyme-to-json";
-import { nextTick } from "../../../utils/nextTick";
-import { Alert } from "@nice-digital/nds-alert";
 import { EditOrganisationUsers } from "../EditOrganisationUsers";
+import { Endpoints } from "../../../data/endpoints";
 import orgUsers from "./orgUsers.json";
-import singleUser from "./singleUser.json";
 import users from "./users.json";
+import usersMore from "./usersMore.json";
 
-describe("EditOrganisationUsers", () => {
-    const match = {
-        params: { id: 1 },
-        isExact: true,
-        path: "",
-        url: "",
-	};
+const consoleErrorReset = console.error;
 
-    const orgUsersEmpty = {
-        organisationId: 1,
-        organisation: { "id": 1, "name": "NICE", "dateAdded": null },
-        usersAndJobIds: [],
-    };
-    
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
 
-	const consoleErrorReset = console.error;
+const server = setupServer(
+  rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+    return res(ctx.json(orgUsers));
+  }),
+  rest.get(Endpoints.usersList, (req, res, ctx) => {
+    return res(ctx.json(users));
+  }),
+  rest.delete(Endpoints.job("1082"), (req, res, ctx) => {
+    return res(ctx.json({}));
+  }),
+  rest.post(Endpoints.jobs, (req, res, ctx) => {
+    return res(ctx.json({}));
+  })
+);
 
-	beforeEach(() => {
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
-        
-	});
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
-    it("should show loading message before data has been loaded", () => {
-		fetch.mockResponseOnce(JSON.stringify(orgUsers));
-		const wrapper = shallow(<EditOrganisationUsers match={match} />);
-		expect(wrapper.find("p").text()).toEqual("Loading...");
-	});
+test("should show loading message before data has been loaded", () => {
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };
+	render(<EditOrganisationUsers match={match} />, {wrapper: MemoryRouter});
+	const loadingMessage = screen.getByText("Loading...", { selector: "p" });
+	expect(loadingMessage).toBeInTheDocument();
+});
 
-    it("should match the snapshot after data has been loaded", async () => {
-		fetch.mockResponseOnce(JSON.stringify(orgUsers));
-		const wrapper = shallow(<EditOrganisationUsers match={match} />);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should match the snapshot after data has been loaded", async () => {
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };
+	const {container} = render(<EditOrganisationUsers match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-    it("should show error message when fetchData function returns 401 error", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should show error message when fetchData function returns 401 error", async () => {
+	console.error = jest.fn();	
+	const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };
+	server.use(
+		rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<EditOrganisationUsers match={match} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();
+});
 
-	it("should show error message when fetchData function returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should show error message when fetchData function returns 500 error", async () => {
+	console.error = jest.fn();	
+	const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };
+	server.use(
+		rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<EditOrganisationUsers match={match} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
 
-    it("should show no users found message when an organisation has no users assigned", async () => {
-        console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(orgUsersEmpty));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-        expect(wrapper.find({children: "No users found for this organisation."})).toHaveLength(1);
-    });
+test("should show no users found message when an organisation has no users assigned", async () => {
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };
+  const orgUsersEmpty = {
+    organisationId: 1,
+    organisation: { "id": 1, "name": "NICE", "dateAdded": null },
+    usersAndJobIds: [],
+  };
+	server.use(
+		rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.json(orgUsersEmpty)
+			);
+		})
+	);
+	render(<EditOrganisationUsers match={match} />, {wrapper: MemoryRouter});
+	const noUsersFoundMessage = await screen.findByText("No users found for this organisation.");
+  expect(noUsersFoundMessage).toBeInTheDocument();
+});
 
-    it("should add user to table when suggestion is clicked and show confirmation message", async () => {
-        console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(orgUsersEmpty));
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({}));
-        const userFullName = `${singleUser[0].firstName} ${singleUser[0].lastName}`;
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-        // const filterSuggestion = wrapper.find('input');
-        // filterSuggestion.instance().value = 'a';
-        wrapper.find(EditOrganisationUsers).instance().filterUsersSearchList('a');
-        await nextTick();
-        wrapper.update();
-        wrapper.find("a#suggestion1").simulate("click");
-        await nextTick();
-        wrapper.update();
-        expect(wrapper.find("td").first().text()).toEqual(userFullName);
-        expect(wrapper.find(Alert).exists()).toBe(true);
-        expect(wrapper.find(Alert).text()).toBe("User has been successfully added.");
-	});
+test("should add user to table when suggestion is clicked and show confirmation message", async () => {
+  jest.useFakeTimers();
+  console.error = jest.fn();
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  }; 
+  const orgUsersEmpty = {
+    organisationId: 1,
+    organisation: { "id": 1, "name": "NICE", "dateAdded": null },
+    usersAndJobIds: [],
+  };
+  server.use(
+		rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+			return res.once(ctx.json(orgUsersEmpty));
+		})
+	);
+  render(<MemoryRouter><EditOrganisationUsers match={match} /></MemoryRouter>);
+  await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+  const filterSearchInput = screen.getByRole("searchbox");
+  filterSearchInput.focus();
+  await act(async () => {
+		userEvent.paste("kri")
+		jest.advanceTimersByTime(1000);	
+  });
+  let suggestion = await screen.findByText("Kristin Patrick", { selector: "a" });
+  expect(suggestion).toBeInTheDocument();
+  userEvent.click(suggestion);
+  const userAdded = await screen.findByText("Kristin Patrick", { selector: "td" });
+  expect(userAdded).toBeInTheDocument();
+  expect(screen.getByText("User has been successfully added.", { selector: "p" })).toBeInTheDocument();
+  jest.useFakeTimers();
+});
 
-    it("should remove user from org and show confirmation message when selected from table", async () => {
-        console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(orgUsers));
-		fetch.mockResponseOnce(JSON.stringify({}));
-        const orgUsersCount = orgUsers.usersAndJobIds.length;
-        const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-        expect(wrapper.find("tbody").first().find("tr").length).toEqual(orgUsersCount);
-        const lastRemoveUserLink = wrapper.find("[href='#remove-org-user']").last();
-        lastRemoveUserLink.simulate('click');
-        await nextTick();
-        wrapper.update();
-        expect(wrapper.find("tbody").first().find("tr").length).toEqual(orgUsersCount-1);
-        expect(wrapper.find(Alert).exists()).toBe(true);
-        expect(wrapper.find(Alert).text()).toBe("User has been successfully removed.");
-    });
+test("should remove user from org and show confirmation message when selected from table", async () => {
+  console.error = jest.fn();	
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };  
+	render(<EditOrganisationUsers match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+  const user = userEvent.setup();
+	let removeUserLinks = screen.getAllByRole("link", { name: "Remove user" });
+  const lastRemoveUserLink = removeUserLinks[removeUserLinks.length - 1];
+  expect(removeUserLinks.length).toEqual(4);
+  user.click(lastRemoveUserLink);
+  const userRemovedMessage = await screen.findByText("User has been successfully removed.");
+  removeUserLinks = screen.getAllByRole("link", { name: "Remove user" });
+  expect(userRemovedMessage).toBeInTheDocument();
+  expect(removeUserLinks.length).toEqual(3);
+});
 
-    it("should show 3 suggestions when search term has been entered", async () => {
-        console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(orgUsersEmpty));
-		fetch.mockResponseOnce(JSON.stringify(users));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-        wrapper.find(EditOrganisationUsers).instance().filterUsersSearchList('a');
-        await nextTick();
-		wrapper.update();
-        expect(wrapper.find("[href='#add-org-user']").length).toEqual(3);
-    });
+test("should show 3 suggestions when search term has been entered", async () => {
+  jest.useFakeTimers();
+  console.error = jest.fn();
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };
+  const orgUsersEmpty = {
+    organisationId: 1,
+    organisation: { "id": 1, "name": "NICE", "dateAdded": null },
+    usersAndJobIds: [],
+  };
+	server.use(
+		rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+			return res.once(ctx.json(orgUsersEmpty));
+		}),
+    rest.get(Endpoints.usersList, (req, res, ctx) => {
+			return res.once(ctx.json(usersMore));
+		}),
+	);
+  render(<MemoryRouter><EditOrganisationUsers match={match} /></MemoryRouter>);
+  await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+  const filterSearchInput = screen.getByRole("searchbox");
+  filterSearchInput.focus();
+  await act(async () => {
+		userEvent.paste("kri")
+		jest.advanceTimersByTime(1000);	
+  });
+  await waitFor(() => screen.getByText("Kristin Patrick"));
+  const suggestionsList= await screen.findByRole("list", { name: "suggestions-add-organisation-user"});
+	const { queryAllByRole } = within(suggestionsList);
+	const suggestionsListItems = queryAllByRole("listitem");
+  expect(suggestionsListItems.length).toEqual(3);
+  jest.useFakeTimers();
+});
 
-    it("should hide suggestions when clicked off", async () => {
-        console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(orgUsersEmpty));
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-        const filterSuggestion = wrapper.find('input');
-        wrapper.find(EditOrganisationUsers).instance().filterUsersSearchList('a');
-        await nextTick();
-        wrapper.update();
-        expect(wrapper.find("[href='#add-org-user']").length).toEqual(1);
-        filterSuggestion.simulate("blur");
-        expect(wrapper.find("[href='#add-org-user']").length).toEqual(0);
-    });
+test("should hide suggestions when clicked off", async () => {
+  jest.useFakeTimers();
+  console.error = jest.fn();
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  };  
+  render(<MemoryRouter><EditOrganisationUsers match={match} /></MemoryRouter>);
+  await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+  const filterSearchInput = screen.getByRole("searchbox");
+  filterSearchInput.focus();
+  await act(async () => {
+		userEvent.paste("kri")
+		jest.advanceTimersByTime(1000);	
+  });
+  let suggestion = await screen.findAllByText("Kristin Patrick");
+  expect(suggestion.length).toEqual(1);
+  userEvent.tab();
+  suggestion = screen.queryAllByText("Kristin Patrick");
+  expect(suggestion.length).toEqual(0);
+  jest.useFakeTimers();
+});
 
-    it("should hide existing confirmation/alert when suggestions search has been initiated again", async () => {
-        console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(orgUsersEmpty));
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({}));
-        fetch.mockResponseOnce(JSON.stringify(singleUser));
-        const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisationUsers match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-        wrapper.find(EditOrganisationUsers).instance().filterUsersSearchList('a');
-        await nextTick();
-        wrapper.update();
-        wrapper.find("a#suggestion1").simulate("click");
-        await nextTick();
-        wrapper.update();
-        expect(wrapper.find(Alert).exists()).toBe(true);
-        wrapper.find(EditOrganisationUsers).instance().filterUsersSearchList('k');
-        await nextTick();
-        wrapper.update();
-        expect(wrapper.find(Alert).exists()).toBe(false);
-    });
-
+test("should hide existing confirmation/alert when suggestions search has been initiated again", async () => {
+  jest.useFakeTimers();
+  console.error = jest.fn();
+  const match = {
+    params: { id: 1 },
+    isExact: true,
+    path: "",
+    url: "",
+  }; 
+  const orgUsersEmpty = {
+    organisationId: 1,
+    organisation: { "id": 1, "name": "NICE", "dateAdded": null },
+    usersAndJobIds: [],
+  };
+  server.use(
+		rest.get(Endpoints.usersAndJobIdsByOrganisation("1"), (req, res, ctx) => {
+			return res.once(ctx.json(orgUsersEmpty));
+		})
+	);
+  render(<MemoryRouter><EditOrganisationUsers match={match} /></MemoryRouter>);
+  await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+  const filterSearchInput = screen.getByRole("searchbox");
+  filterSearchInput.focus();
+  await act(async () => {
+		userEvent.paste("kri")
+		jest.advanceTimersByTime(1000);	
+  });
+  let suggestion = await screen.findByText("Kristin Patrick", { selector: "a" });
+  expect(suggestion).toBeInTheDocument();
+  userEvent.click(suggestion);
+  const userAddedMessage = await screen.findByText("User has been successfully added.", { selector: "p" });
+  expect(userAddedMessage).toBeInTheDocument();
+  filterSearchInput.focus();
+  await act(async () => {
+		userEvent.paste("a")
+		jest.advanceTimersByTime(1000);	
+  });
+  expect(userAddedMessage).not.toBeInTheDocument();
+  jest.useFakeTimers();
 });

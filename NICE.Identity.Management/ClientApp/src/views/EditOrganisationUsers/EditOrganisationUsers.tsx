@@ -205,18 +205,22 @@ export class EditOrganisationUsers extends Component<
 					<Breadcrumb>Edit users</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader
-					preheading={
-						isLoading ? "Loading Organisation Name" : organisation?.name
-					}
-					heading="Users"
-					lead="Add or remove users from this organisation"
-				/>
+				
 
 				{error ? (
-					<ErrorMessage error={error}></ErrorMessage>
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				) : (
 					<>
+						<PageHeader
+							preheading={
+								isLoading ? "Loading Organisation Name" : organisation?.name
+							}
+							heading="Users"
+							lead="Add or remove users from this organisation"
+						/>
 						<Grid>
 							<GridItem cols={12} md={3}>
 								<FilterSuggestions

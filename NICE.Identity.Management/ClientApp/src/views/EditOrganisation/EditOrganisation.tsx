@@ -41,7 +41,7 @@ export class EditOrganisation extends Component<
 			fetchedOrgNameFound: false,
 			organisation: {} as OrganisationType,
 			formName: "",
-			isLoading: false,
+			isLoading: true,
 			hasSubmitted: false,
 			isSaveButtonLoading: false,
 		};
