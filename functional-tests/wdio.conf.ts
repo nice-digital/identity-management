@@ -10,7 +10,7 @@ export const config: WebdriverIO.Config = {
 	maxInstances: 1,
 	path: "/wd/hub",
 
-	specs: ["./src/features/**/*.feature"],
+	specs: ["./src/features/**/manageUsersList.feature"],
 
 	capabilities: [
 		{
@@ -40,16 +40,15 @@ export const config: WebdriverIO.Config = {
 	baseUrl: "https://niceorg/consultations/",
 	reporters: [
 		"spec",
-		isTeamCity && "teamcity",
-		isInDocker && [
-			"allure",
+		"teamcity",
+		["allure",
 			{
 				useCucumberStepReporter: true,
 				// Turn on screenshot reporting for error shots
 				disableWebdriverScreenshotsReporting: false,
 			},
 		],
-	].filter(Boolean) as WebdriverIO.Config["reporters"],
+	],
 
 	framework: "cucumber",
 	cucumberOpts: {
@@ -61,9 +60,11 @@ export const config: WebdriverIO.Config = {
 		timeout: 1500000,
 	},
 
-	afterStep: async function (_test, _scenario, { error }) {
+	afterStep: async function (_test, _scenario, { error, passed }) {
 		// Take screenshots on error, these end up in the Allure reports
+		var fileName = "errorShots/" + "ERROR_" + _scenario.name + ".png";
 		if (error) await browser.takeScreenshot();
+		if (error) await browser.saveScreenshot(fileName);
 	},
 	
 	before: async function before() {
