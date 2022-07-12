@@ -10,7 +10,7 @@ export const config: WebdriverIO.Config = {
 	maxInstances: 1,
 	path: "/wd/hub",
 
-	specs: ["./src/features/**/manageUsersList.feature"],
+	specs: ["./src/features/**/*.feature"],
 
 	capabilities: [
 		{
