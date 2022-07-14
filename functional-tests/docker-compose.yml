@@ -40,6 +40,7 @@ services:
     volumes:
       - ./:/tests
       - /tests/node_modules
+      - ./errorShots:/tests/errorShots
     links:
       - api
       - hub
