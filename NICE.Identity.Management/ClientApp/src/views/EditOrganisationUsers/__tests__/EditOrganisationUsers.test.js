@@ -159,7 +159,7 @@ test("should add user to table when suggestion is clicked and show confirmation 
   const userAdded = await screen.findByText("Kristin Patrick", { selector: "td" });
   expect(userAdded).toBeInTheDocument();
   expect(screen.getByText("User has been successfully added.", { selector: "p" })).toBeInTheDocument();
-  jest.useFakeTimers();
+  jest.useRealTimers();
 });
 
 test("should remove user from org and show confirmation message when selected from table", async () => {
@@ -218,7 +218,7 @@ test("should show 3 suggestions when search term has been entered", async () => 
 	const { queryAllByRole } = within(suggestionsList);
 	const suggestionsListItems = queryAllByRole("listitem");
   expect(suggestionsListItems.length).toEqual(3);
-  jest.useFakeTimers();
+  jest.useRealTimers();
 });
 
 test("should hide suggestions when clicked off", async () => {
@@ -243,7 +243,7 @@ test("should hide suggestions when clicked off", async () => {
   userEvent.tab();
   suggestion = screen.queryAllByText("Kristin Patrick");
   expect(suggestion.length).toEqual(0);
-  jest.useFakeTimers();
+  jest.useRealTimers();
 });
 
 test("should hide existing confirmation/alert when suggestions search has been initiated again", async () => {
@@ -284,5 +284,5 @@ test("should hide existing confirmation/alert when suggestions search has been i
 		jest.advanceTimersByTime(1000);	
   });
   expect(userAddedMessage).not.toBeInTheDocument();
-  jest.useFakeTimers();
+  jest.useRealTimers();
 });

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StaticContext } from "react-router";
 import { RouteComponentProps, Link } from "react-router-dom";
-import { OrganisationType, UserType } from "src/models/types";
+import type { OrganisationType, UserType } from "src/models/types";
 import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";

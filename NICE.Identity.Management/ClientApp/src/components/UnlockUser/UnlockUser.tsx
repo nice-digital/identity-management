@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "@nice-digital/nds-button";
 
 import { Endpoints } from "src/data/endpoints";
-import { UserType } from "src/models/types";
+import type { UserType } from "src/models/types";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
 

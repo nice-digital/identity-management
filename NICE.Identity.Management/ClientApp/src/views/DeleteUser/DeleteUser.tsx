@@ -4,7 +4,7 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { UserType } from "src/models/types";
+import type { UserType } from "src/models/types";
 import { Endpoints } from "src/data/endpoints";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";

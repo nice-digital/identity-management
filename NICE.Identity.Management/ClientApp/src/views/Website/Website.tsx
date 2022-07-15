@@ -12,7 +12,7 @@ import { Table } from "@nice-digital/nds-table";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
-import {
+import type {
 	RoleType,
 	UserAndRolesType,
 	WebsiteUsersAndRolesType,

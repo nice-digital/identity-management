@@ -20,5 +20,4 @@ test('should mount without crashing', async () => {
 	await waitFor(() => screen.getByText("My account", { selector: "button" }));
 	expect(screen.getByRole("heading", { name: "Administration"})).toBeInTheDocument();
 	expect(screen.getByText("John Holland", { selector: "span" })).toBeInTheDocument();
-	//screen.debug(undefined, 30000000);
 });

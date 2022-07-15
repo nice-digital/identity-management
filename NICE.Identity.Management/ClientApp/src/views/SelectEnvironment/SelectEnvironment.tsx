@@ -7,7 +7,7 @@ import { StackedNav, StackedNavLink } from "@nice-digital/nds-stacked-nav";
 import { Endpoints } from "src/data/endpoints";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
-import { UserType, ServiceType, WebsiteType } from "src/models/types";
+import type { UserType, ServiceType, WebsiteType } from "src/models/types";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 
 type TParams = { id: string; serviceId: string };

@@ -3,7 +3,7 @@ import { Link, Redirect, useLocation } from "react-router-dom";
 import { useListFetch, isError } from "src/helpers/useListFetch";
 import { useListInfo } from "src/helpers/useListInfo";
 import { Endpoints } from "src/data/endpoints";
-import { OrganisationType } from "src/models/types";
+import type { OrganisationType } from "src/models/types";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { EnhancedPagination } from "@nice-digital/nds-enhanced-pagination";

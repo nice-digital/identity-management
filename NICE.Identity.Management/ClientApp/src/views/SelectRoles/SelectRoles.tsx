@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-import {
+import type {
 	EnvironmentType,
 	ServiceType,
 	UserType,
