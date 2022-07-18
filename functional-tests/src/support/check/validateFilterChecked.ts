@@ -59,10 +59,10 @@ export async function clickCancelFilterServiceDetailPage(): Promise<void> {
 
 export async function validateServiceUserRoleChecked(): Promise<void> {
 
-	checkContainsText("element", ".userRecord:first-child td:nth-child(1)", "", 'Aisha Bartlett');
-	checkContainsText("element", ".userRecord:first-child td:nth-child(2)", "", 'aisha.bartlett@example.com');
-	checkContainsText("element", ".userRecord:first-child td:nth-child(3)", "", 'Product editor');
-	checkContainsText("element", ".userRecord:first-child td:nth-child(4)", "", 'No');
+	await checkContainsText("element", ".userRecord:first-child td:nth-child(1)", "", 'Aisha Bartlett');
+	await checkContainsText("element", ".userRecord:first-child td:nth-child(2)", "", 'aisha.bartlett@example.com');
+	await checkContainsText("element", ".userRecord:first-child td:nth-child(3)", "", 'Product editor');
+	await checkContainsText("element", ".userRecord:first-child td:nth-child(4)", "", 'No');
 };
 
 
