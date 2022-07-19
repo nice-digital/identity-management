@@ -296,11 +296,6 @@
       "id": 26,
       "name": "Just20Organization",
       "dateAdded": "2022-03-02T16:46:02.41"
-    },
-    {
-      "id": 27,
-      "name": "The Justified Ancients of Mu Mu",
-      "dateAdded": "2022-07-18T09:46:02.41"
     }
   ],
   "usersByOrganisation": [
@@ -1530,11 +1525,8 @@
       }
     ]
   },
-  "verificationemail": [
-    {
-      "verificationemail": 1
-    }
-  ],
+  "verificationemail": [{ "verificationemail": 1 }],
+
   "accountstatus": {
     "isAuthenticated": true,
     "displayName": "commenttestuser+5@gmail.com",

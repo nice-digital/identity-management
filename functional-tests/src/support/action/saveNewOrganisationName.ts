@@ -12,6 +12,7 @@ export async function saveNewOrganisationName(): Promise<void> {
 
 export async function saveEditOrgButton(): Promise<void> {
 
+  await pause("5000")
   await waitForDisplayed(selectors.manageOrgPage.saveEditOrgButton, "");
   await clickElement('click', 'selector', selectors.manageOrgPage.saveEditOrgButton);
   await pause("5000");
