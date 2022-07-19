@@ -11,11 +11,11 @@ Feature: The list of Organisation is reduced when user filter by name
 
 	Scenario: User can filter for organisation list by name and number of results
 		Given I expect I appear on the Organisations list page
-		Then I expect the organisations result list count contains "Showing 1 to 25 of 28 organisations"
+		Then I expect the organisations result list count contains "Showing 1 to 25 of 27 organisations"
 		When I add name "Just1Organization" to the filter
 		Then I expect the organisations result list count contains "Showing 1 organisation"
 		When I delete entered organisation name
-		Then I expect the organisations result list count contains "Showing 1 to 25 of 28 organisations"
+		Then I expect the organisations result list count contains "Showing 1 to 25 of 27 organisations"
 		When I change the number of results on the page by selecting index "1"
 		Then I expect the organisations result list count contains "Showing 28 organisations"
 		When I change the number of results on the page by selecting index "2"
