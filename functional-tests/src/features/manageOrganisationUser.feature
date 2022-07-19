@@ -10,7 +10,7 @@ Feature: Manage organisation user
 
   Scenario: Manage organisation details and view assigned user
     Given I expect I appear on the Organisations list page
-    When I add name "The Justified Ancients of Mu Mu" to the filter
+    When I add name "Just9Organization" to the filter
     Then I click on the first organisation in the list
     When I click on the edit users button
     Then I expect user "Aisha Bartlett" to exist in the organisation user list
