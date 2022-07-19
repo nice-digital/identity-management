@@ -8,6 +8,7 @@ export async function navigateToUserListPageUsingBreadscrumb(): Promise<void> {
 };
 
 export async function navigateToUserListPageFromAdminPage(): Promise<void> {
+  await waitForDisplayed(selectors.adminHomePage.manageUsersButton, "");
   await clickElement('click', 'element', selectors.adminHomePage.manageUsersButton);
   await waitForDisplayed(selectors.userListPage.userlist, "");
 };

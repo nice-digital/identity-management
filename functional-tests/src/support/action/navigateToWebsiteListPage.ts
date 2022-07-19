@@ -3,6 +3,7 @@ import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action
 import selectors from "../selectors";
 
 export async function navigateToWebsiteListPageFromAdminPage(): Promise<void> {
+  await waitForDisplayed(selectors.adminHomePage.manageServicesButton, "");
   await clickElement('click', 'element', selectors.adminHomePage.manageServicesButton);
   await waitForDisplayed(selectors.websiteListPage.websitelist, "");
 }
