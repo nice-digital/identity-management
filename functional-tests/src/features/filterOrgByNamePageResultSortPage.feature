@@ -17,9 +17,9 @@ Feature: The list of Organisation is reduced when user filter by name
 		When I delete entered organisation name
 		Then I expect the organisations result list count contains "Showing 1 to 25 of 27 organisations"
 		When I change the number of results on the page by selecting index "1"
-		Then I expect the organisations result list count contains "Showing 28 organisations"
+		Then I expect the organisations result list count contains "Showing 27 organisations"
 		When I change the number of results on the page by selecting index "2"
-		Then I expect the organisations result list count contains "Showing 28 organisations"
+		Then I expect the organisations result list count contains "Showing 27 organisations"
 		Given I sort orgnanisation list using the alphabetical sorting descending order
 		When I check the first organisation on the page it displays "The Justified Ancients of Mu Mu"
 		Given I sort organisation list using the date sorting descending order
