@@ -6,7 +6,7 @@ import { Button } from "@nice-digital/nds-button";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { DeleteOrganisationConfirmation } from "../DeleteOrganisationConfirmation/DeleteOrganisationConfirmation";
-import type { OrganisationType } from "src/models/types";
+import { type OrganisationType } from "src/models/types";
 import { Endpoints } from "src/data/endpoints";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import { fetchData } from "src/helpers/fetchData";

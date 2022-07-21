@@ -10,7 +10,7 @@ import { PageHeader } from "@nice-digital/nds-page-header";
 import { Table } from "@nice-digital/nds-table";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
-import type { UserType } from "src/models/types";
+import { type UserType } from "src/models/types";
 import { Endpoints } from "src/data/endpoints";
 import { UnlockUser } from "src/components/UnlockUser/UnlockUser";
 import { ResendVerification } from "src/components/ResendVerification/ResendVerification";

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import type { UserType } from "src/models/types";
+import { type UserType } from "src/models/types";
 
 type SuggestionUserProps = {
 	item: UserType;

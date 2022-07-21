@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import Moment from "moment";
 import { Card } from "@nice-digital/nds-card";
-import type { OrganisationType } from "src/models/types";
+import { type OrganisationType } from "src/models/types";
 
 type CardMetaData = {
 	label?: string;

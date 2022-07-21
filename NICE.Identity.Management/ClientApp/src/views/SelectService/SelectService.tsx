@@ -10,7 +10,7 @@ import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import { Endpoints } from "src/data/endpoints";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
-import type { ServiceType, UserType } from "src/models/types";
+import { type ServiceType, type UserType } from "src/models/types";
 
 type TParams = { id: string };
 

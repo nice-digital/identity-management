@@ -9,7 +9,7 @@ import { Endpoints } from "src/data/endpoints";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
-import type { UsersAndJobIdsByOrganisationType, UserType } from "src/models/types";
+import { type UsersAndJobIdsByOrganisationType, type UserType } from "src/models/types";
 import { UserStatus } from "src/components/UserStatus/UserStatus";
 import { FilterSuggestions } from "src/components/FilterSuggestions/FilterSuggestions";
 import { SuggestionUser } from "src/components/SuggestionUser/SuggestionUser";

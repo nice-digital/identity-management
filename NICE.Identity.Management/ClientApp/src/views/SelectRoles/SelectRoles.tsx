@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-import type {
-	EnvironmentType,
-	ServiceType,
-	UserType,
-	RoleType,
-	WebsiteType,
-} from "src/models/types";
+import { type EnvironmentType, type ServiceType, type UserType, type RoleType, type WebsiteType } from "src/models/types";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
 import { Endpoints } from "src/data/endpoints";

@@ -10,7 +10,7 @@ import { Radio } from "@nice-digital/nds-radio";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { useFetch, isError, CustomError } from "src/helpers/useFetch";
 import { Endpoints } from "src/data/endpoints";
-import type { UserType } from "src/models/types";
+import { type UserType } from "src/models/types";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import "@nice-digital/nds-radio/scss/radio.scss";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Tag } from "@nice-digital/nds-tag";
-import type { WebsiteType } from "src/models/types";
+import { type WebsiteType } from "src/models/types";
 
 type WebsiteEnvironmentProps = {
 	website: WebsiteType;

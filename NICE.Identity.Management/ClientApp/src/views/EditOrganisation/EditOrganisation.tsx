@@ -9,7 +9,7 @@ import { Endpoints } from "src/data/endpoints";
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
-import type { OrganisationType } from "src/models/types";
+import { type OrganisationType } from "src/models/types";
 
 type TParams = { id: string };
 

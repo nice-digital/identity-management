@@ -15,7 +15,7 @@ import {
 import { fetchData } from "src/helpers/fetchData";
 import { isDataError } from "src/helpers/isDataError";
 import { Endpoints } from "src/data/endpoints";
-import type { HistoryType, WebsiteType } from "src/models/types";
+import { type HistoryType, type WebsiteType } from "src/models/types";
 import { FilterSearch } from "src/components/FilterSearch/FilterSearch";
 import { FilterBox } from "src/components/FilterBox/FilterBox";
 import { WebsiteEnvironment } from "src/components/WebsiteEnvironment/WebsiteEnvironment";
