@@ -8,7 +8,7 @@ type ErrorMessageProps = {
 };
 
 export const ErrorMessage = (props: ErrorMessageProps): React.ReactElement => (
-	<Alert type="error">
+	<Alert type="error" role="alert">
 		{props.children ? (
 			props.children
 		) : (

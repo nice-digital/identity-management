@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { StaticContext } from "react-router";
 import { RouteComponentProps, Link } from "react-router-dom";
-import { OrganisationType, UserType } from "../../models/types";
+import { type OrganisationType, type UserType } from "src/models/types";
 import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { Button } from "@nice-digital/nds-button";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { UserStatus } from "../../components/UserStatus/UserStatus";
-import { ToFormattedDateString } from "../../helpers/dateHelpers";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { Endpoints } from "../../data/endpoints";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { UserStatus } from "src/components/UserStatus/UserStatus";
+import { ToFormattedDateString } from "src/helpers/dateHelpers";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
 
 import styles from "./Organisation.module.scss";
 

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Button } from "@nice-digital/nds-button";
 
-import { Endpoints } from "../../data/endpoints";
-import { UserType } from "../../models/types";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
+import { Endpoints } from "src/data/endpoints";
+import { type UserType } from "src/models/types";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
 
 type UnlockUserProps = {
 	id: number;

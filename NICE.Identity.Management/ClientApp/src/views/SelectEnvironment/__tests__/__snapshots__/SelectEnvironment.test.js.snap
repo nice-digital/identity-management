@@ -1,142 +1,680 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SelectEnvironment should match the snapshot after data has been loaded 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-administration-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/"
-    >
-      Administration
-    </Breadcrumb>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-user-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/users"
-    >
-      Users
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/users/1"
-    >
-      Kristin Patrick
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/users/1/services"
-    >
-      Select service
-    </Breadcrumb>
-    <Breadcrumb>
-      Select environment
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    heading="EPPI Reviewer"
-    preheading="Select environment for"
-  />
-  <Grid
-    elementType="div"
-    equalHeight={false}
-    gutter="standard"
-    horizontalAlignment="left"
-    reverse={false}
-    verticalAlignment="top"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
   >
-    <GridItem
-      cols={8}
+    <ol
+      class="breadcrumbs"
     >
-      <StackedNav
-        aria-label="Environments"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <StackedNavLink
-          destination="/1/roles"
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          dev
-        </StackedNavLink>
-        <StackedNavLink
-          destination="/2/roles"
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          test
-        </StackedNavLink>
-      </StackedNav>
-    </GridItem>
-  </Grid>
-</Fragment>
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Kristin Patrick
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1/services"
+        >
+          Select service
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Select environment
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Kristin Patrick"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@id": "/users/1/services",
+        "name": "Select service"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "name": "Select environment"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      <span
+        class="page-header__pre-heading"
+      >
+        Select environment for
+      </span>
+      EPPI Reviewer
+    </h1>
+  </div>
+  <div
+    class="grid"
+  >
+    <div
+      data-g="8"
+    >
+      <nav
+        aria-label="Environments"
+        class="stacked-nav"
+      >
+        <ul
+          class="stacked-nav__list"
+        >
+          <li
+            class="stacked-nav__list-item"
+          >
+            <a
+              aria-current="false"
+              href="/1/roles"
+            >
+              <span
+                class="stacked-nav__content-wrapper"
+              >
+                dev
+              </span>
+            </a>
+          </li>
+          <li
+            class="stacked-nav__list-item"
+          >
+            <a
+              aria-current="false"
+              href="/2/roles"
+            >
+              <span
+                class="stacked-nav__content-wrapper"
+              >
+                test
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should show error message when service fetchData function returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1/services"
+        >
+          Select service
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Select environment
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@id": "/users/1/services",
+        "name": "Select service"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "name": "Select environment"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`should show error message when service fetchData function returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1/services"
+        >
+          Select service
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Select environment
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@id": "/users/1/services",
+        "name": "Select service"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "name": "Select environment"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`should show error message when user fetchData function returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1/services"
+        >
+          Select service
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Select environment
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@id": "/users/1/services",
+        "name": "Select service"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "name": "Select environment"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`should show error message when user fetchData function returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Error
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1/services"
+        >
+          Select service
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Select environment
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Error"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@id": "/users/1/services",
+        "name": "Select service"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "name": "Select environment"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
 `;

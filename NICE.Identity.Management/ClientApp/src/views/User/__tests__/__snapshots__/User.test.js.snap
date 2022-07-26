@@ -1,314 +1,274 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`User should match the snapshot after data has been loaded 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-administration-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/"
-    >
-      Administration
-    </Breadcrumb>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-user-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/users"
-    >
-      Users
-    </Breadcrumb>
-    <Breadcrumb>
-      Kristin Patrick
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    cta={
-      <React.Fragment>
-        <Button
-          data-qa-sel="add-user-role-button"
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/users/1/services"
-          variant="cta"
-        >
-          Add role
-        </Button>
-        <Button
-          data-qa-sel="edit-profile-button"
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/users/1/edit"
-        >
-          Edit profile
-        </Button>
-      </React.Fragment>
-    }
-    data-qa-sel="name-user-profile"
-    heading="Kristin Patrick"
-    preheading="User profile for"
-  />
-  <Grid
-    elementType="div"
-    equalHeight={false}
-    gutter="standard"
-    horizontalAlignment="left"
-    reverse={false}
-    verticalAlignment="top"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
   >
-    <GridItem
-      aria-busy={false}
-      cols={12}
-      md={9}
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Kristin Patrick
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Kristin Patrick"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+    data-qa-sel="name-user-profile"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      <span
+        class="page-header__pre-heading"
+      >
+        User profile for
+      </span>
+      Kristin Patrick
+    </h1>
+    <p
+      class="page-header__cta"
+    >
+      <a
+        class="btn btn--cta"
+        data-qa-sel="add-user-role-button"
+        href="/users/1/services"
+      >
+        Add role
+      </a>
+      <a
+        class="btn"
+        data-qa-sel="edit-profile-button"
+        href="/users/1/edit"
+      >
+        Edit profile
+      </a>
+    </p>
+  </div>
+  <div
+    class="grid"
+  >
+    <div
+      aria-busy="false"
+      data-g="12 md:9"
     >
       <div
-        className="summaryList pv--c"
+        class="summaryList pv--c"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Account information
         </span>
         <div
-          className="summaryListDetail"
+          class="summaryListDetail"
         >
           <div>
-            <UserStatus
-              user={
-                Object {
-                  "acceptedTerms": true,
-                  "allowContactMe": true,
-                  "emailAddress": "kristin.patrick@example.com",
-                  "firstName": "Kristin",
-                  "hasAccessToWebsiteIds": Array [
-                    1,
-                    2,
-                    3,
-                  ],
-                  "hasVerifiedEmailAddress": true,
-                  "initialRegistrationDate": "2019-01-23T12:29:54.911Z",
-                  "isInAuthenticationProvider": true,
-                  "isLockedOut": false,
-                  "isMigrated": false,
-                  "isStaffMember": false,
-                  "lastLoggedInDate": "2019-01-23T12:29:54.911Z",
-                  "lastName": "Patrick",
-                  "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
-                  "userEmailHistory": Array [
-                    Object {
-                      "archivedByUserDisplayName": null,
-                      "archivedByUserId": null,
-                      "archivedDateUTC": "2021-10-26T14:52:54.1478773",
-                      "emailAddress": "jcwilliams+id5@gmail.com",
-                      "userEmailHistoryId": 1,
-                      "userId": 1,
-                    },
-                    Object {
-                      "archivedByUserDisplayName": "John Holland",
-                      "archivedByUserId": 2,
-                      "archivedDateUTC": "2021-10-26T14:54:35.5142339",
-                      "emailAddress": "updated@gmail.com",
-                      "userEmailHistoryId": 2,
-                      "userId": 1,
-                    },
-                  ],
-                  "userId": 1,
-                }
-              }
-            />
+            <span
+              class="tag tag--consultation"
+              data-qa-sel="user-status"
+            >
+              Active
+            </span>
           </div>
-          <UnlockUser
-            id={1}
-            isLocked={false}
-            onError={[Function]}
-            onToggleLock={[Function]}
-          />
+          <button
+            class="btn btn--secondary"
+            data-qa-sel="lock-user-button"
+            type="button"
+          >
+            Lock user
+          </button>
         </div>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Email address
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
           data-qa-sel="email-user-profile"
         >
           kristin.patrick@example.com
         </span>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Initial registration date
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
         >
           23 January 2019 12:29
         </span>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Last logged in date
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
         >
           23 January 2019 12:29
         </span>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Name identifier (internal id)
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
         >
           auth0|abc12345-2f95-43e7-b419-18f2784f1111
         </span>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Audience insight community membership
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
           data-qa-sel="audience-user-profile"
         >
           Yes
         </span>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Is migrated from NICE Accounts
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
         >
           No
         </span>
       </div>
       <div
-        className="summaryList pv--c mb--d"
+        class="summaryList pv--c mb--d"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Is in Authentication Provider (Auth0)
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
         >
           Yes
         </span>
       </div>
       <hr
-        className="mv--b"
+        class="mv--b"
       />
       <h2
-        className="h3"
+        class="h3"
       >
         Permanently delete this account
       </h2>
       <p>
         The account will no longer be available, and all data in the account will be permanently deleted.
       </p>
-      <Link
-        className="pv--c mb--d"
+      <a
+        class="pv--c mb--d"
         data-qa-sel="delete-user-link"
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
-        to="/users/1/delete"
+        href="/users/1/delete"
+        style="display: inline-block;"
       >
         Delete user
-      </Link>
+      </a>
       <hr
-        className="mv--b"
+        class="mv--b"
       />
       <h2
-        className="h3"
+        class="h3"
       >
         Email audit trail
       </h2>
-      <Table
-        style={
-          Object {
-            "display": "table",
-          }
-        }
+      <table
+        class="table"
+        style="display: table;"
       >
         <thead>
           <tr>
@@ -345,101 +305,95 @@ exports[`User should match the snapshot after data has been loaded 1`] = `
             </td>
           </tr>
         </tbody>
-      </Table>
-    </GridItem>
-  </Grid>
-</Fragment>
+      </table>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`User should show error message when fetch returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Error
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Error
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Error"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -447,99 +401,93 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`User should show error message when fetch returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Error
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Error
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Error"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -547,6 +495,6 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;

@@ -5,14 +5,14 @@ import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Table } from "@nice-digital/nds-table";
-import { Endpoints } from "../../data/endpoints";
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { UsersAndJobIdsByOrganisationType, UserType } from "../../models/types";
-import { UserStatus } from "../../components/UserStatus/UserStatus";
-import { FilterSuggestions } from "../../components/FilterSuggestions/FilterSuggestions";
-import { SuggestionUser } from "../../components/SuggestionUser/SuggestionUser";
+import { Endpoints } from "src/data/endpoints";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { type UsersAndJobIdsByOrganisationType, type UserType } from "src/models/types";
+import { UserStatus } from "src/components/UserStatus/UserStatus";
+import { FilterSuggestions } from "src/components/FilterSuggestions/FilterSuggestions";
+import { SuggestionUser } from "src/components/SuggestionUser/SuggestionUser";
 import styles from "./EditOrganisationUsers.module.scss";
 
 type TParams = { id: string };
@@ -205,18 +205,22 @@ export class EditOrganisationUsers extends Component<
 					<Breadcrumb>Edit users</Breadcrumb>
 				</Breadcrumbs>
 
-				<PageHeader
-					preheading={
-						isLoading ? "Loading Organisation Name" : organisation?.name
-					}
-					heading="Users"
-					lead="Add or remove users from this organisation"
-				/>
+				
 
 				{error ? (
-					<ErrorMessage error={error}></ErrorMessage>
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				) : (
 					<>
+						<PageHeader
+							preheading={
+								isLoading ? "Loading Organisation Name" : organisation?.name
+							}
+							heading="Users"
+							lead="Add or remove users from this organisation"
+						/>
 						<Grid>
 							<GridItem cols={12} md={3}>
 								<FilterSuggestions

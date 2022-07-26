@@ -1,29 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterSearch should match the snapshot when querystring search has a value 1`] = `
-<div
-  className="panel"
->
+exports[`should match the snapshot when querystring search has a value 1`] = `
+<div>
   <div
-    className="input"
+    class="panel"
   >
-    <label
-      className="input__label"
-      htmlFor="filter-search"
+    <div
+      class="input"
     >
-      Filter by organisation name
-    </label>
-    <input
-      autoComplete="off"
-      className="input__input"
-      data-qa-sel="filter-search-input"
-      defaultValue="SomeText"
-      id="filter-search"
-      name="filter-search"
-      onChange={[Function]}
-      type="search"
-      unique="filterSearch"
-    />
+      <label
+        class="input__label"
+        for="filter-search"
+      >
+        Filter by organisation name
+      </label>
+      <input
+        autocomplete="off"
+        class="input__input"
+        data-qa-sel="filter-search-input"
+        id="filter-search"
+        name="filter-search"
+        type="search"
+        unique="filterSearch"
+        value="SomeText"
+      />
+    </div>
   </div>
 </div>
 `;

@@ -1,7 +1,7 @@
 Feature: Manage organisation user
   As a user of NICE Identity Organisation page
   We can add and remove organisation users
-  
+
 
   Background:
     Given I open the url "/"
@@ -10,7 +10,7 @@ Feature: Manage organisation user
 
   Scenario: Manage organisation details and view assigned user
     Given I expect I appear on the Organisations list page
-    When I add name "The Musical Streets" to the filter
+    When I add name "Just9Organization" to the filter
     Then I click on the first organisation in the list
     When I click on the edit users button
     Then I expect user "Aisha Bartlett" to exist in the organisation user list
@@ -18,4 +18,4 @@ Feature: Manage organisation user
     And I expect successful message for the user "User has been successfully removed."
     When I search and add an active user "Aisha"
     And I expect successful message for the user "User has been successfully added."
-     Then I expect user "Aisha Bartlett" to exist in the organisation user list
+    Then I expect user "Aisha Bartlett" to exist in the organisation user list

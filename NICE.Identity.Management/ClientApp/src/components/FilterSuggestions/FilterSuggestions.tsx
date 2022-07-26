@@ -171,7 +171,7 @@ export class FilterSuggestions<TSuggestionItem> extends Component<
 					className={styles.noMargin}
 				/>
 				<div className={styles.suggestions}>
-					<ul ref={this.dropdownRef}>
+					<ul ref={this.dropdownRef} aria-label={`suggestions-${qaSelExtract}`}>
 						{data.map((item, index) => {
 							const suggestionId = `${this.suggestionIdPrefix}${index + 1}`;
 

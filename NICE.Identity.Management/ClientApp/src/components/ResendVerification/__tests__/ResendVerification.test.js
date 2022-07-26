@@ -1,55 +1,93 @@
 import React from "react";
-import { mount } from "enzyme";
-
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 import { ResendVerification } from "../ResendVerification";
-import { nextTick } from "../../../utils/nextTick";
+import { Endpoints } from "src/data/endpoints";
 
-describe("ResendVerification", () => {
-	let userProps;
-	
-	const consoleErrorReset = console.error;
+const consoleErrorReset = console.error;
 
-	beforeEach(() => {
-		userProps = {
-			nameIdentifier: "some_id",
-			onClick: jest.fn(),
-			onError: jest.fn(),
-		};
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
-	});
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
 
-	it("should show correct text on load", () => {
-		const wrapper = mount(<ResendVerification {...userProps} />);
-		expect(wrapper.find("button").text()).toEqual("Resend verification email");
-	});
+const server = setupServer(
+  rest.post(Endpoints.verificationEmail, (req, res, ctx) => {
+    return res(ctx.json({}));
+  })
+);
 
-	it("should disable button when clicked", () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify({}));
-		const wrapper = mount(<ResendVerification {...userProps} />);
-		wrapper.find("button").simulate("click");
-		wrapper.update();
-		expect(wrapper.find("button").props().disabled).toEqual(true);
-		expect(wrapper.find("button").text()).toEqual("Loading...");
-	});
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
-	it("should show error message when fetch fails", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(<ResendVerification {...userProps} />);
-		wrapper.find("button").simulate("click");
-		await nextTick();
-		expect(userProps.onError).toHaveBeenCalledTimes(1);
-	});
+test("should show correct text on load", () => {
+	const userProps = {
+		nameIdentifier: "some_id",
+		onClick: jest.fn(),
+		onError: jest.fn(),
+	};
+	render(<ResendVerification {...userProps} />);
+	expect(screen.getByText("Resend verification email", { selector: "button" })).toBeInTheDocument();
+});
 
-	it("should show error message when fetch returns non-200 error", async () => {
-		console.error = jest.fn();
-		const serverErrorMessage = "Not authorized";
-		fetch.mockResponseOnce({ message: serverErrorMessage }, { status: 401 });
-		const wrapper = mount(<ResendVerification {...userProps} />);
-		wrapper.find("button").simulate("click");
-		await nextTick();
-		expect(userProps.onError).toHaveBeenCalledTimes(1);
-	});
+test("should disable button when clicked", async () => {
+	const userProps = {
+		nameIdentifier: "some_id",
+		onClick: jest.fn(),
+		onError: jest.fn(),
+	};
+	render(<ResendVerification {...userProps} />);
+	let resendVerificationButton = screen.getByRole("button", { name: "Resend verification email"});
+	userEvent.click(resendVerificationButton);
+	resendVerificationButton = await screen.findByRole("button", { name: "Loading..." });
+	expect(resendVerificationButton).toHaveAttribute("disabled");
+	expect(resendVerificationButton).toBeInTheDocument();
+});
+
+test("should show error message when fetch fails", async () => {
+	console.error = jest.fn();
+	const userProps = {
+		nameIdentifier: "some_id",
+		onClick: jest.fn(),
+		onError: jest.fn(),
+	};
+	server.use(
+		rest.post(Endpoints.verificationEmail, (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	render(<ResendVerification {...userProps} />);
+	let resendVerificationButton = screen.getByRole("button", { name: "Resend verification email"});
+	userEvent.click(resendVerificationButton);
+	resendVerificationButton = await screen.findByRole("button", { name: "Loading..." });
+	resendVerificationButton = await screen.findByRole("button", { name: "Email sent" });
+	expect(userProps.onError).toHaveBeenCalledTimes(1);
+});
+
+test("should show error message when fetch returns non-200 error", async () => {
+	console.error = jest.fn();
+	const userProps = {
+		nameIdentifier: "some_id",
+		onClick: jest.fn(),
+		onError: jest.fn(),
+	};
+	server.use(
+		rest.post(Endpoints.verificationEmail, (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	render(<ResendVerification {...userProps} />);
+	let resendVerificationButton = screen.getByRole("button", { name: "Resend verification email"});
+	userEvent.click(resendVerificationButton);
+	resendVerificationButton = await screen.findByRole("button", { name: "Loading..." });
+	resendVerificationButton = await screen.findByRole("button", { name: "Email sent" });
+	expect(userProps.onError).toHaveBeenCalledTimes(1);
 });

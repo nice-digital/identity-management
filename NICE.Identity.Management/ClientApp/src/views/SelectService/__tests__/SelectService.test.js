@@ -1,115 +1,136 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { render, waitFor, waitForElementToBeRemoved, screen } from "@testing-library/react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router";
-import toJson from "enzyme-to-json";
-
-import { nextTick } from "../../../utils/nextTick";
+import { SelectService } from "../SelectService";
+import { Endpoints } from "src/data/endpoints";
 import singleUser from "./singleUser.json";
 import services from "./services.json";
-import { SelectService } from "../SelectService";
 
-import { Endpoints } from "../../../data/endpoints";
-import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
+const consoleErrorReset = console.error;
 
-describe("SelectService", () => {
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
+
+const server = setupServer(
+  rest.get(Endpoints.user("1"), (req, res, ctx) => {
+    return res(ctx.json(singleUser));
+  }),
+  rest.get(Endpoints.servicesList, (req, res, ctx) => {
+    return res(ctx.json(services));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("should show loading message before data has been loaded", () => {
 	const match = {
 		params: { id: 1 },
 		isExact: true,
 		path: "",
 		url: "",
 	};
+	render(<SelectService match={match} />, {wrapper: MemoryRouter});
+	const loadingMessage = screen.getByText("Loading...", { selector: "p" });
+	expect(loadingMessage).toBeInTheDocument();
+});
 
-	const consoleErrorReset = console.error;
+test("should match the snapshot after data has been loaded", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	const {container} = render(<SelectService match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	beforeEach(() => {
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
-	});
+test("should show error message when user fetchData function returns 500 error", async () => {
+	console.error = jest.fn();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<SelectService match={match} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();
+});
 
-	it("should show loading message before data has been loaded", () => {
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify(services));
-		const wrapper = shallow(<SelectService match={match} />);
-		expect(wrapper.find("p").text()).toEqual("Loading...");
-	});
+test("should show error message when user fetchData function returns 401 error", async () => {
+	console.error = jest.fn();	
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<SelectService match={match} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
 
-	it("should call fetchData during componentDidMount", async () => {
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify(services));
-		const wrapper = mount(<MemoryRouter><SelectService match={match} /></MemoryRouter>);
-		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
-		wrapper.instance().componentDidMount();
-		await nextTick();
-		wrapper.update();
-		expect(spy).toHaveBeenCalled();
-		expect(fetch.mock.calls.length).toEqual(2);
-		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.user(match.params.id));
-		expect(fetch.mock.calls[1][0]).toEqual(Endpoints.servicesList);
-		spy.mockClear();
-	});
+test("should show error message when services fetchData function returns 500 error", async () => {
+	console.error = jest.fn();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.servicesList, (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<SelectService match={match} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();
+});
 
-	it("should match the snapshot after data has been loaded", async () => {
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify(services));
-		const wrapper = shallow(<SelectService match={match} />);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show error message when user fetchData function returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		fetch.mockResponseOnce(JSON.stringify(services));
-		const wrapper = mount(
-			<MemoryRouter>
-				<SelectService match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-
-	it("should show error message when user fetchData function returns 401 error", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		fetch.mockResponseOnce(JSON.stringify(services));
-		const wrapper = mount(
-			<MemoryRouter>
-				<SelectService match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-
-	it("should show error message when services fetchData function returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(
-			<MemoryRouter>
-				<SelectService match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-
-	it("should show error message when services fetchData function returns 401 error", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(
-			<MemoryRouter>
-				<SelectService match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
+test("should show error message when services fetchData function returns 401 error", async () => {
+	console.error = jest.fn();	
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.servicesList, (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<SelectService match={match} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();
 });

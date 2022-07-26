@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import "@nice-digital/design-system/scss/base.scss";
 
@@ -7,4 +7,5 @@ import "./styles.scss";
 
 import { App } from "./components/App/App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = createRoot(document.getElementById("root") as HTMLElement);
+root.render(<App />);

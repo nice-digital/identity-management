@@ -15,11 +15,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        1,
-        2,
-        3
-      ],
+      "hasAccessToWebsiteIds": [1, 2, 3],
       "userEmailHistory": [
         {
           "userEmailHistoryId": 1,
@@ -62,9 +58,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        3
-      ],
+      "hasAccessToWebsiteIds": [3],
       "userEmailHistory": []
     },
     {
@@ -82,10 +76,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        3,
-        4
-      ],
+      "hasAccessToWebsiteIds": [3, 4],
       "userEmailHistory": []
     },
     {
@@ -103,11 +94,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        1,
-        4,
-        5
-      ],
+      "hasAccessToWebsiteIds": [1, 4, 5],
       "userEmailHistory": []
     },
     {
@@ -125,10 +112,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        2,
-        4
-      ],
+      "hasAccessToWebsiteIds": [2, 4],
       "userEmailHistory": []
     },
     {
@@ -314,7 +298,7 @@
       "dateAdded": "2022-03-02T16:46:02.41"
     }
   ],
-  "usersByOrganisation":  [
+  "usersByOrganisation": [
     {
       "userId": 1,
       "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
@@ -330,11 +314,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        1,
-        2,
-        3
-      ],
+      "hasAccessToWebsiteIds": [1, 2, 3],
       "userEmailHistory": [
         {
           "userEmailHistoryId": 1,
@@ -377,9 +357,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        3
-      ],
+      "hasAccessToWebsiteIds": [3],
       "userEmailHistory": []
     },
     {
@@ -397,10 +375,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        3,
-        4
-      ],
+      "hasAccessToWebsiteIds": [3, 4],
       "userEmailHistory": []
     },
     {
@@ -418,11 +393,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        1,
-        4,
-        5
-      ],
+      "hasAccessToWebsiteIds": [1, 4, 5],
       "userEmailHistory": []
     },
     {
@@ -440,14 +411,11 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
-      "hasAccessToWebsiteIds": [
-        2,
-        4
-      ],
+      "hasAccessToWebsiteIds": [2, 4],
       "userEmailHistory": []
     }
-	],
-"jobs": [
+  ],
+  "jobs": [
     {
       "id": 1,
       "userId": 1,
@@ -466,117 +434,108 @@
       "organisationId": 1,
       "isLead": true
     }
-    ],
-"usersandjobidsfororganisation": {
-      "organisationId": 1,
-      "organisation": {
-        "id": 1,
-        "name": "ClinicalTrial Pharma",
-        "dateAdded": "2022-01-01T16:46:02.4101236"
-      },
-      "usersAndJobIds": [
-        {
-          "userId": 1,
-          "user": {
-            "userId": 1,
-            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
-            "firstName": "Kristin",
-            "lastName": "Patrick",
-            "emailAddress": "kristin.patrick@example.com",
-            "allowContactMe": true,
-            "hasVerifiedEmailAddress": true,
-            "isLockedOut": false,
-            "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
-            "lastLoggedInDate": "2019-02-25T01:29:54.911Z",
-            "isStaffMember": false,
-            "acceptedTerms": true,
-            "isMigrated": false,
-            "isInAuthenticationProvider": true,
-            "hasAccessToWebsiteIds": [
-              1,
-              2,
-              3
-            ],
-            "userEmailHistory": [
-              {
-                "userEmailHistoryId": 1,
-                "userId": 1,
-                "emailAddress": "jcwilliams+id5@gmail.com",
-                "archivedByUserId": null,
-                "archivedDateUTC": "2021-10-26T14:52:54.1478773",
-                "archivedByUserDisplayName": null
-              },
-              {
-                "userEmailHistoryId": 2,
-                "userId": 1,
-                "emailAddress": "updated@gmail.com",
-                "archivedByUserId": 2,
-                "archivedDateUTC": "2021-10-26T14:54:35.5142339",
-                "archivedByUserDisplayName": "Thomas Holding"
-              },
-              {
-                "userEmailHistoryId": 3,
-                "userId": 1,
-                "emailAddress": "updated2@gmail.com",
-                "archivedByUserId": null,
-                "archivedDateUTC": "2021-10-26T15:14:00.7624903",
-                "archivedByUserDisplayName": null
-              }
-            ]
-          },
-          "jobId": 1
-        },
-        {
-          "userId": 2,
-          "user": {
-            "userId": 2,
-            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
-            "firstName": "Thomas",
-            "lastName": "Holding",
-            "emailAddress": "thomas.holding@example.com",
-            "allowContactMe": true,
-            "hasVerifiedEmailAddress": true,
-            "isLockedOut": false,
-            "initialRegistrationDate": "2019-10-24T12:29:54.911Z",
-            "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
-            "isStaffMember": false,
-            "acceptedTerms": true,
-            "isMigrated": false,
-            "isInAuthenticationProvider": true,
-            "hasAccessToWebsiteIds": [
-              3
-            ],
-            "userEmailHistory": []
-          },
-          "jobId": 2
-        },
-        {
-          "userId": 3,
-          "user": {
-            "userId": 3,
-            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
-            "firstName": "Aisha",
-            "lastName": "Bartlett",
-            "emailAddress": "aisha.bartlett@example.com",
-            "allowContactMe": true,
-            "hasVerifiedEmailAddress": true,
-            "isLockedOut": false,
-            "initialRegistrationDate": "2019-10-25T12:29:54.911Z",
-            "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
-            "isStaffMember": false,
-            "acceptedTerms": true,
-            "isMigrated": false,
-            "isInAuthenticationProvider": true,
-            "hasAccessToWebsiteIds": [
-              3,
-              4
-            ],
-            "userEmailHistory": []
-          },
-          "jobId": 3
-        }
-      ]
+  ],
+  "usersandjobidsfororganisation": {
+    "organisationId": 1,
+    "organisation": {
+      "id": 1,
+      "name": "ClinicalTrial Pharma",
+      "dateAdded": "2022-01-01T16:46:02.4101236"
     },
+    "usersAndJobIds": [
+      {
+        "userId": 1,
+        "user": {
+          "userId": 1,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+          "firstName": "Kristin",
+          "lastName": "Patrick",
+          "emailAddress": "kristin.patrick@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+          "lastLoggedInDate": "2019-02-25T01:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [1, 2, 3],
+          "userEmailHistory": [
+            {
+              "userEmailHistoryId": 1,
+              "userId": 1,
+              "emailAddress": "jcwilliams+id5@gmail.com",
+              "archivedByUserId": null,
+              "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+              "archivedByUserDisplayName": null
+            },
+            {
+              "userEmailHistoryId": 2,
+              "userId": 1,
+              "emailAddress": "updated@gmail.com",
+              "archivedByUserId": 2,
+              "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+              "archivedByUserDisplayName": "Thomas Holding"
+            },
+            {
+              "userEmailHistoryId": 3,
+              "userId": 1,
+              "emailAddress": "updated2@gmail.com",
+              "archivedByUserId": null,
+              "archivedDateUTC": "2021-10-26T15:14:00.7624903",
+              "archivedByUserDisplayName": null
+            }
+          ]
+        },
+        "jobId": 1
+      },
+      {
+        "userId": 2,
+        "user": {
+          "userId": 2,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+          "firstName": "Thomas",
+          "lastName": "Holding",
+          "emailAddress": "thomas.holding@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-24T12:29:54.911Z",
+          "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [3],
+          "userEmailHistory": []
+        },
+        "jobId": 2
+      },
+      {
+        "userId": 3,
+        "user": {
+          "userId": 3,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
+          "firstName": "Aisha",
+          "lastName": "Bartlett",
+          "emailAddress": "aisha.bartlett@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-25T12:29:54.911Z",
+          "lastLoggedInDate": "2019-10-25T12:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [3, 4],
+          "userEmailHistory": []
+        },
+        "jobId": 3
+      }
+    ]
+  },
   "websites": [
     {
       "id": 4,
@@ -1306,122 +1265,115 @@
       "isInAuthenticationProvider": true
     }
   ],
-  "usersandrolesbywebsite":
+  "usersandrolesbywebsite": {
+    "websiteId": 1,
+    "serviceId": 1,
+    "environmentId": 71,
+    "usersAndRoles": [
       {
-      "websiteId":1,
-      "serviceId":1,
-      "environmentId":71,
-      "usersAndRoles":[
-        {
-          "userId":1,
-          "user":{
-             "userId":1,
-             "nameIdentifier":"auth0|abc12345-2f95-43e7-b419-18f2784f1111",
-             "firstName":"Kristin",
-             "lastName":"Patrick",
-             "emailAddress":"kristin.patrick@example.com",
-             "allowContactMe":true,
-             "hasVerifiedEmailAddress":true,
-             "isLockedOut":false,
-             "initialRegistrationDate":"2019-10-23T12:29:54.911Z",
-             "lastLoggedInDate":"2019-02-25T01:29:54.911Z",
-             "isStaffMember":false,
-             "acceptedTerms":true,
-             "isMigrated":false,
-             "isInAuthenticationProvider":true,
-             "hasAccessToWebsiteIds":[
-                1,
-                2,
-                3
-             ],
-             "userEmailHistory":[
-                {
-                   "userEmailHistoryId":1,
-                   "userId":1,
-                   "emailAddress":"jcwilliams+id5@gmail.com",
-                   "archivedByUserId":null,
-                   "archivedDateUTC":"2021-10-26T14:52:54.1478773",
-                   "archivedByUserDisplayName":null
-                },
-                {
-                   "userEmailHistoryId":2,
-                   "userId":1,
-                   "emailAddress":"updated@gmail.com",
-                   "archivedByUserId":2,
-                   "archivedDateUTC":"2021-10-26T14:54:35.5142339",
-                   "archivedByUserDisplayName":"Thomas Holding"
-                },
-                {
-                   "userEmailHistoryId":3,
-                   "userId":1,
-                   "emailAddress":"updated2@gmail.com",
-                   "archivedByUserId":null,
-                   "archivedDateUTC":"2021-10-26T15:14:00.7624903",
-                   "archivedByUserDisplayName":null
-                }
-             ]
-          },
-          "roles":[
-             {
-                "id":991,
-                "hasRole":true,
-                "name":"Product contributor",
-                "description":"Some text here"
-             },
-             {
-                "id":992,
-                "hasRole":true,
-                "name":"Product manager",
-                "description":"Some text here"
-             },
-             {
-                "id":993,
-                "hasRole":true,
-                "name":"Product administrator",
-                "description":"Some text here"
-             }
-          ]
-       },
-       {
-            "userId":2,
-            "user":{
-               "userId":2,
-               "nameIdentifier":"auth0|abc12345-2f95-43e7-b419-18f2784f2222",
-               "firstName":"Thomas",
-               "lastName":"Holding",
-               "emailAddress":"thomas.holding@example.com",
-               "allowContactMe":true,
-               "hasVerifiedEmailAddress":true,
-               "isLockedOut":false,
-               "initialRegistrationDate":"2019-10-24T12:29:54.911Z",
-               "lastLoggedInDate":"2019-10-24T12:29:54.911Z",
-               "isStaffMember":false,
-               "acceptedTerms":true,
-               "isMigrated":false,
-               "isInAuthenticationProvider":true,
-               "hasAccessToWebsiteIds":[
-                  1
-               ],
-               "userEmailHistory":[]
+        "userId": 1,
+        "user": {
+          "userId": 1,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f1111",
+          "firstName": "Kristin",
+          "lastName": "Patrick",
+          "emailAddress": "kristin.patrick@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-23T12:29:54.911Z",
+          "lastLoggedInDate": "2019-02-25T01:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [1, 2, 3],
+          "userEmailHistory": [
+            {
+              "userEmailHistoryId": 1,
+              "userId": 1,
+              "emailAddress": "jcwilliams+id5@gmail.com",
+              "archivedByUserId": null,
+              "archivedDateUTC": "2021-10-26T14:52:54.1478773",
+              "archivedByUserDisplayName": null
             },
-            "roles":[
-               {
-                 "id":992,
-                 "hasRole":true,
-                 "name":"Product manager",
-                 "description":"Some text here"
-               },
-               {
-                  "id":993,
-                  "hasRole":true,
-                  "name":"Product administrator",
-                  "description":"Some text here"
-               }
-            ]
-         },
-         {
+            {
+              "userEmailHistoryId": 2,
+              "userId": 1,
+              "emailAddress": "updated@gmail.com",
+              "archivedByUserId": 2,
+              "archivedDateUTC": "2021-10-26T14:54:35.5142339",
+              "archivedByUserDisplayName": "Thomas Holding"
+            },
+            {
+              "userEmailHistoryId": 3,
+              "userId": 1,
+              "emailAddress": "updated2@gmail.com",
+              "archivedByUserId": null,
+              "archivedDateUTC": "2021-10-26T15:14:00.7624903",
+              "archivedByUserDisplayName": null
+            }
+          ]
+        },
+        "roles": [
+          {
+            "id": 991,
+            "hasRole": true,
+            "name": "Product contributor",
+            "description": "Some text here"
+          },
+          {
+            "id": 992,
+            "hasRole": true,
+            "name": "Product manager",
+            "description": "Some text here"
+          },
+          {
+            "id": 993,
+            "hasRole": true,
+            "name": "Product administrator",
+            "description": "Some text here"
+          }
+        ]
+      },
+      {
+        "userId": 2,
+        "user": {
+          "userId": 2,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f2222",
+          "firstName": "Thomas",
+          "lastName": "Holding",
+          "emailAddress": "thomas.holding@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": true,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-24T12:29:54.911Z",
+          "lastLoggedInDate": "2019-10-24T12:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [1],
+          "userEmailHistory": []
+        },
+        "roles": [
+          {
+            "id": 992,
+            "hasRole": true,
+            "name": "Product manager",
+            "description": "Some text here"
+          },
+          {
+            "id": 993,
+            "hasRole": true,
+            "name": "Product administrator",
+            "description": "Some text here"
+          }
+        ]
+      },
+      {
         "userId": 3,
-        "user":{
+        "user": {
           "userId": 3,
           "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f3333",
           "firstName": "Aisha",
@@ -1436,168 +1388,157 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
-          "hasAccessToWebsiteIds": [
-            3,
-            4
-          ],
+          "hasAccessToWebsiteIds": [3, 4],
           "userEmailHistory": []
         },
-        "roles":[
+        "roles": [
           {
-            "id":994,
-            "hasRole":true,
-            "name":"Product editor",
-            "description":"Some text here"
-         }
-       ]
-    },
-    {
-      "userId": 4,
-      "user":{
-            "userId": 4,
-            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
-            "firstName": "Theo",
-            "lastName": "Bradford",
-            "emailAddress": "theo.bradford@example.com",
-            "allowContactMe": true,
-            "hasVerifiedEmailAddress": false,
-            "isLockedOut": false,
-            "initialRegistrationDate": "2019-10-26T12:29:54.911Z",
-            "lastLoggedInDate": null,
-            "isStaffMember": false,
-            "acceptedTerms": true,
-            "isMigrated": false,
-            "isInAuthenticationProvider": true,
-            "hasAccessToWebsiteIds": [
-            1,
-            4,
-            5
-          ],
+            "id": 994,
+            "hasRole": true,
+            "name": "Product editor",
+            "description": "Some text here"
+          }
+        ]
+      },
+      {
+        "userId": 4,
+        "user": {
+          "userId": 4,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f4444",
+          "firstName": "Theo",
+          "lastName": "Bradford",
+          "emailAddress": "theo.bradford@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": false,
+          "isLockedOut": false,
+          "initialRegistrationDate": "2019-10-26T12:29:54.911Z",
+          "lastLoggedInDate": null,
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [1, 4, 5],
           "userEmailHistory": []
         },
-        "roles":[
+        "roles": [
           {
-             "id":991,
-             "hasRole":true,
-             "name":"Product contributor",
-             "description":"Some text here"
+            "id": 991,
+            "hasRole": true,
+            "name": "Product contributor",
+            "description": "Some text here"
           }
-       ]
+        ]
+      },
+      {
+        "userId": 5,
+        "user": {
+          "userId": 5,
+          "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
+          "firstName": "Polly",
+          "lastName": "Greaves",
+          "emailAddress": "polly.greaves@example.com",
+          "allowContactMe": true,
+          "hasVerifiedEmailAddress": false,
+          "isLockedOut": true,
+          "initialRegistrationDate": "2019-10-27T12:29:54.911Z",
+          "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
+          "isStaffMember": false,
+          "acceptedTerms": true,
+          "isMigrated": false,
+          "isInAuthenticationProvider": true,
+          "hasAccessToWebsiteIds": [2, 4],
+          "userEmailHistory": []
+        },
+        "roles": [
+          {
+            "id": 992,
+            "hasRole": true,
+            "name": "Product manager",
+            "description": "Some text here"
+          }
+        ]
+      }
+    ],
+    "service": {
+      "id": 1,
+      "name": "EPPI Reviewer",
+      "websites": null
     },
-    {
-      "userId": 5,
-      "user":{
-            "userId": 5,
-            "nameIdentifier": "auth0|abc12345-2f95-43e7-b419-18f2784f5555",
-            "firstName": "Polly",
-            "lastName": "Greaves",
-            "emailAddress": "polly.greaves@example.com",
-            "allowContactMe": true,
-            "hasVerifiedEmailAddress": false,
-            "isLockedOut": true,
-            "initialRegistrationDate": "2019-10-27T12:29:54.911Z",
-            "lastLoggedInDate": "2019-10-27T12:29:54.911Z",
-            "isStaffMember": false,
-            "acceptedTerms": true,
-            "isMigrated": false,
-            "isInAuthenticationProvider": true,
-            "hasAccessToWebsiteIds": [
-            2,
-            4
-          ],
-            "userEmailHistory": []
-        },  
-        "roles":[
-          {
-            "id":992,
-            "hasRole":true,
-            "name":"Product manager",
-            "description":"Some text here"
-          }
-       ]    
-      } 
-  ],
-  "service": {
-  "id": 1,
-  "name": "EPPI Reviewer",
-  "websites": null
-},
     "website": {
-    "id": 1,
-    "serviceId": 1,
-    "environmentId": 71,
-    "host": "dev-eppi.nice.org.uk",
-    "environment": {
+      "id": 1,
+      "serviceId": 1,
+      "environmentId": 71,
+      "host": "dev-eppi.nice.org.uk",
+      "environment": {
         "id": 71,
         "name": "Dev",
         "order": 5
-    },
-    "service": {
+      },
+      "service": {
         "id": 1,
         "name": "EPPI Reviewer",
         "websites": [
-            {
-                "id": 1,
-                "serviceId": 1,
-                "environmentId": 71,
-                "host": "dev-eppi.nice.org.uk",
-                "environment": {
-                    "id": 71,
-                    "name": "Dev",
-                    "order": 0
-                },
-                "service": null
-            }
+          {
+            "id": 1,
+            "serviceId": 1,
+            "environmentId": 71,
+            "host": "dev-eppi.nice.org.uk",
+            "environment": {
+              "id": 71,
+              "name": "Dev",
+              "order": 0
+            },
+            "service": null
+          }
         ]
-    }
-},
-"environment": {
-    "id": 71,
-    "name": "Dev",
-    "order": 0
-},
-"allRoles": [
-  {
-    "id":991,
-    "websiteId": 1,
-    "name": "Product contributor",
-    "description": "Some text here"
+      }
+    },
+    "environment": {
+      "id": 71,
+      "name": "Dev",
+      "order": 0
+    },
+    "allRoles": [
+      {
+        "id": 991,
+        "websiteId": 1,
+        "name": "Product contributor",
+        "description": "Some text here"
+      },
+      {
+        "id": 992,
+        "websiteId": 1,
+        "name": "Product manager",
+        "description": "Some text here"
+      },
+      {
+        "id": 993,
+        "websiteId": 1,
+        "name": "Product administrator",
+        "description": "Some text here"
+      },
+      {
+        "id": 994,
+        "websiteId": 1,
+        "name": "Product editor",
+        "description": "Some text here"
+      }
+    ]
   },
-  {
-    "id": 992,
-    "websiteId": 1,
-    "name": "Product manager",
-    "description": "Some text here"
-  },
-  {
-    "id": 993,
-    "websiteId": 1,
-    "name": "Product administrator",
-    "description": "Some text here"
-  },
-  {
-    "id":994,
-    "websiteId": 1,
-    "name":"Product editor",
-    "description":"Some text here"
-  }
-]
- },
   "verificationemail": [{ "verificationemail": 1 }],
 
-  "accountstatus":
-  {
-    "isAuthenticated":true,
-    "displayName":"commenttestuser+5@gmail.com",
-    "links":[
-       {
-          "Key":"Sign out",
-          "Value":"/account/logout"
-       },
-       {
-          "Key":"Health checks",
-          "Value":"/healthchecks-ui"
-       }
+  "accountstatus": {
+    "isAuthenticated": true,
+    "displayName": "commenttestuser+5@gmail.com",
+    "links": [
+      {
+        "Key": "Sign out",
+        "Value": "/account/logout"
+      },
+      {
+        "Key": "Health checks",
+        "Value": "/healthchecks-ui"
+      }
     ]
   }
 }

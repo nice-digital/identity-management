@@ -33,6 +33,14 @@ export const config: WebdriverIO.Config = {
       },
     },
   },
+  // {
+  // 	acceptInsecureCerts: true, // Because of self-signed cert inside Docker
+  // 	acceptSslCerts: true,
+  //     browserName: "firefox",
+  //     "moz:firefoxOptions": {
+  // 		args: ["-headless"]
+  //     }
+  // }
 	],
 
 	logLevel: "warn",

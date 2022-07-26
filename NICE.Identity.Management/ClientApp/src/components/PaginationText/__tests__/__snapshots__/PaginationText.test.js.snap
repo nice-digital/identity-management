@@ -1,19 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PaginationText should match the snapshot when on page 2 and organisations props passed in 1`] = `
-<h2
-  className="paginationText"
-  data-qa-sel="organisations-returned"
->
-  Showing 26 to 32 of 32 organisations
-</h2>
+exports[`should match the snapshot when on page 2 and organisations props passed in 1`] = `
+<div>
+  <h2
+    class="paginationText"
+    data-qa-sel="organisations-returned"
+  >
+    Showing 26 to 32 of 32 organisations
+  </h2>
+</div>
 `;
 
-exports[`PaginationText should match the snapshot when pagination is default and organisations props passed in 1`] = `
-<h2
-  className="paginationText"
-  data-qa-sel="organisations-returned"
->
-  Showing 1 to 25 of 32 organisations
-</h2>
+exports[`should match the snapshot when pagination is default and organisations props passed in 1`] = `
+<div>
+  <h2
+    class="paginationText"
+    data-qa-sel="organisations-returned"
+  >
+    Showing 1 to 25 of 32 organisations
+  </h2>
+</div>
 `;

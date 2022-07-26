@@ -1,38 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ItemsPerPage should match the snapshot when querystring amount is all 1`] = `
-<div
-  className="mr--e"
-  data-qa-sel="number-of-results-on-page"
->
-  <label
-    className="bold mr--c"
-    htmlFor="itemsPerPage"
+exports[`should match the snapshot when querystring amount is all 1`] = `
+<div>
+  <div
+    class="mr--e"
+    data-qa-sel="number-of-results-on-page"
   >
-    Items per page
-  </label>
-  <select
-    data-qa-sel="result-on-the-page-index"
-    id="itemsPerPage"
-    name="itemsPerPage"
-    onChange={[Function]}
-    value="all"
-  >
-    <option
-      value="25"
+    <label
+      class="bold mr--c"
+      for="itemsPerPage"
     >
-      25
-    </option>
-    <option
-      value="50"
+      Items per page
+    </label>
+    <select
+      data-qa-sel="result-on-the-page-index"
+      id="itemsPerPage"
+      name="itemsPerPage"
     >
-      50
-    </option>
-    <option
-      value="all"
-    >
-      All
-    </option>
-  </select>
+      <option
+        value="25"
+      >
+        25
+      </option>
+      <option
+        value="50"
+      >
+        50
+      </option>
+      <option
+        value="all"
+      >
+        All
+      </option>
+    </select>
+  </div>
 </div>
 `;

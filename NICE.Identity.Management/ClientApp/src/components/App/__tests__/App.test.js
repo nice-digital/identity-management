@@ -1,15 +1,23 @@
 import React from "react";
-import { shallow } from "enzyme";
+import {render, waitFor, screen} from "@testing-library/react";
+import {rest} from "msw";
+import {setupServer} from "msw/node";
 import { App } from "../App";
+import { Endpoints } from "src/data/endpoints";
 
-describe("App", () => {
-	beforeEach(() => {
-		fetch.resetMocks();
-	});
+const server = setupServer(
+  rest.get(Endpoints.identityManagementUser.replace("/api", ""), (req, res, ctx) => {
+    return res(ctx.json({ isAuthenticated: true, displayName: "John Holland", links: []}))
+  }),
+)
 
-	it("should mount without crashing", () => {
-		fetch.mockResponseOnce(JSON.stringify({ displayName: "John Holland", links: []}));
-		const wrapper = shallow(<App />);
-		expect(wrapper).toHaveLength(1);
-	});
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+test('should mount without crashing', async () => {
+	render(<App />);
+	await waitFor(() => screen.getByText("My account", { selector: "button" }));
+	expect(screen.getByRole("heading", { name: "Administration"})).toBeInTheDocument();
+	expect(screen.getByText("John Holland", { selector: "span" })).toBeInTheDocument();
 });

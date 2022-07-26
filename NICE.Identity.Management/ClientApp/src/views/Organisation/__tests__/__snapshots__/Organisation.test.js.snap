@@ -1,122 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Organisation should match the snapshot after data has been loaded 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-administration-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/"
-    >
-      Administration
-    </Breadcrumb>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-organisation-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/organisations"
-    >
-      Organisations
-    </Breadcrumb>
-    <Breadcrumb>
-      TEST
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    className="page-header mb--d"
-    cta={
-      <React.Fragment>
-        <Button
-          data-qa-sel="edit-organisation-button"
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/organisations/1/edit"
-          variant="cta"
-        >
-          Edit organisation
-        </Button>
-        <Button
-          data-qa-sel="edit-organisations-users-button"
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/organisations/1/users"
-        >
-          Edit users
-        </Button>
-      </React.Fragment>
-    }
-    heading="TEST"
-  />
-  <Grid
-    elementType="div"
-    equalHeight={false}
-    gutter="standard"
-    horizontalAlignment="left"
-    reverse={false}
-    verticalAlignment="top"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
   >
-    <GridItem
-      aria-busy={false}
-      cols={12}
-      md={9}
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-organisation-link"
+          href="/organisations"
+        >
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          TEST
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "TEST"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header mb--d"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      TEST
+    </h1>
+    <p
+      class="page-header__cta"
+    >
+      <a
+        class="btn btn--cta"
+        data-qa-sel="edit-organisation-button"
+        href="/organisations/1/edit"
+      >
+        Edit organisation
+      </a>
+      <a
+        class="btn"
+        data-qa-sel="edit-organisations-users-button"
+        href="/organisations/1/users"
+      >
+        Edit users
+      </a>
+    </p>
+  </div>
+  <div
+    class="grid"
+  >
+    <div
+      aria-busy="false"
+      data-g="12 md:9"
     >
       <div
-        className="summaryList pv--c"
+        class="summaryList pv--c"
       >
         <span
-          className="summaryListLabel"
+          class="summaryListLabel"
         >
           Date added
         </span>
         <span
-          className="summaryListDetail"
+          class="summaryListDetail"
           data-qa-sel="dateAdded-organisation"
         >
           19 January 2022 17:05
@@ -125,123 +123,113 @@ exports[`Organisation should match the snapshot after data has been loaded 1`] =
       <p>
         There are currently no users assigned to this organisation.
       </p>
-    </GridItem>
-  </Grid>
+    </div>
+  </div>
   <hr
-    className="mv--b"
+    class="mv--b"
   />
   <h2
-    className="h3"
+    class="h3"
   >
     Permanently delete this organisation
   </h2>
   <p>
     This organisation will no longer be available, and all associated data will be permanently deleted.
   </p>
-  <Link
-    className="pv--c mb--d"
+  <a
+    class="pv--c mb--d"
     data-qa-sel="delete-organisation-link"
-    style={
-      Object {
-        "display": "inline-block",
-      }
-    }
-    to="/organisations/1/delete"
+    href="/organisations/1/delete"
+    style="display: inline-block;"
   >
     Delete organisation
-  </Link>
-</Fragment>
+  </a>
+</div>
 `;
 
-exports[`Organisation should show error message when fetch returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-organisation-link"
+          href="/organisations"
         >
-          <a
-            data-qa-sel="breadcrumb-organisation-link"
-            href="/organisations"
-            onClick={[Function]}
-          >
-            Organisations
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Error
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Error
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisations\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Error"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -249,99 +237,93 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`Organisation should show error message when fetch returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetch returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-organisation-link"
+          href="/organisations"
         >
-          <a
-            data-qa-sel="breadcrumb-organisation-link"
-            href="/organisations"
-            onClick={[Function]}
-          >
-            Organisations
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Error
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Error
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/organisations\\",
-        \\"name\\": \\"Organisations\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Error"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -349,6 +331,6 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;

@@ -1,117 +1,131 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddOrganisation should match the snapshot on load 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/overview"
-    >
-      Administration
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/organisations"
-    >
-      Organisations
-    </Breadcrumb>
-    <Breadcrumb>
-      Add organisation
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    heading="Add organisation"
-  />
-  <Grid
-    elementType="div"
-    equalHeight={false}
-    gutter="standard"
-    horizontalAlignment="left"
-    reverse={false}
-    verticalAlignment="top"
+exports[`should match the snapshot on load 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
   >
-    <GridItem
-      cols={12}
-      lg={4}
-      md={6}
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/overview"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/organisations"
+        >
+          Organisations
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Add organisation
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/organisations",
+        "name": "Organisations"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Add organisation"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Add organisation
+    </h1>
+  </div>
+  <div
+    class="grid"
+  >
+    <div
+      data-g="12 md:6 lg:4"
     >
       <form
-        noValidate={true}
-        onSubmit={[Function]}
+        novalidate=""
       >
-        <Input
-          autoComplete="off"
-          className="mb--e"
-          data-qa-sel="name-input-add-organisation"
-          disabled={false}
-          error={false}
-          errorMessage="Organisation name should be alphanumeric and be between 2-100 characters"
-          label="Organisation name"
-          maxLength="100"
-          minLength="2"
-          name="orgName"
-          onBlur={[Function]}
-          onChange={[Function]}
-          pattern="^((?![<>]).)*$"
-          placeholder="Add organisation name"
-          required={true}
-          type="text"
-          value=""
-        />
-        <Button
+        <div
+          class="input mb--e"
+        >
+          <label
+            class="input__label"
+            for="orgName"
+          >
+            Organisation name
+          </label>
+          <input
+            autocomplete="off"
+            class="input__input"
+            data-qa-sel="name-input-add-organisation"
+            id="orgName"
+            maxlength="100"
+            minlength="2"
+            name="orgName"
+            pattern="^((?![<>]).)*$"
+            placeholder="Add organisation name"
+            required=""
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          class="btn btn--cta"
           data-qa-sel="save-button-add-organisation"
-          disabled={false}
           type="submit"
-          variant="cta"
         >
           Save organisation
-        </Button>
-        <Button
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/organisations"
-          variant="secondary"
+        </button>
+        <a
+          class="btn btn--secondary"
+          href="/organisations"
         >
           Cancel
-        </Button>
+        </a>
       </form>
-    </GridItem>
-  </Grid>
-</Fragment>
+    </div>
+  </div>
+</div>
 `;

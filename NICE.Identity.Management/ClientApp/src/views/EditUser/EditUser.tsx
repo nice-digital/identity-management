@@ -8,11 +8,10 @@ import { FormGroup } from "@nice-digital/nds-form-group";
 import { Input } from "@nice-digital/nds-input";
 import { Radio } from "@nice-digital/nds-radio";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { useFetch, isError, CustomError } from "../../helpers/useFetch";
-import { Endpoints } from "../../data/endpoints";
-import { UserType } from "../../models/types";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-
+import { useFetch, isError, CustomError } from "src/helpers/useFetch";
+import { Endpoints } from "src/data/endpoints";
+import { type UserType } from "src/models/types";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import "@nice-digital/nds-radio/scss/radio.scss";
 
 type TParams = { id: string };
@@ -419,7 +418,10 @@ export const EditUser = (props: EditUserProps): React.ReactElement => {
 					)}
 				</>
 			) : (
-				<ErrorMessage error={error} />
+				<>
+					<PageHeader heading="Error" />
+					<ErrorMessage error={error} />
+				</>
 			)}
 		</>
 	);

@@ -1,27 +1,23 @@
 import React, { Component } from "react";
-
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
 import { StaticContext } from "react-router";
 import Moment from "moment";
-
 import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
+import { Button } from "@nice-digital/nds-button";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Table } from "@nice-digital/nds-table";
-
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import { UserType } from "../../models/types";
-import { Endpoints } from "../../data/endpoints";
-import { UnlockUser } from "../../components/UnlockUser/UnlockUser";
-import { ResendVerification } from "../../components/ResendVerification/ResendVerification";
-import { UserStatus } from "../../components/UserStatus/UserStatus";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { ToFormattedDateString } from "../../helpers/dateHelpers";
-
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { type UserType } from "src/models/types";
+import { Endpoints } from "src/data/endpoints";
+import { UnlockUser } from "src/components/UnlockUser/UnlockUser";
+import { ResendVerification } from "src/components/ResendVerification/ResendVerification";
+import { UserStatus } from "src/components/UserStatus/UserStatus";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { ToFormattedDateString } from "src/helpers/dateHelpers";
 import styles from "./User.module.scss";
-import { Button } from "@nice-digital/nds-button";
 
 type TParams = { id: string };
 

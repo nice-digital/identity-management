@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import { RouteComponentProps, Link } from "react-router-dom";
-
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import {
@@ -9,22 +7,16 @@ import {
 	appendQueryParameter,
 	removeQueryParameter,
 	stripMultipleQueries,
-} from "../../utils/querystring";
+} from "src/utils/querystring";
 import { Table } from "@nice-digital/nds-table";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
-
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
-import {
-	RoleType,
-	UserAndRolesType,
-	WebsiteUsersAndRolesType,
-} from "../../models/types";
-import { Endpoints } from "../../data/endpoints";
-import { FilterBox } from "../../components/FilterBox/FilterBox";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { Pagination } from "../../components/Pagination/Pagination";
-
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
+import { type RoleType, type UserAndRolesType, type	WebsiteUsersAndRolesType } from "src/models/types";
+import { Endpoints } from "src/data/endpoints";
+import { FilterBox } from "src/components/FilterBox/FilterBox";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { Pagination } from "src/components/Pagination/Pagination";
 import styles from "./Website.module.scss";
 
 type TParams = { id: string };
@@ -329,6 +321,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 					</Breadcrumb>
 					<Breadcrumb>{lastBreadcrumb}</Breadcrumb>
 				</Breadcrumbs>
+				
 				{!error ? (
 					<>
 						<PageHeader
@@ -424,8 +417,11 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 							</Grid>
 						)}
 					</>
-				) : (
-					<ErrorMessage error={error}></ErrorMessage>
+				) : (					
+					<>
+						<PageHeader heading="Error" />
+						<ErrorMessage error={error}></ErrorMessage>
+					</>
 				)}
 			</>
 		);

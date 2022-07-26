@@ -1,16 +1,32 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
-import { MemoryRouter } from "react-router-dom";
-import toJson from "enzyme-to-json";
-
+import { act } from "react-dom/test-utils";
+import { render, waitFor, waitForElementToBeRemoved, fireEvent, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import { MemoryRouter } from "react-router";
 import { ServicesList } from "../ServicesList";
-import websites from "./websites.json";
+import { Endpoints } from "src/data/endpoints";
+import websitesFive from "./websitesFive.json";
+import websitesThirty from "./websitesThirty.json";
 
-import { nextTick } from "../../../utils/nextTick";
+const consoleErrorReset = console.error;
 
-import { Endpoints } from "../../../data/endpoints";
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
 
-describe("ServicesList", () => {
+const server = setupServer(
+  rest.get(Endpoints.websitesList, (req, res, ctx) => {
+    return res(ctx.json(websitesFive));
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("should show loading message before data has been loaded", () => {
 	const servicesListProps = {
 		location: {
 			pathname: "/services",
@@ -20,164 +36,242 @@ describe("ServicesList", () => {
 			push: jest.fn(),
 		},
 	};
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	const loadingMessage = screen.getByText("Loading...", { selector: "p" });
+	expect(loadingMessage).toBeInTheDocument();
+});
 
-	const servicesListPropsOnePerPage = {
-		...servicesListProps,
-		location: { search: "?amount=1&page=4" },
+test("should match the snapshot after data has been loaded", async () => {
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?amount=all&page=1",
+		},
+		history: {
+			push: jest.fn(),
+		},
 	};
+	const {container} = render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});	
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	const servicesListPropsThreePerPage = {
-		...servicesListProps,
-		location: { search: "?amount=3&page=1" },
+test("should show error message when fetch returns 401 error", async () => {
+	console.error = jest.fn();	
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?amount=all&page=1",
+		},
+		history: {
+			push: jest.fn(),
+		},
 	};
-	
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+		return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
+
+test("should show error message when fetch returns 500 error", async () => {
+	console.error = jest.fn();	
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?amount=all&page=1",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
+
+test("should show no results message when fetch returns an empty array", async () => {
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?amount=all&page=1",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			return res.once(
+				ctx.json([])
+			);
+		})
+	);
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	const noResultsMessage = await screen.findByText("No results found", { selector: "p" });
+	expect(noResultsMessage).toBeInTheDocument();
+});
+
+test("should show no results found message after search returns empty array", async () => {
+	jest.useFakeTimers();
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?amount=all&page=1",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
 	const dummyText = "SomeText";
-
-	const consoleErrorReset = console.error;
-
-	beforeEach(() => {
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			const search = req.url.searchParams.get('q')
+			
+			if (search === dummyText) {
+				return res.once(
+					ctx.json([])
+				);
+			} else {
+				return res(ctx.json(websitesFive));				
+			}
+		})
+	);
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	const searchInput = screen.getByLabelText("Filter by service name or URL");
+	searchInput.focus();
+	await act(async () => {
+		fireEvent.change(searchInput, {target: {value: dummyText}});
+		jest.advanceTimersByTime(1000);
 	});
+	const noResultsFoundMessage = await screen.findByText(`No results found for "${dummyText}"`);
+	expect(noResultsFoundMessage).toBeInTheDocument();
+	jest.useRealTimers();
+});
 
-	it("should show loading message before data has been loaded", () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = shallow(<ServicesList {...servicesListProps} />);
-		expect(wrapper.find("p").text()).toEqual("Loading...");
+test("should filter websites to all in dev environment when checkbox is clicked", async () => {
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?amount=all&page=1",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const activeCheckbox = screen.getByLabelText("Dev");
+	const tagsBeforeFilter = screen.queryAllByText(/^(Alpha|Beta|Test|Dev|Local)/i, { selector: "span.tag"});
+	expect(tagsBeforeFilter.length).toEqual(5);
+	userEvent.click(activeCheckbox);
+	await waitForElementToBeRemoved(() => screen.getAllByText("Alpha", { selector: "span.tag" }));
+	const tagsAfterFilter = screen.queryAllByText(/^(Alpha|Beta|Test|Dev|Local)/i, { selector: "span.tag"});
+	const tagsAfterFilterCount = tagsAfterFilter.length;
+	expect(tagsAfterFilterCount).toBeLessThan(5);
+	tagsAfterFilter.forEach((tag) => {
+		const {getByText} = within(tag);
+		expect(getByText("Dev", { selector: "span.tag"})).toBeInTheDocument();
 	});
+});
 
-	it("should call fetchData during componentDidMount", () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(<MemoryRouter><ServicesList {...servicesListProps} /></MemoryRouter>);
-		const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
-		wrapper.instance().componentDidMount();
-		wrapper.update();
-		expect(spy).toHaveBeenCalled();
-		expect(fetch.mock.calls.length).toEqual(1);
-		expect(fetch.mock.calls[0][0]).toEqual(Endpoints.websitesList);
-		spy.mockClear();
-	});
+test("should show 25 (default page amount) or less results by default when paginated", async () => {
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			return res.once(
+				ctx.json(websitesThirty)
+			);
+		})
+	);
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const websitesList = screen.getByRole("list", { name: "websites"});
+	const { getAllByRole } = within(websitesList);
+	const websitesListItems = getAllByRole("listitem");
+	expect(websitesListItems.length).toEqual(25);
+});
 
-	it("should match the snapshot after data has been loaded", async () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<ServicesList {...servicesListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should go to page 2 when next button is clicked", async () => {
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			return res.once(
+				ctx.json(websitesThirty)
+			);
+		})
+	);
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const nextPageButton = screen.getByRole("link", { name: "Go to next page"});
+	userEvent.click(nextPageButton);
+	const websitesListSummary = await screen.findByText("Showing 26 to 30 of 30 services", { selector: "h2" });
+	const paginationCounter = screen.getByText("Page 2 of 2");
+	const websitesList = screen.getByRole("list", { name: "websites"});
+	const { getAllByRole } = within(websitesList);
+	const websitesListItems = getAllByRole("listitem");
+	expect(websitesListSummary).toBeInTheDocument();
+	expect(paginationCounter).toBeInTheDocument();
+	expect(websitesListItems.length).toEqual(5);
+});
 
-	it("should show error message when fetch returns 401 error", async () => {
-		console.error = jest.fn();		
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(<MemoryRouter><ServicesList {...servicesListProps} /></MemoryRouter>);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show error message when fetch returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(<MemoryRouter><ServicesList {...servicesListProps} /></MemoryRouter>);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
-
-	it("should show no results message when fetch returns an empty array", async () => {
-		fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = shallow(<ServicesList {...servicesListProps} />);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find("p").text()).toEqual("No results found");
-	});
-
-	it("should show no results found message after search returns empty array", async () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = shallow(<ServicesList {...servicesListProps} />);
-		const instance = wrapper.instance();
-		await nextTick();
-		wrapper.update();
-		instance.filterWebsitesBySearch(dummyText);
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find("p").text()).toEqual(
-			`No results found for "${dummyText}"`,
-		);
-	});
-
-	it("should filter websites to all in dev environment when checkbox is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<ServicesList {...servicesListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("#filter_environments_dev").simulate("change", {
-			target: { value: "Dev" },
-		});
-		await nextTick();
-		wrapper.update();
-		wrapper.find(".tag").forEach((tag) => {
-			expect(tag.text()).toEqual("Dev");
-		});
-	});
-
-	it("should show 25 (default page amount) or less results by default when paginated", async () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<ServicesList {...servicesListProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-websites']");
-		expect(listContainer.find(".card").length).toBeLessThanOrEqual(25);
-	});
-
-	it("should go to page 2 when next button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<ServicesList {...servicesListPropsThreePerPage} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("[data-pager='next']").simulate("click");
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-websites']");
-		const servicesListSummary = wrapper.find(".servicesListSummary");
-		expect(servicesListSummary.text()).toEqual("Showing 4 to 5 of 5 services");
-		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 2 of 2");
-		expect(listContainer.find(".card").length).toEqual(2);
-	});
-
-	it("should go to first page when page 1 button is clicked", async () => {
-		fetch.mockResponseOnce(JSON.stringify(websites));
-		const wrapper = mount(
-			<MemoryRouter>
-				<ServicesList {...servicesListPropsOnePerPage} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("[data-pager='1']").simulate("click");
-		await nextTick();
-		wrapper.update();
-		const listContainer = wrapper.find("[data-qa-sel='list-of-websites']");
-		const servicesListSummary = wrapper.find(".servicesListSummary");
-		expect(servicesListSummary.text()).toEqual("Showing 1 to 1 of 5 services");
-		expect(wrapper.find(".paginationCounter").text()).toEqual("Page 1 of 5");
-		expect(listContainer.find(".card").length).toEqual(1);
-	});
+test("should go to first page when page 1 button is clicked", async () => {
+	const servicesListProps = {
+		location: {
+			pathname: "/services",
+			search: "?page=2",
+		},
+		history: {
+			push: jest.fn(),
+		},
+	};
+	server.use(
+		rest.get(Endpoints.websitesList, (req, res, ctx) => {
+			return res.once(
+				ctx.json(websitesThirty)
+			);
+		})
+	);
+	render(<ServicesList {...servicesListProps} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const previousPageButton = screen.getByRole("link", { name: "Go to page 1"});
+	userEvent.click(previousPageButton);
+	const websitesListSummary = await screen.findByText("Showing 1 to 25 of 30 services", { selector: "h2" });
+	const paginationCounter = screen.getByText("Page 1 of 2");
+	const websitesList = screen.getByRole("list", { name: "websites"});
+	const { getAllByRole } = within(websitesList);
+	const websitesListItems = getAllByRole("listitem");
+	expect(websitesListSummary).toBeInTheDocument();
+	expect(paginationCounter).toBeInTheDocument();
+	expect(websitesListItems.length).toEqual(25);
 });

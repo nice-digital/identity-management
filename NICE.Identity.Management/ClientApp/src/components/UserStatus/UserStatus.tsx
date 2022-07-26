@@ -1,6 +1,6 @@
 import React from "react";
 import { Tag } from "@nice-digital/nds-tag";
-import { UserType } from "../../models/types";
+import { type UserType } from "src/models/types";
 
 type UserStatusProps = {
 	user: UserType;

@@ -1,22 +1,21 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { useListFetch, isError } from "../../helpers/useListFetch";
-import { useListInfo } from "../../helpers/useListInfo";
-import { Endpoints } from "../../data/endpoints";
-import { OrganisationType } from "../../models/types";
+import { useListFetch, isError } from "src/helpers/useListFetch";
+import { useListInfo } from "src/helpers/useListInfo";
+import { Endpoints } from "src/data/endpoints";
+import { type OrganisationType } from "src/models/types";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { EnhancedPagination } from "@nice-digital/nds-enhanced-pagination";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
 import { PageHeader } from "@nice-digital/nds-page-header";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
-import { ResultsList } from "../../components/ResultsList/ResultsList";
-import { SortOptions } from "../../components/SortOptions/SortOptions";
-import { ItemsPerPage } from "../../components/ItemsPerPage/ItemsPerPage";
-import { ResultOrganisation } from "../../components/ResultOrganisation/ResultOrganisation";
-import { PaginationText } from "../../components/PaginationText/PaginationText";
-
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { FilterSearch } from "src/components/FilterSearch/FilterSearch";
+import { ResultsList } from "src/components/ResultsList/ResultsList";
+import { SortOptions } from "src/components/SortOptions/SortOptions";
+import { ItemsPerPage } from "src/components/ItemsPerPage/ItemsPerPage";
+import { ResultOrganisation } from "src/components/ResultOrganisation/ResultOrganisation";
+import { PaginationText } from "src/components/PaginationText/PaginationText";
 import styles from "./OrganisationsList.module.scss";
 
 export const OrganisationsList: FC = () => {
@@ -61,68 +60,74 @@ export const OrganisationsList: FC = () => {
 				</Breadcrumb>
 				<Breadcrumb>Organisations</Breadcrumb>
 			</Breadcrumbs>
-			<PageHeader heading="Organisations" className="page-header mb--d" />
+			
 			{!error ? (
-				<Grid>
-					<GridItem cols={12}>
-						<Button
-							to={`/organisations/add`}
-							variant="cta"
-							elementType={Link}
-							className="mb--e"
-							data-qa-sel="add-organisation"
-						>
-							Add organisation
-						</Button>
-					</GridItem>
-					<GridItem cols={12} md={3}>
-						<FilterSearch label={"Filter by organisation name"} />
-					</GridItem>
-					<GridItem cols={12} md={9} aria-busy={true}>
-						{isLoading ? (
-							<p>Loading...</p>
-						) : organisations.length ? (
-							<>
-								<div className="text-right">
-									<SortOptions />
-								</div>
-								<PaginationText
-									dataLength={organisationsCount}
-									labelSingular="organisation"
-									labelPlural="organisations"
-								/>
-								<ResultsList
-									data={organisations}
-									elementType={ResultOrganisation}
-									qaSelExtract="organisations"
-								/>
-								<div className={`${styles.flex} ${styles.flexAlignCenter}`}>
-									<ItemsPerPage />
-									<EnhancedPagination
-										currentPage={pageNumber}
-										elementType={Link}
-										method="to"
-										mapPageNumberToHref={(pageNumber) => {
-											const querystringObject = new URLSearchParams(
-												querystring,
-											);
-											querystringObject.set("page", pageNumber.toString());
-											return `?${querystringObject}`;
-										}}
-										totalPages={totalPages || 1}
-										data-qa-sel="pagination-section"
+				<>
+					<PageHeader heading="Organisations" className="page-header mb--d" />
+					<Grid>
+						<GridItem cols={12}>
+							<Button
+								to={`/organisations/add`}
+								variant="cta"
+								elementType={Link}
+								className="mb--e"
+								data-qa-sel="add-organisation"
+							>
+								Add organisation
+							</Button>
+						</GridItem>
+						<GridItem cols={12} md={3}>
+							<FilterSearch label={"Filter by organisation name"} />
+						</GridItem>
+						<GridItem cols={12} md={9} aria-busy={true}>
+							{isLoading ? (
+								<p>Loading...</p>
+							) : organisations.length ? (
+								<>
+									<div className="text-right">
+										<SortOptions />
+									</div>
+									<PaginationText
+										dataLength={organisationsCount}
+										labelSingular="organisation"
+										labelPlural="organisations"
 									/>
-								</div>
-							</>
-						) : searchQuery ? (
-							<p>No results found for &quot;{searchQuery}&quot;</p>
-						) : (
-							<p>No results found</p>
-						)}
-					</GridItem>
-				</Grid>
+									<ResultsList
+										data={organisations}
+										elementType={ResultOrganisation}
+										qaSelExtract="organisations"
+									/>
+									<div className={`${styles.flex} ${styles.flexAlignCenter}`}>
+										<ItemsPerPage />
+										<EnhancedPagination
+											currentPage={pageNumber}
+											elementType={Link}
+											method="to"
+											mapPageNumberToHref={(pageNumber) => {
+												const querystringObject = new URLSearchParams(
+													querystring,
+												);
+												querystringObject.set("page", pageNumber.toString());
+												return `?${querystringObject}`;
+											}}
+											totalPages={totalPages || 1}
+											data-qa-sel="pagination-section"
+										/>
+									</div>
+								</>
+							) : searchQuery ? (
+								<p>No results found for &quot;{searchQuery}&quot;</p>
+							) : (
+								<p>No results found</p>
+							)}
+						</GridItem>
+					</Grid>
+				</>
 			) : (
-				<ErrorMessage error={error}></ErrorMessage>
+				<>
+					<PageHeader heading="Error" />
+					<ErrorMessage error={error}></ErrorMessage>
+				</>
 			)}
 		</>
 	);

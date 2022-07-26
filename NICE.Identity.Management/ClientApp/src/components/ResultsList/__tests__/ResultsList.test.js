@@ -1,27 +1,16 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import toJson from "enzyme-to-json";
-import { nextTick } from "../../../utils/nextTick";
 import { ResultsList } from "../ResultsList";
-import { ResultOrganisation } from "../../ResultOrganisation/ResultOrganisation";
+import { ResultOrganisation } from "src/components/ResultOrganisation/ResultOrganisation";
 import organisations from "./organisations.json";
 
-describe("ResultsList", () => {
-    const resultsListOrganisationProps = {
+test("should match the snapshot when ResultOrganisation has been passed into elementType", async () => {
+	const resultsListOrganisationProps = {
 		data: organisations,
-        elementType: ResultOrganisation,
+		elementType: ResultOrganisation,
 		qaSelExtract: "organisations",
 	};
-
-	it("should match the snapshot when ResultOrganisation has been passed into elementType", async () => {
-		const wrapper = mount(
-			<MemoryRouter>
-				<ResultsList {...resultsListOrganisationProps} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+	const {container} =	render(<ResultsList {...resultsListOrganisationProps} />, {wrapper: MemoryRouter});
+	expect(container).toMatchSnapshot();
 });

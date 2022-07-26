@@ -1,172 +1,129 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { render, waitForElementToBeRemoved, fireEvent, screen } from "@testing-library/react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
-import { Redirect } from "react-router-dom";
-import toJson from "enzyme-to-json";
-import { nextTick } from "../../../utils/nextTick";
-import { Alert } from "@nice-digital/nds-alert";
 import { EditOrganisation } from "../EditOrganisation";
-import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
+import { Endpoints } from "src/data/endpoints";
 import singleOrganisation from "./singleOrganisation.json";
 import organisations from "./organisations.json";
 
-describe("EditOrganisation", () => {
-    const match = {
+const consoleErrorReset = console.error;
+
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
+
+const server = setupServer(
+  rest.get(Endpoints.organisation("1"), (req, res, ctx) => {
+    return res(ctx.json(singleOrganisation));
+  }),
+  rest.get(Endpoints.organisationsList, (req, res, ctx) => {
+	//const search = req.url.searchParams.get('q');
+
+	return res(ctx.json(organisations));
+  }),
+  rest.patch(Endpoints.organisation("1"), (req, res, ctx) => {
+    return res(ctx.json({}));
+  }),
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("should match the snapshot on load", async () => {
+	const match = {
 		params: { id: 1 },
 		isExact: true,
 		path: "",
 		url: "",
 	};
+	const {container} = render(<EditOrganisation match={match} />, {wrapper: MemoryRouter});	
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	const consoleErrorReset = console.error;
-
-	beforeEach(() => {
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
+test("should disable form submit button when clicked", async () => {
+	jest.useFakeTimers();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	const dummyText = "SomeText";
+	render(<EditOrganisation match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const orgNameInput = screen.getByLabelText("Organisation name");
+	orgNameInput.focus();
+	await act(async () => {
+		fireEvent.change(orgNameInput, {target: {value: dummyText}});
+		jest.advanceTimersByTime(1000);
 	});
+	let saveButton = await screen.findByText("Save changes", { selector: "button" });
+	userEvent.click(saveButton);
+	saveButton = await screen.findByRole("button", { name: "Loading..." });
+	expect(saveButton).toHaveAttribute("disabled");
+	expect(saveButton).toBeInTheDocument();
+	jest.useRealTimers();
+});
 
-    it("should match the snapshot on load", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleOrganisation));
-        const wrapper = mount(<MemoryRouter><EditOrganisation match={match} /></MemoryRouter>);
-        await nextTick();
-        wrapper.update();
-        expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
+test("should show error message when duplicate name fetchData get fails", async () => {
+	jest.useFakeTimers();
+	console.error = jest.fn();	
+	server.use(
+		rest.get(Endpoints.organisationsList, (req, res, ctx) => {
+		return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	const dummyText = "Org Ninety Nine";
+	render(<EditOrganisation match={match} />, {wrapper: MemoryRouter});
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const orgNameInput = screen.getByLabelText("Organisation name");
+	orgNameInput.focus();
+	await act(async () => {
+		fireEvent.change(orgNameInput, {target: {value: dummyText}});
+		jest.advanceTimersByTime(1000);
 	});
+	const saveButton = await screen.findByText("Save changes", { selector: "button" });
+	userEvent.click(saveButton);
+	const errorMessage = await screen.findByRole("heading", { name: "Error"});
+	expect(errorMessage).toBeInTheDocument();
+	jest.useRealTimers();
+});
 
-	it("should disable form submit button when clicked", async () => {
-		console.error = jest.fn();
-        fetch.mockResponseOnce(JSON.stringify(singleOrganisation));
-		fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisation match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-		wrapper.find("#orgName").prop("onChange")({
-			target: {
-				name: "orgName",
-				value: "Org Ninety Nine",
-				validity: { valid: true }
-			}
-		});
-		wrapper.find("form").simulate("submit");
-		expect(wrapper.find("button").props().disabled).toEqual(true);
-		expect(wrapper.find("button").text()).toEqual("Loading...");
+test("should show validation error when name is invalid format", async () => {
+	jest.useFakeTimers();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	render(<MemoryRouter><EditOrganisation match={match} /></MemoryRouter>);
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	const orgNameInput = screen.getByLabelText("Organisation name");
+	orgNameInput.focus();
+	await act(async () => {
+		fireEvent.change(orgNameInput, {target: {value: ""}});
+		jest.advanceTimersByTime(1000);
 	});
-
-    it("should redirect if form is submitted without changes", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleOrganisation));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisation match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("form").prop("onSubmit")({
-			preventDefault: () => false, 
-			currentTarget: { 
-				checkValidity: () => true
-			}
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(Redirect).exists()).toBe(true);
-	});
-
-    it("should show error message when duplicate name fetchData get fails", async () => {
-		console.error = jest.fn();
-		const error = new Error("Not allowed");
-		fetch.mockResponseOnce(JSON.stringify(singleOrganisation));
-		fetch.mockRejectOnce(error);
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisation match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-		wrapper.find("#orgName").prop("onChange")({
-			target: {
-				name: "orgName",
-				value: "Org Ninety Nine",
-				validity: { valid: true }
-			}
-		});
-		wrapper.find("form").prop("onSubmit")({
-			preventDefault: () => false, 
-			currentTarget: { 
-				checkValidity: () => true
-			},
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-
-	it("should show validation error when name is invalid format", async () => {
-		console.error = jest.fn();
-        fetch.mockResponseOnce(JSON.stringify(singleOrganisation));
-		fetch.mockResponseOnce(JSON.stringify([]));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisation match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();		
-		wrapper.find("#orgName").prop("onChange")({
-			target: {
-				name: "orgName",
-				value: "a",
-				validity: { valid: false }
-			}
-		});
-		wrapper.find("#orgName").prop("onBlur")({
-			target: {
-				name: "orgName",
-				value: "a",
-				validity: { valid: false }
-			}
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find({ label: "Organisation name" }).prop("error")).toEqual(true);
-	});
-
-	it("should show validation error when org name is in use already", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleOrganisation));
-		fetch.mockResponseOnce(JSON.stringify(organisations));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditOrganisation match={match} />
-			</MemoryRouter>,
-		);
-        await nextTick();
-		wrapper.update();
-		wrapper.find("#orgName").prop("onChange")({
-			target: {
-				name: "orgName",
-				value: "Org 2",
-				validity: { valid: true }
-			}
-		});
-		wrapper.find("#orgName").prop("onBlur")({
-			target: {
-				name: "orgName",
-				value: "Org 2",
-				validity: { valid: true }
-			}
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find({ label: "Organisation name" }).prop("error")).toEqual(true);
-		expect(wrapper.find({ label: "Organisation name" }).prop("errorMessage")).toBe("Cannot change to Org 2, that organisation already exists!");
-	});
-
+	userEvent.tab();
+	const orgNotFoundMessage = await screen.findByText("Organisation name should be alphanumeric and be between 2-100 characters");
+	expect(screen.getByText("Save changes")).toHaveFocus();
+	expect(orgNotFoundMessage).toBeInTheDocument();
+	expect(orgNameInput).toBeInvalid();
+	jest.useRealTimers();
 });

@@ -1,218 +1,205 @@
 import React from "react";
-import { mount } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { render, waitForElementToBeRemoved, fireEvent, screen, waitFor } from "@testing-library/react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
-import { Redirect } from "react-router-dom";
-import toJson from "enzyme-to-json";
-import { Alert } from "@nice-digital/nds-alert";
 import { EditUser } from "../EditUser";
+import { Endpoints } from "src/data/endpoints";
 import singleUser from "./singleUser.json";
 import singleUserWithEPPIEmail from "./singleUserWithEPPIEmail.json";
-import { nextTick } from "../../../utils/nextTick";
 
-import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
+const consoleErrorReset = console.error;
 
-describe("EditUser", () => {
+beforeEach(() => {
+	console.error = consoleErrorReset;
+});
+
+const server = setupServer(
+  rest.get(Endpoints.user("1"), (req, res, ctx) => {
+    return res(ctx.json(singleUser));
+  }),
+  rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+    return res(ctx.json({}));
+  }),
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("should show loading message before data has been loaded", () => {
 	const match = {
 		params: { id: 1 },
 		isExact: true,
 		path: "",
 		url: "",
 	};
+	render(<MemoryRouter initialEntries={["/users/1/edit"]}><EditUser match={match} /></MemoryRouter>);
+	const loadingMessage = screen.getByText("Loading...", { selector: "p" });
+	expect(loadingMessage).toBeInTheDocument();
+});
 
-    const consoleErrorReset = console.error;
+test("should match the snapshot after data has been loaded", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	const {container} = render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	await waitForElementToBeRemoved(() => screen.getByText("Loading...", { selector: "p" }));
+	expect(container).toMatchSnapshot();
+});
 
-	beforeEach(() => {		
-		fetch.resetMocks();
-		console.error = consoleErrorReset;
-	});
+test("should disable form submit button when clicked", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	let saveProfileButton = await screen.findByText("Save profile", { selector: "button" });
+	fireEvent.click(saveProfileButton);
+	saveProfileButton = await screen.findByText("Loading...", { selector: "button" });
+	expect(saveProfileButton).toBeInTheDocument();
+	expect(saveProfileButton).toBeDisabled();
+});
 
-    it("should show loading message before data has been loaded", () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = mount(<MemoryRouter initialEntries={["/users/1/edit"]}><EditUser match={match} /></MemoryRouter>);
-		expect(wrapper.find("p").text()).toEqual("Loading...");
-	});
+test("should show error message when useFetch get call returns 401 error", async () => {
+	console.error = jest.fn();	
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(401),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();
+});
 
-    it("should match the snapshot after data has been loaded", async () => {
-		console.error = jest.fn();
-        fetch.mockResponseOnce(JSON.stringify(singleUser));
-        const wrapper = mount(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
-        await nextTick();
-        wrapper.update();
-        expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-    });
+test("should show error message when useFetch get call returns 500 error", async () => {
+	console.error = jest.fn();	
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(500),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();	
+});
 
-    it("should disable form submit button when clicked", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({}));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("form").simulate("submit");
-		expect(wrapper.find("button").props().disabled).toEqual(true);
-		expect(wrapper.find("button").text()).toEqual("Loading...");
-	});
 
-	it("should redirect if form is submitted without changes", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("form").prop("onSubmit")({
-			preventDefault: () => false, 
-			currentTarget: { 
-				checkValidity: () => true
-			}
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(Redirect).exists()).toBe(true);
-	});
+test("should show error message when useFetch patch fails", async () => {
+	console.error = jest.fn();	
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(422),
+				ctx.json({})
+			);
+		})
+	);
+	const {container} = render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	const emailAddressInput = await screen.findByLabelText("Email address");
+	const saveProfileButton = screen.getByText("Save profile", { selector: "button" });
+	fireEvent.change(emailAddressInput, {target: {value: "john.holland@nice.org.uk"}});
+	fireEvent.click(saveProfileButton);
+	await waitFor(() => screen.getByRole("heading", { name: "Error"}));
+	expect(container).toMatchSnapshot();
+});
 
-	it("should show error message when useFetch get call returns 401 error", async () => {	
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify({}), { status: 401 });
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should show validation error when email is invalid format", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	const emailAddressInput = await screen.findByLabelText("Email address");
+	const user = userEvent.setup();
+	emailAddressInput.focus();
+	user.paste("john.holland@");
+	user.tab();
+	const emailInvalidMessage = await screen.findByText("Email address is in an invalid format", { selector: "p" });
+	expect(emailInvalidMessage).toBeInTheDocument();
+	expect(emailAddressInput).toBeInvalid();
+});
 
-	it("should show error message when useFetch get call returns 500 error", async () => {
-		console.error = jest.fn();
-		fetch.mockRejectOnce(new Error("500 Internal Server Error"));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		expect(toJson(wrapper, { noKey: true, mode: "deep" })).toMatchSnapshot();
-	});
+test("should show validation error when email is in use already", async () => {
+	console.error = jest.fn();	
+	jest.useFakeTimers();
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.patch(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(
+				ctx.status(422),
+				ctx.json({ title: "Email address is already in use", status: 422 })
+			);
+		})
+	);
+	render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	const emailAddressInput = await screen.findByLabelText("Email address");
+	const user = userEvent.setup();
+	emailAddressInput.focus();
+	await act(async () => {
+		user.clear(emailAddressInput);
+		user.paste("john.holland@hotmail.com");
+		jest.advanceTimersByTime(1000);
+	});  
+	const saveProfileButton = screen.getByText("Save profile", { selector: "button" });
+	user.click(saveProfileButton);
+	const orgInUseMessage = await screen.findByText("Email address is already in use");
+	expect(orgInUseMessage).toBeInTheDocument();
+	jest.useRealTimers();
+});
 
-	it("should show error message when useFetch patch fails", async () => {
-		console.error = jest.fn();
-		const error = new Error("Not allowed");
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockRejectOnce(error);
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("#emailAddress").prop("onChange")({
-			target: {
-				name: "emailAddress",
-				value: "john.holland@nice.org.uk",
-				validity: { valid: true }
-			}
-		});
-		await nextTick();
-		wrapper.update();
-		wrapper.find("form").prop("onSubmit")({
-			preventDefault: () => false, 
-			currentTarget: { 
-				checkValidity: () => true
-			},
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find(ErrorMessage).exists()).toBe(true);
-	});
-	
-	it("should show validation error when email is invalid format", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("#emailAddress").prop("onChange")({
-			target: {
-				name: "emailAddress",
-				value: "john.holland@",
-				validity: { valid: false }
-			}
-		});
-		await nextTick();
-		wrapper.update();		
-		wrapper.find("#emailAddress").prop("onBlur")({
-			target: {
-				name: "emailAddress",
-				value: "john.holland@",
-				validity: { valid: false }
-			}
-		});
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find({ label: "Email address" }).prop("error")).toEqual(true);
-	});
-
-	it("should show validation error when email is in use already", async () => {
-		console.error = jest.fn();
-		fetch.mockResponseOnce(JSON.stringify(singleUser));
-		fetch.mockResponseOnce(JSON.stringify({ title: "Email address is already in use", status: 422 }), { status: 422 });
-		const wrapper = mount(
-			<MemoryRouter>
-				<EditUser match={match} />
-			</MemoryRouter>,
-		);
-		await nextTick();
-		wrapper.update();
-		wrapper.find("#emailAddress").prop("onChange")({
-			target: {
-				name: "emailAddress",
-				value: "john.holland@hotmail.com",
-				validity: { valid: true }
-			}
-		});
-		await nextTick();
-		wrapper.update();		
-		wrapper.find("form").prop("onSubmit")({
-			preventDefault: () => false, 
-			currentTarget: { 
-				checkValidity: () => true
-			},
-		});
-		await nextTick();
-		wrapper.update();
-		await nextTick();
-		wrapper.update();
-		expect(wrapper.find({ label: "Email address" }).prop("error")).toEqual(true);
-		expect(wrapper.find({ label: "Email address" }).prop("errorMessage")).toBe("Email address is already in use");
-	});
-
-	it("should display alert message if editing an EPPI user", async () => {
-        console.error = jest.fn();
-        fetch.mockResponseOnce(JSON.stringify(singleUserWithEPPIEmail));
-        const wrapper = mount(
-            <MemoryRouter>
-                <EditUser match={match} />
-            </MemoryRouter>,
-        );
-        await nextTick();
-        wrapper.update();
-        expect(wrapper.find("p").text()).toEqual("This user may have access to EPPI R5 - only a professional email address can be associated to this profile. Please verify via the EPPI user admin page before changing the email address.");
-        expect(wrapper.find(Alert).exists()).toBe(true);
-    });
+test("should display alert message if editing an EPPI user", async () => {
+	const match = {
+		params: { id: 1 },
+		isExact: true,
+		path: "",
+		url: "",
+	};
+	server.use(
+		rest.get(Endpoints.user("1"), (req, res, ctx) => {
+			return res.once(ctx.json(singleUserWithEPPIEmail));
+		})
+	);
+	render(<MemoryRouter><EditUser match={match} /></MemoryRouter>);
+	const eppiUserAlertMessage = await screen.findByText("This user may have access to EPPI R5 - only a professional email address can be associated to this profile. Please verify via the EPPI user admin page before changing the email address.", { selector: "p" });
+	expect(eppiUserAlertMessage).toMatchSnapshot();
 });

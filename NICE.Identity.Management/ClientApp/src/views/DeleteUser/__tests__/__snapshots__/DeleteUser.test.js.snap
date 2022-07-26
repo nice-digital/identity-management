@@ -1,239 +1,247 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DeleteUser should match the snapshot after data has been loaded 1`] = `
-<Fragment>
-  <Breadcrumbs>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-administration-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/"
-    >
-      Administration
-    </Breadcrumb>
-    <Breadcrumb
-      data-qa-sel="breadcrumb-user-link"
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/users"
-    >
-      Users
-    </Breadcrumb>
-    <Breadcrumb
-      elementType={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      to="/users/1"
-    >
-      Kristin Patrick
-    </Breadcrumb>
-    <Breadcrumb>
-      Delete user
-    </Breadcrumb>
-  </Breadcrumbs>
-  <PageHeader
-    cta={
-      <React.Fragment>
-        <Button
-          data-qa-sel="confirm-delete-user"
-          disabled={false}
-          onClick={[Function]}
-          variant="cta"
-        >
-          Confirm
-        </Button>
-        <Button
-          disabled={false}
-          elementType={
-            Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "propTypes": Object {
-                "innerRef": [Function],
-                "onClick": [Function],
-                "replace": [Function],
-                "target": [Function],
-                "to": [Function],
-              },
-              "render": [Function],
-            }
-          }
-          to="/users/1"
-          variant="secondary"
-        >
-          Cancel
-        </Button>
-      </React.Fragment>
-    }
-    heading="Kristin Patrick"
-    preheading="Are you sure you want to delete user?"
-  />
-  <hr
-    className="mv--b"
-  />
-  <Grid
-    className="pv--d"
-    elementType="div"
-    equalHeight={false}
-    gutter="standard"
-    horizontalAlignment="left"
-    reverse={false}
-    verticalAlignment="top"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
   >
-    <GridItem
-      cols={3}
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
+        >
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/users/1"
+        >
+          Kristin Patrick
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Delete user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "/users/1",
+        "name": "Kristin Patrick"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Delete user"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
     >
       <span
-        className="detailsLabel"
+        class="page-header__pre-heading"
+      >
+        Are you sure you want to delete user?
+      </span>
+      Kristin Patrick
+    </h1>
+    <p
+      class="page-header__cta"
+    >
+      <button
+        class="btn btn--cta"
+        data-qa-sel="confirm-delete-user"
+        type="button"
+      >
+        Confirm
+      </button>
+      <a
+        class="btn btn--secondary"
+        href="/users/1"
+      >
+        Cancel
+      </a>
+    </p>
+  </div>
+  <hr
+    class="mv--b"
+  />
+  <div
+    class="grid pv--d"
+  >
+    <div
+      data-g="3"
+    >
+      <span
+        class="detailsLabel"
       >
         Email address
       </span>
-    </GridItem>
-    <GridItem
-      cols={9}
+    </div>
+    <div
+      data-g="9"
     >
       <span>
         kristin.patrick@example.com
       </span>
-    </GridItem>
-  </Grid>
-</Fragment>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`DeleteUser should show error message when fetchData function returns 401 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetchData function returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Error
-          </span>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Delete user
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Error
+        </span>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Delete user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Error"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Delete user\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Delete user"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -241,113 +249,107 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;
 
-exports[`DeleteUser should show error message when fetchData function returns 500 error 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should show error message when fetchData function returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          data-qa-sel="breadcrumb-administration-link"
+          href="/"
         >
-          <a
-            data-qa-sel="breadcrumb-administration-link"
-            href="/"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          data-qa-sel="breadcrumb-user-link"
+          href="/users"
         >
-          <a
-            data-qa-sel="breadcrumb-user-link"
-            href="/users"
-            onClick={[Function]}
-          >
-            Users
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Error
-          </span>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Delete user
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Users
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Error
+        </span>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Delete user
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"@id\\": \\"/users\\",
-        \\"name\\": \\"Users\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "/users",
+        "name": "Users"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 3,
-      \\"item\\": {
-        \\"name\\": \\"Error\\"
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "name": "Error"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 4,
-      \\"item\\": {
-        \\"name\\": \\"Delete user\\"
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "name": "Delete user"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header"
+    class="page-header"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Error
     </h1>
-  </div>,
+  </div>
   <div
-    className="alert alert--error"
+    class="alert alert--error"
+    role="alert"
   >
     <h2>
       Whoops
@@ -355,6 +357,6 @@ Array [
     <p>
       Sorry, there's been an error!
     </p>
-  </div>,
-]
+  </div>
+</div>
 `;

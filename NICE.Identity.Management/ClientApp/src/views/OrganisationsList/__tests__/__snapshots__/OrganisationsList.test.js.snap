@@ -1,83 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OrganisationsList should match the snapshot after data has been loaded 1`] = `
-Array [
-  Array [
-    <nav
-      aria-label="Breadcrumbs"
-      role="navigation"
+exports[`should match the snapshot after data has been loaded 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
     >
-      <ol
-        className="breadcrumbs"
+      <li
+        class="breadcrumbs__crumb"
       >
-        <li
-          className="breadcrumbs__crumb"
+        <a
+          href="/overview"
         >
-          <a
-            href="/overview"
-            onClick={[Function]}
-          >
-            Administration
-          </a>
-        </li>
-        <li
-          className="breadcrumbs__crumb"
-        >
-          <span>
-            Organisations
-          </span>
-        </li>
-      </ol>
-    </nav>,
-    <script
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "{
-  \\"@context\\": \\"http://schema.org\\",
-  \\"@type\\": \\"BreadcrumbList\\",
-  \\"itemListElement\\": [
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Organisations
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 1,
-      \\"item\\": {
-        \\"@id\\": \\"/overview\\",
-        \\"name\\": \\"Administration\\"
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
       }
     },
     {
-      \\"@type\\": \\"ListItem\\",
-      \\"position\\": 2,
-      \\"item\\": {
-        \\"name\\": \\"Organisations\\"
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Organisations"
       }
     }
   ]
-}",
-        }
-      }
-      type="application/ld+json"
-    />,
-  ],
+}
+  </script>
   <div
-    className="page-header mb--d"
+    class="page-header mb--d"
   >
     <h1
-      className="page-header__heading"
+      class="page-header__heading"
     >
       Organisations
     </h1>
-  </div>,
+  </div>
   <div
-    className="grid"
+    class="grid"
   >
     <div
       data-g="12"
     >
       <a
-        className="btn btn--cta mb--e"
+        class="btn btn--cta mb--e"
         data-qa-sel="add-organisation"
         href="/organisations/add"
-        onClick={[Function]}
       >
         Add organisation
       </a>
@@ -86,44 +79,43 @@ Array [
       data-g="12 md:3"
     >
       <div
-        className="panel"
+        class="panel"
       >
         <div
-          className="input"
+          class="input"
         >
           <label
-            className="input__label"
-            htmlFor="filter-search"
+            class="input__label"
+            for="filter-search"
           >
             Filter by organisation name
           </label>
           <input
-            autoComplete="off"
-            className="input__input"
+            autocomplete="off"
+            class="input__input"
             data-qa-sel="filter-search-input"
-            defaultValue=""
             id="filter-search"
             name="filter-search"
-            onChange={[Function]}
             type="search"
             unique="filterSearch"
+            value=""
           />
         </div>
       </div>
     </div>
     <div
-      aria-busy={true}
+      aria-busy="true"
       data-g="12 md:9"
     >
       <div
-        className="text-right"
+        class="text-right"
       >
         <ul
-          className="list list--piped"
+          class="list list--piped"
         >
           <li>
             <span
-              className="pv--c pr--c"
+              class="pv--c pr--c"
             >
               A - Z
             </span>
@@ -132,7 +124,6 @@ Array [
             <a
               data-qa-sel="sort-alpha-desc"
               href="/?sort=alpha-desc"
-              onClick={[Function]}
             >
               Z - A
             </a>
@@ -141,7 +132,6 @@ Array [
             <a
               data-qa-sel="sort-date-asc"
               href="/?sort=date-asc"
-              onClick={[Function]}
             >
               Date ascending
             </a>
@@ -150,7 +140,6 @@ Array [
             <a
               data-qa-sel="sort-date-desc"
               href="/?sort=date-desc"
-              onClick={[Function]}
             >
               Date descending
             </a>
@@ -158,178 +147,167 @@ Array [
         </ul>
       </div>
       <h2
-        className="paginationText"
+        class="paginationText"
         data-qa-sel="organisations-returned"
       >
         Showing 4 organisations
       </h2>
       <ul
-        className="list--unstyled"
+        aria-label="organisations"
+        class="list--unstyled"
         data-qa-sel="list-of-organisations"
       >
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/organisations/1001"
                 >
-                  <a
-                    href="/organisations/1001"
-                    onClick={[Function]}
-                  >
-                    NICE
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  NICE
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
+                <dt
+                  class="visually-hidden"
                 >
-                  <dt
-                    className="visually-hidden"
-                  >
-                    Date created
-                  </dt>
-                  <dd>
-                    1 December 2021 00:00
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                  Date created
+                </dt>
+                <dd>
+                  1 December 2021 00:00
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/organisations/1003"
                 >
-                  <a
-                    href="/organisations/1003"
-                    onClick={[Function]}
-                  >
-                    Org 1
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Org 1
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
+                <dt
+                  class="visually-hidden"
                 >
-                  <dt
-                    className="visually-hidden"
-                  >
-                    Date created
-                  </dt>
-                  <dd>
-                    11 January 2022 13:13
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                  Date created
+                </dt>
+                <dd>
+                  11 January 2022 13:13
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/organisations/1004"
                 >
-                  <a
-                    href="/organisations/1004"
-                    onClick={[Function]}
-                  >
-                    Org 2
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Org 2
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
+                <dt
+                  class="visually-hidden"
                 >
-                  <dt
-                    className="visually-hidden"
-                  >
-                    Date created
-                  </dt>
-                  <dd>
-                    12 January 2022 13:14
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                  Date created
+                </dt>
+                <dd>
+                  12 January 2022 13:14
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
         <li>
           <article
-            className="card"
+            class="card"
           >
-            Array [
-              <header
-                className="card__header"
+            <header
+              class="card__header"
+            >
+              <p
+                class="card__heading"
               >
-                <p
-                  className="card__heading"
+                <a
+                  href="/organisations/1005"
                 >
-                  <a
-                    href="/organisations/1005"
-                    onClick={[Function]}
-                  >
-                    Org 3
-                  </a>
-                </p>
-              </header>,
-              <dl
-                className="card__metadata"
+                  Org 3
+                </a>
+              </p>
+            </header>
+            <dl
+              class="card__metadata"
+            >
+              <div
+                class="card__metadatum"
               >
-                <div
-                  className="card__metadatum"
+                <dt
+                  class="visually-hidden"
                 >
-                  <dt
-                    className="visually-hidden"
-                  >
-                    Date created
-                  </dt>
-                  <dd>
-                    13 January 2022 13:15
-                  </dd>
-                </div>
-              </dl>,
-            ]
+                  Date created
+                </dt>
+                <dd>
+                  13 January 2022 13:15
+                </dd>
+              </div>
+            </dl>
           </article>
         </li>
       </ul>
       <div
-        className="flex flexAlignCenter"
+        class="flex flexAlignCenter"
       >
         <div
-          className="mr--e"
+          class="mr--e"
           data-qa-sel="number-of-results-on-page"
         >
           <label
-            className="bold mr--c"
-            htmlFor="itemsPerPage"
+            class="bold mr--c"
+            for="itemsPerPage"
           >
             Items per page
           </label>
@@ -337,8 +315,6 @@ Array [
             data-qa-sel="result-on-the-page-index"
             id="itemsPerPage"
             name="itemsPerPage"
-            onChange={[Function]}
-            value={25}
           >
             <option
               value="25"
@@ -359,22 +335,22 @@ Array [
         </div>
         <nav
           aria-label="Pagination"
-          className="pagination "
+          class="pagination "
           data-qa-sel="pagination-section"
           role="navigation"
         >
           <ol
-            className="pagination__list"
+            class="pagination__list"
           >
             <li
               aria-current="true"
-              className="pagination__item pagination__item--current"
+              class="pagination__item pagination__item--current"
             >
               <span
-                className="pagination__inactive"
+                class="pagination__inactive"
               >
                 <span
-                  className="visually-hidden"
+                  class="visually-hidden"
                 >
                   Current page 
                 </span>
@@ -382,7 +358,7 @@ Array [
               </span>
             </li>
             <li
-              className="pagination__item pagination__item--count"
+              class="pagination__item pagination__item--count"
             >
               <span>
                 Page 
@@ -399,6 +375,156 @@ Array [
         </nav>
       </div>
     </div>
-  </div>,
-]
+  </div>
+</div>
+`;
+
+exports[`should show error message when fetch organisations returns 401 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/overview"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Organisations
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Organisations"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`should show error message when fetch organisations returns 500 error 1`] = `
+<div>
+  <nav
+    aria-label="Breadcrumbs"
+    role="navigation"
+  >
+    <ol
+      class="breadcrumbs"
+    >
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <a
+          href="/overview"
+        >
+          Administration
+        </a>
+      </li>
+      <li
+        class="breadcrumbs__crumb"
+      >
+        <span>
+          Organisations
+        </span>
+      </li>
+    </ol>
+  </nav>
+  <script
+    type="application/ld+json"
+  >
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "/overview",
+        "name": "Administration"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "name": "Organisations"
+      }
+    }
+  ]
+}
+  </script>
+  <div
+    class="page-header"
+  >
+    <h1
+      class="page-header__heading"
+    >
+      Error
+    </h1>
+  </div>
+  <div
+    class="alert alert--error"
+    role="alert"
+  >
+    <h2>
+      Whoops
+    </h2>
+    <p>
+      Sorry, there's been an error!
+    </p>
+  </div>
+</div>
 `;

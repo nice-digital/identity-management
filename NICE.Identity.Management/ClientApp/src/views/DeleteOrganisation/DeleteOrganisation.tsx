@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-
 import { Alert } from "@nice-digital/nds-alert";
 import { Breadcrumbs, Breadcrumb } from "@nice-digital/nds-breadcrumbs";
 import { Button } from "@nice-digital/nds-button";
 import { PageHeader } from "@nice-digital/nds-page-header";
 import { Grid, GridItem } from "@nice-digital/nds-grid";
-
 import { DeleteOrganisationConfirmation } from "../DeleteOrganisationConfirmation/DeleteOrganisationConfirmation";
-import { OrganisationType } from "../../models/types";
-import { Endpoints } from "../../data/endpoints";
-import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-
-import { fetchData } from "../../helpers/fetchData";
-import { isDataError } from "../../helpers/isDataError";
+import { type OrganisationType } from "src/models/types";
+import { Endpoints } from "src/data/endpoints";
+import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
+import { fetchData } from "src/helpers/fetchData";
+import { isDataError } from "src/helpers/isDataError";
 
 type TParams = { id: string };
 
