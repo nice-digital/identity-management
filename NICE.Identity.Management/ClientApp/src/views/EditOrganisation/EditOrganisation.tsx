@@ -67,7 +67,7 @@ export class EditOrganisation extends Component<
 		this.setState({ organisation, isLoading: false });
 	}
 
-	checkOrgName = async (formName: string): Promise<void> => {
+	checkOrgName = async (formName: string, returnValue = false): Promise<void | boolean> => {
 		const orgName = this.state.organisation.name.toLowerCase();
 		formName = formName.toLowerCase();
 		const namesAreDifferent = orgName !== formName;
@@ -89,6 +89,9 @@ export class EditOrganisation extends Component<
 
 		this.setState({ fetchedOrgNameFound });
 		this.typingTimer = 0;
+		if (returnValue) {
+			return fetchedOrgNameFound;
+		}
 	};
 
 	toggleValidationMessage = (
@@ -111,6 +114,7 @@ export class EditOrganisation extends Component<
 		const form = e.currentTarget;
 		const formName = this.state.formName.trim();
 		const formHasNotChanged = formName === this.state.organisation.name;
+		let fetchedOrgNameFound = this.state.fetchedOrgNameFound;
 
 		if (formHasNotChanged) {
 			this.setState({
@@ -122,10 +126,8 @@ export class EditOrganisation extends Component<
 
 		if (this.typingTimer) {
 			clearTimeout(this.typingTimer);
-			await this.checkOrgName(formName);
+			fetchedOrgNameFound = await this.checkOrgName(formName, true) as boolean;
 		}
-
-		const { fetchedOrgNameFound } = this.state;
 
 		if (!form.checkValidity() || validationError || fetchedOrgNameFound) {
 			const validationErrorMessage = this.toggleValidationMessage(
@@ -187,13 +189,12 @@ export class EditOrganisation extends Component<
 	): Promise<void> => {
 		const formElement = e.target;
 		const formName = this.state.formName.trim();
+		let fetchedOrgNameFound = this.state.fetchedOrgNameFound;
 
 		if (this.typingTimer) {
 			clearTimeout(this.typingTimer);
-			await this.checkOrgName(formName);
+			fetchedOrgNameFound = await this.checkOrgName(formName, true) as boolean;
 		}
-
-		const { fetchedOrgNameFound } = this.state;
 
 		const isNowValid = formElement.validity.valid
 			? !fetchedOrgNameFound

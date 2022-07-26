@@ -52,7 +52,7 @@ export class AddOrganisation extends Component<
 			: "Organisation name should be alphanumeric and be between 2-100 characters";
 	};
 
-	checkOrgName = async (formName: string): Promise<void> => {
+	checkOrgName = async (formName: string, returnValue = false): Promise<void | boolean> => {
 		let fetchedOrgNameFound = false;
 		formName = formName.toLowerCase();
 
@@ -66,6 +66,9 @@ export class AddOrganisation extends Component<
 
 		this.setState({ fetchedOrgNameFound });
 		this.typingTimer = 0;
+		if (returnValue) {
+			return fetchedOrgNameFound;
+		}
 	};
 
 	handleSubmit = async (
@@ -77,13 +80,12 @@ export class AddOrganisation extends Component<
 		const { validationError } = this.state;
 		const form = e.currentTarget;
 		const formName = this.state.formName.trim();
+		let fetchedOrgNameFound = this.state.fetchedOrgNameFound;
 
 		if (this.typingTimer) {
 			clearTimeout(this.typingTimer);
-			await this.checkOrgName(formName);
+			fetchedOrgNameFound = await this.checkOrgName(formName, true) as boolean;
 		}
-
-		const { fetchedOrgNameFound } = this.state;
 
 		if (!form.checkValidity() || validationError || fetchedOrgNameFound) {
 			const validationErrorMessage = fetchedOrgNameFound
@@ -146,13 +148,12 @@ export class AddOrganisation extends Component<
 	): Promise<void> => {
 		const formElement = e.target;
 		const formName = this.state.formName.trim();
+		let fetchedOrgNameFound = this.state.fetchedOrgNameFound;
 
 		if (this.typingTimer) {
 			clearTimeout(this.typingTimer);
-			await this.checkOrgName(formName);
+			fetchedOrgNameFound = await this.checkOrgName(formName, true) as boolean;
 		}
-
-		const { fetchedOrgNameFound } = this.state;
 
 		const isNowValid = formElement.validity.valid
 			? !fetchedOrgNameFound

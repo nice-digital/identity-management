@@ -108,7 +108,7 @@ test("should show validation error when org name is in use already", async () =>
   jest.useFakeTimers();
   server.use(
     rest.get(Endpoints.organisationsList, (req, res, ctx) => {
-      return res.once(ctx.json(organisations));
+      return res(ctx.json(organisations));
     })
   );
   const user = userEvent.setup();
