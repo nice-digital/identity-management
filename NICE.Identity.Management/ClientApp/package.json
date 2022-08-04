@@ -3,10 +3,10 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@nice-digital/design-system": "^1.2.30",
-		"@nice-digital/global-nav": "^4.1.805",
+		"@nice-digital/design-system": "^3.0.11-alpha.0",
+		"@nice-digital/global-nav": "^5.0.877-GN-187-Rebrand",
 		"concurrently": "^6.2.0",
-		"moment": "^2.29.3",
+		"moment": "^2.29.4",
 		"query-string": "^6.12.1",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
@@ -29,7 +29,7 @@
 		"cross-env": "^5.2.1",
 		"msw": "^0.39.2",
 		"react-scripts": "5.0.1",
-		"sass": "1.35.1",
+		"sass": "1.53.0",
 		"typescript": "^4.6.4"
 	},
 	"scripts": {

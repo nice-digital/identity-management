@@ -1,12 +1,15 @@
-@import '@nice-digital/nds-core/scss/core.scss';
+@use '@nice-digital/nds-core/scss/colours/tokens/global';
+@use "@nice-digital/nds-core/scss/colours";
+@use "@nice-digital/nds-core/scss/spacing";
+@use "@nice-digital/nds-core/scss/utils";
 
 .suggestions {
   position: relative;
 
   ul {
     list-style: none;
-    background-color: $nds-colour-nice-white;
-    border: 1px solid $nds-colour-border;
+    background-color: global.$white;
+    border: 1px solid colours.$border;
     border-top: 0;
     border-bottom: 0;
     position: absolute;
@@ -21,13 +24,13 @@
 
     li {
       margin: 0;
-      border-bottom: 1px solid $nds-colour-border;
+      border-bottom: 1px solid colours.$border;
       line-height: 1.15;
 
       a {
-        background-color: $nds-colour-nice-white;
+        background-color: global.$white;
         cursor: pointer;
-        padding: rem($nds-spacing-small);
+        padding: utils.rem(spacing.$small);
         display: block;
 
         small {
@@ -43,7 +46,7 @@
 
 .active {
   a {
-    background-color: $nds-colour-nice-grey-3 !important;
+    background-color: global.$custom-grey-4 !important;
   }
 }
 
