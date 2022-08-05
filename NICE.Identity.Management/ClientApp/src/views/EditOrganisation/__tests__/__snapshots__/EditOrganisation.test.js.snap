@@ -90,7 +90,7 @@ exports[`should match the snapshot on load 1`] = `
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Edit organisation
     </h1>

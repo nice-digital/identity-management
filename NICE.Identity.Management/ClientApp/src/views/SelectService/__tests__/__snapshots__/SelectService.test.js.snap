@@ -92,7 +92,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       <span
         class="page-header__pre-heading"
@@ -245,7 +245,7 @@ exports[`should show error message when services fetchData function returns 401 
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>
@@ -356,7 +356,7 @@ exports[`should show error message when services fetchData function returns 500 
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>
@@ -467,7 +467,7 @@ exports[`should show error message when user fetchData function returns 401 erro
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>
@@ -578,7 +578,7 @@ exports[`should show error message when user fetchData function returns 500 erro
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>

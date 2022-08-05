@@ -75,7 +75,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="page-header mb--d"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       TEST
     </h1>
@@ -222,7 +222,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>
@@ -316,7 +316,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>
