@@ -573,14 +573,14 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       data-g="12 md:9"
     >
       <h2
-        class="usersListSummary"
+        class="h5 mv--0"
         data-qa-sel="users-returned"
       >
         Showing 4 users
       </h2>
       <ul
         aria-label="users"
-        class="list--unstyled"
+        class="list--unstyled mt--d"
         data-qa-sel="list-of-users"
       >
         <li>
@@ -608,7 +608,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--consultation"
+                    class="tag activeTag"
                     data-qa-sel="user-status"
                   >
                     Active
@@ -655,7 +655,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--consultation"
+                    class="tag activeTag"
                     data-qa-sel="user-status"
                   >
                     Active
@@ -702,7 +702,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--consultation"
+                    class="tag activeTag"
                     data-qa-sel="user-status"
                   >
                     Active

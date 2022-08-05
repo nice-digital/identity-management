@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 import { useListInfo } from "src/helpers/useListInfo";
 
-import styles from "./PaginationText.module.scss";
-
 type PaginationTextProps = {
 	dataLength: number;
 	labelSingular: string;
@@ -19,7 +17,7 @@ export const PaginationText: FC<PaginationTextProps> = ({
 
 	return (
 		<h2
-			className={styles.paginationText}
+			className="h5 mv--0"
 			data-qa-sel={`${labelPlural}-returned`}
 		>
 			{`Showing ${

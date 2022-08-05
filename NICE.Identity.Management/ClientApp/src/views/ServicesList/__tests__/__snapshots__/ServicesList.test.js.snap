@@ -233,14 +233,14 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       data-g="12 md:9"
     >
       <h2
-        class="servicesListSummary"
+        class="h5 mv--0"
         data-qa-sel="services-returned"
       >
         Showing 5 services
       </h2>
       <ul
         aria-label="websites"
-        class="list--unstyled"
+        class="list--unstyled mt--d"
         data-qa-sel="list-of-websites"
       >
         <li>

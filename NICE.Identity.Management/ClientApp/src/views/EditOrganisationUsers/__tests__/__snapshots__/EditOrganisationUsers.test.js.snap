@@ -147,7 +147,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       data-g="12 md:9"
     >
       <h2
-        class="orgUsersListSummary"
+        class="h5 mv--0"
       >
         Current users
       </h2>
@@ -182,7 +182,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             </td>
             <td>
               <span
-                class="tag tag--consultation"
+                class="tag activeTag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -205,7 +205,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             </td>
             <td>
               <span
-                class="tag tag--consultation"
+                class="tag activeTag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -228,7 +228,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             </td>
             <td>
               <span
-                class="tag tag--consultation"
+                class="tag activeTag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -251,7 +251,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             </td>
             <td>
               <span
-                class="tag tag--consultation"
+                class="tag activeTag"
                 data-qa-sel="user-status"
               >
                 Active

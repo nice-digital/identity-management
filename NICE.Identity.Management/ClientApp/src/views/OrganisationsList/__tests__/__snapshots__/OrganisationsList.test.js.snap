@@ -147,14 +147,14 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         </ul>
       </div>
       <h2
-        class="paginationText"
+        class="h5 mv--0"
         data-qa-sel="organisations-returned"
       >
         Showing 4 organisations
       </h2>
       <ul
         aria-label="organisations"
-        class="list--unstyled"
+        class="list--unstyled mt--d"
         data-qa-sel="list-of-organisations"
       >
         <li>

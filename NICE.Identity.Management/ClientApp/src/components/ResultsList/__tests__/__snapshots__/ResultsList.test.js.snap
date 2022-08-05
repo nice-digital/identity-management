@@ -4,7 +4,7 @@ exports[`should match the snapshot when ResultOrganisation has been passed into 
 <div>
   <ul
     aria-label="organisations"
-    class="list--unstyled"
+    class="list--unstyled mt--d"
     data-qa-sel="list-of-organisations"
   >
     <li>

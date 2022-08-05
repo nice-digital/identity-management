@@ -262,7 +262,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       data-g="12 md:9"
     >
       <h2
-        class="websiteSummary"
+        class="h5 mv--0"
         data-qa-sel="users-returned"
       >
         Showing 4 users
