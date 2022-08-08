@@ -1,0 +1,23 @@
+@use "@nice-digital/nds-core/scss/colours/tokens/global";
+
+.liveTag {
+    $custom-green-1: #68c103;
+    //background-color: #578137;
+    color: white;
+}
+
+.testTag {
+    //background-color: global.$custom-purple-1;
+    background-color: #451551;
+    color: white;
+}
+
+.devTag {
+    background-color: #517489;
+    color: white;
+}
+
+.localTag {
+    background-color: #557021;
+    color: white;
+}

@@ -315,7 +315,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--new"
+                    class="tag testTag"
                     data-qa-sel="environment-test"
                   >
                     Test
@@ -362,7 +362,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--new"
+                    class="tag testTag"
                     data-qa-sel="environment-test"
                   >
                     Test
@@ -409,7 +409,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--updated"
+                    class="tag devTag"
                     data-qa-sel="environment-dev"
                   >
                     Dev
@@ -456,7 +456,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
               >
                 <dd>
                   <span
-                    class="tag tag--updated"
+                    class="tag devTag"
                     data-qa-sel="environment-dev"
                   >
                     Dev
