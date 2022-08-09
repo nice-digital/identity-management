@@ -346,7 +346,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 								</GridItem>
 								<GridItem cols={12} md={9} aria-busy={true}>
 									<h2
-										className="h5 mv--0"
+										className="results-heading"
 										data-qa-sel="users-returned"
 									>
 										{paginationText}

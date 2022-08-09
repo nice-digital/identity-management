@@ -242,7 +242,7 @@ export class EditOrganisationUsers extends Component<
 										<p>{confirmationMessage}</p>
 									</Alert>
 								)}
-								<h2 className="h5 mv--0">Current users</h2>
+								<h2 className="results-heading">Current users</h2>
 								{isLoading ? (
 									<p>Loading...</p>
 								) : usersAndJobIds.length ? (

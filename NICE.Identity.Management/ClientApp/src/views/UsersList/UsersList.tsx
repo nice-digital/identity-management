@@ -492,7 +492,7 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								) : users.length ? (
 									<>
 										<h2
-											className="h5 mv--0"
+											className="results-heading"
 											data-qa-sel="users-returned"
 										>
 											{paginationText}

@@ -370,7 +370,7 @@ export class ServicesList extends Component<
 								) : websites.length ? (
 									<>
 										<h2
-											className="h5 mv--0"
+											className="results-heading"
 											data-qa-sel="services-returned"
 										>
 											{paginationText}
