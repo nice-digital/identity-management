@@ -147,7 +147,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         </ul>
       </div>
       <h2
-        class="h5 mv--0"
+        class="results-heading"
         data-qa-sel="organisations-returned"
       >
         Showing 4 organisations

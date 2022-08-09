@@ -3,7 +3,7 @@
 exports[`should match the snapshot when on page 2 and organisations props passed in 1`] = `
 <div>
   <h2
-    class="h5 mv--0"
+    class="results-heading"
     data-qa-sel="organisations-returned"
   >
     Showing 26 to 32 of 32 organisations
@@ -14,7 +14,7 @@ exports[`should match the snapshot when on page 2 and organisations props passed
 exports[`should match the snapshot when pagination is default and organisations props passed in 1`] = `
 <div>
   <h2
-    class="h5 mv--0"
+    class="results-heading"
     data-qa-sel="organisations-returned"
   >
     Showing 1 to 25 of 32 organisations
