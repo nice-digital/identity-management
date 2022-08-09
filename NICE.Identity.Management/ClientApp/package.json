@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@nice-digital/design-system": "^3.0.11-alpha.0",
+		"@nice-digital/design-system": "^3.0.13-alpha.0",
 		"@nice-digital/global-nav": "^5.0.877-GN-187-Rebrand",
 		"concurrently": "^6.2.0",
 		"moment": "^2.29.4",
