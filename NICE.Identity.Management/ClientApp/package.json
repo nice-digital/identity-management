@@ -47,6 +47,6 @@
 		"extends @nice-digital/browserslist-config"
 	],
 	"volta": {
-		"node": "16.13.2"
+		"node": "14.19.0"
 	}
 }
