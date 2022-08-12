@@ -1,8 +1,6 @@
-@use "@nice-digital/nds-core/scss/colours/tokens/global";
-
 .liveTag {
-    // might need to change to #578137;
-    background-color: global.$custom-green-1;
+    // might need to change to global.$custom-green-1;;
+    background-color: #578137;
     color: white;
 }
 
