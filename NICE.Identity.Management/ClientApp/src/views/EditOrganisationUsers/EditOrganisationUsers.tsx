@@ -13,7 +13,6 @@ import { type UsersAndJobIdsByOrganisationType, type UserType } from "src/models
 import { UserStatus } from "src/components/UserStatus/UserStatus";
 import { FilterSuggestions } from "src/components/FilterSuggestions/FilterSuggestions";
 import { SuggestionUser } from "src/components/SuggestionUser/SuggestionUser";
-import styles from "./EditOrganisationUsers.module.scss";
 
 type TParams = { id: string };
 
@@ -243,7 +242,7 @@ export class EditOrganisationUsers extends Component<
 										<p>{confirmationMessage}</p>
 									</Alert>
 								)}
-								<h2 className={styles.orgUsersListSummary}>Current users</h2>
+								<h2 className="results-heading">Current users</h2>
 								{isLoading ? (
 									<p>Loading...</p>
 								) : usersAndJobIds.length ? (

@@ -17,7 +17,6 @@ import { Endpoints } from "src/data/endpoints";
 import { FilterBox } from "src/components/FilterBox/FilterBox";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import { Pagination } from "src/components/Pagination/Pagination";
-import styles from "./Website.module.scss";
 
 type TParams = { id: string };
 
@@ -347,7 +346,7 @@ export class Website extends Component<WebsiteProps, WebsiteState> {
 								</GridItem>
 								<GridItem cols={12} md={9} aria-busy={true}>
 									<h2
-										className={styles.websiteSummary}
+										className="results-heading"
 										data-qa-sel="users-returned"
 									>
 										{paginationText}

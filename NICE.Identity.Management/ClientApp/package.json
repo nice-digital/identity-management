@@ -3,10 +3,10 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@nice-digital/design-system": "^1.2.30",
-		"@nice-digital/global-nav": "^4.1.805",
+		"@nice-digital/design-system": "^4.0.0",
+		"@nice-digital/global-nav": "^5.0.890",
 		"concurrently": "^6.2.0",
-		"moment": "^2.29.3",
+		"moment": "^2.29.4",
 		"query-string": "^6.12.1",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
@@ -15,10 +15,10 @@
 	"devDependencies": {
 		"@nice-digital/browserslist-config": "^2.0.1",
 		"@nice-digital/eslint-config": "^1.0.3",
-		"@testing-library/dom": "^8.13.0",
-		"@testing-library/jest-dom": "^5.16.4",
-		"@testing-library/react": "^13.2.0",
-		"@testing-library/user-event": "^14.1.1",
+		"@testing-library/dom": "8.13.0",
+		"@testing-library/jest-dom": "5.16.4",
+		"@testing-library/react": "13.2.0",
+		"@testing-library/user-event": "14.1.1",
 		"@types/jest": "^26.0.15",
 		"@types/node": "^12.0.0",
 		"@types/react": "^18.0.8",
@@ -26,23 +26,27 @@
 		"@types/react-router-dom": "^5.3.3",
 		"@typescript-eslint/eslint-plugin": "^5.22.0",
 		"@typescript-eslint/parser": "^5.22.0",
+		"copyfiles": "^2.4.1",
 		"cross-env": "^5.2.1",
 		"msw": "^0.39.2",
 		"react-scripts": "5.0.1",
-		"sass": "1.35.1",
+		"sass": "1.53.0",
 		"typescript": "^4.6.4"
 	},
 	"scripts": {
+		"prestart": "npm run sass-design-system",
 		"start": "react-scripts start",
+		"prebuild": "npm run sass-design-system",
 		"build": "react-scripts build",
 		"test": "cross-env REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
 		"test:ci": "cross-env CI=true REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"sass-design-system": "sass -I ./node_modules node_modules/@nice-digital/design-system/scss/nice-design-system.scss public/nice-design-system.css"
 	},
 	"browserslist": [
 		"extends @nice-digital/browserslist-config"
 	],
 	"volta": {
-		"node": "14.19.0"
+		"node": "16.13.2"
 	}
 }

@@ -76,7 +76,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     data-qa-sel="name-user-profile"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       <span
         class="page-header__pre-heading"
@@ -124,7 +124,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         >
           <div>
             <span
-              class="tag tag--consultation"
+              class="tag activeTag"
               data-qa-sel="user-status"
             >
               Active
@@ -386,7 +386,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>
@@ -480,7 +480,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
     class="page-header"
   >
     <h1
-      class="page-header__heading"
+      class="page-header__heading "
     >
       Error
     </h1>

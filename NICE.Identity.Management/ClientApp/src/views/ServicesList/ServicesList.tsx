@@ -22,8 +22,6 @@ import { WebsiteEnvironment } from "src/components/WebsiteEnvironment/WebsiteEnv
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import { Pagination } from "src/components/Pagination/Pagination";
 
-import styles from "./ServicesList.module.scss";
-
 type CardMetaData = {
 	label?: string;
 	value: React.ReactNode;
@@ -372,12 +370,12 @@ export class ServicesList extends Component<
 								) : websites.length ? (
 									<>
 										<h2
-											className={styles.servicesListSummary}
+											className="results-heading"
 											data-qa-sel="services-returned"
 										>
 											{paginationText}
 										</h2>
-										<ul className="list--unstyled" aria-label="websites" data-qa-sel="list-of-websites">
+										<ul className="list--unstyled mt--d" aria-label="websites" data-qa-sel="list-of-websites">
 											{websitesPaginated.map((website) => {
 												const { id, host, service } = website;
 												const servicesListHeading = {

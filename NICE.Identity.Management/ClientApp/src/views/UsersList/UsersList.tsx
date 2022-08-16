@@ -19,7 +19,6 @@ import { FilterBox } from "src/components/FilterBox/FilterBox";
 import { UserStatus } from "src/components/UserStatus/UserStatus";
 import { ErrorMessage } from "src/components/ErrorMessage/ErrorMessage";
 import { Pagination } from "src/components/Pagination/Pagination";
-import styles from "./UsersList.module.scss";
 
 type CardMetaData = {
 	label?: string;
@@ -493,12 +492,12 @@ export class UsersList extends Component<UsersListProps, UsersListState> {
 								) : users.length ? (
 									<>
 										<h2
-											className={styles.usersListSummary}
+											className="results-heading"
 											data-qa-sel="users-returned"
 										>
 											{paginationText}
 										</h2>
-										<ul className="list--unstyled" aria-label="users" data-qa-sel="list-of-users">
+										<ul className="list--unstyled mt--d" aria-label="users" data-qa-sel="list-of-users">
 											{usersPaginated.map((user) => {
 												const {
 													userId,
