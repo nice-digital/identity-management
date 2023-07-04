@@ -213,6 +213,15 @@ export class User extends Component<UserProps, UserState> {
 
 										<div className={`${styles.summaryList} pv--c mb--d`}>
 											<span className={styles.summaryListLabel}>
+												Marked for deletion
+											</span>
+											<span className={styles.summaryListDetail}>
+												{user.isMarkedForDeletion ? "Yes" : "No"}
+											</span>
+										</div>
+
+										<div className={`${styles.summaryList} pv--c mb--d`}>
+											<span className={styles.summaryListLabel}>
 												Name identifier (internal id)
 											</span>
 											<span className={styles.summaryListDetail}>

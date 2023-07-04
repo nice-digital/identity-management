@@ -37,9 +37,18 @@ cd NICE.Identity.Management/ClientApp
 npm install
 npm start
 
+## Running in Visual Studio
+
+Change the dropdown next to the green play button to "NICE.Identity.Dev", you might also need to disable IIS Express.
+
+## Further Readme files
+
+There are other readme.md files dotted about this repo, most importantly, you will need to follow the readme file in NICE.Identity.Management/ClientApp
 
 #### Secrets.json
 
 The application's uses appsettings.json to store configuration. However, since this is a public repository, confidential configuration information is stored in secrets.json
 In order to run the application correctly (with it having access to a database), you'll need to acquire (from another dev) or create a secrets.json file with the correct configuration information in. For more  information see: [https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?tabs=visual-studio)
   
+If you are creating from scratch, the key sections are:
+ - WebAppConfiguration (To enable the application to talk to Auth0 and the Identity WebAPI)
