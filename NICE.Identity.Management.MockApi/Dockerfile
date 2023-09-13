@@ -1,4 +1,4 @@
-FROM node:lts-bullseye
+FROM node:latest
 
 WORKDIR /data
 
