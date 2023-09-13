@@ -15,6 +15,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [1, 2, 3],
       "userEmailHistory": [
         {
@@ -58,6 +59,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [3],
       "userEmailHistory": []
     },
@@ -76,6 +78,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [3, 4],
       "userEmailHistory": []
     },
@@ -94,6 +97,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [1, 4, 5],
       "userEmailHistory": []
     },
@@ -112,6 +116,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [2, 4],
       "userEmailHistory": []
     },
@@ -130,6 +135,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [5, 4],
       "userEmailHistory": []
     },
@@ -148,6 +154,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [5, 4],
       "userEmailHistory": []
     }
@@ -314,6 +321,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [1, 2, 3],
       "userEmailHistory": [
         {
@@ -357,6 +365,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [3],
       "userEmailHistory": []
     },
@@ -375,6 +384,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [3, 4],
       "userEmailHistory": []
     },
@@ -393,6 +403,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [1, 4, 5],
       "userEmailHistory": []
     },
@@ -411,6 +422,7 @@
       "acceptedTerms": true,
       "isMigrated": false,
       "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false,
       "hasAccessToWebsiteIds": [2, 4],
       "userEmailHistory": []
     }
@@ -460,6 +472,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [1, 2, 3],
           "userEmailHistory": [
             {
@@ -507,6 +520,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [3],
           "userEmailHistory": []
         },
@@ -529,6 +543,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [3, 4],
           "userEmailHistory": []
         },
@@ -1262,7 +1277,8 @@
       "isStaffMember": false,
       "acceptedTerms": true,
       "isMigrated": false,
-      "isInAuthenticationProvider": true
+      "isInAuthenticationProvider": true,
+      "isMarkedForDeletion": false
     }
   ],
   "usersandrolesbywebsite": {
@@ -1287,6 +1303,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [1, 2, 3],
           "userEmailHistory": [
             {
@@ -1353,6 +1370,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [1],
           "userEmailHistory": []
         },
@@ -1388,6 +1406,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [3, 4],
           "userEmailHistory": []
         },
@@ -1417,6 +1436,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [1, 4, 5],
           "userEmailHistory": []
         },
@@ -1446,6 +1466,7 @@
           "acceptedTerms": true,
           "isMigrated": false,
           "isInAuthenticationProvider": true,
+          "isMarkedForDeletion": false,
           "hasAccessToWebsiteIds": [2, 4],
           "userEmailHistory": []
         },
