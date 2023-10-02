@@ -9,6 +9,7 @@ export type UserType = {
 	acceptedTerms: boolean;
 	initialRegistrationDate: Date;
 	lastLoggedInDate: Date;
+	isMarkedForDeletion: boolean;
 	isMigrated: boolean;
 	isInAuthenticationProvider: boolean;
 	allowContactMe: boolean;

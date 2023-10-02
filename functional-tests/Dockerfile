@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:lts-bullseye
 
 ENV IN_DOCKER=true
 

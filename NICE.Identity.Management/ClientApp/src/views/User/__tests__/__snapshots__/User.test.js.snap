@@ -188,6 +188,20 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <span
           class="summaryListLabel"
         >
+          Marked for deletion
+        </span>
+        <span
+          class="summaryListDetail"
+        >
+          No
+        </span>
+      </div>
+      <div
+        class="summaryList pv--c mb--d"
+      >
+        <span
+          class="summaryListLabel"
+        >
           Name identifier (internal id)
         </span>
         <span
