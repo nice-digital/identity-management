@@ -1,5 +1,5 @@
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
+import clickElement from "../action/clickElement.js";
+import waitForDisplayed from "../action/waitForDisplayed.js";
 import selectors from "../selectors";
 
 export async function clickDeleteUserLink(): Promise<void> {

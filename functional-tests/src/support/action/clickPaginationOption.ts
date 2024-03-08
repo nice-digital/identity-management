@@ -1,5 +1,5 @@
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
+import clickElement from "../action/clickElement.js";
+import pause from "../action/pause.js";
 
 
 export async function clickNextPagination(): Promise<void> {

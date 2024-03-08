@@ -1,4 +1,4 @@
-import { Then } from '@cucumber/cucumber';
+import { Then } from "@wdio/cucumber-framework";
 import loginErrorMessage from '../support/check/loginErrorMessage';
 import userNameInput from '../support/check/userNameInput';
 import passwordInput from '../support/check/passwordInput';

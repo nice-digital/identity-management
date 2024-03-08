@@ -1,6 +1,5 @@
-import "@nice-digital/wdio-cucumber-steps/lib/when";
+import { When } from "@wdio/cucumber-framework";
 import { Login } from "../support/action/Login";
-import { When } from "@cucumber/cucumber";
 import registerLink from "../support/action/RegisterLink";
 import findUserList, { clickFirstUserInList, clickSecondUserInList, clickLastUserInList } from "../support/check/findUserInList";
 import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink, deleteOrgButton } from "../support/action/clickDeleteUserLink";
