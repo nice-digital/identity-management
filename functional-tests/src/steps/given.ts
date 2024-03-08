@@ -1,4 +1,4 @@
-import { Given } from '@cucumber/cucumber';
+import { Given } from "@wdio/cucumber-framework";
 import navigateToRegPage from '../support/action/navigateToRegPage';
 import {
   navigateToUserListPageUsingBreadscrumb,

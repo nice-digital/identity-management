@@ -1,9 +1,6 @@
-import {checkContainsText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-// import {checkURL} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
-import {isEnabled} from "@nice-digital/wdio-cucumber-steps/lib/support/check/isEnabled";
-import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
+import clickElement from "../action/clickElement.js";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import pause from "../action/pause.js";
 import selectors from "../selectors";
 
 export async function clickDeleteUserLink(): Promise<void> {

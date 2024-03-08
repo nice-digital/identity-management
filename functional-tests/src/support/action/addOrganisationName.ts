@@ -1,7 +1,7 @@
-import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed'
-import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import clickElement from "../action/clickElement.js";
+import setInputField from "../action/setInputField.js";
 import selectors from '../selectors';
-import {setInputField} from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
 
 
 
