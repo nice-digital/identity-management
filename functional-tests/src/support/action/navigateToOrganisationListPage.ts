@@ -1,9 +1,8 @@
-import { waitForDisplayed } from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import selectors from "../selectors";
+import clickElement from "../action/clickElement.js";
+import selectors from "../selectors.js";
 
 export async function navigateToOrganisationListPageFromAdminPage(): Promise<void> {
-  await clickElement('click', 'element', selectors.adminHomePage.manageOrganisationsButton);
+  await clickElement('click', 'selector', selectors.adminHomePage.manageOrganisationsButton);
 }
 
 export default navigateToOrganisationListPageFromAdminPage;

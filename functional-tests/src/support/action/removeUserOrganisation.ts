@@ -1,11 +1,11 @@
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import clickElement from "../action/clickElement.js";
 import selectors from '../selectors';
 
 
 export async function removeUserOrganisation(text: string): Promise<void> {
     await waitForDisplayed(selectors.manageOrgPage.removeUser, "");
-    await clickElement("click", "selector", selectors.manageOrgPage.removeUser, text);
+    await clickElement("click", "selector", selectors.manageOrgPage.removeUser); /*I have removed a 4th param here "text" and might need readding*/ 
   };
   
   
