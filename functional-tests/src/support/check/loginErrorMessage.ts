@@ -1,6 +1,5 @@
-import {checkContainsAnyText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsAnyText";
-import {checkContainsText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
+import checkContainsAnyText from '../check/checkContainsAnyText.js';
+import waitForDisplayed from '../action/waitForDisplayed.js';
 import selectors from "../selectors";
 
 export async function loginErrorMessage(): Promise<void> {
