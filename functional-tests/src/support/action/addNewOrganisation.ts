@@ -2,7 +2,7 @@ import waitForDisplayed from "../action/waitForDisplayed.js";
 import clickElement from "../action/clickElement.js";
 import setInputField from "../action/setInputField.js";
 import pause from "../action/pause.js";
-import selectors from '../selectors';
+import selectors from '../selectors.js';
 
 export async function addNewOrganisation(): Promise<void> {
 

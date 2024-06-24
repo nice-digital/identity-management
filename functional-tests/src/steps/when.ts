@@ -1,18 +1,18 @@
 import { When } from "@wdio/cucumber-framework";
-import { Login } from "../support/action/Login";
-import registerLink from "../support/action/RegisterLink";
-import findUserList, { clickFirstUserInList, clickSecondUserInList, clickLastUserInList } from "../support/check/findUserInList";
-import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink, deleteOrgButton } from "../support/action/clickDeleteUserLink";
-import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted";
-import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton";
-import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton";
-import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave, clickFirstService } from "../support/action/selectService";
-import validateServiceEnvFilterChecked, { enterNameToFilter, clickCancelFilter } from "../support/check/validateFilterChecked";
-import deleteEnteredText from "../support/check/deleteInputText";
-import deleteInputText, { deleteNewOrgEnteredText } from "../support/check/deleteInputText";
-import selectFromDropdownByIndex from '../support/action/selectFromDropdownByIndex';
-import checkFirstOrgInList from '../support/check/checkFirstOrgInList';
-import addNewOrganisation, { editOrganisationButton, editUsersButton, searchAddUser } from '../support/action/addNewOrganisation';
+import { Login } from "../support/action/Login.js";
+import registerLink from "../support/action/RegisterLink.js";
+import findUserList, { clickFirstUserInList, clickSecondUserInList, clickLastUserInList } from "../support/check/findUserInList.js";
+import clickDeleteUserLink, { clickConfirmDelete, clickBackToUsersLink, deleteOrgButton } from "../support/action/clickDeleteUserLink.js";
+import clickRegisterUncompleted from "../support/action/clickRegisterUncompleted.js";
+import clickGlobalNavAccountButton from "../support/action/clickGlobalNavAccountButton.js";
+import clickLockUserButton, { clickAddRoleButton } from "../support/action/clickLockUserButton.js";
+import clickIdamDockerService, { clickTestEnvironment, clickFirstRole, clickSecondRole, clickThirdRole, clickFourthRole, clickSave, clickFirstService } from "../support/action/selectService.js";
+import validateServiceEnvFilterChecked, { enterNameToFilter, clickCancelFilter } from "../support/check/validateFilterChecked.js";
+import deleteEnteredText from "../support/check/deleteInputText.js";
+import deleteInputText, { deleteNewOrgEnteredText } from "../support/check/deleteInputText.js";
+import selectFromDropdownByIndex from '../support/action/selectFromDropdownByIndex.js';
+import checkFirstOrgInList from '../support/check/checkFirstOrgInList.js';
+import addNewOrganisation, { editOrganisationButton, editUsersButton, searchAddUser } from '../support/action/addNewOrganisation.js';
 
 When(
   /^I log into accounts with username "([A-Z0-9_]+)" and password "([A-Z0-9_]+)"$/,

@@ -1,8 +1,8 @@
-import waitForDisplayed from '../action/waitForDisplayed';
+import waitForDisplayed from '../action/waitForDisplayed.js';
 import checkContainsText from './checkContainsText.js';
 import pause from '../action/pause.js';
 import setInputField from '../action/setInputField.js';
-import selectors from '../selectors';
+import selectors from '../selectors.js';
 
 export async function validateDeletionSuccessMessage(message: string): Promise<void> {
   await pause("1000");

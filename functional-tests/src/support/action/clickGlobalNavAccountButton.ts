@@ -1,6 +1,6 @@
 import clickElement from "../action/clickElement.js";
 import pause from "../action/pause.js";
-import selectors from "../selectors";
+import selectors from "../selectors.js";
 
 export async function clickGlobalNavAccountButton(): Promise<void> {
   await clickElement('click', 'selector', selectors.userListPage.globalNavMyAccount);

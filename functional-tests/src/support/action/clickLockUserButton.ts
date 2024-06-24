@@ -1,6 +1,6 @@
 import clickElement from "../action/clickElement.js";
 import waitForDisplayed from "../action/waitForDisplayed.js";
-import selectors from "../selectors";
+import selectors from "../selectors.js";
 
 export async function clickDeleteUserLink(): Promise<void> {
   await waitForDisplayed(selectors.adminUserPage.lockUserButton, "");

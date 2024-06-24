@@ -1,16 +1,19 @@
-const isInDocker = !!process.env.IN_DOCKER,
-	isTeamCity = !!process.env.TEAMCITY_VERSION;
+import { hooks } from './src/support/hooks.js';
+// const isInDocker = !!process.env.IN_DOCKER,
+// 	isTeamCity = !!process.env.TEAMCITY_VERSION;
 
 export const config: WebdriverIO.Config = {
 	// Use devtools to control Chrome when we're running tests locally
 	// Avoids issues with having the wrong ChromeDriver installed via selenium-standalone when Chrome updates every 6 weeks.
 	// We need to use webdriver protocol in Docker because we use the selenium grid.
-	automationProtocol: isInDocker ? "webdriver" : "devtools",
-
+	automationProtocol: "webdriver",
+	runner:'local',
 	maxInstances: 1,
 	path: "/wd/hub",
 
-	specs: ["./src/features/**/*.feature"],
+	specs: [//"./src/features/**/*.feature"
+		"./src/features/**/addNewOrganisations.feature"
+	],
 
 	capabilities: [
 		{
@@ -61,14 +64,13 @@ export const config: WebdriverIO.Config = {
 	framework: "cucumber",
 	cucumberOpts: {
 		require: [
-			"./src/steps/**/*.ts",
-			"./node_modules/@nice-digital/wdio-cucumber-steps/lib",
+			"./src/steps/**/*.ts"
 		],
-		tagExpression: "not @pending", // See https://docs.cucumber.io/tag-expressions/
+		tags: "not @pending", // See https://docs.cucumber.io/tag-expressions/
 		timeout: 1500000,
 	},
 
-	afterStep: async function (_test, _scenario, { error, passed }) {
+	afterStep: async function (_test: any, _scenario: { name: string; }, { error, passed }: any) {
 		// Take screenshots on error, these end up in the Allure reports
 		var fileName = "errorShots/" + "ERROR_" + _scenario.name + ".png";
 		if (error) await browser.takeScreenshot();
@@ -87,7 +89,7 @@ export const config: WebdriverIO.Config = {
         });
         request.open('POST', process.env.IDENTITYAPI_API_OAUTH_TOKEN_URL, true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.onload = function (e) {
+        request.onload = function (e: any) {
             console.log(this.status);
             if (this.status == 200) {
                 const auth_token = JSON.parse(this.responseText);

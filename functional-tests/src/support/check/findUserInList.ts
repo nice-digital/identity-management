@@ -3,7 +3,7 @@ import clickElement from "../action/clickElement.js";
 import waitForDisplayed from "../action/waitForDisplayed.js";
 import checkUrl from "../check/checkURL.js";
 import pause from "../action/pause.js";
-import selectors from "../selectors";
+import selectors from "../selectors.js";
 
 export async function findUserList(userName: string): Promise<void> {
   await browser.refresh();
