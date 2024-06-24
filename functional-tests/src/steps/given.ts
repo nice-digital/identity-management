@@ -10,7 +10,12 @@ import navigateToOrganisationListPageFromAdminPage from '../support/action/navig
 import manageOrganisationsPage from '../support/check/manageOrganisationsPage.js';
 import sortAlphaOrganisationList from '../support/action/sortOrganisationList.js';
 import sortOrganisationList, { sortDateOrganisationList } from '../support/action/sortOrganisationList.js';
+import openWebsite from '../support/action/openWebsite.js';
 
+Given(
+    /^I open the (url|site) "([^"]*)?"$/,
+    openWebsite
+);
 
 Given(/^I navigate to the registration page$/, navigateToRegPage);
 

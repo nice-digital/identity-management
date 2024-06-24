@@ -1,4 +1,4 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+import { XMLHttpRequest } from "xmlhttprequest";
 
 export async function deleteUser(username: string, userApi: string): Promise<void> {
   

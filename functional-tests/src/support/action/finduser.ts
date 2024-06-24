@@ -1,4 +1,4 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+import { XMLHttpRequest } from "xmlhttprequest";
 
 export async function finduser(userApi: string, username: string): Promise<void> {
 
