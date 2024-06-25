@@ -1,46 +1,47 @@
 # See https://github.com/SeleniumHQ/docker-selenium#via-docker-compose
 services:
-  chrome:
-    image: selenium/node-chrome:4.17.0-20240123
-    shm_size: '2gb'
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-  edge:
-    image: selenium/node-edge:4.1.2-20220217
-    shm_size: 2gb
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - VNC_NO_PASSWORD=1
-      - SE_NODE_MAX_SESSIONS=2
-
   firefox:
-    image: selenium/node-firefox:4.1.2-20220217
-    shm_size: 2gb
+    container_name: functional-tests_firefox_1
+    image: selenium/node-firefox:3.141
+    # todo - Update these images so we can use a up to date browser NIM-8
+    volumes:
+      - /dev/shm:/dev/shm
     depends_on:
-      - selenium-hub
+      - hub
     environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - VNC_NO_PASSWORD=1
-      - SE_NODE_MAX_SESSIONS=2
+      HUB_HOST: hub
+
+  chrome:
+    container_name: functional-tests_chrome_1
+    image: selenium/node-chrome:3.141.59-20200826
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+      #NODE_MAX_INSTANCES: 2
 
   # Selenium Grid/Hub
-  selenium-hub:
+  hub:
+    image: selenium/hub:3.141.59
     restart: always
-    image: selenium/hub:4.17.0-20240123
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+      #GRID_MAX_SESSION: 2
+  #    ports:
+  #      - 4444:4444
+
+  # Selenium Grid/Hub
+  # selenium-hub:
+  #   restart: always
+  #   image: selenium/hub:4.17.0-20240123
+  #   ports:
+  #     - "4442:4442"
+  #     - "4443:4443"
+  #     - "4444:4444"
 
   # The tests themselves
   tests:
@@ -52,7 +53,7 @@ services:
       - ./errorShots:/tests/errorShots
     links:
       - api
-      - selenium-hub
+      - hub
       # - nginx
       - idammanagement
     environment:
