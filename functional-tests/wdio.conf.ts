@@ -26,12 +26,11 @@ export const config: WebdriverIO.Config = {
     //   args: ['--headless', '--window-size=1366,1000'],
     // },
     'goog:chromeOptions': {
-      args: ['--disable-dev-shm-usage', '--ignore-certificate-errors', '--ignore-ssl-errors=yes', '--allow-insecure-localhost', '--allow-running-insecure-content', '--disable-web-security', '--no-sandbox'],
+      args: ['--disable-web-security', /*'--headless',*/ '--disable-dev-shm-usage', '--no-sandbox', '--window-size=1920,1080'],
       localState: {
         'browser.enabled_labs_experiments': [
           'same-site-by-default-cookies@2',
-          'cookies-without-same-site-must-be-secure@2',
-          'mixed-forms-interstitial@2'
+          'cookies-without-same-site-must-be-secure@2'
         ],
       },
     },
