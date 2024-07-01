@@ -1,4 +1,5 @@
 # See https://github.com/SeleniumHQ/docker-selenium#via-docker-compose
+version: "3.8"
 services:
   firefox:
     container_name: functional-tests_firefox_1
@@ -10,7 +11,7 @@ services:
       - hub
     environment:
       HUB_HOST: hub
-
+  # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md#install-certificates-for-chromium-based-browsers
   chrome:
     container_name: functional-tests_chrome_1
     image: selenium/node-chrome:3.141.59-20200826
