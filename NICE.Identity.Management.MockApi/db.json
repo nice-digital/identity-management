@@ -16,11 +16,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        1,
-        2,
-        3
-      ],
+      "hasAccessToWebsiteIds": [1, 2, 3],
       "userEmailHistory": [
         {
           "userEmailHistoryId": 1,
@@ -64,9 +60,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        3
-      ],
+      "hasAccessToWebsiteIds": [3],
       "userEmailHistory": []
     },
     {
@@ -85,10 +79,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        3,
-        4
-      ],
+      "hasAccessToWebsiteIds": [3, 4],
       "userEmailHistory": []
     },
     {
@@ -107,11 +98,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        1,
-        4,
-        5
-      ],
+      "hasAccessToWebsiteIds": [1, 4, 5],
       "userEmailHistory": []
     },
     {
@@ -130,10 +117,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        2,
-        4
-      ],
+      "hasAccessToWebsiteIds": [2, 4],
       "userEmailHistory": []
     },
     {
@@ -152,10 +136,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        5,
-        4
-      ],
+      "hasAccessToWebsiteIds": [5, 4],
       "userEmailHistory": []
     },
     {
@@ -174,10 +155,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        5,
-        4
-      ],
+      "hasAccessToWebsiteIds": [5, 4],
       "userEmailHistory": []
     }
   ],
@@ -325,10 +303,6 @@
       "id": 26,
       "name": "Just20Organization",
       "dateAdded": "2022-03-02T16:46:02.41"
-    },
-    {
-      "name": "Abbot Medical London",
-      "id": 27
     }
   ],
   "usersByOrganisation": [
@@ -348,11 +322,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        1,
-        2,
-        3
-      ],
+      "hasAccessToWebsiteIds": [1, 2, 3],
       "userEmailHistory": [
         {
           "userEmailHistoryId": 1,
@@ -396,9 +366,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        3
-      ],
+      "hasAccessToWebsiteIds": [3],
       "userEmailHistory": []
     },
     {
@@ -417,10 +385,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        3,
-        4
-      ],
+      "hasAccessToWebsiteIds": [3, 4],
       "userEmailHistory": []
     },
     {
@@ -439,11 +404,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        1,
-        4,
-        5
-      ],
+      "hasAccessToWebsiteIds": [1, 4, 5],
       "userEmailHistory": []
     },
     {
@@ -462,10 +423,7 @@
       "isMigrated": false,
       "isInAuthenticationProvider": true,
       "isMarkedForDeletion": false,
-      "hasAccessToWebsiteIds": [
-        2,
-        4
-      ],
+      "hasAccessToWebsiteIds": [2, 4],
       "userEmailHistory": []
     }
   ],
@@ -515,11 +473,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            1,
-            2,
-            3
-          ],
+          "hasAccessToWebsiteIds": [1, 2, 3],
           "userEmailHistory": [
             {
               "userEmailHistoryId": 1,
@@ -567,9 +521,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            3
-          ],
+          "hasAccessToWebsiteIds": [3],
           "userEmailHistory": []
         },
         "jobId": 2
@@ -592,10 +544,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            3,
-            4
-          ],
+          "hasAccessToWebsiteIds": [3, 4],
           "userEmailHistory": []
         },
         "jobId": 3
@@ -1355,11 +1304,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            1,
-            2,
-            3
-          ],
+          "hasAccessToWebsiteIds": [1, 2, 3],
           "userEmailHistory": [
             {
               "userEmailHistoryId": 1,
@@ -1426,9 +1371,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            1
-          ],
+          "hasAccessToWebsiteIds": [1],
           "userEmailHistory": []
         },
         "roles": [
@@ -1464,10 +1407,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            3,
-            4
-          ],
+          "hasAccessToWebsiteIds": [3, 4],
           "userEmailHistory": []
         },
         "roles": [
@@ -1497,11 +1437,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            1,
-            4,
-            5
-          ],
+          "hasAccessToWebsiteIds": [1, 4, 5],
           "userEmailHistory": []
         },
         "roles": [
@@ -1531,10 +1467,7 @@
           "isMigrated": false,
           "isInAuthenticationProvider": true,
           "isMarkedForDeletion": false,
-          "hasAccessToWebsiteIds": [
-            2,
-            4
-          ],
+          "hasAccessToWebsiteIds": [2, 4],
           "userEmailHistory": []
         },
         "roles": [
