@@ -1,4 +1,5 @@
 import { hooks } from './src/support/hooks.js';
+import { XMLHttpRequest } from "xmlhttprequest";
 // const isInDocker = !!process.env.IN_DOCKER,
 // 	isTeamCity = !!process.env.TEAMCITY_VERSION;
 
@@ -11,8 +12,26 @@ export const config: WebdriverIO.Config = {
 	maxInstances: 1,
 	path: "/wd/hub",
 
-	specs: [//"./src/features/**/*.feature"
-		"./src/features/**/addNewOrganisations.feature"
+	specs: ["./src/features/**/*.feature"
+		// "./src/features/**/addNewOrganisations.feature",
+		// "./src/features/**/editUserRoles.feature",
+		// "./src/features/**/filterOrgByNamePageResultSortPage.feature",
+		// "./src/features/**/filterServicesPageByNameEnv.feature",
+		// "./src/features/**/filterUsersPageByNameStatusEnv.feature",
+		// "./src/features/**/identityFailedLogin.feature",
+		// "./src/features/**/identityHomepage.feature",
+		// "./src/features/**/identityRegistrationValidation.feature",
+		// "./src/features/**/identitySignOutUsingGN.feature",
+		// "./src/features/**/identitySuccessfulRegistration.feature",
+		// "./src/features/**/manageOrganisation.feature",
+		// "./src/features/**/manageOrganisationList.feature",
+		// "./src/features/**/manageOrganisationUser.feature",
+		// "./src/features/**/manageServicesList.feature",
+		// "./src/features/**/manageUserRoles.feature",
+		// "./src/features/**/manageUsersList.feature",
+		// "./src/features/**/manageUserStatus.feature",
+		// "./src/features/**/paginationOnOrganisationPage.feature"
+
 	],
 
 	capabilities: [
@@ -47,7 +66,7 @@ export const config: WebdriverIO.Config = {
 
 	logLevel: "warn",
 
-	baseUrl: "https://niceorg/consultations/",
+	baseUrl: "https://http://idam:8080",
 	reporters: [
 		"spec",
 		"teamcity",
@@ -77,8 +96,7 @@ export const config: WebdriverIO.Config = {
 	},
 	
 	before: async function before() {
-
-        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+       
         const request = new XMLHttpRequest();
         var body = JSON.stringify({
             "grant_type": process.env.IDENTITYAPI_API_GRANT_TYPE,

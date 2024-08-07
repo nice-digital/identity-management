@@ -8,7 +8,7 @@ import selectors from '../selectors.js';
 export async function createaccount(username: string, password: string): Promise<void> {
   await waitForDisplayed(selectors.registrationPage.emailInput, "");
   await waitForDisplayed(selectors.registrationPage.passwordInput, "");
-  await waitFor(selectors.registrationPage.tcCheckBox, "10000", true, "exist");
+  // await waitFor(selectors.registrationPage.tcCheckBox, "10000", true, "exist");
   await clickElement('click', 'selector', selectors.registrationPage.tcCheckBox);
   await setInputField("set", process.env[username]!, selectors.registrationPage.emailInput);
   // browser.setValue(selectors.registrationPage.confirmEmailInput, process.env[username]);

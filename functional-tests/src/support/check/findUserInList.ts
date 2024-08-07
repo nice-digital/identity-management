@@ -8,7 +8,7 @@ import selectors from "../selectors.js";
 export async function findUserList(userName: string): Promise<void> {
   await browser.refresh();
   await waitForDisplayed(selectors.userListPage.userlist, "");
-  await checkUrl(true, "http://idam:8080/users");
+  await checkUrl(false, "http://idam:8080/users");
   await checkContainsText("element", selectors.userListPage.userlist, "", userName);
   await pause("1000");
 };
@@ -36,14 +36,15 @@ export async function clickLastUserInList(): Promise<void> {
 };
 
 
-export async function findUserOrganisation(): Promise<void> {
+export async function findUserOrganisation(text: string): Promise<void> {
   await waitForDisplayed(selectors.manageOrgPage.findUser, "");
-  await clickElement("click", "selector", selectors.manageOrgPage.findUser);
+  await checkContainsText("element", selectors.manageOrgPage.findUser, "", text);
+  // await clickElement("click", "selector", selectors.manageOrgPage.findUser, text);
 };
 
-export async function findCurrentUserOrganisation(): Promise<void> {
+export async function findCurrentUserOrganisation(text: string): Promise<void> {
   await waitForDisplayed(selectors.manageOrgPage.findCurrentUser, "");
-  await clickElement("click", "selector", selectors.manageOrgPage.findCurrentUser);
+  await checkContainsText("element", selectors.manageOrgPage.findCurrentUser, "", text);
 };
 
 
