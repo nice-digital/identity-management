@@ -40,6 +40,7 @@ import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisat
 import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb, navigateDetailPage } from '../support/action/navigateToOrgListPage.js';
 import findOrganisationList from '../support/check/findOrganisationList.js';
 import removeUserOrganisation from '../support/action/removeUserOrganisation.js';
+import {checkForAccessibilityIssues} from "../support/check/checkForAccessibilityIssues.js";
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
 
@@ -200,3 +201,5 @@ Then(/^I click to remove user "([^"]*)"$/, removeUserOrganisation);
 Then(/^I expect successful message for the user "([^"]*)"$/, validateUserMessage);
 
 Then(/^I click cancel button to navigate back to detail page$/, navigateDetailPage);
+
+Then(/^the page should have no(?: (A|AA))? accessibility issues$/,checkForAccessibilityIssues);

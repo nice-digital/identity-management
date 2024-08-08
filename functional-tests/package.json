@@ -9,7 +9,7 @@
     "test:accessibility": "wdio run wdio.accessibility.conf.ts",
     "test:locally": "wdio run wdio.teamcity.conf.ts",
     "test:docker": "npm test -- --hostname hub --port 4444 --baseUrl http://idam:8080",
-    "test:accessibility-docker": "npm run test:accessibility -- --hostname hub --baseUrl http://idam:8080",
+    "test:accessibility-docker": "npm run test:accessibility -- --hostname hub --port 4444 --baseUrl http://idam:8080",
     "wait:docker": "waitforit -t 120 --strict idammanagement:8080",
     "wait-then-test": "npm run wait:docker && npm run test:docker",
     "wait-then-accessibility-test": "npm run wait:docker && npm run test:accessibility-docker"
@@ -39,6 +39,7 @@
     "wdio-teamcity-reporter": "^3.1.1"
   },
   "dependencies": {
+    "axe-core": "^4.3.3",
     "devtools": "^8.39.0",
     "webdriverio": "^8.14.6",
     "xmlhttprequest": "^1.8.0"

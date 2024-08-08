@@ -67,7 +67,7 @@ export const config: WebdriverIO.Config = {
         });
         request.open('POST', process.env.IDENTITYAPI_API_OAUTH_TOKEN_URL, true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.onload = function (e) {
+        request.onload = function (e: any) {
             console.log(this.status);
             if (this.status == 200) {
                 const auth_token = JSON.parse(this.responseText);
