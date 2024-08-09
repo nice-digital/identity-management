@@ -1,7 +1,8 @@
-import { waitForDisplayed } from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
-import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
-import selectors from '../selectors';
-import { pause } from '@nice-digital/wdio-cucumber-steps/lib/support/action/pause';
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import clickElement from "../action/clickElement.js";
+import pause from "../action/pause.js";
+import selectors from '../selectors.js';
+
 
 export async function saveNewOrganisationName(): Promise<void> {
 

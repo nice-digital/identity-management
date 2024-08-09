@@ -1,16 +1,20 @@
-const isInDocker = !!process.env.IN_DOCKER,
-	isTeamCity = !!process.env.TEAMCITY_VERSION;
+import { hooks } from './src/support/hooks.js';
+import { XMLHttpRequest } from "xmlhttprequest";
+// const isInDocker = !!process.env.IN_DOCKER,
+// 	isTeamCity = !!process.env.TEAMCITY_VERSION;
 
 export const config: WebdriverIO.Config = {
 	// Use devtools to control Chrome when we're running tests locally
 	// Avoids issues with having the wrong ChromeDriver installed via selenium-standalone when Chrome updates every 6 weeks.
 	// We need to use webdriver protocol in Docker because we use the selenium grid.
-	automationProtocol: isInDocker ? "webdriver" : "devtools",
-
+	automationProtocol: "webdriver",
+	runner:'local',
 	maxInstances: 1,
 	path: "/wd/hub",
 
-	specs: ["./src/accessibilityfeatures/**/*.feature"],
+	specs: ["./src/accessibilityfeatures/**/*.feature"
+		// "./src/accessibilityfeatures/**/accessibilityAddOrgPage.feature"
+	],
 
 	capabilities: [
 		{
@@ -23,16 +27,23 @@ export const config: WebdriverIO.Config = {
     //   args: ['--headless', '--window-size=1366,1000'],
     // },
     'goog:chromeOptions': {
-      args: ['--disable-dev-shm-usage'],
+      args: ['--disable-web-security', /*'--headless',*/ '--disable-dev-shm-usage', '--no-sandbox', '--window-size=1920,1080'],
       localState: {
         'browser.enabled_labs_experiments': [
           'same-site-by-default-cookies@2',
-          'cookies-without-same-site-must-be-secure@2',
-          'mixed-forms-interstitial@2',
+          'cookies-without-same-site-must-be-secure@2'
         ],
       },
     },
   },
+  // {
+  // 	acceptInsecureCerts: true, // Because of self-signed cert inside Docker
+  // 	acceptSslCerts: true,
+  //     browserName: "firefox",
+  //     "moz:firefoxOptions": {
+  // 		args: ["-headless"]
+  //     }
+  // }
 	],
 
 	logLevel: "warn",
@@ -53,10 +64,9 @@ export const config: WebdriverIO.Config = {
 	framework: "cucumber",
 	cucumberOpts: {
 		require: [
-			"./src/steps/**/*.ts",
-			"./node_modules/@nice-digital/wdio-cucumber-steps/lib",
+			"./src/steps/**/*.ts"
 		],
-		tagExpression: "not @pending", // See https://docs.cucumber.io/tag-expressions/
+		tags: "not @pending", // See https://docs.cucumber.io/tag-expressions/
 		timeout: 1500000,
 	},
 
@@ -69,7 +79,6 @@ export const config: WebdriverIO.Config = {
 	
 	before: async function before() {
 
-        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
         const request = new XMLHttpRequest();
         var body = JSON.stringify({
             "grant_type": process.env.IDENTITYAPI_API_GRANT_TYPE,
@@ -79,7 +88,7 @@ export const config: WebdriverIO.Config = {
         });
         request.open('POST', process.env.IDENTITYAPI_API_OAUTH_TOKEN_URL, true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.onload = function (e) {
+        request.onload = function (e: any) {
             console.log(this.status);
             if (this.status == 200) {
                 const auth_token = JSON.parse(this.responseText);

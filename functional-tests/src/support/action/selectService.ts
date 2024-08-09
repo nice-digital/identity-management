@@ -1,6 +1,6 @@
-import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
-import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
-import selectors from '../selectors';
+import waitForDisplayed from '../action/waitForDisplayed.js';
+import clickElement from '../action/clickElement.js';
+import selectors from '../selectors.js';
 
 export async function clickIdamDockerService(): Promise<void> {
   await waitForDisplayed(selectors.serviceListPage.thirdService, "");

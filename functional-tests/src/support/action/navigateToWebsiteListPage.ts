@@ -1,10 +1,10 @@
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import selectors from "../selectors";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import clickElement from "../action/clickElement.js";
+import selectors from "../selectors.js";
 
 export async function navigateToWebsiteListPageFromAdminPage(): Promise<void> {
   await waitForDisplayed(selectors.adminHomePage.manageServicesButton, "");
-  await clickElement('click', 'element', selectors.adminHomePage.manageServicesButton);
+  await clickElement('click', 'selector', selectors.adminHomePage.manageServicesButton);
   await waitForDisplayed(selectors.websiteListPage.websitelist, "");
 }
 

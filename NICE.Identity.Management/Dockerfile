@@ -3,7 +3,7 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 
-ENV ASPNETCORE_URLS http://+:8080
+ENV ASPNETCORE_URLS=http://+:8080
 
 # Install Git
 RUN apt-get update && apt-get install git -y
@@ -15,11 +15,11 @@ SHELL ["/bin/bash", "-c"]
 
 # since we're starting non-interactive shell, 
 # we will need to tell bash to load .bashrc manually
-ENV BASH_ENV ~/.bashrc
+ENV BASH_ENV="~/.bashrc"
 # needed by volta() function
-ENV VOLTA_HOME /root/.volta
+ENV VOLTA_HOME="/root/.volta"
 # make sure packages managed by volta will be in PATH
-ENV PATH $VOLTA_HOME/bin:$PATH
+ENV PATH=$VOLTA_HOME/bin:$PATH
 
 # install volta
 RUN curl https://get.volta.sh | bash
@@ -36,9 +36,9 @@ RUN apt-get update && apt-get install jq -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Download wait-for-it as binary waitforit, see  https://github.com/vishnubob/wait-for-it
-ENV WAITFORIT_VERSION db04971
-ENV WAITFORIT_DOWNLOAD_SHA dd7511b88c5eaf3f8953167ab498f66589143649142a9a2f49a8f33e08584aaf
-ENV WAITFORIT_DOWNLOAD_URL https://github.com/vishnubob/wait-for-it/archive/$WAITFORIT_VERSION.tar.gz
+ENV WAITFORIT_VERSION=db04971
+ENV WAITFORIT_DOWNLOAD_SHA=dd7511b88c5eaf3f8953167ab498f66589143649142a9a2f49a8f33e08584aaf
+ENV WAITFORIT_DOWNLOAD_URL=https://github.com/vishnubob/wait-for-it/archive/$WAITFORIT_VERSION.tar.gz
 RUN curl -SL "$WAITFORIT_DOWNLOAD_URL" --output waitforit.tar.gz \
   && echo "$WAITFORIT_DOWNLOAD_SHA waitforit.tar.gz" | sha256sum -c - \
   && mkdir -p /usr/local/waitforit \

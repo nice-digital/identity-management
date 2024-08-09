@@ -23,9 +23,8 @@
 
 - [VS Code IDE](https://code.visualstudio.com/)
   - With recommended extensions (VS Code will prompt you to install these automatically)
-- [WebdriverIO 7](https://webdriver.io/)
+- [WebdriverIO 8](https://webdriver.io/)
   - [Cucumber.js](https://github.com/cucumber/cucumber-js) for running BDD gherkin-syntax feature files
-  - [wdio-cucumber-steps](https://github.com/nice-digital/wdio-cucumber-steps) for shared step definitions for Cucumber JS BDD tests in WebdriverIO
   - [Allure](https://docs.qameta.io/allure/) to generate a test report
 - [Docker](https://www.docker.com/) for running the tests in TeamCity against Chrome and Firefox
 
@@ -47,18 +46,17 @@ Run the tests directly on your machine via [Docker](#docker) or run them [using 
 
 We run the tests in Docker on TeamCity because it allows us to spin up a self-contained application, and selenium grid with both Chrome and Firefox. You can run this same stack locally inside Docker.
 
-It can be harder to debug tests running inside Docker as you can't watch the tests run in the browser, but we do save error screenshots and logs into the docker-output folder for debugging.
+We save error screenshots and logs into the docker-output folder to help with for debugging. However, we can also run the tests locally against the application running in docker [using npm](#using-npm).
 
 1. Install [Volta](https://volta.sh/) to use the version of Node specified in package.json. Or install Node LTS if you're not using Volta.
 2. Build the [Identity Management Portal](../NICE.Identity.Management/):
    1. `cd NICE.Identity.Management && dotnet publish -c Release -o published-app /property:PublishWithAspNetCoreTargetManifest="false"`
 3. Install Docker
 4. Open bash and `cd` into the _functional-tests_ folder
-5. Run `docker-compose build`
-   1. This downloads all the required images from Docker
-   2. So it takes a while but it will cache everything so will be quicker next time
-6. Run `./docker-run.sh`
+5. Run `./docker-run.sh`
    1. This builds the docker network, runs the tests and copies outputs in the _docker-output_ folder.
+6. Alternatively, you can run `./docker-dev.sh`
+   1. This builds the docker network, and exec's into the terminal inside the test container to allow you to run the tests at will. This is good for debugging.
 
 > View the [docker-compose.yml](docker-compose.yml) file to understand the structure of the Docker network and the links between containers.
 

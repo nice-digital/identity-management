@@ -1,7 +1,7 @@
-import {checkContainsText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
-import selectors from "../selectors";
+import checkContainsText from "./checkContainsText.js";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import pause from "../action/pause.js";
+import selectors from "../selectors.js";
 
 export async function validateServiceDownloadPageResultCount(countText: string): Promise<void> {
 	await waitForDisplayed(selectors.validateAdminUserServicePage.pageServiceResultCount, "");

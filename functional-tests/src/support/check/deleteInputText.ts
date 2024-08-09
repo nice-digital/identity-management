@@ -1,8 +1,7 @@
-import { waitForDisplayed } from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {clickElement} from '@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement';
-import {pressButton} from '@nice-digital/wdio-cucumber-steps/lib/support/action/pressButton';
-import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
-import selectors from "../selectors";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import clickElement from "../action/clickElement.js";
+import pause from '../action/pause.js';
+import selectors from "../selectors.js";
 
 export async function deleteEnteredText(): Promise<void> {
 

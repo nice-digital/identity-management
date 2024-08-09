@@ -1,45 +1,46 @@
-import { Then } from '@cucumber/cucumber';
-import loginErrorMessage from '../support/check/loginErrorMessage';
-import userNameInput from '../support/check/userNameInput';
-import passwordInput from '../support/check/passwordInput';
-import confirmEmailInput from '../support/check/confirmEmailInput';
-import confirmPasswordInput from '../support/check/confirmPasswordInput';
-import signUpUserNameInput from '../support/check/signUpUserNameInput';
-import signUpSurnameInput from '../support/check/signUpSurnameInput';
-import emailInput from '../support/check/emailInput';
-import manageUsersPage from '../support/check/manageUsersPage';
-import adminHomepage from '../support/check/adminHomepage';
-import createaccount from '../support/action/createaccount';
-import finduser from '../support/action/finduser';
-import { deleteUser } from '../support/action/deleteUser';
-import findUserList, { userNotInList, findUserOrganisation, findCurrentUserOrganisation } from '../support/check/findUserInList';
-import findWebsiteList from '../support/check/findWebsiteInList';
+import { Then } from "@wdio/cucumber-framework";
+import loginErrorMessage from '../support/check/loginErrorMessage.js';
+import userNameInput from '../support/check/userNameInput.js';
+import passwordInput from '../support/check/passwordInput.js';
+import confirmEmailInput from '../support/check/confirmEmailInput.js';
+import confirmPasswordInput from '../support/check/confirmPasswordInput.js';
+import signUpUserNameInput from '../support/check/signUpUserNameInput.js';
+import signUpSurnameInput from '../support/check/signUpSurnameInput.js';
+import emailInput from '../support/check/emailInput.js';
+import manageUsersPage from '../support/check/manageUsersPage.js';
+import adminHomepage from '../support/check/adminHomepage.js';
+import createaccount from '../support/action/createaccount.js';
+import finduser from '../support/action/finduser.js';
+import { deleteUser } from '../support/action/deleteUser.js';
+import findUserList, { userNotInList, findUserOrganisation, findCurrentUserOrganisation } from '../support/check/findUserInList.js';
+import findWebsiteList from '../support/check/findWebsiteInList.js';
 import validateDeletionSuccessMessage, {
   validateRegistrationValidationMessages,
-} from '../support/check/validateMessages';
+} from '../support/check/validateMessages.js';
 import validateUserStatusActive, {
   validateUserStatusLocked,
   validateUserStatusListPageLocked,
-} from '../support/check/validateUserStatus';
-import identityLogInPage from '../support/check/identityLogInPage';
-import validateRoleChange from '../support/check/validateRoleChange';
-import validateServiceDownloadPageResultCount,  { validateUserDownloadPageResultCount} from '../support/check/validateAdminUserServicePage';
-import editUserProfile from '../support/action/editUserProfile';
-import editUserEmailName from '../support/action/editUserEmailName';
-import editAudienceInsight from '../support/action/editAudienceInsight';
-import saveUserEditButton from '../support/action/saveUserEditButton';
-import validateProfileSuccessfulMessage from '../support/check/validateUserStatus';
-import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile';
-import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserRoleChecked } from '../support/check/validateFilterChecked';
-import validateOrganisationsDownloadPageResultCount from '../support/check/validateAdminOrgPage';
-import validateAdminOrgPage, { validateFirstLinkInPagination, validatePreviousPage } from "../support/check/validateAdminOrgPage";
-import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } from "../support/action/clickPaginationOption";
-import addOrganisationName, { editOrganisationName } from '../support/action/addOrganisationName';
-import saveNewOrganisationName, { saveEditOrgButton } from '../support/action/saveNewOrganisationName';
-import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisationDate, validateEditOrgResponseMessage, validateUserMessage } from '../support/check/validateNewOrgResponseMessage';
-import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb, navigateDetailPage } from '../support/action/navigateToOrgListPage';
-import findOrganisationList from '../support/check/findOrganisationList';
-import removeUserOrganisation from '../support/action/removeUserOrganisation';
+} from '../support/check/validateUserStatus.js';
+import identityLogInPage from '../support/check/identityLogInPage.js';
+import validateRoleChange from '../support/check/validateRoleChange.js';
+import validateServiceDownloadPageResultCount,  { validateUserDownloadPageResultCount} from '../support/check/validateAdminUserServicePage.js';
+import editUserProfile from '../support/action/editUserProfile.js';
+import editUserEmailName from '../support/action/editUserEmailName.js';
+import editAudienceInsight from '../support/action/editAudienceInsight.js';
+import saveUserEditButton from '../support/action/saveUserEditButton.js';
+import validateProfileSuccessfulMessage from '../support/check/validateUserStatus.js';
+import checkUpdatedUserProfile from '../support/check/checkUpdatedUserProfile.js';
+import validateServiceEnvFilterChecked, { validateServiceEnvChecked, clickCancelFilterServiceDetailPage, validateServiceUserRoleChecked } from '../support/check/validateFilterChecked.js';
+import validateOrganisationsDownloadPageResultCount from '../support/check/validateAdminOrgPage.js';
+import validateAdminOrgPage, { validateFirstLinkInPagination, validatePreviousPage } from "../support/check/validateAdminOrgPage.js";
+import clickPaginationOption, {	clickNextPagination,	clickPreviousPagination } from "../support/action/clickPaginationOption.js";
+import addOrganisationName, { editOrganisationName } from '../support/action/addOrganisationName.js';
+import saveNewOrganisationName, { saveEditOrgButton } from '../support/action/saveNewOrganisationName.js';
+import validateNewOrgResponseMessage , { validateErrorMessage, validateOrganisationDate, validateEditOrgResponseMessage, validateUserMessage } from '../support/check/validateNewOrgResponseMessage.js';
+import navigateToOrgListPage, { navigateToOrgListPageUsingBreadscrumb, navigateDetailPage } from '../support/action/navigateToOrgListPage.js';
+import findOrganisationList from '../support/check/findOrganisationList.js';
+import removeUserOrganisation from '../support/action/removeUserOrganisation.js';
+import {checkForAccessibilityIssues} from "../support/check/checkForAccessibilityIssues.js";
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
 
@@ -200,3 +201,5 @@ Then(/^I click to remove user "([^"]*)"$/, removeUserOrganisation);
 Then(/^I expect successful message for the user "([^"]*)"$/, validateUserMessage);
 
 Then(/^I click cancel button to navigate back to detail page$/, navigateDetailPage);
+
+Then(/^the page should have no(?: (A|AA))? accessibility issues$/,checkForAccessibilityIssues);

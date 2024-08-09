@@ -1,5 +1,7 @@
-const isInDocker = !!process.env.IN_DOCKER,
-	isTeamCity = !!process.env.TEAMCITY_VERSION;
+import { hooks } from './src/support/hooks.js';
+import { XMLHttpRequest } from "xmlhttprequest";
+// const isInDocker = !!process.env.IN_DOCKER,
+// 	isTeamCity = !!process.env.TEAMCITY_VERSION;
 
 export const config: WebdriverIO.Config = {
    runner: 'local',
@@ -24,40 +26,37 @@ export const config: WebdriverIO.Config = {
           }
         }
     ],
-    services: ['selenium-standalone'],
+    // services: ['selenium-standalone'],
     logLevel: 'debug',
     baseUrl: "http://idam:8080",
     reporters: [
 		"spec",
-		isTeamCity && "teamcity",
-		isInDocker && [
-			"allure",
+		"teamcity",
+		["allure",
 			{
 				useCucumberStepReporter: true,
 				// Turn on screenshot reporting for error shots
 				disableWebdriverScreenshotsReporting: false,
 			},
 		],
-	].filter(Boolean) as WebdriverIO.Config["reporters"],
+	],
 
 	framework: "cucumber",
 	cucumberOpts: {
 		require: [
-			"./src/steps/**/*.ts",
-			"./node_modules/@nice-digital/wdio-cucumber-steps/lib",
+			"./src/steps/**/*.ts"
 		],
-		tagExpression: "not @pending", // See https://docs.cucumber.io/tag-expressions/
+		tags: "not @pending", // See https://docs.cucumber.io/tag-expressions/
 		timeout: 1500000,
 	},
 
-	afterStep: async function (_test, _scenario, { error }) {
+	afterStep: async function (_test: any, _scenario: { name: string; }, { error, passed }: any) {
 		// Take screenshots on error, these end up in the Allure reports
 		if (error) await browser.takeScreenshot();
 	},
 	
 	before: async function before() {
-
-        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+        
         const request = new XMLHttpRequest();
         var body = JSON.stringify({
             "grant_type": process.env.IDENTITYAPI_API_GRANT_TYPE,
@@ -67,7 +66,7 @@ export const config: WebdriverIO.Config = {
         });
         request.open('POST', process.env.IDENTITYAPI_API_OAUTH_TOKEN_URL, true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.onload = function (e) {
+        request.onload = function (e: any) {
             console.log(this.status);
             if (this.status == 200) {
                 const auth_token = JSON.parse(this.responseText);

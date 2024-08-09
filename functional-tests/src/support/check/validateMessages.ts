@@ -1,9 +1,8 @@
-import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
-import {checkContainsText} from '@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText';
-import {isEnabled} from '@nice-digital/wdio-cucumber-steps/lib/support/check/isEnabled';
-import {pause} from '@nice-digital/wdio-cucumber-steps/lib/support/action/pause';
-import {setInputField} from '@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField';
-import selectors from '../selectors';
+import waitForDisplayed from '../action/waitForDisplayed.js';
+import checkContainsText from './checkContainsText.js';
+import pause from '../action/pause.js';
+import setInputField from '../action/setInputField.js';
+import selectors from '../selectors.js';
 
 export async function validateDeletionSuccessMessage(message: string): Promise<void> {
   await pause("1000");

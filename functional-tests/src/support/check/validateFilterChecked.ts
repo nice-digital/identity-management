@@ -1,9 +1,9 @@
-import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {setInputField} from "@nice-digital/wdio-cucumber-steps/lib/support/action/setInputField";
-import {clearInputField} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clearInputField";
-import { clickElement } from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import { checkContainsText } from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
+import pause from "../action/pause.js";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import setInputField from "../action/setInputField.js";
+import clearInputField from "../action/clearInputField.js";
+import clickElement from "../action/clickElement.js";
+import checkContainsText from "./checkContainsText.js";
 
 export async function validateServiceEnvFilterChecked(): Promise<void> {
 	await $("[for='filter_environments_alpha']").click();

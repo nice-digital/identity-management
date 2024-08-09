@@ -1546,8 +1546,11 @@
       }
     ]
   },
-  "verificationemail": [{ "verificationemail": 1 }],
-
+  "verificationemail": [
+    {
+      "verificationemail": 1
+    }
+  ],
   "accountstatus": {
     "isAuthenticated": true,
     "displayName": "commenttestuser+5@gmail.com",
