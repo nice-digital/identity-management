@@ -1,6 +1,6 @@
-import { waitForDisplayed } from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import selectors from '../selectors';
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import clickElement from "../action/clickElement.js";
+import selectors from '../selectors.js';
 
 export async function navigateToRegPage(): Promise<void> {
   await waitForDisplayed('body #ccc-recommended-settings', "");

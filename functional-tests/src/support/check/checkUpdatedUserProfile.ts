@@ -1,7 +1,7 @@
-import {waitForDisplayed} from '@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed';
-import {checkContainsText} from '@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText';
-import {pause} from '@nice-digital/wdio-cucumber-steps/lib/support/action/pause';
-import selectors from '../selectors';
+import waitForDisplayed from '../action/waitForDisplayed.js';
+import checkContainsText from '../check/checkContainsText.js';
+import pause from '../action/pause.js';
+import selectors from '../selectors.js';
 
 
 export async function checkUpdatedUserProfile(): Promise<void> {

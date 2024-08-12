@@ -1,10 +1,9 @@
-import {selectOptionByIndex} from "@nice-digital/wdio-cucumber-steps/lib/support/action/selectOptionByIndex";
-import selectors from "../selectors";
+import selectOptionByIndex from '../action/selectOptionByIndex.js';
+import selectors from "../selectors.js";
 
 export async function selectFromDropdownByIndex(index: string): Promise<void> {
 	await selectOptionByIndex(
 		index,
-		"obsolete",
 		selectors.organisationListPage.numberResultsOnPage
 	);
 };

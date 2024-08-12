@@ -1,6 +1,6 @@
-const toDataQASelAttr = (attrValue) => `[data-qa-sel='${attrValue}']`;
-const toNthChildAttr = (attrValue) => `> :nth-child(${attrValue}) a`;
-const toChildAndQASel = (childIndex, attrValue) =>
+const toDataQASelAttr = (attrValue: string) => `[data-qa-sel='${attrValue}']`;
+const toNthChildAttr = (attrValue: any) => `> :nth-child(${attrValue}) a`;
+const toChildAndQASel = (childIndex: number, attrValue: string) =>
   toDataQASelAttr(attrValue) + ' ' + toNthChildAttr(childIndex);
 
 export default {
@@ -45,7 +45,7 @@ export default {
     roleField: toChildAndQASel(1, 'list-of-users'),
     pageTitle: 'h1',
     globalNavMyAccount: "[id$='my-account-button']",
-    globalNavSignOut: "[id$='my-account']",
+    globalNavSignOut: "[id$='my-account'] > li:nth-child(4)",
     userStatusListPage:
       "[data-qa-sel='list-of-users'] [data-qa-sel='user-status']",
   },
@@ -141,7 +141,7 @@ export default {
     saveEditOrgButton: toDataQASelAttr('save-button-edit-organisation'),
     editResponseFeedback: toDataQASelAttr('successful-message-edit-organisation'),
     editUsers: toDataQASelAttr('edit-organisations-users-button'),
-    findCurrentUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(1)',
+    findCurrentUser: toDataQASelAttr('list-of-organisation-users'),//'.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(1)',
     removeUser: '.table > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(4) > a:nth-child(1)',
     userResponseFeedback: toDataQASelAttr('added-edit-organisation-users'),
     addUser: '#suggestion1', 

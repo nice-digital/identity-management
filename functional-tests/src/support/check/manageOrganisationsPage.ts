@@ -1,7 +1,7 @@
-import {checkUrl} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
+import checkUrl from "./checkURL.js";
 
 export async function manageOrganisationsPage(): Promise<void> {
-  await checkUrl("", "http://idam:8080/organisations");
+  await checkUrl(false, "http://idam:8080/organisations");
   // waitForVisible(selectors.adminHomepage.usernameField);
   // waitForVisible(selectors.adminHomepage.roleField);
   // checkContainsText('element', selectors.adminHomepage.pageTitle, 'User Admin Portal');

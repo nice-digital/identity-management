@@ -1,16 +1,22 @@
-import { Given } from '@cucumber/cucumber';
-import navigateToRegPage from '../support/action/navigateToRegPage';
+import { Given } from "@wdio/cucumber-framework";
+import navigateToRegPage from '../support/action/navigateToRegPage.js';
 import {
   navigateToUserListPageUsingBreadscrumb,
   navigateToUserListPageFromAdminPage,
-} from '../support/action/navigateToUserListPage';
-import {  navigateToWebsiteListPageFromAdminPage } from '../support/action/navigateToWebsiteListPage';
-import validateServiceEnvFilterChecked, {  validateUserStatusFilterChecked, validateUserEnvFilterChecked, validateUserRolesFilterChecked, validateUserRoleFilterChecked } from '../support/check/validateFilterChecked';
-import navigateToOrganisationListPageFromAdminPage from '../support/action/navigateToOrganisationListPage';
-import manageOrganisationsPage from '../support/check/manageOrganisationsPage';
-import sortAlphaOrganisationList from '../support/action/sortOrganisationList';
-import sortOrganisationList, { sortDateOrganisationList } from '../support/action/sortOrganisationList';
+} from '../support/action/navigateToUserListPage.js';
+import {  navigateToWebsiteListPageFromAdminPage } from '../support/action/navigateToWebsiteListPage.js';
+import validateServiceEnvFilterChecked, {  validateUserStatusFilterChecked, validateUserEnvFilterChecked, validateUserRolesFilterChecked, validateUserRoleFilterChecked } from '../support/check/validateFilterChecked.js';
+import navigateToOrganisationListPageFromAdminPage from '../support/action/navigateToOrganisationListPage.js';
+import manageOrganisationsPage from '../support/check/manageOrganisationsPage.js';
+import sortAlphaOrganisationList from '../support/action/sortOrganisationList.js';
+import sortOrganisationList, { sortDateOrganisationList } from '../support/action/sortOrganisationList.js';
+import openWebsite from '../support/action/openWebsite.js';
+import { debug } from '../support/action/debug.js';
 
+Given(
+    /^I open the (url|site) "([^"]*)?"$/,
+    openWebsite
+);
 
 Given(/^I navigate to the registration page$/, navigateToRegPage);
 
@@ -47,3 +53,5 @@ Given(/^I sort organisation list using the date sorting descending order$/, sort
 Given(/^I select Product manager and Product administrator roles filter$/, validateUserRolesFilterChecked);
 
 Given(/^I select Product editor role filter$/, validateUserRoleFilterChecked);
+
+Given(/^I debug$/, debug);

@@ -1,22 +1,21 @@
-import {checkContainsText} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkContainsText";
-import {clickElement} from "@nice-digital/wdio-cucumber-steps/lib/support/action/clickElement";
-import {waitForDisplayed} from "@nice-digital/wdio-cucumber-steps/lib/support/action/waitForDisplayed";
-import {checkUrl} from "@nice-digital/wdio-cucumber-steps/lib/support/check/checkURL";
-import {isEnabled} from "@nice-digital/wdio-cucumber-steps/lib/support/check/isEnabled";
-import {pause} from "@nice-digital/wdio-cucumber-steps/lib/support/action/pause";
-import selectors from "../selectors";
+import checkContainsText from "./checkContainsText.js";
+import clickElement from "../action/clickElement.js";
+import waitForDisplayed from "../action/waitForDisplayed.js";
+import checkUrl from "../check/checkURL.js";
+import pause from "../action/pause.js";
+import selectors from "../selectors.js";
 
 export async function findUserList(userName: string): Promise<void> {
   await browser.refresh();
   await waitForDisplayed(selectors.userListPage.userlist, "");
-  await checkUrl("", "http://idam:8080/users");
+  await checkUrl(false, "http://idam:8080/users");
   await checkContainsText("element", selectors.userListPage.userlist, "", userName);
   await pause("1000");
 };
 
 export async function userNotInList(userName: string): Promise<void> {
   await waitForDisplayed(selectors.userListPage.userlist, "");
-  await checkUrl("", "http://idam:8080/users");
+  await checkUrl(true, "http://idam:8080/users");
   await checkContainsText("element", selectors.userListPage.userlist, " not", userName);
   await pause("1000");
 };
@@ -39,12 +38,13 @@ export async function clickLastUserInList(): Promise<void> {
 
 export async function findUserOrganisation(text: string): Promise<void> {
   await waitForDisplayed(selectors.manageOrgPage.findUser, "");
-  await clickElement("click", "selector", selectors.manageOrgPage.findUser, text);
+  await checkContainsText("element", selectors.manageOrgPage.findUser, "", text);
+  // await clickElement("click", "selector", selectors.manageOrgPage.findUser, text);
 };
 
 export async function findCurrentUserOrganisation(text: string): Promise<void> {
   await waitForDisplayed(selectors.manageOrgPage.findCurrentUser, "");
-  await clickElement("click", "selector", selectors.manageOrgPage.findCurrentUser, text);
+  await checkContainsText("element", selectors.manageOrgPage.findCurrentUser, "", text);
 };
 
 

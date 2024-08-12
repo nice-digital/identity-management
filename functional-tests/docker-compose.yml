@@ -1,17 +1,17 @@
 # See https://github.com/SeleniumHQ/docker-selenium#via-docker-compose
-version: '2'
+version: "3.8"
 services:
   firefox:
     container_name: functional-tests_firefox_1
     image: selenium/node-firefox:3.141
-    # See https://github.com/SeleniumHQ/docker-selenium#running-the-images
+    # todo - Update these images so we can use a up to date browser NIM-8
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
       - hub
     environment:
       HUB_HOST: hub
-
+  # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md#install-certificates-for-chromium-based-browsers
   chrome:
     container_name: functional-tests_chrome_1
     image: selenium/node-chrome:3.141.59-20200826
@@ -26,12 +26,23 @@ services:
   # Selenium Grid/Hub
   hub:
     image: selenium/hub:3.141.59
-    container_name: selenium_hub
-    environment:
-      GRID_DEBUG: 'true'
+    restart: always
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
       #GRID_MAX_SESSION: 2
   #    ports:
   #      - 4444:4444
+
+  # Selenium Grid/Hub
+  # selenium-hub:
+  #   restart: always
+  #   image: selenium/hub:4.17.0-20240123
+  #   ports:
+  #     - "4442:4442"
+  #     - "4443:4443"
+  #     - "4444:4444"
 
   # The tests themselves
   tests:
