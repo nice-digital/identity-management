@@ -1,5 +1,6 @@
 import { Then } from "@wdio/cucumber-framework";
 import loginErrorMessage from '../support/check/loginErrorMessage.js';
+import passwordComplexityErrorMessage from '../support/check/passwordComplexityErrorMessage.js'
 import userNameInput from '../support/check/userNameInput.js';
 import passwordInput from '../support/check/passwordInput.js';
 import confirmEmailInput from '../support/check/confirmEmailInput.js';
@@ -43,6 +44,8 @@ import removeUserOrganisation from '../support/action/removeUserOrganisation.js'
 import {checkForAccessibilityIssues} from "../support/check/checkForAccessibilityIssues.js";
 
 Then(/^I expect the error message is displayed$/, loginErrorMessage);
+
+Then(/^I expect the password Complexity reset error message is displayed$/, passwordComplexityErrorMessage);
 
 Then(/^I expect that username input field does( not)* exist$/, userNameInput);
 
