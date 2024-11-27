@@ -1,5 +1,4 @@
 # See https://github.com/SeleniumHQ/docker-selenium#via-docker-compose
-version: "3.8"
 services:
   firefox:
     container_name: functional-tests_firefox_1
@@ -74,8 +73,10 @@ services:
       - ACCOUNTS_EMAIL3
       - ACCOUNTS_EMAIL4
       - ACCOUNTS_EMAIL5
+      - ACCOUNTS_EMAIL_FAIL_COMPLEXITY
       - ACCOUNTS_PASSWORD
       - ACCOUNTS_PASSWORD2
+      - ACCOUNTS_PASSWORD_FAIL_COMPLEXITY
       - USER_EMAIL1
       - FIRSTNAME1
       - LASTNAME1

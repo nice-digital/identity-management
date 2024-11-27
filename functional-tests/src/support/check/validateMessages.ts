@@ -65,7 +65,7 @@ export async function validateRegistrationValidationMessages(): Promise<void> {
     'element',
     selectors.registrationPage.passwordValidationMessage,
     "",
-    'Please provide a password with least 8 characters in length, contain at least 3 of the following 4 types of characters: lower case letters (a-z), upper case letters (A-Z), numbers (i.e. 0-9) and special characters (e.g. !@#$%^&*)'
+    'Please provide a password with at least 14 characters in length, contains at least 3 of the following 4 types of characters: lower case letters (a-z), upper case letters (A-Z), numbers (i.e. 0-9) and special characters (e.g. !@#$%^&*)'
   );
 };
 
