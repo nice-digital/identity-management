@@ -5,6 +5,6 @@ WORKDIR /data
 COPY package.json /data
 COPY package-lock.json /data
 
-RUN npm install
+RUN npm ci
 
 COPY . .
