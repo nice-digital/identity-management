@@ -117,7 +117,7 @@ Change directory to the client app:
 ```powershell
 cd NICE.Identity.Management/ClientApp
 
-npm install
+npm ci
 
 npm start
 ```

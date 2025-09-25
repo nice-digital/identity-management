@@ -34,7 +34,7 @@ Install [Node.js](https://nodejs.org/en/download/)
 change directory to the client app:
 cd NICE.Identity.Management/ClientApp
 
-npm install
+npm ci
 npm start
 
 ## Running in Visual Studio

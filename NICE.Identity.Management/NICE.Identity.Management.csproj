@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <Target Name="PublishSpa" AfterTargets="ComputeFilesToPublish">
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm ci" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />  
     <!-- Include the newly-built spa files in the publish output -->
     <ItemGroup>

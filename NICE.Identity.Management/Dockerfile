@@ -50,9 +50,9 @@ RUN curl -SL "$WAITFORIT_DOWNLOAD_URL" --output waitforit.tar.gz \
 
 # Install frontend packages with node
 COPY ./published-app/ClientApp/package.json ./app/ClientApp/
-#COPY ./published-app/ClientApp/package-lock.json ./app/ClientApp/
+COPY ./published-app/ClientApp/package-lock.json ./app/ClientApp/
 WORKDIR /app/ClientApp
-RUN npm i --production
+RUN npm ci
 RUN node -v
 
 # Copy .net app to a location on container and run application
