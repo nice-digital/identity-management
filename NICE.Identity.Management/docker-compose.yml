@@ -6,7 +6,7 @@ services:
       - ./docker_ssl_proxy:/etc/nginx
     ports:
       - 8080:80
-      - 44300:443
+      - 443:443
     depends_on:
       - identity
     networks:

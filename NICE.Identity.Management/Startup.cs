@@ -29,8 +29,6 @@ namespace NICE.Identity.Management
 {
     public class Startup
     {
-        private const string CorsPolicyName = "CorsPolicy";
-
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -40,6 +38,7 @@ namespace NICE.Identity.Management
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Environment { get; }
         private const string AdministratorRole = "Administrator";
+        private const string CorsPolicyName = "CorsPolicy";
         public static string AccessKeyForLocalDevelopmentUse;
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -116,15 +115,11 @@ namespace NICE.Identity.Management
         {
             startupLogger.LogInformation("Identity management is starting up");
 
+            app.UseForwardedHeaders();
 
             app.Use(async (context, next) =>
             {
-                if (context.Request.Headers["X-Forwarded-Proto"] == "https" ||
-                                context.Request.Headers["Front-End-Https"] == "on" ||
-                                context.Request.Headers.ContainsKey("X-ARR-SSL"))
-                {
-                    context.Request.Scheme = "https";
-                }
+                context.Request.Scheme = "https";
 
                 context.Response.OnStarting(() =>
                 {
@@ -135,6 +130,8 @@ namespace NICE.Identity.Management
                 await next();
             }
             );
+
+            app.UseHttpsRedirection();
 
             if (env.IsDevelopment())
             {
@@ -202,13 +199,6 @@ namespace NICE.Identity.Management
                 }
             });
 
-            app.UseHttpsRedirection();
-            //app.UseCookiePolicy();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
             app.Use(async (context, next) =>
             {
                 startupLogger.LogInformation(
@@ -228,13 +218,13 @@ namespace NICE.Identity.Management
                 await next();
             });
 
+            app.UseRouting();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
-            app.UseForwardedHeaders();
-
             app.UseStaticFiles();
-
-            //app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
@@ -250,13 +240,21 @@ namespace NICE.Identity.Management
                 }).RequireAuthorization(new AuthorizeAttribute(AdministratorRole));
             });
 
-            app.MapWhen(httpContext => !httpContext.User.Identity.IsAuthenticated, builder =>
-            {
-                builder.Run(async context =>
+            app.MapWhen(
+                httpContext =>
+                    !httpContext.User.Identity.IsAuthenticated &&
+                    !httpContext.Request.Path
+                        .StartsWithSegments(AppSettings.EnvironmentConfig.HealthCheckPublicAPIEndpoint),
+                builder =>
                 {
-                    await niceAuthenticationService.Login(context, context.Request.Path);
+                    builder.Run(async context =>
+                    {
+                        await niceAuthenticationService.Login(
+                            context,
+                            context.Request.Path);
+                    });
                 });
-            });
+
 
             app.MapWhen(httpContext => httpContext.User.Identity.IsAuthenticated && !httpContext.User.IsInRole(AdministratorRole), builder =>
             {

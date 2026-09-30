@@ -1,0 +1,231 @@
+[
+    {
+      "name" : "identity-backend",
+      "image"  : "${backend_image_uri}",
+      "essential" : true,
+      "portMappings" : [
+        {
+          "containerPort" : ${backend_container_port},
+          "name"          : "identity-backend-tcp",
+          "protocol"      : "tcp",
+          "appProtocol"   : "http"
+        }
+      ],
+      "environment" : [
+        {
+          "name"  : "AppSettings__Environment__AccountsEnvironment",
+          "value" : "${backend_env_appsettings_environment_accountsenvironment}"
+        },
+        {
+          "name"  : "AppSettings__Environment__Name",
+          "value" : "${backend_env_appsettings_environment_name}"
+        },
+        {
+          "name"  : "AppSettings__Environment__SsrPort",
+          "value" : "${backend_env_appsettings_environment_ssrport}"
+        },
+        {
+          "name"  : "AppSettings__Environment__SsrHost",
+          "value" : "${backend_env_appsettings_environment_ssrhost}"
+        },
+        {
+          "name"  : "AppSettings__Environment__CorsOrigin",
+          "value" : "${backend_env_appsettings_environment_corsorigin}"
+        },
+        {
+          "name"  : "ConnectionStrings__DefaultConnection",
+          "value" : "${backend_env_connectionstrings_defaultconnection}"
+        },
+        {
+          "name"  : "ConsultationList__DownloadRoles__AdminRoles",
+          "value" : "${backend_env_consultationlist_downloadroles_adminroles}"
+        },
+        {
+          "name"  : "ConsultationList__DownloadRoles__TeamRoles",
+          "value" : "${backend_env_consultationlist_downloadroles_teamroles}"
+        },
+        {
+          "name"  : "Encryption__IV",
+          "value" : "${backend_env_encryption_iv}"
+        },
+        {
+          "name"  : "Encryption__Key",
+          "value" : "${backend_env_encryption_key}"
+        },
+        {
+          "name"  : "Feeds__CacheDurationSeconds",
+          "value" : "${backend_env_feeds_cachedurationseconds}"
+        },
+        {
+          "name"  : "Feeds__IndevApiKey",
+          "value" : "${backend_env_feeds_indevapikey}"
+        },
+        {
+          "name"  : "Feeds__IndevBasePath",
+          "value" : "${backend_env_feeds_indevbasepath}"
+        },
+        {
+          "name"  : "Feeds__IndevDraftPreviewChapterFeedPath",
+          "value" : "${backend_env_feeds_indevdraftpreviewchapterfeedpath}"
+        },
+        {
+          "name"  : "Feeds__IndevDraftPreviewDetailFeedPath",
+          "value" : "${backend_env_feeds_indevdraftpreviewdetailfeedpath}"
+        },
+        {
+          "name"  : "Feeds__IndevIDAMConfig__APIIdentifier",
+          "value" : "${backend_env_feeds_indevidamconfig_apiidentifier}"
+        },
+        {
+          "name"  : "Feeds__IndevIDAMConfig__ClientId",
+          "value" : "${backend_env_feeds_indevidamconfig_clientid}"
+        },
+        {
+          "name"  : "Feeds__IndevIDAMConfig__ClientSecret",
+          "value" : "${backend_env_feeds_indevidamconfig_clientsecret}"
+        },
+        {
+          "name"  : "Feeds__IndevIDAMConfig__Domain",
+          "value" : "${backend_env_feeds_indevidamconfig_domain}"
+        },
+        {
+          "name"  : "Feeds__IndevListFeedPath",
+          "value" : "${backend_env_feeds_indevlistfeedpath}"
+        },
+        {
+          "name"  : "Feeds__IndevPublishedChapterFeedPath",
+          "value" : "${backend_env_feeds_indevpublishedchapterfeedpath}"
+        },
+        {
+          "name"  : "Feeds__IndevPublishedDetailFeedPath",
+          "value" : "${backend_env_feeds_indevpublisheddetailfeedpath}"
+        },
+        {
+          "name"  : "Feeds__IndevPublishedPreviewDetailFeedPath",
+          "value" : "${backend_env_feeds_indevpublishedpreviewdetailfeedpath}"
+        },
+        {
+          "name"  : "Gilliam__GetClaimsUrl",
+          "value" : "${backend_env_gilliam_getclaimsurl}"
+        },
+        {
+          "name"  : "Gilliam__GilliamBasePath",
+          "value" : "${backend_env_gilliam_gilliambasepath}"
+        },
+        {
+          "name"  : "Gilliam__GilliamClientCertificateBase64",
+          "value" : "${backend_env_gilliam_gilliamclientcertificatebase64}"
+        },
+        {
+          "name"  : "GlobalNav__CookieBannerScript",
+          "value" : "${backend_env_globalnav_cookiebannerscript}"
+        },
+        {
+          "name"  : "GlobalNav__Script",
+          "value" : "${backend_env_globalnav_script}"
+        },
+        {
+          "name"  : "GlobalNav__ScriptIE8",
+          "value" : "${backend_env_globalnav_scriptie8}"
+        },
+        {
+          "name"  : "IndevDraftPreviewDetailFeedPath",
+          "value" : "${backend_env_indevdraftpreviewdetailfeedpath}"
+        },
+        {
+          "name"  : "Logging__SerilogMinLevel",
+          "value" : "${backend_env_logging_serilogminlevel}"
+        },
+        {
+          "name"  : "Status__APIKey",
+          "value" : "${backend_env_status_apikey}"
+        },
+        {
+          "name"  : "WebAppConfiguration__ApiIdentifier",
+          "value" : "${backend_env_webappconfiguration_apiidentifier}"
+        },
+        {
+          "name"  : "WebAppConfiguration__AuthorisationServiceUri",
+          "value" : "${backend_env_webappconfiguration_authorisationserviceuri}"
+        },
+        {
+          "name"  : "WebAppConfiguration__RedirectUri",
+          "value" : "${backend_env_webappconfiguration_redirecturi}"
+        },
+        {
+          "name"  : "WebAppConfiguration__PostLogoutRedirectUri",
+          "value" : "${backend_env_webappconfiguration_postlogoutredirecturi}"
+        },
+        {
+          "name"  : "WebAppConfiguration__ClientId",
+          "value" : "${backend_env_webappconfiguration_clientid}"
+        },
+        {
+          "name"  : "WebAppConfiguration__ClientSecret",
+          "value" : "${backend_env_webappconfiguration_clientsecret}"
+        },
+        {
+          "name"  : "WebAppConfiguration__Domain",
+          "value" : "${backend_env_webappconfiguration_domain}"
+        },
+        {
+          "name"  : "WebAppConfiguration__GoogleTrackingId",
+          "value" : "${backend_env_webappconfiguration_googletrackingid}"
+        },
+        {
+          "name"  : "WebAppConfiguration__RedisServiceConfiguration__ConnectionString",
+          "value" : "${backend_env_webappconfiguration_redisserviceconfiguration_connectionstring}"
+        },
+        {
+          "name"  : "WebAppConfiguration__RedisServiceConfiguration__Enabled",
+          "value" : "${backend_env_webappconfiguration_redisserviceconfiguration_enabled}"
+        }
+      ],
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group"  : "true",
+          "awslogs-group"         : "/ecs/identity",
+          "awslogs-region"        : "${aws_region}",
+          "awslogs-stream-prefix" : "ecs"
+        }
+      },
+      "healthCheck" : {
+        "command"  : ["CMD-SHELL", "wget --spider -q http://0.0.0.0:80 || exit 1"],
+        "interval" : 120,
+        "timeout"  : 60,
+        "retries"  : 3
+      },
+      "dependsOn" : [
+        {
+          "containerName" : "identity-frontend",
+          "condition" : "START"
+        }
+      ]
+    },
+    {
+      "name"      : "identity-frontend",
+      "image"     : "${frontend_image_uri}",
+      "essential" : true,
+      "portMappings" : [
+        {
+          "hostPort"      : ${frontend_container_port},
+          "containerPort" : ${frontend_container_port},
+          "name"          : "identity-frontend-tcp",
+          "protocol"      : "tcp",
+          "appProtocol"   : "http"
+        }
+      ],
+      "environment" : [
+      ],
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group"  : "true",
+          "awslogs-group"         : "/ecs/identity",
+          "awslogs-region"        : "${aws_region}",
+          "awslogs-stream-prefix" : "ecs"
+        }
+      }
+    }
+  ]
