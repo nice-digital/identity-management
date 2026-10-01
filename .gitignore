@@ -257,3 +257,11 @@ netcoreapp2.0/*
 /NICE.Identity.Management/published-app
 /NICE.Identity.Management.Test/published-app
 
+# Terraform local development files
+terraform/environments/dev/dev.s3.tfbackend
+terraform/environments/dev/dev.tfvars
+terraform/environments/dev/.terraform
+terraform/environments/dev/tfplan
+
+.env
+

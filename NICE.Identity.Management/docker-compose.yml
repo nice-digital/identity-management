@@ -1,0 +1,41 @@
+services:
+  nginxidentity:
+    container_name: nginxidentity
+    image: nginx:latest
+    volumes:
+      - ./docker_ssl_proxy:/etc/nginx
+    ports:
+      - 8080:80
+      - 443:443
+    depends_on:
+      - identity
+    networks:
+      default:
+        aliases:
+          - identity
+  redisidentity:
+    container_name: redisidentity
+    image: "redis:alpine3.15"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+  nodeappidentity:
+    container_name: nodeappidentity
+    build:
+      context: ./ClientApp
+    ports:
+      - "5000:5000"
+  identity:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redisidentity
+      - nodeappidentity
+    ports:
+      - "80:80"
+    env_file: ".env"
+
+      

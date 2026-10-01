@@ -1,0 +1,182 @@
+[
+    {
+      "name" : "identity-backend",
+      "image"  : "${backend_image_uri}",
+      "essential" : true,
+      "portMappings" : [
+        {
+          "containerPort" : ${backend_container_port},
+          "name"          : "identity-backend-tcp",
+          "protocol"      : "tcp",
+          "appProtocol"   : "http"
+        }
+      ],
+      "environment" : [
+        {
+          "name"  : "WebAppConfiguration__ApiIdentifier",
+          "value" : "${backend_env_webappconfiguration_apiidentifier}"
+        },
+        {
+          "name"  : "WebAppConfiguration__AuthorisationServiceUri",
+          "value" : "${backend_env_webappconfiguration_authorisationserviceuri}"
+        },
+        {
+          "name"  : "WebAppConfiguration__RedirectUri",
+          "value" : "${backend_env_webappconfiguration_redirecturi}"
+        },
+        {
+          "name"  : "WebAppConfiguration__PostLogoutRedirectUri",
+          "value" : "${backend_env_webappconfiguration_postlogoutredirecturi}"
+        },
+        {
+          "name"  : "WebAppConfiguration__ClientId",
+          "value" : "${backend_env_webappconfiguration_clientid}"
+        },
+        {
+          "name"  : "WebAppConfiguration__ClientSecret",
+          "value" : "${backend_env_webappconfiguration_clientsecret}"
+        },
+        {
+          "name"  : "WebAppConfiguration__Domain",
+          "value" : "${backend_env_webappconfiguration_domain}"
+        },
+        {
+          "name"  : "WebAppConfiguration__GoogleTrackingId",
+          "value" : "${backend_env_webappconfiguration_googletrackingid}"
+        },
+        {
+          "name"  : "WebAppConfiguration__RedisServiceConfiguration__ConnectionString",
+          "value" : "${backend_env_webappconfiguration_redisserviceconfiguration_connectionstring}"
+        },
+        {
+          "name": "Environment__Name",
+          "value": "${backend_env_environment_name}"
+        },
+        {
+          "name": "AppSettings__Environment__HealthCheckPublicAPIEndpoint",
+          "value": "${backend_env_environment_healthcheckpublicapiendpoint}"
+        },
+        {
+          "name": "AppSettings__Environment__HealthCheckAuthenticatedEndpoints",
+          "value": "${backend_env_environment_healthcheckauthenticatedendpoints}"
+        },
+        {
+          "name": "Environment__HealthCheckAuthenticatedAPIKey",
+          "value": "${backend_env_environment_healthcheckauthenticatedapikey}"
+        },
+        {
+          "name": "Environment__CorsOrigin",
+          "value": "${backend_env_environment_corsorigin}"
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__Name",
+          "value": "${backend_env_healthchecksui_webhooks_0_name}"
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__Uri",
+          "value": "${backend_env_healthchecksui_webhooks_0_uri}"
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__Payload",
+          "value": ${jsonencode(backend_env_healthchecksui_webhooks_0_payload)}
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__RestoredPayload",
+          "value": ${jsonencode(backend_env_healthchecksui_webhooks_0_restoredpayload)}
+        },
+        {
+          "name": "HealthChecksUI__EvaluationTimeInSeconds",
+          "value": "${backend_env_healthchecksui_evaluationtimeinseconds}"
+        },
+        {
+          "name": "HealthChecksUI__MinimumSecondsBetweenFailureNotifications",
+          "value": "${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications}"
+        },
+        {
+          "name": "FrontendProxy__Routes__frontend-route__ClusterId",
+          "value": "${backend_env_frontendproxy_routes_frontend-route_clusterid}"
+        },
+        {
+          "name": "FrontendProxy__Routes__frontend-route__Match__Path",
+          "value": "${backend_env_frontendproxy_routes_frontend-route_match_path}"
+        },
+        {
+          "name": "FrontendProxy__Clusters__frontend-cluster__Destinations__frontend-server__Address",
+          "value": "${backend_env_frontendproxy_clusters_frontend-cluster_destinations_frontend-server_address}"
+        }
+      ],
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group"  : "true",
+          "awslogs-group"         : "/ecs/identity",
+          "awslogs-region"        : "${aws_region}",
+          "awslogs-stream-prefix" : "ecs"
+        }
+      },
+      "healthCheck" : {
+        "command"  : ["CMD-SHELL", "wget --spider -q http://0.0.0.0:80/health || exit 1"],
+        "interval" : 120,
+        "timeout"  : 60,
+        "retries"  : 3
+      },
+      "dependsOn" : [
+        {
+          "containerName" : "identity-redis",
+          "condition" : "START"
+        },
+        {
+          "containerName" : "identity-frontend",
+          "condition" : "START"
+        }
+      ]
+    },
+    {
+      "name"      : "identity-frontend",
+      "image"     : "${frontend_image_uri}",
+      "essential" : true,
+      "portMappings" : [
+        {
+          "hostPort"      : ${frontend_container_port},
+          "containerPort" : ${frontend_container_port},
+          "name"          : "identity-frontend-tcp",
+          "protocol"      : "tcp",
+          "appProtocol"   : "http"
+        }
+      ],
+      "environment" : [
+      ],
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group"  : "true",
+          "awslogs-group"         : "/ecs/identity",
+          "awslogs-region"        : "${aws_region}",
+          "awslogs-stream-prefix" : "ecs"
+        }
+      }
+    },
+    {
+      "name"      : "identity-redis",
+      "image"     : "redis:alpine3.15",
+      "essential" : true,
+      "portMappings" : [
+        {
+          "hostPort"      : 6379,
+          "containerPort" : 6379,
+          "name"          : "identity-redis-tcp",
+          "protocol"      : "tcp",
+          "appProtocol"   : "http"
+        }
+      ],
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group"  : "true",
+          "awslogs-group"         : "/ecs/identity",
+          "awslogs-region"        : "${aws_region}",
+          "awslogs-stream-prefix" : "ecs"
+        }
+      }
+    }
+  ]
