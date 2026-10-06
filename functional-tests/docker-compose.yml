@@ -82,17 +82,34 @@ services:
       - LASTNAME1
       - FIRSTNAME1LASTNAME1
 
+  # Identity management frontend
+  nodeappidentity:
+    container_name: nodeappidentity
+    build:
+      context: ./../Comments/ClientApp/
+    ports:
+      - "5000:5000"
+    networks:
+      default:
+        aliases:
+          - nodeappidentity  
+
   # Identity management dotnet core web app
   idammanagement:
     container_name: functional-tests_idammanagement_1
-    build: ./../NICE.Identity.Management/
+    build: 
+      context: ./../NICE.Identity.Management/
+      dockerfile: Test.Dockerfile
     links:
       - database
       - api
+    depends_on:
+      - nodeappidentity
     # Enable browsing from the host machine on http://localhost:8080/consultations
     ports:
       - 8080:8080
     environment:
+      - FrontendProxy__Clusters__frontend-cluster__Destinations__frontend-server__Address=http://nodeappidentity
       - AUTHCONFIGURATION_AUTH_SERVICE_URI
       - AUTHCONFIGURATION_API_IDENTIFIER
       - ALPHA_AUTH_SERVICE_URI
