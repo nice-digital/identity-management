@@ -86,7 +86,7 @@ services:
   nodeappidentity:
     container_name: nodeappidentity
     build:
-      context: ./../Comments/ClientApp/
+      context: ./../NICE.Identity.Management/ClientApp/
     ports:
       - "5000:5000"
     networks:
