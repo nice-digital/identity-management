@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.1.0",
-    "json-server": "^0.17.0"
+    "dotenv": "^16.0.2",
+    "json-server": "^0.17.3"
   }
 }

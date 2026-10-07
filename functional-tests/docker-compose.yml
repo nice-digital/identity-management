@@ -66,8 +66,8 @@ services:
       - IDENTITYAPI_API_GRANT_TYPE
       - IDENTITYAPI_API_AUDIENCE
       - IDENTITY_NOUSER_EMAIL
-      - WEBAPP_API_IDENTIFIER
-      - WEBAPP_GOOGLE_TRACK_ID
+      - WebAppConfiguration_ApiIdentifier
+      - WebAppConfiguration_GoogleTrackingId
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
@@ -92,12 +92,12 @@ services:
     networks:
       default:
         aliases:
-          - nodeappidentity  
+          - nodeappidentity
 
   # Identity management dotnet core web app
   idammanagement:
     container_name: functional-tests_idammanagement_1
-    build: 
+    build:
       context: ./../NICE.Identity.Management/
       dockerfile: Test.Dockerfile
     links:
@@ -117,14 +117,14 @@ services:
       - ALPHA_API_KEY
       - REACT_APP_API_BASE_URL
       - DEFAULT_CONNECTION
-      - WEBAPP_DOMAIN
-      - WEBAPP_CLIENTID
-      - WEBAPP_CLIENTSECRECT
-      - WEBAPP_REDIRECT_URI
-      - WEBAPP_LOGOUT_REDIRECT_URI
-      - WEBAPP_AUTH_SERVICE_URI
-      - WEBAPP_API_IDENTIFIER
-      - WEBAPP_GOOGLE_TRACK_ID
+      - WebAppConfiguration_Domain
+      - WebAppConfiguration_ClientId
+      - WebAppConfiguration_ClientSecret
+      - WebAppConfiguration_RedirectUri
+      - WebAppConfiguration_PostLogoutRedirectUri
+      - WebAppConfiguration_AuthorisationServiceUri
+      - WebAppConfiguration_ApiIdentifier
+      - WebAppConfiguration_GoogleTrackingId
       - IDENTITYAPI_AUTH_SERVICE_URI
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_CLIENTID
@@ -168,11 +168,11 @@ services:
 
   redis:
     container_name: functional-tests_redis_1
-    image: 'redis:alpine'
+    image: "redis:alpine"
     #command: redis-server --requirepass sOmE_sEcUrE_pAsS
     ports:
-      - '6379:6379'
-    command: ['redis-server', '--appendonly', 'yes']
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
     #command: ["redis-server", "--bind", "redis", "--port", "6379"]
 
   # nginx:
