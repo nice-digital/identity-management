@@ -20,6 +20,7 @@ jq \
     --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
     --arg identityapiclientsecret "$IDENTITYAPI_API_CLIENTSECRECT" \
     --arg RedisConnectionString "$REDIS_CONNECTION_STRING" \
+    --arg frontendproxyclustersfrontendaddress "FRONTENDPROXY_ADDRESS" \
     '
     .ConnectionStrings.DefaultConnection = $defaultConnection |
     .WebAppConfiguration.Domain = $webappdomain |
@@ -35,7 +36,8 @@ jq \
     .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
     .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
     .IdentityApiConfiguration.ClientId = $identityapiclientid |
-    .IdentityApiConfiguration.ClientSecret = $identityapiclientsecret
+    .IdentityApiConfiguration.ClientSecret = $identityapiclientsecret |
+    .FrontendProxy.Clusters.frontend-cluster.Destinations.frontend-server.Address = $frontendproxyclustersfrontendaddress
     '\
     appsettings.json > _appsettings.json \
     && mv _appsettings.json appsettings.json
