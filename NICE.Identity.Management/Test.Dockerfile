@@ -3,7 +3,27 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0.11-resolute-amd64
 
-ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_URLS="http://+:8080"
+
+# Install required packages
+# To Run locally uncomment lines 10-26
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  git \
+  curl \
+  ca-certificates \
+  jq \
+  && rm -rf /var/lib/apt/lists/*
+
+# Add corporate / proxy CA certificate
+COPY ./certificates/company-ca.crt.cer \
+  /usr/local/share/ca-certificates/corporate-root-ca.crt
+
+RUN update-ca-certificates
+
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/corporate-root-ca.crt
+RUN apt-get update && apt-get install git -y
+RUN git --version
 
 # Install Git
 RUN apt-get update && apt-get install git -y

@@ -1,21 +1,36 @@
-FROM node:24.13.1-trixie
+FROM node:lts-trixie
 
 ENV IN_DOCKER=true
 
+# Uncomment line 6-12 to run locally
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  git \
+  curl \
+  ca-certificates \
+  jq \
+  && rm -rf /var/lib/apt/lists/*
+
+# Uncomment line 15-18 to run locally
+COPY ./certificates/company-ca.crt.cer \
+  /usr/local/share/ca-certificates/corporate-root-ca.crt
+
+RUN update-ca-certificates
+
 # Install Java (for Allure) see https://stackoverflow.com/a/44154721/486434
 RUN \
-	apt-get update && \
-	DEBIAN_FRONTEND=noninteractive \
-	apt-get -y install \
-	default-jre-headless \
-	&& \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/*
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive \
+  apt-get -y install \
+  default-jre-headless \
+  && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # Install Allure for generating a report
 RUN curl -o allure-2.13.2.tgz -Ls https://repo1.maven.org/maven2/io/qameta/allure/allure-commandline/2.13.2/allure-commandline-2.13.2.tgz \
-	&& tar -zxf allure-2.13.2.tgz -C /usr/local --strip-components=1 \
-	&& rm allure-2.13.2.tgz
+  && tar -zxf allure-2.13.2.tgz -C /usr/local --strip-components=1 \
+  && rm allure-2.13.2.tgz
 
 RUN mkdir -p /tests
 
@@ -37,8 +52,10 @@ WORKDIR /tests
 COPY package.json /tests
 COPY package-lock.json /tests
 
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/corporate-root-ca.crt
+
 RUN npm ci
 
 COPY . /tests
 
-CMD tail -f /dev/null
+CMD ["tail", "-f", "/dev/null"]

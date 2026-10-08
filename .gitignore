@@ -266,3 +266,6 @@ terraform/environments/dev/tfplan
 .env
 
 /NICE.Identity.Management/certificates
+/NICE.Identity.Management/ClientApp/certificates
+/NICE.Identity.Management.MockApi/certificates
+/functional-tests/certificates
