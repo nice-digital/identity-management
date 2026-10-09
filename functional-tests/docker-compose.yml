@@ -54,7 +54,7 @@ services:
     links:
       - api
       - hub
-      # - nginx
+      - nginx
       - idammanagement
     environment:
       - TEAMCITY_VERSION
@@ -82,17 +82,32 @@ services:
       - LASTNAME1
       - FIRSTNAME1LASTNAME1
 
+  # Identity management frontend
+  nodeappidentity:
+    container_name: nodeappidentity
+    build:
+      context: ./../NICE.Identity.Management/ClientApp/
+    ports:
+      - "5000:5000"
+    networks:
+      default:
+        aliases:
+          - nodeappidentity
+
   # Identity management dotnet core web app
   idammanagement:
     container_name: functional-tests_idammanagement_1
-    build: ./../NICE.Identity.Management/
+    build:
+      context: ./../NICE.Identity.Management/
+      dockerfile: Test.Dockerfile
     links:
       - database
       - api
+    depends_on:
+      - nodeappidentity
     # Enable browsing from the host machine on http://localhost:8080/consultations
-    ports:
-      - 8080:8080
     environment:
+      - FRONTENDPROXY_ADDRESS
       - AUTHCONFIGURATION_AUTH_SERVICE_URI
       - AUTHCONFIGURATION_API_IDENTIFIER
       - ALPHA_AUTH_SERVICE_URI
@@ -114,10 +129,7 @@ services:
       - IDENTITYAPI_API_CLIENTSECRECT
       - ASPNETCORE_ENVIRONMENT
       - REDIS_CONNECTION_STRING
-    networks:
-      default:
-        aliases:
-          - idam
+      - HEALTHCHECK_PUBLIC_API_ENDPOINT
 
   # MS SQL Server database
   database:
@@ -151,24 +163,24 @@ services:
 
   redis:
     container_name: functional-tests_redis_1
-    image: 'redis:alpine'
+    image: "redis:alpine"
     #command: redis-server --requirepass sOmE_sEcUrE_pAsS
     ports:
-      - '6379:6379'
-    command: ['redis-server', '--appendonly', 'yes']
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
     #command: ["redis-server", "--bind", "redis", "--port", "6379"]
 
-  # nginx:
-  #   container_name: functional-tests_nginx_1
-  #   image: nginx:latest
-  #   volumes:
-  #     - ./docker_ssl_proxy:/etc/nginx
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   links:
-  #     - comments
-  #   networks:
-  #     default:
-  #       aliases:
-  #         - niceorg
+  nginx:
+    container_name: functional-tests_nginx_1
+    image: nginx:latest
+    volumes:
+      - ./docker_ssl_proxy:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - idammanagement
+    networks:
+      default:
+        aliases:
+          - idam

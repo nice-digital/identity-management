@@ -20,8 +20,11 @@ jq \
     --arg identityapiclientid "$IDENTITYAPI_API_CLIENTID" \
     --arg identityapiclientsecret "$IDENTITYAPI_API_CLIENTSECRECT" \
     --arg RedisConnectionString "$REDIS_CONNECTION_STRING" \
+    --arg frontendproxyclustersfrontendaddress "$FRONTENDPROXY_ADDRESS" \
+    --arg healthcheckpublicapiendpoint "$HEALTHCHECK_PUBLIC_API_ENDPOINT" \
     '
     .ConnectionStrings.DefaultConnection = $defaultConnection |
+    .AppSettings.Environment.HealthCheckPublicAPIEndpoint = $healthcheckpublicapiendpoint |
     .WebAppConfiguration.Domain = $webappdomain |
     .WebAppConfiguration.ClientId = $webappclientid |
     .WebAppConfiguration.ClientSecret = $webappclientsecret |
@@ -35,12 +38,19 @@ jq \
     .IdentityApiConfiguration.AuthorisationServiceUri = $identityapiauthorisationserviceuri |
     .IdentityApiConfiguration.ApiIdentifier = $identityapiidentifier |
     .IdentityApiConfiguration.ClientId = $identityapiclientid |
-    .IdentityApiConfiguration.ClientSecret = $identityapiclientsecret
+    .IdentityApiConfiguration.ClientSecret = $identityapiclientsecret |
+    .FrontendProxy.Clusters."frontend-cluster".Destinations."frontend-server".Address = $frontendproxyclustersfrontendaddress
     '\
     appsettings.json > _appsettings.json \
     && mv _appsettings.json appsettings.json
 
-replace "#{REACT_APP_API_BASE_URL}" "$REACT_APP_API_BASE_URL" ClientApp/build/static/js/ -r --include="*.js"
+# The frontend is served by the separate nodeappidentity container, so the
+# backend no longer bundles ClientApp/build. Only run the API-base-url token
+# replacement when a bundled build is actually present (legacy/coupled mode),
+# otherwise skip it so backend startup does not fail when the SPA is absent.
+if [ -d ClientApp/build/static/js ]; then
+    replace "#{REACT_APP_API_BASE_URL}" "$REACT_APP_API_BASE_URL" ClientApp/build/static/js/ -r --include="*.js"
+fi
 
 dotnet NICE.Identity.Management.dll
 

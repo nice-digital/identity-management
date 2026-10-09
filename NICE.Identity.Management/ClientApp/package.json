@@ -3,9 +3,13 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@babel/preset-flow": "^7.10.4",
+		"@babel/register": "^7.10.4",
 		"@nice-digital/design-system": "^4.0.0",
 		"@nice-digital/global-nav": "^5.0.890",
 		"concurrently": "^6.2.0",
+		"express": "^4.17.1",
+		"ignore-styles": "^5.0.1",
 		"moment": "^2.29.4",
 		"query-string": "^6.12.1",
 		"react": "^18.1.0",
@@ -35,6 +39,7 @@
 	},
 	"scripts": {
 		"prestart": "npm run sass-design-system",
+		"start:spa": "cross-env NODE_ENV=production node src/server/spa-server.js",
 		"start": "react-scripts start",
 		"prebuild": "npm run sass-design-system",
 		"build": "react-scripts build",
