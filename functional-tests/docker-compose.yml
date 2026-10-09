@@ -54,7 +54,7 @@ services:
     links:
       - api
       - hub
-      # - nginx
+      - nginx
       - idammanagement
     environment:
       - TEAMCITY_VERSION
@@ -66,8 +66,8 @@ services:
       - IDENTITYAPI_API_GRANT_TYPE
       - IDENTITYAPI_API_AUDIENCE
       - IDENTITY_NOUSER_EMAIL
-      - WebAppConfiguration_ApiIdentifier
-      - WebAppConfiguration_GoogleTrackingId
+      - WEBAPP_API_IDENTIFIER
+      - WEBAPP_GOOGLE_TRACK_ID
       - ACCOUNTS_EMAIL
       - ACCOUNTS_EMAIL2
       - ACCOUNTS_EMAIL3
@@ -106,8 +106,6 @@ services:
     depends_on:
       - nodeappidentity
     # Enable browsing from the host machine on http://localhost:8080/consultations
-    ports:
-      - 8080:8080
     environment:
       - FRONTENDPROXY_ADDRESS
       - AUTHCONFIGURATION_AUTH_SERVICE_URI
@@ -117,24 +115,20 @@ services:
       - ALPHA_API_KEY
       - REACT_APP_API_BASE_URL
       - DEFAULT_CONNECTION
-      - WebAppConfiguration_Domain
-      - WebAppConfiguration_ClientId
-      - WebAppConfiguration_ClientSecret
-      - WebAppConfiguration_RedirectUri
-      - WebAppConfiguration_PostLogoutRedirectUri
-      - WebAppConfiguration_AuthorisationServiceUri
-      - WebAppConfiguration_ApiIdentifier
-      - WebAppConfiguration_GoogleTrackingId
+      - WEBAPP_DOMAIN
+      - WEBAPP_CLIENTID
+      - WEBAPP_CLIENTSECRECT
+      - WEBAPP_REDIRECT_URI
+      - WEBAPP_LOGOUT_REDIRECT_URI
+      - WEBAPP_AUTH_SERVICE_URI
+      - WEBAPP_API_IDENTIFIER
+      - WEBAPP_GOOGLE_TRACK_ID
       - IDENTITYAPI_AUTH_SERVICE_URI
       - IDENTITYAPI_IDENTIFIER
       - IDENTITYAPI_API_CLIENTID
       - IDENTITYAPI_API_CLIENTSECRECT
       - ASPNETCORE_ENVIRONMENT
       - REDIS_CONNECTION_STRING
-    networks:
-      default:
-        aliases:
-          - idam
 
   # MS SQL Server database
   database:
@@ -175,17 +169,17 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
     #command: ["redis-server", "--bind", "redis", "--port", "6379"]
 
-  # nginx:
-  #   container_name: functional-tests_nginx_1
-  #   image: nginx:latest
-  #   volumes:
-  #     - ./docker_ssl_proxy:/etc/nginx
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   links:
-  #     - comments
-  #   networks:
-  #     default:
-  #       aliases:
-  #         - niceorg
+  nginx:
+    container_name: functional-tests_nginx_1
+    image: nginx:latest
+    volumes:
+      - ./docker_ssl_proxy:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - idammanagement
+    networks:
+      default:
+        aliases:
+          - idam

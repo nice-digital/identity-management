@@ -66,7 +66,7 @@ export const config: WebdriverIO.Config = {
 
 	logLevel: "warn",
 
-	baseUrl: "https://idam:8080",
+	baseUrl: "https://idam",
 	reporters: [
 		"spec",
 		"teamcity",
