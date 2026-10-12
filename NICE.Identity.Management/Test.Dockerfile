@@ -35,14 +35,18 @@ SHELL ["/bin/bash", "-c"]
 
 # since we're starting non-interactive shell, 
 # we will need to tell bash to load .bashrc manually
-ENV BASH_ENV="~/.bashrc"
+# ENV BASH_ENV="~/.bashrc"
 # needed by volta() function
 ENV VOLTA_HOME="/root/.volta"
 # make sure packages managed by volta will be in PATH
 ENV PATH=$VOLTA_HOME/bin:$PATH
 
-# install volta
-RUN curl https://get.volta.sh | bash
+# Install Volta, then install node. Volta's installer writes to the PATH
+# set above, so `volta` is on PATH in this and later layers without
+# relying on .bashrc being sourced (BASH_ENV does not expand "~"). 
+#The --skip-setup flag tells Volta not to mess with shell profile files, since we're managing PATH ourselves via ENV.
+RUN curl https://get.volta.sh | bash -s -- --skip-setup
+
 RUN volta install node
 
 RUN node -v
