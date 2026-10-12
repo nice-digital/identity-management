@@ -3,19 +3,19 @@ FROM node:lts-trixie
 ENV IN_DOCKER=true
 
 # Uncomment line 6-12 to run locally
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-  git \
-  curl \
-  ca-certificates \
-  jq \
-  && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update \
+#   && apt-get install -y --no-install-recommends \
+#   git \
+#   curl \
+#   ca-certificates \
+#   jq \
+#   && rm -rf /var/lib/apt/lists/*
 
-# Uncomment line 15-18 to run locally
-COPY ./certificates/company-ca.crt.cer \
-  /usr/local/share/ca-certificates/corporate-root-ca.crt
+# # Uncomment line 15-18 to run locally
+# COPY ./certificates/company-ca.crt.cer \
+#   /usr/local/share/ca-certificates/corporate-root-ca.crt
 
-RUN update-ca-certificates
+# RUN update-ca-certificates
 
 # Install Java (for Allure) see https://stackoverflow.com/a/44154721/486434
 RUN \

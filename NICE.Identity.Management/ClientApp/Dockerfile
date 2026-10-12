@@ -3,8 +3,8 @@ FROM node:14.18.0-bullseye-slim
 WORKDIR /app
 
 # Uncomment line 15-18 to run locally
-COPY ./certificates/company-ca.crt.cer \
-  /usr/local/share/ca-certificates/corporate-root-ca.crt
+# COPY ./certificates/company-ca.crt.cer \
+#   /usr/local/share/ca-certificates/corporate-root-ca.crt
 
 # Uncomment line 6-12 to run locally
 # RUN apt-get update \

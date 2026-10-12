@@ -2,46 +2,47 @@
 services:
   firefox:
     container_name: functional-tests_firefox_1
-    image: selenium/node-firefox:3.141
-    # todo - Update these images so we can use a up to date browser NIM-8
+    # Pinned to current stable Grid 4.49 so hub + all nodes share one version (NIM-8).
+    image: selenium/node-firefox:4.49.0-20260909
+    shm_size: 2gb
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
       - hub
     environment:
-      HUB_HOST: hub
+      - SE_EVENT_BUS_HOST=hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=2
   # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md#install-certificates-for-chromium-based-browsers
   chrome:
     container_name: functional-tests_chrome_1
-    image: selenium/node-chrome:3.141.59-20200826
+    image: selenium/node-chrome:4.49.0-20260909
+    shm_size: 2gb
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
       - hub
     environment:
-      HUB_HOST: hub
+      - SE_EVENT_BUS_HOST=hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       #NODE_MAX_INSTANCES: 2
 
-  # Selenium Grid/Hub
+  # Selenium Grid/Hub (v4). Keeps the /wd/hub endpoint, so wdio.conf.ts `path: "/wd/hub"` still applies.
   hub:
-    image: selenium/hub:3.141.59
+    image: selenium/hub:4.49.0-20260909
     restart: always
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
-      #GRID_MAX_SESSION: 2
-  #    ports:
-  #      - 4444:4444
 
-  # Selenium Grid/Hub
-  # selenium-hub:
-  #   restart: always
-  #   image: selenium/hub:4.17.0-20240123
-  #   ports:
-  #     - "4442:4442"
-  #     - "4443:4443"
-  #     - "4444:4444"
+  # --- Previous Selenium Grid 3.141 config (kept for rollback) ---
+  # firefox:  image: selenium/node-firefox:3.141            (env: HUB_HOST=hub)
+  # chrome:   image: selenium/node-chrome:3.141.59-20200826 (env: HUB_HOST=hub)
+  # hub:      image: selenium/hub:3.141.59
 
   # The tests themselves
   tests:
