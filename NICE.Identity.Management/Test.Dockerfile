@@ -29,37 +29,25 @@ ENV ASPNETCORE_URLS="http://+:8080"
 RUN apt-get update && apt-get install git -y
 RUN git --version
 
-# # bash will load volta() function via .bashrc 
-# # using $VOLTA_HOME/load.sh
-# SHELL ["/bin/bash", "-c"]
+# bash will load volta() function via .bashrc 
+# using $VOLTA_HOME/load.sh
+SHELL ["/bin/bash", "-c"]
 
-# # since we're starting non-interactive shell, 
-# # we will need to tell bash to load .bashrc manually
-# # ENV BASH_ENV="~/.bashrc"
-# # needed by volta() function
-# ENV VOLTA_HOME="/root/.volta"
-# # make sure packages managed by volta will be in PATH
-# ENV PATH=$VOLTA_HOME/bin:$PATH
+# since we're starting non-interactive shell, 
+# we will need to tell bash to load .bashrc manually
+# ENV BASH_ENV="~/.bashrc"
+# needed by volta() function
+ENV VOLTA_HOME="/root/.volta"
+# make sure packages managed by volta will be in PATH
+ENV PATH=$VOLTA_HOME/bin:$PATH
 
-# # Install Volta, then install node. Volta's installer writes to the PATH
-# # set above, so `volta` is on PATH in this and later layers without
-# # relying on .bashrc being sourced (BASH_ENV does not expand "~"). 
-# #The --skip-setup flag tells Volta not to mess with shell profile files, since we're managing PATH ourselves via ENV.
-# RUN curl https://get.volta.sh | bash -s -- --skip-setup
+# Install Volta, then install node. Volta's installer writes to the PATH
+# set above, so `volta` is on PATH in this and later layers without
+# relying on .bashrc being sourced (BASH_ENV does not expand "~"). 
+#The --skip-setup flag tells Volta not to mess with shell profile files, since we're managing PATH ourselves via ENV.
+RUN curl https://get.volta.sh | bash -s -- --skip-setup
 
-# RUN volta install node
-
-# Install node and npm
-# Latest Nodejs LTS as of 03/05/2018
-ENV NODE_VERSION="18.17.0"
-ENV NODE_DOWNLOAD_SHA="5c4a7fd9262c0c47bafab3442de6c3fed1602be3d243cb8cf11309a201955e75"
-ENV NODE_DOWNLOAD_URL="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz"
-
-RUN curl -SL "$NODE_DOWNLOAD_URL" --output nodejs.tar.gz \
-  && echo "$NODE_DOWNLOAD_SHA nodejs.tar.gz" | sha256sum -c - \
-  && tar -xzf nodejs.tar.gz -C /usr/local --strip-components=1 \
-  && rm nodejs.tar.gz \
-  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
+RUN volta install node
 
 RUN node -v
 RUN npm -v
