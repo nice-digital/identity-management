@@ -9,11 +9,11 @@ ENV ASPNETCORE_URLS="http://+:8080"
 # To Run locally uncomment lines 10-26
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-  #   git \
+  # git
   curl \
-  #   ca-certificates \
-  #   jq \
-  #   && rm -rf /var/lib/apt/lists/*
+  # ca-certificates
+  # jq
+  # && rm -rf /var/lib/apt/lists/*
 
   # # Add corporate / proxy CA certificate
   # COPY ./certificates/company-ca.crt.cer \
