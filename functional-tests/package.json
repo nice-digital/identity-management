@@ -10,7 +10,7 @@
     "test:locally": "wdio run wdio.teamcity.conf.ts",
     "test:docker": "npm test -- --hostname hub --port 4444 --baseUrl https://idam",
     "test:accessibility-docker": "npm run test:accessibility -- --hostname hub --port 4444 --baseUrl https://idam",
-    "wait:docker": "waitforit -t 120 --strict idammanagement",
+    "wait:docker": "waitforit -t 120 --strict idammanagement:8080",
     "wait-then-test": "npm run wait:docker && npm run test:docker",
     "wait-then-accessibility-test": "npm run wait:docker && npm run test:accessibility-docker"
   },
