@@ -4,8 +4,8 @@
 # And run .NET webapp
 
 set -e
-pwd
-ls
+# Comment line 7 to run locally
+ cd NICE.Identity.Management/published-app
 
 jq \
     --arg defaultConnection "$DEFAULT_CONNECTION" \
