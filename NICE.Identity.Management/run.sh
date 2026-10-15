@@ -4,6 +4,8 @@
 # And run .NET webapp
 
 set -e
+pwd
+ls
 
 jq \
     --arg defaultConnection "$DEFAULT_CONNECTION" \
