@@ -1,8 +1,6 @@
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
-	? process.env.REACT_APP_API_BASE_URL
-	: "#{REACT_APP_API_BASE_URL}";
+const API_BASE_URL = "/api";
 
-const APP_BASE_URL = `${API_BASE_URL}` == 'http://api:8090' ? `${API_BASE_URL}` : API_BASE_URL.replace("/api", '');
+const APP_BASE_URL = window.location.origin;
 
 export const Endpoints = {
 	identityManagementUser: `${APP_BASE_URL}/account/status`, // accesses the account controller to get the status endpoint which returns JSON data containing the username.
