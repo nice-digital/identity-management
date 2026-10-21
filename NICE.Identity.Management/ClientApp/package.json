@@ -13,6 +13,7 @@
 		"react-router-dom": "^5.0.1"
 	},
 	"devDependencies": {
+		"@craco/craco": "7.1.0",
 		"@nice-digital/browserslist-config": "^2.0.1",
 		"@nice-digital/eslint-config": "^1.0.3",
 		"@testing-library/dom": "8.13.0",
@@ -35,9 +36,9 @@
 	},
 	"scripts": {
 		"prestart": "npm run sass-design-system",
-		"start": "react-scripts start",
+		"start": "craco start",
 		"prebuild": "npm run sass-design-system",
-		"build": "react-scripts build",
+		"build": "craco build",
 		"test": "cross-env REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
 		"test:ci": "cross-env CI=true REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
 		"eject": "react-scripts eject",
