@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@nice-digital/design-system": "^4.0.0",
-		"@nice-digital/global-nav": "^5.0.890",
+		"@nice-digital/global-nav": "7.1.1194-GN-264-load-aws-chal",
 		"concurrently": "^6.2.0",
 		"moment": "^2.29.4",
 		"query-string": "^6.12.1",
