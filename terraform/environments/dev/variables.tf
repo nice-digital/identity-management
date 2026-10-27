@@ -66,5 +66,8 @@ variable "networking_config" {
     certificate_arn               = string
     hosted_zone_id                = string
     hostname                      = string
+    assign_public_ip              = string
+    environment_name              = string
+    application_name              = string
   })
 }

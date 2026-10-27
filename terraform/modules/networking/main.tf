@@ -1,13 +1,13 @@
 # networking
 resource "aws_lb" "identity_lb" {
-  name               = "identity-lb"
+  name               = "${var.networking_config.application_name}-${var.networking_config.environment_name}-lb"
   load_balancer_type = "application"
   subnets            = var.networking_config.load_balancer_subnets
   security_groups    = var.networking_config.load_balancer_security_groups
 }
 
 resource "aws_lb_target_group" "identity_tg" {
-  name             = "identity-tg"
+  name             = "${var.networking_config.application_name}-${var.networking_config.environment_name}-tg"
   target_type      = "ip"
   protocol         = "HTTP"
   port             = var.backend_config.container_port
@@ -32,8 +32,13 @@ resource "aws_lb_listener" "identity_http_listener" {
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.identity_tg.arn
-    type             = "forward"
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "identity_role" {
-  name        = "identity-execution-role"
+  name        = "${var.networking_config.application_name}-${var.networking_config.environment_name}-execution-role"
   description = "identity execution role"
   path        = "/service-role/"
   assume_role_policy = jsonencode(
@@ -20,7 +20,7 @@ resource "aws_iam_role" "identity_role" {
 }
 
 resource "aws_iam_role_policy" "identity_ecs_task_execution" {
-  name = "identity-ecs-task-execution"
+  name = "${var.networking_config.application_name}-${var.networking_config.environment_name}-ecs-task-execution"
   role = aws_iam_role.identity_role.id
 
   policy = jsonencode({

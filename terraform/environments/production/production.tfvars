@@ -73,4 +73,7 @@ networking_config = {
   certificate_arn               = "#{networking_config_certificate_arn}"
   hosted_zone_id                = "#{networking_config_hosted_zone_id}"
   hostname                      = "#{networking_config_hostname}"
+  assign_public_ip              = "#{networking_config_assign_public_ip}"
+  environment_name              = "#{networking_config_environment_name}"
+  application_name              = "#{networking_config_application_name}"
 }

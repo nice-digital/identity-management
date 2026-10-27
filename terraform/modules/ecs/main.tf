@@ -16,7 +16,7 @@ locals {
 }
 
 resource "aws_ecs_task_definition" "identity_td" {
-  family                   = "identity"
+  family                   = "${var.networking_config.application_name}-${var.networking_config.environment_name}-taskdef"
   requires_compatibilities = ["FARGATE"]
   runtime_platform {
     operating_system_family = "LINUX"
@@ -62,7 +62,7 @@ resource "aws_ecs_task_definition" "identity_td" {
 }
 
 resource "aws_ecs_cluster" "identity_cluster" {
-  name = "identity-cluster"
+  name = "${var.networking_config.application_name}-${var.networking_config.environment_name}-cluster"
 
   setting {
     name  = "containerInsights"
@@ -71,7 +71,7 @@ resource "aws_ecs_cluster" "identity_cluster" {
 }
 
 resource "aws_ecs_service" "identity" {
-  name                 = "identity-service"
+  name                 = "${var.networking_config.application_name}-${var.networking_config.environment_name}-service"
   cluster              = aws_ecs_cluster.identity_cluster.arn
   force_new_deployment = true
   triggers = {
@@ -95,7 +95,7 @@ resource "aws_ecs_service" "identity" {
     rollback = true
   }
   network_configuration {
-    assign_public_ip = true
+    assign_public_ip = var.network_configuration.assign_public_ip
     subnets          = var.networking_config.load_balancer_subnets
     security_groups  = var.networking_config.load_balancer_security_groups
   }
