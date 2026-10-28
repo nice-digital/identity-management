@@ -54,15 +54,3 @@ resource "aws_lb_listener" "identity_https_listener" {
     type             = "forward"
   }
 }
-
-resource "aws_route53_record" "identity_hostname" {
-  zone_id = var.networking_config.hosted_zone_id
-  name    = var.networking_config.hostname
-  type    = "A"
-
-  alias {
-    name                   = aws_lb.identity_lb.dns_name
-    zone_id                = aws_lb.identity_lb.zone_id
-    evaluate_target_health = true
-  }
-}
