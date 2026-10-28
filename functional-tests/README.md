@@ -6,16 +6,18 @@
 
 ## Table of contents
 
-- [Table of contents](#table-of-contents)
-- [Stack](#stack)
-  - [Software](#software)
-- [:rocket: Set up](#rocket-set-up)
-  - [Install Java JDK](#install-java-jdk)
-  - [Run the tests](#run-the-tests)
-  - [Docker](#docker)
-  - [Using npm](#using-npm)
-- [Excluding tests](#excluding-tests)
-- [Running single features](#running-single-features)
+- [End to End tests for Identity Management Portal](#end-to-end-tests-for-identity-management-portal)
+  - [Table of contents](#table-of-contents)
+  - [Stack](#stack)
+    - [Software](#software)
+  - [:rocket: Set up](#rocket-set-up)
+    - [Install Java JDK](#install-java-jdk)
+    - [Run the tests](#run-the-tests)
+    - [Docker](#docker)
+    - [Using npm](#using-npm)
+      - [Different URLs](#different-urls)
+  - [Excluding tests](#excluding-tests)
+  - [Running single features](#running-single-features)
 
 ## Stack
 
@@ -23,7 +25,7 @@
 
 - [VS Code IDE](https://code.visualstudio.com/)
   - With recommended extensions (VS Code will prompt you to install these automatically)
-- [WebdriverIO 8](https://webdriver.io/)
+- [WebdriverIO 9](https://webdriver.io/)
   - [Cucumber.js](https://github.com/cucumber/cucumber-js) for running BDD gherkin-syntax feature files
   - [Allure](https://docs.qameta.io/allure/) to generate a test report
 - [Docker](https://www.docker.com/) for running the tests in TeamCity against Chrome and Firefox
@@ -43,6 +45,12 @@ If you don't have JDK 8 installed, install it from the [Oracle website](https://
 Run the tests directly on your machine via [Docker](#docker) or run them [using npm](#using-npm).
 
 ### Docker
+Due to issues with self signed Iboss certificates we now have to create certificates in the following locations and uncomment the comments in Test.Dockerfile in NICE.Identity.Management, Dockerfile in NICE.Identity.Management\ClientApp, Dockerfile in functional-tests and Dockerfile in NICE.Identity.Management.MockApi:
+
+- NICE.Identity.Management\certificates
+- NICE.Identity.Management\
+- functional-tests\certificates
+- NICE.Identity.Management.MockApi\certificates
 
 We run the tests in Docker on TeamCity because it allows us to spin up a self-contained application, and selenium grid with both Chrome and Firefox. You can run this same stack locally inside Docker.
 
