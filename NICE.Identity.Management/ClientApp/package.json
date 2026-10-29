@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@nice-digital/design-system": "^4.0.0",
-		"@nice-digital/global-nav": "^5.0.890",
+		"@nice-digital/global-nav": "7.1.1198-GN-264-load-aws-chal",
 		"concurrently": "^6.2.0",
 		"moment": "^2.29.4",
 		"query-string": "^6.12.1",
@@ -13,6 +13,7 @@
 		"react-router-dom": "^5.0.1"
 	},
 	"devDependencies": {
+		"@craco/craco": "7.1.0",
 		"@nice-digital/browserslist-config": "^2.0.1",
 		"@nice-digital/eslint-config": "^1.0.3",
 		"@testing-library/dom": "8.13.0",
@@ -35,9 +36,9 @@
 	},
 	"scripts": {
 		"prestart": "npm run sass-design-system",
-		"start": "react-scripts start",
+		"start": "craco start",
 		"prebuild": "npm run sass-design-system",
-		"build": "react-scripts build",
+		"build": "cross-env NODE_ENV=production craco build",
 		"test": "cross-env REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
 		"test:ci": "cross-env CI=true REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
 		"eject": "react-scripts eject",
