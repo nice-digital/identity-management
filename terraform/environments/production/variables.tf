@@ -53,15 +53,7 @@ variable "frontend_config" {
   type = object({
     ecr_repository_name                 = string
     ecr_image_tag                       = string
-    container_port                      = number,
-    env_api_url                         = string,
-    env_port                            = string,
-    env_public_url                      = string,
-    env_react_app_hotjarid              = string,
-    env_react_app_accounts_environment  = string,
-    env_react_app_global_nav_script     = string,
-    env_react_app_global_nav_script_ie8 = string
-    env_react_app_cookie_banner_script  = string
+    container_port                      = number
   })
 }
 
