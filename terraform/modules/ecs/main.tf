@@ -96,8 +96,8 @@ resource "aws_ecs_service" "identity" {
   }
   network_configuration {
     assign_public_ip = var.networking_config.assign_public_ip
-    subnets          = var.networking_config.load_balancer_subnets
-    security_groups  = var.networking_config.load_balancer_security_groups
+    subnets          = var.networking_config.ecs_task_subnets
+    security_groups  = var.networking_config.ecs_task_security_groups
   }
   load_balancer {
     container_name   = "identity-backend"
