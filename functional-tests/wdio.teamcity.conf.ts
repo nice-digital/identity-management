@@ -28,7 +28,7 @@ export const config: WebdriverIO.Config = {
     ],
     // services: ['selenium-standalone'],
     logLevel: 'debug',
-    baseUrl: "http://idam:8080",
+    baseUrl: "https://idam",
     reporters: [
 		"spec",
 		"teamcity",

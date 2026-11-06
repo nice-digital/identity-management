@@ -44,6 +44,7 @@ export const config: WebdriverIO.Config = {
     //   // w3c: false,
     //   args: ['--headless', '--window-size=1366,1000'],
     // },
+    'wdio:enforceWebDriverClassic': true, // Use classic WebDriver, avoids BiDi connection errors on Grid
     'goog:chromeOptions': {
       args: ['--disable-web-security', /*'--headless',*/ '--disable-dev-shm-usage', '--no-sandbox', '--window-size=1920,1080'],
       localState: {
@@ -66,7 +67,7 @@ export const config: WebdriverIO.Config = {
 
 	logLevel: "warn",
 
-	baseUrl: "https://idam:8080",
+	baseUrl: "https://idam",
 	reporters: [
 		"spec",
 		"teamcity",

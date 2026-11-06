@@ -8,14 +8,14 @@ import selectors from "../selectors.js";
 export async function findUserList(userName: string): Promise<void> {
   await browser.refresh();
   await waitForDisplayed(selectors.userListPage.userlist, "");
-  await checkUrl(false, "http://idam:8080/users");
+  await checkUrl(false, "https://idam/users");
   await checkContainsText("element", selectors.userListPage.userlist, "", userName);
   await pause("1000");
 };
 
 export async function userNotInList(userName: string): Promise<void> {
   await waitForDisplayed(selectors.userListPage.userlist, "");
-  await checkUrl(true, "http://idam:8080/users");
+  await checkUrl(true, "https://idam/users");
   await checkContainsText("element", selectors.userListPage.userlist, " not", userName);
   await pause("1000");
 };
