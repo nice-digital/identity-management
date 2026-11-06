@@ -53,8 +53,8 @@ RUN curl https://get.volta.sh | bash
 
 RUN volta install node
 
-RUN node -v
-RUN npm -v
+# RUN node -v
+# RUN npm -v
 
 # Install replace globally for endpoints.ts replacement
 RUN npm i -g replace
