@@ -51,7 +51,7 @@ ENV PATH=$VOLTA_HOME/bin:$PATH
 #The --skip-setup flag tells Volta not to mess with shell profile files, since we're managing PATH ourselves via ENV.
 RUN curl https://get.volta.sh | bash
 
-RUN volta install node
+RUN volta install node@24
 
 RUN node -v
 RUN npm -v
