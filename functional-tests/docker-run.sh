@@ -10,7 +10,7 @@ rm -rf docker-output && rm -rf allure-results && rm -rf allure-report
 # Clean up before starting containers
 docker exec functional-tests_database_1 kill 1 || :
 docker-compose down --remove-orphans && docker-compose rm -vf
-docker-compose build && docker-compose up -d
+docker-compose build && docker-compose up -d --force-recreate
 
 # Wait for the web app to be up before running the tests
 docker-compose run -T tests npm run wait-then-test
