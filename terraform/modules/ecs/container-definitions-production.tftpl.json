@@ -13,134 +13,6 @@
       ],
       "environment" : [
         {
-          "name"  : "AppSettings__Environment__AccountsEnvironment",
-          "value" : "${backend_env_appsettings_environment_accountsenvironment}"
-        },
-        {
-          "name"  : "AppSettings__Environment__Name",
-          "value" : "${backend_env_appsettings_environment_name}"
-        },
-        {
-          "name"  : "AppSettings__Environment__SsrPort",
-          "value" : "${backend_env_appsettings_environment_ssrport}"
-        },
-        {
-          "name"  : "AppSettings__Environment__SsrHost",
-          "value" : "${backend_env_appsettings_environment_ssrhost}"
-        },
-        {
-          "name"  : "AppSettings__Environment__CorsOrigin",
-          "value" : "${backend_env_appsettings_environment_corsorigin}"
-        },
-        {
-          "name"  : "ConnectionStrings__DefaultConnection",
-          "value" : "${backend_env_connectionstrings_defaultconnection}"
-        },
-        {
-          "name"  : "ConsultationList__DownloadRoles__AdminRoles",
-          "value" : "${backend_env_consultationlist_downloadroles_adminroles}"
-        },
-        {
-          "name"  : "ConsultationList__DownloadRoles__TeamRoles",
-          "value" : "${backend_env_consultationlist_downloadroles_teamroles}"
-        },
-        {
-          "name"  : "Encryption__IV",
-          "value" : "${backend_env_encryption_iv}"
-        },
-        {
-          "name"  : "Encryption__Key",
-          "value" : "${backend_env_encryption_key}"
-        },
-        {
-          "name"  : "Feeds__CacheDurationSeconds",
-          "value" : "${backend_env_feeds_cachedurationseconds}"
-        },
-        {
-          "name"  : "Feeds__IndevApiKey",
-          "value" : "${backend_env_feeds_indevapikey}"
-        },
-        {
-          "name"  : "Feeds__IndevBasePath",
-          "value" : "${backend_env_feeds_indevbasepath}"
-        },
-        {
-          "name"  : "Feeds__IndevDraftPreviewChapterFeedPath",
-          "value" : "${backend_env_feeds_indevdraftpreviewchapterfeedpath}"
-        },
-        {
-          "name"  : "Feeds__IndevDraftPreviewDetailFeedPath",
-          "value" : "${backend_env_feeds_indevdraftpreviewdetailfeedpath}"
-        },
-        {
-          "name"  : "Feeds__IndevIDAMConfig__APIIdentifier",
-          "value" : "${backend_env_feeds_indevidamconfig_apiidentifier}"
-        },
-        {
-          "name"  : "Feeds__IndevIDAMConfig__ClientId",
-          "value" : "${backend_env_feeds_indevidamconfig_clientid}"
-        },
-        {
-          "name"  : "Feeds__IndevIDAMConfig__ClientSecret",
-          "value" : "${backend_env_feeds_indevidamconfig_clientsecret}"
-        },
-        {
-          "name"  : "Feeds__IndevIDAMConfig__Domain",
-          "value" : "${backend_env_feeds_indevidamconfig_domain}"
-        },
-        {
-          "name"  : "Feeds__IndevListFeedPath",
-          "value" : "${backend_env_feeds_indevlistfeedpath}"
-        },
-        {
-          "name"  : "Feeds__IndevPublishedChapterFeedPath",
-          "value" : "${backend_env_feeds_indevpublishedchapterfeedpath}"
-        },
-        {
-          "name"  : "Feeds__IndevPublishedDetailFeedPath",
-          "value" : "${backend_env_feeds_indevpublisheddetailfeedpath}"
-        },
-        {
-          "name"  : "Feeds__IndevPublishedPreviewDetailFeedPath",
-          "value" : "${backend_env_feeds_indevpublishedpreviewdetailfeedpath}"
-        },
-        {
-          "name"  : "Gilliam__GetClaimsUrl",
-          "value" : "${backend_env_gilliam_getclaimsurl}"
-        },
-        {
-          "name"  : "Gilliam__GilliamBasePath",
-          "value" : "${backend_env_gilliam_gilliambasepath}"
-        },
-        {
-          "name"  : "Gilliam__GilliamClientCertificateBase64",
-          "value" : "${backend_env_gilliam_gilliamclientcertificatebase64}"
-        },
-        {
-          "name"  : "GlobalNav__CookieBannerScript",
-          "value" : "${backend_env_globalnav_cookiebannerscript}"
-        },
-        {
-          "name"  : "GlobalNav__Script",
-          "value" : "${backend_env_globalnav_script}"
-        },
-        {
-          "name"  : "GlobalNav__ScriptIE8",
-          "value" : "${backend_env_globalnav_scriptie8}"
-        },
-        {
-          "name"  : "IndevDraftPreviewDetailFeedPath",
-          "value" : "${backend_env_indevdraftpreviewdetailfeedpath}"
-        },
-        {
-          "name"  : "Logging__SerilogMinLevel",
-          "value" : "${backend_env_logging_serilogminlevel}"
-        },
-        {
-          "name"  : "Status__APIKey",
-          "value" : "${backend_env_status_apikey}"
-        },
-        {
           "name"  : "WebAppConfiguration__ApiIdentifier",
           "value" : "${backend_env_webappconfiguration_apiidentifier}"
         },
@@ -179,6 +51,62 @@
         {
           "name"  : "WebAppConfiguration__RedisServiceConfiguration__Enabled",
           "value" : "${backend_env_webappconfiguration_redisserviceconfiguration_enabled}"
+        },
+        {
+          "name": "Environment__Name",
+          "value": "${backend_env_environment_name}"
+        },
+        {
+          "name": "AppSettings__Environment__HealthCheckPublicAPIEndpoint",
+          "value": "${backend_env_environment_healthcheckpublicapiendpoint}"
+        },
+        {
+          "name": "AppSettings__Environment__HealthCheckAuthenticatedEndpoints",
+          "value": "${backend_env_environment_healthcheckauthenticatedendpoints}"
+        },
+        {
+          "name": "Environment__HealthCheckAuthenticatedAPIKey",
+          "value": "${backend_env_environment_healthcheckauthenticatedapikey}"
+        },
+        {
+          "name": "Environment__CorsOrigin",
+          "value": "${backend_env_environment_corsorigin}"
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__Name",
+          "value": "${backend_env_healthchecksui_webhooks_0_name}"
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__Uri",
+          "value": "${backend_env_healthchecksui_webhooks_0_uri}"
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__Payload",
+          "value": ${jsonencode(backend_env_healthchecksui_webhooks_0_payload)}
+        },
+        {
+          "name": "HealthChecksUI__Webhooks__0__RestoredPayload",
+          "value": ${jsonencode(backend_env_healthchecksui_webhooks_0_restoredpayload)}
+        },
+        {
+          "name": "HealthChecksUI__EvaluationTimeInSeconds",
+          "value": "${backend_env_healthchecksui_evaluationtimeinseconds}"
+        },
+        {
+          "name": "HealthChecksUI__MinimumSecondsBetweenFailureNotifications",
+          "value": "${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications}"
+        },
+        {
+          "name": "FrontendProxy__Routes__frontend-route__ClusterId",
+          "value": "${backend_env_frontendproxy_routes_frontend-route_clusterid}"
+        },
+        {
+          "name": "FrontendProxy__Routes__frontend-route__Match__Path",
+          "value": "${backend_env_frontendproxy_routes_frontend-route_match_path}"
+        },
+        {
+          "name": "FrontendProxy__Clusters__frontend-cluster__Destinations__frontend-server__Address",
+          "value": "${backend_env_frontendproxy_clusters_frontend-cluster_destinations_frontend-server_address}"
         }
       ],
       "logConfiguration" : {
@@ -191,7 +119,7 @@
         }
       },
       "healthCheck" : {
-        "command"  : ["CMD-SHELL", "wget --spider -q http://0.0.0.0:80 || exit 1"],
+        "command"  : ["CMD-SHELL", "wget --spider -q http://0.0.0.0:80/health || exit 1"],
         "interval" : 120,
         "timeout"  : 60,
         "retries"  : 3

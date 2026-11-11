@@ -53,15 +53,7 @@ variable "frontend_config" {
   type = object({
     ecr_repository_name                 = string
     ecr_image_tag                       = string
-    container_port                      = number,
-    env_api_url                         = string,
-    env_port                            = string,
-    env_public_url                      = string,
-    env_react_app_hotjarid              = string,
-    env_react_app_accounts_environment  = string,
-    env_react_app_global_nav_script     = string,
-    env_react_app_global_nav_script_ie8 = string
-    env_react_app_cookie_banner_script  = string
+    container_port                      = number
   })
 }
 
@@ -70,9 +62,14 @@ variable "networking_config" {
   type = object({
     load_balancer_subnets         = list(string)
     load_balancer_security_groups = list(string)
+    ecs_task_subnets              = list(string)
+    ecs_task_security_groups      = list(string)
     target_group_vpc_id           = string
     certificate_arn               = string
     hosted_zone_id                = string
     hostname                      = string
+    assign_public_ip              = string
+    environment_name              = string
+    application_name              = string
   })
 }

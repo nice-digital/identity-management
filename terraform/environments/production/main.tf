@@ -1,11 +1,6 @@
-module "ecr" {
-  source          = "../../modules/ecr"
-  backend_config  = var.backend_config
-  frontend_config = var.frontend_config
-}
-
 module "iam" {
   source = "../../modules/iam"
+  networking_config = var.networking_config
 }
 
 module "networking" {
