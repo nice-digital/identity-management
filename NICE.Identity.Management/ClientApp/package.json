@@ -37,6 +37,7 @@
 	"scripts": {
 		"prestart": "npm run sass-design-system",
 		"start": "craco start",
+        "start:spa": "cross-env NODE_ENV=production node src/server/spa-server.js",
 		"prebuild": "npm run sass-design-system",
 		"build": "cross-env NODE_ENV=production craco build",
 		"test": "cross-env REACT_APP_API_BASE_URL=test-api react-scripts test --transformIgnorePatterns",
