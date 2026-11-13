@@ -1,0 +1,3 @@
+bucket = "#{tfbackend_bucket}"
+key = "#{tfbackend_key}"
+region = "#{tfbackend_region}"

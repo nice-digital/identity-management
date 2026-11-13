@@ -14,5 +14,9 @@ namespace NICE.Identity.Management.Configuration
         public string HealthCheckAuthenticatedAPIKey { get; set; }
 
         public string CorsOrigin { get; set; } = "https://local-identityadmin.nice.org.uk:44300";
+
+        public string SsrPort { get; set; }
+
+        public string SsrHost { get; set; }
     }
 }
