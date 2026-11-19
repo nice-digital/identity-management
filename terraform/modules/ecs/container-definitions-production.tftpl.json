@@ -107,10 +107,6 @@
           "value": ${jsonencode(backend_env_healthchecksui_webhooks_0_restoredpayload)}
         },
         {
-          "name": "HealthChecksUI__EvaluationTimeInSeconds",
-          "value": "${backend_env_healthchecksui_evaluationtimeinseconds}"
-        },
-        {
           "name": "HealthChecksUI__MinimumSecondsBetweenFailureNotifications",
           "value": "${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications}"
         },
