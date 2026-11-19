@@ -88,7 +88,7 @@
         },
         {
           "name": "HealthChecksUI__MinimumSecondsBetweenFailureNotifications",
-          "value": ${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications)}
+          "value": ${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications}
         },
         {
           "name": "HealthChecksUI__Webhooks__0__Name",
