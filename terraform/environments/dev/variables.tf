@@ -35,6 +35,7 @@ variable "backend_config" {
     environment_healthcheckauthenticatedapikey = string
     environment_corsorigin = string
 
+    healthchecksui_healthchecks = string
     healthchecksui_webhooks_0_name = string
     healthchecksui_webhooks_0_uri = string
     healthchecksui_webhooks_0_payload = string

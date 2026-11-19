@@ -23,6 +23,7 @@ backend_config = {
     environment_healthcheckauthenticatedapikey = "#{backend_config_environment_healthcheckauthenticatedapikey}"
     environment_corsorigin = "#{backend_config_environment_corsorigin}"
     
+    healthchecksui_healthchecks = "#{backend_config_healthchecksui_healthchecks}"
     healthchecksui_webhooks_0_name = "#{backend_config_healthchecksui_webhooks_0_name}"
     healthchecksui_webhooks_0_uri = "#{backend_config_healthchecksui_webhooks_0_uri}"
     healthchecksui_webhooks_0_payload = "#{backend_config_healthchecksui_webhooks_0_payload}"

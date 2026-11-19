@@ -45,6 +45,7 @@ resource "aws_ecs_task_definition" "identity_td" {
       backend_env_environment_healthcheckauthenticatedendpoints                  = var.backend_config.environment_healthcheckauthenticatedendpoints
       backend_env_environment_healthcheckauthenticatedapikey                     = var.backend_config.environment_healthcheckauthenticatedapikey
       backend_env_environment_corsorigin                                         = var.backend_config.environment_corsorigin
+      backend_env_healthchecksui_healthchecks                                    = var.backend_config.healthchecksui_healthchecks
       backend_env_healthchecksui_webhooks_0_name                                             = var.backend_config.healthchecksui_webhooks_0_name
       backend_env_healthchecksui_webhooks_0_uri                                              = var.backend_config.healthchecksui_webhooks_0_uri
       backend_env_healthchecksui_webhooks_0_payload                                          = var.backend_config.healthchecksui_webhooks_0_payload
