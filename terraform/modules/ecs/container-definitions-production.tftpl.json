@@ -84,11 +84,11 @@
         %{ endfor ~}
         {
           "name": "HealthChecksUI__EvaluationTimeInSeconds",
-          "value": ${backend_env_healthchecksui_evaluationtimeinseconds}
+          "value": ${jsonencode(tostring(backend_env_healthchecksui_evaluationtimeinseconds))}
         },
         {
           "name": "HealthChecksUI__MinimumSecondsBetweenFailureNotifications",
-          "value": ${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications}
+          "value": ${jsonencode(tostring(backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications))}
         },
         {
           "name": "HealthChecksUI__Webhooks__0__Name",
