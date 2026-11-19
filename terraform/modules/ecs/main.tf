@@ -46,12 +46,12 @@ resource "aws_ecs_task_definition" "identity_td" {
       backend_env_environment_healthcheckauthenticatedapikey                     = var.backend_config.environment_healthcheckauthenticatedapikey
       backend_env_environment_corsorigin                                         = var.backend_config.environment_corsorigin
       backend_env_healthchecksui_healthchecks                                    = var.backend_config.healthchecksui_healthchecks
+      backend_env_healthchecksui_evaluationtimeinseconds                                     = var.backend_config.healthchecksui_evaluationtimeinseconds
+      backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications                   = var.backend_config.healthchecksui_minimumsecondsbetweenfailurenotifications
       backend_env_healthchecksui_webhooks_0_name                                             = var.backend_config.healthchecksui_webhooks_0_name
       backend_env_healthchecksui_webhooks_0_uri                                              = var.backend_config.healthchecksui_webhooks_0_uri
       backend_env_healthchecksui_webhooks_0_payload                                          = var.backend_config.healthchecksui_webhooks_0_payload
       backend_env_healthchecksui_webhooks_0_restoredpayload                                  = var.backend_config.healthchecksui_webhooks_0_restoredpayload
-      backend_env_healthchecksui_evaluationtimeinseconds                                     = var.backend_config.healthchecksui_evaluationtimeinseconds
-      backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications                   = var.backend_config.healthchecksui_minimumsecondsbetweenfailurenotifications
       backend_env_frontendproxy_routes_frontend-route_clusterid                             = var.backend_config.frontendproxy_routes_frontend-route_clusterid
       backend_env_frontendproxy_routes_frontend-route_match_path                            = var.backend_config.frontendproxy_routes_frontend-route_match_path
       backend_env_frontendproxy_clusters_frontend-cluster_destinations_frontend-server_address = var.backend_config.frontendproxy_clusters_frontend-cluster_destinations_frontend-server_address

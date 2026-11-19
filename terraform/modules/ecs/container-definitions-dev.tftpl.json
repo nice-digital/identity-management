@@ -68,7 +68,7 @@
           "name": "Environment__CorsOrigin",
           "value": "${backend_env_environment_corsorigin}"
         },
-        %{ for index, check in backend_config_healthchecksui_healthchecks ~}
+        %{ for index, check in backend_env_healthchecksui_healthchecks ~}
         {
           "name": "HealthChecksUI__HealthChecks__${index}__Name",
           "value": ${jsonencode(check.Name)}
@@ -80,11 +80,11 @@
         %{ endfor ~}
         {
           "name": "HealthChecksUI__EvaluationTimeInSeconds",
-          "value": ${backend_config_healthchecksui_evaluationtimeinseconds}
+          "value": ${backend_env_healthchecksui_evaluationtimeinseconds}
         },
         {
           "name": "HealthChecksUI__MinimumSecondsBetweenFailureNotifications",
-          "value": ${backend_config_healthchecksui_minimumsecondsbetweenfailurenotifications)}
+          "value": ${backend_env_healthchecksui_minimumsecondsbetweenfailurenotifications)}
         },
         {
           "name": "HealthChecksUI__Webhooks__0__Name",
