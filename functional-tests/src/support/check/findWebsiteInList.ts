@@ -7,7 +7,7 @@ import selectors from "../selectors.js";
 export async function findWebsiteList(website: string): Promise<void> {
   await browser.refresh();
   await waitForDisplayed(selectors.websiteListPage.websitelist, "");
-  await checkUrl(true, "http://idam:8080/services");
+  await checkUrl(true, "https://idam/services");
   await checkContainsText("element", selectors.websiteListPage.websitelist, "", website);
   await pause("1000");
 };

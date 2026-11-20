@@ -5,7 +5,7 @@ const toChildAndQASel = (childIndex: number, attrValue: string) =>
 
 export default {
   loginPage: {
-    wrongEmailPasswordMessage: 'body .alert',
+    wrongEmailPasswordMessage: 'body .alert--error',
     usernameField: toDataQASelAttr('login-email'),
     passwordField: toDataQASelAttr('login-password'),
     registerLink: toDataQASelAttr('Signup-link-login'),
