@@ -57,11 +57,11 @@
           "value": "${backend_env_environment_name}"
         },
         {
-          "name": "AppSettings__Environment__HealthCheckPublicAPIEndpoint",
+          "name": "Environment__HealthCheckPublicAPIEndpoint",
           "value": "${backend_env_environment_healthcheckpublicapiendpoint}"
         },
         {
-          "name": "AppSettings__Environment__HealthCheckAuthenticatedEndpoints",
+          "name": "Environment__HealthCheckAuthenticatedEndpoints",
           "value": "${backend_env_environment_healthcheckauthenticatedendpoints}"
         },
         {
@@ -133,7 +133,7 @@
         }
       },
       "healthCheck" : {
-        "command"  : ["CMD-SHELL", "wget --spider -q http://0.0.0.0:80/health || exit 1"],
+        "command"  : ["CMD-SHELL", "wget --spider -q http://0.0.0.0:80//healthcheck-public || exit 1"],
         "interval" : 120,
         "timeout"  : 60,
         "retries"  : 3
