@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -87,7 +88,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -109,13 +111,16 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12 md:3"
     >
       <div
         class="panel"
+        data-component="panel"
       >
         <div
           class="input noMargin"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -144,6 +149,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     </div>
     <div
       aria-busy="false"
+      data-component="grid-item"
       data-g="12 md:9"
     >
       <h2
@@ -153,6 +159,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       </h2>
       <table
         class="table"
+        data-component="table"
         data-qa-sel="list-of-organisation-users"
         style="display: table;"
       >
@@ -183,6 +190,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             <td>
               <span
                 class="tag activeTag"
+                data-component="tag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -206,6 +214,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             <td>
               <span
                 class="tag activeTag"
+                data-component="tag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -229,6 +238,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             <td>
               <span
                 class="tag activeTag"
+                data-component="tag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -252,6 +262,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             <td>
               <span
                 class="tag activeTag"
+                data-component="tag"
                 data-qa-sel="user-status"
               >
                 Active
@@ -276,6 +287,7 @@ exports[`should show error message when fetchData function returns 401 error 1`]
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -356,7 +368,8 @@ exports[`should show error message when fetchData function returns 401 error 1`]
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -366,6 +379,7 @@ exports[`should show error message when fetchData function returns 401 error 1`]
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -382,6 +396,7 @@ exports[`should show error message when fetchData function returns 500 error 1`]
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -462,7 +477,8 @@ exports[`should show error message when fetchData function returns 500 error 1`]
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -472,6 +488,7 @@ exports[`should show error message when fetchData function returns 500 error 1`]
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>

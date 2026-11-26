@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -89,7 +90,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -106,11 +108,13 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12"
     >
       <nav
         aria-label="Services"
         class="stacked-nav"
+        data-component="stacked-nav"
         data-qa-sel="service-stacked-nav"
       >
         <ul
@@ -157,6 +161,7 @@ exports[`should show error message when services fetchData function returns 401 
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -242,7 +247,8 @@ exports[`should show error message when services fetchData function returns 401 
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -252,6 +258,7 @@ exports[`should show error message when services fetchData function returns 401 
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -268,6 +275,7 @@ exports[`should show error message when services fetchData function returns 500 
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -353,7 +361,8 @@ exports[`should show error message when services fetchData function returns 500 
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -363,6 +372,7 @@ exports[`should show error message when services fetchData function returns 500 
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -379,6 +389,7 @@ exports[`should show error message when user fetchData function returns 401 erro
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -464,7 +475,8 @@ exports[`should show error message when user fetchData function returns 401 erro
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -474,6 +486,7 @@ exports[`should show error message when user fetchData function returns 401 erro
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -490,6 +503,7 @@ exports[`should show error message when user fetchData function returns 500 erro
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -575,7 +589,8 @@ exports[`should show error message when user fetchData function returns 500 erro
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -585,6 +600,7 @@ exports[`should show error message when user fetchData function returns 500 erro
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>

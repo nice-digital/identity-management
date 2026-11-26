@@ -10,6 +10,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -95,7 +96,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
     data-qa-sel="page-header-edit-user"
   >
     <h1
@@ -113,6 +115,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12 md:6 lg:4"
     >
       <form
@@ -120,6 +123,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       >
         <div
           class="input"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -140,6 +144,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         </div>
         <div
           class="input"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -163,6 +168,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         </div>
         <div
           class="input"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -189,6 +195,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         >
           <fieldset
             class="form-group"
+            data-component="form-group"
           >
             <legend
               class="form-group__legend"
@@ -197,6 +204,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             </legend>
             <div
               class="radio"
+              data-component="radio"
             >
               <input
                 checked=""
@@ -205,6 +213,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 id="audienceInsight_optIn"
                 name="audienceInsight"
                 type="radio"
+                value="optIn"
               />
               <label
                 class="radio__label"
@@ -215,6 +224,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
             </div>
             <div
               class="radio"
+              data-component="radio"
             >
               <input
                 class="radio__input"
@@ -222,6 +232,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 id="audienceInsight_optOut"
                 name="audienceInsight"
                 type="radio"
+                value="optOut"
               />
               <label
                 class="radio__label"
@@ -233,6 +244,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           </fieldset>
           <button
             class="btn btn--cta"
+            data-component="button--cta"
             data-qa-sel="save-button-edit-user"
             type="submit"
           >
@@ -240,6 +252,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           </button>
           <a
             class="btn btn--secondary"
+            data-component="button--secondary"
             href="/users/1"
           >
             Cancel
@@ -255,6 +268,7 @@ exports[`should show error message when useFetch get call returns 401 error 1`] 
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -340,7 +354,8 @@ exports[`should show error message when useFetch get call returns 401 error 1`] 
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -350,6 +365,7 @@ exports[`should show error message when useFetch get call returns 401 error 1`] 
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -366,6 +382,7 @@ exports[`should show error message when useFetch get call returns 500 error 1`] 
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -451,7 +468,8 @@ exports[`should show error message when useFetch get call returns 500 error 1`] 
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -461,6 +479,7 @@ exports[`should show error message when useFetch get call returns 500 error 1`] 
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -477,6 +496,7 @@ exports[`should show error message when useFetch patch fails 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -562,7 +582,8 @@ exports[`should show error message when useFetch patch fails 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -572,6 +593,7 @@ exports[`should show error message when useFetch patch fails 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
