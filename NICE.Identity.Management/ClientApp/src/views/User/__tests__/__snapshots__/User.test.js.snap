@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -72,7 +73,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
     data-qa-sel="name-user-profile"
   >
     <h1
@@ -90,6 +92,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     >
       <a
         class="btn btn--cta"
+        data-component="button--cta"
         data-qa-sel="add-user-role-button"
         href="/users/1/services"
       >
@@ -97,6 +100,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       </a>
       <a
         class="btn"
+        data-component="button--primary"
         data-qa-sel="edit-profile-button"
         href="/users/1/edit"
       >
@@ -109,6 +113,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
   >
     <div
       aria-busy="false"
+      data-component="grid-item"
       data-g="12 md:9"
     >
       <div
@@ -125,6 +130,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           <div>
             <span
               class="tag activeTag"
+              data-component="tag"
               data-qa-sel="user-status"
             >
               Active
@@ -132,6 +138,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
           </div>
           <button
             class="btn btn--secondary"
+            data-component="button--secondary"
             data-qa-sel="lock-user-button"
             type="button"
           >
@@ -282,6 +289,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       </h2>
       <table
         class="table"
+        data-component="table"
         style="display: table;"
       >
         <thead>
@@ -329,6 +337,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -397,7 +406,8 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -407,6 +417,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -423,6 +434,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -491,7 +503,8 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -501,6 +514,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>

@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -53,7 +54,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -65,13 +67,16 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12 md:3"
     >
       <div
         class="panel"
+        data-component="panel"
       >
         <div
           class="input"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -97,6 +102,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <form>
           <div
             class="filter-panel"
+            data-component="filter-panel"
           >
             <h2
               class="filter-panel__heading"
@@ -172,6 +178,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </legend>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_status_active"
                   >
                     <input
@@ -189,6 +196,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_status_pending"
                   >
                     <input
@@ -206,6 +214,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_status_locked"
                   >
                     <input
@@ -233,6 +242,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <form>
           <div
             class="filter-panel"
+            data-component="filter-panel"
           >
             <h2
               class="filter-panel__heading"
@@ -270,33 +280,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <h3
                   class="filter-group__heading"
                 >
-                  <button
-                    aria-controls="group-dev"
-                    aria-expanded="true"
-                    type="button"
+                  <span
+                    id="group-heading-dev"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
-                      fill="none"
-                      focusable="false"
-                      height="1em"
-                      viewBox="0 0 512 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span
-                      id="group-heading-dev"
-                    >
-                      Dev
-                       
-                    </span>
-                  </button>
+                    Dev
+                     
+                  </span>
                 </h3>
                 <fieldset
                   aria-hidden="false"
@@ -308,6 +297,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </legend>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_dev_3"
                   >
                     <input
@@ -325,6 +315,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_dev_1"
                   >
                     <input
@@ -342,6 +333,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                 </fieldset>
               </div>
+              <button
+                class="btn filter-panel__submit"
+                type="submit"
+              >
+                Apply filters
+              </button>
             </div>
           </div>
         </form>
@@ -352,6 +349,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <form>
           <div
             class="filter-panel"
+            data-component="filter-panel"
           >
             <h2
               class="filter-panel__heading"
@@ -389,33 +387,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <h3
                   class="filter-group__heading"
                 >
-                  <button
-                    aria-controls="group-test"
-                    aria-expanded="true"
-                    type="button"
+                  <span
+                    id="group-heading-test"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
-                      fill="none"
-                      focusable="false"
-                      height="1em"
-                      viewBox="0 0 512 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span
-                      id="group-heading-test"
-                    >
-                      Test
-                       
-                    </span>
-                  </button>
+                    Test
+                     
+                  </span>
                 </h3>
                 <fieldset
                   aria-hidden="false"
@@ -427,6 +404,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </legend>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_test_2"
                   >
                     <input
@@ -444,6 +422,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_test_5"
                   >
                     <input
@@ -461,6 +440,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                 </fieldset>
               </div>
+              <button
+                class="btn filter-panel__submit"
+                type="submit"
+              >
+                Apply filters
+              </button>
             </div>
           </div>
         </form>
@@ -471,6 +456,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <form>
           <div
             class="filter-panel"
+            data-component="filter-panel"
           >
             <h2
               class="filter-panel__heading"
@@ -508,33 +494,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <h3
                   class="filter-group__heading"
                 >
-                  <button
-                    aria-controls="group-alpha"
-                    aria-expanded="true"
-                    type="button"
+                  <span
+                    id="group-heading-alpha"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="filter-group__heading-icon filter-group__heading-icon--expanded"
-                      fill="none"
-                      focusable="false"
-                      height="1em"
-                      viewBox="0 0 512 512"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M478.152 174c0 10.091-3.525 18.661-10.576 25.712l-186 186c-7.243 7.243-15.909 10.864-26 10.864-10.283 0-18.853-3.621-25.712-10.864l-186-186C36.621 192.853 33 184.283 33 174c0-10.091 3.621-18.757 10.864-26L65 126.576C72.424 119.525 81.09 116 91 116c10.091 0 18.661 3.525 25.712 10.576L255.576 265.44 394.44 126.576c7.051-7.051 15.621-10.576 25.712-10.576 9.909 0 18.576 3.525 26 10.576L467.576 148c7.051 7.424 10.576 16.091 10.576 26Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    <span
-                      id="group-heading-alpha"
-                    >
-                      Alpha
-                       
-                    </span>
-                  </button>
+                    Alpha
+                     
+                  </span>
                 </h3>
                 <fieldset
                   aria-hidden="false"
@@ -546,6 +511,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </legend>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_alpha_4"
                   >
                     <input
@@ -563,6 +529,12 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                 </fieldset>
               </div>
+              <button
+                class="btn filter-panel__submit"
+                type="submit"
+              >
+                Apply filters
+              </button>
             </div>
           </div>
         </form>
@@ -570,6 +542,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     </div>
     <div
       aria-busy="false"
+      data-component="grid-item"
       data-g="12 md:9"
     >
       <h2
@@ -586,6 +559,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -609,6 +583,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag activeTag"
+                    data-component="tag"
                     data-qa-sel="user-status"
                   >
                     Active
@@ -633,6 +608,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -656,6 +632,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag activeTag"
+                    data-component="tag"
                     data-qa-sel="user-status"
                   >
                     Active
@@ -680,6 +657,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -703,6 +681,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag activeTag"
+                    data-component="tag"
                     data-qa-sel="user-status"
                   >
                     Active
@@ -727,6 +706,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -750,6 +730,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag"
+                    data-component="tag"
                     data-qa-sel="user-status"
                   >
                     Locked
@@ -817,6 +798,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -866,7 +848,8 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -876,6 +859,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -892,6 +876,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -941,7 +926,8 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -951,6 +937,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -967,6 +954,7 @@ exports[`should show error message when fetch websites returns 401 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -1016,7 +1004,8 @@ exports[`should show error message when fetch websites returns 401 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -1026,6 +1015,7 @@ exports[`should show error message when fetch websites returns 401 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -1042,6 +1032,7 @@ exports[`should show error message when fetch websites returns 500 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -1091,7 +1082,8 @@ exports[`should show error message when fetch websites returns 500 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -1101,6 +1093,7 @@ exports[`should show error message when fetch websites returns 500 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>

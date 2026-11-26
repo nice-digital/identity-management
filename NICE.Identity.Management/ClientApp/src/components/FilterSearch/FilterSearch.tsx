@@ -1,6 +1,6 @@
 import React from "react";
 import { Panel } from "@nice-digital/nds-panel";
-import { Input } from "@nice-digital/nds-forms";
+import { Input } from "@nice-digital/nds-input";
 import { useHistory, useLocation } from "react-router-dom";
 
 type FilterSearchProps = {

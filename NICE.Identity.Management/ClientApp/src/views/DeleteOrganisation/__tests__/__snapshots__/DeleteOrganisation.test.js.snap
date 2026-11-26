@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -89,7 +90,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -101,11 +103,13 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12 md:9"
     >
       <div
         aria-live="polite"
         class="alert alert--info"
+        data-component="alert--info"
         data-qa-sel="warning-message-delete-organisation"
         role="status"
       >
@@ -115,6 +119,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       </div>
       <button
         class="btn btn--cta"
+        data-component="button--cta"
         data-qa-sel="confirm-delete-organisation"
         type="button"
       >
@@ -122,6 +127,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
       </button>
       <a
         class="btn btn--secondary"
+        data-component="button--secondary"
         href="/organisations/1"
       >
         Cancel
@@ -135,6 +141,7 @@ exports[`should show error message when fetchData function returns 401 error 1`]
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -217,7 +224,8 @@ exports[`should show error message when fetchData function returns 401 error 1`]
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -227,6 +235,7 @@ exports[`should show error message when fetchData function returns 401 error 1`]
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -243,6 +252,7 @@ exports[`should show error message when fetchData function returns 500 error 1`]
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -325,7 +335,8 @@ exports[`should show error message when fetchData function returns 500 error 1`]
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -335,6 +346,7 @@ exports[`should show error message when fetchData function returns 500 error 1`]
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>

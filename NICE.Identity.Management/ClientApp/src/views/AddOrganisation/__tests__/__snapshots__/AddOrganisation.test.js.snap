@@ -4,6 +4,7 @@ exports[`should match the snapshot on load 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -70,7 +71,8 @@ exports[`should match the snapshot on load 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -82,6 +84,7 @@ exports[`should match the snapshot on load 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12 md:6 lg:4"
     >
       <form
@@ -89,6 +92,7 @@ exports[`should match the snapshot on load 1`] = `
       >
         <div
           class="input mb--e"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -113,6 +117,7 @@ exports[`should match the snapshot on load 1`] = `
         </div>
         <button
           class="btn btn--cta"
+          data-component="button--cta"
           data-qa-sel="save-button-add-organisation"
           type="submit"
         >
@@ -120,6 +125,7 @@ exports[`should match the snapshot on load 1`] = `
         </button>
         <a
           class="btn btn--secondary"
+          data-component="button--secondary"
           href="/organisations"
         >
           Cancel

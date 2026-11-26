@@ -4,6 +4,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -53,7 +54,8 @@ exports[`should match the snapshot after data has been loaded 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -65,13 +67,16 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     class="grid"
   >
     <div
+      data-component="grid-item"
       data-g="12 md:3"
     >
       <div
         class="panel"
+        data-component="panel"
       >
         <div
           class="input"
+          data-component="input"
         >
           <label
             class="input__label"
@@ -97,6 +102,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <form>
           <div
             class="filter-panel"
+            data-component="filter-panel"
           >
             <h2
               class="filter-panel__heading"
@@ -172,6 +178,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </legend>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_environments_alpha"
                   >
                     <input
@@ -189,6 +196,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_environments_test"
                   >
                     <input
@@ -206,6 +214,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                   </label>
                   <label
                     class="filter-option"
+                    data-component="filter-option"
                     for="filter_environments_dev"
                   >
                     <input
@@ -230,6 +239,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
     </div>
     <div
       aria-busy="false"
+      data-component="grid-item"
       data-g="12 md:9"
     >
       <h2
@@ -246,6 +256,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -269,6 +280,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag tag--alpha"
+                    data-component="tag"
                     data-qa-sel="environment-alpha"
                   >
                     Alpha
@@ -293,6 +305,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -316,6 +329,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag testTag"
+                    data-component="tag"
                     data-qa-sel="environment-test"
                   >
                     Test
@@ -340,6 +354,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -363,6 +378,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag testTag"
+                    data-component="tag"
                     data-qa-sel="environment-test"
                   >
                     Test
@@ -387,6 +403,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -410,6 +427,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag devTag"
+                    data-component="tag"
                     data-qa-sel="environment-dev"
                   >
                     Dev
@@ -434,6 +452,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
         <li>
           <article
             class="card"
+            data-component="card"
           >
             <header
               class="card__header"
@@ -457,6 +476,7 @@ exports[`should match the snapshot after data has been loaded 1`] = `
                 <dd>
                   <span
                     class="tag devTag"
+                    data-component="tag"
                     data-qa-sel="environment-dev"
                   >
                     Dev
@@ -524,6 +544,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -573,7 +594,8 @@ exports[`should show error message when fetch returns 401 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -583,6 +605,7 @@ exports[`should show error message when fetch returns 401 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>
@@ -599,6 +622,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 <div>
   <nav
     aria-label="Breadcrumbs"
+    data-component="breadcrumbs"
     role="navigation"
   >
     <ol
@@ -648,7 +672,8 @@ exports[`should show error message when fetch returns 500 error 1`] = `
 }
   </script>
   <div
-    class="page-header"
+    class="page-header "
+    data-component="page-header"
   >
     <h1
       class="page-header__heading "
@@ -658,6 +683,7 @@ exports[`should show error message when fetch returns 500 error 1`] = `
   </div>
   <div
     class="alert alert--error"
+    data-component="alert--error"
     role="alert"
   >
     <h2>

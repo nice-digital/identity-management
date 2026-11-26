@@ -4,9 +4,11 @@ exports[`should match the snapshot when querystring search has a value 1`] = `
 <div>
   <div
     class="panel"
+    data-component="panel"
   >
     <div
       class="input"
+      data-component="input"
     >
       <label
         class="input__label"
