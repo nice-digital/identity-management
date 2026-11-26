@@ -39,7 +39,10 @@ export class App extends React.Component<Record<string, never>, AppState> {
 		super(props);
 
 		this.state = {
-			isLoading: false,
+			// Start loading so the global nav Header isn't mounted until the IdAM auth details exist.
+			// Header decides between NICE Accounts and IdAM from its first render only, so mounting it
+			// with an empty auth object makes it call NICE Accounts with an undefined environment.
+			isLoading: true,
 			auth: {} as IdamProviderProps,
 		};
 	}
@@ -47,7 +50,8 @@ export class App extends React.Component<Record<string, never>, AppState> {
 	async componentDidMount(): Promise<void> {
 		this.setState({ isLoading: true });
 
-		const myAccountDetails = await fetchData(Endpoints.identityManagementUser);
+		// A null body (200 with JSON null) would make isDataError and displayName throw, leaving the app on "Loading..." forever
+		const myAccountDetails = (await fetchData(Endpoints.identityManagementUser)) ?? {};
 
 		if (isDataError(myAccountDetails)) {
 			this.setState({ error: myAccountDetails });
